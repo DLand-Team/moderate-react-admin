@@ -78,11 +78,13 @@ export default () => {
       title: "确定么？",
       content: "更新权限之后，需要重新登陆",
       onOk: () => {
-        updatePermissions(checked).then(() => {
-          sessionStorage.setItem("ACCESS_TOKEN", "");
-          globalStore.init()
-          navigate("/");
-        });
+        if(Array.isArray(checked)){
+          updatePermissions(checked).then(() => {
+            sessionStorage.setItem("ACCESS_TOKEN", "");
+            globalStore.init()
+            navigate("/");
+          });
+        }
       },
     });
   };
