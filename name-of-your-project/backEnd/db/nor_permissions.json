@@ -1,0 +1,20 @@
+[
+  "index",
+  "user",
+  "role",
+  "index:Add",
+  "index:EDIT",
+  "index:DELETE",
+  "index:IMPORT",
+  "index:EXPORT",
+  "user:Add",
+  "user:EDIT",
+  "user:DELETE",
+  "user:IMPORT",
+  "user:EXPORT",
+  "role:Add",
+  "role:EDIT",
+  "role:DELETE",
+  "role:IMPORT",
+  "role:EXPORT"
+]

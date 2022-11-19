@@ -1,0 +1,36 @@
+.content {
+    width: 100%;
+    height: 100%;
+    background: white;
+    padding: 32px;
+
+    .title {
+        text-align: center;
+        font-weight: bold;
+        font-size: 50px;
+        background: -webkit-linear-gradient(315deg, #42d392 25%, #647eff);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 76px;
+        line-height: 1.25;
+        font-weight: 900;
+        letter-spacing: -1.5px;
+    }
+
+    .info {
+        boxSizing: border-box;
+        width: 100%;
+        padding: 40px;
+        display: flex;
+        justifyContent: start;
+        color: black;
+        alignItems: center;
+    }
+
+    .infoBoard {
+        padding: 30px;
+        background-color: #C9FDFB;
+        color: #7dd431;
+    }
+}
