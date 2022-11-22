@@ -21,7 +21,6 @@ export default observer(() => {
   const token = sessionStorage.getItem("ACCESS_TOKEN");
 
   useEffect(() => {
-    debugger
     if (globalStore.token || token) {
       sessionStorage.setItem("ACCESS_TOKEN", globalStore.token || token);
       getPermissions()
