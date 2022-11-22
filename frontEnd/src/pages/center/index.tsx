@@ -18,6 +18,7 @@ import Breadcrumb from "./components/breadcrumb";
 import useLocationListen from "@/common/hooks/useLocationListen";
 import KeepAlive from "@/common/hocs/keepAlive";
 import routerConfig from "@/router/config";
+import HeadPortrait from "./components/head-portrait";
 
 const { Header, Content, Sider } = Layout;
 
@@ -66,8 +67,9 @@ const center = observer(() => {
   }, [routerData]);
   return (
     <Layout className={styles.content}>
-      <Header className="header">
+      <Header className={styles.header}>
         <div className={styles.logo}>Moderate admin React</div>
+        <HeadPortrait />
       </Header>
       <Layout>
         <Sider width={260} className="site-layout-background">
