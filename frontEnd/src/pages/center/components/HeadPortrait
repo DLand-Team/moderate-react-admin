@@ -1,0 +1,48 @@
+import React, { useState } from 'react';
+import { DownOutlined } from '@ant-design/icons';
+import type { MenuProps } from 'antd';
+import { Dropdown, Space } from 'antd';
+import {globalStore} from "@/stores";
+
+const HeadPortrait: React.FC = () => {
+  const [open, setOpen] = useState(false);
+  
+  const handleMenuClick: MenuProps['onClick'] = (e) => {
+    if (e.key === '1') {
+      globalStore.setToken("");
+      sessionStorage.setItem("ACCESS_TOKEN", "");
+      setOpen(false);
+    }
+  };
+  
+  const handleOpenChange = (flag: boolean) => {
+    setOpen(flag);
+  };
+  
+  const items: MenuProps['items'] = [
+    {
+      label: 'Sign out',
+      key: '1',
+    },
+  ];
+  
+  return (
+    <Dropdown
+      menu={{
+        items,
+        onClick: handleMenuClick,
+      }}
+      onOpenChange={handleOpenChange}
+      open={open}
+    >
+      <a onClick={(e) => e.preventDefault()}>
+        <Space>
+          Admin
+          <DownOutlined />
+        </Space>
+      </a>
+    </Dropdown>
+  );
+};
+
+export default HeadPortrait;
