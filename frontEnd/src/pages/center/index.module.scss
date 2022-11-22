@@ -1,6 +1,9 @@
 .content {
     height: 100%;
-
+    .header{
+        display: flex;
+        justify-content: space-between;
+    }
     .logo {
         float: left;
         height: 31px;
