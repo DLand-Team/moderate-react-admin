@@ -5,6 +5,7 @@ import {
   Routes,
   Route,
 } from "react-router-dom";
+import { withRouter } from "r6helper";
 import { useEffect } from "react";
 import { useState } from "react";
 import { globalStore } from "@/stores/index";
@@ -14,14 +15,14 @@ import { getPermissions } from "./service";
 import Login from "./pages/login";
 import Center from "./pages/center";
 
-export default observer(() => {
+export default withRouter(observer(() => {
   const { setRouterData, setPermissions } = globalStore;
   const [routerData, setRouter] = useState<any>();
   const navigate = useNavigate();
   const token = sessionStorage.getItem("ACCESS_TOKEN");
 
   useEffect(() => {
-    debugger
+    debugger;
     if (globalStore.token || token) {
       sessionStorage.setItem("ACCESS_TOKEN", globalStore.token || token);
       getPermissions()
@@ -77,4 +78,4 @@ export default observer(() => {
       )}
     </>
   );
-});
+}));

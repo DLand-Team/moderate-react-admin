@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "yarn workspace admin-fe dev&yarn workspace admin-server start"
+    "start": "yarn workspace admin-fe dev&yarn workspace admin-server dev"
   },
   "author": "",
   "license": "ISC",
@@ -20,5 +20,8 @@
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
     "lerna": "^3.22.1"
+  },
+  "dependencies": {
+    "r6helper": "^0.2.8"
   }
 }

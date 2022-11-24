@@ -46,7 +46,7 @@ const center = observer(() => {
     let temp = pathname.split("/").filter((item) => {
       return item;
     });
-    setDefaultSelectedKeys([temp.at(-1)]);
+    setDefaultSelectedKeys([temp.slice(-1)[0]]);
     let temp2 = temp.slice(1, temp.length - 1);
     if (temp2.length) {
       setDefaultOpenKeys(temp2);

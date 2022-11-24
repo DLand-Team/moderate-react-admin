@@ -28,7 +28,7 @@ export default observer(() => {
     setItems(
       tabsHistory.map((item) => {
         const { pathname } = item;
-        let routeId = pathname.split("/").at(-1);
+        let routeId = pathname.split("/").slice(-1)[0]
         const { meta } = routeConfig[routeId];
         return { label: meta.title, key: pathname };
       })
