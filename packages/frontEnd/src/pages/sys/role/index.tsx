@@ -7,7 +7,6 @@ import {
   ActionsPermissionConfig,
   type BtnItemT,
 } from "@/permissions/actionConfig";
-import { withRouter } from "r6helper";
 import SearchForm from "./components/searchForm";
 import type { ColumnsType } from "antd/es/table";
 import { useEffect } from "react";
@@ -70,9 +69,7 @@ const processPermission = (routesData: any[], newData: any[]) => {
   });
 };
 
-export default withRouter((props) => {
-  const {router} = props;
-  
+export default(props) => {
   const [allPermissions, setPer] = useState<any>();
   const [checked, setChecked] = useState<any>();
   const navigate = useNavigate();
@@ -149,4 +146,4 @@ export default withRouter((props) => {
       <Table columns={columns} dataSource={data} />
     </div>
   );
-});
+}

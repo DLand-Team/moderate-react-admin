@@ -20,8 +20,6 @@
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
     "lerna": "^3.22.1"
-  },
-  "dependencies": {
-    "r6helper": "^0.2.8"
   }
+
 }
