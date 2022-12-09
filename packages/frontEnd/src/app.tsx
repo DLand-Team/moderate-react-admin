@@ -23,18 +23,27 @@ export default observer(() => {
   useEffect(() => {
     if (globalStore.token || token) {
       sessionStorage.setItem("ACCESS_TOKEN", globalStore.token || token);
-      getPermissions()
-        .then((res) => {
-          const { data } = res;
-          let temp = createRouteData(data);
-          sessionStorage.setItem("PER", data);
-          setRouter(temp);
-          setRouterData(temp);
-          setPermissions(data);
-        })
-        .finally(() => {
-          navigate("/center/hello");
-        });
+      const toStart = (data)=>{
+        let temp = createRouteData(data);
+        sessionStorage.setItem("PER", data);
+        setRouter(temp);
+        setRouterData(temp);
+        setPermissions(data);
+      }
+      let per = sessionStorage.getItem("PERMISSIONS")
+      if (!per) {
+        getPermissions()
+          .then((res) => {
+            const { data } = res;
+            sessionStorage.setItem("PERMISSIONS", data);
+            toStart(data)
+          })
+          .finally(() => {
+            navigate("/center/hello");
+          });
+      }else{
+        toStart(per)
+      }
     } else {
       navigate("/");
       setRouter(routeData);
