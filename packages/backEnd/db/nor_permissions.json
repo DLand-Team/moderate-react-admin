@@ -1,6 +1,7 @@
 [
-  "index",
-  "user",
+  "hello",
+  "center",
+  "sys",
   "role",
   "index:Add",
   "index:EDIT",
@@ -11,10 +12,10 @@
   "user:EDIT",
   "user:DELETE",
   "user:IMPORT",
-  "user:EXPORT",
   "role:Add",
   "role:EDIT",
   "role:DELETE",
   "role:IMPORT",
-  "role:EXPORT"
+  "role:EXPORT",
+  "user"
 ]

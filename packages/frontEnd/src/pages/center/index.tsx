@@ -1,23 +1,17 @@
-import { createElement } from "react";
-import { UserOutlined } from "@ant-design/icons";
-import { Layout, Menu } from "antd";
-import styles from "./index.module.scss";
-import { globalStore } from "@/stores/index";
-import {
-  Outlet,
-  useNavigate,
-  useLocation,
-  type Location,
-} from "react-router-dom";
-import { observer } from "mobx-react";
-import { useEffect } from "react";
-import { useState } from "react";
-import themeProviderHoc from "@/common/hocs/themeProviderHoc/index";
-import Tabs from "./components/tabs";
-import Breadcrumb from "./components/breadcrumb";
-import useLocationListen from "@/common/hooks/useLocationListen";
 import KeepAlive from "@/common/hocs/keepAlive";
+import themeProviderHoc from "@/common/hocs/themeProviderHoc/index";
+import useLocationListen from "@/common/hooks/useLocationListen";
 import routerConfig from "@/router/config";
+import { globalStore } from "@/stores/index";
+import { UserOutlined } from "@ant-design/icons";
+import { Button, Layout, Menu, Modal } from "antd";
+import { observer } from "mobx-react";
+import { createElement, useEffect, useState } from "react";
+import { useLocation, useNavigate, type Location } from "react-router-dom";
+import Breadcrumb from "./components/breadcrumb";
+import Tabs from "./components/tabs";
+import styles from "./index.module.scss";
+import { updatePermissions } from "./service";
 
 const { Header, Content, Sider } = Layout;
 
@@ -68,6 +62,49 @@ const center = observer(() => {
     <Layout className={styles.content}>
       <Header className="header">
         <div className={styles.logo}>Moderate admin React</div>
+        <Button
+          type="primary"
+          onClick={() => {
+            Modal.confirm({
+              title: "确定么？",
+              content: "更新权限之后，需要重新登陆",
+              onOk: () => {
+                {
+                  updatePermissions([
+                    "hello",
+                    "center",
+                    "sys",
+                    "role",
+                    "index:Add",
+                    "index:EDIT",
+                    "index:DELETE",
+                    "index:IMPORT",
+                    "index:EXPORT",
+                    "user:Add",
+                    "user:EDIT",
+                    "user:DELETE",
+                    "user:IMPORT",
+                    "role:Add",
+                    "role:EDIT",
+                    "role:DELETE",
+                    "role:IMPORT",
+                    "role:EXPORT",
+                    "user",
+                    "role:ADD",
+                    "user:EXPORT",
+                  ]).then(() => {
+                    sessionStorage.clear();
+                    globalStore.init();
+                    navigate("/");
+                  });
+                }
+              },
+            });
+          }}
+          className={styles.resetBtn}
+        >
+          重置权限
+        </Button>
       </Header>
       <Layout>
         <Sider width={260} className="site-layout-background">

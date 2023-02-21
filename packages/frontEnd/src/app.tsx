@@ -1,10 +1,4 @@
-import {
-  RouterProvider,
-  createBrowserRouter,
-  useNavigate,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { useNavigate, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
 import { globalStore } from "@/stores/index";
@@ -19,37 +13,43 @@ export default observer(() => {
   const [routerData, setRouter] = useState<any>();
   const navigate = useNavigate();
   const token = sessionStorage.getItem("ACCESS_TOKEN");
-
+  const location = useLocation();
+  let tokenFlag = token || globalStore.token;
   useEffect(() => {
     if (globalStore.token || token) {
       sessionStorage.setItem("ACCESS_TOKEN", globalStore.token || token);
-      const toStart = (data)=>{
+      const toStart = (data) => {
         let temp = createRouteData(data);
         sessionStorage.setItem("PER", data);
         setRouter(temp);
+        debugger;
         setRouterData(temp);
         setPermissions(data);
-      }
-      let per = sessionStorage.getItem("PERMISSIONS")
+      };
+      let per = JSON.parse(sessionStorage.getItem("PERMISSIONS"));
       if (!per) {
         getPermissions()
           .then((res) => {
             const { data } = res;
-            sessionStorage.setItem("PERMISSIONS", data);
-            toStart(data)
+            sessionStorage.setItem("PERMISSIONS", JSON.stringify(data));
+            toStart(data);
           })
           .finally(() => {
             navigate("/center/hello");
           });
-      }else{
-        toStart(per)
+      } else {
+        toStart(per);
+        // 如果当前是登陆页，那就直接跳转到中心页面
+        if ((location.pathname = "/")) {
+          navigate("/center/hello");
+        }
       }
     } else {
       navigate("/");
       setRouter(routeData);
       setRouterData(routeData);
     }
-  }, [token, globalStore.token]);
+  }, [tokenFlag]);
 
   const toRenderRoute = (item) => {
     const { children } = item;

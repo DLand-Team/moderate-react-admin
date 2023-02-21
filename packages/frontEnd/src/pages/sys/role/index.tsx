@@ -1,5 +1,5 @@
 import "react";
-import { Table, Form, Tree, Modal } from "antd";
+import { Table, Form, Tree, Modal, notification } from "antd";
 import ModalForm from "./components/modalForm";
 import { globalStore } from "@/stores/index";
 import {
@@ -70,7 +70,7 @@ const processPermission = (routesData: any[], newData: any[]) => {
 };
 
 export default(props) => {
-  const [allPermissions, setPer] = useState<any>();
+  const [allPermissions, setPer] = useState<any>([]);
   const [checked, setChecked] = useState<any>();
   const navigate = useNavigate();
   const handleSubmit = () => {
@@ -79,20 +79,30 @@ export default(props) => {
       content: "更新权限之后，需要重新登陆",
       onOk: () => {
         if(Array.isArray(checked)){
-          updatePermissions(checked).then(() => {
-            sessionStorage.setItem("ACCESS_TOKEN", "");
-            globalStore.init()
-            navigate("/");
-          });
+          if(checked.includes("hello")){
+            updatePermissions(checked).then(() => {
+              sessionStorage.clear()
+              globalStore.init()
+              navigate("/");
+            });
+          }else{
+            notification.info({
+              message:"hello 首页得有啊！"
+            })
+          }
         }
       },
     });
   };
   const { permissions } = globalStore;
+  if(permissions.length){
+    debugger
+  }
   useEffect(() => {
     let result = [];
     processPermission(routesStructData, result);
     setPer(result);
+    debugger
   }, []);
 
   const columns: ColumnsType<DataType> = [
@@ -121,7 +131,7 @@ export default(props) => {
             size={"middle"}
           >
             <Form.Item label="权限" name="permission">
-              <Tree
+              {permissions.length&&allPermissions.length&&<Tree
                 checkStrictly={true}
                 defaultCheckedKeys={permissions}
                 checkable
@@ -129,7 +139,7 @@ export default(props) => {
                 onCheck={(data: any) => {
                   setChecked(data.checked);
                 }}
-              />
+              />}
               {JSON.stringify(checked)}
             </Form.Item>
           </Form>
