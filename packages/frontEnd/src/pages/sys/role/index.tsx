@@ -149,9 +149,6 @@ export default(props) => {
   ];
   return (
     <div>
-      <div onClick={()=>{
-        router.navigate("/center/sys/user")
-      }}>test</div>
       <SearchForm />
       <Table columns={columns} dataSource={data} />
     </div>
