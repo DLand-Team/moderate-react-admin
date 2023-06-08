@@ -1,10 +1,12 @@
 import KeepAlive from "@/common/hocs/keepAlive";
 import themeProviderHoc from "@/common/hocs/themeProviderHoc/index";
 import useLocationListen from "@/common/hooks/useLocationListen";
-import routerConfig from "@/router/config";
+import routerManager from "@/router/routerManager";
+import { RouteItem } from "@/router/types";
 import { globalStore } from "@/stores/index";
 import { UserOutlined } from "@ant-design/icons";
 import { Button, Layout, Menu, Modal } from "antd";
+import { ItemType } from "antd/es/menu/hooks/useItems";
 import { observer } from "mobx-react";
 import { createElement, useEffect, useState } from "react";
 import { useLocation, useNavigate, type Location } from "react-router-dom";
@@ -14,50 +16,52 @@ import styles from "./index.module.scss";
 import { updatePermissions } from "./service";
 
 const { Header, Content, Sider } = Layout;
-
-const processRoute = (data, result: any) => {
+type MenuItem = ItemType & Partial<{
+  key: string;
+  children: MenuItem[]
+}>
+const processRoute = (data: RouteItem[], result: MenuItem[]) => {
   data.forEach((item) => {
-    let temp: any = {
-      key: item.routeId,
+    const temp: MenuItem = {
+      key: item.id,
       icon: createElement(UserOutlined),
       label: item.meta.title,
     };
     result.push(temp);
     if (item?.children?.length) {
-      temp.children = [];
-      processRoute(item.children, temp.children);
+      temp.children = processRoute(item.children, []);
     }
   });
+  return result;
 };
 
 const center = observer(() => {
   const navigate = useNavigate();
   const [defaultOpenKeys, setDefaultOpenKeys] = useState([]);
   const [defaultSelectedKeys, setDefaultSelectedKeys] = useState([]);
-  const [menuData, setMenuData] = useState([]);
+  const [menuData, setMenuData] = useState<ItemType[]>([]);
   useLocationListen((location: Location) => {
     const { pathname } = location;
-    let temp = pathname.split("/").filter((item) => {
+    const temp = pathname.split("/").filter((item) => {
       return item;
     });
     setDefaultSelectedKeys([temp.slice(-1)[0]]);
-    let temp2 = temp.slice(1, temp.length - 1);
+    const temp2 = temp.slice(1, temp.length - 1);
     if (temp2.length) {
       setDefaultOpenKeys(temp2);
     }
     globalStore.addTabHistory(location);
   });
-  const { routerData = [] } = globalStore;
+  const { routesData = [] } = globalStore;
   // 路由监听
-  let location = useLocation();
-  useEffect(() => {}, [location]);
+  const location = useLocation();
+  useEffect(() => { }, [location]);
   useEffect(() => {
-    if (routerData.length) {
-      let result = [];
-      processRoute(routerData[1].children, result);
+    if (routesData.length) {
+      const result = processRoute(routesData[1].children, []);
       setMenuData(result);
     }
-  }, [routerData]);
+  }, [routesData]);
   return (
     <Layout className={styles.content}>
       <Header className="header">
@@ -117,7 +121,7 @@ const center = observer(() => {
               style={{ height: "100%", borderRight: 0 }}
               items={menuData}
               onClick={({ key }) => {
-                const path = routerConfig[key]?.path;
+                const path = routerManager.getRoutePathByKey(key);
                 if (path) {
                   navigate(path);
                 }
@@ -132,6 +136,8 @@ const center = observer(() => {
             style={{
               margin: 0,
               minHeight: 280,
+              height: "100%",
+              overflow: "auto",
             }}
           >
             <Tabs></Tabs>

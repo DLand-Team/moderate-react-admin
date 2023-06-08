@@ -1,20 +1,17 @@
-import "react";
-import { Table, Form, Tree, Modal, notification } from "antd";
-import ModalForm from "./components/modalForm";
-import { globalStore } from "@/stores/index";
 import {
-  BTN_PERMISSIONS,
   ActionsPermissionConfig,
-  type BtnItemT,
+  BTN_PERMISSIONS
 } from "@/permissions/actionConfig";
-import SearchForm from "./components/searchForm";
+import { ROUTE_STRUCT_CONFIG } from "@/router/config";
+import routerManager from "@/router/routerManager";
+import { globalStore } from "@/stores/index";
+import { Form, Modal, Table, Tree, notification } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import { useEffect } from "react";
-import { centerRouteDta, routesStructData } from "@/router/index";
-import routerConfig from "@/router/config";
-import { useState } from "react";
-import { updatePermissions } from "./service";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ModalForm from "./components/modalForm";
+import SearchForm from "./components/searchForm";
+import { updatePermissions } from "./service";
 
 interface DataType {
   key: string;
@@ -38,12 +35,10 @@ const data = [
 const processPermission = (routesData: any[], newData: any[]) => {
   routesData.forEach((routeStructItem) => {
     const { id } = routeStructItem;
-    let routeItem = routerConfig[id];
-    routeItem.routeId = id;
     let item: any = {
-      title: routeItem.meta.title,
-      value: routeItem.routeId,
-      key: routeItem.routeId,
+      title: routerManager.getRouteTitleByKey(id),
+      value: id,
+      key: id,
     };
     newData.push(item);
     if (routeStructItem.children) {
@@ -51,10 +46,10 @@ const processPermission = (routesData: any[], newData: any[]) => {
       processPermission(routeStructItem.children, item.children);
     } else {
       item.children = [];
-      if (routeItem.routeId in ActionsPermissionConfig) {
+      if (id in ActionsPermissionConfig) {
         const actionsPermissions =
           ActionsPermissionConfig[
-            routeItem.routeId as keyof typeof ActionsPermissionConfig
+          id as keyof typeof ActionsPermissionConfig
           ];
         actionsPermissions.forEach((actionId) => {
           const btnConfig = BTN_PERMISSIONS[actionId.split(":")[1]];
@@ -69,7 +64,7 @@ const processPermission = (routesData: any[], newData: any[]) => {
   });
 };
 
-export default(props) => {
+export default (props) => {
   const [allPermissions, setPer] = useState<any>([]);
   const [checked, setChecked] = useState<any>();
   const navigate = useNavigate();
@@ -78,16 +73,16 @@ export default(props) => {
       title: "确定么？",
       content: "更新权限之后，需要重新登陆",
       onOk: () => {
-        if(Array.isArray(checked)){
-          if(checked.includes("hello")){
+        if (Array.isArray(checked)) {
+          if (checked.includes("hello")) {
             updatePermissions(checked).then(() => {
               sessionStorage.clear()
               globalStore.init()
               navigate("/");
             });
-          }else{
+          } else {
             notification.info({
-              message:"hello 首页得有啊！"
+              message: "hello 首页得有啊！"
             })
           }
         }
@@ -95,14 +90,10 @@ export default(props) => {
     });
   };
   const { permissions } = globalStore;
-  if(permissions.length){
-    debugger
-  }
   useEffect(() => {
     let result = [];
-    processPermission(routesStructData, result);
+    processPermission(ROUTE_STRUCT_CONFIG, result);
     setPer(result);
-    debugger
   }, []);
 
   const columns: ColumnsType<DataType> = [
@@ -127,11 +118,11 @@ export default(props) => {
             labelCol={{ span: 4 }}
             wrapperCol={{ span: 14 }}
             layout="horizontal"
-            onValuesChange={() => {}}
+            onValuesChange={() => { }}
             size={"middle"}
           >
             <Form.Item label="权限" name="permission">
-              {permissions.length&&allPermissions.length&&<Tree
+              {permissions.length && allPermissions.length && <Tree
                 checkStrictly={true}
                 defaultCheckedKeys={permissions}
                 checkable

@@ -1,26 +1,25 @@
-import "react";
-import { Breadcrumb } from "antd";
-import routeConfig from "@/router/config";
-import type { Location } from "react-router-dom";
 import useLocationListen from "@/common/hooks/useLocationListen";
+import routerManager from "@/router/routerManager";
+import { Breadcrumb } from "antd";
 import { useState } from "react";
+import type { Location } from "react-router-dom";
 
 export default () => {
   const [infoArr, setInfoArr] = useState<{ id: string; info: string }[]>([]);
   useLocationListen((location: Location) => {
     const { pathname } = location;
-    let temp = pathname.split("/").filter((item) => {
+    const pathArr = pathname.split("/").filter((item) => {
       return item;
     });
-    let temp2 = temp.map((item) => {
-        return {
-          id: item,
-          info: routeConfig[item]?.meta?.title,
-        };
-      })
-      
+    const temp2 = pathArr.map((path: string) => {
+      const info = routerManager.getRouteTitleByKey(path)
+      return {
+        id: path,
+        info: info
+      };
+    })
     setInfoArr(
-        temp2
+      temp2
     );
   });
 

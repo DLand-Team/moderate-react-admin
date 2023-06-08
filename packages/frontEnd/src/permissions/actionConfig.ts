@@ -20,7 +20,7 @@ export const BTN_PERMISSIONS = addCodeToPermission<BtnItemT>({
 });
 
 const { ADD, EDIT, DELETE, IMPORT, EXPORT } = BTN_PERMISSIONS;
-const { index, sys, user, role } = ROUTE_PERMISSION;
+const { index,  user, role } = ROUTE_PERMISSION;
 
 export const ActionsPermissionConfig = {
   index: [
@@ -37,7 +37,6 @@ export const ActionsPermissionConfig = {
     role.name + ":"+ ADD.name,
     role.name + ":"+ EDIT.name,
     role.name + ":"+ DELETE.name,
-
   ],
 };
 

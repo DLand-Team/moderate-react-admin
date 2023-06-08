@@ -1,7 +1,7 @@
 import "react";
 import styles from "./index.module.scss";
 import Card from "./components/card";
-import { Image } from "antd";
+import { Image, Upload } from "antd";
 import helloImg from "@/assets/imgs/dland.png";
 
 export default (props) => {
@@ -12,7 +12,7 @@ export default (props) => {
         <Card />
         <div
           style={{
-            boxSizing: "border-box",
+            height: '100%',
             width: "100%",
             padding: "40px",
             backgroundColor: "var(--color-fill-2)",

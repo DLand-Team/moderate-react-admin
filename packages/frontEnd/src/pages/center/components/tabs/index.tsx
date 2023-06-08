@@ -1,22 +1,12 @@
-import { useRef, useState } from "react";
-import { Tabs } from "antd";
-import { globalStore } from "@/stores/index";
-import { observer, inject } from "mobx-react";
-import { toJS } from "mobx";
-import styles from "./index.module.scss";
-import routeConfig from "@/router/config";
-import { useEffect } from "react";
 import useLocationListen from "@/common/hooks/useLocationListen";
+import routerManager from "@/router/routerManager";
+import { globalStore } from "@/stores/index";
+import { Tabs } from "antd";
+import { toJS } from "mobx";
+import { observer } from "mobx-react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const initialItems = [
-  { label: "Tab 1", key: "1" },
-  { label: "Tab 2", key: "2" },
-  {
-    label: "Tab 3",
-    key: "3",
-  },
-];
+import styles from "./index.module.scss";
 
 export default observer(() => {
   const [activeKey, setActiveKey] = useState("");
@@ -24,13 +14,12 @@ export default observer(() => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    let tabsHistory = Object.values(toJS(globalStore.tabsHistory));
+    const tabsHistory = Object.values(toJS(globalStore.tabsHistory));
     setItems(
       tabsHistory.map((item) => {
         const { pathname } = item;
-        let routeId = pathname.split("/").slice(-1)[0]
-        const { meta } = routeConfig[routeId];
-        return { label: meta.title, key: pathname };
+        const id = pathname.split("/").slice(-1)[0]
+        return { label: routerManager.getRouteTitleByKey(id), key: pathname };
       })
     );
   }, [globalStore.tabsHistory]);
@@ -52,8 +41,7 @@ export default observer(() => {
       hideAdd={true}
       onEdit={(e, action) => {
         if (action == "remove") {
-          ;
-          globalStore.deleteTabHistory(e);
+          globalStore.deleteTabHistory(e as string);
         }
       }}
     />

@@ -1,13 +1,10 @@
-import "react";
-import { Button, Checkbox, Form, Input } from "antd";
-import { login } from "./service";
-import { useNavigate } from "react-router-dom";
 import { globalStore } from "@/stores/index";
+import { Button, Checkbox, Form, Input } from "antd";
+import "react";
+import { login } from "./service";
 
 export default () => {
-  const naviagte = useNavigate();
   const onFinish = (values: any) => {
-    console.log("Success:", values);
     const { name, password } = values;
     login({
       name,
@@ -15,7 +12,7 @@ export default () => {
     }).then((res) => {
       const { token } = res.data;
       globalStore.setToken(token);
-      
+      sessionStorage.setItem("ACCESS_TOKEN", globalStore.token || token);
     });
   };
 

@@ -1,24 +1,27 @@
-import { action, makeAutoObservable, toJS } from "mobx";
+import { RouteItem } from "@/router/types";
+import { makeAutoObservable, toJS } from "mobx";
 import type { Location } from "react-router-dom";
 
-// Model the application state.
 class Global {
-  routerData = null;
-  token = "";
-  tabsHistory: { [key: string]: Location } = {};
-  permissions: any[] = [];
+  isLoginChecking: boolean;
+  routesData: RouteItem[];
+  token: string;
+  tabsHistory: { [key: string]: Location };
+  permissions: string[];
 
   constructor() {
     makeAutoObservable(this);
+    this.init()
   }
   init() {
-    this.routerData = [];
+    this.isLoginChecking = true
+    this.routesData = [];
     this.token = "";
     this.tabsHistory = {};
     this.permissions = [];
   }
-  setRouterData = (data) => {
-    this.routerData = data;
+  setRoutesData = (data:RouteItem[]) => {
+    this.routesData = data;
   };
 
   setToken = (token: string) => {
@@ -38,6 +41,10 @@ class Global {
       this.tabsHistory = temp;
     }
   };
+
+  setIsLoginChecking = (isLoginChecking: boolean) => {
+    this.isLoginChecking = isLoginChecking;
+  }
 
   setPermissions = (permissions) => {
     this.permissions = permissions;

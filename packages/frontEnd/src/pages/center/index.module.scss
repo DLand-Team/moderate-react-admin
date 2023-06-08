@@ -1,5 +1,6 @@
 .content {
     height: 100%;
+    overflow: hidden;
 
     .logo {
         float: left;
@@ -16,7 +17,7 @@
         left: -25px;
     }
 
-    .resetBtn{
+    .resetBtn {
         position: absolute;
         right: 50px;
         top: 15px;

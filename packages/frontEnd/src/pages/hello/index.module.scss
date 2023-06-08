@@ -3,7 +3,7 @@
     height: 100%;
     background: white;
     padding: 32px;
-
+    overflow: auto;
     .title {
         text-align: center;
         font-weight: bold;
@@ -16,17 +16,17 @@
         line-height: 1.25;
         font-weight: 900;
         letter-spacing: -1.5px;
-        
+
     }
 
     .info {
-        boxSizing: border-box;
+        box-sizing: border-box;
         width: 100%;
         padding: 40px;
         display: flex;
-        justifyContent: start;
+        justify-content: start;
         color: black;
-        alignItems: center;
+        align-items: center;
     }
 
     .infoBoard {

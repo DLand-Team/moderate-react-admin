@@ -11,7 +11,7 @@ export const addCodeToPermission = <T>(data: any) => {
   let num = 0;
   for (let key in data) {
     const item = data[key as RouteKeyT];
-    item.code = 2 ** num+"";
+    item.code = 2 ** num + "";
     item.name = key;
     num++;
   }

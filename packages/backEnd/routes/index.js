@@ -25,7 +25,7 @@ router.get('/json', async (ctx, next) => {
 // 登录
 router.post("/login", async (ctx, next) => {
   const { name } = ctx.request.body;
-  let payload = { name }; // 加密的数据
+  const payload = { name }; // 加密的数据
   let permissions
   await new Promise((resolve) => {
     fs.readFile(path.resolve('db/', `${name}_permissions.json`), (err, dataStr) => {
