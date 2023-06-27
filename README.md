@@ -41,3 +41,9 @@ module.exports = {
     }
 }
 ```
+
+这样，一个全栈项目就跑起来了。
+
+有问题就交流，群号：551406017
+
+![闲D岛](https://qiniu.moderate.run/IMG_4020.JPG)
