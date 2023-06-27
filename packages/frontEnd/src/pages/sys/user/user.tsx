@@ -1,7 +1,7 @@
-import "react";
-import { Space, Table, Tag } from "antd";
-import SearchForm from "./components/searchForm";
+import { Space, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
+import "react";
+import SearchForm from "./components/searchForm";
 
 interface DataType {
   key: string;

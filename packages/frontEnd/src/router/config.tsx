@@ -1,16 +1,32 @@
-import { Hello, RolePage, UserPage } from "../pages";
-import type { RouteInfoConfigItem, RoutesStructDataItem } from './types';
+import { ArticleCtr, Hello, RolePage, UserPage, Menu } from "../pages";
+import type { RouteInfoConfigItem, RoutesStructDataItem } from "./types";
+
+// 配置步骤
+// 1，配置路由id
+// 2，配置路由内容
+// 3，配置路由结构
+
+// 为啥不配置成一个完成的数据？
+// 将路由信息分成‘结构’和‘内容’两部分，这样方便关注点分离。
+// 结构关注点在组织关系。
+// 路由信息关注点在路由具体内容是什么。
+
+// 最终会生成一个树状的信息，一个结合了结构和内容的完整信息。
 
 // 路由id
 export const ROUTE_ID = {
-  center: 'center',
-  login: 'login',
+  center: "center",
+  login: "login",
   hello: "hello",
-  sys: "sys",
+  cms: "cms", // 内容管理
+  sys: "sys", //系统管理
   role: "role",
   user: "user",
+  menu: "menu",
+  article: "article",
 };
 
+// 路由信息
 export const ROUTE_INFO_CONFIG: { [key: PropertyKey]: RouteInfoConfigItem } = {
   center: {
     meta: {
@@ -22,27 +38,40 @@ export const ROUTE_INFO_CONFIG: { [key: PropertyKey]: RouteInfoConfigItem } = {
       title: "首页",
     },
     component: Hello,
-    parentId: ROUTE_ID.center,
   },
   sys: {
     meta: {
       title: "系统管理",
     },
-    parentId: ROUTE_ID.center,
+  },
+  cms: {
+    meta: {
+      title: "内容管理",
+    },
   },
   user: {
     meta: {
       title: "用户管理",
     },
     component: UserPage,
-    parentId: ROUTE_ID.sys,
   },
   role: {
     meta: {
       title: "角色管理",
     },
     component: RolePage,
-    parentId: ROUTE_ID.sys,
+  },
+  menu: {
+    meta: {
+      title: "菜单管理",
+    },
+    component: Menu,
+  },
+  article: {
+    meta: {
+      title: "文章管理",
+    },
+    component: ArticleCtr,
   },
 };
 
@@ -50,26 +79,27 @@ export const ROUTE_INFO_CONFIG: { [key: PropertyKey]: RouteInfoConfigItem } = {
 export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [
   {
     id: ROUTE_ID.hello,
-    meta: {
-      title: "首页",
-    },
   },
   {
     id: ROUTE_ID.sys,
-    meta: {
-      title: "首页",
-    },
-    children: [{
-      id: ROUTE_ID.role,
-      meta: {
-        title: "角色管理",
+    children: [
+      {
+        id: ROUTE_ID.role,
       },
-    }, {
-      id: ROUTE_ID.user,
-      meta: {
-        title: "用户管理",
+      {
+        id: ROUTE_ID.user,
       },
-    }],
+      {
+        id: ROUTE_ID.menu,
+      },
+    ],
+  },
+  {
+    id: ROUTE_ID.cms,
+    children: [
+      {
+        id: ROUTE_ID.article,
+      },
+    ],
   },
 ];
-

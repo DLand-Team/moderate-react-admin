@@ -1,10 +1,7 @@
 import axios from "axios";
 import { HttpError } from "./HttpError";
 
-let isDev = process.env.NODE_ENV === "development";
-let baseUrl = isDev ? "/api" : "/";
 export const http = axios.create({
-  baseURL: baseUrl,
   timeout: 30000,
   headers: {
     "Content-Type": "application/json;charset=utf-8",

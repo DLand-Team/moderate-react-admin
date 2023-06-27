@@ -1,10 +1,10 @@
 import {
   ActionsPermissionConfig,
-  BTN_PERMISSIONS
+  BTN_PERMISSIONS,
 } from "@/permissions/actionConfig";
 import { ROUTE_STRUCT_CONFIG } from "@/router/config";
 import routerManager from "@/router/routerManager";
-import { globalStore } from "@/stores/index";
+import { useInject } from "@/stores/index";
 import { Form, Modal, Table, Tree, notification } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { useEffect, useState } from "react";
@@ -48,9 +48,7 @@ const processPermission = (routesData: any[], newData: any[]) => {
       item.children = [];
       if (id in ActionsPermissionConfig) {
         const actionsPermissions =
-          ActionsPermissionConfig[
-          id as keyof typeof ActionsPermissionConfig
-          ];
+          ActionsPermissionConfig[id as keyof typeof ActionsPermissionConfig];
         actionsPermissions.forEach((actionId) => {
           const btnConfig = BTN_PERMISSIONS[actionId.split(":")[1]];
           item.children?.push({
@@ -65,6 +63,12 @@ const processPermission = (routesData: any[], newData: any[]) => {
 };
 
 export default (props) => {
+  const [permissionsStore] = useInject('permissions')
+  const {state:{
+    permissions
+  },actions:{
+    init
+  }} = permissionsStore
   const [allPermissions, setPer] = useState<any>([]);
   const [checked, setChecked] = useState<any>();
   const navigate = useNavigate();
@@ -76,20 +80,19 @@ export default (props) => {
         if (Array.isArray(checked)) {
           if (checked.includes("hello")) {
             updatePermissions(checked).then(() => {
-              sessionStorage.clear()
-              globalStore.init()
+              sessionStorage.clear();
+              init();
               navigate("/");
             });
           } else {
             notification.info({
-              message: "hello 首页得有啊！"
-            })
+              message: "hello 首页得有啊！",
+            });
           }
         }
       },
     });
   };
-  const { permissions } = globalStore;
   useEffect(() => {
     let result = [];
     processPermission(ROUTE_STRUCT_CONFIG, result);
@@ -118,19 +121,21 @@ export default (props) => {
             labelCol={{ span: 4 }}
             wrapperCol={{ span: 14 }}
             layout="horizontal"
-            onValuesChange={() => { }}
+            onValuesChange={() => {}}
             size={"middle"}
           >
             <Form.Item label="权限" name="permission">
-              {permissions.length && allPermissions.length && <Tree
-                checkStrictly={true}
-                defaultCheckedKeys={permissions}
-                checkable
-                treeData={allPermissions}
-                onCheck={(data: any) => {
-                  setChecked(data.checked);
-                }}
-              />}
+              {permissions.length && allPermissions.length && (
+                <Tree
+                  checkStrictly={true}
+                  defaultCheckedKeys={permissions}
+                  checkable
+                  treeData={allPermissions}
+                  onCheck={(data: any) => {
+                    setChecked(data.checked);
+                  }}
+                />
+              )}
               {JSON.stringify(checked)}
             </Form.Item>
           </Form>
@@ -144,4 +149,4 @@ export default (props) => {
       <Table columns={columns} dataSource={data} />
     </div>
   );
-}
+};

@@ -3,7 +3,7 @@ import themeProviderHoc from "@/common/hocs/themeProviderHoc/index";
 import useLocationListen from "@/common/hooks/useLocationListen";
 import routerManager from "@/router/routerManager";
 import { RouteItem } from "@/router/types";
-import { globalStore } from "@/stores/index";
+import { useInject } from "@/stores/index";
 import { UserOutlined } from "@ant-design/icons";
 import { Button, Layout, Menu, Modal } from "antd";
 import { ItemType } from "antd/es/menu/hooks/useItems";
@@ -16,11 +16,14 @@ import styles from "./index.module.scss";
 import { updatePermissions } from "./service";
 
 const { Header, Content, Sider } = Layout;
-type MenuItem = ItemType & Partial<{
-  key: string;
-  children: MenuItem[]
-}>
-const processRoute = (data: RouteItem[], result: MenuItem[]) => {
+type MenuItem = ItemType &
+  Partial<{
+    key: string;
+    children: MenuItem[];
+  }>;
+
+// 递归生成菜单数据
+const generateMenuDataLoop = (data: RouteItem[], result: MenuItem[]) => {
   data.forEach((item) => {
     const temp: MenuItem = {
       key: item.id,
@@ -29,13 +32,18 @@ const processRoute = (data: RouteItem[], result: MenuItem[]) => {
     };
     result.push(temp);
     if (item?.children?.length) {
-      temp.children = processRoute(item.children, []);
+      temp.children = generateMenuDataLoop(item.children, []);
     }
   });
   return result;
 };
 
 const center = observer(() => {
+  const [permissionsStore] = useInject("permissions");
+  const {
+    state: { routesData },
+    actions: { addTabHistory, init },
+  } = permissionsStore;
   const navigate = useNavigate();
   const [defaultOpenKeys, setDefaultOpenKeys] = useState([]);
   const [defaultSelectedKeys, setDefaultSelectedKeys] = useState([]);
@@ -50,16 +58,16 @@ const center = observer(() => {
     if (temp2.length) {
       setDefaultOpenKeys(temp2);
     }
-    globalStore.addTabHistory(location);
+    addTabHistory(location);
   });
-  const { routesData = [] } = globalStore;
+
   // 路由监听
   const location = useLocation();
-  useEffect(() => { }, [location]);
+  useEffect(() => {}, [location]);
   useEffect(() => {
     if (routesData.length) {
-      const result = processRoute(routesData[1].children, []);
-      setMenuData(result);
+      const memuDataTemp = generateMenuDataLoop(routesData[1].children, []);
+      setMenuData(memuDataTemp);
     }
   }, [routesData]);
   return (
@@ -98,7 +106,7 @@ const center = observer(() => {
                     "user:EXPORT",
                   ]).then(() => {
                     sessionStorage.clear();
-                    globalStore.init();
+                    init();
                     navigate("/");
                   });
                 }

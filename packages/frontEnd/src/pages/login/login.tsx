@@ -1,10 +1,9 @@
-import "react";
 import AnimateText from "@/common/components/animateText";
 import styles from "./index.module.scss";
 import LoginCard from "./loginCard";
 import LoginForm from "./loginForm";
 
-export default (props) => {
+export default () => {
   return (
     <div className={styles.content}>
       <div className={styles.moderate}>

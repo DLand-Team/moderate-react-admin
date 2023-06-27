@@ -1,18 +1,24 @@
-import { globalStore } from "@/stores/index";
+import {  useInject } from "@/stores/index";
 import { Button, Checkbox, Form, Input } from "antd";
-import "react";
 import { login } from "./service";
 
 export default () => {
+  const [permissionsStore] = useInject("permissions");
+  const {
+    state: { token },
+    actions: { setIsAdmin, setToken },
+  } = permissionsStore;
   const onFinish = (values: any) => {
     const { name, password } = values;
     login({
       name,
       password,
     }).then((res) => {
-      const { token } = res.data;
-      globalStore.setToken(token);
-      sessionStorage.setItem("ACCESS_TOKEN", globalStore.token || token);
+      const { token, isAdmin } = res.data;
+      setIsAdmin(isAdmin);
+      setToken(token);
+      sessionStorage.setItem("ACCESS_TOKEN", token);
+      sessionStorage.setItem("IS_ADMIN", isAdmin ? "1" : "0");
     });
   };
 

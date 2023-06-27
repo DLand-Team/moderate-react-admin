@@ -11,11 +11,11 @@ export default defineConfig({
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, '')
       },
-      '/api2': {
-        target: 'http://localhost:5010/',
+      '/javaApi': {
+        target: 'http://localhost:8000/',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, '')
-      }
+        rewrite: (path) => path.replace(/^\/javaApi/, '')
+      },
     }
   },
   plugins: [react()],

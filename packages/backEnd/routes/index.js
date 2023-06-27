@@ -33,10 +33,11 @@ router.post("/login", async (ctx, next) => {
       resolve()
     })
   })
+
   ctx.response.body = {
     status: 1,
     code: "200",
-    data: { token: getToken(payload) },
+    data: { token: getToken(payload) ,isAdmin:name=='admin'},
   }
 })
 

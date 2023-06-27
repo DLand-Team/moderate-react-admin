@@ -3,29 +3,33 @@ import { makeAutoObservable, toJS } from "mobx";
 import type { Location } from "react-router-dom";
 
 class Global {
-  isLoginChecking: boolean;
   routesData: RouteItem[];
   token: string;
   tabsHistory: { [key: string]: Location };
   permissions: string[];
+  isAdmin: boolean; // 是否是管理员
 
   constructor() {
     makeAutoObservable(this);
     this.init()
   }
   init() {
-    this.isLoginChecking = true
     this.routesData = [];
-    this.token = "";
+    this.token = sessionStorage.getItem("ACCESS_TOKEN")||"";
     this.tabsHistory = {};
     this.permissions = [];
+    this.isAdmin = sessionStorage.getItem("IS_ADMIN") === "1";
   }
-  setRoutesData = (data:RouteItem[]) => {
-    this.routesData = data;
-  };
 
   setToken = (token: string) => {
     this.token = token;
+  };
+  setIsAdmin = (isAdmin: boolean) => {
+    this.isAdmin = isAdmin;
+  }
+
+  setRoutesData = (data:RouteItem[]) => {
+    this.routesData = data;
   };
 
   addTabHistory = (newItem: Location) => {
@@ -42,9 +46,7 @@ class Global {
     }
   };
 
-  setIsLoginChecking = (isLoginChecking: boolean) => {
-    this.isLoginChecking = isLoginChecking;
-  }
+ 
 
   setPermissions = (permissions) => {
     this.permissions = permissions;

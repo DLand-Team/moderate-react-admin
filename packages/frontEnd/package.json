@@ -15,6 +15,8 @@
     "match-sorter": "^6.3.1",
     "mobx": "^6.7.0",
     "mobx-react": "^7.6.0",
+    "natur": "^3.0.0",
+    "natur-immer": "^1.0.11",
     "react": "^18.2.0",
     "react-color": "^2.19.3",
     "react-dom": "^18.2.0",

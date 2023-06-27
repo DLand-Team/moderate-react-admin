@@ -6,19 +6,9 @@ interface loginParamsT {
 }
 
 export function login(params: loginParamsT) {
-  return http.request({
-    url: "/login",
+  return http.request<{ isAdmin: boolean; token: string }>({
+    url: "/api/login",
     method: "POST",
     data: params,
   });
 }
-
-//获得权限
-export function getPermissions() {
-  return http.request({
-    url: "/users/getPermissions",
-    method: "GET",
-  });
-}
-
-
