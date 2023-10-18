@@ -1,0 +1,31 @@
+<%
+  const name = locals.name
+  const typeName = locals.typeName
+-%>
+import type { <%- typeName %>State } from "./<%- name %>.model";
+import actions from "./<%- name %>.action";
+import watch from "./<%- name %>.watch";
+
+// 状态初始化函数
+// 写成函数，方便初始化
+const initState = (): <%- typeName %>State => {
+  return {
+    pageNum: 1,
+    pageSize: 10,
+    pageList: [],
+    total: 0,
+  };
+};
+
+const <%- name %> = {
+  // 状态
+  state: initState(),
+  // 计算属性
+  actions: {
+    ...actions,
+    init: initState,
+  },
+  watch,
+};
+
+export default <%- name %>;

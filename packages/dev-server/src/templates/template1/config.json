@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "fileList":[
+    {
+      "type":"tsx",
+      "template":"page.ejs",
+      "path":"",
+      "extraName":""
+    },
+    {
+      "type":"ts",
+      "template":"store.ejs",
+      "path":"/services/pageStore",
+      "fileName":"index.ts",
+      "extraName":"Store"
+    }
+  ]
+}

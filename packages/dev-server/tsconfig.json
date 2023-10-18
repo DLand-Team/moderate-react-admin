@@ -1,0 +1,28 @@
+{
+	"compilerOptions": {
+		"declaration": true,
+		"esModuleInterop": true,
+		"resolveJsonModule": true,
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"skipLibCheck": true,
+		"target": "es2019",
+		"jsx": "react",
+		"baseUrl": "./",
+		"outDir": "./dist",
+		"rootDir": "./src",
+		"paths": {
+			"@/*": ["./src/*","./dist/*"]
+		}
+	},
+	"exclude": [
+		"**/node_modules",
+		"**/dist",
+		"**/*.test.ts",
+		"**/*.e2e.ts",
+		"**/templates"
+	],
+	"include": ["src"]
+}

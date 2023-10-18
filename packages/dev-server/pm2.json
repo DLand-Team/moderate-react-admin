@@ -1,0 +1,14 @@
+{
+	"apps": [
+		{
+			"name": "my-app",
+			"script": "npm",
+			"args": "run dev",
+			"log": "logs/test.log",
+			"time": true,
+			"env": {
+				"NODE_ENV": "production"
+			}
+		}
+	]
+}
