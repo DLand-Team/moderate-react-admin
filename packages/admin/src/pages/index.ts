@@ -36,10 +36,7 @@ const CategoryPage = lazy(
 	() => import("./homePage/cmsPage/categoryPage/categoryPage"),
 );
 
-const SectsPage = lazy(
-	() => import("./homePage/cmsPage/sectsPage/sectsPage"),
-);
-
+const SectsPage = lazy(() => import("./homePage/cmsPage/sectsPage/sectsPage"));
 
 ////tagPage
 const TagPage = lazy(() => import("./homePage/cmsPage/tagPage/tagPage"));
@@ -58,5 +55,5 @@ export const pageList = {
 	ApiDevPage,
 	CategoryPage,
 	TagPage,
-  SectsPage,
+	SectsPage,
 };

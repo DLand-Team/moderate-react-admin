@@ -6,7 +6,7 @@
 import state, { initState } from "./state";
 import actions from "./action";
 import watch from "./watch";
-import { useFlatInject } from "@/common/hooks";
+//import { useFlatInject } from "@/common/hooks";
 
 const store = {
 	// 状态
@@ -21,6 +21,6 @@ const store = {
 
 export default store;
 
-export const useStore = () => {
-	return useFlatInject("<%- name %>");
-};
+//export const useStore = () => {
+//	return useFlatInject("<%- name %>");
+//};
