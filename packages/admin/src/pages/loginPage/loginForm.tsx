@@ -48,7 +48,7 @@ const LoginForm = () => {
 				label="密码"
 				name="password"
 				rules={[{ required: true, message: "请输入！" }]}
-				initialValue={123456}
+				initialValue={"123456"}
 			>
 				<Input.Password placeholder={"密码是123456"} />
 			</Form.Item>
