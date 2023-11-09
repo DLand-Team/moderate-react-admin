@@ -40,7 +40,7 @@ const HomePage = () => {
 	return (
 		<Layout className={styles.content}>
 			<Header className="header">
-				<div className={styles.logo}>Scaling Admin Console System</div>
+				<div className={styles.logo}>Moderate Admin</div>
 				<Button
 					type="primary"
 					onClick={() => {

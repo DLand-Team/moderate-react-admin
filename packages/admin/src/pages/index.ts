@@ -41,6 +41,8 @@ const SectsPage = lazy(() => import("./homePage/cmsPage/sectsPage/sectsPage"));
 ////tagPage
 const TagPage = lazy(() => import("./homePage/cmsPage/tagPage/tagPage"));
 
+////testAPage
+const TestAPage = lazy(() => import("./homePage/cmsPage/testAPage/testAPage"));
 //MODERATE_AUTO_PAGE_LAZY_IMPORT:END
 export const pageList = {
 	HomePage,
@@ -56,4 +58,5 @@ export const pageList = {
 	CategoryPage,
 	TagPage,
 	SectsPage,
+	TestAPage,
 };
