@@ -179,7 +179,7 @@ class devHelper {
 		const newStoreDeclaration = `import ${name} from "./${name}/${name}";\n`;
 		let newCode = input.replace(regex, `${newStoreDeclaration}$&`);
 		const matches = this.getStoreList(name);
-		let newStroes = matches
+		let newStores = matches
 			.filter((item) => {
 				return item;
 			})
@@ -187,7 +187,7 @@ class devHelper {
 				return `  ${item}`;
 			})
 			.join(",\n");
-		const str = "\nconst stores = {\n" + newStroes + "\n};\n";
+		const str = "\nconst stores = {\n" + newStores + "\n};\n";
 		newCode = newCode.replace(matchStores[1], str);
 		fs.writeFileSync(pathHelper.webStoresIndexPath, newCode);
 	};
