@@ -1,9 +1,9 @@
 import { useFlatInject } from "@/common/hooks";
-import { Line } from "@ant-design/plots";
+import { Column, Line } from "@ant-design/plots";
 import { Card } from "antd";
 import dayjs from "dayjs";
 import { sortBy } from "lodash";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const PlatformColumnChart = () => {
 	const { platformStatisticsData } = useFlatInject("helloPageStore")[0];

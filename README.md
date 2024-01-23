@@ -6,7 +6,7 @@
 -   Antd5
 -   natur
 -   react-router 6.4.3
--   webpack
+-   rspack 相当快了，比vite还快
 -   ts
 
 ## 功能点

@@ -48,14 +48,12 @@ const actions = createActions(state)({
 			naturApi.setState({
 				loading: true,
 			});
-			const { data } = await api
-				.queryApi<PageType>(params)
-				.finally(() => {
-					naturApi.setState({
-						loading: false,
-					});
+			const res = await api.queryApi<PageType>(params).finally(() => {
+				naturApi.setState({
+					loading: false,
 				});
-			const { content: dataList, count } = data;
+			});
+			const { content: dataList, count } = res.data || {};
 			return {
 				pageNum: params.page,
 				dataList,

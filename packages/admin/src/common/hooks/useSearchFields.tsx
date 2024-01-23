@@ -39,7 +39,7 @@ const useSearchFields = <T,>(
 			}
 			temp.push(
 				<Col span={Math.floor(24 / count)} key={i}>
-					<Form.Item {...formOptions}>{InputItem}</Form.Item>
+					<Form.Item {...formOptions} hidden={ !isSearch }>{InputItem}</Form.Item>
 				</Col>,
 			);
 		}

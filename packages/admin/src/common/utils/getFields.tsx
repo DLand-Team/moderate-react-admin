@@ -12,7 +12,7 @@ export const getFields = <T,>(
 		if (typeof options == "function") {
 			optionsArr = options({ formIns });
 		} else {
-			optionsArr = options;
+			optionsArr = options || [];
 		}
 		FieldItem = (
 			<Select allowClear {...inputOptions}>

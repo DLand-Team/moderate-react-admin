@@ -5,10 +5,10 @@ const watch = {
 	userInfoStore: (event: ModuleEvent, api: WatchAPI) => {
 		const {
 			actionName,
-			newModule: { state },
+			newModule,
 		} = event;
 		if (actionName === "login" && event.type === "update") {
-			api.localDispatch("createRoutesAction", state);
+			api.localDispatch("createRoutesAction", newModule?.state);
 		}
 	},
 };

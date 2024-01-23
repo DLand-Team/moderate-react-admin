@@ -9,21 +9,23 @@ const Actions = {
 	login:
 		({ userName, password }: { userName: string; password: string }) =>
 		async ({ setState }: ITP<UseInfoStoreState>) => {
+			// 第一步：登录获取token，并存储
 			const {
-				data: { token },
+				data: { content },
 			} = await userInfoApi.login({
 				username: userName,
 				password,
 			});
+			// 第二步：根据token获取权限，并存储
 			const isAdmin = true;
-			console.log("set store token" + token);
+			console.log("set store token" + content);
 			setState({
 				userName,
 				password,
-				token: token,
+				token: content,
 				isAdmin: isAdmin,
 			});
-			sessionStorage.setItem("ACCESS_TOKEN", token);
+			sessionStorage.setItem("ACCESS_TOKEN", content);
 			sessionStorage.setItem("IS_ADMIN", isAdmin ? "1" : "0");
 		},
 	updatePermissions: async (value: PermissionItem[]) => {

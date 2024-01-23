@@ -57,11 +57,11 @@ export const fieldCreater = <T>(
 	fieldConfig.formOptions = {
 		name: name,
 		label: name,
-        rules: [
-            {
-                required: true,
-            },
-        ],
+		rules: [
+			{
+				required: true,
+			},
+		],
 		...(fieldConfig.formOptions || {}),
 	};
 	return {

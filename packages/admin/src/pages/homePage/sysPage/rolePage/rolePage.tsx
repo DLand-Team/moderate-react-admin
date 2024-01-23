@@ -82,7 +82,7 @@ const RolePage = () => {
     {
       title: "Action",
       key: "action",
-      render: (_, record) => (
+      render: (_) => (
         <ModalForm handleCancel={()=>{
           modalForm.resetFields()
         }} handleSubmit={handleSubmit}>

@@ -1,8 +1,13 @@
 {
-	"name": "web",
-	"version": "0.1.0",
-	"private": true,
-	"dependencies": {
+  "name": "rs",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "rsbuild dev --open",
+    "build": "rsbuild build",
+    "preview": "rsbuild preview"
+  },
+  "dependencies": {
 		"@ant-design/icons": "^5.1.4",
 		"@ant-design/plots": "^1.2.5",
 		"@babel/core": "^7.16.0",
@@ -78,92 +83,9 @@
 		"webpack-manifest-plugin": "^4.0.2",
 		"workbox-webpack-plugin": "^6.4.1"
 	},
-	"scripts": {
-		"start": "cross-env PORT=8680 node scripts/dev.js",
-		"dev": "cross-env PORT=8680 node scripts/start.js",
-		"build": "node scripts/build.js",
-		"test": "node scripts/test.js"
-	},
-	"eslintConfig": {
-		"rules": {
-			"react-hooks/exhaustive-deps": "off",
-			"no-lone-blocks": "off",
-			"jsx-a11y/anchor-is-valid": "off"
-		},
-		"extends": [
-			"react-app",
-			"react-app/jest"
-		]
-	},
-	"browserslist": {
-		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all"
-		],
-		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version"
-		]
-	},
-	"jest": {
-		"roots": [
-			"<rootDir>/src"
-		],
-		"collectCoverageFrom": [
-			"src/**/*.{js,jsx,ts,tsx}",
-			"!src/**/*.d.ts"
-		],
-		"setupFiles": [
-			"react-app-polyfill/jsdom"
-		],
-		"setupFilesAfterEnv": [
-			"<rootDir>/src/setupTests.ts"
-		],
-		"testMatch": [
-			"<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
-			"<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
-		],
-		"testEnvironment": "jsdom",
-		"transform": {
-			"^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": "<rootDir>/config/jest/babelTransform.js",
-			"^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-			"^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
-		},
-		"transformIgnorePatterns": [
-			"[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs|cjs|ts|tsx)$",
-			"^.+\\.module\\.(css|sass|scss)$"
-		],
-		"modulePaths": [],
-		"moduleNameMapper": {
-			"^react-native$": "react-native-web",
-			"^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
-		},
-		"moduleFileExtensions": [
-			"web.js",
-			"js",
-			"web.ts",
-			"ts",
-			"web.tsx",
-			"tsx",
-			"json",
-			"web.jsx",
-			"jsx",
-			"node"
-		],
-		"watchPlugins": [
-			"jest-watch-typeahead/filename",
-			"jest-watch-typeahead/testname"
-		],
-		"resetMocks": true
-	},
-	"babel": {
-		"presets": [
-			"react-app"
-		]
-	},
 	"devDependencies": {
+    "@rsbuild/core": "^0.3.5",
+    "@rsbuild/plugin-react": "^0.3.5",
 		"@types/node": "^16.18.38"
 	}
 }

@@ -24,7 +24,6 @@ const useConfig = () => {
 				dataIndex: "name",
 				key: "name",
 				fieldConfig: {
-					isSearch: true,
 					formOptions: {
 						label: "name",
 						name: "name",
@@ -162,7 +161,6 @@ const useConfig = () => {
 					},
 				},
 			},
-
 			{
 				title: "action",
 				key: "action",

@@ -1,4 +1,5 @@
 import { http } from "@/common/http";
+import { UUID } from "@/common/utils";
 
 interface LoginApiInput {
 	username: string;
@@ -6,7 +7,7 @@ interface LoginApiInput {
 }
 
 interface LoginApiOutput {
-	token: string;
+	content: string;
 }
 
 // 更新权限
@@ -25,11 +26,11 @@ function login(params: LoginApiInput) {
 		email: params.username,
 		password: params.password,
 	};
-	return http.request<LoginApiOutput>({
-		url: "/api/auth/login",
-		method: "POST",
-		data: temp,
-	});
+	return {
+		data:{
+			content:UUID()
+		}
+	}
 }
 
 const userInfoApi = {

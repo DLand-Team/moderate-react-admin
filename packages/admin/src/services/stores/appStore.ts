@@ -87,7 +87,7 @@ const appStore = {
 			};
 		},
 		setTableItemsAct(tabItems) {
-			debugger;
+			
 			return {
 				tabItems,
 			};
