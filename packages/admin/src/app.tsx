@@ -8,7 +8,7 @@ const App = () => {
 	const { routesData, createRoutesAction } = useFlatInject("routerStore")[0];
 	const { token } = useFlatInject("userInfoStore")[0];
 	const location = useLocation();
-	
+
 	useEffect(() => {
 		// 判断是否登陆
 		if (token) {
