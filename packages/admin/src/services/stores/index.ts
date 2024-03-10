@@ -1,14 +1,4 @@
 import categoryPageStore from "@/pages/homePage/cmsPage/categoryPage/services/pageStore";
-import companyPageStore from "@/pages/homePage/cmsPage/partnerPage/services/pageStore";
-import enquiryPageStore from "@/pages/homePage/cmsPage/enquiryPage/services/pageStore";
-import feedbackPageStore from "@/pages/homePage/cmsPage/memberFeedbackPage/services/pageStore";
-import opportunityPageStore from "@/pages/homePage/cmsPage/opportunityPage/services/pageStore";
-import paymentPageStore from "@/pages/homePage/cmsPage/paymentPage/services/pageStore";
-import tagPageStore from "@/pages/homePage/cmsPage/tagPage/services/pageStore";
-import usersPageStore from "@/pages/homePage/cmsPage/memberPage/services/pageStore";
-import commentPageStore from "@/pages/homePage/cmsPage/commentPage/services/pageStore";
-import notifyPageStore from "@/pages/homePage/cmsPage/notifyPage/services/pageStore";
-import dealPageStore from "@/pages/homePage/cmsPage/dealPage/services/pageStore";
 import helloPageStore from "@/pages/homePage/helloPage/services/pageStore";
 import { createStore } from "natur";
 import { thunkMiddleware } from "natur-immer";
@@ -33,17 +23,7 @@ const stores = {
 	appStore,
 	permissionStore,
 	devStore,
-	companyPageStore,
 	categoryPageStore,
-	commentPageStore,
-	dealPageStore,
-	notifyPageStore,
-	opportunityPageStore,
-	tagPageStore,
-	enquiryPageStore,
-	feedbackPageStore,
-	paymentPageStore,
-	usersPageStore,
 	helloPageStore,
 };
 // MODERATE_AUTO_STORES_1:END

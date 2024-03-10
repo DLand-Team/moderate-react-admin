@@ -70,7 +70,6 @@ const HomePage = () => {
 				<Sider width={260} className="site-layout-background">
 					{menuData.length > 0 && menuDefaultOpenKeys && (
 						<Menu
-							theme="dark"
 							mode="inline"
 							selectedKeys={menuDefaultSelectedKeys}
 							defaultOpenKeys={menuDefaultOpenKeys}
