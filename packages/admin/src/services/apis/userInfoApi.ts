@@ -6,10 +6,6 @@ interface LoginApiInput {
 	password: string;
 }
 
-interface LoginApiOutput {
-	content: string;
-}
-
 // 更新权限
 export function updatePermissions(data: string[]) {
 	return http.request({

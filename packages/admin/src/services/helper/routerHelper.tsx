@@ -94,35 +94,37 @@ class RouterHelper {
 
 	// 生成路由配置根据权限
 	createRoutesConfigByUserInfo = (): RouteItem[] => {
+		const routerStore = store.getModule("routerStore");
 		let homeChildren = ROUTE_STRUCT_CONFIG.find(
 			(item) => item.id === ROUTE_ID.homePage,
 		)!.children!;
 		homeChildren.sort((a, b) => {
 			return ROUTE_NAME[a.id] - ROUTE_NAME[b.id];
 		});
-		let routeData = [...store.getModule("routerStore").state.routesData];
+		let routeData = [...routerStore.state.routesData];
 		let targetId = routeData.findIndex((item) => {
 			return item.id === ROUTE_ID.homePage;
 		});
 		routeData[targetId] = Object.assign({}, routeData[targetId], {
 			children: this.createRouteConfigLoop([], homeChildren, "/homePage"),
 		});
-		store
-			.getModule("routerStore")
-			.actions.setRoutesConfigMap(this.routesConfigMapTemp);
+		routerStore.actions.setRoutesConfigMap(this.routesConfigMapTemp);
 		return [...routeData];
 	};
 
 	getRoutePathByKey(key: string) {
 		return store.getModule("routerStore").state.routesConfigMap[key]?.path;
 	}
+
 	getRouteTitleByKey(key: string) {
 		return store.getModule("routerStore").state.routesConfigMap[key]?.meta
 			?.title;
 	}
+
 	getRouteIdByPath(path: string) {
 		return store.getModule("routerStore").state.routesConfigMap[path]?.id;
 	}
+
 	getKeepAliveRoutePath() {
 		return Object.values(ROUTE_INFO_CONFIG)
 			.filter((item) => {
@@ -132,6 +134,7 @@ class RouterHelper {
 				return item.id;
 			});
 	}
+
 	createDefaultRoutesConfig(defaultRouteKeys) {
 		return defaultRouteKeys.map((item: ROUTE_ID_KEY) => {
 			let routeItem = ROUTE_INFO_CONFIG[item];

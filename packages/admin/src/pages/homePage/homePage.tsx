@@ -48,7 +48,6 @@ const HomePage = () => {
 							onOk: () => {
 								{
 									initAllStores();
-									routerHelper.init();
 									routerHelper.jumpTo(ROUTE_ID.loginPage);
 								}
 							},

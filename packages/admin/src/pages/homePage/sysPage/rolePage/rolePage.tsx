@@ -1,6 +1,5 @@
 import { initAllStores, useFlatInject, useGreatAsync } from "@/common/hooks";
 import { ROUTE_STRUCT_CONFIG } from "@/config/routerConfig";
-import { routerHelper } from "@/services";
 import { Button, Form, Modal, Table, Tree, notification } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { useEffect, useState } from "react";
@@ -50,7 +49,6 @@ const RolePage = () => {
 					if (checked.includes("helloPage")) {
 						updatePermissionsG(checked).then(() => {
 							initAllStores();
-							routerHelper.init();
 							navigate("/");
 						});
 					} else {
