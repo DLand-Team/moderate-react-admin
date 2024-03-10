@@ -17,6 +17,7 @@ export enum ROUTE_NAME {
 	storeDevPage,
 	apiDevPage,
 	categoryPage,
+	testPage,
 }
 // MODERATE_AUTO_2:END
 export const ROUTE_ID = enumToObject(ROUTE_NAME);
@@ -24,7 +25,7 @@ export const ROUTE_ID = enumToObject(ROUTE_NAME);
 // ROUTE_INFO_CONFIG，路由信息字典
 // MODERATE_AUTO_3:START
 export const ROUTE_INFO_CONFIG: {
-	[key: string]: RouteItem;
+	[key in ROUTE_ID_KEY]: RouteItem;
 } = {
 	loginPage: {
 		id: "loginPage",
@@ -132,56 +133,48 @@ export const ROUTE_INFO_CONFIG: {
 		component: "CategoryPage",
 		isMustShow: true,
 	},
+	testPage: {
+		id: "testPage",
+		meta: {
+			title: "testPage",
+		},
+		component: "TestPage",
+		isMustShow: true,
+	},
 }; //MODERATE_AUTO_3:END
 // =============== 路由结构数据 ===============
-// MODERATE_AUTO:START
-export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [
-	{
-		id: ROUTE_ID.homePage,
-		children: [
-			{
-				id: ROUTE_ID.cmsPage,
-				children: [
-					{
-						id: ROUTE_ID.categoryPage,
-					},
-				],
-			},
-			{
-				id: ROUTE_ID.devPage,
-				children: [
-					{
-						id: ROUTE_ID.apiDevPage,
-					},
-					{
-						id: ROUTE_ID.pageDevPage,
-					},
-					{
-						id: ROUTE_ID.storeDevPage,
-					},
-				],
-			},
-			{
-				id: ROUTE_ID.helloPage,
-			},
-			{
-				id: ROUTE_ID.permissionPage,
-			},
-			{
-				id: ROUTE_ID.sysPage,
-				children: [
-					{
-						id: ROUTE_ID.rolePage,
-					},
-					{
-						id: ROUTE_ID.userPage,
-					},
-				],
-			},
-		],
-	},
-	{
-		id: ROUTE_ID.loginPage,
-	},
-];
+// MODERATE_AUTO:START 
+export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [{
+  id: ROUTE_ID.homePage,
+  children: [{
+    id: ROUTE_ID.cmsPage,
+    children: [{
+      id: ROUTE_ID.categoryPage
+    }, {
+      id: ROUTE_ID.testPage
+    }]
+  }, {
+    id: ROUTE_ID.devPage,
+    children: [{
+      id: ROUTE_ID.apiDevPage
+    }, {
+      id: ROUTE_ID.pageDevPage
+    }, {
+      id: ROUTE_ID.storeDevPage
+    }]
+  }, {
+    id: ROUTE_ID.helloPage
+  }, {
+    id: ROUTE_ID.permissionPage
+  }, {
+    id: ROUTE_ID.sysPage,
+    children: [{
+      id: ROUTE_ID.rolePage
+    }, {
+      id: ROUTE_ID.userPage
+    }]
+  }]
+}, {
+  id: ROUTE_ID.loginPage
+}]
 // MODERATE_AUTO:END

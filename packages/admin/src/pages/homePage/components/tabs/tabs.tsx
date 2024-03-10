@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { useNavigate, type Location } from "react-router-dom";
 import styles from "./tabs.module.scss";
 
-const TabsComp  = () => {
+const TabsComp = () => {
 	const {
 		deleteTabHistoryAct,
 		setTableItemsAct,
@@ -14,8 +14,8 @@ const TabsComp  = () => {
 		tabsHistory,
 		activeTabKey,
 		tabItems,
-	} = useFlatInject('appStore')[0];
-	const navi = useNavigate()
+	} = useFlatInject("appStore")[0];
+	const navi = useNavigate();
 	useEffect(() => {
 		const tabsHistoryArr = Object.values(tabsHistory);
 		setTableItemsAct(
@@ -34,7 +34,7 @@ const TabsComp  = () => {
 	});
 	const onChange = (newActiveKey: string) => {
 		setActiveTabKeyAct(newActiveKey);
-		navi(newActiveKey)
+		navi(newActiveKey);
 	};
 
 	return (
@@ -54,4 +54,4 @@ const TabsComp  = () => {
 	);
 };
 
-export default TabsComp
+export default TabsComp;

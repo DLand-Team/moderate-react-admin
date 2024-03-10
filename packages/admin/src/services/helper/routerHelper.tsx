@@ -129,9 +129,11 @@ class RouterHelper {
 		return store.getModule("routerStore").state.routesConfigMap[path]?.id;
 	}
 	getKeepAliveRoutePath() {
-		return Object.values(ROUTE_INFO_CONFIG).filter((item)=>{
-				return item.keepAlive
-			}).map((item) => {
+		return Object.values(ROUTE_INFO_CONFIG)
+			.filter((item) => {
+				return item.keepAlive;
+			})
+			.map((item) => {
 				return item.id;
 			});
 	}
@@ -165,7 +167,21 @@ class RouterHelper {
 	) {
 		const { type = "push", state } = options || {};
 		const path = this.getRoutePathByKey(id);
-		if(!path) return new Error("路由不存在")
+		if (!path) return new Error("路由不存在");
+		if (type === "push") {
+			this.history.push(path, state);
+		} else {
+			this.history.replace(path, state);
+		}
+	}
+	jumpToByPath(
+		path: string,
+		options?: {
+			type: "replace" | "push";
+			state?: any;
+		},
+	) {
+		const { type = "push", state } = options || {};
 		if (type === "push") {
 			this.history.push(path, state);
 		} else {

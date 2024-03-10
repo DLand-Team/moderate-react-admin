@@ -72,6 +72,9 @@ const appStore = {
 					let temp = state.tabsHistory;
 					if (Object.values(temp).length > 1) {
 						Reflect.deleteProperty(temp, pathName);
+						routerHelper.jumpToByPath(
+							Object.values(temp)[0].pathname,
+						);
 					}
 				}),
 		addTabHistoryActionAct:
@@ -87,7 +90,6 @@ const appStore = {
 			};
 		},
 		setTableItemsAct(tabItems) {
-			
 			return {
 				tabItems,
 			};

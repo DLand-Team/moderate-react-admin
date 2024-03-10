@@ -4,7 +4,6 @@ import { initAllStores, useFlatInject } from "@/common/hooks";
 import useLocationListen from "@/common/hooks/useLocationListen";
 import { ROUTE_ID } from "@/config/routerConfig";
 import { routerHelper } from "@/services";
-import defaultTopPermission from "@/static/defaultTopPermission";
 import { Button, Layout, Menu, Modal } from "antd";
 import { type Location } from "react-router-dom";
 import Breadcrumb from "./components/breadcrumb/breadcrumb";
@@ -14,7 +13,6 @@ import styles from "./homePage.module.scss";
 const { Header, Content, Sider } = Layout;
 
 const HomePage = () => {
-	const { updatePermissions } = useFlatInject("userInfoStore")[0];
 	const {
 		menuData,
 		menuDefaultOpenKeys,
@@ -49,11 +47,6 @@ const HomePage = () => {
 							content: "更新权限之后，需要重新登陆",
 							onOk: () => {
 								{
-									// updatePermissions(
-									// 	defaultTopPermission,
-									// ).then(() => {
-
-									// });
 									initAllStores();
 									routerHelper.init();
 									routerHelper.jumpTo(ROUTE_ID.loginPage);

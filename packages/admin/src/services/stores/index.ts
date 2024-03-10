@@ -1,4 +1,5 @@
 import categoryPageStore from "@/pages/homePage/cmsPage/categoryPage/services/pageStore";
+import testPageStore from "@/pages/homePage/cmsPage/testPage/services";
 import helloPageStore from "@/pages/homePage/helloPage/services/pageStore";
 import { createStore } from "natur";
 import { thunkMiddleware } from "natur-immer";
@@ -25,6 +26,7 @@ const stores = {
 	devStore,
 	categoryPageStore,
 	helloPageStore,
+	testPageStore,
 };
 // MODERATE_AUTO_STORES_1:END
 export const store = createStore(
