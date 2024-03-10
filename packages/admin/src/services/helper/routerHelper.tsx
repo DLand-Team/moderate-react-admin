@@ -25,12 +25,8 @@ type MenuItem = ItemType &
 		children: MenuItem[];
 	}>;
 class RouterHelper {
-	history: BrowserHistory;
+	history: BrowserHistory = historyInstanse;
 	routesConfigMapTemp = cloneDeep(ROUTE_INFO_CONFIG);
-	constructor() {
-		this.init();
-	}
-
 	createRouteItem = (routeItem: RouteItem) => {
 		const { component } = routeItem;
 		const Page = pageList[component];
@@ -98,7 +94,6 @@ class RouterHelper {
 
 	// 生成路由配置根据权限
 	createRoutesConfigByUserInfo = (): RouteItem[] => {
-		this.init();
 		let homeChildren = ROUTE_STRUCT_CONFIG.find(
 			(item) => item.id === ROUTE_ID.homePage,
 		)!.children!;
@@ -187,10 +182,6 @@ class RouterHelper {
 		} else {
 			this.history.replace(path, state);
 		}
-	}
-	init() {
-		this.history = historyInstanse;
-		this.routesConfigMapTemp = cloneDeep(ROUTE_INFO_CONFIG);
 	}
 	// 递归生成菜单数据
 	generateMenuDataLoop = (data: RouteItem[], result: MenuItem[]) => {

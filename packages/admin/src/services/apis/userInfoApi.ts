@@ -22,15 +22,11 @@ export function updatePermissions(data: string[]) {
 }
 
 function login(params: LoginApiInput) {
-	let temp = {
-		email: params.username,
-		password: params.password,
-	};
 	return {
-		data:{
-			content:UUID()
-		}
-	}
+		data: {
+			content: UUID(),
+		},
+	};
 }
 
 const userInfoApi = {

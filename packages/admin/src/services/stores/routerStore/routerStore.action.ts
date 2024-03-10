@@ -15,6 +15,5 @@ const actions = {
 			routesData,
 		};
 	},
-	
 };
 export default actions;

@@ -18,6 +18,7 @@ export enum ROUTE_NAME {
 	apiDevPage,
 	categoryPage,
 	testPage,
+	test1Page,
 }
 // MODERATE_AUTO_2:END
 export const ROUTE_ID = enumToObject(ROUTE_NAME);
@@ -141,6 +142,14 @@ export const ROUTE_INFO_CONFIG: {
 		component: "TestPage",
 		isMustShow: true,
 	},
+	test1Page: {
+		id: "test1Page",
+		meta: {
+			title: "test1Page",
+		},
+		component: "Test1Page",
+		isMustShow: true,
+	},
 }; //MODERATE_AUTO_3:END
 // =============== 路由结构数据 ===============
 // MODERATE_AUTO:START 
@@ -150,6 +159,8 @@ export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [{
     id: ROUTE_ID.cmsPage,
     children: [{
       id: ROUTE_ID.categoryPage
+    }, {
+      id: ROUTE_ID.test1Page
     }, {
       id: ROUTE_ID.testPage
     }]
