@@ -8,7 +8,6 @@ const App = () => {
 	return (
 		<Routes>
 			{routesConfig?.map((item) => {
-				;
 				return routerHelper.toRenderRouteLoop(item);
 			})}
 		</Routes>
