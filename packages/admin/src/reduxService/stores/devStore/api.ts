@@ -1,4 +1,4 @@
-import { http } from "@/common/http";
+import { http } from "src/common/http";
 import {
 	AdcompanyPageParams,
 	AddStoreParams,

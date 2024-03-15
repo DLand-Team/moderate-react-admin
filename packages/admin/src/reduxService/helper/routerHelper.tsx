@@ -1,23 +1,24 @@
-import historyInstanse from "@/common/components/customRouter/historyInstance";
+import historyInstanse from "src/common/components/customRouter/historyInstance";
 import {
 	ROUTE_ID,
 	ROUTE_INFO_CONFIG,
 	ROUTE_NAME,
 	ROUTE_STRUCT_CONFIG,
-} from "@/config/routerConfig";
+} from "src/config/routerConfig";
 import type {
 	ROUTE_ID_KEY,
 	RouteItem,
 	RoutesStructDataItem,
-} from "@/config/types";
-import { DynamicPageRender, pageList } from "@/pages";
-import { UserOutlined } from "@ant-design/icons";
+} from "src/config/types";
+import { DynamicPageRender, pageList } from "src/pages";
 import { ItemType } from "antd/es/menu/hooks/useItems";
 import { BrowserHistory } from "history";
 import { cloneDeep } from "lodash-es";
-import { Suspense, createElement } from "react";
+import { Suspense } from "react";
 import { Route } from "react-router-dom";
-import { dp, reduxStore as store } from "..";
+import { reduxStore as store } from "..";
+import { MenuPermissionItem } from "../stores/authStore/model";
+import { MenuConfig } from "src/config/menuConfig";
 
 type MenuItem = ItemType &
 	Partial<{
@@ -25,13 +26,22 @@ type MenuItem = ItemType &
 		children: MenuItem[];
 	}>;
 export class RouterHelper {
-	history: BrowserHistory = historyInstanse;
-	routesConfigMapCopy = cloneDeep(ROUTE_INFO_CONFIG);
+	history: BrowserHistory;
+	routesConfigMapCopy: {
+		[key in ROUTE_ID_KEY]: RouteItem;
+	};
+	constructor() {
+		this.init();
+	}
+	init() {
+		this.history = historyInstanse;
+		this.routesConfigMapCopy = cloneDeep(ROUTE_INFO_CONFIG);
+	}
 	// 递归生成菜单数据
-	generateMenuDataLoop = (data: RouteItem[], result: MenuItem[]) => {
+	static createMenuDataLoop = (data: RouteItem[], result: MenuItem[]) => {
 		data.forEach((item) => {
-			const { isMenu = true } = item;
-			if (!isMenu) {
+			const { isMenu = true, isNoAuth } = item;
+			if (!isMenu || !isNoAuth) {
 				return;
 			}
 			const temp: MenuItem = {
@@ -41,10 +51,39 @@ export class RouterHelper {
 			};
 			result.push(temp);
 			if (item?.children?.length) {
-				temp.children = this.generateMenuDataLoop(item.children, []);
+				temp.children = RouterHelper.createMenuDataLoop(
+					item.children,
+					[],
+				);
 			}
 		});
 		return result;
+	};
+
+	static createMenuDataLoopByPermissions = (
+		data: MenuPermissionItem[],
+		result: MenuItem[],
+		routesPermissions: string[],
+	) => {
+		data.forEach((item) => {
+			const temp: MenuItem = {
+				key:
+					MenuConfig[item.componentName]?.routeName ||
+					item.componentName,
+				// icon: createElement(UserOutlined),
+				label: item.name,
+			};
+			routesPermissions.push(MenuConfig[item.componentName]?.routeName);
+			result.push(temp);
+			if (item?.children?.length) {
+				temp.children = RouterHelper.createMenuDataLoopByPermissions(
+					item.children,
+					[],
+					routesPermissions,
+				).menuData;
+			}
+		});
+		return { menuData: result, routesPermissions };
 	};
 
 	// 递归创建路由
@@ -60,7 +99,6 @@ export class RouterHelper {
 		if (!item.element) {
 			const Page = pageList[component];
 			if (Page) {
-				;
 				element = (
 					<Suspense>
 						<DynamicPageRender name={component} />
@@ -68,11 +106,10 @@ export class RouterHelper {
 				);
 			}
 		}
-		;
 		return (
 			<Route
 				children={routeChildren}
-				key={item.path}
+				key={item.id}
 				path={item.path}
 				element={item.element || element}
 			></Route>
@@ -82,7 +119,7 @@ export class RouterHelper {
 	static createDefaultRoutesConfig() {
 		return Object.values(ROUTE_INFO_CONFIG)
 			.filter((item) => {
-				return item.isDefault;
+				return item.isNoAuth;
 			})
 			.map((routeItem) => {
 				return {
@@ -92,25 +129,32 @@ export class RouterHelper {
 	}
 
 	// 生成路由配置
-	createRouteConfigLoop = (
-		children: any[],
-		routesStuctData: RoutesStructDataItem[],
-		prefix: string,
-	) => {
+	static createRouteConfigLoop = ({
+		children,
+		routesStuctData,
+		prefix,
+		routesConfigMap,
+		routesPermissions,
+	}: {
+		children: any[];
+		routesStuctData: RoutesStructDataItem[];
+		prefix: string;
+		routesConfigMap: {
+			[key in ROUTE_ID_KEY]: RouteItem;
+		};
+		routesPermissions: string[];
+	}) => {
 		routesStuctData.forEach((routeStructItem) => {
-			const authStore = store.getState().authStore;
-			const { id, isMustShow } = routeStructItem;
+			const { id } = routeStructItem;
 			// 如果有权限或者是必须显示的，或者是管理员
 			if (
-				authStore.isAdmin ||
-				authStore.permissions?.includes(id) ||
-				isMustShow
+				routesPermissions?.includes(id) ||
+				routesConfigMap[id].isNoAuth
 			) {
-				const { component, ...rest } = this.routesConfigMapCopy[id];
-
+				const { component, ...rest } = routesConfigMap[id];
 				const path = prefix + "/" + id;
-				this.routesConfigMapCopy[id].id = id as ROUTE_ID_KEY;
-				this.routesConfigMapCopy[id].path = path;
+				routesConfigMap[id].id = id as ROUTE_ID_KEY;
+				routesConfigMap[id].path = path;
 
 				let routesConfig: RouteItem = {
 					...rest,
@@ -118,49 +162,64 @@ export class RouterHelper {
 					id,
 					component,
 				};
-
 				// 沿途记录，然后拼接成path
-
 				children!.push(routesConfig);
 				if (routeStructItem.children!?.length > 0) {
-					routesConfig.children = this.createRouteConfigLoop(
-						[],
-						routeStructItem.children!,
-						routesConfig.path,
-					);
+					routesConfig.children = this.createRouteConfigLoop({
+						children: [],
+						routesStuctData: routeStructItem.children!,
+						prefix: routesConfig.path,
+						routesPermissions,
+						routesConfigMap,
+					});
 				}
 			}
 		});
 		return children;
 	};
 
-	// 生成路由配置根据权限
-	createRoutesConfigByUserInfo = (): {
+	static createRoutesConfigByUserInfo = ({
+		routesPermissions,
+		routesConfigMap,
+	}: {
+		routesPermissions: string[];
+		routesConfigMap: {
+			[key in ROUTE_ID_KEY]: RouteItem;
+		};
+	}): {
 		routesConfig: RouteItem[];
 		routesConfigMap: {
 			[key in ROUTE_ID_KEY]: RouteItem;
 		};
 	} => {
-		const routerStore = store.getState().routerStore;
+		// 初始化一个这个实体类
+		// 每次执行，确保初始化，防止重新登录
 		let homeChildren = ROUTE_STRUCT_CONFIG.find(
 			(item) => item.id === ROUTE_ID.homePage,
 		)!.children!;
 		homeChildren.sort((a, b) => {
 			return ROUTE_NAME[a.id] - ROUTE_NAME[b.id];
 		});
-		let routesConfig = [...routerStore.routesConfig];
+		let routesConfig = [...RouterHelper.createDefaultRoutesConfig()];
 		let targetId = routesConfig.findIndex((item) => {
 			return item.id === ROUTE_ID.homePage;
 		});
 		routesConfig[targetId] = Object.assign({}, routesConfig[targetId], {
-			children: this.createRouteConfigLoop([], homeChildren, "/homePage"),
+			children: RouterHelper.createRouteConfigLoop({
+				children: [],
+				routesStuctData: homeChildren,
+				prefix: "/" + ROUTE_ID[ROUTE_ID.homePage],
+				routesConfigMap,
+				routesPermissions,
+			}),
 		});
-		;
 		return {
 			routesConfig: [...routesConfig],
-			routesConfigMap: this.routesConfigMapCopy,
+			routesConfigMap: routesConfigMap,
 		};
 	};
+	// 生成路由配置根据权限
+	// 每次登陆只会触发一次
 
 	getRoutePathByKey(key: string) {
 		const routerStore = store.getState().routerStore;
@@ -200,7 +259,7 @@ export class RouterHelper {
 	) {
 		const { type = "push", state } = options || {};
 		const path = this.getRoutePathByKey(id);
-
+		debugger;
 		if (!path) return new Error("路由不存在");
 		if (type === "push") {
 			this.history.push(path, state);

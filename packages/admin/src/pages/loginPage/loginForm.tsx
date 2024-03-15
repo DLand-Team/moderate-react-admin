@@ -1,11 +1,11 @@
-import { useGreatAsync } from "@/common/hooks";
-import { useFlat } from "@/reduxService";
+import { useGreatAsync } from "src/common/hooks";
+import { useFlat } from "src/reduxService";
 import { Button, Checkbox, Form, Input } from "antd";
 
 const LoginForm = () => {
 	const { login } = useFlat("authStore");
 
-	const { fn: loginG } = useGreatAsync(login, {
+	const { run: loginG } = useGreatAsync(login, {
 		auto: false,
 		single: true,
 	});
@@ -13,7 +13,9 @@ const LoginForm = () => {
 	const onFinish = async (values: any) => {
 		// 开发环境使用默认账号密码
 		loginG({
-			userName: values.name,
+			username: values.name,
+			// captchaVerification:
+			// 	"hqQbtOeaIhcVWuhvC6chvbqrPPokbgGMp2ijKRMa0XTfTdLZW9IjZtD9BEvJXE44OTPFKK4r2UCLV3dKy",
 			password: values.password,
 		});
 	};

@@ -3,7 +3,9 @@ type ItemKey =
 	| "SOCKET_ID"
 	| "SOCKET_STATUS"
 	| "DEAL_ID"
-	| "IS_ADMIN";
+	| "IS_ADMIN"
+	| "PERMISSIONS_DATA"
+	| "MENU_DATA";
 
 const storageHelper = {
 	setItem: (

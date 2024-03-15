@@ -1,9 +1,9 @@
 /* Core */
-import { Provider } from "react-redux";
 import "./setup";
 /* Instruments */
 
 import { reduxStore } from ".";
+import { Provider } from "redux-eazy";
 
 const App = (props: React.PropsWithChildren<{}>) => {
 	return <>{props.children}</>;

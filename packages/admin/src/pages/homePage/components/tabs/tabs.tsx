@@ -1,5 +1,5 @@
-import useLocationListen from "@/common/hooks/useLocationListen";
-import { routerHelper, useFlat } from "@/reduxService";
+import useLocationListen from "src/common/hooks/useLocationListen";
+import { routerHelper, useFlat } from "src/reduxService";
 import { Tabs } from "antd";
 import { useEffect } from "react";
 import { useNavigate, type Location } from "react-router-dom";

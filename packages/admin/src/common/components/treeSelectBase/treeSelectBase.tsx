@@ -1,8 +1,8 @@
 import FormItemHoc, {
 	type FormItemHocProps,
-} from "@/common/hocs/formItemHoc/formItemHoc";
-import { RouteItem } from "@/config/types";
-import { routerHelper, useFlat } from "@/reduxService";
+} from "src/common/hocs/formItemHoc/formItemHoc";
+import { RouteItem } from "src/config/types";
+import { routerHelper, useFlat } from "src/reduxService";
 import { TreeSelect, TreeSelectProps } from "antd";
 import { useEffect, useState } from "react";
 

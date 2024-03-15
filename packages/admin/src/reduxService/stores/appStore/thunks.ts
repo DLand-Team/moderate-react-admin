@@ -3,6 +3,8 @@ import { type Location } from "react-router-dom";
 import { dp } from "../..";
 import { createThunks } from "../../setup";
 import names from "../names";
+import { RouterHelper } from "src/reduxService/helper/routerHelper";
+import { ROUTE_ID } from "src/config/routerConfig";
 
 const thunks = createThunks(names.appStore, {
 	testAct: async (arg: { id: string }, api) => {},
@@ -19,7 +21,26 @@ const thunks = createThunks(names.appStore, {
 		const tabsHistoryCopy = { ...tabsHistory };
 		tabsHistoryCopy[newItem.pathname] = newItem;
 		dp("appStore", "setTabsHistory", tabsHistoryCopy);
-		;
+	},
+	createMenuDataAct: async (_, api) => {
+		const { menuPermissions } = api.getState().authStore;
+		const { children } = menuPermissions || {};
+		const { menuData = [] } = children
+			? RouterHelper.createMenuDataLoopByPermissions(children, [], [])
+			: {};
+		const { routesConfig } = api.getState().routerStore;
+		if (routesConfig.length) {
+			const temp = routesConfig.find((item) => {
+				return item.id === ROUTE_ID.homePage;
+			}).children;
+			if (temp?.length) {
+				const memuDataTemp = RouterHelper.createMenuDataLoop(temp, []);
+				dp("appStore", "setMenuDataAct", [
+					...menuData,
+					...memuDataTemp,
+				]);
+			}
+		}
 	},
 });
 export default thunks;

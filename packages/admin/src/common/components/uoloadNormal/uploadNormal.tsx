@@ -1,6 +1,6 @@
 import FormItemHoc, {
   type FormItemHocProps,
-} from "@/common/hocs/formItemHoc/formItemHoc";
+} from "src/common/hocs/formItemHoc/formItemHoc";
 import { Upload, UploadProps, message } from "antd";
 
 const UploadNor = ({

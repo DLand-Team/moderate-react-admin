@@ -1,4 +1,4 @@
-import { getFields } from "@/common/utils";
+import { getFields } from "src/common/utils";
 import { Col, Form } from "antd";
 import { RuleObject } from "antd/es/form";
 import { cloneDeep } from "lodash-es";
@@ -16,8 +16,8 @@ const useSearchFields = <T,>(
 	useEffect(() => {
 		let temp = [];
 		for (let i = 0; i < columns.length; i++) {
-			const { fieldConfig = {} } = columns[i];
-			let fieldConfigTemp = cloneDeep(fieldConfig);
+			const { config = {} } = columns[i];
+			let fieldConfigTemp = cloneDeep(config);
 			const {
 				searchFromRender,
 				formOptions,
@@ -27,7 +27,7 @@ const useSearchFields = <T,>(
 			if (!isSearch) continue;
 			if (searchFromRender) {
 				InputItem = searchFromRender;
-			} else if (fieldConfig) {
+			} else if (config) {
 				if (formOptions?.rules) {
 					formOptions.rules.forEach((a: RuleObject) => {
 						if (a.required) {

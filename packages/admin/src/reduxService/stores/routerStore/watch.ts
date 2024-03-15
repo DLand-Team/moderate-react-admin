@@ -1,19 +1,12 @@
-import { getActionType } from "@/reduxService";
-import { startAppListening } from "@/reduxService/setup";
-import { ListenerMiddleware } from "redux-eazy";
+import { dp, getActionType } from "src/reduxService";
+import { startAppListening } from "src/reduxService/setup";
 
-const watch = (listenerMiddleware: ListenerMiddleware) => {
-	// startAppListening({
-	// 	type: getActionType("authStore").login,
-	// 	effect: () => {},
-	// });
-	// 监听例子
+const watch = () => {
 	startAppListening({
-		predicate: (action, currentState, previousState) => {
-			// return true when the listener should run
-			return false;
+		type: getActionType("authStore").setPermissions,
+		effect: () => {
+			dp("routerStore", "createRoutesDataAct");
 		},
-		effect: async (action, listenerApi) => {},
 	});
 };
 

@@ -1,5 +1,5 @@
-import useLocationListen from "@/common/hooks/useLocationListen";
-import { routerHelper } from "@/reduxService";
+import useLocationListen from "src/common/hooks/useLocationListen";
+import { routerHelper } from "src/reduxService";
 import { Breadcrumb } from "antd";
 import { useState } from "react";
 import type { Location } from "react-router-dom";

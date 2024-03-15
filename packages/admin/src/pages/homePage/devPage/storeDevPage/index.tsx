@@ -1,11 +1,11 @@
-import { useGreatAsync } from "@/common/hooks";
-import { useFlat } from "@/reduxService";
+import { useGreatAsync } from "src/common/hooks";
+import { useFlat } from "src/reduxService";
 import { Space, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { useEffect } from "react";
 import ModalForm from "./components/modalForm/modalForm";
 import styles from "./index.module.scss";
-import { CommonType } from "@/reduxService/stores/devStore/model";
+import { CommonType } from "src/reduxService/stores/devStore/model";
 
 const columns: ColumnsType<CommonType> = [
 	{

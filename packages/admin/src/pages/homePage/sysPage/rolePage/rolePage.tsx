@@ -1,5 +1,5 @@
-import { useGreatAsync } from "@/common/hooks";
-import { useFlat, useResetRedux } from "@/reduxService";
+import { useGreatAsync } from "src/common/hooks";
+import { useFlat, useResetRedux } from "src/reduxService";
 import { Button, Form, Modal, Table, notification } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { useEffect, useState } from "react";
@@ -35,7 +35,7 @@ const RolePage = () => {
 		updatePermissionsAct,
 	} = useFlat("authStore");
 
-	const { loading, fn: updatePermissionsG } = useGreatAsync(
+	const { loading, run: updatePermissionsG } = useGreatAsync(
 		updatePermissionsAct,
 		{
 			auto: false,

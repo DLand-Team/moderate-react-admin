@@ -1,14 +1,14 @@
-import { useGreatAsync } from "@/common/hooks";
+import { useGreatAsync } from "src/common/hooks";
 import { Checkbox, Space, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { useEffect } from "react";
 import ModalForm from "./components/modalForm/modalForm";
 import styles from "./index.module.scss";
-import { useFlat } from "@/reduxService";
+import { useFlat } from "src/reduxService";
 import {
 	AdcompanyPageParams,
 	PageType,
-} from "@/reduxService/stores/devStore/model";
+} from "src/reduxService/stores/devStore/model";
 
 const columns: ColumnsType<PageType> = [
 	{

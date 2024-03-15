@@ -1,11 +1,21 @@
-import { FormInstance, Input, Select, Switch } from "antd";
+import {
+	Checkbox,
+	DatePicker,
+	FormInstance,
+	Input,
+	InputNumber,
+	Select,
+	Switch,
+	Upload,
+} from "antd";
 import { FieldConfig } from "../model/fieldsHooks";
-
+const { TextArea } = Input;
+const { RangePicker } = DatePicker;
 export const getFields = <T,>(
-	fieldConfig: FieldConfig<T>,
+	config: FieldConfig<T>,
 	formIns?: FormInstance<T>,
 ) => {
-	const { inputType, options, inputOptions = {} } = fieldConfig;
+	const { inputType, options, inputOptions = {} } = config;
 	let FieldItem;
 	if (inputType === "Select") {
 		let optionsArr = [];
@@ -39,12 +49,15 @@ export const getFields = <T,>(
 			</Select>
 		);
 	} else {
-		let InputItem;
-		if (inputType === "Switch") {
-			InputItem = Switch;
-		} else {
-			InputItem = Input;
-		}
+		let InputItem =
+			{
+				Switch,
+				Checkbox,
+				InputNumber,
+				RangePicker,
+				TextArea,
+				Upload,
+			}[inputType] || Input;
 		FieldItem = <InputItem {...inputOptions} />;
 	}
 	return FieldItem;

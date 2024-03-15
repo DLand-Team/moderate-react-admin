@@ -1,9 +1,7 @@
-import { overrideHttpType } from "./overrideHttpType";
-import { HttpError } from "./HttpError";
 import axios from "axios";
-import { message } from "antd";
-import { routerHelper } from "@/reduxService/helper";
-import { ROUTE_ID } from "@/config/routerConfig";
+import storageHelper from "../utils/storageHelper";
+import { HttpError } from "./HttpError";
+import { overrideHttpType } from "./overrideHttpType";
 
 const _http = axios.create({
 	timeout: 1000 * 30,
@@ -12,29 +10,44 @@ const _http = axios.create({
 _http.interceptors.request.use(
 	(config) => {
 		config.headers.Authorization =
-			"bearer " + sessionStorage.getItem("ACCESS_TOKEN");
+			"Bearer " + JSON.parse(sessionStorage.getItem("ACCESS_TOKEN"));
 		return config;
 	},
 	(err) => {
 		throw err;
 	},
 );
-
+const handleError = ({
+	code,
+	message,
+}: {
+	code: string | number;
+	message: string;
+}) => {
+	if (Number(code) === 401) {
+		storageHelper.clear();
+		window.location.href = "/";
+		throw new HttpError(message, Number(code));
+	}
+};
 _http.interceptors.response.use(
 	(response) => {
+		const { data = {} } = response;
+		const { code, msg } = data;
+		if (Number(code) !== 0) {
+			return handleError({
+				code,
+				message: msg,
+			});
+		}
 		return response.data;
 	},
 	(err) => {
 		const { response } = err;
-		const { status, data } = response;
-		if (Number(status) === 401) {
-			message.info(data.message);
-			routerHelper.jumpTo(ROUTE_ID.loginPage);
-			throw new HttpError(data.message, Number(err.code));
-		} else {
-			message.info(data.message || "network error");
-			throw new HttpError(data.message, Number(err.code || err.status));
-		}
+		handleError({
+			code: "",
+			message: "",
+		});
 	},
 );
 

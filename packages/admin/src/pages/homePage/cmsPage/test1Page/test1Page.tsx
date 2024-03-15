@@ -5,7 +5,8 @@ const Test1Page = () => {
 
 	return (
 		<div className={styles.content}>
-			welcome!
+			welcome!123
+			<div>123</div>
 		</div>
 	);
 };

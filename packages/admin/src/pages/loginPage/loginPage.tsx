@@ -1,4 +1,4 @@
-import AnimateText from "@/common/components/animateText/animateText";
+import AnimateText from "src/common/components/animateText/animateText";
 import LoginCard from "./loginCard";
 import LoginForm from "./loginForm";
 import styles from "./loginPage.module.scss";

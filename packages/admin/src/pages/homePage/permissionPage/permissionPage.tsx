@@ -3,8 +3,8 @@ import type { ColumnsType } from "antd/es/table";
 import { useEffect } from "react";
 import ModalForm from "./components/modalForm/modalForm";
 import styles from "./permissionPage.module.scss";
-import { useFlat } from "@/reduxService";
-import { useGreatAsync } from "@/common/hooks";
+import { useFlat } from "src/reduxService";
+import { useGreatAsync } from "src/common/hooks";
 
 const columns: ColumnsType<any> = [
 	{
@@ -37,7 +37,7 @@ const columns: ColumnsType<any> = [
 const PermissionPage = () => {
 	const { pageNum, pageSize, total, pageList, fetchPageListAct } =
 		useFlat("devStore");
-	const { loading: loading1, fn: createArticleListG } = useGreatAsync(
+	const { loading: loading1, run: createArticleListG } = useGreatAsync(
 		fetchPageListAct,
 		{
 			auto: true,

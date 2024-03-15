@@ -1,7 +1,7 @@
-import { usePageConfig } from "@/common/hooks";
+import { usePageConfig } from "src/common/hooks";
 import { Modal, Space } from "antd";
 import { PageType } from "./services/model";
-import { useFlat } from "@/reduxService";
+import { useFlat } from "src/reduxService";
 
 // change the name of the prime to primary
 const TYPE_ENUM = ["prime", "parent", "sub"];
@@ -22,7 +22,7 @@ const useConfig = () => {
 				title: "name",
 				dataIndex: "name",
 				key: "name",
-				fieldConfig: {
+				config: {
 					formOptions: {
 						label: "name",
 						name: "name",
@@ -58,7 +58,7 @@ const useConfig = () => {
 				title: "description",
 				dataIndex: "description",
 				key: "description",
-				fieldConfig: {
+				config: {
 					isSearch: true,
 					formOptions: {
 						label: "description",
@@ -80,7 +80,7 @@ const useConfig = () => {
 				title: "type",
 				dataIndex: "type",
 				key: "type",
-				fieldConfig: {
+				config: {
 					isSearch: true,
 					inputType: "Select",
 					options: TYPE_ENUM,
@@ -100,7 +100,7 @@ const useConfig = () => {
 				title: "prime_id",
 				dataIndex: "prime_id",
 				key: "prime_id",
-				fieldConfig: {
+				config: {
 					isSearch: true,
 					inputType: "Select",
 					options: () => {
@@ -135,7 +135,7 @@ const useConfig = () => {
 				title: "parent_id",
 				dataIndex: "parent_id",
 				key: "parent_id",
-				fieldConfig: {
+				config: {
 					isSearch: true,
 					inputType: "Select",
 					options: ({ formIns }) => {

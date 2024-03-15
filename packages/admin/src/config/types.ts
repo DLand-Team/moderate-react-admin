@@ -1,14 +1,13 @@
 import type { RouteProps } from "react-router-dom";
 import { ACTION_DICT } from "./permissionConfig";
 import { ROUTE_NAME } from "./routerConfig";
-import { pageList } from "@/pages";
+import { pageList } from "src/pages";
 // 详情数据
 export type RouteItem = RouteProps & {
 	id?: ROUTE_ID_KEY; // 节点id
 	parentId?: string; // 父节点id
 	isMenu?: boolean; // 是否是菜单
-	isMustShow?: boolean; // 是否必须显示，不通过权限控制
-	isDefault?: boolean;
+	isNoAuth?: boolean; // 无权限
 	meta?: {
 		title?: string;
 	};
@@ -25,5 +24,4 @@ export type ROUTE_ID_KEY = keyof typeof ROUTE_NAME;
 export interface RoutesStructDataItem {
 	id: ROUTE_ID_KEY;
 	children?: RoutesStructDataItem[];
-	isMustShow?: boolean; // 是否必须显示，不通过权限控制
 }

@@ -1,8 +1,8 @@
-import { MyColumnType } from "@/common/model/fieldsHooks";
+import { MyColumnType } from "src/common/model/fieldsHooks";
 import { Divider, Form, FormInstance } from "antd";
 import { cloneDeep } from "lodash-es";
 import { Fragment } from "react";
-import { getFields } from "@/common/utils";
+import { getFields } from "src/common/utils";
 
 const useFormFields = <T,>(
 	formList: MyColumnType<T>[],
@@ -11,8 +11,8 @@ const useFormFields = <T,>(
 	let recordKeyObj = {};
 
 	return formList.map((item, index) => {
-		const { fieldConfig } = item;
-		const { formRender, formOptions } = fieldConfig;
+		const { config } = item;
+		const { formRender, formOptions } = config;
 		const { name } = formOptions;
 		let temp = [];
 		if (Array.isArray(name)) {
@@ -38,26 +38,22 @@ const useFormFields = <T,>(
 		}
 		let InputItem;
 		if (formRender) {
-			InputItem = formRender;
-		} else if (fieldConfig) {
-			fieldConfig.inputOptions = cloneDeep(
-				fieldConfig.inputOptions || {},
-			);
-			if (!("disabled" in fieldConfig.inputOptions)) {
+			InputItem = formRender();
+		} else if (config) {
+			config.inputOptions = cloneDeep(config.inputOptions || {});
+			if (!("disabled" in config.inputOptions)) {
 				if (isJustShow) {
-					fieldConfig.inputOptions.disabled = true;
+					config.inputOptions.disabled = true;
 				} else {
-					fieldConfig.inputOptions.disabled = false;
+					config.inputOptions.disabled = false;
 				}
 			}
-			InputItem = getFields<T>(fieldConfig, formIns);
+			InputItem = getFields<T>(config, formIns);
 		}
 		return (
 			<Fragment key={item.key}>
 				<>{temp}</>
-				<Form.Item {...item.fieldConfig.formOptions}>
-					{InputItem}
-				</Form.Item>
+				<Form.Item {...item.config.formOptions}>{InputItem}</Form.Item>
 			</Fragment>
 		);
 	});

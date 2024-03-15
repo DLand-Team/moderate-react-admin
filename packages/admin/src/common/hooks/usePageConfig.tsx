@@ -1,4 +1,4 @@
-import { MyColumnType } from "@/common/model/fieldsHooks";
+import { MyColumnType } from "src/common/model/fieldsHooks";
 import { useMemo } from "react";
 
 const usePageConfig = <T,>(
@@ -13,12 +13,12 @@ const usePageConfig = <T,>(
 	const config = useMemo(pageConfigCreater, dep);
 	const columns = useMemo(() => {
 		return config.filter((item) => {
-			const { fieldConfig = {} } = item;
+			const { config = {} } = item;
 			const {
 				formOptions = {},
 				isHidenInTable,
 				scope = ["modal", "search", "table"],
-			} = fieldConfig;
+			} = config;
 			const { name } = formOptions;
 			return (
 				(typeof name == "string" || !name) &&
@@ -29,16 +29,16 @@ const usePageConfig = <T,>(
 	}, dep);
 	const formList = useMemo(() => {
 		return config.filter((item) => {
-			const { fieldConfig } = item;
-			const { scope = ["modal", "search", "table"] } = fieldConfig || {};
-			return fieldConfig && scope?.includes("modal");
+			const { config } = item;
+			const { scope = ["modal", "search", "table"] } = config || {};
+			return config && scope?.includes("modal");
 		});
 	}, dep);
 	const searchList = useMemo(() => {
 		return config.filter((item) => {
-			const { fieldConfig } = item;
-			const { scope = ["modal", "search", "table"] } = fieldConfig || {};
-			return fieldConfig && scope?.includes("search");
+			const { config } = item;
+			const { scope = ["modal", "search", "table"] } = config || {};
+			return config && scope?.includes("search");
 		});
 	}, dep);
 

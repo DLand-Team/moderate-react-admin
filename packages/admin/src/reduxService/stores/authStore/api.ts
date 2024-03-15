@@ -1,27 +1,24 @@
-// import { http } from "@/common/http";
+import { http } from "src/common/http";
 
-import { UUID } from "@/common/utils";
-export interface LoginApiParams {
-	userName: string;
-	password: string;
-}
-function loginApi(_: LoginApiParams) {
-	return Promise.resolve({
-		data: {
-			token: UUID(),
-		},
+import { LoginApiParams, MenuPermissionItem } from "./model";
+
+function loginApi(params: LoginApiParams) {
+	return http.request({
+		url: "/admin-api/system/auth/login",
+		method: "POST",
+		data: params,
 	});
-	// return http.request({
-	// 	url: "/javaApi/user/auth/updatePermissions",
-	// 	method: "POST",
-	// 	data: {
-	// 		permission: JSON.stringify(params),
-	// 	},
-	// });
+}
+function fetchUserPermissins() {
+	return http.request<{ permissions: any; menus: MenuPermissionItem[] }>({
+		url: "/admin-api/system/auth/get-permission-info",
+		method: "GET",
+	});
 }
 
 const api = {
 	loginApi,
+	fetchUserPermissins,
 };
 
 export default api;

@@ -1,25 +1,14 @@
-import { ListenerMiddleware } from "redux-eazy";
+import { ROUTE_ID } from "src/config/routerConfig";
+import { dp, getActionType, routerHelper } from "src/reduxService";
 import { startAppListening } from "../../setup";
-import { dp, getActionType, routerHelper } from "@/reduxService";
-import { ROUTE_ID } from "@/config/routerConfig";
+import { RouterHelper } from "src/reduxService/helper/routerHelper";
 
-const watch = (listenerMiddleware: ListenerMiddleware) => {
+const watch = () => {
+	// 监听权限数据，动态生成菜单
 	startAppListening({
-		type: getActionType("routerStore").setRouterConfig,
-		effect: async (action, listenerApi) => {
-			const { routesConfig } = listenerApi.getState().routerStore;
-			if (routesConfig.length) {
-				const temp = routesConfig.find((item) => {
-					return item.id === ROUTE_ID.homePage;
-				}).children;
-				if (temp?.length) {
-					const memuDataTemp = routerHelper.generateMenuDataLoop(
-						temp,
-						[],
-					);
-					dp("appStore", "setMenuDataAct", memuDataTemp);
-				}
-			}
+		type: getActionType("authStore").setPermissions,
+		effect: async () => {
+			dp("appStore", "createMenuDataAct");
 		},
 	});
 };

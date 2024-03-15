@@ -1,7 +1,7 @@
-import { ACTION_DICT } from "@/config/permissionConfig";
-import { RoutesStructDataItem } from "@/config/types";
-import { routerHelper } from "@/reduxService";
-import { ROUTE_INFO_CONFIG } from "@/config/routerConfig";
+import { ACTION_DICT } from "src/config/permissionConfig";
+import { RoutesStructDataItem } from "src/config/types";
+import { routerHelper } from "src/reduxService";
+import { ROUTE_INFO_CONFIG } from "src/config/routerConfig";
 type PermissionNode = any;
 class PermissionHelper {
 	createPermissionByRoutesLoop(

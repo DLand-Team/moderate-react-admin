@@ -1,5 +1,5 @@
 /* Instruments */
-import { dp } from "@/reduxService";
+import { dp } from "src/reduxService";
 import { createThunks } from "../../setup";
 import names from "../names";
 import httpApi from "./api";

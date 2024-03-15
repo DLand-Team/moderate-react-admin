@@ -1,5 +1,4 @@
-import { UploadNormal } from "@/common/components";
-import { useInject } from "@/common/hooks";
+import { UploadNormal } from "src/common/components";
 import { Button, Form, Image, Input, Modal, Radio, Select } from "antd";
 import { useState } from "react";
 import DropUpload from "../dropUpload/dropUpload";
@@ -34,8 +33,6 @@ const CollectionCreateForm: React.FC<CollectionCreateFormProps> = ({
 	onCancel,
 }) => {
 	// 引入natur的articleStore
-	const [articleStore] = useInject("articleStore");
-	const { articleTypeList } = articleStore.state;
 	const [form] = Form.useForm();
 	const [isUploadMd, setIsUpload] = useState(false);
 	return (
@@ -101,7 +98,7 @@ const CollectionCreateForm: React.FC<CollectionCreateFormProps> = ({
 					valuePropName="number"
 				>
 					<Select mode="tags">
-						{articleTypeList.map((item) => {
+						{/* {articleTypeList.map((item) => {
 							return (
 								<Select.Option
 									key={item.id}
@@ -110,7 +107,7 @@ const CollectionCreateForm: React.FC<CollectionCreateFormProps> = ({
 									{item.name}
 								</Select.Option>
 							);
-						})}
+						})} */}
 					</Select>
 				</Form.Item>
 				<Form.Item
@@ -225,3 +222,4 @@ const ModalForm = ({
 };
 
 export default ModalForm;
+

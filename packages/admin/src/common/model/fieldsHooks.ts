@@ -1,12 +1,31 @@
-import { FormItemProps, SelectProps, InputProps, FormInstance } from "antd";
+import {
+	FormItemProps,
+	SelectProps,
+	InputProps,
+	FormInstance,
+	CheckboxProps,
+	SwitchProps,
+	UploadProps,
+	InputNumberProps,
+} from "antd";
+import { TextAreaProps } from "antd/lib/input/TextArea";
 import { ColumnType } from "antd/es/table";
-
-export type MyInputType = "Input" | "Select" | "Switch";
+import { Input } from "antd";
+Input.TextArea;
+export type MyInputType =
+	| "Input"
+	| "Select"
+	| "Switch"
+	| "Checkbox"
+	| "Upload"
+	| "TextArea"
+	| "RangePicker"
+	| "InputNumber";
 export type ScopeType = "table" | "modal" | "search";
 
 export type FieldConfigOptions = (
 	| string
-	| { key: string|number; value: string|number; label: string|number }
+	| { key: string | number; value: string | number; label: string | number }
 )[];
 export interface FieldConfig<T> {
 	inputType?: MyInputType;
@@ -14,7 +33,13 @@ export interface FieldConfig<T> {
 		| FieldConfigOptions
 		| ((props?: { formIns?: FormInstance<T> }) => FieldConfigOptions);
 	formOptions?: FormItemProps;
-	inputOptions?: SelectProps & InputProps;
+	inputOptions?: SelectProps &
+		InputProps &
+		CheckboxProps &
+		SwitchProps &
+		UploadProps &
+		InputNumberProps &
+		TextAreaProps;
 	searchFromRender?: () => JSX.Element;
 	formRender?: () => JSX.Element;
 	isHidenInTable?: boolean;
@@ -23,5 +48,5 @@ export interface FieldConfig<T> {
 }
 
 export interface MyColumnType<T> extends ColumnType<T> {
-	fieldConfig?: FieldConfig<T>;
+	config?: FieldConfig<T>;
 }

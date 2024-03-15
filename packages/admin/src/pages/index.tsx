@@ -1,4 +1,10 @@
 import { lazy } from "react";
+
+export const DynamicPageRender = ({ name }) => {
+	const Component = pageList[name];
+	return <Component />;
+};
+
 // MODERATE_AUTO_PAGE_LAZY_IMPORT:START
 const HomePage = lazy(() => import("./homePage/homePage"));
 const LoginPage = lazy(() => import("./loginPage/loginPage"));
@@ -28,6 +34,10 @@ const CategoryPage = lazy(() => import("./homePage/cmsPage/categoryPage"));
 const TestPage = lazy(() => import("./homePage/cmsPage/testPage/testPage"));
 ////test1Page
 const Test1Page = lazy(() => import("./homePage/cmsPage/test1Page/test1Page"));
+////posPage
+const PosPage = lazy(() => import("./homePage/posPage/posPage"));
+////marketPage
+const MarketPage = lazy(() => import("./homePage/marketPage/marketPage"));
 //MODERATE_AUTO_PAGE_LAZY_IMPORT:END
 export const pageList = {
 	HomePage,
@@ -42,9 +52,6 @@ export const pageList = {
 	CategoryPage,
 	TestPage,
 	Test1Page,
-};
-
-export const DynamicPageRender = ({ name }) => {
-	const Component = pageList[name];
-	return <Component />;
+	PosPage,
+	MarketPage,
 };
