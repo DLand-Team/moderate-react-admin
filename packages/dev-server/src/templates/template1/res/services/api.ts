@@ -1,6 +1,6 @@
 import { http } from "@/common/http";
 
-let baseUrl = "/nestApi/category/";
+const baseUrl = "";
 // 增
 function addApi(data) {
 	return http.request({
@@ -30,7 +30,7 @@ function upadteApi(data) {
 
 // 查
 function queryApi<T>(data: any) {
-	return http.request<{},{count:number,data:T[]}>({
+	return http.request<{ count: number; content: T[] }>({
 		url: baseUrl + "query",
 		method: "POST",
 		data,
