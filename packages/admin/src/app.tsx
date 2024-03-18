@@ -3,7 +3,7 @@ import { Routes } from "react-router-dom";
 import { useFlat } from "./reduxService";
 
 const App = () => {
-	const { routesConfig } = useFlat("routerStore");
+	const { routesConfig } = useFlat('');
 
 	return (
 		<Routes>

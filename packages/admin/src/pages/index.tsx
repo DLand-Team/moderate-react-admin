@@ -6,6 +6,7 @@ export const DynamicPageRender = ({
 	name: keyof typeof pageList;
 }) => {
 	const Component = pageList[name];
+	debugger;
 	return <Component />;
 };
 

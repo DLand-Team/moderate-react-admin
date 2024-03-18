@@ -102,7 +102,7 @@ export class RouterHelper {
 		}
 		let element;
 		if (!item.element) {
-			if (component && !(component! in pageList)) {
+			if (component && component in pageList) {
 				element = (
 					<Suspense>
 						<DynamicPageRender name={component} />
