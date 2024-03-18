@@ -48,14 +48,14 @@ const PageDevPage = () => {
 		addPageListAct,
 	} = useFlat("devStore");
 
-	const { loading: loading1, run: createArticleListG } = useGreatAsync(
+	const { loading: loading1, fn: createArticleListG } = useGreatAsync(
 		fetchPageListAct,
 		{
 			auto: true,
 			debounceTime: 1000,
 		},
 	);
-
+	debugger;
 	const handlePageChange = async (pageNum = 1, pageSize) => {
 		await createArticleListG();
 	};

@@ -1,28 +1,27 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { ItemType } from "antd/es/menu/hooks/useItems";
 import { createSliceCustom } from "redux-eazy";
 import names from "../names";
 import { StoreState, TabItem, TabsHistory } from "./modal";
-import { RouterHelper } from "src/reduxService/helper/routerHelper";
+import { MenuItem, RouterHelper } from "src/reduxService/helper/routerHelper";
 import { cloneDeep } from "lodash-es";
 import { ROUTE_ID, ROUTE_INFO_CONFIG } from "src/config/routerConfig";
 
 const initialState = (): StoreState => {
-	const { routesConfig } = RouterHelper.createRoutesConfigByUserInfo({
+	const { routesConfig = [] } = RouterHelper.createRoutesConfigByUserInfo({
 		routesPermissions: [],
 		routesConfigMap: cloneDeep(ROUTE_INFO_CONFIG),
 	});
-	const temp = routesConfig.find((item) => {
-		return item.id === ROUTE_ID.homePage;
-	}).children;
-	const menuData = RouterHelper.createMenuDataLoop(temp, []);
+	const children = routesConfig.find((item) => {
+		return item!?.id === ROUTE_ID.homePage;
+	})?.children;
+	const menuData = RouterHelper.createMenuDataLoop(children!, []);
 	return {
 		menuDefaultSelectedKeys: [],
 		menuDefaultOpenKeys: null,
 		menuData: menuData,
 		tabsHistory: {},
 		tabItems: [],
-		activeTabKey: null,
+		activeTabKey: "",
 	};
 };
 
@@ -50,20 +49,19 @@ const appSlice = createSliceCustom({
 			{ payload }: PayloadAction<string[]>,
 		) => {
 			state.menuDefaultOpenKeys = payload;
-			debugger;
 		},
-		setMenuDataAct: (state, { payload }: PayloadAction<ItemType[]>) => {
+		setMenuDataAct: (state, { payload }: PayloadAction<MenuItem[]>) => {
 			state.menuData = payload;
 		},
 		setServerMenuDataAct: (
 			state,
-			{ payload }: PayloadAction<ItemType[]>,
+			{ payload }: PayloadAction<MenuItem[]>,
 		) => {
 			state.menuData = payload;
 		},
 	},
 
-	extraReducers: (builder) => {},
+	extraReducers: () => {},
 });
 
 export default appSlice;

@@ -20,16 +20,18 @@ import { reduxStore as store } from "..";
 import { MenuPermissionItem } from "../stores/authStore/model";
 import { MenuConfig } from "src/config/menuConfig";
 
-type MenuItem = ItemType &
+export type MenuItem = Partial<ItemType> &
 	Partial<{
 		key: string;
 		children: MenuItem[];
 	}>;
 export class RouterHelper {
-	history: BrowserHistory;
-	routesConfigMapCopy: {
-		[key in ROUTE_ID_KEY]: RouteItem;
-	};
+	history: BrowserHistory | undefined;
+	routesConfigMapCopy:
+		| {
+				[key in ROUTE_ID_KEY]: RouteItem;
+		  }
+		| undefined;
 	constructor() {
 		this.init();
 	}
@@ -47,7 +49,7 @@ export class RouterHelper {
 			const temp: MenuItem = {
 				key: item.id,
 				// icon: createElement(UserOutlined),
-				label: item.meta.title,
+				label: item.meta!?.title || "",
 			};
 			result.push(temp);
 			if (item?.children?.length) {
@@ -68,12 +70,15 @@ export class RouterHelper {
 		data.forEach((item) => {
 			const temp: MenuItem = {
 				key:
-					MenuConfig[item.componentName]?.routeName ||
-					item.componentName,
+					MenuConfig[item.componentName as keyof typeof MenuConfig]
+						?.routeName || item.componentName,
 				// icon: createElement(UserOutlined),
 				label: item.name,
 			};
-			routesPermissions.push(MenuConfig[item.componentName]?.routeName);
+			routesPermissions.push(
+				MenuConfig[item.componentName as keyof typeof MenuConfig]
+					?.routeName,
+			);
 			result.push(temp);
 			if (item?.children?.length) {
 				temp.children = RouterHelper.createMenuDataLoopByPermissions(
@@ -89,7 +94,7 @@ export class RouterHelper {
 	// 递归创建路由
 	toRenderRouteLoop = (item: RouteItem) => {
 		const { children, component } = item;
-		let routeChildren = [];
+		let routeChildren: JSX.Element[] = [];
 		if (children) {
 			routeChildren = children.map((item) => {
 				return this.toRenderRouteLoop(item);
@@ -97,8 +102,7 @@ export class RouterHelper {
 		}
 		let element;
 		if (!item.element) {
-			const Page = pageList[component];
-			if (Page) {
+			if (component && !(component! in pageList)) {
 				element = (
 					<Suspense>
 						<DynamicPageRender name={component} />
@@ -168,7 +172,7 @@ export class RouterHelper {
 					routesConfig.children = this.createRouteConfigLoop({
 						children: [],
 						routesStuctData: routeStructItem.children!,
-						prefix: routesConfig.path,
+						prefix: routesConfig.path || "",
 						routesPermissions,
 						routesConfigMap,
 					});
@@ -259,12 +263,11 @@ export class RouterHelper {
 	) {
 		const { type = "push", state } = options || {};
 		const path = this.getRoutePathByKey(id);
-		debugger;
 		if (!path) return new Error("路由不存在");
 		if (type === "push") {
-			this.history.push(path, state);
+			this.history!?.push(path, state);
 		} else {
-			this.history.replace(path, state);
+			this.history!?.replace(path, state);
 		}
 	}
 
@@ -277,9 +280,9 @@ export class RouterHelper {
 	) {
 		const { type = "push", state } = options || {};
 		if (type === "push") {
-			this.history.push(path, state);
+			this.history!?.push(path, state);
 		} else {
-			this.history.replace(path, state);
+			this.history!?.replace(path, state);
 		}
 	}
 }

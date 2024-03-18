@@ -4,10 +4,11 @@ import { useFlat } from "./reduxService";
 
 const App = () => {
 	const { routesConfig } = useFlat("routerStore");
-	debugger
+
 	return (
 		<Routes>
 			{routesConfig?.map((item) => {
+				debugger;
 				return routerHelper.toRenderRouteLoop(item);
 			})}
 		</Routes>

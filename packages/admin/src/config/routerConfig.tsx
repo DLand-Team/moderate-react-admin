@@ -179,66 +179,44 @@ export const ROUTE_INFO_CONFIG: {
   },
 }; //MODERATE_AUTO_3:END
 // =============== 路由结构数据 ===============
-// MODERATE_AUTO:START
-export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [
-  {
-    id: ROUTE_ID.homePage,
-    children: [
-      {
-        id: ROUTE_ID.cmsPage,
-        children: [
-          {
-            id: ROUTE_ID.categoryPage,
-          },
-          {
-            id: ROUTE_ID.test1Page,
-          },
-          {
-            id: ROUTE_ID.testPage,
-          },
-        ],
-      },
-      {
-        id: ROUTE_ID.devPage,
-        children: [
-          {
-            id: ROUTE_ID.apiDevPage,
-          },
-          {
-            id: ROUTE_ID.pageDevPage,
-          },
-          {
-            id: ROUTE_ID.storeDevPage,
-          },
-        ],
-      },
-      {
-        id: ROUTE_ID.helloPage,
-      },
-      {
-        id: ROUTE_ID.marketPage,
-      },
-      {
-        id: ROUTE_ID.permissionPage,
-      },
-      {
-        id: ROUTE_ID.posPage,
-      },
-      {
-        id: ROUTE_ID.sysPage,
-        children: [
-          {
-            id: ROUTE_ID.rolePage,
-          },
-          {
-            id: ROUTE_ID.userPage,
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: ROUTE_ID.loginPage,
-  },
-];
+// MODERATE_AUTO:START 
+export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [{
+  id: ROUTE_ID.homePage,
+  children: [{
+    id: ROUTE_ID.cmsPage,
+    children: [{
+      id: ROUTE_ID.categoryPage
+    }, {
+      id: ROUTE_ID.test1Page
+    }, {
+      id: ROUTE_ID.testPage
+    }]
+  }, {
+    id: ROUTE_ID.devPage,
+    children: [{
+      id: ROUTE_ID.apiDevPage
+    }, {
+      id: ROUTE_ID.pageDevPage
+    }, {
+      id: ROUTE_ID.storeDevPage
+    }]
+  }, {
+    id: ROUTE_ID.helloPage
+  }, {
+    id: ROUTE_ID.marketPage
+  }, {
+    id: ROUTE_ID.permissionPage
+  }, {
+    id: ROUTE_ID.posPage
+  }, {
+    id: ROUTE_ID.sysPage,
+    children: [{
+      id: ROUTE_ID.rolePage
+    }, {
+      id: ROUTE_ID.userPage
+    }]
+  }]
+}, {
+  id: ROUTE_ID.loginPage
+}]
 // MODERATE_AUTO:END

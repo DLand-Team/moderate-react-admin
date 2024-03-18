@@ -1,6 +1,10 @@
 import { lazy } from "react";
 
-export const DynamicPageRender = ({ name }) => {
+export const DynamicPageRender = ({
+	name,
+}: {
+	name: keyof typeof pageList;
+}) => {
 	const Component = pageList[name];
 	return <Component />;
 };

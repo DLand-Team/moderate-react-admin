@@ -8,6 +8,7 @@ import type { AdcompanyPageParams, AddStoreParams } from "./model";
 const thunks = createThunks(names.appStore, {
 	fetchPageListAct: async () => {
 		const { data } = await httpApi.fetchPageList();
+		debugger;
 		dp("devStore", "setState", {
 			pageList: data.pageList,
 			total: data.pageList.length,
