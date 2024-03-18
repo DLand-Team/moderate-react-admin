@@ -1,0 +1,20 @@
+.content{
+    .operate_board{
+        position: relative;
+        height: 50px;
+        .upload{
+            position: absolute;
+            top: 0;
+            background: #fff;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            .iconfont{
+                font-size: 30px;
+                color: #ccc;
+            }
+        }
+    }
+}
