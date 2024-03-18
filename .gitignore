@@ -3,4 +3,5 @@
 .DS_Store
 /.vscode
 /.idea
-/redux-eazyÏ
+packages/redux-eazy2
+packages/redux-eazy
