@@ -28,12 +28,7 @@ const data = [
 const RolePage = () => {
 	const [modalForm] = Form.useForm();
 	const resetAllSotres = useResetRedux();
-	const {
-		// createPermissionTree,
-		// permissionTreeData,
-		permissions,
-		updatePermissionsAct,
-	} = useFlat("authStore");
+	const { updatePermissionsAct } = useFlat("authStore");
 
 	const { loading, run: updatePermissionsG } = useGreatAsync(
 		updatePermissionsAct,
@@ -42,7 +37,7 @@ const RolePage = () => {
 			single: true,
 		},
 	);
-	const [checked, setChecked] = useState<any>();
+	const [checked] = useState<any>();
 	const navigate = useNavigate();
 	const handleSubmit = () => {
 		Modal.confirm({

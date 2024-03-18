@@ -30,7 +30,6 @@ const slice = createSliceCustom({
 			state.routesConfig = payload;
 		},
 	},
-	extraReducers: (builder) => {},
 });
 
 export default slice;

@@ -18,7 +18,8 @@ export function enumToObject<T extends Record<keyof T, number | string>>(
 	for (const key in enumObj) {
 		let keyStr = enumObj[key];
 		if (typeof keyStr !== "number") {
-			obj[keyStr as string] = enumObj[key];
+			//@ts-ignore
+			obj[keyStr] = enumObj[key];
 		}
 	}
 	return obj as any;
@@ -46,9 +47,7 @@ export function bubbleSort<T>(arr: T[], callF: (a: T, b: T) => boolean) {
 	return arr;
 }
 
-export const normalizeNum = (value) => {
+export const normalizeNum = (value: any) => {
 	let temp = Number(value) || value;
 	return temp;
 };
-
-

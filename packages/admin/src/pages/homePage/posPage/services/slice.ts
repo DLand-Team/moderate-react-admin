@@ -22,7 +22,6 @@ const slice = createSliceCustom({
 	name: names.posStore,
 	stateInit: initialState,
 	reducers: {},
-	extraReducers: (builder) => {},
 });
 
 export default slice;

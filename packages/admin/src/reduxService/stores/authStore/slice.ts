@@ -1,8 +1,9 @@
-import { ROUTE_INFO_CONFIG } from "src/config/routerConfig";
 import { PayloadAction, createSliceCustom } from "redux-eazy";
+import storageHelper from "src/common/utils/storageHelper";
+import { ROUTE_INFO_CONFIG } from "src/config/routerConfig";
 import names from "../names";
 import { MenuPermissionItem, StoreState } from "./model";
-import storageHelper from "src/common/utils/storageHelper";
+import { ROUTE_ID_KEY } from "src/config/types";
 
 const initialState = (): StoreState => {
 	const defaultPermissions = Object.values(ROUTE_INFO_CONFIG)
@@ -10,14 +11,14 @@ const initialState = (): StoreState => {
 			return item.isNoAuth;
 		})
 		.map((item) => {
-			return item.id;
+			return item.id!;
 		});
 	return {
 		userName: "",
 		token: storageHelper.getItem("ACCESS_TOKEN") || "",
 		isAdmin: storageHelper.getItem("IS_ADMIN") || false,
 		qiniuToken: "",
-		permissions: defaultPermissions,
+		permissions: defaultPermissions!,
 		routesPermissions: defaultPermissions,
 		menuPermissions: null,
 	};
@@ -47,7 +48,7 @@ const slice = createSliceCustom({
 				payload,
 			}: PayloadAction<{
 				menuPermissions: MenuPermissionItem;
-				permissions: string[];
+				permissions: ROUTE_ID_KEY[];
 				routesPermissions: string[];
 			}>,
 		) {

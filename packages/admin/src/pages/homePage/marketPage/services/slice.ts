@@ -22,7 +22,6 @@ const slice = createSliceCustom({
 	name: names.categoryStore,
 	stateInit: initialState,
 	reducers: {},
-	extraReducers: (builder) => {},
 });
 
 export default slice;

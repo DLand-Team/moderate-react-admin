@@ -1,13 +1,13 @@
-import { ConfigProvider } from "antd";
+import { ConfigProvider, ThemeConfig } from "antd";
 
-const themeHoc =  (Comp, theme) => {
-  return (props) => {
-    return (
-      <ConfigProvider theme={theme}>
-        <Comp {...props} />
-      </ConfigProvider>
-    );
-  };
+const themeHoc = (Comp: React.FC, theme: ThemeConfig) => {
+	return (props: any) => {
+		return (
+			<ConfigProvider theme={theme}>
+				<Comp {...props} />
+			</ConfigProvider>
+		);
+	};
 };
 
 export default themeHoc;

@@ -21,9 +21,9 @@ const normFile = (e: any) => {
 	if (e?.fileList.response) {
 	}
 	return e?.fileList[0].response
-		? e?.fileList.map((item) => {
+		? e?.fileList.map((item: any) => {
 				return item.response.hash;
-		  })
+			})
 		: e?.fileList;
 };
 
@@ -160,7 +160,7 @@ const CollectionCreateForm: React.FC<CollectionCreateFormProps> = ({
 				<UploadNormal
 					options={{
 						maxCount: 1,
-						itemRender: (originNode, file, fileList) => {
+						itemRender: (_, _1, fileList) => {
 							return fileList[0] ? (
 								<Image
 									width={100}
@@ -222,4 +222,3 @@ const ModalForm = ({
 };
 
 export default ModalForm;
-

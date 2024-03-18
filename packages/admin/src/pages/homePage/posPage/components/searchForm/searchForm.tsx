@@ -1,9 +1,9 @@
-import { useSearchFields } from "src/common/hooks";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Row } from "antd";
 import { useState } from "react";
-import useConfig from "../../useConfig";
+import { useSearchFields } from "src/common/hooks";
 import { useFlat } from "src/reduxService";
+import useConfig from "../../useConfig";
 
 const AdvancedSearchForm = () => {
 	const { searchList } = useConfig();
@@ -65,7 +65,7 @@ const AdvancedSearchForm = () => {
 	);
 };
 
-const App: React.FC = (columns) => (
+const App: React.FC = () => (
 	<div style={{ marginBottom: "32px" }}>
 		<AdvancedSearchForm />
 	</div>

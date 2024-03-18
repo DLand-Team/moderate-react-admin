@@ -1,6 +1,6 @@
 // import { http } from "src/common/http";
 
-function geoQueryApi(params: { id: string }) {
+function geoQueryApi() {
 	return Promise.resolve({});
 	// return http.request({
 	// 	url: "/javaApi/user/auth/setPermissions",

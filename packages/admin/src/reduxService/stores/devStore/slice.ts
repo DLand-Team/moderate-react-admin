@@ -1,5 +1,6 @@
 /* Core */
 import { createSliceCustom } from "redux-eazy";
+import { PayloadAction } from "@reduxjs/toolkit";
 import names from "../names";
 import { StoreState } from "./model";
 
@@ -18,8 +19,13 @@ const initialState = (): StoreState => {
 const slice = createSliceCustom({
 	name: names.appStore,
 	stateInit: initialState,
-	reducers: {},
-	extraReducers: (builder) => {},
+	reducers: {
+		setPageList(state, { payload }: PayloadAction<any>) {
+			state.pageList = payload.pageList;
+			state.total = payload.total;
+			;
+		},
+	},
 });
 
 export default slice;

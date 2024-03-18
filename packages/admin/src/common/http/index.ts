@@ -10,7 +10,7 @@ const _http = axios.create({
 _http.interceptors.request.use(
 	(config) => {
 		config.headers.Authorization =
-			"Bearer " + JSON.parse(sessionStorage.getItem("ACCESS_TOKEN"));
+			"Bearer " + storageHelper.getItem("ACCESS_TOKEN");
 		return config;
 	},
 	(err) => {
@@ -34,7 +34,8 @@ _http.interceptors.response.use(
 	(response) => {
 		const { data = {} } = response;
 		const { code, msg } = data;
-		if (Number(code) !== 0) {
+		if (Number(code) !== 0 && Number(code) !== 200) {
+			;
 			return handleError({
 				code,
 				message: msg,
@@ -42,8 +43,7 @@ _http.interceptors.response.use(
 		}
 		return response.data;
 	},
-	(err) => {
-		const { response } = err;
+	(_) => {
 		handleError({
 			code: "",
 			message: "",

@@ -1,11 +1,13 @@
+import { ROUTE_ID_KEY } from "src/config/types";
+
 export type PermissionItem = string;
 export interface StoreState {
 	userName: string;
 	token: string;
 	isAdmin: boolean;
 	qiniuToken: string;
-	permissions: string[];
-	menuPermissions: MenuPermissionItem;
+	permissions: ROUTE_ID_KEY[];
+	menuPermissions: MenuPermissionItem | null;
 	routesPermissions: string[];
 }
 

@@ -1,9 +1,10 @@
-import useLocationListen from "src/common/hooks/useLocationListen";
-import { routerHelper, useFlat } from "src/reduxService";
 import { Tabs } from "antd";
 import { useEffect } from "react";
-import { useNavigate, type Location } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import useLocationListen from "src/common/hooks/useLocationListen";
+import { routerHelper, useFlat } from "src/reduxService";
 import styles from "./tabs.module.scss";
+import { TabItem } from "src/reduxService/stores/appStore/modal";
 
 const TabsComp = () => {
 	const {
@@ -24,7 +25,7 @@ const TabsComp = () => {
 				return {
 					label: routerHelper.getRouteTitleByKey(id),
 					key: pathname,
-				};
+				} as TabItem;
 			}),
 		);
 	}, [tabsHistory]);

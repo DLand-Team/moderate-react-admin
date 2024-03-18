@@ -30,7 +30,7 @@ const columns: ColumnsType<PageType> = [
 	{
 		title: "操作",
 		key: "action",
-		render: (_, record) => (
+		render: () => (
 			<Space size="middle">
 				<a>修改</a>
 			</Space>
@@ -47,7 +47,7 @@ const PageDevPage = () => {
 		fetchPageListAct,
 		addPageListAct,
 	} = useFlat("devStore");
-
+	;
 	const { loading: loading1, fn: createArticleListG } = useGreatAsync(
 		fetchPageListAct,
 		{
@@ -55,8 +55,7 @@ const PageDevPage = () => {
 			debounceTime: 1000,
 		},
 	);
-	debugger;
-	const handlePageChange = async (pageNum = 1, pageSize) => {
+	const handlePageChange = async () => {
 		await createArticleListG();
 	};
 
@@ -65,7 +64,7 @@ const PageDevPage = () => {
 	};
 
 	useEffect(() => {
-		handlePageChange(pageNum, pageSize);
+		handlePageChange();
 	}, []);
 
 	return (
@@ -82,13 +81,12 @@ const PageDevPage = () => {
 					pageSize,
 					current: pageNum,
 					total,
-					onChange(page, pageSize) {
-						console.log(page, pageSize);
-						handlePageChange(page, pageSize);
+					onChange() {
+						handlePageChange();
 					},
 				}}
 				columns={columns}
-				dataSource={pageList}
+				dataSource={pageList || []}
 			/>
 		</div>
 	);

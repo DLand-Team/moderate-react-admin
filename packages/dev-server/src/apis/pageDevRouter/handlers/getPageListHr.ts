@@ -3,9 +3,9 @@ import { RouteItem } from "@/model";
 import { v4 as uuidv4 } from "uuid";
 
 const getPageListApiHr = async (ctx) => {
-	let routesObj:{
-        [key:PropertyKey]:RouteItem
-    } = devHelper.getRouteConfig();
+	let routesObj: {
+		[key: PropertyKey]: RouteItem;
+	} = devHelper.getRouteConfig();
 	let pageList = Object.values(routesObj).map((item) => {
 		return {
 			id: uuidv4(),
@@ -17,6 +17,7 @@ const getPageListApiHr = async (ctx) => {
 		status: 1,
 		code: "200",
 		data: {
+			code: "200",
 			pageList: pageList,
 		},
 	};

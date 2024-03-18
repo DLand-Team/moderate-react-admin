@@ -15,7 +15,7 @@ const BreadcrumbComp = () => {
 			const info = routerHelper.getRouteTitleByKey(path);
 			return {
 				id: path,
-				title: info,
+				title: info || "",
 			};
 		});
 		setInfoArr(temp2);

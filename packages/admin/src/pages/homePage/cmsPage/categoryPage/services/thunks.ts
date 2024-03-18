@@ -1,10 +1,9 @@
 /* Instruments */
+import { pickBy } from "lodash-es";
+import { UUID } from "src/common/utils";
 import { createThunks } from "src/reduxService/setup";
 import names from "src/reduxService/stores/names";
-import { pickBy } from "lodash-es";
 import httpApi from "./api";
-import type { PageType, QueryActParams } from "./model";
-import { UUID } from "src/common/utils";
 
 const thunks = createThunks(names.categoryStore, {
 	refreshFormVersionAct: () => {
@@ -27,7 +26,7 @@ const thunks = createThunks(names.categoryStore, {
 		recordData,
 	}: {
 		isShowAddModal: boolean;
-		recordData?;
+		recordData?: any;
 	}) => {
 		let extra = !isShowAddModal
 			? {
@@ -49,23 +48,8 @@ const thunks = createThunks(names.categoryStore, {
 	updateAct: async (params) => {
 		await httpApi.upadteApi(pickBy(params));
 	},
-	queryAct:
-		(params: QueryActParams = {}) =>
-		async (naturApi) => {
-			naturApi.setState({
-				loading: true,
-			});
-			const res = await httpApi.queryApi<PageType>(params).finally(() => {
-				naturApi.setState({
-					loading: false,
-				});
-			});
-			const { content: dataList, count } = res.data || {};
-			return {
-				pageNum: params.page,
-				dataList,
-				total: count,
-			};
-		},
+	queryAct: async (params) => {
+		await httpApi.upadteApi(pickBy(params));
+	},
 });
 export default thunks;

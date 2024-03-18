@@ -6,7 +6,7 @@ import { createThunks } from "../../setup";
 import names from "../names";
 
 const thunks = createThunks(names.routerStore, {
-	createRoutesDataAct: async (arg: any, api) => {
+	createRoutesDataAct: async (_, api) => {
 		const { routesPermissions } = api.getState().authStore;
 		const { routesConfig, routesConfigMap } =
 			RouterHelper.createRoutesConfigByUserInfo({
@@ -15,6 +15,9 @@ const thunks = createThunks(names.routerStore, {
 			});
 		dp("routerStore", "setRouterConfig", routesConfig);
 		dp("routerStore", "setRoutesConfigMap", routesConfigMap);
+		return {
+			a: 1,
+		};
 	},
 });
 export default thunks;

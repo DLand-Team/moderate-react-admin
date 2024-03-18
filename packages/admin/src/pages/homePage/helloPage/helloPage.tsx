@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import styles from "./helloPage.module.scss";
 
 const HelloPage = () => {
-	const [timeRange, SetTimeRange] = useState("all");
+	const [timeRange] = useState("all");
 
 	useEffect(() => {}, [timeRange]);
 

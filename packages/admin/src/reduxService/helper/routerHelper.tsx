@@ -79,6 +79,7 @@ export class RouterHelper {
 				MenuConfig[item.componentName as keyof typeof MenuConfig]
 					?.routeName,
 			);
+			;
 			result.push(temp);
 			if (item?.children?.length) {
 				temp.children = RouterHelper.createMenuDataLoopByPermissions(
@@ -263,6 +264,7 @@ export class RouterHelper {
 	) {
 		const { type = "push", state } = options || {};
 		const path = this.getRoutePathByKey(id);
+		;
 		if (!path) return new Error("路由不存在");
 		if (type === "push") {
 			this.history!?.push(path, state);

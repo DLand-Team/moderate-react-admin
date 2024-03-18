@@ -26,7 +26,7 @@ const columns: ColumnsType<any> = [
 	{
 		title: "操作",
 		key: "action",
-		render: (_, record) => (
+		render: (_) => (
 			<Space size="middle">
 				<a>修改</a>
 			</Space>
@@ -45,12 +45,12 @@ const PermissionPage = () => {
 		},
 	);
 
-	const handlePageChange = async (pageNum = 1, pageSize) => {
+	const handlePageChange = async () => {
 		await createArticleListG();
 	};
-	const handleUpload = (values: any) => {};
+	const handleUpload = () => {};
 	useEffect(() => {
-		handlePageChange(pageNum, pageSize);
+		handlePageChange();
 	}, []);
 	return (
 		<div className={styles.content}>
@@ -68,11 +68,11 @@ const PermissionPage = () => {
 					total,
 					onChange(page, pageSize) {
 						console.log(page, pageSize);
-						handlePageChange(page, pageSize);
+						handlePageChange();
 					},
 				}}
 				columns={columns}
-				dataSource={pageList}
+				dataSource={pageList!}
 			/>
 		</div>
 	);

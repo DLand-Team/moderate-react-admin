@@ -28,7 +28,8 @@ class PermissionHelper {
 				const actionsPermissions: string[] =
 					routeInfoItem.actionPermissions || [];
 				item.children = actionsPermissions.map((actionId) => {
-					const btnConfig = ACTION_DICT[actionId];
+					const btnConfig =
+						ACTION_DICT[actionId as keyof typeof ACTION_DICT];
 					return {
 						title: btnConfig.title,
 						value: `${id}:${actionId}`,

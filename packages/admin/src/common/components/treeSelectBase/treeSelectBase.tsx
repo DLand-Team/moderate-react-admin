@@ -1,23 +1,23 @@
+import { TreeSelect, TreeSelectProps } from "antd";
+import { useEffect, useState } from "react";
 import FormItemHoc, {
 	type FormItemHocProps,
 } from "src/common/hocs/formItemHoc/formItemHoc";
 import { RouteItem } from "src/config/types";
-import { routerHelper, useFlat } from "src/reduxService";
-import { TreeSelect, TreeSelectProps } from "antd";
-import { useEffect, useState } from "react";
+import { useFlat } from "src/reduxService";
 
-const transformTreeDataLoop = (data: RouteItem[]) => {
+const transformTreeDataLoop: any = (data: RouteItem[]) => {
 	return data.map((item) => {
 		if (item.children) {
 			return {
 				value: item.path,
-				title: item.meta.title,
+				title: item.meta!.title,
 				children: transformTreeDataLoop(item.children),
 			};
 		} else {
 			return {
 				value: item.path,
-				title: item.meta.title,
+				title: item.meta!.title,
 			};
 		}
 	});

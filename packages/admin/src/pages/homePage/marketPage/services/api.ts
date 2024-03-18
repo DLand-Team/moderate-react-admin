@@ -2,7 +2,7 @@ import { http } from "src/common/http";
 
 const baseUrl = "";
 // 增
-function addApi(data) {
+function addApi(data: any) {
 	return http.request({
 		url: baseUrl + "create",
 		method: "POST",
@@ -11,7 +11,7 @@ function addApi(data) {
 }
 
 // 删
-function deleteApi(data) {
+function deleteApi(data: any) {
 	return http.request({
 		url: baseUrl + "delete",
 		method: "POST",
@@ -20,7 +20,7 @@ function deleteApi(data) {
 }
 
 // 改
-function upadteApi(data) {
+function upadteApi(data: any) {
 	return http.request({
 		url: baseUrl + "update",
 		method: "POST",

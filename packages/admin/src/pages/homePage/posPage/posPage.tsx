@@ -4,13 +4,14 @@ import ModalForm from "./components/modalForm/modalForm";
 import SearchForm from "./components/searchForm/searchForm";
 import styles from "./style.module.scss";
 import useConfig from "./useConfig";
+import { useEffect } from "react";
 
 const CategoryPage = () => {
 	const { columns } = useConfig();
+
 	const { setAddModalShowAct } = useFlat("posStore");
 
-	const handlePageChange = async (pageNum = 1, pageSize) => {};
-
+	
 	return (
 		<div className={styles.content}>
 			{/* 搜索栏目 */}
@@ -19,7 +20,6 @@ const CategoryPage = () => {
 			<Button
 				type="primary"
 				onClick={() => {
-					;
 					setAddModalShowAct({ isShowAddModal: true });
 				}}
 				style={{

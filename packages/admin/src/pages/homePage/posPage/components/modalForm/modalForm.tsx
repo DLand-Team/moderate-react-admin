@@ -59,7 +59,7 @@ const ModalForm: React.FC = () => {
 		>
 			<Form<PageType>
 				form={form}
-				onFieldsChange={(values, old) => {
+				onFieldsChange={(values) => {
 					// 当prime_id表单修改，并且修改新的值和旧的值不一样的时候，清空parent_id
 					if (
 						values[0].name === "prime_id" &&

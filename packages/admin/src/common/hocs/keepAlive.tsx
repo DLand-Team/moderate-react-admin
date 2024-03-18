@@ -5,15 +5,17 @@ const KeepAlive = (props: { include: string[] }) => {
 	const outlet = useOutlet();
 	const { include } = props;
 	const { pathname } = useLocation();
-  
+
 	const componentList = useRef(new Map());
 	const forceUpdate = useReducer((bool: any) => !bool, true)[1]; // 强制渲染
-	const cacheKey = useMemo(() => pathname.split('/').slice(-1)[0], [pathname]);
+	const cacheKey = useMemo(
+		() => pathname.split("/").slice(-1)[0],
+		[pathname],
+	);
 	const activeKey = useRef<string>("");
 	useEffect(() => {
-		componentList.current.forEach(function (value, key) {
+		componentList.current.forEach(function (_, key) {
 			if (!include.includes(key) || key === pathname) {
-				this.delete(key);
 			}
 		}, componentList.current);
 

@@ -1,13 +1,12 @@
 /* Instruments */
 import { type Location } from "react-router-dom";
+import { ROUTE_ID } from "src/config/routerConfig";
+import { RouterHelper } from "src/reduxService/helper/routerHelper";
 import { dp } from "../..";
 import { createThunks } from "../../setup";
 import names from "../names";
-import { RouterHelper } from "src/reduxService/helper/routerHelper";
-import { ROUTE_ID } from "src/config/routerConfig";
 
 const thunks = createThunks(names.appStore, {
-	testAct: async (arg: { id: string }, api) => {},
 	deleteTabHistoryAct: async ({ pathName }: { pathName: string }, api) => {
 		const { tabsHistory } = api.getState().appStore;
 		if (Object.values(tabsHistory).length > 1) {
@@ -32,7 +31,7 @@ const thunks = createThunks(names.appStore, {
 		if (routesConfig.length) {
 			const temp = routesConfig.find((item) => {
 				return item.id === ROUTE_ID.homePage;
-			}).children;
+			})?.children;
 			if (temp?.length) {
 				const memuDataTemp = RouterHelper.createMenuDataLoop(temp, []);
 				dp("appStore", "setMenuDataAct", [

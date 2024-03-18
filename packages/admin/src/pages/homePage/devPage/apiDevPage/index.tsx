@@ -36,7 +36,7 @@ const ApiDevPage = () => {
 		},
 	);
 
-	const handlePageChange = async (pageNum = 1, pageSize) => {
+	const handlePageChange = async () => {
 		await createApiListG();
 	};
 	const handleUpload = (values: any) => {
@@ -44,7 +44,7 @@ const ApiDevPage = () => {
 	};
 
 	useEffect(() => {
-		handlePageChange(pageNum, pageSize);
+		handlePageChange();
 	}, []);
 
 	return (

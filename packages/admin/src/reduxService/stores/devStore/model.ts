@@ -1,8 +1,8 @@
 export interface StoreState {
-	routePageList: string[];
-	pageList: PageType[];
-	storeList: CommonType[];
-	apiList: CommonType[];
+	routePageList: string[] | null;
+	pageList: PageType[] | null;
+	storeList: CommonType[] | null;
+	apiList: CommonType[] | null;
 	total: number;
 	pageSize: number;
 	pageNum: number;

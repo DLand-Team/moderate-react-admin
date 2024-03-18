@@ -38,8 +38,10 @@ const useSearchFields = <T,>(
 				InputItem = getFields(fieldConfigTemp);
 			}
 			temp.push(
-				<Col span={Math.floor(24 / count)} key={i}>
-					<Form.Item {...formOptions} hidden={ !isSearch }>{InputItem}</Form.Item>
+				<Col span={Math.floor(24 / count!)} key={i}>
+					<Form.Item {...formOptions} hidden={!isSearch}>
+						{InputItem}
+					</Form.Item>
 				</Col>,
 			);
 		}

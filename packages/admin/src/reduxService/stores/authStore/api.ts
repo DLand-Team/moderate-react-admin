@@ -3,7 +3,7 @@ import { http } from "src/common/http";
 import { LoginApiParams, MenuPermissionItem } from "./model";
 
 function loginApi(params: LoginApiParams) {
-	return http.request({
+	return http.request<{ accessToken: string }>({
 		url: "/admin-api/system/auth/login",
 		method: "POST",
 		data: params,

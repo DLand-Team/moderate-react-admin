@@ -1,0 +1,23 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Monitor TS Errors",
+			"command": "./node_modules/.bin/tsc",
+			"type": "shell",
+			"args": ["--watch", "-p", ".", "--noEmit"],
+			"presentation": {
+				"echo": true,
+				"reveal": "never",
+				"focus": false,
+				"panel": "shared"
+			},
+			"showOutput": "silent",
+			"isBackground": true,
+			"problemMatcher": "$tsc-watch",
+			"runOptions": {
+				"runOn": "folderOpen"
+			}
+		}
+	]
+}

@@ -1,13 +1,13 @@
-import { dp, routerHelper } from "src/reduxService";
+import storageHelper from "src/common/utils/storageHelper";
+import { dp } from "src/reduxService";
+import { RouterHelper } from "src/reduxService/helper/routerHelper";
 import { createThunks } from "../../setup";
 import names from "../names";
 import httpApi from "./api";
-import storageHelper from "src/common/utils/storageHelper";
 import { LoginApiParams } from "./model";
-import { RouterHelper } from "src/reduxService/helper/routerHelper";
 
 const thunks = createThunks(names.authStore, {
-	login: async (arg: LoginApiParams, api) => {
+	login: async (arg: LoginApiParams) => {
 		// 第一步：登录获取token，并存储
 		const {
 			data: { accessToken },
@@ -22,7 +22,7 @@ const thunks = createThunks(names.authStore, {
 		storageHelper.setItem("ACCESS_TOKEN", accessToken);
 		storageHelper.setItem("IS_ADMIN", accessToken);
 	},
-	getUserPermissionsAct: async (arg: any, api) => {
+	getUserPermissionsAct: async () => {
 		const {
 			data: { permissions, menus },
 		} = await httpApi.fetchUserPermissins();
@@ -33,7 +33,7 @@ const thunks = createThunks(names.authStore, {
 		// 生成一个路由数据权限
 		const { routesPermissions } =
 			RouterHelper.createMenuDataLoopByPermissions(
-				menuPermissions.children,
+				menuPermissions!.children || [],
 				[],
 				[],
 			);
@@ -44,12 +44,13 @@ const thunks = createThunks(names.authStore, {
 		);
 		storageHelper.setItem("PERMISSIONS_DATA", permissions);
 		// redux存储一下
-		dp("authStore", "setPermissions", {
-			menuPermissions,
-			permissions,
-			routesPermissions,
-		});
+		menuPermissions &&
+			dp("authStore", "setPermissions", {
+				menuPermissions,
+				permissions,
+				routesPermissions,
+			});
 	},
-	updatePermissionsAct: async (arg: any, api) => {},
+	updatePermissionsAct: async () => {},
 });
 export default thunks;

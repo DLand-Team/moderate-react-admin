@@ -10,8 +10,6 @@ const CategoryPage = () => {
 
 	useEffect(() => {}, []);
 
-	const handlePageChange = async (pageNum = 1, pageSize) => {};
-
 	return (
 		<div className={styles.content}>
 			{/* 搜索栏目 */}

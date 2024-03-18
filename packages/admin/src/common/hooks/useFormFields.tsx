@@ -10,11 +10,11 @@ const useFormFields = <T,>(
 ) => {
 	let recordKeyObj = {};
 
-	return formList.map((item, index) => {
+	return formList.map((item) => {
 		const { config } = item;
-		const { formRender, formOptions } = config;
-		const { name } = formOptions;
-		let temp = [];
+		const { formRender, formOptions } = config!;
+		const { name } = formOptions!;
+		let temp: any = [];
 		if (Array.isArray(name)) {
 			let nameArr = name.slice(0, -1);
 
