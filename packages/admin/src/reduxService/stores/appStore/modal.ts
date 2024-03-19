@@ -1,5 +1,5 @@
 import { type Location } from "react-router-dom";
-import { MenuItem } from "src/reduxService/helper/routerHelper";
+import { MenuItem } from "src/reduxService/helper";
 
 export interface TabItem {
 	label: string;

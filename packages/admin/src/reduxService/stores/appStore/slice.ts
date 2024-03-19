@@ -2,8 +2,8 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { cloneDeep } from "lodash-es";
 import { createSliceCustom } from "redux-eazy";
 import { ROUTE_ID, ROUTE_INFO_CONFIG } from "src/config/routerConfig";
-import { AppHelper } from "src/reduxService/helper/appHelper";
-import { MenuItem, RouterHelper } from "src/reduxService/helper/routerHelper";
+import { AppHelper } from "src/reduxService/helper";
+import { MenuItem, RouterHelper } from "src/reduxService/helper";
 import names from "../names";
 import { StoreState, TabItem, TabsHistory } from "./modal";
 

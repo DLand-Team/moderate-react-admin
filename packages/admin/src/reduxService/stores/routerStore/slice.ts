@@ -1,7 +1,7 @@
 /* Core */
 import { ROUTE_INFO_CONFIG } from "src/config/routerConfig";
 import { RouteItem } from "src/config/types";
-import { RouterHelper } from "src/reduxService/helper/routerHelper";
+import { RouterHelper } from "src/reduxService/helper";
 import { cloneDeep } from "lodash-es";
 import { PayloadAction, createSliceCustom } from "redux-eazy";
 import names from "../names";

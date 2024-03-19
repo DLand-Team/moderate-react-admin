@@ -1,6 +1,6 @@
 import { ROUTE_INFO_CONFIG } from "src/config/routerConfig";
 import { dp } from "src/reduxService";
-import { RouterHelper } from "src/reduxService/helper/routerHelper";
+import { RouterHelper } from "src/reduxService/helper";
 import { cloneDeep } from "lodash-es";
 import { createThunks } from "../../setup";
 import names from "../names";

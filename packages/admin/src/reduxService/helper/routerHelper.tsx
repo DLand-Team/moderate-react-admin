@@ -21,6 +21,7 @@ export type MenuItem = Partial<ItemType> &
 		key: string;
 		children: MenuItem[];
 	}>;
+
 export class RouterHelper {
 	static createDefaultRoutesConfig() {
 		return Object.values(ROUTE_INFO_CONFIG)

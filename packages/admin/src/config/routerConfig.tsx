@@ -81,10 +81,8 @@ export const ROUTE_INFO_CONFIG: {
 	cpdPage: {
 		id: "cpdPage",
 		meta: {
-			title: "Cpd",
+			title: "cpdPage",
 		},
-		actionPermissions: ["ADD", "EDIT"],
-		isNoAuth: true,
 	},
 	userPage: {
 		id: "userPage",

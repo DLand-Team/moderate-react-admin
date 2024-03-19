@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useLocationListen from "src/common/hooks/useLocationListen";
 import { useFlat } from "src/reduxService";
-import { RouterHelper } from "src/reduxService/helper/routerHelper";
+import { RouterHelper } from "src/reduxService/helper";
 import { TabItem } from "src/reduxService/stores/appStore/modal";
 import styles from "./tabs.module.scss";
 

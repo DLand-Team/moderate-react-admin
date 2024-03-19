@@ -16,7 +16,7 @@ export class AppHelper {
 		const { menuData = [] } = data
 			? AppHelper.createMenuDataLoopByPermissions(data, [])
 			: {};
-		result.concat(menuData);
+		result = result.concat(menuData);
 		const { routesConfig } = reduxStore.getState().routerStore;
 		// 创建客户端权限配置的菜单信息
 		if (routesConfig.length) {
@@ -24,7 +24,7 @@ export class AppHelper {
 				return item.id === ROUTE_ID.homePage;
 			})?.children;
 			if (temp?.length) {
-				result.concat(AppHelper.createMenuDataLoop(temp, []));
+				result = result.concat(AppHelper.createMenuDataLoop(temp, []));
 			}
 		}
 		return result;
@@ -75,7 +75,10 @@ export class AppHelper {
 			};
 			result.push(temp);
 			if (item?.children?.length) {
-				temp.children = this.createMenuDataLoop(item.children, []);
+				const children = this.createMenuDataLoop(item.children, []);
+				if (children.length) {
+					temp.children = this.createMenuDataLoop(item.children, []);
+				}
 			}
 		});
 		return result;

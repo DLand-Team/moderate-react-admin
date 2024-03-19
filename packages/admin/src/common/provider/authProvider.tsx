@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { ROUTE_ID } from "src/config/routerConfig";
 import { dp, useFlat } from "src/reduxService";
-import { RouterHelper } from "src/reduxService/helper/routerHelper";
+import { RouterHelper } from "src/reduxService/helper";
 import useAsyncEffcet from "../hooks/useAsyncEffect";
 
 const AuthProvider = ({ children }: React.PropsWithChildren) => {

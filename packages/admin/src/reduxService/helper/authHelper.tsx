@@ -12,17 +12,26 @@ export class AuthHelper {
 	 * @param {string[]} routesPermissions 路由权限数组ƒ
 	 * @return {}
 	 */
-	static createRoutesPermissionsByMenu = (
+	static createRoutesPermissionsByMenu = (data: MenuPermissionItem[]) => {
+		const menuPermissions = data.find((item) => {
+			return item.path == "/userCenter";
+		});
+		const { routesPermissions } = this.createRoutesLoop(
+			menuPermissions?.children || [],
+			[],
+		);
+
+		return { menuPermissions, routesPermissions };
+	};
+
+	static createRoutesLoop = (
 		data: MenuPermissionItem[],
 		routesPermissions: string[],
 	) => {
-		data.forEach((item) => {
+		data?.forEach((item) => {
 			routesPermissions.push(item.componentName);
 			if (item?.children?.length) {
-				this.createRoutesPermissionsByMenu(
-					item.children,
-					routesPermissions,
-				);
+				this.createRoutesLoop(item.children, routesPermissions);
 			}
 		});
 		return { routesPermissions };

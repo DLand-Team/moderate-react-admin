@@ -8,7 +8,7 @@
  */
 /* Instruments */
 import { type Location } from "react-router-dom";
-import { AppHelper } from "src/reduxService/helper/appHelper";
+import { AppHelper } from "src/reduxService/helper";
 import { dp } from "../..";
 import { createThunks } from "../../setup";
 import names from "../names";
@@ -32,6 +32,7 @@ const thunks = createThunks(names.appStore, {
 		const { menuPermissions } = api.getState().authStore;
 		const { children = [] } = menuPermissions || {};
 		const menuData = AppHelper.createMenuData(children);
+		debugger;
 		dp("appStore", "setMenuDataAct", menuData);
 	},
 });

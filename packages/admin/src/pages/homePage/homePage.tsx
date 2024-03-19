@@ -6,7 +6,7 @@ import themeProviderHoc from "src/common/hocs/themeHoc/themeHoc";
 import useLocationListen from "src/common/hooks/useLocationListen";
 import { ROUTE_ID } from "src/config/routerConfig";
 import { useFlat, useResetRedux } from "src/reduxService";
-import { RouterHelper } from "src/reduxService/helper/routerHelper";
+import { RouterHelper } from "src/reduxService/helper";
 import Breadcrumb from "./components/breadcrumb/breadcrumb";
 import Tabs from "./components/tabs/tabs";
 import styles from "./homePage.module.scss";
@@ -28,7 +28,7 @@ const HomePage = () => {
 		const selectedKeysTemp = pathname.split("/").filter((item) => {
 			return item;
 		});
-		setMenuDefaultSelectedKeys([selectedKeysTemp.slice(-1)[0]]);
+		setMenuDefaultSelectedKeys(selectedKeysTemp);
 		const openKeysTemp = selectedKeysTemp.slice(
 			1,
 			selectedKeysTemp.length - 1,
@@ -61,7 +61,7 @@ const HomePage = () => {
 			</Header>
 			<Layout>
 				<Sider width={260} className="site-layout-background">
-					{menuData.length > 0 && (
+					{menuData.length > 0 && menuDefaultOpenKeys && (
 						<Menu
 							triggerSubMenuAction="click"
 							mode="inline"
@@ -70,6 +70,7 @@ const HomePage = () => {
 							style={{ height: "100%", borderRight: 0 }}
 							items={menuData as ItemType[]}
 							onClick={({ key }) => {
+								debugger;
 								RouterHelper.jumpTo(key);
 							}}
 						/>
