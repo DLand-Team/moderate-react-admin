@@ -1,6 +1,6 @@
 import { Button, Layout, Menu, Modal } from "antd";
 import { ItemType } from "antd/es/menu/hooks/useItems";
-import { type Location } from "react-router-dom";
+import { Route, type Location } from "react-router-dom";
 import KeepAlive from "src/common/hocs/keepAlive";
 import themeProviderHoc from "src/common/hocs/themeHoc/themeHoc";
 import useLocationListen from "src/common/hooks/useLocationListen";

@@ -23,6 +23,10 @@ export enum ROUTE_NAME {
 	posPage,
 	marketPage,
 	marketEditPage,
+	posEditPage,
+	rulePage,
+	ruleEditPage,
+	notFundPage,
 }
 // MODERATE_AUTO_2:END
 
@@ -192,7 +196,38 @@ export const ROUTE_INFO_CONFIG: {
 			title: "marketEditPage",
 		},
 		component: "MarketEditPage",
+	},
+	posEditPage: {
+		id: "posEditPage",
+		meta: {
+			title: "posEditPage",
+		},
+		component: "PosEditPage",
+		depands: ["posPage"],
+	},
+	rulePage: {
+		id: "rulePage",
+		meta: {
+			title: "rulePage",
+		},
+		component: "RulePage",
+	},
+	ruleEditPage: {
+		id: "ruleEditPage",
+		meta: {
+			title: "ruleEditPage",
+		},
+		component: "RuleEditPage",
 		isNoAuth: true,
+	},
+	notFundPage: {
+		id: "notFundPage",
+		meta: {
+			title: "notFundPage",
+		},
+		component: "NotFundPage",
+		isNoAuth: true,
+		path: "*",
 	},
 }; //MODERATE_AUTO_3:END
 // =============== 路由结构数据 ===============
@@ -211,12 +246,19 @@ export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [{
   }, {
     id: ROUTE_ID.cpdPage,
     children: [{
-      id: ROUTE_ID.marketPage,
+      id: ROUTE_ID.marketEditPage
+    }, {
+      id: ROUTE_ID.marketPage
+    }, {
+      id: ROUTE_ID.posPage,
       children: [{
-        id: ROUTE_ID.marketEditPage
+        id: ROUTE_ID.posEditPage
       }]
     }, {
-      id: ROUTE_ID.posPage
+      id: ROUTE_ID.rulePage,
+      children: [{
+        id: ROUTE_ID.ruleEditPage
+      }]
     }]
   }, {
     id: ROUTE_ID.devPage,
@@ -229,6 +271,8 @@ export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [{
     }]
   }, {
     id: ROUTE_ID.helloPage
+  }, {
+    id: ROUTE_ID.notFundPage
   }, {
     id: ROUTE_ID.permissionPage
   }, {

@@ -15,6 +15,7 @@ import type {
 } from "src/config/types";
 import { DynamicPageRender, pageList } from "src/pages";
 import { reduxStore as store } from "..";
+import { includeOne } from "src/common/utils";
 
 export type MenuItem = Partial<ItemType> &
 	Partial<{
@@ -42,6 +43,7 @@ export class RouterHelper {
 		prefix,
 		routesConfigMap,
 		routesPermissions,
+		parentId,
 	}: {
 		children: any[];
 		routesStuctData: RoutesStructDataItem[];
@@ -50,22 +52,25 @@ export class RouterHelper {
 			[key in ROUTE_ID_KEY]: RouteItem;
 		};
 		routesPermissions: string[];
+		parentId: string;
 	}) => {
 		routesStuctData.forEach((routeStructItem) => {
 			const { id } = routeStructItem;
+			const { depands, path: pathE } = routesConfigMap[id];
 			// 如果有权限或者是必须显示的，或者是管理员
 			if (
 				routesPermissions?.includes(id) ||
+				(depands && includeOne(routesPermissions, depands)) ||
 				routesConfigMap[id].isNoAuth
 			) {
 				const { component, ...rest } = routesConfigMap[id];
 				const path = prefix + "/" + id;
+				routesConfigMap[id].parentId = parentId as ROUTE_ID_KEY;
 				routesConfigMap[id].id = id as ROUTE_ID_KEY;
-				routesConfigMap[id].path = path;
-
+				routesConfigMap[id].path = pathE || path;
 				let routesConfig: RouteItem = {
 					...rest,
-					path,
+					path: pathE || path,
 					id,
 					component,
 				};
@@ -78,6 +83,7 @@ export class RouterHelper {
 						prefix: routesConfig.path || "",
 						routesPermissions,
 						routesConfigMap,
+						parentId: id,
 					});
 				}
 			}
@@ -85,7 +91,12 @@ export class RouterHelper {
 		return children;
 	};
 
-	static createRoutesConfigByUserInfo = ({
+	/**
+	 * @description: 创建路由配置数据（根据路由权限）
+	 * @param {MenuPermissionItem} data 若依后台的菜单权限数组
+	 * @return {*} 适用于antd的菜单组件数据
+	 */
+	static createRoutesConfigByPermissions = ({
 		routesPermissions,
 		routesConfigMap,
 	}: {
@@ -118,6 +129,7 @@ export class RouterHelper {
 				prefix: "/" + ROUTE_ID[ROUTE_ID.homePage],
 				routesConfigMap,
 				routesPermissions,
+				parentId: ROUTE_ID.homePage,
 			}),
 		});
 		return {

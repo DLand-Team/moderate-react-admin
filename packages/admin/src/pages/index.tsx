@@ -1,14 +1,12 @@
-import {
-  lazy
-} from "react";
+import { lazy } from "react";
 
 export const DynamicPageRender = ({
-  name,
+	name,
 }: {
-  name: keyof typeof pageList;
+	name: keyof typeof pageList;
 }) => {
-  const Component = pageList[name];
-  return < Component / > ;
+	const Component = pageList[name];
+	return <Component />;
 };
 
 // MODERATE_AUTO_PAGE_LAZY_IMPORT:START
@@ -26,7 +24,7 @@ const RolePage = lazy(() => import("./homePage/sysPage/rolePage/rolePage"));
 const PageDevPage = lazy(() => import("./homePage/devPage/pageDevPage"));
 //permissionPage
 const PermissionPage = lazy(
-  () => import("./homePage/permissionPage/permissionPage"),
+	() => import("./homePage/permissionPage/permissionPage"),
 );
 //storeDevPage
 const StoreDevPage = lazy(() => import("./homePage/devPage/storeDevPage"));
@@ -43,24 +41,44 @@ const Test1Page = lazy(() => import("./homePage/cmsPage/test1Page/test1Page"));
 ////posPage
 const PosPage = lazy(() => import("./homePage/cpdPage/posPage/posPage"));
 ////marketPage
-const MarketPage = lazy(() => import("./homePage/cpdPage/marketPage/marketPage"));
-////marketEditPage 
-const MarketEditPage = lazy(() => import("./homePage/cpdPage/marketPage/marketEditPage/marketEditPage"));
+const MarketPage = lazy(
+	() => import("./homePage/cpdPage/marketPage/marketPage"),
+);
+////marketEditPage
+const MarketEditPage = lazy(
+	() => import("./homePage/cpdPage/marketEditPage/marketEditPage"),
+);
+////posEditPage
+const PosEditPage = lazy(
+	() => import("./homePage/cpdPage/posPage/posEditPage/posEditPage"),
+);
+////rulePage
+const RulePage = lazy(() => import("./homePage/cpdPage/rulePage/rulePage"));
+////ruleEditPage
+const RuleEditPage = lazy(
+	() => import("./homePage/cpdPage/rulePage/ruleEditPage/ruleEditPage"),
+);
+////notFundPage
+const NotFundPage = lazy(() => import("./homePage/notFundPage/notFundPage"));
 //MODERATE_AUTO_PAGE_LAZY_IMPORT:END
 export const pageList = {
-  HomePage,
-  LoginPage,
-  HelloPage,
-  UserPage,
-  RolePage,
-  PageDevPage,
-  PermissionPage,
-  StoreDevPage,
-  ApiDevPage,
-  CategoryPage,
-  TestPage,
-  Test1Page,
-  PosPage,
-  MarketPage,
-  MarketEditPage
+	HomePage,
+	LoginPage,
+	HelloPage,
+	UserPage,
+	RolePage,
+	PageDevPage,
+	PermissionPage,
+	StoreDevPage,
+	ApiDevPage,
+	CategoryPage,
+	TestPage,
+	Test1Page,
+	PosPage,
+	MarketPage,
+	MarketEditPage,
+	PosEditPage,
+	RulePage,
+	RuleEditPage,
+	NotFundPage,
 };

@@ -1,10 +1,10 @@
 /* Instruments */
-import { pickBy } from "lodash-es";
-import { UUID } from "src/common/utils";
-import { dp } from "src/reduxService";
-import { createThunks } from "src/reduxService/setup";
 import names from "src/reduxService/stores/names";
+import { pickBy } from "lodash-es";
 import httpApi from "./api";
+import type { PageType, QueryActParams } from "./model";
+import { UUID } from "src/common/utils";
+import { createThunks } from "src/reduxService/setup";
 
 const thunks = createThunks(names.categoryStore, {
 	refreshFormVersionAct: () => {
@@ -34,29 +34,40 @@ const thunks = createThunks(names.categoryStore, {
 					isDetail: false,
 				}
 			: {};
-		dp("posStore", "setState", {
+		return {
 			recordData,
 			isShowAddModal,
 			...extra,
-		});
+		};
 	},
-	addAct: async (params) => {
+	addAct: async (params: any) => {
 		await httpApi.addApi(pickBy(params));
 	},
-	deleteAct: async (params) => {
+	deleteAct: async (params: any) => {
 		await httpApi.deleteApi(params);
 	},
-	updateAct: async (params) => {
+	updateAct: async (params: any) => {
 		await httpApi.upadteApi(pickBy(params));
 	},
-	queryAct: async (_, api) => {
-		const { pageNum, pageSize } = api.getState().posStore;
-		await httpApi.queryApi(
-			pickBy({
-				pageNo: pageNum,
-				pageSize: pageSize,
-			}),
-		);
-	},
+	queryAct:
+		(params: QueryActParams = {}) =>
+		async (naturApi: {
+			setState: (arg0: { loading: boolean }) => void;
+		}) => {
+			naturApi.setState({
+				loading: true,
+			});
+			const res = await httpApi.queryApi<PageType>(params).finally(() => {
+				naturApi.setState({
+					loading: false,
+				});
+			});
+			const { content: dataList, count } = res.data || {};
+			return {
+				pageNum: params.page,
+				dataList,
+				total: count,
+			};
+		},
 });
 export default thunks;

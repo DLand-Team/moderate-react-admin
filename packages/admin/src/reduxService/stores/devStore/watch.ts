@@ -1,4 +1,3 @@
-
 const watch = () => {
 	// startAppListening({
 	// 	type: getActionType('appStore').setAppInfo,

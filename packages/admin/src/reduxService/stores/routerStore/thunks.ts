@@ -9,7 +9,7 @@ const thunks = createThunks(names.routerStore, {
 	createRoutesDataAct: async (_, api) => {
 		const { routesPermissions } = api.getState().authStore;
 		const { routesConfig, routesConfigMap } =
-			RouterHelper.createRoutesConfigByUserInfo({
+			RouterHelper.createRoutesConfigByPermissions({
 				routesPermissions: routesPermissions,
 				routesConfigMap: cloneDeep(ROUTE_INFO_CONFIG),
 			});

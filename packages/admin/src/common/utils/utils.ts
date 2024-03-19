@@ -51,3 +51,10 @@ export const normalizeNum = (value: any) => {
 	let temp = Number(value) || value;
 	return temp;
 };
+
+export function includeOne(targetArr: any[], fliterArr: any[]) {
+	const found = fliterArr.some((item) => {
+		return targetArr.includes(item);
+	});
+	return found;
+}

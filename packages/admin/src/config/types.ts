@@ -8,6 +8,7 @@ export type RouteItem = RouteProps & {
 	parentId?: string; // 父节点id
 	isMenu?: boolean; // 是否是菜单
 	isNoAuth?: boolean; // 无权限
+	depands?: ROUTE_ID_KEY[];
 	meta?: {
 		title?: string;
 	};

@@ -9,7 +9,7 @@ import { RoutesConfigMap, StoreState } from "./model";
 
 const initialState = (): StoreState => {
 	const { routesConfig, routesConfigMap } =
-		RouterHelper.createRoutesConfigByUserInfo({
+		RouterHelper.createRoutesConfigByPermissions({
 			routesPermissions: [],
 			routesConfigMap: cloneDeep(ROUTE_INFO_CONFIG),
 		});

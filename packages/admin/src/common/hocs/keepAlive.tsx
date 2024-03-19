@@ -1,7 +1,7 @@
 import { useRef, useEffect, useReducer, useMemo, memo } from "react";
 import { useLocation, useOutlet } from "react-router-dom";
 
-const KeepAlive = (props: { include: string[] }) => {
+const KeepAlive = <T,>(props: { include: T[] }) => {
 	const outlet = useOutlet();
 	const { include } = props;
 	const { pathname } = useLocation();
@@ -41,4 +41,4 @@ const KeepAlive = (props: { include: string[] }) => {
 	);
 };
 
-export default memo(KeepAlive);
+export default memo(KeepAlive) as <T>(props: { include: T[] }) => JSX.Element;

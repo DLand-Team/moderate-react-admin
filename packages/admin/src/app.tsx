@@ -4,7 +4,7 @@ import { RouterHelper } from "./reduxService/helper";
 
 const App = () => {
 	const { routesConfig } = useFlat("routerStore");
-	
+	debugger;
 	return (
 		<Routes>
 			{routesConfig?.map((item) => {

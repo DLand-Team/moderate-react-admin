@@ -8,7 +8,7 @@ import names from "../names";
 import { StoreState, TabItem, TabsHistory } from "./modal";
 
 const initialState = (): StoreState => {
-	const { routesConfig = [] } = RouterHelper.createRoutesConfigByUserInfo({
+	const { routesConfig = [] } = RouterHelper.createRoutesConfigByPermissions({
 		routesPermissions: [],
 		routesConfigMap: cloneDeep(ROUTE_INFO_CONFIG),
 	});
