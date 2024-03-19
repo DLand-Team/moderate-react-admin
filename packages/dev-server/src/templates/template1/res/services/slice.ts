@@ -1,7 +1,7 @@
 /* Core */
 import { createSliceCustom } from "redux-eazy";
 import { StoreState } from "./model";
-import names from "@/reduxService/stores/names";
+import names from "src/reduxService/stores/names";
 
 const initialState = (): StoreState => {
 	return {
@@ -22,7 +22,6 @@ const slice = createSliceCustom({
 	name: names.categoryStore,
 	stateInit: initialState,
 	reducers: {},
-	extraReducers: (builder) => {},
 });
 
 export default slice;

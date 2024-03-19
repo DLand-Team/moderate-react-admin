@@ -9,7 +9,7 @@ const addPageHandler = async (ctx) => {
 			title: name,
 		},
 		component: devHelper.capitalizeFirstLetter(name),
-		isMustShow: true,
+		isNoAuth: true,
 	};
 	devHelper.toRegistePage(newItem, pathNew, name);
 	devHelper.toBuildPage(pathNew, name);
