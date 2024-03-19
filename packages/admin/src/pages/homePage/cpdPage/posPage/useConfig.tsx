@@ -1,18 +1,16 @@
-import { usePageConfig } from "src/common/hooks";
 import { Modal, Space } from "antd";
-import { PageType } from "./services/model";
-import { useFlat } from "src/reduxService";
 import { Link } from "react-router-dom";
+import { usePageConfig } from "src/common/hooks";
+import { useFlat } from "src/reduxService";
+import { PageType } from "./services/model";
 
 // change the name of the prime to primary
-const TYPE_ENUM = ["prime", "parent", "sub"];
 
 const useConfig = () => {
 	const {
 		setAddModalShowAct,
 		deleteAct,
 		queryAct,
-		setIsDetailAct,
 		dataList,
 		formVersion,
 	} = useFlat("categoryStore");

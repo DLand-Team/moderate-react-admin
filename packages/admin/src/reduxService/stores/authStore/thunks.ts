@@ -1,6 +1,6 @@
 import storageHelper from "src/common/utils/storageHelper";
 import { dp } from "src/reduxService";
-import { RouterHelper } from "src/reduxService/helper/routerHelper";
+import { AuthHelper } from "src/reduxService/helper/authHelper";
 import { createThunks } from "../../setup";
 import names from "../names";
 import httpApi from "./api";
@@ -27,16 +27,14 @@ const thunks = createThunks(names.authStore, {
 			data: { permissions, menus },
 		} = await httpApi.fetchUserPermissins();
 		const menuPermissions = menus.find((item) => {
-			return item.path == "/usercenter";
+			return item.path == "/userCenter";
 		});
 		// 需要根据后端的menu权限跟前端的权限结合，生成一个权限数据
 		// 生成一个路由数据权限
-		const { routesPermissions } =
-			RouterHelper.createMenuDataLoopByPermissions(
-				menuPermissions!.children || [],
-				[],
-				[],
-			);
+		const { routesPermissions } = AuthHelper.createRoutesPermissionsByMenu(
+			menuPermissions!?.children || [],
+			[],
+		);
 		// 持久化一下
 		storageHelper.setItem(
 			"MENU_DATA",

@@ -4,7 +4,7 @@ import devStore from "./devStore";
 import routerStore from "./routerStore";
 // 组件文件夹下的store
 import categoryStore from "src/pages/homePage/cmsPage/categoryPage/services";
-import posStore from "src/pages/homePage/posPage/services";
+import posStore from "src/pages/homePage/cpdPage/posPage/services";
 
 const stores = {
 	appStore,

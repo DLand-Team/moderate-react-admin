@@ -1,11 +1,11 @@
-import { useGreatAsync } from "src/common/hooks";
-import { useFlat } from "src/reduxService";
 import { Space, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { useEffect } from "react";
+import { useGreatAsync } from "src/common/hooks";
+import { useFlat } from "src/reduxService";
+import { CommonType } from "src/reduxService/stores/devStore/model";
 import ModalForm from "./components/modalForm/modalForm";
 import styles from "./index.module.scss";
-import { CommonType } from "src/reduxService/stores/devStore/model";
 
 const columns: ColumnsType<CommonType> = [
 	{
@@ -16,7 +16,7 @@ const columns: ColumnsType<CommonType> = [
 	{
 		title: "操作",
 		key: "action",
-		render: (_, record) => (
+		render: () => (
 			<Space size="middle">
 				<a>修改</a>
 			</Space>
@@ -42,14 +42,14 @@ const StoreDevPage = () => {
 		},
 	);
 
-	const handlePageChange = async (pageNum = 1, pageSize) => {
+	const handlePageChange = async () => {
 		await createStoreListG();
 	};
 	const handleUpload = (values: any) => {
 		addStoreAct(values);
 	};
 	useEffect(() => {
-		handlePageChange(pageNum, pageSize);
+		handlePageChange();
 	}, []);
 	return (
 		<div className={styles.content}>
@@ -70,11 +70,11 @@ const StoreDevPage = () => {
 					total,
 					onChange(page, pageSize) {
 						console.log(page, pageSize);
-						handlePageChange(page, pageSize);
+						handlePageChange();
 					},
 				}}
 				columns={columns}
-				dataSource={storeList}
+				dataSource={storeList!}
 			/>
 		</div>
 	);

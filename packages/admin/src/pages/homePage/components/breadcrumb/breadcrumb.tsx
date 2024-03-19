@@ -1,8 +1,8 @@
-import useLocationListen from "src/common/hooks/useLocationListen";
-import { routerHelper } from "src/reduxService";
 import { Breadcrumb } from "antd";
 import { useState } from "react";
 import type { Location } from "react-router-dom";
+import useLocationListen from "src/common/hooks/useLocationListen";
+import { RouterHelper } from "src/reduxService/helper/routerHelper";
 
 const BreadcrumbComp = () => {
 	const [infoArr, setInfoArr] = useState<{ id: string; title: string }[]>([]);
@@ -12,7 +12,7 @@ const BreadcrumbComp = () => {
 			return item;
 		});
 		const temp2 = pathArr.map((path: string) => {
-			const info = routerHelper.getRouteTitleByKey(path);
+			const info = RouterHelper.getRouteTitleByKey(path);
 			return {
 				id: path,
 				title: info || "",

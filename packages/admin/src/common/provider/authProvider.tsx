@@ -1,6 +1,7 @@
-import { ROUTE_ID } from "src/config/routerConfig";
-import { dp, routerHelper, useFlat } from "src/reduxService";
 import { useLocation } from "react-router-dom";
+import { ROUTE_ID } from "src/config/routerConfig";
+import { dp, useFlat } from "src/reduxService";
+import { RouterHelper } from "src/reduxService/helper/routerHelper";
 import useAsyncEffcet from "../hooks/useAsyncEffect";
 
 const AuthProvider = ({ children }: React.PropsWithChildren) => {
@@ -11,15 +12,15 @@ const AuthProvider = ({ children }: React.PropsWithChildren) => {
 		// 判断是否登陆
 		if (token) {
 			await dp("authStore", "getUserPermissionsAct");
-			const loginPath = routerHelper.getRoutePathByKey(
+			const loginPath = RouterHelper.getRoutePathByKey(
 				ROUTE_ID.loginPage,
 			);
 			// 判断是否是登录页
 			if (location.pathname === loginPath) {
-				routerHelper.jumpTo(ROUTE_ID.helloPage);
+				RouterHelper.jumpTo(ROUTE_ID.helloPage);
 			}
 		} else {
-			routerHelper.jumpTo(ROUTE_ID.loginPage);
+			RouterHelper.jumpTo(ROUTE_ID.loginPage);
 		}
 	}, [token]);
 

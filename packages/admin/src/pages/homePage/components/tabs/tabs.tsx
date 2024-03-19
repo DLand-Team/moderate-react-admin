@@ -2,9 +2,10 @@ import { Tabs } from "antd";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useLocationListen from "src/common/hooks/useLocationListen";
-import { routerHelper, useFlat } from "src/reduxService";
-import styles from "./tabs.module.scss";
+import { useFlat } from "src/reduxService";
+import { RouterHelper } from "src/reduxService/helper/routerHelper";
 import { TabItem } from "src/reduxService/stores/appStore/modal";
+import styles from "./tabs.module.scss";
 
 const TabsComp = () => {
 	const {
@@ -23,7 +24,7 @@ const TabsComp = () => {
 				const { pathname } = item;
 				const id = pathname.split("/").slice(-1)[0];
 				return {
-					label: routerHelper.getRouteTitleByKey(id),
+					label: RouterHelper.getRouteTitleByKey(id),
 					key: pathname,
 				} as TabItem;
 			}),

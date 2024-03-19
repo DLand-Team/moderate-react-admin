@@ -1,10 +1,34 @@
 import { ACTION_DICT } from "src/config/permissionConfig";
-import { RoutesStructDataItem } from "src/config/types";
-import { routerHelper } from "src/reduxService";
 import { ROUTE_INFO_CONFIG } from "src/config/routerConfig";
+import { RoutesStructDataItem } from "src/config/types";
+import { MenuPermissionItem } from "../stores/authStore/model";
+import { RouterHelper } from "./routerHelper";
 type PermissionNode = any;
-class PermissionHelper {
-	createPermissionByRoutesLoop(
+export class AuthHelper {
+	/**
+	 * @description: 根据权限创建菜单
+	 * @param {MenuPermissionItem} data
+	 * @param {MenuItem} result
+	 * @param {string[]} routesPermissions 路由权限数组ƒ
+	 * @return {}
+	 */
+	static createRoutesPermissionsByMenu = (
+		data: MenuPermissionItem[],
+		routesPermissions: string[],
+	) => {
+		data.forEach((item) => {
+			routesPermissions.push(item.componentName);
+			if (item?.children?.length) {
+				this.createRoutesPermissionsByMenu(
+					item.children,
+					routesPermissions,
+				);
+			}
+		});
+		return { routesPermissions };
+	};
+
+	static createPermissionByRoutesLoop(
 		routesConfig: RoutesStructDataItem[],
 		newData: PermissionNode[],
 	) {
@@ -12,7 +36,7 @@ class PermissionHelper {
 			const { id } = routeStructItem;
 			const routeInfoItem = ROUTE_INFO_CONFIG[id];
 			let item: PermissionNode = {
-				title: routerHelper.getRouteTitleByKey(id),
+				title: RouterHelper.getRouteTitleByKey(id),
 				value: id,
 				key: id,
 			};
@@ -41,6 +65,6 @@ class PermissionHelper {
 	}
 }
 
-const permissionHelper = new PermissionHelper();
+const authHelper = new AuthHelper();
 
-export default permissionHelper;
+export default authHelper;

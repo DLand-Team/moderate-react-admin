@@ -1,10 +1,12 @@
 import { Button, Layout, Menu, Modal } from "antd";
+import { ItemType } from "antd/es/menu/hooks/useItems";
 import { type Location } from "react-router-dom";
 import KeepAlive from "src/common/hocs/keepAlive";
 import themeProviderHoc from "src/common/hocs/themeHoc/themeHoc";
 import useLocationListen from "src/common/hooks/useLocationListen";
 import { ROUTE_ID } from "src/config/routerConfig";
-import { routerHelper, useFlat, useResetRedux } from "src/reduxService";
+import { useFlat, useResetRedux } from "src/reduxService";
+import { RouterHelper } from "src/reduxService/helper/routerHelper";
 import Breadcrumb from "./components/breadcrumb/breadcrumb";
 import Tabs from "./components/tabs/tabs";
 import styles from "./homePage.module.scss";
@@ -47,7 +49,7 @@ const HomePage = () => {
 							onOk: () => {
 								{
 									resetAllStores();
-									routerHelper.jumpTo(ROUTE_ID.loginPage);
+									RouterHelper.jumpTo(ROUTE_ID.loginPage);
 								}
 							},
 						});
@@ -61,13 +63,18 @@ const HomePage = () => {
 				<Sider width={260} className="site-layout-background">
 					{menuData.length > 0 && (
 						<Menu
+							triggerSubMenuAction="click"
 							mode="inline"
 							selectedKeys={menuDefaultSelectedKeys}
-							defaultOpenKeys={menuDefaultOpenKeys}
+							defaultOpenKeys={menuDefaultOpenKeys!}
 							style={{ height: "100%", borderRight: 0 }}
-							items={menuData}
+							items={menuData as ItemType[]}
+							onOpenChange={(data) => {
+								debugger;
+							}}
 							onClick={({ key }) => {
-								routerHelper.jumpTo(key);
+								debugger;
+								RouterHelper.jumpTo(key);
 							}}
 						/>
 					)}
@@ -92,7 +99,7 @@ const HomePage = () => {
 							}}
 						>
 							<KeepAlive
-								include={routerHelper.getKeepAliveRoutePath()}
+								include={RouterHelper.getKeepAliveRoutePath()}
 							></KeepAlive>
 						</div>
 					</Content>

@@ -1,13 +1,14 @@
-import { lazy } from "react";
+import {
+  lazy
+} from "react";
 
 export const DynamicPageRender = ({
-	name,
+  name,
 }: {
-	name: keyof typeof pageList;
+  name: keyof typeof pageList;
 }) => {
-	const Component = pageList[name];
-	;
-	return <Component />;
+  const Component = pageList[name];
+  return < Component / > ;
 };
 
 // MODERATE_AUTO_PAGE_LAZY_IMPORT:START
@@ -25,7 +26,7 @@ const RolePage = lazy(() => import("./homePage/sysPage/rolePage/rolePage"));
 const PageDevPage = lazy(() => import("./homePage/devPage/pageDevPage"));
 //permissionPage
 const PermissionPage = lazy(
-	() => import("./homePage/permissionPage/permissionPage"),
+  () => import("./homePage/permissionPage/permissionPage"),
 );
 //storeDevPage
 const StoreDevPage = lazy(() => import("./homePage/devPage/storeDevPage"));
@@ -40,23 +41,26 @@ const TestPage = lazy(() => import("./homePage/cmsPage/testPage/testPage"));
 ////test1Page
 const Test1Page = lazy(() => import("./homePage/cmsPage/test1Page/test1Page"));
 ////posPage
-const PosPage = lazy(() => import("./homePage/posPage/posPage"));
+const PosPage = lazy(() => import("./homePage/cpdPage/posPage/posPage"));
 ////marketPage
-const MarketPage = lazy(() => import("./homePage/marketPage/marketPage"));
+const MarketPage = lazy(() => import("./homePage/cpdPage/marketPage/marketPage"));
+////marketEditPage 
+const MarketEditPage = lazy(() => import("./homePage/cpdPage/marketPage/marketEditPage/marketEditPage"));
 //MODERATE_AUTO_PAGE_LAZY_IMPORT:END
 export const pageList = {
-	HomePage,
-	LoginPage,
-	HelloPage,
-	UserPage,
-	RolePage,
-	PageDevPage,
-	PermissionPage,
-	StoreDevPage,
-	ApiDevPage,
-	CategoryPage,
-	TestPage,
-	Test1Page,
-	PosPage,
-	MarketPage,
+  HomePage,
+  LoginPage,
+  HelloPage,
+  UserPage,
+  RolePage,
+  PageDevPage,
+  PermissionPage,
+  StoreDevPage,
+  ApiDevPage,
+  CategoryPage,
+  TestPage,
+  Test1Page,
+  PosPage,
+  MarketPage,
+  MarketEditPage
 };

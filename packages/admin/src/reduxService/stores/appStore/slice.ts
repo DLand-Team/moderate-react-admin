@@ -1,10 +1,11 @@
 import { PayloadAction } from "@reduxjs/toolkit";
+import { cloneDeep } from "lodash-es";
 import { createSliceCustom } from "redux-eazy";
+import { ROUTE_ID, ROUTE_INFO_CONFIG } from "src/config/routerConfig";
+import { AppHelper } from "src/reduxService/helper/appHelper";
+import { MenuItem, RouterHelper } from "src/reduxService/helper/routerHelper";
 import names from "../names";
 import { StoreState, TabItem, TabsHistory } from "./modal";
-import { MenuItem, RouterHelper } from "src/reduxService/helper/routerHelper";
-import { cloneDeep } from "lodash-es";
-import { ROUTE_ID, ROUTE_INFO_CONFIG } from "src/config/routerConfig";
 
 const initialState = (): StoreState => {
 	const { routesConfig = [] } = RouterHelper.createRoutesConfigByUserInfo({
@@ -14,7 +15,7 @@ const initialState = (): StoreState => {
 	const children = routesConfig.find((item) => {
 		return item!?.id === ROUTE_ID.homePage;
 	})?.children;
-	const menuData = RouterHelper.createMenuDataLoop(children!, []);
+	const menuData = AppHelper.createMenuDataLoop(children!, []);
 	return {
 		menuDefaultSelectedKeys: [],
 		menuDefaultOpenKeys: null,

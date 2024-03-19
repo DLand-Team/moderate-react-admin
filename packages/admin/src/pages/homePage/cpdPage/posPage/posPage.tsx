@@ -1,10 +1,16 @@
+/*
+ * @Author: Do not edit
+ * @Date: 2024-03-18 11:51:26
+ * @LastEditors: Do not edit
+ * @LastEditTime: 2024-03-19 11:35:29
+ * @Description: Do not edit
+ */
 import { useFlat } from "src/reduxService";
 import { Button, Table } from "antd";
 import ModalForm from "./components/modalForm/modalForm";
 import SearchForm from "./components/searchForm/searchForm";
 import styles from "./style.module.scss";
 import useConfig from "./useConfig";
-import { useEffect } from "react";
 
 const CategoryPage = () => {
 	const { columns } = useConfig();
