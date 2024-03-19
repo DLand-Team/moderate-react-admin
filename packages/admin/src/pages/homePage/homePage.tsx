@@ -69,11 +69,7 @@ const HomePage = () => {
 							defaultOpenKeys={menuDefaultOpenKeys!}
 							style={{ height: "100%", borderRight: 0 }}
 							items={menuData as ItemType[]}
-							onOpenChange={(data) => {
-								debugger;
-							}}
 							onClick={({ key }) => {
-								debugger;
 								RouterHelper.jumpTo(key);
 							}}
 						/>
