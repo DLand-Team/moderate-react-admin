@@ -212,14 +212,17 @@ export class RouterHelper {
 	) {
 		const { type = "push", state } = options || {};
 		const path = this.getRoutePathByKey(id);
-		if (!path) return new Error("路由不存在");
+		if (!path) {
+			historyInstanse!?.push("notFund", state);
+			throw new Error("路由不存在");
+		}
+
 		if (type === "push") {
 			historyInstanse!?.push(path, state);
 		} else {
 			historyInstanse!?.replace(path, state);
 		}
 	}
-	
 
 	static jumpToByPath(
 		path: string,
