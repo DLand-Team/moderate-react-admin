@@ -1,6 +1,6 @@
-import { RouteItem } from "src/config/types";
+import { ROUTE_ID_KEY, RouteItem } from "src/config/types";
 import { MenuPermissionItem } from "../stores/authStore/model";
-import { MenuItem } from "./routerHelper";
+import { MenuItem, RouterHelper } from "./routerHelper";
 import { reduxStore } from "..";
 import { ROUTE_ID } from "src/config/routerConfig";
 
@@ -69,7 +69,7 @@ export class AppHelper {
 				return;
 			}
 			const temp: MenuItem = {
-				key: item.id,
+				key: item.id!,
 				// icon: createElement(UserOutlined),
 				label: item.meta!?.title || "",
 			};
@@ -83,5 +83,22 @@ export class AppHelper {
 		});
 		return result;
 	};
+
+	static getMenuConfigByPathName(pathName: string) {
+		const selectedKeysTemp = pathName.split("/").filter((item) => {
+			return item;
+		});
+		const { depands = [] } =
+			RouterHelper.getRoutItemConfigById(
+				selectedKeysTemp.slice(-1)[0] as ROUTE_ID_KEY,
+			) || {};
+
+		const openKeysTemp = selectedKeysTemp.slice(1, -1);
+		return {
+			selectedKeys: selectedKeysTemp.concat(depands),
+			openKeys: openKeysTemp.length ? openKeysTemp : [],
+			newTabItem: location,
+		};
+	}
 }
 export default new AppHelper();

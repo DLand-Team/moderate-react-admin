@@ -22,7 +22,7 @@ export interface MenuPermissionItem {
 	name: string;
 	path: string;
 	component: string;
-	componentName: string;
+	componentName: ROUTE_ID_KEY;
 	icon: string;
 	visible: boolean;
 	keepAlive: boolean;

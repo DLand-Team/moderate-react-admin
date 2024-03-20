@@ -1,11 +1,11 @@
 import { Button, Layout, Menu, Modal } from "antd";
-import { ItemType } from "antd/es/menu/hooks/useItems";
 import { Outlet, type Location } from "react-router-dom";
 import themeProviderHoc from "src/common/hocs/themeHoc/themeHoc";
 import useLocationListen from "src/common/hooks/useLocationListen";
 import { ROUTE_ID } from "src/config/routerConfig";
+import { ROUTE_ID_KEY } from "src/config/types";
 import { useFlat, useResetRedux } from "src/reduxService";
-import { RouterHelper } from "src/reduxService/helper";
+import { AppHelper, RouterHelper } from "src/reduxService/helper";
 import Breadcrumb from "./components/breadcrumb/breadcrumb";
 import Tabs from "./components/tabs/tabs";
 import styles from "./homePage.module.scss";
@@ -26,15 +26,10 @@ const HomePage = () => {
 	useLocationListen(
 		(location: Location) => {
 			const { pathname } = location;
-			const selectedKeysTemp = pathname.split("/").filter((item) => {
-				return item;
-			});
-			setMenuDefaultSelectedKeys(selectedKeysTemp);
-			const openKeysTemp = selectedKeysTemp.slice(
-				1,
-				selectedKeysTemp.length - 1,
-			);
-			setMenuDefaultOpenKeys(openKeysTemp.length ? openKeysTemp : []);
+			const { selectedKeys, openKeys } =
+				AppHelper.getMenuConfigByPathName(pathname);
+			setMenuDefaultSelectedKeys(selectedKeys);
+			setMenuDefaultOpenKeys(openKeys);
 			addTabHistoryActionAct({ newItem: location });
 		},
 		[menuData],
@@ -71,9 +66,9 @@ const HomePage = () => {
 							selectedKeys={menuDefaultSelectedKeys}
 							defaultOpenKeys={menuDefaultOpenKeys!}
 							style={{ height: "100%", borderRight: 0 }}
-							items={menuData as ItemType[]}
+							items={menuData}
 							onClick={({ key }) => {
-								RouterHelper.jumpTo(key);
+								RouterHelper.jumpTo(key as ROUTE_ID_KEY);
 							}}
 						/>
 					)}

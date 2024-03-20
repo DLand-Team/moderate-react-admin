@@ -17,11 +17,10 @@ import { DynamicPageRender, pageList } from "src/pages";
 import { reduxStore as store } from "..";
 import { includeOne } from "src/common/utils";
 
-export type MenuItem = Partial<ItemType> &
-	Partial<{
-		key: string;
-		children: MenuItem[];
-	}>;
+export type MenuItem = Partial<ItemType> & {
+	key: ROUTE_ID_KEY;
+	children?: MenuItem[];
+};
 
 export class RouterHelper {
 	static createDefaultRoutesConfig() {
@@ -170,17 +169,17 @@ export class RouterHelper {
 	// 生成路由配置根据权限
 	// 每次登陆只会触发一次
 
-	static getRoutePathByKey(key: string) {
+	static getRoutePathByKey(key: ROUTE_ID_KEY) {
 		const routerStore = store.getState().routerStore;
 		return routerStore.routesConfigMap[key]?.path;
 	}
 
-	static getRouteTitleByKey(key: string) {
+	static getRouteTitleByKey(key: ROUTE_ID_KEY) {
 		const routerStore = store.getState().routerStore;
 		return routerStore.routesConfigMap[key]?.meta?.title;
 	}
 
-	static getRouteIdByPath(path: string) {
+	static getRouteIdByPath(path: ROUTE_ID_KEY) {
 		const routerStore = store.getState().routerStore;
 		return routerStore.routesConfigMap[path]?.id;
 	}
@@ -195,12 +194,17 @@ export class RouterHelper {
 			});
 	}
 
+	static getRoutItemConfigById(key: ROUTE_ID_KEY) {
+		const routerStore = store.getState().routerStore;
+		return routerStore.routesConfigMap[key];
+	}
+
 	static getHistory() {
 		return historyInstanse;
 	}
 
 	static jumpTo(
-		id: string,
+		id: ROUTE_ID_KEY,
 		options?: {
 			type: "replace" | "push";
 			state?: any;
@@ -215,6 +219,7 @@ export class RouterHelper {
 			historyInstanse!?.replace(path, state);
 		}
 	}
+	
 
 	static jumpToByPath(
 		path: string,

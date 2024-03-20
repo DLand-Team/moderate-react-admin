@@ -7,13 +7,8 @@ import { PageType } from "./services/model";
 // change the name of the prime to primary
 
 const useConfig = () => {
-	const {
-		setAddModalShowAct,
-		deleteAct,
-		queryAct,
-		dataList,
-		formVersion,
-	} = useFlat("categoryStore");
+	const { setAddModalShowAct, deleteAct, queryAct, dataList, formVersion } =
+		useFlat("categoryStore");
 	const intlData = {};
 	return usePageConfig<PageType>(() => {
 		return [
@@ -79,7 +74,7 @@ const useConfig = () => {
 					inputOptions: {
 						placeholder: intlData["posPage.placeholder_posName"],
 						maxLength: 30,
-						size: "large",
+						size: "small",
 					},
 				},
 			},
