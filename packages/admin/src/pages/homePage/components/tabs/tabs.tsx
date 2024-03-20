@@ -20,14 +20,18 @@ const TabsComp = () => {
 	useEffect(() => {
 		const tabsHistoryArr = Object.values(tabsHistory);
 		setTabItems(
-			tabsHistoryArr.map((item) => {
-				const { pathname } = item;
-				const id = pathname.split("/").slice(-1)[0];
-				return {
-					label: RouterHelper.getRouteTitleByKey(id),
-					key: pathname,
-				} as TabItem;
-			}),
+			tabsHistoryArr
+				.map((item) => {
+					const { pathname } = item;
+					const id = pathname.split("/").slice(-1)[0];
+					return {
+						label: RouterHelper.getRouteTitleByKey(id),
+						key: pathname,
+					} as TabItem;
+				})
+				.filter((item) => {
+					return item.label;
+				}),
 		);
 	}, [tabsHistory]);
 	useLocationListen((location) => {

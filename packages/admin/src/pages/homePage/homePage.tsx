@@ -1,7 +1,6 @@
 import { Button, Layout, Menu, Modal } from "antd";
 import { ItemType } from "antd/es/menu/hooks/useItems";
-import { Route, type Location } from "react-router-dom";
-import KeepAlive from "src/common/hocs/keepAlive";
+import { Outlet, type Location } from "react-router-dom";
 import themeProviderHoc from "src/common/hocs/themeHoc/themeHoc";
 import useLocationListen from "src/common/hooks/useLocationListen";
 import { ROUTE_ID } from "src/config/routerConfig";
@@ -22,20 +21,24 @@ const HomePage = () => {
 		setMenuDefaultOpenKeys,
 		setMenuDefaultSelectedKeys,
 	} = useFlat("appStore");
+
 	const resetAllStores = useResetRedux();
-	useLocationListen((location: Location) => {
-		const { pathname } = location;
-		const selectedKeysTemp = pathname.split("/").filter((item) => {
-			return item;
-		});
-		setMenuDefaultSelectedKeys(selectedKeysTemp);
-		const openKeysTemp = selectedKeysTemp.slice(
-			1,
-			selectedKeysTemp.length - 1,
-		);
-		setMenuDefaultOpenKeys(openKeysTemp.length ? openKeysTemp : []);
-		addTabHistoryActionAct({ newItem: location });
-	});
+	useLocationListen(
+		(location: Location) => {
+			const { pathname } = location;
+			const selectedKeysTemp = pathname.split("/").filter((item) => {
+				return item;
+			});
+			setMenuDefaultSelectedKeys(selectedKeysTemp);
+			const openKeysTemp = selectedKeysTemp.slice(
+				1,
+				selectedKeysTemp.length - 1,
+			);
+			setMenuDefaultOpenKeys(openKeysTemp.length ? openKeysTemp : []);
+			addTabHistoryActionAct({ newItem: location });
+		},
+		[menuData],
+	);
 	return (
 		<Layout className={styles.content}>
 			<Header className="header">
@@ -61,7 +64,7 @@ const HomePage = () => {
 			</Header>
 			<Layout>
 				<Sider width={260} className="site-layout-background">
-					{menuData.length > 0 && menuDefaultOpenKeys && (
+					{menuData.length > 0 && (
 						<Menu
 							triggerSubMenuAction="click"
 							mode="inline"
@@ -70,7 +73,6 @@ const HomePage = () => {
 							style={{ height: "100%", borderRight: 0 }}
 							items={menuData as ItemType[]}
 							onClick={({ key }) => {
-								debugger;
 								RouterHelper.jumpTo(key);
 							}}
 						/>
@@ -79,7 +81,6 @@ const HomePage = () => {
 				<Layout style={{ padding: "0 24px 24px" }}>
 					<Breadcrumb />
 					<Content
-						className="site-layout-background"
 						style={{
 							margin: 0,
 							minHeight: 280,
@@ -87,17 +88,15 @@ const HomePage = () => {
 							overflow: "auto",
 						}}
 					>
-						<Tabs></Tabs>
+						<Tabs />
 						<div
 							style={{
 								overflow: "auto",
 								padding: 32,
-								background: "white",
+								backgroundColor: "white",
 							}}
 						>
-							<KeepAlive
-								include={RouterHelper.getKeepAliveRoutePath()}
-							></KeepAlive>
+							<Outlet />
 						</div>
 					</Content>
 				</Layout>

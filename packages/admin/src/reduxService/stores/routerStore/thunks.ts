@@ -15,9 +15,6 @@ const thunks = createThunks(names.routerStore, {
 			});
 		dp("routerStore", "setRouterConfig", routesConfig);
 		dp("routerStore", "setRoutesConfigMap", routesConfigMap);
-		return {
-			a: 1,
-		};
 	},
 });
 export default thunks;

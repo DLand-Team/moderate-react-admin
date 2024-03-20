@@ -1,6 +1,6 @@
 export interface QueryApiParams {
-	pageNo: string;
-	pageSize: string;
+	pageNo: number|string;
+	pageSize: number|string;
 	posName?: string;
 }
 

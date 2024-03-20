@@ -250,10 +250,9 @@ export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [{
     }, {
       id: ROUTE_ID.marketPage
     }, {
-      id: ROUTE_ID.posPage,
-      children: [{
-        id: ROUTE_ID.posEditPage
-      }]
+      id: ROUTE_ID.posEditPage
+    }, {
+      id: ROUTE_ID.posPage
     }, {
       id: ROUTE_ID.rulePage,
       children: [{

@@ -7,7 +7,6 @@ import useAsyncEffcet from "../hooks/useAsyncEffect";
 const AuthProvider = ({ children }: React.PropsWithChildren) => {
 	const { token } = useFlat("authStore");
 	const location = useLocation();
-
 	useAsyncEffcet(async () => {
 		// 判断是否登陆
 		if (token) {

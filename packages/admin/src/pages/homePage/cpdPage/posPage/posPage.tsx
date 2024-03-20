@@ -5,18 +5,19 @@
  * @LastEditTime: 2024-03-19 11:35:29
  * @Description: Do not edit
  */
-import { useFlat } from "src/reduxService";
+import { RouterHelper, useFlat } from "src/reduxService";
 import { Button, Table } from "antd";
 import ModalForm from "./components/modalForm/modalForm";
 import SearchForm from "./components/searchForm/searchForm";
 import styles from "./style.module.scss";
 import useConfig from "./useConfig";
 import { useEffect } from "react";
+import { ROUTE_ID } from "src/config/routerConfig";
 
 const CategoryPage = () => {
 	const { columns } = useConfig();
 
-	const { setAddModalShowAct, queryAct } = useFlat("posStore");
+	const { queryAct } = useFlat("posStore");
 	useEffect(() => {
 		queryAct();
 	}, []);
@@ -29,13 +30,13 @@ const CategoryPage = () => {
 			<Button
 				type="primary"
 				onClick={() => {
-					setAddModalShowAct({ isShowAddModal: true });
+					RouterHelper.jumpTo(ROUTE_ID.posEditPage);
 				}}
 				style={{
 					marginBottom: 12,
 				}}
 			>
-				+ add
+				+ 添加
 			</Button>
 			{/* modal */}
 			<ModalForm />

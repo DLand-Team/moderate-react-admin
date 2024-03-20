@@ -1,7 +1,31 @@
-import styles from "./style.module.scss";
+import { Button, Result } from "antd";
+import React from "react";
+import { ROUTE_ID } from "src/config/routerConfig";
+import { useFlat } from "src/reduxService";
+import { RouterHelper } from "src/reduxService/helper";
 
-const NotFundPage = () => {
-	return <div className={styles.content}>not fund!123</div>;
+const ErrPage: React.FC = () => {
+	const { routesPermissions } = useFlat("authStore");
+	return (
+		<>
+			{routesPermissions && (
+				<Result
+					status="404"
+					title="404"
+					subTitle="对不起，没有页面匹配当前url."
+					extra={
+						<Button
+							onClick={() => {
+								RouterHelper.jumpTo(ROUTE_ID.helloPage);
+							}}
+							type="primary"
+						>
+							返回首页
+						</Button>
+					}
+				/>
+			)}
+		</>
+	);
 };
-
-export default NotFundPage;
+export default ErrPage;

@@ -3,7 +3,6 @@ export interface StoreState {
 	total: number;
 	pageSize: number;
 	pageNum: number;
-	isShowAddModal: boolean;
 	isUpdate: boolean;
 	recordData: unknown;
 	loading: boolean;

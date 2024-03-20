@@ -23,9 +23,8 @@
 		"lodash-es": "^4.17.21",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
-		"react-redux": "^9.1.0",
 		"react-router-dom": "^6.4.3",
-		"redux-eazy": "0.0.12"
+		"redux-eazy": "0.0.13"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.16.0",

@@ -5,7 +5,9 @@ type ItemKey =
 	| "DEAL_ID"
 	| "IS_ADMIN"
 	| "PERMISSIONS_DATA"
-	| "MENU_DATA";
+	| "MENU_DATA"
+	| "ROUTES_CONFIG_MAP"
+	| "ROUTES_CONFIG";
 
 const storageHelper = {
 	setItem: (

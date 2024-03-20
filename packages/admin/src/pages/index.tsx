@@ -50,7 +50,7 @@ const MarketEditPage = lazy(
 );
 ////posEditPage
 const PosEditPage = lazy(
-	() => import("./homePage/cpdPage/posPage/posEditPage/posEditPage"),
+	() => import("./homePage/cpdPage/posEditPage/posEditPage"),
 );
 ////rulePage
 const RulePage = lazy(() => import("./homePage/cpdPage/rulePage/rulePage"));

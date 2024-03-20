@@ -9,7 +9,6 @@ const initialState = (): StoreState => {
 		pageSize: 10,
 		dataList: [],
 		total: 0,
-		isShowAddModal: false,
 		isUpdate: false,
 		recordData: null,
 		loading: false,
