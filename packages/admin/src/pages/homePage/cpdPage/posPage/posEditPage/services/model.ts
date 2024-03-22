@@ -34,3 +34,19 @@ export interface QueryActParams {
 	prime_id?: number;
 	updated_at?: string[];
 }
+
+export interface PosItem {
+	createTime: string;
+	updateTime: string;
+	creator: string;
+	updater: string;
+	deleted: boolean;
+	id: number;
+	posInfo: string;
+	posType: string;
+	agentOrAirline: string;
+	officeOwner: string;
+	exclude: string;
+	weight: 0;
+	posId: 0;
+}

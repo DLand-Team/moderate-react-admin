@@ -71,7 +71,7 @@ const useConfig = () => {
 							},
 						],
 					},
-					inputOptions: {
+					inputAttrConfig: {
 						placeholder: intlData["posPage.placeholder_posName"],
 						maxLength: 30,
 						size: "small",

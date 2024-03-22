@@ -6,7 +6,7 @@ const AdvancedSearchForm = () => {
 	const [expand, setExpand] = useState(false);
 	const [form] = Form.useForm();
 
-	const getFields = () => {
+	const getField = () => {
 		const count = expand ? 10 : 6;
 		const children = [];
 		for (let i = 0; i < count; i++) {
@@ -41,7 +41,7 @@ const AdvancedSearchForm = () => {
 			className="ant-advanced-search-form"
 			onFinish={onFinish}
 		>
-			<Row gutter={24}>{getFields()}</Row>
+			<Row gutter={24}>{getField()}</Row>
 			<Row>
 				<Col span={24} style={{ textAlign: "right" }}>
 					<Button type="primary" htmlType="submit">

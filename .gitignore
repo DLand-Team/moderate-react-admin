@@ -5,3 +5,5 @@
 /.idea
 packages/redux-eazy2
 packages/redux-eazy
+
+*.zip

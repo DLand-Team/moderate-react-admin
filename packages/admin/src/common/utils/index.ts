@@ -1,3 +1,3 @@
 export * from "./utils";
-export * from "./getFields";
+export * from "./getField";
 export * from "./fieldsPresetCreater";

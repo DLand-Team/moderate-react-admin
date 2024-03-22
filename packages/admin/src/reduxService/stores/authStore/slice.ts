@@ -36,7 +36,7 @@ const slice = createSliceCustom({
 				Pick<StoreState, "token" | "isAdmin" | "userName">
 			>,
 		) {
-			debugger;
+			;
 			return {
 				...state,
 				...payload,

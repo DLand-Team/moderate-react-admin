@@ -6,13 +6,15 @@ import { useFlat } from "src/reduxService";
 import useConfig from "../../useConfig";
 
 const AdvancedSearchForm = () => {
+	const [form] = Form.useForm();
 	const { searchList } = useConfig();
 	const [expand, setExpand] = useState(false);
 	let count = 4;
 	const SearchFields = useSearchFields(searchList, {
 		count,
+		form,
 	});
-	const [form] = Form.useForm();
+
 	const { queryAct, pageSize } = useFlat("categoryStore");
 	const onFinish = (values: any) => {
 		console.log("Received values of form: ", values);

@@ -27,13 +27,15 @@ export type FieldConfigOptions = (
 	| string
 	| { key: string | number; value: string | number; label: string | number }
 )[];
-export interface FieldConfig<T> {
-	inputType?: MyInputType;
+export interface FieldConfig<T = any> {
+	label?: string;
+	name?: string;
+	type?: MyInputType;
 	options?:
 		| FieldConfigOptions
 		| ((props?: { formIns?: FormInstance<T> }) => FieldConfigOptions);
 	formOptions?: FormItemProps;
-	inputOptions?: SelectProps &
+	inputAttrConfig?: SelectProps &
 		InputProps &
 		CheckboxProps &
 		SwitchProps &
@@ -45,8 +47,11 @@ export interface FieldConfig<T> {
 	isHidenInTable?: boolean;
 	isSearch?: boolean;
 	scope?: ScopeType[];
+	render?: any;
 }
 
 export interface MyColumnType<T> extends ColumnType<T> {
 	config?: FieldConfig<T>;
+	fieldConfig?: FieldConfig<T>;
 }
+

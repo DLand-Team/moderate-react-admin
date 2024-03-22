@@ -7,10 +7,10 @@ import useAsyncEffcet from "../hooks/useAsyncEffect";
 const AuthProvider = ({ children }: React.PropsWithChildren) => {
 	const { token } = useFlat("authStore");
 	const location = useLocation();
-	debugger;
+	;
 	useAsyncEffcet(async () => {
 		// 判断是否登陆
-		debugger;
+		;
 		if (token) {
 			await dp("authStore", "getUserPermissionsAct");
 			const loginPath = RouterHelper.getRoutePathByKey(

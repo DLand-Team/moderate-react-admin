@@ -18,7 +18,6 @@ const PosPage = () => {
 
 	return (
 		<div className={styles.content}>
-			home
 			<Outlet />
 		</div>
 	);

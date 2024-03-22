@@ -82,7 +82,7 @@ const useConfig = () => {
 				key: "type",
 				config: {
 					isSearch: true,
-					inputType: "Select",
+					type: "Select",
 					options: TYPE_ENUM,
 					formOptions: {
 						initialValue: TYPE_ENUM[0],
@@ -102,7 +102,7 @@ const useConfig = () => {
 				key: "prime_id",
 				config: {
 					isSearch: true,
-					inputType: "Select",
+					type: "Select",
 					options: () => {
 						// 没有parent_id，筛选出来
 						return dataList
@@ -126,7 +126,7 @@ const useConfig = () => {
 						label: "prime_id",
 						name: "prime_id",
 					},
-					inputOptions: {
+					inputAttrConfig: {
 						allowClear: true,
 					},
 				},
@@ -137,7 +137,7 @@ const useConfig = () => {
 				key: "parent_id",
 				config: {
 					isSearch: true,
-					inputType: "Select",
+					type: "Select",
 					options: (props) => {
 						const { formIns } = props! || {};
 						let primeIdValue = formIns?.getFieldsValue()?.prime_id;
@@ -159,7 +159,7 @@ const useConfig = () => {
 						label: "parent_id",
 						name: "parent_id",
 					},
-					inputOptions: {
+					inputAttrConfig: {
 						allowClear: true,
 					},
 				},

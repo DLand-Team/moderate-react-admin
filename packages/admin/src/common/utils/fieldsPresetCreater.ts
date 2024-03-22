@@ -4,7 +4,7 @@ import { MyColumnType, MyInputType, ScopeType } from "../model/fieldsHooks";
 export const getInputNumerFormItemConfig = <T>(
 	name: string,
 	options?: {
-		inputType?: MyInputType;
+		type?: MyInputType;
 		formName?: string[];
 		isRequire?: boolean;
 		scope?: ScopeType[];
@@ -41,7 +41,7 @@ export const fieldCreater = <T>(
 	let { config } = options;
 	if (!config || Object.values(config).length === 0) {
 		config = {
-			inputType: "Input",
+			type: "Input",
 			isSearch: true,
 			formOptions: {
 				rules: [

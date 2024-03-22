@@ -45,7 +45,7 @@ const TabsComp = () => {
 		// );
 		// if (data?.depands) {
 		// 	const temp = data?.path!?.split("/").slice(0, -1).join("/");
-		// 	debugger;
+		// 	;
 		// 	if (!(temp in tabsHistory)) {
 		// 		addTabHistoryActionAct({
 		// 			newItem: { ...location, pathname: temp },

@@ -1,0 +1,61 @@
+.posEditContent {
+    position: relative;
+    .topWrapper {
+        position: relative;
+        background: white;
+        border-radius: 2px;
+        padding: 8px 31px;
+        margin: 8px 0 0 0;
+        border-bottom: 1px solid #e9e9e9;
+        .savaBtn {
+            font-family: PingFang SC;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 22px;
+            position: absolute;
+            top: 13px;
+            right: 30px;
+            border-radius: 2px;
+        }
+    }
+
+    .title {
+        margin-top: 8px;
+        height: 35px;
+        font-family: PingFang SC;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        color: #000000;
+        margin-bottom: 15px;
+    }
+    .btnWrapper {
+        display: flex;
+        position: absolute;
+        top: 13px;
+        right: 30px;
+        font-family: PingFang SC;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 22px;
+        .posAddBtn {
+            border-radius: 2px;
+            margin-right: 10px;
+        }
+    }
+    .posAddBtn2 {
+        border-radius: 2px;
+        margin-right: 10px;
+        position: relative;
+        bottom: 35px;
+        z-index: 2;
+    }
+    .btnTable {
+        position: absolute;
+        right: 0px;
+        bottom: -50px;
+    }
+}

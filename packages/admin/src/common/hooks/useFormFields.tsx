@@ -2,13 +2,13 @@ import { MyColumnType } from "src/common/model/fieldsHooks";
 import { Divider, Form, FormInstance } from "antd";
 import { cloneDeep } from "lodash-es";
 import { Fragment } from "react";
-import { getFields } from "src/common/utils";
+import { getField } from "src/common/utils";
 
 const useFormFields = <T,>(
 	formList: MyColumnType<T>[],
 	{ isJustShow, formIns }: { isJustShow: boolean; formIns: FormInstance<T> },
 ) => {
-	let recordKeyObj = {};
+	let recordKeyObj: Record<PropertyKey, any> = {};
 
 	return formList.map((item) => {
 		const { config } = item;
@@ -40,20 +40,20 @@ const useFormFields = <T,>(
 		if (formRender) {
 			InputItem = formRender();
 		} else if (config) {
-			config.inputOptions = cloneDeep(config.inputOptions || {});
-			if (!("disabled" in config.inputOptions)) {
+			config.inputAttrConfig = cloneDeep(config.inputAttrConfig || {});
+			if (!("disabled" in config.inputAttrConfig)) {
 				if (isJustShow) {
-					config.inputOptions.disabled = true;
+					config.inputAttrConfig.disabled = true;
 				} else {
-					config.inputOptions.disabled = false;
+					config.inputAttrConfig.disabled = false;
 				}
 			}
-			InputItem = getFields<T>(config, formIns);
+			InputItem = getField<T>(config, formIns);
 		}
 		return (
 			<Fragment key={item.key}>
 				<>{temp}</>
-				<Form.Item {...item.config.formOptions}>{InputItem}</Form.Item>
+				<Form.Item {...item.config?.formOptions}>{InputItem}</Form.Item>
 			</Fragment>
 		);
 	});

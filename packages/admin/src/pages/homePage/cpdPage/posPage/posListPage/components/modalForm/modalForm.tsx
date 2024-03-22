@@ -36,7 +36,7 @@ const ModalForm: React.FC = () => {
 	const prime_id = useRef();
 	return (
 		<Modal
-			open={isShowAddModal}
+			open={true}
 			title="add"
 			{...extraOptions}
 			onCancel={() => {

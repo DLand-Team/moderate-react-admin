@@ -15,8 +15,6 @@ import { useEffect } from "react";
 import { ROUTE_ID } from "src/config/routerConfig";
 
 const CategoryPage = () => {
-	const { columns } = useConfig();
-
 	const { queryAct } = useFlat("posStore");
 	useEffect(() => {
 		queryAct();
@@ -39,9 +37,9 @@ const CategoryPage = () => {
 				+ 添加
 			</Button>
 			{/* modal */}
-			<ModalForm />
+			{/* <ModalForm /> */}
 			{/* 表格 */}
-			<Table
+			{/* <Table
 				rowKey={(record) => {
 					return record.id;
 				}}
@@ -57,7 +55,7 @@ const CategoryPage = () => {
 				// }}
 				columns={columns}
 				// dataSource={dataList}
-			/>
+			/> */}
 		</div>
 	);
 };

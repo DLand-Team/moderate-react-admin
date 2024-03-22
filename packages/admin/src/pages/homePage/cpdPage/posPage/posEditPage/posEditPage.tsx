@@ -1,47 +1,85 @@
-import { Button, theme } from "antd";
-import styles from "./style.module.scss";
-import { RouterHelper, useFlat } from "src/reduxService";
-import { ROUTE_ID } from "src/config/routerConfig";
+import { Col, Form, Input, Row, Typography, type FormProps } from "antd";
+import React from "react";
+import TablePart from "./components/tablePart";
+type FieldType = {
+	posName?: string;
+	comment?: string;
+};
 
-const PosEditPage = () => {
-	const {
-		token: { colorBgContainer, borderRadiusLG },
-	} = theme.useToken();
-	const { deleteTabHistoryAct } = useFlat("appStore");
+const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
+	console.log("Success:", values);
+};
+
+const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
+	console.log("Failed:", errorInfo);
+};
+
+const TopPart: React.FC = () => {
 	return (
-		<div className={styles.container}>
-			<div
+		<div>
+			<Typography
 				style={{
-					padding: 24,
-					textAlign: "center",
-					background: colorBgContainer,
-					borderRadius: borderRadiusLG,
-					marginBottom: "100px",
+					fontSize: "16px",
+					marginBottom: "30px",
 				}}
 			>
-				编辑页面区域
-			</div>
-			<div
-				style={{
-					padding: 24,
-					textAlign: "center",
-					background: colorBgContainer,
-					borderRadius: borderRadiusLG,
-				}}
+				销售地详细信息
+			</Typography>
+			<Form
+				layout="vertical"
+				name="basic"
+				wrapperCol={{ span: 16 }}
+				style={{ width: "100%" }}
+				initialValues={{ remember: true }}
+				onFinish={onFinish}
+				onFinishFailed={onFinishFailed}
+				autoComplete="off"
 			>
-				<Button
-					onClick={() => {
-						deleteTabHistoryAct({
-							pathName: location.pathname,
-						});
-						RouterHelper.jumpTo(ROUTE_ID.posPage);
+				<Row
+					style={{
+						width: "100%",
 					}}
 				>
-					提交
-				</Button>
-			</div>
+					<Col span={12}>
+						<Form.Item<FieldType>
+							label="销售地名称"
+							name="posName"
+							rules={[
+								{
+									required: true,
+									// message: `${intlData["posPage.placeholder_input"]} ${intlData["posPage.POSName"]}`,
+								},
+								{
+									max: 30,
+									// message: intlData["posPage.rule_posName_1"],
+								},
+								{
+									pattern: /^[0-9a-zA-z_-]+$/,
+									// message: intlData["posPage.placeholder_posName"],
+								},
+							]}
+						>
+							<Input />
+						</Form.Item>
+					</Col>
+
+					<Col span={12}>
+						<Form.Item<FieldType> label="描述" name="comment">
+							<Input.TextArea style={{ height: 120 }} />
+						</Form.Item>
+					</Col>
+				</Row>
+			</Form>
 		</div>
 	);
 };
 
-export default PosEditPage;
+const Page = () => {
+	return (
+		<div>
+			<TopPart></TopPart>
+			<TablePart></TablePart>
+		</div>
+	);
+};
+export default Page;

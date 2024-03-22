@@ -32,7 +32,7 @@ const thunks = createThunks(names.appStore, {
 		const { menuPermissions } = api.getState().authStore;
 		const { children = [] } = menuPermissions || {};
 		const menuData = AppHelper.createMenuData(children);
-		debugger;
+		;
 		dp("appStore", "setMenuDataAct", menuData);
 	},
 });

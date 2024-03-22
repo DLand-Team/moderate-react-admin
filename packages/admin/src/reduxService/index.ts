@@ -6,7 +6,7 @@ import {
 	resetReduxHookCreater,
 } from "redux-eazy";
 import { stores } from "./stores";
-debugger;
+;
 declare global {
 	interface Window {
 		reduxStore: ReturnType<typeof createStore<typeof stores>>;
