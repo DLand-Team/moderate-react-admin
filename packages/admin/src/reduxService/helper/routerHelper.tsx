@@ -139,7 +139,7 @@ export class RouterHelper {
 
 	// 递归创建路由
 	static toRenderRouteLoop = (item: RouteItem) => {
-		const { children, component, index } = item;
+		const { children, component, path, index, ...rest } = item;
 		let routeChildren: JSX.Element[] = [];
 		if (children) {
 			routeChildren = children.map((item) => {
@@ -160,8 +160,11 @@ export class RouterHelper {
 			<Route
 				children={routeChildren}
 				key={item.id}
-				path={index ? "" : item.path}
+				// index是官方的配置项https://reactrouter.com/en/main/route/route#index
+				// 这句话很神奇的，当配置了index了之后，那么他便没有了path，父组件路由是啥就会路由到这个子组件
+				path={index ? "" : path}
 				element={item.element || element}
+				{...(rest as any)}
 			></Route>
 		);
 	};

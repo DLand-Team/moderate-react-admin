@@ -236,9 +236,9 @@ export const ROUTE_INFO_CONFIG: {
 		meta: {
 			title: "posListPage",
 		},
+		index: true,
 		component: "PosListPage",
 		depands: ["posPage"],
-		index: true,
 	},
 }; //MODERATE_AUTO_3:END
 // =============== 路由结构数据 ===============

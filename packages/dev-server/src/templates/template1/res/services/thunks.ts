@@ -49,25 +49,8 @@ const thunks = createThunks(names.categoryStore, {
 	updateAct: async (params: any) => {
 		await httpApi.upadteApi(pickBy(params));
 	},
-	queryAct:
-		(params: QueryActParams = {}) =>
-		async (naturApi: {
-			setState: (arg0: { loading: boolean }) => void;
-		}) => {
-			naturApi.setState({
-				loading: true,
-			});
-			const res = await httpApi.queryApi<PageType>(params).finally(() => {
-				naturApi.setState({
-					loading: false,
-				});
-			});
-			const { content: dataList, count } = res.data || {};
-			return {
-				pageNum: params.page,
-				dataList,
-				total: count,
-			};
-		},
+	queryAct: async (params: any) => {
+		await httpApi.upadteApi(pickBy(params));
+	},
 });
 export default thunks;

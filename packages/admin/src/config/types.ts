@@ -2,8 +2,8 @@ import type { RouteProps } from "react-router-dom";
 import { ACTION_DICT } from "./permissionConfig";
 import { ROUTE_NAME } from "./routerConfig";
 import { pageList } from "src/pages";
-// 详情数据
-export type RouteItem = RouteProps & {
+
+export interface ExtendRouteConfig {
 	id?: ROUTE_ID_KEY; // 节点id
 	parentId?: string; // 父节点id
 	isMenu?: boolean; // 是否是菜单
@@ -17,7 +17,9 @@ export type RouteItem = RouteProps & {
 	page?: React.LazyExoticComponent<(props: unknown) => JSX.Element>;
 	actionPermissions?: (keyof typeof ACTION_DICT)[];
 	keepAlive?: boolean;
-};
+}
+// 详情数据
+export type RouteItem = RouteProps & ExtendRouteConfig;
 
 export type ROUTE_ID_KEY = keyof typeof ROUTE_NAME;
 
