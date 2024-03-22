@@ -1,4 +1,4 @@
-import { PayloadAction } from "@reduxjs/toolkit";
+import { PayloadAction } from "redux-eazy";
 import { cloneDeep } from "lodash-es";
 import { createSliceCustom } from "redux-eazy";
 import { ROUTE_ID, ROUTE_INFO_CONFIG } from "src/config/routerConfig";
@@ -6,6 +6,7 @@ import { AppHelper } from "src/reduxService/helper";
 import { MenuItem, RouterHelper } from "src/reduxService/helper";
 import names from "../names";
 import { StoreState, TabItem, TabsHistory } from "./modal";
+import storageHelper from "src/common/utils/storageHelper";
 
 const initialState = (): StoreState => {
 	const { routesConfig = [] } = RouterHelper.createRoutesConfigByPermissions({
@@ -20,7 +21,7 @@ const initialState = (): StoreState => {
 		menuDefaultSelectedKeys: [],
 		menuDefaultOpenKeys: null,
 		menuData: menuData,
-		tabsHistory: {},
+		tabsHistory: storageHelper.getItem("TABS_HISTORY") || {},
 		tabItems: [],
 		activeTabKey: "",
 	};
@@ -32,6 +33,7 @@ const appSlice = createSliceCustom({
 	reducers: {
 		setTabsHistory(state, { payload }: PayloadAction<TabsHistory>) {
 			state.tabsHistory = payload;
+			storageHelper.setItem("TABS_HISTORY", payload);
 		},
 		setActiveTabKey(state, { payload }: PayloadAction<string>) {
 			state.activeTabKey = payload;

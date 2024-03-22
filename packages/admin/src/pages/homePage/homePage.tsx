@@ -17,7 +17,6 @@ const HomePage = () => {
 		menuData,
 		menuDefaultOpenKeys,
 		menuDefaultSelectedKeys,
-		addTabHistoryActionAct,
 		setMenuDefaultOpenKeys,
 		setMenuDefaultSelectedKeys,
 	} = useFlat("appStore");
@@ -30,7 +29,6 @@ const HomePage = () => {
 				AppHelper.getMenuConfigByPathName(pathname);
 			setMenuDefaultSelectedKeys(selectedKeys);
 			setMenuDefaultOpenKeys(openKeys);
-			addTabHistoryActionAct({ newItem: location });
 		},
 		[menuData],
 	);
@@ -59,19 +57,21 @@ const HomePage = () => {
 			</Header>
 			<Layout>
 				<Sider width={260} className="site-layout-background">
-					{menuData.length > 0 && (
-						<Menu
-							triggerSubMenuAction="click"
-							mode="inline"
-							selectedKeys={menuDefaultSelectedKeys}
-							defaultOpenKeys={menuDefaultOpenKeys!}
-							style={{ height: "100%", borderRight: 0 }}
-							items={menuData}
-							onClick={({ key }) => {
-								RouterHelper.jumpTo(key as ROUTE_ID_KEY);
-							}}
-						/>
-					)}
+					{menuData.length > 0 &&
+						menuDefaultOpenKeys &&
+						menuDefaultSelectedKeys && (
+							<Menu
+								triggerSubMenuAction="click"
+								mode="inline"
+								selectedKeys={menuDefaultSelectedKeys}
+								defaultOpenKeys={menuDefaultOpenKeys!}
+								style={{ height: "100%", borderRight: 0 }}
+								items={menuData}
+								onClick={({ key }) => {
+									RouterHelper.jumpTo(key as ROUTE_ID_KEY);
+								}}
+							/>
+						)}
 				</Sider>
 				<Layout style={{ padding: "0 24px 24px" }}>
 					<Breadcrumb />

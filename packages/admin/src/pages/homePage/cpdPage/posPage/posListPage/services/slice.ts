@@ -9,6 +9,7 @@ const initialState = (): StoreState => {
 		pageSize: 10,
 		dataList: [],
 		total: 0,
+		isShowAddModal: false,
 		isUpdate: false,
 		recordData: null,
 		loading: false,
@@ -18,7 +19,7 @@ const initialState = (): StoreState => {
 };
 
 const slice = createSliceCustom({
-	name: names.posStore,
+	name: names.categoryStore,
 	stateInit: initialState,
 	reducers: {},
 });

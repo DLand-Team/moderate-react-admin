@@ -27,6 +27,7 @@ export enum ROUTE_NAME {
 	rulePage,
 	ruleEditPage,
 	notFundPage,
+	posListPage,
 }
 // MODERATE_AUTO_2:END
 
@@ -61,7 +62,6 @@ export const ROUTE_INFO_CONFIG: {
 		meta: {
 			title: "Statistics Dashboard",
 		},
-		index: true,
 		component: "HelloPage",
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
@@ -102,6 +102,7 @@ export const ROUTE_INFO_CONFIG: {
 		meta: {
 			title: "Role Management",
 		},
+
 		component: "RolePage",
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
@@ -202,6 +203,7 @@ export const ROUTE_INFO_CONFIG: {
 		meta: {
 			title: "posEditPage",
 		},
+
 		component: "PosEditPage",
 		depands: ["posPage"],
 	},
@@ -229,6 +231,15 @@ export const ROUTE_INFO_CONFIG: {
 		isNoAuth: true,
 		path: "*",
 	},
+	posListPage: {
+		id: "posListPage",
+		meta: {
+			title: "posListPage",
+		},
+		component: "PosListPage",
+		depands: ["posPage"],
+		index: true,
+	},
 }; //MODERATE_AUTO_3:END
 // =============== 路由结构数据 ===============
 // MODERATE_AUTO:START 
@@ -250,9 +261,12 @@ export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [{
     }, {
       id: ROUTE_ID.marketPage
     }, {
-      id: ROUTE_ID.posEditPage
-    }, {
-      id: ROUTE_ID.posPage
+      id: ROUTE_ID.posPage,
+      children: [{
+        id: ROUTE_ID.posEditPage
+      }, {
+        id: ROUTE_ID.posListPage
+      }]
     }, {
       id: ROUTE_ID.rulePage,
       children: [{

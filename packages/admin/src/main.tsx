@@ -6,11 +6,11 @@ import ServiceProvider from "./reduxService/ServiceProvider";
 import AuthProvider from "./common/provider/authProvider";
 
 createRoot(document.getElementById("root")!).render(
-	<CustomRouter>
-		<ServiceProvider>
+	<ServiceProvider>
+		<CustomRouter>
 			<AuthProvider>
 				<App></App>
 			</AuthProvider>
-		</ServiceProvider>
-	</CustomRouter>,
+		</CustomRouter>
+	</ServiceProvider>,
 );

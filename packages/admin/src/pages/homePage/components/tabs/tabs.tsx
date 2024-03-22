@@ -6,6 +6,7 @@ import { useFlat } from "src/reduxService";
 import { RouterHelper } from "src/reduxService/helper";
 import { TabItem } from "src/reduxService/stores/appStore/modal";
 import styles from "./tabs.module.scss";
+import { ROUTE_ID_KEY } from "src/config/types";
 
 const TabsComp = () => {
 	const {
@@ -15,6 +16,7 @@ const TabsComp = () => {
 		tabsHistory,
 		activeTabKey,
 		tabItems,
+		addTabHistoryActionAct,
 	} = useFlat("appStore");
 	const navi = useNavigate();
 	useEffect(() => {
@@ -25,7 +27,9 @@ const TabsComp = () => {
 					const { pathname } = item;
 					const id = pathname.split("/").slice(-1)[0];
 					return {
-						label: RouterHelper.getRouteTitleByKey(id),
+						label: RouterHelper.getRouteTitleByKey(
+							id as ROUTE_ID_KEY,
+						),
 						key: pathname,
 					} as TabItem;
 				})
@@ -35,7 +39,25 @@ const TabsComp = () => {
 		);
 	}, [tabsHistory]);
 	useLocationListen((location) => {
+		// const data = RouterHelper.getRoutItemConfigById(
+		// 	location.pathname.split("/").slice(-1)[0] as ROUTE_ID_KEY,
+		// );
+		// if (data?.depands) {
+		// 	const temp = data?.path!?.split("/").slice(0, -1).join("/");
+		// 	debugger;
+		// 	if (!(temp in tabsHistory)) {
+		// 		addTabHistoryActionAct({
+		// 			newItem: { ...location, pathname: temp },
+		// 		});
+		// 		setActiveTabKey(temp);
+		// 	}
+		// } else {
+		// 	addTabHistoryActionAct({ newItem: location });
+		// 	setActiveTabKey(location.pathname);
+		// }
+		addTabHistoryActionAct({ newItem: location });
 		setActiveTabKey(location.pathname);
+		debugger;
 	});
 	const onChange = (newActiveKey: string) => {
 		setActiveTabKey(newActiveKey);
@@ -52,9 +74,33 @@ const TabsComp = () => {
 			hideAdd={true}
 			onEdit={(e, action) => {
 				if (action === "remove") {
-					deleteTabHistoryAct({
-						pathName: e as string,
-					});
+					if (Object.values(tabsHistory).length > 1) {
+						deleteTabHistoryAct({
+							pathName: e as string,
+						});
+
+						if (activeTabKey == e) {
+							const routeId =
+								RouterHelper.getRouteIdByPath(activeTabKey);
+							const routeItemData =
+								RouterHelper.getRoutItemConfigById(
+									routeId as ROUTE_ID_KEY,
+								);
+							if (routeItemData.depands) {
+								RouterHelper.jumpTo(
+									routeItemData.parentId as ROUTE_ID_KEY,
+								);
+							} else {
+								const item = Object.values(tabsHistory).find(
+									(item) => {
+										return item.pathname !== e;
+									},
+								);
+								item &&
+									RouterHelper.jumpToByPath(item?.pathname);
+							}
+						}
+					}
 				}
 			}}
 		/>

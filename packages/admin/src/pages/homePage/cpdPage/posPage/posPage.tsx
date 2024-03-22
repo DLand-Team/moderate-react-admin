@@ -5,18 +5,12 @@
  * @LastEditTime: 2024-03-19 11:35:29
  * @Description: Do not edit
  */
-import { RouterHelper, useFlat } from "src/reduxService";
-import { Button, Table } from "antd";
-import ModalForm from "./components/modalForm/modalForm";
-import SearchForm from "./components/searchForm/searchForm";
-import styles from "./style.module.scss";
-import useConfig from "./useConfig";
 import { useEffect } from "react";
-import { ROUTE_ID } from "src/config/routerConfig";
+import { Outlet } from "react-router-dom";
+import { useFlat } from "src/reduxService";
+import styles from "./style.module.scss";
 
-const CategoryPage = () => {
-	const { columns } = useConfig();
-
+const PosPage = () => {
 	const { queryAct } = useFlat("posStore");
 	useEffect(() => {
 		queryAct();
@@ -24,42 +18,10 @@ const CategoryPage = () => {
 
 	return (
 		<div className={styles.content}>
-			{/* 搜索栏目 */}
-			<SearchForm></SearchForm>
-			{/* 按钮  */}
-			<Button
-				type="primary"
-				onClick={() => {
-					RouterHelper.jumpTo(ROUTE_ID.posEditPage);
-				}}
-				style={{
-					marginBottom: 12,
-				}}
-			>
-				+ 添加
-			</Button>
-			{/* modal */}
-			<ModalForm />
-			{/* 表格 */}
-			<Table
-				rowKey={(record) => {
-					return record.id;
-				}}
-				// loading={loading}
-				// pagination={{
-				// 	pageSize,
-				// 	current: pageNum,
-				// 	total,
-				// 	onChange(page, pageSize) {
-				// 		console.log(page, pageSize);
-				// 		handlePageChange(page, pageSize);
-				// 	},
-				// }}
-				columns={columns}
-				// dataSource={dataList}
-			/>
+			home
+			<Outlet />
 		</div>
 	);
 };
 
-export default CategoryPage;
+export default PosPage;

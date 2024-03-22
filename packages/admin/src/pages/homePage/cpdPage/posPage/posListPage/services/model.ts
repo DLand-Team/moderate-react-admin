@@ -3,6 +3,7 @@ export interface StoreState {
 	total: number;
 	pageSize: number;
 	pageNum: number;
+	isShowAddModal: boolean;
 	isUpdate: boolean;
 	recordData: unknown;
 	loading: boolean;
@@ -11,7 +12,6 @@ export interface StoreState {
 }
 
 export interface PageType {
-	posId:string
 	created_at: Date;
 	deleted_at: Date;
 	description: string;

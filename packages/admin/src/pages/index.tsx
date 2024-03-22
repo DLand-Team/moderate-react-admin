@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { Suspense, lazy } from "react";
 
 export const DynamicPageRender = ({
 	name,
@@ -6,7 +6,9 @@ export const DynamicPageRender = ({
 	name: keyof typeof pageList;
 }) => {
 	const Component = pageList[name];
-	return <Component />;
+	return (
+		<Suspense><Component /></Suspense>
+	);
 };
 
 // MODERATE_AUTO_PAGE_LAZY_IMPORT:START
@@ -49,7 +51,7 @@ const MarketEditPage = lazy(
 );
 ////posEditPage
 const PosEditPage = lazy(
-	() => import("./homePage/cpdPage/posEditPage/posEditPage"),
+	() => import("./homePage/cpdPage/posPage/posEditPage/posEditPage"),
 );
 ////rulePage
 const RulePage = lazy(() => import("./homePage/cpdPage/rulePage/rulePage"));
@@ -59,6 +61,10 @@ const RuleEditPage = lazy(
 );
 ////notFundPage
 const NotFundPage = lazy(() => import("./homePage/notFundPage/notFundPage"));
+////posListPage
+const PosListPage = lazy(
+	() => import("./homePage/cpdPage/posPage/posListPage/posListPage"),
+);
 //MODERATE_AUTO_PAGE_LAZY_IMPORT:END
 export const pageList = {
 	HomePage,
@@ -80,4 +86,5 @@ export const pageList = {
 	RulePage,
 	RuleEditPage,
 	NotFundPage,
+	PosListPage,
 };

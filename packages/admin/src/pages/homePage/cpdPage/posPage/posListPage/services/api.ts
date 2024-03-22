@@ -1,7 +1,6 @@
 import { http } from "src/common/http";
-import { QueryApiParams, QueryApiRespone } from "./modal";
 
-const baseUrl = "/admin-api/usercenter/cpd-pos/";
+const baseUrl = "";
 // 增
 function addApi(data: any) {
 	return http.request({
@@ -28,12 +27,13 @@ function upadteApi(data: any) {
 		data,
 	});
 }
+
 // 查
-function queryApi(data: QueryApiParams) {
-	return http.request<QueryApiRespone>({
-		url: baseUrl + "page?",
-		method: "GET",
-		params: data,
+function queryApi<T>(data: any) {
+	return http.request<{ count: number; content: T[] }>({
+		url: baseUrl + "query",
+		method: "POST",
+		data,
 	});
 }
 

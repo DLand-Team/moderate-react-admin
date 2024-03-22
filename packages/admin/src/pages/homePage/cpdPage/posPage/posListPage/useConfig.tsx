@@ -2,7 +2,7 @@ import { Modal, Space } from "antd";
 import { Link } from "react-router-dom";
 import { usePageConfig } from "src/common/hooks";
 import { useFlat } from "src/reduxService";
-import { PageType } from "./services/model";
+import { PageType } from "../services/model";
 
 // change the name of the prime to primary
 

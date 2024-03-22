@@ -139,7 +139,7 @@ export class RouterHelper {
 
 	// 递归创建路由
 	static toRenderRouteLoop = (item: RouteItem) => {
-		const { children, component } = item;
+		const { children, component, index } = item;
 		let routeChildren: JSX.Element[] = [];
 		if (children) {
 			routeChildren = children.map((item) => {
@@ -160,7 +160,7 @@ export class RouterHelper {
 			<Route
 				children={routeChildren}
 				key={item.id}
-				path={item.path}
+				path={index ? "" : item.path}
 				element={item.element || element}
 			></Route>
 		);
@@ -177,11 +177,6 @@ export class RouterHelper {
 	static getRouteTitleByKey(key: ROUTE_ID_KEY) {
 		const routerStore = store.getState().routerStore;
 		return routerStore.routesConfigMap[key]?.meta?.title;
-	}
-
-	static getRouteIdByPath(path: ROUTE_ID_KEY) {
-		const routerStore = store.getState().routerStore;
-		return routerStore.routesConfigMap[path]?.id;
 	}
 
 	static getKeepAliveRoutePath() {
@@ -222,6 +217,10 @@ export class RouterHelper {
 		} else {
 			historyInstanse!?.replace(path, state);
 		}
+	}
+
+	static getRouteIdByPath(path: string) {
+		return path.split("/").slice(-1)[0];
 	}
 
 	static jumpToByPath(

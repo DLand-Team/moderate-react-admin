@@ -7,7 +7,8 @@ type ItemKey =
 	| "PERMISSIONS_DATA"
 	| "MENU_DATA"
 	| "ROUTES_CONFIG_MAP"
-	| "ROUTES_CONFIG";
+	| "ROUTES_CONFIG"
+	| "TABS_HISTORY";
 
 const storageHelper = {
 	setItem: (

@@ -7,7 +7,7 @@ const HelloPage = () => {
 
 	useEffect(() => {}, [timeRange]);
 
-	return <div className={styles.content}></div>;
+	return <div className={styles.content}>123</div>;
 };
 
 export default HelloPage;

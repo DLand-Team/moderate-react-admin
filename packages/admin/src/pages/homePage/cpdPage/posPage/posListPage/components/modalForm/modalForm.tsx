@@ -3,7 +3,7 @@ import { Form, Modal } from "antd";
 import { useEffect, useRef } from "react";
 import useConfig from "../../useConfig";
 import { useFlat } from "src/reduxService";
-import { PageType } from "../../services/model";
+import { PageType } from "../../../services/model";
 
 const ModalForm: React.FC = () => {
 	const [form] = Form.useForm<PageType>();

@@ -1,10 +1,13 @@
-import { theme } from "antd";
+import { Button, theme } from "antd";
 import styles from "./style.module.scss";
+import { RouterHelper, useFlat } from "src/reduxService";
+import { ROUTE_ID } from "src/config/routerConfig";
 
 const PosEditPage = () => {
 	const {
 		token: { colorBgContainer, borderRadiusLG },
 	} = theme.useToken();
+	const { deleteTabHistoryAct } = useFlat("appStore");
 	return (
 		<div className={styles.container}>
 			<div
@@ -16,7 +19,7 @@ const PosEditPage = () => {
 					marginBottom: "100px",
 				}}
 			>
-				123
+				编辑页面区域
 			</div>
 			<div
 				style={{
@@ -26,7 +29,16 @@ const PosEditPage = () => {
 					borderRadius: borderRadiusLG,
 				}}
 			>
-				123
+				<Button
+					onClick={() => {
+						deleteTabHistoryAct({
+							pathName: location.pathname,
+						});
+						RouterHelper.jumpTo(ROUTE_ID.posPage);
+					}}
+				>
+					提交
+				</Button>
 			</div>
 		</div>
 	);
