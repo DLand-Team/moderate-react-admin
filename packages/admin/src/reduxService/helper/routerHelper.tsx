@@ -200,7 +200,9 @@ export class RouterHelper {
 	static getHistory() {
 		return historyInstanse;
 	}
-
+	static goBack() {
+		historyInstanse.back();
+	}
 	static jumpTo(
 		id: ROUTE_ID_KEY,
 		options?: {

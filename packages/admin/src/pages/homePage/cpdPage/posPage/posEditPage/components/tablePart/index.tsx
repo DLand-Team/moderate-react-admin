@@ -1,16 +1,44 @@
 import {
+	Button,
 	Form,
 	FormInstance,
 	Popconfirm,
 	Select,
+	Switch,
 	Table,
 	Typography,
+	message,
 } from "antd";
 import { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { FieldConfig, MyColumnType, getField } from "src/common/utils/getField";
+import { Field, FieldConfig, MyColumnType } from "src/common/utils/getField";
+import FieldRenderPosInfo from "../fieldRenderPosInfo";
+import FieldRenderOffice from "../fieldRenderOffice";
+import { useTranslation } from "react-i18next";
+import { PlusOutlined } from "@ant-design/icons";
+import { useFlat } from "src/reduxService";
 
+const calcWeight = (data: {
+	posType: string;
+	agentOrAirline: string;
+	officeOwner: string;
+	exclude: boolean;
+}) => {
+	const { posType, agentOrAirline, officeOwner, exclude } = data;
+	let weight = 0;
+	weight += 5 * (!agentOrAirline ? 8 : 1);
+	weight += 6 * (!officeOwner || officeOwner == "ALL" ? 6 : 1);
+	weight +=
+		{
+			I: 1,
+			T: 2,
+			C: 3,
+			N: 4,
+			W: 48,
+		}[posType] || 0;
+	weight = weight * (exclude ? 1 : 10);
+	return weight;
+};
 interface Item {
 	key: string;
 	no: string;
@@ -19,15 +47,6 @@ interface Item {
 	posInfo?: string;
 }
 
-const originData: Item[] = [];
-for (let i = 0; i < 100; i++) {
-	originData.push({
-		key: i.toString(),
-		posId: i,
-		no: i.toString(),
-		pos_name: `Edward ${i}`,
-	});
-}
 interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
 	editing: boolean;
 	dataIndex: string;
@@ -42,25 +61,27 @@ interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
 
 const EditableCell: React.FC<EditableCellProps> = ({
 	editing,
-	dataIndex,
-	title,
-	type,
-	record,
-	index,
 	children,
 	fieldConfig,
 	form,
-	...restProps
+	...rest
 }) => {
-	const formNode = editing ? getField(fieldConfig!, form) : "";
-	return <td {...restProps}>{editing ? formNode : children}</td>;
+	return (
+		<td {...rest}>
+			{editing ? (
+				<Field fieldConfig={fieldConfig || {}} formIns={form}></Field>
+			) : (
+				children
+			)}
+		</td>
+	);
 };
 
 const CustomTable = () => {
 	const [form] = Form.useForm();
-	const [data, setData] = useState(originData);
 	const [editingKey, setEditingKey] = useState("");
-
+	const { posItemList: data, addPostItem: setData } = useFlat("posStore");
+	const { t } = useTranslation(["pos"]);
 	const isEditing = (record: Item) => record.key === editingKey;
 
 	const edit = (record: Partial<Item> & { key: React.Key }) => {
@@ -100,11 +121,10 @@ const CustomTable = () => {
 		editable?: boolean;
 	})[] = [
 		{
-			title: "posPage.posType",
+			title: t("posPage.posType"),
 			dataIndex: "posType",
 			key: "posType",
 			editable: true,
-			width: "130px",
 			fieldConfig: {
 				watch: (newValues, old) => {
 					console.log("newValues" + JSON.stringify(newValues));
@@ -113,40 +133,40 @@ const CustomTable = () => {
 				options: [
 					{
 						key: "I",
-						value: "T",
-						label: "posPage.IATANUM",
+						value: "I",
+						label: t("posPage.IATANUM"),
 					},
 					{
 						key: "T",
-						value: "I",
-						label: "posPage.PCC",
+						value: "T",
+						label: t("posPage.PCC"),
 					},
 					{
 						key: "C",
-						value: "I",
-						label: "posPage.CITY",
+						value: "C",
+						label: t("posPage.CITY"),
 					},
 					{
 						key: "N",
-						value: "I",
-						label: "posPage.COUNTRY",
+						value: "N",
+						label: t("posPage.COUNTRY"),
 					},
 					{
 						key: "W",
-						value: "I",
-						label: "posPage.WORLD",
+						value: "W",
+						label: t("posPage.WORLD"),
 					},
 				],
 				formOptions: {
 					rules: [
 						{
 							required: true,
-							message: `${"posPage.placeholder_input"} ${"posPage.posType"}`,
+							message: `${t("posPage.placeholder_input")} ${t("posPage.posType")}`,
 						},
 					],
 				},
 				inputAttrConfig: {
-					placeholder: `${"posPage.placeholder_select"} ${"posPage.posType"}`,
+					placeholder: `${t("posPage.placeholder_select")} ${t("posPage.posType")}`,
 					maxLength: 60,
 					style: {
 						width: "140px",
@@ -198,78 +218,122 @@ const CustomTable = () => {
 
 			render: (value) => {
 				let data = {
-					I: "posPage.IATANUM",
-					T: "posPage.PCC",
-					C: "posPage.CITY",
-					N: "posPage.COUNTRY",
-					W: "posPage.WORLD",
+					I: t("posPage.IATANUM"),
+					T: t("posPage.PCC"),
+					C: t("posPage.CITY"),
+					N: t("posPage.COUNTRY"),
+					W: t("posPage.WORLD"),
 				};
 				return value in data ? data[value as keyof typeof data] : "";
 			},
 		},
 		{
-			title: "posName",
+			title: t("posPage.officeO"),
+			dataIndex: "officeOwner",
+			key: "officeOwner",
 			editable: true,
-			dataIndex: "pos_name",
+			fieldConfig: {
+				render() {
+					return <FieldRenderOffice />;
+				},
+			},
+		},
+		{
+			title: t("posPage.aoa"),
+			dataIndex: "agentOrAirline",
+			key: "agentOrAirline",
+			editable: true,
 			fieldConfig: {
 				formOptions: {
-					name: "pos_name",
 					style: {
 						margin: 0,
 					},
 				},
-			},
-			render: (item, record) => {
-				const { posId } = record;
-				return (
-					<Link
-						to={{
-							pathname: "/userCenter/pos/detail",
-							search: `?title=${"posPage.posEetailTitle"}&posId=${posId}`,
-						}}
-					>
-						{item}
-					</Link>
-				);
-			},
-		},
-		{
-			title: "posPage.comment",
-			dataIndex: "comment",
-			key: "comment",
-		},
-		{
-			title: "age",
-			dataIndex: "age",
-			width: "15%",
-			editable: true,
-			fieldConfig: {
-				formOptions: {
-					name: "age",
-					style: {
-						margin: 0,
+				options: [
+					{
+						key: "A",
+						label: t("posPage.Airline"),
+						value: "A",
+					},
+					{
+						key: "T",
+						label: t("posPage.Agent"),
+						value: "T",
+					},
+				],
+				inputAttrConfig: {
+					placeholder: t("posPage.placeholder_aoa"),
+					allowClear: true,
+					onChange: () => {
+						setTimeout(() => {
+							form.setFieldValue("posInfo", "");
+						}, 100);
 					},
 				},
-				type: "Input",
+				type: "Select",
+			},
+			render: (value) => {
+				let map = {
+					A: t("posPage.Airline"),
+					T: t("posPage.Agent"),
+				};
+				return value in map ? map[value as keyof typeof map] : "";
 			},
 		},
 		{
-			title: "address",
-			dataIndex: "address",
-			width: "40%",
+			title: t("posPage.posInfo"),
+			dataIndex: "posInfo",
+			key: "posInfo",
 			editable: true,
 			fieldConfig: {
-				formOptions: {
-					name: "address",
-					style: {
-						margin: 0,
-					},
+				render: () => {
+					return <FieldRenderPosInfo formIns={form} />;
 				},
-				type: "Input",
 			},
 		},
 		{
-			title: "operation",
+			title: t("posPage.exclude"),
+			dataIndex: "exclude",
+			key: "exclude",
+			editable: true,
+			render: (value) => {
+				return <Switch checked={value}></Switch>;
+			},
+			fieldConfig: {
+				type: "Switch",
+				formOptions: {
+					valuePropName: "checked",
+					initialValue: false,
+				},
+			},
+		},
+		{
+			title: t("posPage.weight"),
+			dataIndex: "weight",
+			key: "weight",
+			editable: true,
+			fieldConfig: {
+				render: () => {
+					const { posType, agentOrAirline, officeOwner, exclude } =
+						form.getFieldsValue();
+					return (
+						<div>
+							{calcWeight({
+								posType,
+								agentOrAirline,
+								officeOwner,
+								exclude,
+							})}
+						</div>
+					);
+				},
+			},
+			render: (value) => {
+				return <div>{value}</div>;
+			},
+		},
+		{
+			title: t("posPage.operation"),
 			dataIndex: "operation",
 			render: (_: any, record: Item) => {
 				const editable = isEditing(record);
@@ -319,8 +383,17 @@ const CustomTable = () => {
 	});
 
 	return (
-		<Form form={form} component={false}>
+		<Form
+			style={{
+				width: "100%",
+			}}
+			form={form}
+			component={false}
+		>
 			<Table
+				style={{
+					width: "100%",
+				}}
 				components={{
 					body: {
 						cell: EditableCell,
@@ -334,6 +407,25 @@ const CustomTable = () => {
 					onChange: cancel,
 				}}
 			/>
+			<Button
+				onClick={() => {
+					// if (editingKey) {
+					// 	message.warning({
+					// 		content: t`posPage.inEditing`,
+					// 	});
+					// 	return;
+					// }
+					setData({});
+					// handleCreate();
+					// if (tableData.length >= pageSize) {
+					// 	this.setState((prevState) => ({
+					// 		currentPageIndex: prevState.currentPageIndex + 1,
+					// 	}));
+					// }
+				}}
+				icon={<PlusOutlined />}
+				type="dashed"
+			>{t`posPage.addLine`}</Button>
 		</Form>
 	);
 };

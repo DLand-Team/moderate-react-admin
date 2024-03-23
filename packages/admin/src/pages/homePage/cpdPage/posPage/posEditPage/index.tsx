@@ -1,5 +1,15 @@
-import { Col, Form, Input, Row, Typography, type FormProps } from "antd";
-import React from "react";
+import {
+	Button,
+	Col,
+	Form,
+	Input,
+	Row,
+	Typography,
+	type FormProps,
+} from "antd";
+import "./index.scss";
+import { useTranslation } from "react-i18next";
+import { RouterHelper } from "src/reduxService";
 import TablePart from "./components/tablePart";
 type FieldType = {
 	posName?: string;
@@ -14,7 +24,8 @@ const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
 	console.log("Failed:", errorInfo);
 };
 
-const TopPart: React.FC = () => {
+const TopPart = () => {
+	const { t } = useTranslation(["pos"]);
 	return (
 		<div>
 			<Typography
@@ -23,7 +34,7 @@ const TopPart: React.FC = () => {
 					marginBottom: "30px",
 				}}
 			>
-				销售地详细信息
+				{t("posPage.itemListTitle")}
 			</Typography>
 			<Form
 				layout="vertical"
@@ -47,15 +58,15 @@ const TopPart: React.FC = () => {
 							rules={[
 								{
 									required: true,
-									// message: `${intlData["posPage.placeholder_input"]} ${intlData["posPage.POSName"]}`,
+									message: `${t("posPage.placeholder_input")} ${t("posPage.POSName")}`,
 								},
 								{
 									max: 30,
-									// message: intlData["posPage.rule_posName_1"],
+									message: t("posPage.rule_posName_1"),
 								},
 								{
 									pattern: /^[0-9a-zA-z_-]+$/,
-									// message: intlData["posPage.placeholder_posName"],
+									message: t("posPage.placeholder_posName"),
 								},
 							]}
 						>
@@ -75,10 +86,27 @@ const TopPart: React.FC = () => {
 };
 
 const Page = () => {
+	const { t } = useTranslation(["pos"]);
 	return (
-		<div>
+		<div className="posEditContent">
 			<TopPart></TopPart>
 			<TablePart></TablePart>
+			<div className="btnTable">
+				<Button
+					// onClick={debounce(this.save)}
+					style={{ marginRight: 10 }}
+					type="primary"
+				>
+					{t`posPage.save`}
+				</Button>
+				<Button
+					onClick={() => {
+						RouterHelper.goBack();
+					}}
+				>
+					{t`posPage.cancel`}
+				</Button>
+			</div>
 		</div>
 	);
 };

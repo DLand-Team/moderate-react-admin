@@ -2,14 +2,13 @@ import { Modal, Space } from "antd";
 import { Link } from "react-router-dom";
 import { usePageConfig } from "src/common/hooks";
 import { useFlat } from "src/reduxService";
-import { PageType } from "../services/model";
-
-// change the name of the prime to primary
+import { useTranslation } from "react-i18next";
+import { PageType } from "src/reduxService/stores/posStore/model";
 
 const useConfig = () => {
-	const { setAddModalShowAct, deleteAct, queryAct, dataList, formVersion } =
-		useFlat("categoryStore");
-	const intlData = {};
+	const { setAddModalShowAct, deleteAct, queryAct, dataList } =
+		useFlat("posStore");
+	const { t } = useTranslation(["pos"]);
 	return usePageConfig<PageType>(() => {
 		return [
 			{
@@ -35,7 +34,7 @@ const useConfig = () => {
 				},
 			},
 			{
-				title: "posName",
+				title: t`posPage.posName`,
 				dataIndex: "pos_name",
 				key: "pos_name",
 				render: (item, record) => {
@@ -58,28 +57,27 @@ const useConfig = () => {
 						rules: [
 							{
 								required: true,
-								message: `${intlData["posPage.placeholder_input"]} ${intlData["posPage.POSName"]}`,
+								message: `${t`posPage.placeholder_input`} ${t`posPage.POSName`}`,
 							},
 							{
 								max: 30,
-								message: intlData["posPage.rule_posName_1"],
+								message: t`posPage.rule_posName_1`,
 							},
 							{
 								pattern: /^[0-9a-zA-z_-]+$/,
-								message:
-									intlData["posPage.placeholder_posName"],
+								message: t`posPage.placeholder_posName`,
 							},
 						],
 					},
 					inputAttrConfig: {
-						placeholder: intlData["posPage.placeholder_posName"],
+						placeholder: t`posPage.placeholder_posName`,
 						maxLength: 30,
 						size: "small",
 					},
 				},
 			},
 			{
-				title: "comment",
+				title: t`posPage.comment`,
 				dataIndex: "comment",
 				key: "comment",
 				render: (item, record) => {
@@ -97,7 +95,7 @@ const useConfig = () => {
 				},
 				config: {
 					formOptions: {
-						label: "comment",
+						label: t`posPage.comment`,
 						name: "comment",
 						rules: [
 							{
@@ -110,7 +108,7 @@ const useConfig = () => {
 				},
 			},
 			{
-				title: "action",
+				title: t`posPage.action`,
 				key: "action",
 				render: (_, record) => (
 					<Space size="middle">
@@ -118,7 +116,6 @@ const useConfig = () => {
 							onClick={() => {
 								setAddModalShowAct({
 									isShowAddModal: true,
-									recordData: record,
 								});
 							}}
 						>
@@ -143,7 +140,7 @@ const useConfig = () => {
 				),
 			},
 		];
-	}, [dataList, formVersion]);
+	}, [dataList]);
 };
 
 export default useConfig;

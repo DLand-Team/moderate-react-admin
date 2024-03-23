@@ -5,17 +5,10 @@
  * @LastEditTime: 2024-03-19 11:35:29
  * @Description: Do not edit
  */
-import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import { useFlat } from "src/reduxService";
 import styles from "./style.module.scss";
 
 const PosPage = () => {
-	const { queryAct } = useFlat("posStore");
-	useEffect(() => {
-		queryAct();
-	}, []);
-
 	return (
 		<div className={styles.content}>
 			<Outlet />

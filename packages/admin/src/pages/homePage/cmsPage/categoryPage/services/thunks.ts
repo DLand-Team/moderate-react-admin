@@ -23,10 +23,8 @@ const thunks = createThunks(names.categoryStore, {
 	},
 	setAddModalShowAct: ({
 		isShowAddModal,
-		recordData,
 	}: {
 		isShowAddModal: boolean;
-		recordData?: any;
 	}) => {
 		let extra = !isShowAddModal
 			? {
@@ -34,7 +32,6 @@ const thunks = createThunks(names.categoryStore, {
 				}
 			: {};
 		return {
-			recordData,
 			isShowAddModal,
 			...extra,
 		};

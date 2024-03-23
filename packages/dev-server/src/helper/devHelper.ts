@@ -229,9 +229,7 @@ class devHelper {
 				),
 				{ strict: true },
 			);
-			let fileName = fileItem.fileName
-				? fileItem.fileName
-				: `${pageName}.${fileItem.type}`;
+			let fileName = `${pageName}.${fileItem.type}`;
 			// 将pageName的首字母大写
 			this.writeFile(
 				filePath + fileItem.path,

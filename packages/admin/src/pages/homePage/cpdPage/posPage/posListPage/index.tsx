@@ -7,17 +7,17 @@
  */
 import { RouterHelper, useFlat } from "src/reduxService";
 import { Button, Table } from "antd";
-import ModalForm from "./components/modalForm/modalForm";
 import SearchForm from "./components/searchForm/searchForm";
 import styles from "./style.module.scss";
-import useConfig from "./useConfig";
 import { useEffect } from "react";
 import { ROUTE_ID } from "src/config/routerConfig";
+import useConfig from "./useConfig";
 
 const CategoryPage = () => {
-	const { queryAct } = useFlat("posStore");
+	const { columns } = useConfig();
+	const { queryPostListAct } = useFlat("posStore");
 	useEffect(() => {
-		queryAct();
+		queryPostListAct();
 	}, []);
 
 	return (
@@ -39,7 +39,7 @@ const CategoryPage = () => {
 			{/* modal */}
 			{/* <ModalForm /> */}
 			{/* 表格 */}
-			{/* <Table
+			<Table
 				rowKey={(record) => {
 					return record.id;
 				}}
@@ -55,7 +55,7 @@ const CategoryPage = () => {
 				// }}
 				columns={columns}
 				// dataSource={dataList}
-			/> */}
+			/>
 		</div>
 	);
 };

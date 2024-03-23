@@ -1,10 +1,11 @@
+// 职责功能划分的仓库
 import appStore from "./appStore";
 import authStore from "./authStore";
 import devStore from "./devStore";
 import routerStore from "./routerStore";
-// 组件文件夹下的store
+// 组件划分
 import categoryStore from "src/pages/homePage/cmsPage/categoryPage/services";
-import posStore from "src/pages/homePage/cpdPage/posPage/posListPage/services";
+import posStore from "./posStore";
 
 const stores = {
 	appStore,
