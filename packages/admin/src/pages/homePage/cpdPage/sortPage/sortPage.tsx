@@ -1,8 +1,7 @@
+import { Outlet } from "react-router-dom";
 import styles from "./style.module.scss";
 
-import { Outlet } from "react-router-dom";
-
-const MarketPage = () => {
+const SortPage = () => {
 	return (
 		<div className={styles.content}>
 			<Outlet />
@@ -10,4 +9,4 @@ const MarketPage = () => {
 	);
 };
 
-export default MarketPage;
+export default SortPage;

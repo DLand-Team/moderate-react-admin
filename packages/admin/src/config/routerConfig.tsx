@@ -21,13 +21,23 @@ export enum ROUTE_NAME {
 	testPage,
 	test1Page,
 	posPage,
-	marketPage,
-	marketEditPage,
 	posEditPage,
 	rulePage,
 	ruleEditPage,
 	notFundPage,
 	posListPage,
+	filterPage,
+	filterEditPage,
+	filterListPage,
+	sortPage,
+	sortListPage,
+	sortEditPage,
+	marketPage,
+	marketListPage,
+	marketEditPage,
+	carrierPage,
+	carrierListPage,
+	carrierEditPage,
 }
 // MODERATE_AUTO_2:END
 
@@ -102,7 +112,6 @@ export const ROUTE_INFO_CONFIG: {
 		meta: {
 			title: "Role Management",
 		},
-
 		component: "RolePage",
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
@@ -183,27 +192,11 @@ export const ROUTE_INFO_CONFIG: {
 		},
 		component: "PosPage",
 	},
-	marketPage: {
-		id: "marketPage",
-		meta: {
-			title: "marketPage",
-		},
-		component: "MarketPage",
-		isNoAuth: true,
-	},
-	marketEditPage: {
-		id: "marketEditPage",
-		meta: {
-			title: "marketEditPage",
-		},
-		component: "MarketEditPage",
-	},
 	posEditPage: {
 		id: "posEditPage",
 		meta: {
 			title: "posEditPage",
 		},
-
 		component: "PosEditPage",
 		depands: ["posPage"],
 	},
@@ -229,6 +222,7 @@ export const ROUTE_INFO_CONFIG: {
 		},
 		component: "NotFundPage",
 		isNoAuth: true,
+		isMenu: false,
 		path: "*",
 	},
 	posListPage: {
@@ -240,95 +234,193 @@ export const ROUTE_INFO_CONFIG: {
 		component: "PosListPage",
 		depands: ["posPage"],
 	},
+	filterPage: {
+		id: "filterPage",
+		meta: {
+			title: "filterPage",
+		},
+		component: "FilterPage",
+		isNoAuth: true,
+	},
+	filterEditPage: {
+		id: "filterEditPage",
+		meta: {
+			title: "filterEditPage",
+		},
+		component: "FilterEditPage",
+		depands: ["filterPage"],
+		isNoAuth: true,
+	},
+	filterListPage: {
+		id: "filterListPage",
+		meta: {
+			title: "filterListPage",
+		},
+		component: "FilterListPage",
+		depands: ["filterPage"],
+		isNoAuth: true,
+		index: true,
+	},
+	sortPage: {
+		id: "sortPage",
+		meta: {
+			title: "sortPage",
+		},
+		component: "SortPage",
+		isNoAuth: true,
+	},
+	sortListPage: {
+		id: "sortListPage",
+		meta: {
+			title: "sortListPage",
+		},
+		component: "SortListPage",
+		isNoAuth: true,
+		index: true,
+		depands: ["sortPage"],
+	},
+	sortEditPage: {
+		id: "sortEditPage",
+		meta: {
+			title: "sortEditPage",
+		},
+		component: "SortEditPage",
+		index: false,
+		depands: ["sortPage"],
+	},
+	marketPage: {
+		id: "marketPage",
+		meta: {
+			title: "marketPage",
+		},
+		component: "MarketPage",
+		index: false,
+	},
+	marketListPage: {
+		id: "marketListPage",
+		meta: {
+			title: "marketListPage",
+		},
+		component: "MarketListPage",
+		index: true,
+		depands: ["marketPage"],
+	},
+	marketEditPage: {
+		id: "marketEditPage",
+		meta: {
+			title: "marketEditPage",
+		},
+		component: "MarketEditPage",
+		index: false,
+		depands: ["marketPage"],
+	},
+	carrierPage: {
+		id: "carrierPage",
+		meta: {
+			title: "carrierPage",
+		},
+		component: "CarrierPage",
+		index: false,
+	},
+	carrierListPage: {
+		id: "carrierListPage",
+		meta: {
+			title: "carrierListPage",
+		},
+		component: "CarrierListPage",
+		depands: ["carrierPage"],
+		index: true,
+	},
+	carrierEditPage: {
+		id: "carrierEditPage",
+		meta: {
+			title: "carrierEditPage",
+		},
+		component: "CarrierEditPage",
+		depands: ["carrierPage"],
+		index: false,
+	},
 }; //MODERATE_AUTO_3:END
 // =============== 路由结构数据 ===============
-// MODERATE_AUTO:START
-export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [
-	{
-		id: ROUTE_ID.homePage,
-		children: [
-			{
-				id: ROUTE_ID.cmsPage,
-				children: [
-					{
-						id: ROUTE_ID.categoryPage,
-					},
-					{
-						id: ROUTE_ID.test1Page,
-					},
-					{
-						id: ROUTE_ID.testPage,
-					},
-				],
-			},
-			{
-				id: ROUTE_ID.cpdPage,
-				children: [
-					{
-						id: ROUTE_ID.marketEditPage,
-					},
-					{
-						id: ROUTE_ID.marketPage,
-					},
-					{
-						id: ROUTE_ID.posPage,
-						children: [
-							{
-								id: ROUTE_ID.posEditPage,
-							},
-							{
-								id: ROUTE_ID.posListPage,
-							},
-						],
-					},
-					{
-						id: ROUTE_ID.rulePage,
-						children: [
-							{
-								id: ROUTE_ID.ruleEditPage,
-							},
-						],
-					},
-				],
-			},
-			{
-				id: ROUTE_ID.devPage,
-				children: [
-					{
-						id: ROUTE_ID.apiDevPage,
-					},
-					{
-						id: ROUTE_ID.pageDevPage,
-					},
-					{
-						id: ROUTE_ID.storeDevPage,
-					},
-				],
-			},
-			{
-				id: ROUTE_ID.helloPage,
-			},
-			{
-				id: ROUTE_ID.notFundPage,
-			},
-			{
-				id: ROUTE_ID.permissionPage,
-			},
-			{
-				id: ROUTE_ID.sysPage,
-				children: [
-					{
-						id: ROUTE_ID.rolePage,
-					},
-					{
-						id: ROUTE_ID.userPage,
-					},
-				],
-			},
-		],
-	},
-	{
-		id: ROUTE_ID.loginPage,
-	},
-];
+// MODERATE_AUTO:START 
+export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [{
+  id: ROUTE_ID.homePage,
+  children: [{
+    id: ROUTE_ID.cmsPage,
+    children: [{
+      id: ROUTE_ID.categoryPage
+    }, {
+      id: ROUTE_ID.test1Page
+    }, {
+      id: ROUTE_ID.testPage
+    }]
+  }, {
+    id: ROUTE_ID.cpdPage,
+    children: [{
+      id: ROUTE_ID.carrierPage,
+      children: [{
+        id: ROUTE_ID.carrierEditPage
+      }, {
+        id: ROUTE_ID.carrierListPage
+      }]
+    }, {
+      id: ROUTE_ID.filterPage,
+      children: [{
+        id: ROUTE_ID.filterEditPage
+      }, {
+        id: ROUTE_ID.filterListPage
+      }]
+    }, {
+      id: ROUTE_ID.marketPage,
+      children: [{
+        id: ROUTE_ID.marketEditPage
+      }, {
+        id: ROUTE_ID.marketListPage
+      }]
+    }, {
+      id: ROUTE_ID.posPage,
+      children: [{
+        id: ROUTE_ID.posEditPage
+      }, {
+        id: ROUTE_ID.posListPage
+      }]
+    }, {
+      id: ROUTE_ID.rulePage,
+      children: [{
+        id: ROUTE_ID.ruleEditPage
+      }]
+    }, {
+      id: ROUTE_ID.sortPage,
+      children: [{
+        id: ROUTE_ID.sortEditPage
+      }, {
+        id: ROUTE_ID.sortListPage
+      }]
+    }]
+  }, {
+    id: ROUTE_ID.devPage,
+    children: [{
+      id: ROUTE_ID.apiDevPage
+    }, {
+      id: ROUTE_ID.pageDevPage
+    }, {
+      id: ROUTE_ID.storeDevPage
+    }]
+  }, {
+    id: ROUTE_ID.helloPage
+  }, {
+    id: ROUTE_ID.notFundPage
+  }, {
+    id: ROUTE_ID.permissionPage
+  }, {
+    id: ROUTE_ID.sysPage,
+    children: [{
+      id: ROUTE_ID.rolePage
+    }, {
+      id: ROUTE_ID.userPage
+    }]
+  }]
+}, {
+  id: ROUTE_ID.loginPage
+}]
 // MODERATE_AUTO:END

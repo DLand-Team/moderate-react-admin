@@ -212,7 +212,15 @@ class devHelper {
 	};
 
 	// 创建页面
-	toBuildPage = (pagePath: string, pageName: string) => {
+	toBuildPage = ({
+		pagePath,
+		pageName,
+		isOutlet,
+	}: {
+		pagePath: string;
+		pageName: string;
+		isOutlet: boolean;
+	}) => {
 		let sourcePath = path.resolve(__dirname, "../templates/template1");
 		let filePath = path.resolve(
 			pathHelper.webPagesPath,
@@ -238,6 +246,7 @@ class devHelper {
 					...fileItem,
 					pageName: pageName.replace(/^\S/, (s) => s.toUpperCase()),
 					name: pageName + extraName,
+					isOutlet: isOutlet,
 				}),
 			);
 		}

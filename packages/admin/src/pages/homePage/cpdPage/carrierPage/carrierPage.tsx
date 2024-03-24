@@ -2,12 +2,16 @@ import styles from "./style.module.scss";
 
 import { Outlet } from "react-router-dom";
 
-const MarketPage = () => {
+const CarrierPage = () => {
+
+
 	return (
 		<div className={styles.content}>
-			<Outlet />
+			
+				<Outlet />
+				
 		</div>
 	);
 };
 
-export default MarketPage;
+export default CarrierPage;
