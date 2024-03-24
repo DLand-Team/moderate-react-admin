@@ -1,7 +1,6 @@
 import { Col, Form } from "antd";
-import { RuleObject } from "antd/es/form";
+import { Rule } from "antd/es/form";
 import { cloneDeep } from "lodash-es";
-import { useState } from "react";
 import { MyColumnType } from "../model/fieldsHooks";
 import { Field } from "../utils";
 
@@ -13,7 +12,6 @@ const useSearchFields = <T,>(
 	} = { count: 4 },
 ) => {
 	const { count, form } = options;
-	const [fields, setFields] = useState([]);
 	return columns.map((item, index) => {
 		const { config = {} } = item;
 		let fieldConfigTemp = cloneDeep(config);
@@ -28,8 +26,10 @@ const useSearchFields = <T,>(
 			InputItem = searchFromRender;
 		} else if (config) {
 			if (formOptions?.rules) {
-				formOptions.rules.forEach((a: RuleObject) => {
+				formOptions.rules.forEach((a: Rule) => {
+					//@ts-ignore
 					if (a.required) {
+						//@ts-ignore
 						a.required = false;
 					}
 				});

@@ -6,8 +6,7 @@ import { useTranslation } from "react-i18next";
 import { PageType } from "src/reduxService/stores/posStore/model";
 
 const useConfig = () => {
-	const { setAddModalShowAct, deleteAct, queryAct, dataList } =
-		useFlat("posStore");
+	const { deleteAct, posList } = useFlat("posStore");
 	const { t } = useTranslation(["pos"]);
 	return usePageConfig<PageType>(() => {
 		return [
@@ -37,13 +36,13 @@ const useConfig = () => {
 				title: t`posPage.posName`,
 				dataIndex: "pos_name",
 				key: "pos_name",
-				render: (item, record) => {
-					const { posId } = record;
+				render: (item, _) => {
+					// const { posId } = record;
 					return (
 						<Link
 							to={{
 								pathname: "/userCenter/pos/detail",
-								search: `?title=posTitle&posId=${posId}`,
+								// search: `?title=posTitle&posId=${posId}`,
 							}}
 						>
 							{item}
@@ -80,13 +79,13 @@ const useConfig = () => {
 				title: t`posPage.comment`,
 				dataIndex: "comment",
 				key: "comment",
-				render: (item, record) => {
-					const { posId } = record;
+				render: (item, _) => {
+					// const { posId } = record;
 					return (
 						<Link
 							to={{
 								pathname: "/userCenter/pos/detail",
-								search: `?title=posTitle&posId=${posId}`,
+								// search: `?title=posTitle&posId=${posId}`,
 							}}
 						>
 							{item}
@@ -112,15 +111,7 @@ const useConfig = () => {
 				key: "action",
 				render: (_, record) => (
 					<Space size="middle">
-						<a
-							onClick={() => {
-								setAddModalShowAct({
-									isShowAddModal: true,
-								});
-							}}
-						>
-							edit
-						</a>
+						<a onClick={() => {}}>edit</a>
 						<a
 							onClick={() => {
 								Modal.confirm({
@@ -129,7 +120,6 @@ const useConfig = () => {
 										await deleteAct({
 											id: record.id,
 										});
-										queryAct();
 									},
 								});
 							}}
@@ -140,7 +130,7 @@ const useConfig = () => {
 				),
 			},
 		];
-	}, [dataList]);
+	}, [posList]);
 };
 
 export default useConfig;

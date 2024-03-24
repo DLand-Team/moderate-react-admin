@@ -30,6 +30,10 @@ const thunks = createThunks(names.posStore, {
 		const { data } = await httpApi.getPosCarrierListApi();
 		dp("posStore", "setPosCarrier", data);
 	},
+	getLocationListAct: async () => {
+		const { data } = await httpApi.getLocationListApi();
+		dp("posStore", "setPosCarrier", data);
+	},
 	getAgencyDataAct: async (params: GetAgencyDataApiParams) => {
 		const { data } = await httpApi.getAgencyDataApi(params);
 		dp("posStore", "setPosCarrier", data);

@@ -2,6 +2,7 @@ import { ItemType } from "antd/es/menu/hooks/useItems";
 import { Suspense } from "react";
 import { Route } from "react-router-dom";
 import historyInstanse from "src/common/components/customRouter/historyInstance";
+import { includeOne } from "src/common/utils";
 import {
 	ROUTE_ID,
 	ROUTE_INFO_CONFIG,
@@ -13,9 +14,8 @@ import type {
 	RouteItem,
 	RoutesStructDataItem,
 } from "src/config/types";
-import { DynamicPageRender, pageList } from "src/pages";
+import { pageList } from "src/pages";
 import { reduxStore as store } from "..";
-import { includeOne } from "src/common/utils";
 
 export type MenuItem = Partial<ItemType> & {
 	key: ROUTE_ID_KEY;
@@ -23,7 +23,7 @@ export type MenuItem = Partial<ItemType> & {
 };
 
 export class RouterHelper {
-	static createDefaultRoutesConfig() {
+	static createClientRoutesConfig() {
 		return Object.values(ROUTE_INFO_CONFIG)
 			.filter((item) => {
 				return item.isNoAuth;
@@ -117,7 +117,8 @@ export class RouterHelper {
 		homeChildren.sort((a, b) => {
 			return ROUTE_NAME[a.id] - ROUTE_NAME[b.id];
 		});
-		let routesConfig = [...RouterHelper.createDefaultRoutesConfig()];
+		// 获取客户端显示的路由作为基础，再去融合后端动态配置权限菜单关联的路由
+		let routesConfig = [...RouterHelper.createClientRoutesConfig()];
 		let targetId = routesConfig.findIndex((item) => {
 			return item.id === ROUTE_ID.homePage;
 		});
@@ -149,9 +150,10 @@ export class RouterHelper {
 		let element;
 		if (!item.element) {
 			if (component && component in pageList) {
+				const Comp = pageList[component];
 				element = (
 					<Suspense>
-						<DynamicPageRender name={component} />
+						<Comp />
 					</Suspense>
 				);
 			}

@@ -1,14 +1,6 @@
 import { Form, FormInstance, Select } from "antd";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useFlat } from "src/reduxService";
-
-const onChange = (value: string) => {
-	console.log(`selected ${value}`);
-};
-
-const onSearch = (value: string) => {
-	console.log("search:", value);
-};
 
 // Filter `option.label` match the user type `input`
 const filterOption = (
@@ -16,22 +8,25 @@ const filterOption = (
 	option?: { label: string; value: string },
 ) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
 
-const FieldRenderPosInfo = (props: { formIns: FormInstance }) => {
-	const { posCarrierList, getPosCarrierListAct } = useFlat("posStore");
+const FieldRenderPosInfo = ({ formIns }: { formIns: FormInstance }) => {
+	const [value, setValue] = useState("");
+	const [_, setIsSlect] = useState(false);
+	const { posCarrierList, locationList, getPosCarrierListAct } =
+		useFlat("posStore");
 	useEffect(() => {
 		if (!posCarrierList.length) {
 			getPosCarrierListAct();
 		}
 	}, []);
-	// let map = {
-	// 	C: "CITY",
-	// 	N: "COUNTRY",
-	// 	W: "WORLD",
-	// };
-	// let locationType =
-	// 	map[formIns.getFieldValue("posType") as keyof typeof map];
-	// let locationListTemp =
-	// 	locationType in locationList ? locationList[locationType] : [];
+	let map = {
+		C: "CITY",
+		N: "COUNTRY",
+		W: "WORLD",
+	};
+	let locationType =
+		map[formIns.getFieldValue("posType") as keyof typeof map];
+	let locationListTemp =
+		locationType in locationList ? locationList[locationType] : [];
 	// // 根据postype的类型，如果在["I", "T"]中，那么就请求
 	// let requestSearchData = ["I", "T"].includes(
 	// 	formIns.getFieldValue("posType"),
@@ -43,6 +38,11 @@ const FieldRenderPosInfo = (props: { formIns: FormInstance }) => {
 	// 			});
 	// 		}
 	// 	: "";
+	const onChange = () => {};
+
+	const onSearch = (value: string) => {
+		setValue(value);
+	};
 	return (
 		<Form.Item
 			rules={[
@@ -74,7 +74,19 @@ const FieldRenderPosInfo = (props: { formIns: FormInstance }) => {
 				optionFilterProp="children"
 				onChange={onChange}
 				onSearch={onSearch}
+				onSelect={(value) => {
+					setValue(value);
+					setIsSlect(true);
+				}}
 				filterOption={filterOption}
+				onBlur={() => {
+					debugger;
+					!locationListTemp.length &&
+						formIns.setFieldsValue({
+							["posInfo"]: value,
+						});
+					setIsSlect(false);
+				}}
 				options={posCarrierList.map((item) => {
 					return {
 						value: String(item.id),

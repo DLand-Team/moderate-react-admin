@@ -38,14 +38,13 @@ const useConfig = () => {
 						],
 					},
 				},
-				render(value, record) {
+				render(value) {
 					return (
 						<a
 							onClick={() => {
 								setIsDetailAct(true);
 								setAddModalShowAct({
 									isShowAddModal: true,
-									recordData: record,
 								});
 							}}
 						>
@@ -173,7 +172,6 @@ const useConfig = () => {
 							onClick={() => {
 								setAddModalShowAct({
 									isShowAddModal: true,
-									recordData: record,
 								});
 							}}
 						>

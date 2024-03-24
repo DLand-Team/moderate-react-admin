@@ -2,6 +2,7 @@ import { Breadcrumb } from "antd";
 import { useState } from "react";
 import type { Location } from "react-router-dom";
 import useLocationListen from "src/common/hooks/useLocationListen";
+import { ROUTE_ID_KEY } from "src/config/types";
 import { RouterHelper } from "src/reduxService/helper";
 
 const BreadcrumbComp = () => {
@@ -12,7 +13,7 @@ const BreadcrumbComp = () => {
 			return item;
 		});
 		const temp2 = pathArr.map((path: string) => {
-			const info = RouterHelper.getRouteTitleByKey(path);
+			const info = RouterHelper.getRouteTitleByKey(path as ROUTE_ID_KEY);
 			return {
 				id: path,
 				title: info || "",

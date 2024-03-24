@@ -7,16 +7,17 @@ import {
 	Switch,
 	Table,
 	Typography,
-	message,
 } from "antd";
 import { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
 import { Field, FieldConfig, MyColumnType } from "src/common/utils/getField";
-import FieldRenderPosInfo from "../fieldRenderPosInfo";
-import FieldRenderOffice from "../fieldRenderOffice";
+import FieldRenderPosInfo from "../posInfo-field";
+import FieldRenderOffice from "../office-field";
 import { useTranslation } from "react-i18next";
 import { PlusOutlined } from "@ant-design/icons";
 import { useFlat } from "src/reduxService";
+import { UUID } from "src/common/utils";
+import { PosItem } from "src/reduxService/stores/posStore/model";
 
 const calcWeight = (data: {
 	posType: string;
@@ -37,22 +38,16 @@ const calcWeight = (data: {
 			W: 48,
 		}[posType] || 0;
 	weight = weight * (exclude ? 1 : 10);
+	console.log(exclude);
 	return weight;
 };
-interface Item {
-	key: string;
-	no: string;
-	pos_name: string;
-	posId?: number;
-	posInfo?: string;
-}
 
 interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
 	editing: boolean;
 	dataIndex: string;
 	title: any;
 	type: "number" | "text";
-	record: Item;
+	record: PosItem;
 	index?: number;
 	children?: React.ReactNode;
 	fieldConfig?: FieldConfig;
@@ -80,13 +75,13 @@ const EditableCell: React.FC<EditableCellProps> = ({
 const CustomTable = () => {
 	const [form] = Form.useForm();
 	const [editingKey, setEditingKey] = useState("");
-	const { posItemList: data, addPostItem: setData } = useFlat("posStore");
+	const { posItemList, addPostItem, setPostItemList } = useFlat("posStore");
 	const { t } = useTranslation(["pos"]);
-	const isEditing = (record: Item) => record.key === editingKey;
+	const isEditing = (record: PosItem) => record.key === editingKey;
 
-	const edit = (record: Partial<Item> & { key: React.Key }) => {
+	const edit = (record: Partial<PosItem>) => {
 		form.setFieldsValue({ name: "", age: "", address: "", ...record });
-		setEditingKey(record.key);
+		setEditingKey(record.key!);
 	};
 
 	const cancel = () => {
@@ -95,21 +90,13 @@ const CustomTable = () => {
 
 	const save = async (key: React.Key) => {
 		try {
-			const row = (await form.validateFields()) as Item;
-
-			const newData = [...data];
+			const row = (await form.validateFields()) as PosItem;
+			debugger;
+			const newData = [...posItemList];
 			const index = newData.findIndex((item) => key === item.key);
 			if (index > -1) {
-				const item = newData[index];
-				newData.splice(index, 1, {
-					...item,
-					...row,
-				});
-				setData(newData);
-				setEditingKey("");
-			} else {
-				newData.push(row);
-				setData(newData);
+				newData[index] = row;
+				setPostItemList(newData);
 				setEditingKey("");
 			}
 		} catch (errInfo) {
@@ -117,7 +104,7 @@ const CustomTable = () => {
 		}
 	};
 
-	const columns: (MyColumnType<Item> & {
+	const columns: (MyColumnType<PosItem> & {
 		editable?: boolean;
 	})[] = [
 		{
@@ -157,14 +144,6 @@ const CustomTable = () => {
 						label: t("posPage.WORLD"),
 					},
 				],
-				formOptions: {
-					rules: [
-						{
-							required: true,
-							message: `${t("posPage.placeholder_input")} ${t("posPage.posType")}`,
-						},
-					],
-				},
 				inputAttrConfig: {
 					placeholder: `${t("posPage.placeholder_select")} ${t("posPage.posType")}`,
 					maxLength: 60,
@@ -178,9 +157,16 @@ const CustomTable = () => {
 						typeof options == "function" ? options() : options;
 					return (
 						<Form.Item
+							name="posType"
 							style={{
 								margin: 0,
 							}}
+							rules={[
+								{
+									required: true,
+									message: `${t("posPage.placeholder_input")} ${t("posPage.posType")}`,
+								},
+							]}
 						>
 							<Select
 								onChange={() => {
@@ -233,6 +219,9 @@ const CustomTable = () => {
 			key: "officeOwner",
 			editable: true,
 			fieldConfig: {
+				formOptions: {
+					name: "officeOwner",
+				},
 				render() {
 					return <FieldRenderOffice />;
 				},
@@ -245,6 +234,7 @@ const CustomTable = () => {
 			editable: true,
 			fieldConfig: {
 				formOptions: {
+					name: "agentOrAirline",
 					style: {
 						margin: 0,
 					},
@@ -302,6 +292,10 @@ const CustomTable = () => {
 			fieldConfig: {
 				type: "Switch",
 				formOptions: {
+					name: "exclude",
+					style: {
+						margin: 0,
+					},
 					valuePropName: "checked",
 					initialValue: false,
 				},
@@ -335,12 +329,12 @@ const CustomTable = () => {
 		{
 			title: t("posPage.operation"),
 			dataIndex: "operation",
-			render: (_: any, record: Item) => {
+			render: (_: any, record: PosItem) => {
 				const editable = isEditing(record);
 				return editable ? (
 					<span>
 						<Typography.Link
-							onClick={() => save(record.key)}
+							onClick={() => save(record.key!)}
 							style={{ marginRight: 8 }}
 						>
 							Save
@@ -368,9 +362,9 @@ const CustomTable = () => {
 		return {
 			...col,
 			onCell: (
-				record: Item,
+				record: PosItem,
 			): {
-				record: Item;
+				record: PosItem;
 				editing: boolean;
 				form: FormInstance<any>;
 			} => ({
@@ -400,7 +394,7 @@ const CustomTable = () => {
 					},
 				}}
 				bordered
-				dataSource={data}
+				dataSource={posItemList}
 				columns={mergedColumns as ColumnsType<any>}
 				rowClassName="editable-row"
 				pagination={{
@@ -415,7 +409,9 @@ const CustomTable = () => {
 					// 	});
 					// 	return;
 					// }
-					setData({});
+					addPostItem({
+						key: UUID(),
+					} as PosItem);
 					// handleCreate();
 					// if (tableData.length >= pageSize) {
 					// 	this.setState((prevState) => ({

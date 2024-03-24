@@ -21,6 +21,7 @@ const initialState = (): StoreState => {
 		},
 		loading: false,
 		posCarrierList: [],
+		locationList: {}, // 添加posItem的posInfo属性枚举值
 	};
 };
 
@@ -40,6 +41,9 @@ const slice = createSliceCustom({
 		},
 		setPosCarrier(state, data: PayloadAction<PosCarrier[]>) {
 			state.posCarrierList = data.payload;
+		},
+		setLocaionList(state, data: PayloadAction<any>) {
+			state.locationList = data.payload;
 		},
 	},
 });

@@ -1,17 +1,4 @@
-import { Suspense, lazy } from "react";
-
-export const DynamicPageRender = ({
-	name,
-}: {
-	name: keyof typeof pageList;
-}) => {
-	const Component = pageList[name];
-	return (
-		<Suspense>
-			<Component />
-		</Suspense>
-	);
-};
+import { lazy } from "react";
 
 // MODERATE_AUTO_PAGE_LAZY_IMPORT:START
 const HomePage = lazy(() => import("./homePage/homePage"));

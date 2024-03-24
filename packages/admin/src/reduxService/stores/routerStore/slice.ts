@@ -9,17 +9,11 @@ import { RoutesConfigMap, StoreState } from "./model";
 import storageHelper from "src/common/utils/storageHelper";
 
 const initialState = (): StoreState => {
-	let ROUTES_CONFIG_MAP = storageHelper.getItem("ROUTES_CONFIG_MAP");
-	let ROUTES_CONFIG = storageHelper.getItem("ROUTES_CONFIG");
-	const { routesConfig, routesConfigMap } = !ROUTES_CONFIG_MAP
-		? RouterHelper.createRoutesConfigByPermissions({
-				routesPermissions: [],
-				routesConfigMap: cloneDeep(ROUTE_INFO_CONFIG),
-			})
-		: {
-				routesConfig: ROUTES_CONFIG,
-				routesConfigMap: ROUTES_CONFIG_MAP,
-			};
+	const { routesConfig, routesConfigMap } =
+		RouterHelper.createRoutesConfigByPermissions({
+			routesPermissions: [],
+			routesConfigMap: cloneDeep(ROUTE_INFO_CONFIG),
+		});
 	return {
 		routesConfig,
 		routesConfigMap,

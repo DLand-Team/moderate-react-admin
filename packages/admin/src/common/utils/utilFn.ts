@@ -9,14 +9,14 @@
  * let person = {name:"张三",age:25,address:"深圳",getName:function(){}}
  * Object.keys(person) // ["name", "age", "address","getName"]
  * */
-export const objectExistValue = (obj) => Object.keys(obj).length > 0;
+export const objectExistValue = (obj: any) => Object.keys(obj).length > 0;
 
 /**
  * 获取跳转接口里带的参数
  * 例子：search: `?title=brand信息&brs8dId=${brs8dId}`,
  * unescape() 函数可对通过 escape() 编码的字符串进行解码。
  */
-export const getUrlParam = (url, name) => {
+export const getUrlParam = (url: string, name: string) => {
 	//   ;
 	var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
 	let search = url.split("?")[1];
@@ -29,7 +29,7 @@ export const getUrlParam = (url, name) => {
 	}
 };
 
-export function hasErrors(fieldsError) {
+export function hasErrors(fieldsError: any) {
 	return Object.keys(fieldsError).some((field) => fieldsError[field]);
 }
 

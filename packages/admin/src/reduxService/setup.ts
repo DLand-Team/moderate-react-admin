@@ -1,4 +1,4 @@
-import { Action, ThunkAction, TypedStartListening } from "@reduxjs/toolkit";
+import { Action, ThunkAction, TypedStartListening } from "redux-eazy";
 import {
 	appSelectorHookCreater,
 	getCreateThunkWithName,

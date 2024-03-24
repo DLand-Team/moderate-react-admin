@@ -31,12 +31,6 @@ const thunks = createThunks(names.authStore, {
 
 		const { menuPermissions, routesPermissions } =
 			AuthHelper.createRoutesPermissionsByMenu(menus || []);
-		// 持久化一下
-		storageHelper.setItem(
-			"MENU_DATA",
-			menuPermissions ? menuPermissions : [],
-		);
-		storageHelper.setItem("PERMISSIONS_DATA", permissions);
 		// redux存储一下
 		menuPermissions &&
 			dp("authStore", "setPermissions", {

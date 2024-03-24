@@ -7,7 +7,6 @@ import { RouterHelper } from "src/reduxService/helper";
 import { TabItem } from "src/reduxService/stores/appStore/modal";
 import styles from "./tabs.module.scss";
 import { ROUTE_ID_KEY } from "src/config/types";
-import { ROUTE_ID } from "src/config/routerConfig";
 
 const TabsComp = () => {
 	const {

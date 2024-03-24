@@ -23,6 +23,7 @@ export class AppHelper {
 			const temp = routesConfig.find((item) => {
 				return item.id === ROUTE_ID.homePage;
 			})?.children;
+			debugger;
 			if (temp?.length) {
 				result = result.concat(AppHelper.createMenuDataLoop(temp, []));
 			}

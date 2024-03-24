@@ -9,6 +9,7 @@ import { StoreState, TabItem, TabsHistory } from "./modal";
 import storageHelper from "src/common/utils/storageHelper";
 
 const initialState = (): StoreState => {
+	debugger;
 	const { routesConfig = [] } = RouterHelper.createRoutesConfigByPermissions({
 		routesPermissions: [],
 		routesConfigMap: cloneDeep(ROUTE_INFO_CONFIG),

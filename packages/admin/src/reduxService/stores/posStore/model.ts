@@ -15,6 +15,7 @@ export interface StoreState {
 	posCarrierList: PosCarrier[];
 	id: string | number;
 	posData: Pos | null; // 添加的posData
+	locationList: Record<PropertyKey, any[]>;
 }
 
 export interface PageType {
@@ -68,6 +69,7 @@ export interface PosItem {
 	exclude: string;
 	weight: number;
 	posId: number;
+	key?: string;
 }
 export interface Pos {
 	id: number;

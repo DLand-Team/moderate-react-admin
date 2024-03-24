@@ -50,6 +50,13 @@ function getPosCarrierListApi() {
 	});
 }
 
+function getLocationListApi() {
+	return http.request<PosCarrier[]>({
+		url: baseUrl + "getLocationList",
+		method: "POST",
+	});
+}
+
 function getAgencyDataApi(data: GetAgencyDataApiParams) {
 	return http.request<PosCarrier[]>({
 		url: baseUrl + "getAgencyData",
@@ -59,6 +66,7 @@ function getAgencyDataApi(data: GetAgencyDataApiParams) {
 }
 
 const devApi = {
+	getLocationListApi,
 	getAgencyDataApi,
 	getPosCarrierListApi,
 	createApi,
