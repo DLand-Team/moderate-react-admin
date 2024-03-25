@@ -5,6 +5,7 @@ import devStore from "./devStore";
 import routerStore from "./routerStore";
 import marketStore from "./marketStore";
 import posStore from "./posStore";
+import carrierStore from "./carrierStore";
 // 组件划分
 import categoryStore from "src/pages/homePage/cmsPage/categoryPage/services";
 
@@ -16,6 +17,7 @@ const stores = {
 	categoryStore,
 	posStore,
 	marketStore,
+	carrierStore,
 };
 
 export { stores };

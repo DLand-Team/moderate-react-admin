@@ -6,6 +6,7 @@ const names = {
 	categoryStore: "categoryStore",
 	posStore: "posStore",
 	marketStore: "marketStore",
+	carrierStore: "carrierStore",
 };
 
 export default names;

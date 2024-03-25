@@ -10,53 +10,59 @@ const useFormFields = <T,>(
 ) => {
 	let recordKeyObj: Record<PropertyKey, any> = {};
 
-	return formList.map((item) => {
-		const { config } = item;
-		const { formRender, formOptions } = config!;
-		const { name } = formOptions!;
-		let temp: any = [];
-		if (Array.isArray(name)) {
-			let nameArr = name.slice(0, -1);
+	return formList
+		.filter((item) => item.fieldConfig)
+		.map((item) => {
+			const { fieldConfig = {}, config } = item;
+			const { formRender, formOptions } = fieldConfig! || config || {};
+			const { name } = formOptions!;
+			let temp: any = [];
+			if (Array.isArray(name)) {
+				let nameArr = name.slice(0, -1);
 
-			nameArr.forEach((nameItem, index) => {
-				if (!recordKeyObj[nameItem]) {
-					recordKeyObj[nameItem] = true;
-					temp.push(
-						<Divider
-							key={`${index} ${nameItem}`}
-							orientation="left"
-						>
-							{index === 0 ? (
-								<h3>{nameItem}</h3>
-							) : (
-								<h5>{nameItem}</h5>
-							)}
-						</Divider>,
-					);
-				}
-			});
-		}
-		let InputItem;
-		if (formRender) {
-			InputItem = formRender();
-		} else if (config) {
-			config.inputAttrConfig = cloneDeep(config.inputAttrConfig || {});
-			if (!("disabled" in config.inputAttrConfig)) {
-				if (isJustShow) {
-					config.inputAttrConfig.disabled = true;
-				} else {
-					config.inputAttrConfig.disabled = false;
-				}
+				nameArr.forEach((nameItem, index) => {
+					if (!recordKeyObj[nameItem]) {
+						recordKeyObj[nameItem] = true;
+						temp.push(
+							<Divider
+								key={`${index} ${nameItem}`}
+								orientation="left"
+							>
+								{index === 0 ? (
+									<h3>{nameItem}</h3>
+								) : (
+									<h5>{nameItem}</h5>
+								)}
+							</Divider>,
+						);
+					}
+				});
 			}
-			InputItem = getField<T>(config, formIns);
-		}
-		return (
-			<Fragment key={item.key}>
-				<>{temp}</>
-				<Form.Item {...item.config?.formOptions}>{InputItem}</Form.Item>
-			</Fragment>
-		);
-	});
+			let InputItem;
+			if (formRender) {
+				InputItem = formRender();
+			} else if (fieldConfig) {
+				fieldConfig.inputAttrConfig = cloneDeep(
+					fieldConfig.inputAttrConfig || {},
+				);
+				if (!("disabled" in fieldConfig.inputAttrConfig)) {
+					if (isJustShow) {
+						fieldConfig.inputAttrConfig.disabled = true;
+					} else {
+						fieldConfig.inputAttrConfig.disabled = false;
+					}
+				}
+				InputItem = getField<T>(fieldConfig, formIns);
+			}
+			return (
+				<Fragment key={item.key}>
+					<>{temp}</>
+					<Form.Item {...item.config?.formOptions}>
+						{InputItem}
+					</Form.Item>
+				</Fragment>
+			);
+		});
 };
 
 export default useFormFields;

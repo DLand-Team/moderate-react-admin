@@ -1,39 +1,54 @@
-import { RouterHelper, useFlat } from "src/reduxService";
 import { Button, Table } from "antd";
-import styles from "./style.module.scss";
 import { useEffect } from "react";
-import { ROUTE_ID } from "src/config/routerConfig";
+import ModalForm from "./components/modalForm/modalForm";
+import SearchForm from "./components/searchForm/searchForm";
+import styles from "./style.module.scss";
 import useConfig from "./useConfig";
+import { useFlat } from "src/reduxService";
 
-const ListPage = () => {
+const CategoryPage = () => {
 	const { columns } = useConfig();
-	const { queryPostListAct } = useFlat("posStore");
-	useEffect(() => {
-		queryPostListAct();
-	}, []);
+	const { setIsShowModal } = useFlat("carrierStore");
+	useEffect(() => {}, []);
 
 	return (
 		<div className={styles.content}>
+			{/* 搜索栏目 */}
+			<SearchForm></SearchForm>
 			{/* 按钮  */}
 			<Button
 				type="primary"
 				onClick={() => {
-					RouterHelper.jumpTo(ROUTE_ID.marketEditPage);
+					setIsShowModal(true);
 				}}
 				style={{
 					marginBottom: 12,
 				}}
 			>
-				+ 添加
+				+ add
 			</Button>
+			{/* modal */}
+			<ModalForm />
+			{/* 表格 */}
 			<Table
 				rowKey={(record) => {
 					return record.id;
 				}}
+				// loading={loading}
+				// pagination={{
+				// 	pageSize,
+				// 	current: pageNum,
+				// 	total,
+				// 	onChange(page, pageSize) {
+				// 		console.log(page, pageSize);
+				// 		handlePageChange(page, pageSize);
+				// 	},
+				// }}
 				columns={columns}
+				// dataSource={dataList}
 			/>
 		</div>
 	);
 };
 
-export default ListPage;
+export default CategoryPage;

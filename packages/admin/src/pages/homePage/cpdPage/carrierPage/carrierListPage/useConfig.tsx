@@ -1,24 +1,58 @@
-import { Modal, Space } from "antd";
-import { Link } from "react-router-dom";
 import { usePageConfig } from "src/common/hooks";
+import { Modal, Space } from "antd";
 import { useFlat } from "src/reduxService";
-import { useTranslation } from "react-i18next";
-import { PageType } from "src/reduxService/stores/posStore/model";
+
+// change the name of the prime to primary
+const TYPE_ENUM = ["prime", "parent", "sub"];
 
 const useConfig = () => {
-	const { deleteAct, posList } = useFlat("posStore");
-	const { t } = useTranslation(["pos"]);
-	return usePageConfig<PageType>(() => {
+	const { setIsShowModal, deleteAct, posList, isShowModal } =
+		useFlat("carrierStore");
+
+	return usePageConfig<any>(() => {
 		return [
 			{
-				title: "NO",
-				dataIndex: "no",
-				key: "no",
-				config: {
-					scope: ["search", "table"],
+				title: "name",
+				dataIndex: "name",
+				key: "name",
+				fieldConfig: {
+					scope: ["modal"],
 					formOptions: {
-						label: "no",
-						name: "no",
+						label: "name",
+						name: "name",
+						rules: [
+							{
+								required: true,
+							},
+							{
+								type: "string",
+								min: 4,
+								max: 60,
+							},
+						],
+					},
+				},
+				render(value) {
+					return (
+						<a
+							onClick={() => {
+								setIsShowModal(true);
+							}}
+						>
+							{value}
+						</a>
+					);
+				},
+			},
+			{
+				title: "description",
+				dataIndex: "description",
+				key: "description",
+				fieldConfig: {
+					isSearch: true,
+					formOptions: {
+						label: "description",
+						name: "description",
 						rules: [
 							{
 								required: true,
@@ -33,85 +67,37 @@ const useConfig = () => {
 				},
 			},
 			{
-				title: t`posPage.posName`,
-				dataIndex: "pos_name",
-				key: "pos_name",
-				render: (item, _) => {
-					// const { posId } = record;
-					return (
-						<Link
-							to={{
-								pathname: "/userCenter/pos/detail",
-								// search: `?title=posTitle&posId=${posId}`,
-							}}
-						>
-							{item}
-						</Link>
-					);
-				},
-				config: {
+				title: "type",
+				dataIndex: "type",
+				key: "type",
+				fieldConfig: {
+					isSearch: true,
+					inputType: "Select",
+					options: TYPE_ENUM,
 					formOptions: {
-						label: "pos_name",
-						name: "pos_name",
+						initialValue: TYPE_ENUM[0],
+						label: "type",
+						name: "type",
 						rules: [
 							{
 								required: true,
-								message: `${t`posPage.placeholder_input`} ${t`posPage.POSName`}`,
-							},
-							{
-								max: 30,
-								message: t`posPage.rule_posName_1`,
-							},
-							{
-								pattern: /^[0-9a-zA-z_-]+$/,
-								message: t`posPage.placeholder_posName`,
-							},
-						],
-					},
-					inputAttrConfig: {
-						placeholder: t`posPage.placeholder_posName`,
-						maxLength: 30,
-						size: "small",
-					},
-				},
-			},
-			{
-				title: t`posPage.comment`,
-				dataIndex: "comment",
-				key: "comment",
-				render: (item, _) => {
-					// const { posId } = record;
-					return (
-						<Link
-							to={{
-								pathname: "/userCenter/pos/detail",
-								// search: `?title=posTitle&posId=${posId}`,
-							}}
-						>
-							{item}
-						</Link>
-					);
-				},
-				config: {
-					formOptions: {
-						label: t`posPage.comment`,
-						name: "comment",
-						rules: [
-							{
-								type: "string",
-								min: 4,
-								max: 60,
 							},
 						],
 					},
 				},
 			},
 			{
-				title: t`posPage.action`,
+				title: "action",
 				key: "action",
 				render: (_, record) => (
 					<Space size="middle">
-						<a onClick={() => {}}>edit</a>
+						<a
+							onClick={() => {
+								setIsShowModal(true);
+							}}
+						>
+							edit
+						</a>
 						<a
 							onClick={() => {
 								Modal.confirm({
@@ -130,7 +116,7 @@ const useConfig = () => {
 				),
 			},
 		];
-	}, [posList]);
+	}, [posList, isShowModal]);
 };
 
 export default useConfig;

@@ -17,7 +17,6 @@ const CategoryPage = () => {
 			{/* 按钮  */}
 			<Button
 				type="primary"
-				onClick={() => {}}
 				style={{
 					marginBottom: 12,
 				}}

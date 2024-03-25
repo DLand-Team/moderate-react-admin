@@ -13,12 +13,12 @@ const usePageConfig = <T,>(
 	const config = useMemo(pageConfigCreater, dep);
 	const columns = useMemo(() => {
 		return config.filter((item) => {
-			const { config = {} } = item;
+			const { fieldConfig = {} } = item;
 			const {
 				formOptions = {},
 				isHidenInTable,
 				scope = ["modal", "search", "table"],
-			} = config;
+			} = fieldConfig;
 			const { name } = formOptions;
 			return (
 				(typeof name == "string" || !name) &&
@@ -29,24 +29,23 @@ const usePageConfig = <T,>(
 	}, dep);
 	const formList = useMemo(() => {
 		return config.filter((item) => {
-			const { config } = item;
-			const { scope = ["modal", "search", "table"] } = config || {};
+			const { fieldConfig } = item;
+			const { scope = ["modal", "search", "table"] } = fieldConfig || {};
 			return config && scope?.includes("modal");
 		});
 	}, dep);
 	const searchList = useMemo(() => {
 		return config.filter((item) => {
-			const { config } = item;
-			const { scope = ["modal", "search", "table"] } = config || {};
+			const { fieldConfig } = item;
+			const { scope = ["modal", "search", "table"] } = fieldConfig || {};
 			return config && scope?.includes("search");
 		});
 	}, dep);
-
 	return {
 		config,
 		columns,
 		formList,
-		searchList
+		searchList,
 	};
 };
 

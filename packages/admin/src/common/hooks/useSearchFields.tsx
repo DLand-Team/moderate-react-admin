@@ -13,8 +13,8 @@ const useSearchFields = <T,>(
 ) => {
 	const { count, form } = options;
 	return columns.map((item, index) => {
-		const { config = {} } = item;
-		let fieldConfigTemp = cloneDeep(config);
+		const { fieldConfig = {} } = item;
+		let fieldConfigTemp = cloneDeep(fieldConfig);
 		const {
 			searchFromRender,
 			formOptions,
@@ -24,7 +24,7 @@ const useSearchFields = <T,>(
 		if (!isSearch) return;
 		if (searchFromRender) {
 			InputItem = searchFromRender;
-		} else if (config) {
+		} else if (fieldConfig) {
 			if (formOptions?.rules) {
 				formOptions.rules.forEach((a: Rule) => {
 					//@ts-ignore
