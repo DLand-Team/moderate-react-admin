@@ -3,9 +3,10 @@ import appStore from "./appStore";
 import authStore from "./authStore";
 import devStore from "./devStore";
 import routerStore from "./routerStore";
+import marketStore from "./marketStore";
+import posStore from "./posStore";
 // 组件划分
 import categoryStore from "src/pages/homePage/cmsPage/categoryPage/services";
-import posStore from "./posStore";
 
 const stores = {
 	appStore,
@@ -14,6 +15,7 @@ const stores = {
 	routerStore,
 	categoryStore,
 	posStore,
+	marketStore,
 };
 
 export { stores };

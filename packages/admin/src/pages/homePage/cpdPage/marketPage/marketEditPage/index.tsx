@@ -26,6 +26,7 @@ const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
 
 const TopPart = () => {
 	const { t } = useTranslation(["pos"]);
+
 	return (
 		<div>
 			<Typography

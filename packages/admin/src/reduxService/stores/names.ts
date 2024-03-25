@@ -5,6 +5,7 @@ const names = {
 	routerStore: "routerStore",
 	categoryStore: "categoryStore",
 	posStore: "posStore",
+	marketStore: "marketStore",
 };
 
 export default names;
