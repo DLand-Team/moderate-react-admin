@@ -1,0 +1,55 @@
+/* Core */
+import { createSliceCustom, PayloadAction } from "redux-eazy";
+import names from "src/reduxService/stores/names";
+import { FilterData, GetListApiRes, PageData, StoreState } from "./model";
+
+const initialState = (): StoreState => {
+  return {
+    isShowModal: false,
+    list: [], // pos列表，
+    id: "", // 编辑页面查看的当前pos的id
+    currentData: null, // 当前pos的数据
+    filterData: {}, //查询数据的对象
+    tablePagedata: {
+      total: 0,
+      pageNum: 1,
+      pageSize: 10,
+    },
+    loading: false,
+    selectedRowKeys: [],
+  };
+};
+
+const slice = createSliceCustom({
+  name: names.filterStore,
+  stateInit: initialState,
+  reducers: {
+    setList(state, data: PayloadAction<GetListApiRes>) {
+      // 设置列表
+      state.list = data.payload.list;
+      state.tablePagedata = {
+        ...state.tablePagedata,
+        total: data.payload.total,
+      };
+    },
+    // 设置查询数据
+    setFilterData(state, data: PayloadAction<Partial<FilterData>>) {
+      state.filterData = {
+        ...state.filterData,
+        ...data.payload,
+      };
+    },
+    setPageData(state, data: PayloadAction<Partial<PageData>>) {
+      state.tablePagedata = {
+        ...state.tablePagedata,
+        ...data.payload,
+      };
+    },
+    // 设置显示弹窗
+    setIsShowModal(state, data: PayloadAction<boolean>) {
+      state.isShowModal = data.payload;
+    },
+  },
+});
+
+export default slice;

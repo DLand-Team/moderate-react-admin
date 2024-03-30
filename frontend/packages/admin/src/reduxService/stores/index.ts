@@ -6,18 +6,22 @@ import routerStore from "./routerStore";
 import marketStore from "./marketStore";
 import posStore from "./posStore";
 import carrierStore from "./carrierStore";
+import sortStore from "./sortStore";
+import filterStore from "./filterStore";
 // 组件划分
 import categoryStore from "src/pages/homePage/cmsPage/categoryPage/services";
 
 const stores = {
-	appStore,
-	authStore,
-	devStore,
-	routerStore,
-	categoryStore,
-	posStore,
-	marketStore,
-	carrierStore,
+  appStore,
+  authStore,
+  devStore,
+  routerStore,
+  categoryStore,
+  posStore,
+  marketStore,
+  carrierStore,
+  sortStore,
+  filterStore,
 };
 
 export { stores };

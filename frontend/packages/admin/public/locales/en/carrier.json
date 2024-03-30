@@ -1,0 +1,23 @@
+{
+  "carrierFamily.SearchName": "Carrier Family",
+  "carrierFamily.ItemList": "Carrier List",
+  "carrierFamily.rule__carrierFamilyName_1": "Please input the carrier family name!",
+  "carrierFamily.rule__carrierFamilyName_2": "Only numbers、'-' or '_' and English are supported. Please input them correctly",
+  "carrierFamily.rule__carrierFamilyName_3": "The maximum length allowed is 30 characters!",
+  "carrierFamily.rule__carrierFamilyList_1": "Please input the carrier list!",
+  "carrierFamily.rule__carrierFamilyList_2": "The maximum length allowed is 20 characters!",
+  "carrierFamily.NO": "NO.",
+  "carrierFamily.listTile": "Carrier Family List",
+  "carrierFamily.add": "Add",
+  "carrierFamily.delete": "Delete",
+  "carrierFamily.carrierFamilyName": "Carrier Family",
+  "carrierFamily.Carrier": "Carrier",
+  "carrierFamily.action": "Actions",
+  "carrierFamily.NewCarrierFamily": "New Carrier Family",
+  "carrierFamily.EditCarrierFamily": "Edit Carrier Family",
+  "carrierFamily.Save": "Save",
+  "carrierFamily.Cancel": "Cancel",
+  "carrierFamily.placeholder_carrierFamilyName": "Please input letters,digits,'-' or '_', at most 30 characters.",
+  "carrierFamily.placeholder_carrierFamilyList": "Please input one or more Airline Codes",
+  "carrierFamily.Search": "Search"
+}

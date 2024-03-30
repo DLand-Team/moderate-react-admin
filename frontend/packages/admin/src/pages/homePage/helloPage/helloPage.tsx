@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import styles from "./helloPage.module.scss";
 
 const HelloPage = () => {
-	const [timeRange] = useState("all");
+  const [timeRange] = useState("all");
 
-	useEffect(() => {}, [timeRange]);
+  useEffect(() => {}, [timeRange]);
 
-	return <div className={styles.content}>12312312312</div>;
+  return <div className={styles.content}></div>;
 };
 
 export default HelloPage;

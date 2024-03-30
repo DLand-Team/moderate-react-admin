@@ -91,7 +91,7 @@ const CustomTable = () => {
 	const save = async (key: React.Key) => {
 		try {
 			const row = (await form.validateFields()) as PosItem;
-			debugger;
+			;
 			const newData = [...posItemList];
 			const index = newData.findIndex((item) => key === item.key);
 			if (index > -1) {

@@ -14,50 +14,48 @@ import { ROUTE_ID } from "src/config/routerConfig";
 import useConfig from "./useConfig";
 
 const CategoryPage = () => {
-	const { columns } = useConfig();
-	const { queryPostListAct } = useFlat("posStore");
-	useEffect(() => {
-		queryPostListAct();
-	}, []);
+  const { columns } = useConfig();
+  const { queryPostListAct } = useFlat("posStore");
+  useEffect(() => {
+    queryPostListAct();
+  }, []);
 
-	return (
-		<div className={styles.content}>
-			{/* 搜索栏目 */}
-			<SearchForm></SearchForm>
-			{/* 按钮  */}
-			<Button
-				type="primary"
-				onClick={() => {
-					RouterHelper.jumpTo(ROUTE_ID.posEditPage);
-				}}
-				style={{
-					marginBottom: 12,
-				}}
-			>
-				+ 添加
-			</Button>
-			{/* modal */}
-			{/* <ModalForm /> */}
-			{/* 表格 */}
-			<Table
-				rowKey={(record) => {
-					return record.id;
-				}}
-				// loading={loading}
-				// pagination={{
-				// 	pageSize,
-				// 	current: pageNum,
-				// 	total,
-				// 	onChange(page, pageSize) {
-				// 		console.log(page, pageSize);
-				// 		handlePageChange(page, pageSize);
-				// 	},
-				// }}
-				columns={columns}
-				// dataSource={dataList}
-			/>
-		</div>
-	);
+  return (
+    <div className={styles.content}>
+      {/* 搜索栏目 */}
+      <SearchForm></SearchForm>
+      {/* 按钮  */}
+      <Button
+        type="primary"
+        onClick={() => {
+          RouterHelper.jumpTo(ROUTE_ID.posEditPage);
+        }}
+        style={{
+          marginBottom: 12,
+        }}>
+        + 添加
+      </Button>
+      {/* modal */}
+      {/* 表格 */}
+      <Table
+        rowKey={(record) => {
+          return record.id;
+        }}
+        // loading={loading}
+        // pagination={{
+        // 	pageSize,
+        // 	current: pageNum,
+        // 	total,
+        // 	onChange(page, pageSize) {
+        // 		console.log(page, pageSize);
+        // 		handlePageChange(page, pageSize);
+        // 	},
+        // }}
+        columns={columns}
+        // dataSource={dataList}
+      />
+    </div>
+  );
 };
 
 export default CategoryPage;

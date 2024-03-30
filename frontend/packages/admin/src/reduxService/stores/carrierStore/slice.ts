@@ -1,56 +1,83 @@
 /* Core */
 import { createSliceCustom, PayloadAction } from "redux-eazy";
-import { Pos, PosCarrier, PosItem, StoreState } from "./model";
 import names from "src/reduxService/stores/names";
+import {
+  FilterData,
+  GetListApiRes,
+  PageData,
+  StoreState,
+  Carrier,
+  CarrierList,
+} from "./model";
 
 const initialState = (): StoreState => {
-	return {
-		isShowModal: false,
-		posList: [], // pos列表，
-		posItemList: [],
-		id: "", // 编辑页面查看的当前pos的id
-		posData: null, // 当前pos的数据
-		posTablePagedata: {
-			total: 0,
-			pageNum: 1,
-			pageSize: 10,
-		},
-		posItemTablePagedata: {
-			total: 0,
-			pageNum: 1,
-			pageSize: 10,
-		},
-		loading: false,
-		posCarrierList: [],
-		locationList: {}, // 添加posItem的posInfo属性枚举值
-	};
+  return {
+    isShowModal: false,
+    list: [], // pos列表，
+    id: "", // 编辑页面查看的当前carrier的id
+    currentData: null, // 当前carrier的数据
+    filterData: {}, //查询数据的对象
+    tablePagedata: {
+      total: 0,
+      pageNum: 1,
+      pageSize: 10,
+    },
+    loading: false,
+    carrierList: [], //航司列表
+    selectedRowKeys: [], //要删除的arrier的id集合
+  };
 };
 
 const slice = createSliceCustom({
-	name: names.carrierStore,
-	stateInit: initialState,
-	reducers: {
-		// 添加postItem
-		addPostItem(state, data: PayloadAction<PosItem>) {
-			state.posItemList = [...state.posItemList, data.payload];
-		},
-		setPostItemList(state, data: PayloadAction<PosItem[]>) {
-			state.posItemList = data.payload;
-		},
-		setPostList(state, data: PayloadAction<Pos[]>) {
-			state.posList = data.payload;
-		},
-		setPosCarrier(state, data: PayloadAction<PosCarrier[]>) {
-			state.posCarrierList = data.payload;
-		},
-		setLocaionList(state, data: PayloadAction<any>) {
-			state.locationList = data.payload;
-		},
-		// 设置显示弹窗
-		setIsShowModal(state, data: PayloadAction<boolean>) {
-			state.isShowModal = data.payload;
-		},
-	},
+  name: names.carrierStore,
+  stateInit: initialState,
+  reducers: {
+    setList(state, data: PayloadAction<GetListApiRes>) {
+      // 设置列表
+      state.list = data.payload.list;
+      state.tablePagedata = {
+        ...state.tablePagedata,
+        total: data.payload.total,
+      };
+    },
+    // 设置查询数据
+    setFilterData(state, data: PayloadAction<Partial<FilterData>>) {
+      state.filterData = {
+        ...state.filterData,
+        ...data.payload,
+      };
+    },
+    setPageData(state, data: PayloadAction<Partial<PageData>>) {
+      state.tablePagedata = {
+        ...state.tablePagedata,
+        ...data.payload,
+      };
+    },
+    // 设置显示弹窗
+    setIsShowModal(state, data: PayloadAction<boolean>) {
+      state.isShowModal = data.payload;
+    },
+    //设置编辑详情信息
+    setCurrentData(state, data: PayloadAction<Carrier | null>) {
+      state.currentData = data?.payload
+        ? {
+            ...data.payload,
+            carriers:
+              typeof data?.payload?.carriers === "string"
+                ? data?.payload?.carriers?.split(",")
+                : data?.payload?.carriers,
+          }
+        : null;
+    },
+    //设置航司列表数据
+    setCarrierList(state, data: PayloadAction<CarrierList[]>) {
+      state.carrierList = data.payload;
+    },
+    //设置要删除的航司
+    setSelectedRowKeys(state, data: PayloadAction<string[]>) {
+      state.selectedRowKeys = data.payload;
+    },
+  },
 });
 
 export default slice;

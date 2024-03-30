@@ -4,13 +4,16 @@ import App from "./app";
 import "./index.css";
 import ServiceProvider from "./reduxService/ServiceProvider";
 import AuthProvider from "./common/provider/authProvider";
+import ThemeProvider from "./theme/provider";
 
 createRoot(document.getElementById("root")!).render(
-	<ServiceProvider>
-		<CustomRouter>
-			<AuthProvider>
-				<App></App>
-			</AuthProvider>
-		</CustomRouter>
-	</ServiceProvider>,
+  <ServiceProvider>
+    <CustomRouter>
+      <AuthProvider>
+        <ThemeProvider>
+          <App></App>
+        </ThemeProvider>
+      </AuthProvider>
+    </CustomRouter>
+  </ServiceProvider>
 );

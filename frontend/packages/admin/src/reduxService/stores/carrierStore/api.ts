@@ -1,78 +1,73 @@
 import { http } from "src/common/http";
 import {
-	GetAgencyDataApiParams,
-	GetPosListApiParams,
-	Pos,
-	PosCarrier,
+  Carrier,
+  DeleteApiParams,
+  GetApiParams,
+  GetListApiParams,
+  GetListApiRes,
+  CarrierList,
 } from "./model";
 
-const baseUrl = "/admin-api/usercenter/cpd-pos/";
+const baseUrl = "/admin-api/usercenter/cpd-carrier-family/";
 // 增
-function createApi(data: Pos) {
-	return http.request({
-		url: baseUrl + "create",
-		method: "POST",
-		data,
-	});
+function createApi(data: Carrier) {
+  return http.request({
+    url: baseUrl + "create",
+    method: "POST",
+    data,
+  });
 }
 
 // 删
-function deleteApi(data: any) {
-	return http.request({
-		url: baseUrl + "delete",
-		method: "POST",
-		data,
-	});
+function deleteApi(data: DeleteApiParams) {
+  return http.request({
+    url: baseUrl + "delete",
+    method: "DELETE",
+    data,
+  });
 }
 
 // 改
-function upadteApi(data: any) {
-	return http.request({
-		url: baseUrl + "update",
-		method: "POST",
-		data,
-	});
+function upadteApi(data: Carrier) {
+  return http.request({
+    url: baseUrl + "update",
+    method: "PUT",
+    data,
+  });
 }
 
-// 查 pos列表
-function getPosListApi(params: GetPosListApiParams) {
-	return http.request<{ list: Pos[] }>({
-		url: baseUrl + "page",
-		method: "GET",
-		params,
-	});
+// 查 列表
+function getListApi(params: GetListApiParams) {
+  return http.request<GetListApiRes>({
+    url: baseUrl + "page",
+    method: "GET",
+    params,
+  });
 }
 
-function getPosCarrierListApi() {
-	return http.request<PosCarrier[]>({
-		url: baseUrl + "getPosCarrierList",
-		method: "POST",
-	});
+// 查详情
+function getDetailApi(params: GetApiParams) {
+  return http.request<Carrier>({
+    url: baseUrl + "get",
+    method: "GET",
+    params,
+  });
 }
-
-function getLocationListApi() {
-	return http.request<PosCarrier[]>({
-		url: baseUrl + "getLocationList",
-		method: "POST",
-	});
-}
-
-function getAgencyDataApi(data: GetAgencyDataApiParams) {
-	return http.request<PosCarrier[]>({
-		url: baseUrl + "getAgencyData",
-		method: "POST",
-		data,
-	});
+//查航司列表
+function getCarrierListApi() {
+  return http.request<CarrierList[]>({
+    url: "/admin-api/usercenter/cpd-rule/" + "getRuleCarrierList",
+    method: "POST",
+  });
 }
 
 const devApi = {
-	getLocationListApi,
-	getAgencyDataApi,
-	getPosCarrierListApi,
-	createApi,
-	deleteApi,
-	upadteApi,
-	getPosListApi,
+  getDetailApi,
+  createApi,
+  deleteApi,
+  upadteApi,
+  getListApi,
+  getCarrierListApi,
 };
 
 export default devApi;

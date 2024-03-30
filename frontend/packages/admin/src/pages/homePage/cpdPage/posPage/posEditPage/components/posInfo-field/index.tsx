@@ -80,7 +80,7 @@ const FieldRenderPosInfo = ({ formIns }: { formIns: FormInstance }) => {
 				}}
 				filterOption={filterOption}
 				onBlur={() => {
-					debugger;
+					;
 					!locationListTemp.length &&
 						formIns.setFieldsValue({
 							["posInfo"]: value,

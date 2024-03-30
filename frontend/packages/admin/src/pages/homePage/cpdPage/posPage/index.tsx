@@ -9,11 +9,11 @@ import { Outlet } from "react-router-dom";
 import styles from "./style.module.scss";
 
 const PosPage = () => {
-	return (
-		<div className={styles.content}>
-			<Outlet />
-		</div>
-	);
+  return (
+    <div className={styles.content}>
+      <Outlet />
+    </div>
+  );
 };
 
 export default PosPage;
