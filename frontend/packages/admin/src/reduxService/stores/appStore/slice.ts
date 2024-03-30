@@ -60,9 +60,6 @@ const appSlice = createSliceCustom({
     setMenuDataAct: (state, { payload }: PayloadAction<MenuItem[]>) => {
       state.menuData = payload;
     },
-    setServerMenuDataAct: (state, { payload }: PayloadAction<MenuItem[]>) => {
-      state.menuData = payload;
-    },
   },
 
   extraReducers: () => {},

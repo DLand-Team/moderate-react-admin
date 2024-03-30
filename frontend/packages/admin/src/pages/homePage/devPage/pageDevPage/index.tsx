@@ -9,6 +9,7 @@ import {
 	AdcompanyPageParams,
 	PageType,
 } from "src/reduxService/stores/devStore/model";
+import { useTranslation } from "react-i18next";
 
 const columns: ColumnsType<PageType> = [
 	{
@@ -47,7 +48,7 @@ const PageDevPage = () => {
 		fetchPageListAct,
 		addPageListAct,
 	} = useFlat("devStore");
-	;
+	const { t } = useTranslation(["dev"]);
 	const { loading: loading1, fn: createArticleListG } = useGreatAsync(
 		fetchPageListAct,
 		{
@@ -70,7 +71,10 @@ const PageDevPage = () => {
 	return (
 		<div className={styles.content}>
 			<div className={styles.operate_board}>
-				<ModalForm btnLabel={"添加路由"} handleUpload={handleUpload} />
+				<ModalForm
+					btnLabel={t`dev.addRouter`}
+					handleUpload={handleUpload}
+				/>
 			</div>
 			<Table
 				rowKey={(record) => {

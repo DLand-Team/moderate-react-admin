@@ -31,7 +31,6 @@ const thunks = createThunks(names.appStore, {
 	createMenuDataAct: async (_, api) => {
 		const { menuPermissions } = api.getState().authStore;
 		const { children = [] } = menuPermissions || {};
-		;
 		const menuData = AppHelper.createMenuData(children);
 		dp("appStore", "setMenuDataAct", menuData);
 	},

@@ -1,4 +1,6 @@
-import { lazy } from "react";
+import {
+  lazy
+} from "react";
 
 // MODERATE_AUTO_PAGE_LAZY_IMPORT:START
 const HomePage = lazy(() => import("./homePage/homePage"));
@@ -24,10 +26,6 @@ const ApiDevPage = lazy(() => import("./homePage/devPage/apiDevPage"));
 ////categoryPage
 const CategoryPage = lazy(() => import("./homePage/cmsPage/categoryPage"));
 
-////testPage
-const TestPage = lazy(() => import("./homePage/cmsPage/testPage/testPage"));
-////test1Page
-const Test1Page = lazy(() => import("./homePage/cmsPage/test1Page/test1Page"));
 ////posPage
 const PosPage = lazy(() => import("./homePage/cpdPage/posPage"));
 
@@ -80,6 +78,8 @@ const CarrierPage = lazy(
 const CarrierListPage = lazy(
   () => import("./homePage/cpdPage/carrierPage/carrierListPage/carrierListPage")
 );
+////menuPage 
+const MenuPage = lazy(() => import("./homePage/sysPage/menuPage/menuPage"));
 //MODERATE_AUTO_PAGE_LAZY_IMPORT:END
 export const pageList = {
   HomePage,
@@ -92,8 +92,6 @@ export const pageList = {
   StoreDevPage,
   ApiDevPage,
   CategoryPage,
-  TestPage,
-  Test1Page,
   PosPage,
   PosEditPage,
   RulePage,
@@ -109,4 +107,5 @@ export const pageList = {
   MarketEditPage,
   CarrierPage,
   CarrierListPage,
+  MenuPage
 };

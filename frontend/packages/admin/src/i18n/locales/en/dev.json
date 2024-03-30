@@ -1,0 +1,8 @@
+{
+	"dev.name": "dev tools",
+	"dev.addRouter": "Add Router",
+	"dev.roleManagement": "Role Management",
+	"dev.sys": "System Management",
+	"dev.cms": "Content Management",
+	"dev.Dashboard": "Dashboard"
+}

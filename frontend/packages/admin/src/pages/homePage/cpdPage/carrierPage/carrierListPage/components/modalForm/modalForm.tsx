@@ -54,7 +54,6 @@ const ModalForm: React.FC = () => {
               ? { ...currentData, ...value, carriers: value.carriers.join(",") }
               : { ...value, ownerId: "1", carriers: value.carriers.join(",") };
             await act(values).then(() => {
-              debugger;
               message.success({
                 content: "操作成功",
               });
