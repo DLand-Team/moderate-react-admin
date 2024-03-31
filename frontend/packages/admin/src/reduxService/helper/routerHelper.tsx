@@ -1,12 +1,11 @@
 import { ItemType } from "antd/es/menu/hooks/useItems";
-import { Suspense } from "react";
+import React, { Suspense } from "react";
 import { Route } from "react-router-dom";
 import historyInstanse from "src/common/components/customRouter/historyInstance";
 import { includeOne } from "src/common/utils";
 import {
 	ROUTE_ID,
 	ROUTE_INFO_CONFIG,
-	ROUTE_NAME,
 	ROUTE_STRUCT_CONFIG,
 } from "src/config/routerConfig";
 import type {
@@ -20,6 +19,7 @@ import { reduxStore as store } from "..";
 export type MenuItem = Partial<ItemType> & {
 	key: ROUTE_ID_KEY;
 	children?: MenuItem[];
+	icon?: React.ReactNode;
 };
 
 export class RouterHelper {
@@ -109,14 +109,10 @@ export class RouterHelper {
 			[key in ROUTE_ID_KEY]: RouteItem;
 		};
 	} => {
-		// 初始化一个这个实体类
-		// 每次执行，确保初始化，防止重新登录
 		let homeChildren = ROUTE_STRUCT_CONFIG.find(
 			(item) => item.id === ROUTE_ID.homePage,
 		)!.children!;
-		homeChildren.sort((a, b) => {
-			return ROUTE_NAME[a.id] - ROUTE_NAME[b.id];
-		});
+
 		// 获取客户端显示的路由作为基础，再去融合后端动态配置权限菜单关联的路由
 		let routesConfig = [...RouterHelper.createClientRoutesConfig()];
 		let targetId = routesConfig.findIndex((item) => {

@@ -7,11 +7,11 @@ import { ROUTE_ID_KEY } from "src/config/types";
 import { useFlat, useResetRedux } from "src/reduxService";
 import { AppHelper, RouterHelper } from "src/reduxService/helper";
 import { ThemeName } from "src/reduxService/stores/appStore/modal";
-import Breadcrumb from "./components/breadcrumb/breadcrumb";
-import OptionsDrawer from "./components/optionsDrawer";
-import OptionsFloatBtn from "./components/optionsFloatBtn";
-import Tabs from "./components/tabs/tabs";
-import styles from "./homePage.module.scss";
+import Breadcrumb from "../../components/breadcrumb/breadcrumb";
+import OptionsDrawer from "../../components/optionsDrawer";
+import OptionsFloatBtn from "../../components/optionsFloatBtn";
+import Tabs from "../../components/tabs/tabs";
+import styles from "./index.module.scss";
 
 const { Header, Content, Sider } = Layout;
 const ThemeSeq: ThemeName[] = ["light", "dark", "auto"];
@@ -42,7 +42,6 @@ const HomePage = ({ children }: React.PropsWithChildren) => {
 	);
 	return (
 		<Layout className={styles.content}>
-			
 			<Header
 				style={{
 					background: antdThemeToken.token.colorBgContainer,

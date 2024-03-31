@@ -1,7 +1,9 @@
+import { MenuItemType } from "antd/es/menu/hooks/useItems";
 import type { RouteProps } from "react-router-dom";
+import { pageList } from "src/pages";
+import { MenuIconType } from "src/static/iconMap";
 import { ACTION_DICT } from "./permissionConfig";
 import { ROUTE_NAME } from "./routerConfig";
-import { pageList } from "src/pages";
 
 export interface ExtendRouteConfig {
 	id?: ROUTE_ID_KEY; // 节点id
@@ -11,7 +13,8 @@ export interface ExtendRouteConfig {
 	depands?: ROUTE_ID_KEY[];
 	meta?: {
 		title?: string;
-	};
+		icon?: MenuIconType;
+	} & Partial<MenuItemType>;
 	children?: RouteItem[];
 	component?: keyof typeof pageList; // 路由组件
 	page?: React.LazyExoticComponent<(props: unknown) => JSX.Element>;

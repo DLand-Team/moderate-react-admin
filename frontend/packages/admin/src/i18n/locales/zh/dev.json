@@ -4,5 +4,6 @@
 	"dev.roleManagement": "规则管理",
 	"dev.sys": "系统管理",
 	"dev.cms": "内容管理",
-	"dev.Dashboard": "仪表盘"
+	"dev.Dashboard": "仪表盘",
+	"dev.cpdPage": "运价规则配置"
 }

@@ -4,5 +4,6 @@
 	"dev.roleManagement": "Role Management",
 	"dev.sys": "System Management",
 	"dev.cms": "Content Management",
-	"dev.Dashboard": "Dashboard"
+	"dev.Dashboard": "Dashboard",
+	"dev.cpdPage": "Cpd"
 }

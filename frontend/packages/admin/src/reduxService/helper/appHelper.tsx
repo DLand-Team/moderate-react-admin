@@ -1,9 +1,10 @@
-import { ROUTE_ID } from "src/config/routerConfig";
+import { ROUTE_ID, ROUTE_NAME } from "src/config/routerConfig";
 import { ROUTE_ID_KEY, RouteItem } from "src/config/types";
 import { reduxStore } from "..";
 import { MenuPermissionItem } from "../stores/authStore/model";
 import { MenuItem, RouterHelper } from "./routerHelper";
-import i18n from "src/i18n";
+import iconMap, { MenuIconType } from "src/static/iconMap";
+import { cloneDeep } from "lodash-es";
 
 export class AppHelper {
 	/**
@@ -30,6 +31,9 @@ export class AppHelper {
 				);
 			}
 		}
+		result.sort((a, b) => {
+			return ROUTE_NAME[a.key] - ROUTE_NAME[b.key];
+		});
 		return result;
 	}
 	/**
@@ -44,9 +48,15 @@ export class AppHelper {
 		result: MenuItem[],
 	) => {
 		data.forEach((item) => {
+			// 通过后端配置的权限，找到对应的前端配置数据
+			// 获取相关信息：图标，国际化等信息
+			const configItem = RouterHelper.getRoutItemConfigById(
+				item.componentName,
+			);
 			const temp: MenuItem = {
 				key: item.componentName,
-				label: item.name,
+				label: configItem.meta?.title || "",
+				icon: configItem.meta?.icon,
 			};
 			result.push(temp);
 			if (item?.children?.length) {
@@ -73,8 +83,8 @@ export class AppHelper {
 			}
 			const temp: MenuItem = {
 				key: item.id!,
-				// icon: createElement(UserOutlined),
-				label: i18n.t(item.meta!?.title!),
+				icon: item.meta?.icon,
+				label: item.meta!?.title! || "",
 			};
 			result.push(temp);
 			if (item?.children?.length) {
@@ -102,6 +112,23 @@ export class AppHelper {
 			openKeys: openKeysTemp.length ? openKeysTemp : [],
 			newTabItem: location,
 		};
+	}
+	// 根据菜单数据（纯原始类型），转换为适用于antd，包含element的完整结构
+	// 为啥转？因为redux内部不可以直接存element类型的数据
+	// 该loop主要是补全icon
+	static transMenuForAntdLoop(data: MenuItem[]) {
+		const result: MenuItem[] = cloneDeep(data);
+		result.forEach((item) => {
+			if (item.icon) {
+				const IconNode = iconMap[item.icon as MenuIconType];
+				//@ts-ignore
+				item.icon = <IconNode />;
+				if (item.children?.length) {
+					item.children = this.transMenuForAntdLoop(item.children);
+				}
+			}
+		});
+		return result;
 	}
 }
 export default new AppHelper();

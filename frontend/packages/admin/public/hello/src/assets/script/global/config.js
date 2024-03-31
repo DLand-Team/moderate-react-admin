@@ -1,0 +1,1 @@
+window.GAME_DATA={ballId:0,characterId:0},window.g_UserData={id:-1,openId:null};

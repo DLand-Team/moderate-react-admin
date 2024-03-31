@@ -1,23 +1,33 @@
 import { ConfigProvider, theme as antdTheme } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import { useFlat } from "src/reduxService";
 
 const ThemeProvider = (props: React.PropsWithChildren) => {
 	const { children } = props;
 	const { setTheme, theme } = useFlat("appStore");
+	const [currentTheme, setCurrentTheme] = useState(theme);
+	useEffect(() => {
+		setCurrentTheme(theme);
+	}, [theme]);
 	// 监听设备的主题
-	const isDeviceDark = useMediaQuery(
+	const isSysDark = useMediaQuery(
 		{
 			query: "(prefers-color-scheme: dark)",
 		},
 		undefined,
 		(isSystemDark: boolean) => {
-			theme == "auto" && setTheme(isSystemDark ? "dark" : "light");
+			const newValue = isSystemDark ? "dark" : "light";
+			if (theme == "auto") {
+				setCurrentTheme(newValue);
+			} else {
+				setTheme(newValue);
+			}
 		},
 	);
-	const isDark =
-		theme == "auto" ? isDeviceDark : theme == "dark" ? true : false;
+	// 如果是auto，那么就跟随系统
+	const isDark = theme == "auto" ? isSysDark : currentTheme == "dark";
+
 	const themeConfig = {
 		algorithm: isDark ? [antdTheme.darkAlgorithm] : [],
 	};

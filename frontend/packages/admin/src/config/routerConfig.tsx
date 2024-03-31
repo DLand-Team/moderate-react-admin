@@ -1,5 +1,6 @@
 import { enumToObject } from "src/common/utils";
 import type { ROUTE_ID_KEY, RouteItem, RoutesStructDataItem } from "./types";
+import i18n from "src/i18n";
 
 // =============== 路由name和id ===============
 // MODERATE_AUTO_2:START
@@ -66,7 +67,8 @@ export const ROUTE_INFO_CONFIG: {
 	helloPage: {
 		id: "helloPage",
 		meta: {
-			title: "dev:dev.Dashboard",
+			title: i18n.t("dev:dev.Dashboard"),
+			icon: "FundProjectionScreenOutlined",
 		},
 		component: "HelloPage",
 		actionPermissions: ["ADD", "EDIT"],
@@ -75,7 +77,8 @@ export const ROUTE_INFO_CONFIG: {
 	sysPage: {
 		id: "sysPage",
 		meta: {
-			title: "dev:dev.sys",
+			title: i18n.t("dev:dev.sys"),
+			icon: "ApartmentOutlined",
 		},
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
@@ -83,7 +86,8 @@ export const ROUTE_INFO_CONFIG: {
 	cmsPage: {
 		id: "cmsPage",
 		meta: {
-			title: "dev:dev.cms",
+			title: i18n.t("dev:dev.cms"),
+			icon: "CoffeeOutlined",
 		},
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
@@ -91,7 +95,8 @@ export const ROUTE_INFO_CONFIG: {
 	cpdPage: {
 		id: "cpdPage",
 		meta: {
-			title: "cpdPage",
+			title: i18n.t("dev:dev.cpdPage"),
+			icon: "FireOutlined",
 		},
 	},
 	userPage: {
@@ -115,7 +120,8 @@ export const ROUTE_INFO_CONFIG: {
 	devPage: {
 		id: "devPage",
 		meta: {
-			title: "dev:dev.name",
+			title: i18n.t("dev:dev.name"),
+			icon: "LaptopOutlined",
 		},
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
