@@ -1,136 +1,131 @@
-import { Modal, Space } from "antd";
-import { Link } from "react-router-dom";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Checkbox, Form, Modal, Space } from "antd";
+import { useTranslation } from "react-i18next";
 import { usePageConfig } from "src/common/hooks";
 import { useFlat } from "src/reduxService";
-import { useTranslation } from "react-i18next";
-import { PageType } from "src/reduxService/stores/posStore/model";
 
 const useConfig = () => {
-	const { deleteAct, posList } = useFlat("posStore");
-	const { t } = useTranslation(["pos"]);
-	return usePageConfig<PageType>(() => {
-		return [
-			{
-				title: "NO",
-				dataIndex: "no",
-				key: "no",
-				config: {
-					scope: ["search", "table"],
-					formOptions: {
-						label: "no",
-						name: "no",
-						rules: [
-							{
-								required: true,
-							},
-							{
-								type: "string",
-								min: 4,
-								max: 60,
-							},
-						],
-					},
-				},
-			},
-			{
-				title: t`posPage.posName`,
-				dataIndex: "pos_name",
-				key: "pos_name",
-				render: (item, _) => {
-					// const { posId } = record;
-					return (
-						<Link
-							to={{
-								pathname: "/userCenter/pos/detail",
-								// search: `?title=posTitle&posId=${posId}`,
-							}}
-						>
-							{item}
-						</Link>
-					);
-				},
-				config: {
-					formOptions: {
-						label: "pos_name",
-						name: "pos_name",
-						rules: [
-							{
-								required: true,
-								message: `${t`posPage.placeholder_input`} ${t`posPage.POSName`}`,
-							},
-							{
-								max: 30,
-								message: t`posPage.rule_posName_1`,
-							},
-							{
-								pattern: /^[0-9a-zA-z_-]+$/,
-								message: t`posPage.placeholder_posName`,
-							},
-						],
-					},
-					inputAttrConfig: {
-						placeholder: t`posPage.placeholder_posName`,
-						maxLength: 30,
-						size: "small",
-					},
-				},
-			},
-			{
-				title: t`posPage.comment`,
-				dataIndex: "comment",
-				key: "comment",
-				render: (item, _) => {
-					// const { posId } = record;
-					return (
-						<Link
-							to={{
-								pathname: "/userCenter/pos/detail",
-								// search: `?title=posTitle&posId=${posId}`,
-							}}
-						>
-							{item}
-						</Link>
-					);
-				},
-				config: {
-					formOptions: {
-						label: t`posPage.comment`,
-						name: "comment",
-						rules: [
-							{
-								type: "string",
-								min: 4,
-								max: 60,
-							},
-						],
-					},
-				},
-			},
-			{
-				title: t`posPage.action`,
-				key: "action",
-				render: (_, record) => (
-					<Space size="middle">
-						<a onClick={() => {}}>edit</a>
-						<a
-							onClick={() => {
-								Modal.confirm({
-									content: "are you sure?",
-									onOk: async () => {
-										await deleteAct({
-											id: record.id,
-										});
-									},
-								});
-							}}
-						>
-							delete
-						</a>
-					</Space>
-				),
-			},
-		];
-	}, [posList]);
+  const { setIsShowModal, deleteAct, list, queryListAct, getDetailAct } =
+    useFlat("filterStore");
+  const { t } = useTranslation(["filter"]);
+  const { t: commonT } = useTranslation(["common"]);
+  return usePageConfig<any>(() => {
+    return [
+      {
+        title: t`filterItem.NO`,
+        dataIndex: "id",
+        key: "id",
+        align: "left",
+        fieldConfig: {
+          scope: ["table"],
+        },
+      },
+      {
+        title: t`filterItem.FilterName`,
+        dataIndex: "filterItemName",
+        key: "filterItemName",
+        fieldConfig: {
+          scope: ["modal", "table", "search"],
+          formOptions: {
+            label: t`filterItem.filterItemName`,
+            name: "filterItemName",
+            rules: [
+              {
+                required: true,
+                message: t`filterItem.rule__filterItemName_1`,
+              },
+              {
+                pattern: /^([a-zA-Z0-9-_]+)$/,
+                message: t`filterItem.rule__filterItemName_2`,
+              },
+              {
+                max: 30,
+                message: t`filterItem.rule__filterItemName_3`,
+              },
+            ],
+          },
+          inputAttrConfig: {
+            placeholder: t`filterItem.placeholder_filterItemName`,
+            maxLength: 30,
+          },
+        },
+      },
+      {
+        title: t`filterItem.AllDirect`,
+        dataIndex: "allDirect",
+        key: "allDirect",
+        fieldConfig: {
+          scope: ["modal", "table"],
+          formOptions: {
+            label: t`filterItem.AllDirect`,
+            name: "allDirect",
+          },
+          render: () => {
+            return (
+              <Form.Item name="allDirect" valuePropName="checked">
+                <Checkbox>{t`filterItem.AllDirect`}</Checkbox>
+              </Form.Item>
+            );
+          },
+        },
+      },
+      {
+        title: t`filterItem.FilterBy`,
+        dataIndex: "allDirect",
+        key: "allDirect",
+        fieldConfig: {
+          scope: ["table"],
+          formOptions: {
+            label: t`filterItem.FilterBy`,
+            name: "FilterBy",
+          },
+          // render: () => {
+          //   return (
+              
+          //   );
+          // },
+        },
+      },
+      {
+        title: commonT`blog.action`,
+        key: "action",
+        render: (_, record) => (
+          <Space size="middle">
+            <EditOutlined
+              style={{
+                fontSize: 15,
+                color: "#1890FF",
+                marginRight: 10,
+              }}
+              onClick={() => {
+                getDetailAct({ id: record.id });
+                setIsShowModal(true);
+              }}
+            />
+            <DeleteOutlined
+              style={{
+                fontSize: 15,
+                color: "#1890FF",
+                marginRight: 10,
+              }}
+              onClick={() => {
+                Modal.confirm({
+                  title: t`filterItem.DelTile`,
+                  content: t`filterItem.modalDeleteContent`,
+                  onOk: async () => {
+                    await deleteAct({
+                      ids: record.id,
+                    });
+                    queryListAct();
+                  },
+                });
+              }}
+            />
+          </Space>
+        ),
+      },
+    ];
+  }, [list]);
 };
 
 export default useConfig;

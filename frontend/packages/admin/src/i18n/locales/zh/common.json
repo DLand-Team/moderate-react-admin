@@ -1,4 +1,8 @@
 {
     "blog.warn_select": "请选择要删除的一个！",
-    "blog.action": "操作"
+    "blog.action": "操作",
+    "blog.modalDeleteTitle": "确认删除这条数据吗?",
+    "blog.modalDeleteContent": "删除后不可恢复！",
+    "blog.Yes": "确认",
+    "blog.No": "取消"
 }

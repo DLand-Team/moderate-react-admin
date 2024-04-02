@@ -7,13 +7,13 @@ import { Carrier, DeleteApiParams, GetApiParams } from "./model";
 
 const thunks = createThunks(names.carrierStore, {
   createAct: async (params: Carrier) => {
-    await httpApi.createApi(params);
+    return await httpApi.createApi(params);
   },
   deleteAct: async (params: DeleteApiParams) => {
     await httpApi.deleteApi(params);
   },
   updateAct: async (params: Carrier) => {
-    await httpApi.upadteApi(params);
+    return await httpApi.upadteApi(params);
   },
   getDetailAct: async (params: GetApiParams) => {
     const { data } = await httpApi.getDetailApi(params);

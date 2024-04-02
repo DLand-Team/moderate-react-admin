@@ -8,6 +8,8 @@ import posStore from "./posStore";
 import carrierStore from "./carrierStore";
 import sortStore from "./sortStore";
 import filterStore from "./filterStore";
+import ruleStore from "./ruleStore";
+import dealStore from "./dealStore";
 // 组件划分
 import categoryStore from "src/pages/homePage/cmsPage/categoryPage/services";
 
@@ -22,6 +24,8 @@ const stores = {
   carrierStore,
   sortStore,
   filterStore,
+  ruleStore,
+  dealStore,
 };
 
 export { stores };

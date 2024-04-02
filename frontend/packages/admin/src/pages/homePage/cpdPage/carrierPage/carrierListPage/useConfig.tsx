@@ -3,6 +3,7 @@ import { Modal, Space, Select, Form } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useFlat } from "src/reduxService";
 import { useTranslation } from "react-i18next";
+let Option = Select.Option;
 
 const useConfig = () => {
   const {
@@ -14,12 +15,14 @@ const useConfig = () => {
     carrierList,
   } = useFlat("carrierStore");
   const { t } = useTranslation(["carrier"]);
+  const { t: commonT } = useTranslation(["common"]);
   return usePageConfig<any>(() => {
     return [
       {
         title: t`carrierFamily.NO`,
         dataIndex: "id",
         key: "id",
+        align: "center",
         fieldConfig: {
           scope: ["table"],
         },
@@ -28,8 +31,8 @@ const useConfig = () => {
         title: t`carrierFamily.carrierFamilyName`,
         dataIndex: "familyName",
         key: "familyName",
+        align: "center",
         fieldConfig: {
-          scope: ["modal", "table", "search"],
           formOptions: {
             label: t`carrierFamily.SearchName`,
             name: "familyName",
@@ -60,6 +63,7 @@ const useConfig = () => {
         title: t`carrierFamily.Carrier`,
         dataIndex: "carriers",
         key: "carriers",
+        align: "center",
         fieldConfig: {
           scope: ["modal", "table"],
           formOptions: {
@@ -93,8 +97,17 @@ const useConfig = () => {
                   allowClear
                   style={{ width: "100%" }}
                   placeholder={t`carrierFamily.placeholder_carrierFamilyList`}
-                  options={carrierList}
-                />
+                >
+                  {carrierList &&
+                    carrierList.length > 0 &&
+                    carrierList.map((item) => {
+                      return (
+                        <Option value={item.carrier} key={item.id}>
+                          {item.carrier}
+                        </Option>
+                      );
+                    })}
+                </Select>
               </Form.Item>
             );
           },
@@ -106,6 +119,7 @@ const useConfig = () => {
       {
         title: t`carrierFamily.action`,
         key: "action",
+        align: "center",
         render: (_, record) => (
           <Space size="middle">
             <a
@@ -119,11 +133,14 @@ const useConfig = () => {
             <a
               onClick={() => {
                 Modal.confirm({
-                  content: "are you sure?",
+                  title: commonT`blog.modalDeleteTitle`,
+                  content: commonT`blog.modalDeleteContent`,
                   onOk: async () => {
-                    await deleteAct({ id: [record.id] });
+                    await deleteAct({ ids: record.id });
                     queryListAct();
                   },
+                  okText: commonT`blog.Yes`,
+                  cancelText: commonT`blog.No`,
                 });
               }}
             >

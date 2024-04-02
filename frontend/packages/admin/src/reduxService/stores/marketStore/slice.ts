@@ -1,51 +1,46 @@
 /* Core */
 import { createSliceCustom, PayloadAction } from "redux-eazy";
-import { Market, PosCarrier, PosItem, StoreState } from "./model";
+import { Market, MarketItem, StoreState } from "./model";
 import names from "src/reduxService/stores/names";
 
 const initialState = (): StoreState => {
-	return {
-		marketList: [], // marketList列表，
-		posItemList: [],
-		id: "", // 编辑页面查看的当前pos的id
-		posData: null, // 当前pos的数据
-		posTablePagedata: {
-			total: 0,
-			pageNum: 1,
-			pageSize: 10,
-		},
-		posItemTablePagedata: {
-			total: 0,
-			pageNum: 1,
-			pageSize: 10,
-		},
-		loading: false,
-		posCarrierList: [],
-		locationList: {}, // 添加posItem的posInfo属性枚举值
-	};
+  return {
+    marketList: [], // marketList列表，
+    marketItemList: [],
+    id: "", // 编辑页面查看的当前market的id
+    marketData: null, // 当前market的数据
+    marketTablePagedata: {
+      total: 0,
+      pageNum: 1,
+      pageSize: 10,
+    },
+    marketItemTablePagedata: {
+      total: 0,
+      pageNum: 1,
+      pageSize: 10,
+    },
+    loading: false,
+    locationList: {}, // 添加marketItem的marketInfo属性枚举值
+  };
 };
 
 const slice = createSliceCustom({
-	name: names.marketStore,
-	stateInit: initialState,
-	reducers: {
-		// 添加postItem
-		addPostItem(state, data: PayloadAction<PosItem>) {
-			state.posItemList = [...state.posItemList, data.payload];
-		},
-		setPostItemList(state, data: PayloadAction<PosItem[]>) {
-			state.posItemList = data.payload;
-		},
-		setPostList(state, data: PayloadAction<Market[]>) {
-			state.marketList = data.payload;
-		},
-		setPosCarrier(state, data: PayloadAction<PosCarrier[]>) {
-			state.posCarrierList = data.payload;
-		},
-		setLocaionList(state, data: PayloadAction<any>) {
-			state.locationList = data.payload;
-		},
-	},
+  name: names.marketStore,
+  stateInit: initialState,
+  reducers: {
+    addMarketItem(state, data: PayloadAction<MarketItem>) {
+      state.marketItemList = [...state.marketItemList, data.payload];
+    },
+    setMarketItemList(state, data: PayloadAction<MarketItem[]>) {
+      state.marketItemList = data.payload;
+    },
+    setMarketList(state, data: PayloadAction<Market[]>) {
+      state.marketList = data.payload;
+    },
+    setLocaionList(state, data: PayloadAction<any>) {
+      state.locationList = data.payload;
+    },
+  },
 });
 
 export default slice;

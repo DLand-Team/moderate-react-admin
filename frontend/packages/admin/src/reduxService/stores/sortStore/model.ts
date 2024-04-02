@@ -18,13 +18,6 @@ export interface PageData {
 
 export type FilterData = Partial<Omit<Sort, "id">>;
 
-export interface GetAgencyDataApiParams {
-  posType: string;
-  posInfo: string;
-  officeOwner: string;
-  agentOrAirline: string;
-}
-
 export interface Sort {
   id: string;
   sortString: string[] | string;
@@ -39,7 +32,7 @@ export type GetListApiParams = {
 } & FilterData;
 
 export interface DeleteApiParams {
-  id: string[];
+  ids: string;
 }
 
 export interface GetListApiRes {

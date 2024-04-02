@@ -51,7 +51,5 @@ export interface FieldConfig<T = any> {
 }
 
 export interface MyColumnType<T> extends ColumnType<T> {
-	config?: FieldConfig<T>;
 	fieldConfig?: FieldConfig<T>;
 }
-

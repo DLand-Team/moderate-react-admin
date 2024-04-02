@@ -19,5 +19,6 @@
   "carrierFamily.Cancel": "Cancel",
   "carrierFamily.placeholder_carrierFamilyName": "Please input letters,digits,'-' or '_', at most 30 characters.",
   "carrierFamily.placeholder_carrierFamilyList": "Please input one or more Airline Codes",
-  "carrierFamily.Search": "Search"
+  "carrierFamily.Search": "Search",
+  "carrierFamily.Succeed": "Succeed"
 }

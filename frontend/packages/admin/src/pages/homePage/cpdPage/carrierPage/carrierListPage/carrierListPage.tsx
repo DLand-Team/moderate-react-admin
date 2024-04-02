@@ -1,4 +1,4 @@
-import { Button, Table, message } from "antd";
+import { Button, Table, message, Modal } from "antd";
 import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useEffect } from "react";
 import { useFlat } from "src/reduxService";
@@ -61,8 +61,16 @@ const CategoryPage = () => {
               if (selectedRowKeys.length == 0) {
                 return message.warning(commonT`blog.warn_select`);
               }
-              deleteAct({ id: selectedRowKeys });
-              queryListAct();
+              Modal.confirm({
+                title: commonT`blog.modalDeleteTitle`,
+                content: commonT`blog.modalDeleteContent`,
+                onOk: async () => {
+                  await deleteAct({ ids: selectedRowKeys.join(",") });
+                  queryListAct();
+                },
+                okText: commonT`blog.Yes`,
+                cancelText: commonT`blog.No`,
+              });
             }}
             style={{
               marginLeft: 12,

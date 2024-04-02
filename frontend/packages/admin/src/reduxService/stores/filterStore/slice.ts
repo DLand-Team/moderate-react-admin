@@ -1,7 +1,14 @@
 /* Core */
 import { createSliceCustom, PayloadAction } from "redux-eazy";
 import names from "src/reduxService/stores/names";
-import { FilterData, GetListApiRes, PageData, StoreState } from "./model";
+import {
+  FilterData,
+  GetListApiRes,
+  PageData,
+  StoreState,
+  Filter,
+  FilterItem,
+} from "./model";
 
 const initialState = (): StoreState => {
   return {
@@ -16,7 +23,14 @@ const initialState = (): StoreState => {
       pageSize: 10,
     },
     loading: false,
-    selectedRowKeys: [],
+    selectedRowKeys: [], //要删除的arrier的id集合
+    filterItemList:[],//创建fiiter表格数据
+    filterItemTablePagedata: {//fiiter表格分页
+			total: 0,
+			pageNum: 1,
+			pageSize: 10,
+		},
+    allDirect:false
   };
 };
 
@@ -48,6 +62,30 @@ const slice = createSliceCustom({
     // 设置显示弹窗
     setIsShowModal(state, data: PayloadAction<boolean>) {
       state.isShowModal = data.payload;
+    },
+    //设置编辑详情信息
+    setCurrentData(state, data: PayloadAction<Filter | null>) {
+      state.currentData = data?.payload
+        ? {
+            ...data.payload,
+          }
+        : null;
+    },
+    //设置要删除的航司
+    setSelectedRowKeys(state, data: PayloadAction<string[]>) {
+      state.selectedRowKeys = data.payload;
+    },
+
+    // 添加postItem
+    addFilterItem(state, data: PayloadAction<FilterItem>) {
+      state.filterItemList = [...state.filterItemList, data.payload];
+    },
+    setFilterItemList(state, data: PayloadAction<FilterItem[]>) {
+      state.filterItemList = data.payload;
+    },
+
+    setAllDirect(state, data: PayloadAction<boolean>) {
+      state.allDirect = data.payload;
     },
   },
 });

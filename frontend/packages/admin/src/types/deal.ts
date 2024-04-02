@@ -7,8 +7,10 @@ export interface IBaseModel {
 
 	deleted_at: string;
 }
+
 export enum DealStatus {
 	PENDING = "pending",
+	DRAFTING = "drafting",
 	REJECTED = "rejected",
 	// status of business logic
 	ACTIVE = "active",
@@ -22,62 +24,64 @@ export enum DealStatus {
 }
 
 export enum DealType {
-	CAPITAL_RAISING = "capital_raising",
-	EQUITY = "equity",
-	STARTUP_PITCH = "startup_pitch",
+	ALL = "",
 	PARTNERSHIPS = "partnerships",
+	CAPITAL_RAISING = "capital_raising",
+	STARTUP_PITCH = "startup_pitch",
+	EQUITY = "equity",
 	SELL_A_BUSINESS = "sell_a_business",
 }
 
-export interface IDealTeamMember {
-	name: string;
-	title: string;
-	description: string;
-	image: string;
-	level: number; // member of different level will be presented differently on frontend, 0 is the highest level and will be on top of everyone else --- most likely the founder.
-}
+export interface IAskInfo {
+	partnerships: {
+		partners: Array<string>;
+	};
 
-export interface IDealGeneralComponent {
-	title: string;
-	sub_title?: string;
-	description?: string;
-	image?: string[];
-	video?: string;
-	content?: string;
-	name?: string;
+	sell_a_business: {
+		amount: number;
+		vendor_finance: boolean;
+	};
+
+	capital_raising: {
+		amount: number;
+	};
+
+	startup_pitch: {
+		amount: number;
+		usage: string;
+		partners: Array<string>;
+	};
+
+	equity: {
+		amount: number;
+		usage: string;
+		partners: Array<string>;
+	};
 }
 
 export interface IDealMedia {
 	linkedin: string;
 	facebook: string;
 	instagram: string;
-	related_pages: Array<string>;
+	file: Array<string>;
+}
+
+export interface IDealTeamMember {
+	name: string;
+	title: string;
+	image: string;
 }
 
 export interface IDealComponentList {
-	pics: Array<string>; // main pics
-	video?: Array<string>; // main video
-
 	// general components
-	highlights?: string[];
-	executive_summary?: IDealGeneralComponent;
-	problem_to_be_solved?: IDealGeneralComponent;
-	vision?: IDealGeneralComponent;
-	product?: IDealGeneralComponent;
-	traction?: IDealGeneralComponent;
-	business_model?: IDealGeneralComponent;
-	funding?: IDealGeneralComponent;
-	team?: IDealTeamMember[];
+	business_name: string;
+	business_website: string;
 
-	custormers: IDealGeneralComponent;
-	market: IDealGeneralComponent;
-	competition: IDealGeneralComponent;
-	customers: IDealGeneralComponent;
-	media: IDealMedia;
-	faq: {
-		question: string;
-		answer: string;
-	}[];
+	problem_to_be_solved?: string;
+	solution?: string;
+	achivement?: string;
+	business_model?: string;
+	funding?: string;
 }
 
 export interface IDealUpdateItem {
@@ -87,54 +91,135 @@ export interface IDealUpdateItem {
 	pic_url: string;
 }
 
+export interface IDealFaqComponent {
+	question: string;
+	answer: string;
+}
+
+export interface IDealTeamMemberList {
+	team: Array<IDealTeamMember>;
+}
+
+export interface IDealFaqComponentList {
+	faq: Array<IDealFaqComponent>;
+}
+
 export interface DealEntity extends IBaseModel {
-	type: DealType; // 交易类型 必选
+	// used for search
+	priority: number;
 
-	title: string; // 标题 / 名字 必填
+	// flags
+	is_draft: boolean;
 
-	sub_title: string; // 副标题 / 简介 必填
+	is_submitted: boolean;
 
-	logo: string | null; // logo
+	is_approved: boolean;
+	// end of flags
 
-	vendor_financing: boolean; // 是否提供卖家融资  default: false
+	// core fields (step 1 - step 7)
+	type: DealType;
 
-	amount: number | null; // 交易金额 必填
+	title: string;
 
-	ask_desc: string | null; // 交易描述 必填
+	industry: string;
 
-	created_at: string;
+	overview: string;
 
-	expire_at: Date; // 不需要填写 会自动生成
+	address: string;
 
-	rating: number; // 评分 0-5 不需要填写 会自动生成
+	ask: IAskInfo;
 
-	status: DealStatus; // 状态 不需要填写 会自动生成， 如果被拒绝了 就是rejected， 需要显示 reject_reason， 弄个红色的框体来装内容
+	highlights: Array<string>;
 
-	reject_reason: string; // 拒绝理由 这个是审核的时候 如果拒绝了 填写的
+	// step 7 pics and logo(logo is optional)
+	pics: Array<string>; // main pics
 
-	tags?: Array<string> | null; // 标签 暂时不管
+	logo: string;
+	// end of core fields
 
-	components: IDealComponentList; // 交易的组件列表
+	// optional fields (step 9)
+	components: IDealComponentList;
 
-	events: Array<IDealUpdateItem>; // 交易的历史信息记录
+	teams: Array<IDealTeamMember>;
 
-	attachments: Array<string>; // 交易的附件列表
+	documents_social: IDealMedia;
 
-	reasons: string; // 交易关闭的理由 暂时不管这个字段
+	faq: Array<IDealFaqComponent>;
+	// all steps finished
 
-	user_id: number; // 交易的创建者 必填
+	// additional fields
+	expire_at: Date;
 
-	category_id: number; // 交易所属的分类 必填
+	// search related
+	rating: number;
 
-	prime_category_name: string; // 交易所属的主分类名称 后端生成 不需要填写
+	status: DealStatus;
 
-	parent_category_name: string; //  交易所属的父分类名称 后端生成 不需要填写
+	reject_reason: string;
 
-	sub_category_name: string; // 交易所属的子分类名称 后端生成 不需要填写
+	tags?: Array<string>;
 
-	liked: boolean; // 动态字段 用来判断当前用户是否已经把这个交易加入了收藏夹
+	reasons: string;
 
 	last_business_for_sale_reminder_sent_at: Date;
 
+	// relations, loose coupled, avoid strong relations
+	user_id: number;
+
+	category_id: number;
+
 	official_deal_id: number;
+
+	// additional fields used for fast loading instead of has to do multiple joins, trade off is data duplication
+	prime_category_name: string;
+
+	parent_category_name: string;
+
+	sub_category_name: string;
+
+	// liked field is used to indicate if the deal is in user's likelist, the value will be determined dynamically after query in marketplace / detail page
+	liked: boolean;
+
+	// draft_step is used to indicate the current step of the deal, the value will be determined dynamically after query in marketplace / detail page
+	draft_step: number;
+}
+
+export interface IDealCreationModel {
+	type: DealType;
+
+	title: string;
+
+	industry: string;
+}
+
+export interface IDealUpdateModel {
+	id?: number;
+
+	type: DealType;
+
+	title: string;
+
+	industry: string;
+
+	overview?: string;
+
+	address?: string;
+
+	ask?: IAskInfo;
+
+	highlights?: Array<string>;
+
+	pics?: Array<string>;
+
+	logo?: string;
+
+	components?: IDealComponentList;
+
+	teams?: IDealTeamMemberList;
+
+	faq?: IDealFaqComponentList;
+
+	documents_social?: IDealMedia;
+
+	prime_category_name: string;
 }

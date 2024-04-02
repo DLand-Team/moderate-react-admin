@@ -1,5 +1,7 @@
 import dev from "./dev.json";
+import pos from "./pos.json";
 const resourcesZh = {
-	dev,
+  dev,
+  pos,
 };
 export default resourcesZh;

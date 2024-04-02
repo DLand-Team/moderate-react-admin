@@ -137,7 +137,7 @@ const useConfig = () => {
 				config: {
 					isSearch: true,
 					type: "Select",
-					options: (props) => {
+					options: (props: any) => {
 						const { formIns } = props! || {};
 						let primeIdValue = formIns?.getFieldsValue()?.prime_id;
 						return primeIdValue

@@ -32,7 +32,7 @@ export type GetListApiParams = {
 } & FilterData;
 
 export interface DeleteApiParams {
-  id: string[];
+  ids: string;
 }
 
 export interface GetListApiRes {
@@ -43,7 +43,7 @@ export interface GetApiParams {
   id: string;
 }
 export interface CarrierList {
-  carrierId: number;
+  id: number;
   carrier: string;
   type: number;
 }

@@ -1,15 +1,15 @@
 import { http } from "src/common/http";
 import {
-  Carrier,
+  Filter,
   DeleteApiParams,
   GetApiParams,
   GetListApiParams,
   GetListApiRes,
 } from "./model";
 
-const baseUrl = "/admin-api/usercenter/cpd-carrier-family/";
+const baseUrl = "/admin-api/usercenter/cpd-filter-item/";
 // 增
-function createApi(data: Carrier) {
+function createApi(data: Filter) {
   return http.request({
     url: baseUrl + "create",
     method: "POST",
@@ -20,14 +20,14 @@ function createApi(data: Carrier) {
 // 删
 function deleteApi(params: DeleteApiParams) {
   return http.request({
-    url: baseUrl + "delete",
+    url: baseUrl + "deleteByIds",
     method: "DELETE",
     params,
   });
 }
 
 // 改
-function upadteApi(data: Carrier) {
+function upadteApi(data: Filter) {
   return http.request({
     url: baseUrl + "update",
     method: "PUT",
@@ -46,7 +46,7 @@ function getListApi(params: GetListApiParams) {
 
 // 查详情
 function getDetail(params: GetApiParams) {
-  return http.request<Carrier>({
+  return http.request<Filter>({
     url: baseUrl + "get",
     method: "GET",
     params,

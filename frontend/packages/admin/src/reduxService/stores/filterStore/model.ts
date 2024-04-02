@@ -8,6 +8,14 @@ export interface StoreState {
   filterData: FilterData;
   loading: boolean;
   selectedRowKeys: string[];
+  filterItemList: FilterItem[]; //创建fiiter表格数据
+  filterItemTablePagedata: {
+    //fiiter表格分页
+    total: number;
+    pageSize: number;
+    pageNum: number;
+  };
+  allDirect: boolean;
 }
 
 export interface PageData {
@@ -18,18 +26,28 @@ export interface PageData {
 
 export type FilterData = Partial<Omit<Filter, "id">>;
 
-export interface GetAgencyDataApiParams {
-  posType: string;
-  posInfo: string;
-  officeOwner: string;
-  agentOrAirline: string;
+export interface Filter {
+  id: string;
+  filterItemName: string;
+  allDirect: boolean;
+  ownerId: string;
+  travelTime: number;
+  travelTimeType: number;
+  travelTimeOperator: number;
+  price: number;
+  priceOperator: number;
+  layover: number;
+  layoverOperator: number;
+  connections: number;
+  connectionsOperator: number;
 }
 
-export interface Filter {
-  id: number;
-  carriers: string | string[];
-  familyName: string;
-  ownerId: string;
+export interface FilterItem {
+  filterBy: string;
+  operator: number;
+  number: string;
+  pv: number;
+  key: string;
 }
 
 export type GetListApiParams = {
@@ -38,7 +56,7 @@ export type GetListApiParams = {
 } & FilterData;
 
 export interface DeleteApiParams {
-  id: string[];
+  ids: string;
 }
 
 export interface GetListApiRes {

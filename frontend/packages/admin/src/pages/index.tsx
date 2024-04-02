@@ -1,6 +1,4 @@
-import {
-  lazy
-} from "react";
+import { lazy } from "react";
 
 // MODERATE_AUTO_PAGE_LAZY_IMPORT:START
 const HomePage = lazy(() => import("./homePage/homePage"));
@@ -35,9 +33,13 @@ const PosEditPage = lazy(
 );
 ////rulePage
 const RulePage = lazy(() => import("./homePage/cpdPage/rulePage/rulePage"));
+////rulePage
+const RuleListPage = lazy(
+  () => import("./homePage/cpdPage/rulePage/ruleListPage")
+);
 ////ruleEditPage
 const RuleEditPage = lazy(
-  () => import("./homePage/cpdPage/rulePage/ruleEditPage/ruleEditPage")
+  () => import("./homePage/cpdPage/rulePage/ruleEditPage")
 );
 ////notFundPage
 const NotFundPage = lazy(() => import("./homePage/notFundPage/notFundPage"));
@@ -78,8 +80,9 @@ const CarrierPage = lazy(
 const CarrierListPage = lazy(
   () => import("./homePage/cpdPage/carrierPage/carrierListPage/carrierListPage")
 );
-////menuPage 
+////menuPage
 const MenuPage = lazy(() => import("./homePage/sysPage/menuPage/menuPage"));
+const DealPage = lazy(() => import("./homePage/cmsPage/dealPage/dealPage"));
 //MODERATE_AUTO_PAGE_LAZY_IMPORT:END
 export const pageList = {
   HomePage,
@@ -95,6 +98,7 @@ export const pageList = {
   PosPage,
   PosEditPage,
   RulePage,
+  RuleListPage,
   RuleEditPage,
   NotFundPage,
   PosListPage,
@@ -107,5 +111,6 @@ export const pageList = {
   MarketEditPage,
   CarrierPage,
   CarrierListPage,
-  MenuPage
+  MenuPage,
+  DealPage,
 };

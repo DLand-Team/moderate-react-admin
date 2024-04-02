@@ -1,78 +1,72 @@
 import { http } from "src/common/http";
 import {
-	GetAgencyDataApiParams,
-	GetPosListApiParams,
-	Market,
-	PosCarrier,
+  GetMarketListApiParams,
+  Market,
+  DeleteApiParams,
+  DetailApiParams,
 } from "./model";
 
-const baseUrl = "/admin-api/usercenter/cpd-pos/";
+const baseUrl = "/admin-api/usercenter/cpd-market/";
 // 增
 function createApi(data: Market) {
-	return http.request({
-		url: baseUrl + "create",
-		method: "POST",
-		data,
-	});
+  return http.request({
+    url: baseUrl + "create",
+    method: "POST",
+    data,
+  });
 }
 
 // 删
-function deleteApi(data: any) {
-	return http.request({
-		url: baseUrl + "delete",
-		method: "POST",
-		data,
-	});
+function deleteApi(data: DeleteApiParams) {
+  return http.request({
+    url: baseUrl + "deleteByIds",
+    method: "DELETE",
+    data,
+  });
 }
 
 // 改
-function upadteApi(data: any) {
-	return http.request({
-		url: baseUrl + "update",
-		method: "POST",
-		data,
-	});
+function upadteApi(data: Market) {
+  return http.request({
+    url: baseUrl + "update",
+    method: "PUT",
+    data,
+  });
 }
 
-// 查 pos列表
-function getPosListApi(params: GetPosListApiParams) {
-	return http.request<{ list: Market[] }>({
-		url: baseUrl + "page",
-		method: "GET",
-		params,
-	});
+// 查列表
+function getMarketListApi(params: GetMarketListApiParams) {
+  return http.request<{ list: Market[] }>({
+    url: baseUrl + "page",
+    method: "GET",
+    params,
+  });
 }
 
-function getPosCarrierListApi() {
-	return http.request<PosCarrier[]>({
-		url: baseUrl + "getPosCarrierList",
-		method: "POST",
-	});
+//查详情
+function getMarketDetailListApi(params: DetailApiParams) {
+  return http.request({
+    url: baseUrl + "cpd-market-item/list-by-market-id",
+    method: "GET",
+    params,
+  });
 }
 
+//获取locationList列表
 function getLocationListApi() {
-	return http.request<PosCarrier[]>({
-		url: baseUrl + "getLocationList",
-		method: "POST",
-	});
-}
-
-function getAgencyDataApi(data: GetAgencyDataApiParams) {
-	return http.request<PosCarrier[]>({
-		url: baseUrl + "getAgencyData",
-		method: "POST",
-		data,
-	});
+  return http.request({
+    url: baseUrl + "getLocationList",
+    method: "POST",
+  });
 }
 
 const devApi = {
-	getLocationListApi,
-	getAgencyDataApi,
-	getPosCarrierListApi,
-	createApi,
-	deleteApi,
-	upadteApi,
-	getPosListApi,
+  getLocationListApi,
+  getMarketDetailListApi,
+  createApi,
+  deleteApi,
+  upadteApi,
+  getMarketListApi,
 };
 
 export default devApi;

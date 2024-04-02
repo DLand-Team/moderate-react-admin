@@ -1,86 +1,86 @@
 export interface StoreState {
-	marketList: Market[];
-	posItemList: PosItem[];
-	posTablePagedata: {
-		total: number;
-		pageSize: number;
-		pageNum: number;
-	};
-	posItemTablePagedata: {
-		total: number;
-		pageSize: number;
-		pageNum: number;
-	};
-	loading: boolean;
-	posCarrierList: PosCarrier[];
-	id: string | number;
-	posData: Market | null; // 添加的posData
-	locationList: Record<PropertyKey, any[]>;
+  marketList: Market[];
+  marketItemList: MarketItem[];
+  marketTablePagedata: {
+    total: number;
+    pageSize: number;
+    pageNum: number;
+  };
+  marketItemTablePagedata: {
+    total: number;
+    pageSize: number;
+    pageNum: number;
+  };
+  loading: boolean;
+  id: string | number;
+  marketData: Market | null; // 添加的marketData
+  locationList: Record<PropertyKey, any[]>;
 }
 
 export interface PageType {
-	created_at: Date;
-	deleted_at: Date;
-	description: string;
-	id: number;
-	name: string;
-	parent_id: number;
-	prime_id: number;
-	updated_at: Date;
+  created_at: Date;
+  deleted_at: Date;
+  description: string;
+  id: number;
+  name: string;
+  parent_id: number;
+  prime_id: number;
+  updated_at: Date;
 }
 
 export interface QueryActParams {
-	created_at?: string[];
-	deleted_at?: string[];
-	ids?: number[];
-	names?: string[];
-	order?: { [key: string]: any };
-	page?: number;
-	page_size?: number;
-	parrent_id?: number;
-	prime_id?: number;
-	updated_at?: string[];
-}
-
-export interface PosCarrier {
-	id: number;
-	carrier: string;
-	type: number;
-	deleted: boolean;
+  created_at?: string[];
+  deleted_at?: string[];
+  ids?: number[];
+  names?: string[];
+  order?: { [key: string]: any };
+  page?: number;
+  page_size?: number;
+  parrent_id?: number;
+  prime_id?: number;
+  updated_at?: string[];
 }
 
 export interface GetAgencyDataApiParams {
-	posType: string;
-	posInfo: string;
-	officeOwner: string;
-	agentOrAirline: string;
+  marketType: string;
+  marketInfo: string;
+  officeOwner: string;
+  agentOrAirline: string;
 }
-export interface PosItem {
-	createTime: string;
-	updateTime: string;
-	creator: string;
-	updater: string;
-	deleted: true;
-	id: number;
-	posInfo: string;
-	posType: string;
-	agentOrAirline: string;
-	officeOwner: string;
-	exclude: string;
-	weight: number;
-	posId: number;
-	key?: string;
+export interface MarketItem {
+  createTime: string;
+  updateTime: string;
+  creator: string;
+  updater: string;
+  deleted: true;
+  id: number;
+  locationInfo: string;
+  locationType: string;
+  exclude: string;
+  weight: number;
+  marketId: number;
+  key?: string;
 }
 export interface Market {
-	id: number;
-	posName: string;
-	ownerId: string;
-	comment: string;
-	cpdPosItems: PosItem[];
+  id: number;
+  marketName: string;
+  marketType: number;
+  comment: string;
+  ownerId: string;
+  cpdMarketItems: MarketItem[];
 }
 
-export interface GetPosListApiParams {
-	pageNo: string | number;
-	pageSize: string | number;
-	posName?: string | number;
+export interface GetMarketListApiParams {
+  pageNo: string | number;
+  pageSize: string | number;
+  marketName?: string;
+  marketType?: string;
+  ownerId?: string;
+  comment?: string;
+}
+export interface DeleteApiParams {
+  ids: string[];
+}
+export interface DetailApiParams {
+  marketId: number;
 }

@@ -19,5 +19,6 @@
   "carrierFamily.Cancel": "取消",
   "carrierFamily.placeholder_carrierFamilyName": "英文字母，数字或'-','_',最长30个字符",
   "carrierFamily.placeholder_carrierFamilyList": "请输入航司二字码，可以多个",
-  "carrierFamily.Search": "查询"
+  "carrierFamily.Search": "查询",
+  "carrierFamily.Succeed": "操作成功"
 }

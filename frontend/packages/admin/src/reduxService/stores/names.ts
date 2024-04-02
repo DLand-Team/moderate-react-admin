@@ -9,6 +9,8 @@ const names = {
   carrierStore: "carrierStore",
   sortStore: "sortStore",
   filterStore: "filterStore",
+  ruleStore: "ruleStore",
+  dealStore: "dealStore",
 };
 
 export default names;

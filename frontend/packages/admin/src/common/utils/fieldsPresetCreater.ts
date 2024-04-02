@@ -15,7 +15,7 @@ export const getInputNumerFormItemConfig = <T>(
 		title: name,
 		dataIndex: name,
 		key: name,
-		config: {
+		fieldConfig: {
 			scope,
 			formOptions: {
 				rules: [
@@ -38,9 +38,9 @@ export const fieldCreater = <T>(
 	name: string,
 	options: MyColumnType<T> = {},
 ): MyColumnType<T> => {
-	let { config } = options;
-	if (!config || Object.values(config).length === 0) {
-		config = {
+	let { fieldConfig } = options;
+	if (!fieldConfig || Object.values(fieldConfig).length === 0) {
+		fieldConfig = {
 			type: "Input",
 			isSearch: true,
 			formOptions: {
@@ -54,7 +54,7 @@ export const fieldCreater = <T>(
 			},
 		};
 	}
-	config.formOptions = {
+	fieldConfig.formOptions = {
 		name: name,
 		label: name,
 		rules: [
@@ -62,12 +62,12 @@ export const fieldCreater = <T>(
 				required: true,
 			},
 		],
-		...(config.formOptions || {}),
+		...(fieldConfig.formOptions || {}),
 	};
 	return {
 		title: name,
 		dataIndex: name,
 		key: name,
-		config,
+		fieldConfig,
 	};
 };

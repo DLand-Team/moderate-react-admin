@@ -60,13 +60,11 @@ const ListPage = () => {
           <Button
             onClick={() => {
               Modal.confirm({
-                title: t`sortItem.DelTile`,
-                content: t`sortItem.modalDeleteContent`,
+                title: commonT`blog.modalDeleteTitle`,
+                content: commonT`blog.modalDeleteContent`,
                 onOk: async () => {
                   if (selectedRowKeys.length > 0) {
-                    await deleteAct({
-                      id: selectedRowKeys,
-                    });
+                    await deleteAct({ ids: selectedRowKeys.join(",") });
                     queryListAct();
                   } else {
                     return messageApi.open({

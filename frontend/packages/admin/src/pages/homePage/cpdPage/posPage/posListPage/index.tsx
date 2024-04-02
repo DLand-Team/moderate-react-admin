@@ -15,7 +15,7 @@ import useConfig from "./useConfig";
 
 const CategoryPage = () => {
   const { columns } = useConfig();
-  const { queryPostListAct } = useFlat("posStore");
+  const { queryPostListAct, posList } = useFlat("posStore");
   useEffect(() => {
     queryPostListAct();
   }, []);
@@ -52,7 +52,7 @@ const CategoryPage = () => {
         // 	},
         // }}
         columns={columns}
-        // dataSource={dataList}
+        dataSource={posList}
       />
     </div>
   );

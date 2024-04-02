@@ -66,7 +66,14 @@ const ModalForm: React.FC = () => {
                   ownerId: "FN",
                   sortString: value.sortString.join(","),
                 };
-            await act(values);
+            await act(values).then((res) => {
+              const { payload } = res;
+              if (payload?.code == 0 || payload?.code == 200) {
+                message.success({
+                  content: t`carrierFamily.Succeed`,
+                });
+              }
+            });
             message.success({
               content: t`sortItem.Succeed`,
             });

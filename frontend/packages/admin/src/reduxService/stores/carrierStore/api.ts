@@ -19,11 +19,11 @@ function createApi(data: Carrier) {
 }
 
 // 删
-function deleteApi(data: DeleteApiParams) {
+function deleteApi(params: DeleteApiParams) {
   return http.request({
-    url: baseUrl + "delete",
+    url: baseUrl + "deleteByIds",
     method: "DELETE",
-    data,
+    params,
   });
 }
 

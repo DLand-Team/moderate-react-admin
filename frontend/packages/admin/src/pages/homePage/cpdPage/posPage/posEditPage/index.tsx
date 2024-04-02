@@ -1,97 +1,45 @@
-import {
-  Button,
-  Col,
-  Form,
-  Input,
-  Row,
-  Typography,
-  type FormProps,
-} from "antd";
+import { Button, Form } from "antd";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { RouterHelper } from "src/reduxService";
-import TablePart from "./components/tablePart";
+import { useSearchParams } from "react-router-dom";
+import { useGreatAsync } from "src/common/hooks";
+import { RouterHelper, useFlat } from "src/reduxService";
+import PosItemsTable from "./components/tablePart";
+import TopForm, { TopPartForm } from "./components/topForm";
 import "./index.scss";
-type FieldType = {
-  posName?: string;
-  comment?: string;
-};
-
-const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-  console.log("Success:", values);
-};
-
-const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
-
-const TopPart = () => {
-  const { t } = useTranslation(["pos"]);
-  return (
-    <div>
-      <Typography
-        style={{
-          fontSize: "16px",
-          marginBottom: "30px",
-        }}>
-        {t("posPage.itemListTitle")}
-      </Typography>
-      <Form
-        layout="vertical"
-        name="basic"
-        wrapperCol={{ span: 16 }}
-        style={{ width: "100%" }}
-        initialValues={{ remember: true }}
-        onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
-        autoComplete="off">
-        <Row
-          style={{
-            width: "100%",
-          }}>
-          <Col span={12}>
-            <Form.Item<FieldType>
-              label="销售地名称"
-              name="posName"
-              rules={[
-                {
-                  required: true,
-                  message: `${t("posPage.placeholder_input")} ${t(
-                    "posPage.POSName"
-                  )}`,
-                },
-                {
-                  max: 30,
-                  message: t("posPage.rule_posName_1"),
-                },
-                {
-                  pattern: /^[0-9a-zA-z_-]+$/,
-                  message: t("posPage.placeholder_posName"),
-                },
-              ]}>
-              <Input />
-            </Form.Item>
-          </Col>
-
-          <Col span={12}>
-            <Form.Item<FieldType> label="描述" name="comment">
-              <Input.TextArea style={{ height: 120 }} />
-            </Form.Item>
-          </Col>
-        </Row>
-      </Form>
-    </div>
-  );
-};
 
 const Page = () => {
+  // 第一步：通过路由信息判断是否是编辑
+  const [formRef] = Form.useForm<TopPartForm>();
+  let [searchParams] = useSearchParams();
+  const id = searchParams.get("id");
+  const { addAct, initCurrentDataAct, currentData } = useFlat("posStore");
+  useEffect(() => {
+    initCurrentDataAct({
+      id,
+    });
+  }, []);
   const { t } = useTranslation(["pos"]);
+  const { fn: addActDebounce } = useGreatAsync(addAct, {
+    auto: false,
+    single: true,
+  });
   return (
     <div className="posEditContent">
-      <TopPart></TopPart>
-      <TablePart></TablePart>
+      {/* 无id，则为添加，直接显示 */}
+      {/* 有id，则为修改，为了回显ok，保证数据获得再显示 */}
+      {(!id || (id && currentData)) && (
+        <>
+          <TopForm formRef={formRef}></TopForm>
+          <PosItemsTable></PosItemsTable>
+        </>
+      )}
       <div className="btnTable">
         <Button
-          // onClick={debounce(this.save)}
+          onClick={async () => {
+            await formRef.validateFields();
+            addActDebounce();
+          }}
           style={{ marginRight: 10 }}
           type="primary">
           {t`posPage.save`}

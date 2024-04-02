@@ -7,7 +7,9 @@ type ItemKey =
   | "ROUTES_CONFIG_MAP"
   | "ROUTES_CONFIG"
   | "TABS_HISTORY"
-  | "THEME";
+  | "THEME"
+  | "BTN_TIME"
+  | "BTN_CON";
 
 const storageHelper = {
   setItem: (

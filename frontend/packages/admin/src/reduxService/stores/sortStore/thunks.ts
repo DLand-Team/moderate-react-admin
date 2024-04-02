@@ -7,13 +7,13 @@ import { Sort, DeleteApiParams,GetApiParams } from "./model";
 
 const thunks = createThunks(names.sortStore, {
   createAct: async (params: Sort) => {
-    await httpApi.createApi(params);
+    return await httpApi.createApi(params);
   },
   deleteAct: async (params: DeleteApiParams) => {
     await httpApi.deleteApi(params);
   },
   updateAct: async (params: Sort) => {
-    await httpApi.upadteApi(params);
+    return await httpApi.upadteApi(params);
   },
   getDetailAct: async (params: GetApiParams) => {
     // await httpApi.getDetail(params);

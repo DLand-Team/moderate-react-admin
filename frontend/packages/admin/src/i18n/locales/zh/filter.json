@@ -37,5 +37,7 @@
     "filterItem.warn_addFilterItem":"至少设置一条过滤条件！",
     "filterItem.warn_addFilterItemLength":"超出数量!",
     "filterItem.YES":"是",
-    "filterItem.NOT":"否"
+    "filterItem.NOT":"否",
+    "filterItem.addLine":"添加一行",
+    "filterItem.EditCancel":"取消编辑？"
 }

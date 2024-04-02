@@ -1,7 +1,7 @@
-import { MyColumnType } from "src/common/model/fieldsHooks";
-import { Divider, Form, FormInstance } from "antd";
+import { Divider, FormInstance } from "antd";
 import { cloneDeep } from "lodash-es";
 import { Fragment } from "react";
+import { MyColumnType } from "src/common/model/fieldsHooks";
 import { getField } from "src/common/utils";
 
 const useFormFields = <T,>(
@@ -11,15 +11,14 @@ const useFormFields = <T,>(
 	let recordKeyObj: Record<PropertyKey, any> = {};
 
 	return formList
-		.filter((item) => item.fieldConfig)
+		.filter((item) => item.fieldConfig || item.fieldConfig!?.formOptions)
 		.map((item) => {
-			const { fieldConfig = {}, config } = item;
-			const { formRender, formOptions } = fieldConfig! || config || {};
-			const { name } = formOptions!;
+			const { fieldConfig = {}, dataIndex } = item;
+			const { formRender, formOptions } = fieldConfig! || {};
+			const { name } = formOptions! || { name: dataIndex };
 			let temp: any = [];
 			if (Array.isArray(name)) {
 				let nameArr = name.slice(0, -1);
-
 				nameArr.forEach((nameItem, index) => {
 					if (!recordKeyObj[nameItem]) {
 						recordKeyObj[nameItem] = true;
@@ -55,11 +54,9 @@ const useFormFields = <T,>(
 				InputItem = getField<T>(fieldConfig, formIns);
 			}
 			return (
-				<Fragment key={item.key}>
+				<Fragment key={item.key || String(item.dataIndex)}>
 					<>{temp}</>
-					<Form.Item {...item.config?.formOptions}>
-						{InputItem}
-					</Form.Item>
+					{InputItem}
 				</Fragment>
 			);
 		});

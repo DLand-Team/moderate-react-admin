@@ -20,7 +20,7 @@ function createApi(data: Sort) {
 // 删
 function deleteApi(params: DeleteApiParams) {
   return http.request({
-    url: baseUrl + "delete",
+    url: baseUrl + "deleteByIds",
     method: "DELETE",
     params,
   });

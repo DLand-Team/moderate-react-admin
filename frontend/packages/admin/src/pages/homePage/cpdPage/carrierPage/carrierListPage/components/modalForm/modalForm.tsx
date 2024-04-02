@@ -53,10 +53,14 @@ const ModalForm: React.FC = () => {
             let values = currentData
               ? { ...currentData, ...value, carriers: value.carriers.join(",") }
               : { ...value, ownerId: "1", carriers: value.carriers.join(",") };
-            await act(values).then(() => {
-              message.success({
-                content: "操作成功",
-              });
+
+            act(values).then((res) => {
+              const { payload } = res;
+              if (payload?.code == 0 || payload?.code == 200) {
+                message.success({
+                  content: t`carrierFamily.Succeed`,
+                });
+              }
             });
             setIsShowModal(false);
             form.resetFields();

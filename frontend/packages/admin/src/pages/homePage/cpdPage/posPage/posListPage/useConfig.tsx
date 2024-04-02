@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import { usePageConfig } from "src/common/hooks";
 import { useFlat } from "src/reduxService";
 import { useTranslation } from "react-i18next";
-import { PageType } from "src/reduxService/stores/posStore/model";
+import { Pos } from "src/reduxService/stores/posStore/model";
+import { RouterHelper } from "src/reduxService/helper/routerHelper";
+import { ROUTE_ID } from "src/config/routerConfig";
 
 const useConfig = () => {
   const { deleteAct, posList } = useFlat("posStore");
   const { t } = useTranslation(["pos"]);
-  return usePageConfig<PageType>(() => {
+  return usePageConfig<Pos>(() => {
     return [
       {
         title: "NO",
@@ -109,7 +111,16 @@ const useConfig = () => {
         key: "action",
         render: (_, record) => (
           <Space size="middle">
-            <a onClick={() => {}}>edit</a>
+            <a
+              onClick={() => {
+                RouterHelper.jumpTo(ROUTE_ID.posEditPage, {
+                  search: {
+                    id: record.id,
+                  },
+                });
+              }}>
+              edit
+            </a>
             <a
               onClick={() => {
                 Modal.confirm({

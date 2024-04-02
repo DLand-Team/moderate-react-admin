@@ -37,6 +37,8 @@
     "filterItem.warn_addFilterItem":  "At least one filter item must be added!",
     "filterItem.warn_addFilterItemLength":  "Over quantity!",
     "filterItem.YES":  "YES",
-    "filterItem.NOT":  "NO"
+    "filterItem.NOT":  "NO",
+    "filterItem.addLine":"New Line",
+    "filterItem.EditCancel":"Sure to cancel ?"
 }
    
