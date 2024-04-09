@@ -12,14 +12,14 @@ const initialState = (): StoreState => {
     routesConfigMap: cloneDeep(ROUTE_INFO_CONFIG),
   });
   const children = routesConfig.find((item) => {
-    return item!?.id === ROUTE_ID.homePage;
+    return item!?.id === ROUTE_ID.HomePage;
   })?.children;
   const menuData = AppHelper.createMenuDataLoop(children!, []);
   return {
     menuDefaultSelectedKeys: [],
     menuDefaultOpenKeys: null,
     menuData: menuData,
-    tabsHistory: storageHelper.getItem("TABS_HISTORY") || {},
+    tabsHistory: storageHelper.getItem("TABS_HISTORY") || [],
     tabItems: [],
     activeTabKey: "",
     theme: storageHelper.getItem("THEME") || "light",

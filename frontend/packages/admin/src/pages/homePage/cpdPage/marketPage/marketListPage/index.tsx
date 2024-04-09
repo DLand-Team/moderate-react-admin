@@ -5,21 +5,25 @@
  * @LastEditTime: 2024-03-19 11:35:29
  * @Description: Do not edit
  */
-import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
+import { RouterHelper, useFlat } from "src/reduxService";
 import { Button, Table } from "antd";
-import { useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import { useFlat } from "src/reduxService";
 import SearchForm from "./components/searchForm/searchForm";
 import styles from "./style.module.scss";
+import { useEffect } from "react";
+import { ROUTE_ID } from "src/config/routerConfig";
 import useConfig from "./useConfig";
 
-const CategoryPage = () => {
-  const { t } = useTranslation(["market"]);
+const Page = () => {
   const { columns } = useConfig();
-  const { queryMarketListAct } = useFlat("marketStore");
+  const {
+    queryMarkettListAct,
+    marketList,
+    marketTablePagedata,
+    setMarketTablePageData,
+  } = useFlat("marketStore");
+  const { pageNum, pageSize, total } = marketTablePagedata;
   useEffect(() => {
-    queryMarketListAct();
+    queryMarkettListAct();
   }, []);
 
   return (
@@ -27,69 +31,41 @@ const CategoryPage = () => {
       {/* 搜索栏目 */}
       <SearchForm></SearchForm>
       {/* 按钮  */}
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <div>{t`carrierFamily.listTile`}</div>
-        <div>
-          <Button
-            type="primary"
-            onClick={() => {
-              // setIsShowModal(true);
-              // dp("carrierStore", "setCurrentData", null);
-            }}
-            style={{
-              marginBottom: 12,
-            }}
-            icon={<PlusOutlined />}
-          >
-            {t`carrierFamily.add`}
-          </Button>
-          <Button
-            onClick={() => {
-              // if (selectedRowKeys.length == 0) {
-              //   return message.warning(commonT`blog.warn_select`);
-              // }
-              // Modal.confirm({
-              //   title: commonT`blog.modalDeleteTitle`,
-              //   content: commonT`blog.modalDeleteContent`,
-              //   onOk: async () => {
-              //     await deleteAct({ ids: selectedRowKeys.join(",") });
-              //     queryListAct();
-              //   },
-              //   okText: commonT`blog.Yes`,
-              //   cancelText: commonT`blog.No`,
-              // });
-            }}
-            style={{
-              marginLeft: 12,
-            }}
-            icon={<DeleteOutlined />}
-          >
-            {t`carrierFamily.delete`}
-          </Button>
-        </div>
-      </div>
+      <Button
+        type="primary"
+        onClick={() => {
+          RouterHelper.jumpTo(ROUTE_ID.MarketEditPage);
+        }}
+        style={{
+          marginBottom: 12,
+        }}>
+        + 添加
+      </Button>
       {/* modal */}
-      {/* <ModalForm /> */}
       {/* 表格 */}
       <Table
         rowKey={(record) => {
-          return record.id;
+          return record.id || record.marketName;
         }}
-        // loading={loading}
-        // pagination={{
-        // 	pageSize,
-        // 	current: pageNum,
-        // 	total,
-        // 	onChange(page, pageSize) {
-        // 		console.log(page, pageSize);
-        // 		handlePageChange(page, pageSize);
-        // 	},
-        // }}
+        pagination={{
+          pageSizeOptions: [5, 10],
+          showSizeChanger: true,
+          pageSize,
+          current: pageNum,
+          total,
+          showTotal: (total) => `Total ${total} items`,
+          onChange(pageNum, pageSize) {
+            setMarketTablePageData({
+              pageNum,
+              pageSize,
+            });
+          },
+        }}
         columns={columns}
-        // dataSource={dataList}
+        dataSource={marketList}
       />
     </div>
   );
 };
 
-export default CategoryPage;
+export default Page;

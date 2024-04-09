@@ -1,114 +1,70 @@
-import {
-	Button,
-	Col,
-	Form,
-	Input,
-	Row,
-	Typography,
-	type FormProps,
-} from "antd";
-import "./index.scss";
+import { Button, Form, message } from "antd";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { RouterHelper } from "src/reduxService";
-import TablePart from "./components/tablePart";
-type FieldType = {
-	posName?: string;
-	comment?: string;
-};
-
-const onFinish: FormProps<FieldType>["onFinish"] = (values) => {
-	console.log("Success:", values);
-};
-
-const onFinishFailed: FormProps<FieldType>["onFinishFailed"] = (errorInfo) => {
-	console.log("Failed:", errorInfo);
-};
-
-const TopPart = () => {
-	const { t } = useTranslation(["pos"]);
-
-	return (
-		<div>
-			<Typography
-				style={{
-					fontSize: "16px",
-					marginBottom: "30px",
-				}}
-			>
-				{t("posPage.itemListTitle")}
-			</Typography>
-			<Form
-				layout="vertical"
-				name="basic"
-				wrapperCol={{ span: 16 }}
-				style={{ width: "100%" }}
-				initialValues={{ remember: true }}
-				onFinish={onFinish}
-				onFinishFailed={onFinishFailed}
-				autoComplete="off"
-			>
-				<Row
-					style={{
-						width: "100%",
-					}}
-				>
-					<Col span={12}>
-						<Form.Item<FieldType>
-							label="销售地名称"
-							name="posName"
-							rules={[
-								{
-									required: true,
-									message: `${t("posPage.placeholder_input")} ${t("posPage.POSName")}`,
-								},
-								{
-									max: 30,
-									message: t("posPage.rule_posName_1"),
-								},
-								{
-									pattern: /^[0-9a-zA-z_-]+$/,
-									message: t("posPage.placeholder_posName"),
-								},
-							]}
-						>
-							<Input />
-						</Form.Item>
-					</Col>
-
-					<Col span={12}>
-						<Form.Item<FieldType> label="描述" name="comment">
-							<Input.TextArea style={{ height: 120 }} />
-						</Form.Item>
-					</Col>
-				</Row>
-			</Form>
-		</div>
-	);
-};
+import { useSearchParams } from "react-router-dom";
+import { useGreatAsync } from "src/common/hooks";
+import { AppHelper, useFlat } from "src/reduxService";
+import MarketItemsTable from "./components/tablePart";
+import TopForm, { TopPartForm } from "./components/topForm";
+import "./index.scss";
 
 const Page = () => {
-	const { t } = useTranslation(["pos"]);
-	return (
-		<div className="posEditContent">
-			<TopPart></TopPart>
-			<TablePart></TablePart>
-			<div className="btnTable">
-				<Button
-					// onClick={debounce(this.save)}
-					style={{ marginRight: 10 }}
-					type="primary"
-				>
-					{t`posPage.save`}
-				</Button>
-				<Button
-					onClick={() => {
-						RouterHelper.goBack();
-					}}
-				>
-					{t`posPage.cancel`}
-				</Button>
-			</div>
-		</div>
-	);
+  // 第一步：通过路由信息判断是否是编辑
+  const [formRef] = Form.useForm<TopPartForm>();
+  let [searchParams] = useSearchParams();
+  const id = searchParams.get("id");
+  const {
+    addAct,
+    updateAct,
+    initCurrentDataAct,
+    currentData,
+    setCurrentMarketData,
+  } = useFlat("marketStore");
+  useEffect(() => {
+    initCurrentDataAct({
+      id,
+    });
+    return () => {
+      setCurrentMarketData(null);
+    };
+  }, []);
+  const { t } = useTranslation(["market"]);
+  const { fn: addActDebounce } = useGreatAsync(addAct, {
+    auto: false,
+    single: true,
+  });
+  return (
+    <div className="marketEditContent">
+      {/* 无id，则为添加，直接显示 */}
+      {/* 有id，则为修改，为了回显ok，保证数据获得再显示 */}
+      {(!id || (id && currentData)) && (
+        <>
+          <TopForm formRef={formRef}></TopForm>
+          <MarketItemsTable></MarketItemsTable>
+        </>
+      )}
+      <div className="btnTable">
+        <Button
+          onClick={async () => {
+            await formRef.validateFields();
+            await (!id ? addActDebounce() : updateAct());
+            message.success({
+              content: "添加成功",
+            });
+            AppHelper.closeTabByPath();
+          }}
+          style={{ marginRight: 10 }}
+          type="primary">
+          {t`marketPage.save`}
+        </Button>
+        <Button
+          onClick={() => {
+            AppHelper.closeTabByPath();
+          }}>
+          {t`marketPage.cancel`}
+        </Button>
+      </div>
+    </div>
+  );
 };
 export default Page;

@@ -25,10 +25,10 @@ function loginNestApi(params: LoginNestApiParams) {
     },
   });
 }
-
+// 登录接口
 function loginApi(params: LoginApiParams) {
   return http.request<{ accessToken: string }>({
-    url: baseUrl + "/auth/login",
+    url: baseUrl + "/auth/login-uc",
     method: "POST",
     data: params,
   });
@@ -39,17 +39,26 @@ function fetchUserPermissins() {
     method: "GET",
   });
 }
-
+//获取滑块图片
 function getImageUrlApi() {
   return http.request({
     url: baseUrl + "/auth/imageUrl",
     method: "POST",
   });
 }
+//获取活块验证成功标志
 function getCaptchaApi() {
   return http.request({
     url: baseUrl + "/auth/captcha",
     method: "POST",
+  });
+}
+//获取邮箱验证码
+function getLoginCodeApi(params: any = {}) {
+  return http.request({
+    url: baseUrl + "/captcha/getUc",
+    method: "POST",
+    data: params,
   });
 }
 
@@ -59,6 +68,7 @@ const api = {
   fetchUserPermissins,
   getImageUrlApi,
   getCaptchaApi,
+  getLoginCodeApi,
 };
 
 export default api;

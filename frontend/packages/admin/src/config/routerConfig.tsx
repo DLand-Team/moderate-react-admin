@@ -5,38 +5,34 @@ import i18n from "src/i18n";
 // =============== 路由name和id ===============
 // MODERATE_AUTO_2:START
 export enum ROUTE_NAME {
-  homePage,
-  loginPage,
-  helloPage,
-  sysPage,
-  cpdPage,
-  cmsPage,
-  rolePage,
-  userPage,
-  devPage,
-  pageDevPage,
-  permissionPage,
-  storeDevPage,
-  apiDevPage,
-  categoryPage,
-  posPage,
-  posEditPage,
-  rulePage,
-  ruleListPage,
-  ruleEditPage,
-  notFundPage,
-  posListPage,
-  filterPage,
-  filterListPage,
-  sortPage,
-  sortListPage,
-  marketPage,
-  marketListPage,
-  marketEditPage,
-  carrierPage,
-  carrierListPage,
-  menuPage,
-  dealPage,
+	HomePage,
+	LoginPage,
+	HelloPage,
+	CpdPage,
+	SysPage,
+	CmsPage,
+	RolePage,
+	UserPage,
+	DevPage,
+	PageDevPage,
+	PermissionPage,
+	StoreDevPage,
+	ApiDevPage,
+	PosPage,
+	PosEditPage,
+	NotFundPage,
+	PosListPage,
+	FilterPage,
+	FilterListPage,
+	SortPage,
+	SortListPage,
+	MarketPage,
+	MarketListPage,
+	MarketEditPage,
+	CarrierPage,
+	CarrierListPage,
+	MenuPage,
+	DealPage,
 }
 // MODERATE_AUTO_2:END
 
@@ -45,412 +41,360 @@ export const ROUTE_ID = enumToObject(ROUTE_NAME);
 // ROUTE_INFO_CONFIG，路由信息字典
 // MODERATE_AUTO_3:START
 export const ROUTE_INFO_CONFIG: {
-  [key in ROUTE_ID_KEY]: RouteItem;
+	[key in ROUTE_ID_KEY]: RouteItem;
 } = {
-  loginPage: {
-    id: "loginPage",
-    meta: {
-      title: "Login",
-    },
-    component: "LoginPage",
-    path: "/login",
-    isNoAuth: true,
-  },
-  homePage: {
-    id: "homePage",
-    meta: {
-      title: "Home",
-    },
-    path: "/",
-    component: "HomePage",
-    actionPermissions: ["ADD", "EDIT"],
-    isNoAuth: true,
-  },
-  helloPage: {
-    id: "helloPage",
-    meta: {
-      title: i18n.t("dev:dev.Dashboard"),
-      icon: "FundProjectionScreenOutlined",
-    },
-    component: "HelloPage",
-    actionPermissions: ["ADD", "EDIT"],
-    isNoAuth: true,
-  },
-  sysPage: {
-    id: "sysPage",
-    meta: {
-      title: i18n.t("dev:dev.sys"),
-      icon: "ApartmentOutlined",
-    },
-    actionPermissions: ["ADD", "EDIT"],
-    isNoAuth: true,
-  },
-  cmsPage: {
-    id: "cmsPage",
-    meta: {
-      title: i18n.t("dev:dev.cms"),
-      icon: "CoffeeOutlined",
-    },
-    actionPermissions: ["ADD", "EDIT"],
-    isNoAuth: true,
-  },
-  cpdPage: {
-    id: "cpdPage",
-    meta: {
-      title: i18n.t("dev:dev.cpdPage"),
-      icon: "FireOutlined",
-    },
-    isNoAuth: true,
-  },
-  userPage: {
-    id: "userPage",
-    meta: {
-      title: "User Management",
-    },
-    actionPermissions: ["ADD", "EDIT"],
-    component: "UserPage",
-    isNoAuth: true,
-  },
-  rolePage: {
-    id: "rolePage",
-    meta: {
-      title: "Role Management",
-    },
-    component: "RolePage",
-    actionPermissions: ["ADD", "EDIT"],
-    isNoAuth: true,
-  },
-  devPage: {
-    id: "devPage",
-    meta: {
-      title: i18n.t("dev:dev.name"),
-      icon: "LaptopOutlined",
-    },
-    actionPermissions: ["ADD", "EDIT"],
-    isNoAuth: true,
-  },
-  pageDevPage: {
-    id: "pageDevPage",
-    meta: {
-      title: "Router Management",
-    },
-    component: "PageDevPage",
-    actionPermissions: ["ADD", "EDIT"],
-    isNoAuth: true,
-  },
-  permissionPage: {
-    id: "permissionPage",
-    meta: {
-      title: "Permission Management",
-    },
-    component: "PermissionPage",
-    isMenu: false,
-    actionPermissions: ["ADD", "EDIT"],
-    isNoAuth: true,
-  },
-  storeDevPage: {
-    id: "storeDevPage",
-    meta: {
-      title: "Store Management",
-    },
-    component: "StoreDevPage",
-    actionPermissions: ["ADD", "EDIT"],
-    isNoAuth: true,
-  },
-  apiDevPage: {
-    id: "apiDevPage",
-    meta: {
-      title: "API Management",
-    },
-    component: "ApiDevPage",
-    isNoAuth: true,
-    actionPermissions: ["ADD", "EDIT"],
-  },
-  categoryPage: {
-    id: "categoryPage",
-    meta: {
-      title: "Category Management",
-    },
-    component: "CategoryPage",
-    isNoAuth: true,
-  },
-  posPage: {
-    id: "posPage",
-    meta: {
-      title: "posPage",
-    },
-    component: "PosPage",
-    isNoAuth: true,
-  },
-  posEditPage: {
-    id: "posEditPage",
-    meta: {
-      title: "posEditPage",
-    },
-    component: "PosEditPage",
-    // depands: ["posPage"],
-    isNoAuth: true,
-  },
-  rulePage: {
-    id: "rulePage",
-    meta: {
-      title: "rulePage",
-    },
-    component: "RulePage",
-  },
-  ruleListPage: {
-    id: "ruleListPage",
-    index: true,
-    meta: {
-      title: "ruleListPage",
-    },
-    component: "RuleListPage",
-    depands: ["rulePage"],
-  },
-  ruleEditPage: {
-    id: "ruleEditPage",
-    meta: {
-      title: "ruleEditPage",
-    },
-    component: "RuleEditPage",
-    depands: ["rulePage"],
-  },
-  notFundPage: {
-    id: "notFundPage",
-    meta: {
-      title: "notFundPage",
-    },
-    component: "NotFundPage",
-    isNoAuth: true,
-    isMenu: false,
-    path: "*",
-  },
-  posListPage: {
-    id: "posListPage",
-    meta: {
-      title: "posListPage",
-    },
-    index: true,
-    component: "PosListPage",
-    depands: ["posPage"],
-  },
-  filterPage: {
-    id: "filterPage",
-    meta: {
-      title: "filterPage",
-    },
-    component: "FilterPage",
-    isNoAuth: true,
-  },
-  filterListPage: {
-    id: "filterListPage",
-    meta: {
-      title: "filterListPage",
-    },
-    component: "FilterListPage",
-    depands: ["filterPage"],
-    isNoAuth: true,
-    index: true,
-  },
-  sortPage: {
-    id: "sortPage",
-    meta: {
-      title: "sortPage",
-    },
-    component: "SortPage",
-    isNoAuth: true,
-  },
-  sortListPage: {
-    id: "sortListPage",
-    meta: {
-      title: "sortListPage",
-    },
-    component: "SortListPage",
-    isNoAuth: true,
-    index: true,
-    depands: ["sortPage"],
-  },
-  marketPage: {
-    id: "marketPage",
-    meta: {
-      title: "marketPage",
-    },
-    component: "MarketPage",
-    index: false,
-  },
-  marketListPage: {
-    id: "marketListPage",
-    meta: {
-      title: "marketListPage",
-    },
-    component: "MarketListPage",
-    index: true,
-    depands: ["marketPage"],
-  },
-  marketEditPage: {
-    id: "marketEditPage",
-    meta: {
-      title: "marketEditPage",
-    },
-    component: "MarketEditPage",
-    index: false,
-    depands: ["marketPage"],
-  },
-  carrierPage: {
-    id: "carrierPage",
-    meta: {
-      title: "carrierPage",
-    },
-    component: "CarrierPage",
-    index: false,
-  },
-  carrierListPage: {
-    id: "carrierListPage",
-    meta: {
-      title: "carrierListPage",
-    },
-    component: "CarrierListPage",
-    index: true,
-    depands: ["carrierPage"],
-  },
-  menuPage: {
-    id: "menuPage",
-    meta: {
-      title: "menuPage",
-    },
-    component: "MenuPage",
-    isNoAuth: true,
-    index: false,
-  },
-  dealPage: {
-    id: "dealPage",
-    meta: {
-      title: "dealPage",
-    },
-    component: "DealPage",
-    isNoAuth: true,
-  },
+	LoginPage: {
+		id: "LoginPage",
+		meta: {
+			title: "Login",
+		},
+		component: "LoginPage",
+		path: "/login",
+		isNoAuth: true,
+	},
+	HomePage: {
+		id: "HomePage",
+		meta: {
+			title: "Home",
+		},
+		path: "/",
+		component: "HomePage",
+		actionPermissions: ["ADD", "EDIT"],
+		isNoAuth: true,
+	},
+	HelloPage: {
+		id: "HelloPage",
+		meta: {
+			title: i18n.t("dev:dev.Dashboard"),
+			icon: "FundProjectionScreenOutlined",
+		},
+		component: "HelloPage",
+		actionPermissions: ["ADD", "EDIT"],
+		isNoAuth: true,
+	},
+	SysPage: {
+		id: "SysPage",
+		meta: {
+			title: i18n.t("dev:dev.sys"),
+			icon: "ApartmentOutlined",
+		},
+		actionPermissions: ["ADD", "EDIT"],
+		isNoAuth: true,
+	},
+	CmsPage: {
+		id: "CmsPage",
+		meta: {
+			title: i18n.t("dev:dev.cms"),
+			icon: "CoffeeOutlined",
+		},
+		actionPermissions: ["ADD", "EDIT"],
+		isNoAuth: true,
+	},
+	CpdPage: {
+		id: "CpdPage",
+		meta: {
+			title: i18n.t("dev:dev.cpdPage"),
+			icon: "FireOutlined",
+		},
+		isNoAuth: true,
+	},
+	UserPage: {
+		id: "UserPage",
+		meta: {
+			title: "User Management",
+		},
+		actionPermissions: ["ADD", "EDIT"],
+		component: "UserPage",
+		isNoAuth: true,
+	},
+	RolePage: {
+		id: "RolePage",
+		meta: {
+			title: "Role Management",
+		},
+		component: "RolePage",
+		actionPermissions: ["ADD", "EDIT"],
+		isNoAuth: true,
+	},
+	DevPage: {
+		id: "DevPage",
+		meta: {
+			title: i18n.t("dev:dev.name"),
+			icon: "LaptopOutlined",
+		},
+		actionPermissions: ["ADD", "EDIT"],
+		isNoAuth: true,
+	},
+	PageDevPage: {
+		id: "PageDevPage",
+		meta: {
+			title: "Router Management",
+		},
+		component: "PageDevPage",
+		actionPermissions: ["ADD", "EDIT"],
+		isNoAuth: true,
+	},
+	PermissionPage: {
+		id: "PermissionPage",
+		meta: {
+			title: "Permission Management",
+		},
+		component: "PermissionPage",
+		isMenu: false,
+		actionPermissions: ["ADD", "EDIT"],
+		isNoAuth: true,
+	},
+	StoreDevPage: {
+		id: "StoreDevPage",
+		meta: {
+			title: "Store Management",
+		},
+		component: "StoreDevPage",
+		actionPermissions: ["ADD", "EDIT"],
+		isNoAuth: true,
+	},
+	ApiDevPage: {
+		id: "ApiDevPage",
+		meta: {
+			title: "API Management",
+		},
+		component: "ApiDevPage",
+		isNoAuth: true,
+		actionPermissions: ["ADD", "EDIT"],
+	},
+	PosPage: {
+		id: "PosPage",
+		meta: {
+			title: "PosPage",
+		},
+		component: "PosPage",
+	},
+	PosEditPage: {
+		id: "PosEditPage",
+		meta: {
+			title: "PosEditPage",
+		},
+		component: "PosEditPage",
+		depands: ["PosPage"],
+	},
+	NotFundPage: {
+		id: "NotFundPage",
+		meta: {
+			title: "NotFundPage",
+		},
+		component: "NotFundPage",
+		isNoAuth: true,
+		isMenu: false,
+		path: "*",
+	},
+	PosListPage: {
+		id: "PosListPage",
+		meta: {
+			title: "PosListPage",
+		},
+		index: true,
+		component: "PosListPage",
+		depands: ["PosPage"],
+	},
+	FilterPage: {
+		id: "FilterPage",
+		meta: {
+			title: "FilterPage",
+		},
+		component: "FilterPage",
+	},
+	FilterListPage: {
+		id: "FilterListPage",
+		meta: {
+			title: "FilterListPage",
+		},
+		component: "FilterListPage",
+		depands: ["FilterPage"],
+		index: true,
+	},
+	SortPage: {
+		id: "SortPage",
+		meta: {
+			title: "SortPage",
+		},
+		component: "SortPage",
+	},
+	SortListPage: {
+		id: "SortListPage",
+		meta: {
+			title: "SortListPage",
+		},
+		component: "SortListPage",
+		index: true,
+		depands: ["SortPage"],
+	},
+	MarketPage: {
+		id: "MarketPage",
+		meta: {
+			title: "MarketPage",
+		},
+		component: "MarketPage",
+		index: false,
+	},
+	MarketListPage: {
+		id: "MarketListPage",
+		meta: {
+			title: "MarketListPage",
+		},
+		component: "MarketListPage",
+		index: true,
+		depands: ["MarketPage"],
+	},
+	MarketEditPage: {
+		id: "MarketEditPage",
+		meta: {
+			title: "MarketEditPage",
+		},
+		component: "MarketEditPage",
+		index: false,
+		depands: ["MarketPage"],
+	},
+	CarrierPage: {
+		id: "CarrierPage",
+		meta: {
+			title: "CarrierPage",
+		},
+		component: "CarrierPage",
+		index: false,
+	},
+	CarrierListPage: {
+		id: "CarrierListPage",
+		meta: {
+			title: "CarrierListPage",
+		},
+		component: "CarrierListPage",
+		index: true,
+		depands: ["CarrierPage"],
+	},
+	MenuPage: {
+		id: "MenuPage",
+		meta: {
+			title: "MenuPage",
+		},
+		component: "MenuPage",
+		isNoAuth: true,
+		index: false,
+	},
+	DealPage: {
+		id: "DealPage",
+		meta: {
+			title: "DealPage",
+		},
+		component: "DealPage",
+		isNoAuth: true,
+	},
 }; //MODERATE_AUTO_3:END
-// =============== 路由结构数据 ===============
+// =============== 路由结构数据 =====Re==========
 // MODERATE_AUTO:START
 export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [
-  {
-    id: ROUTE_ID.homePage,
-    children: [
-      {
-        id: ROUTE_ID.cmsPage,
-        children: [
-          {
-            id: ROUTE_ID.categoryPage,
-          },
-          {
-            id: ROUTE_ID.dealPage,
-          },
-        ],
-      },
-      {
-        id: ROUTE_ID.cpdPage,
-        children: [
-          {
-            id: ROUTE_ID.carrierPage,
-            children: [
-              {
-                id: ROUTE_ID.carrierListPage,
-              },
-            ],
-          },
-          {
-            id: ROUTE_ID.filterPage,
-            children: [
-              {
-                id: ROUTE_ID.filterListPage,
-              },
-            ],
-          },
-          {
-            id: ROUTE_ID.marketPage,
-            children: [
-              {
-                id: ROUTE_ID.marketEditPage,
-              },
-              {
-                id: ROUTE_ID.marketListPage,
-              },
-            ],
-          },
-          {
-            id: ROUTE_ID.posPage,
-            children: [
-              {
-                id: ROUTE_ID.posEditPage,
-              },
-              {
-                id: ROUTE_ID.posListPage,
-              },
-            ],
-          },
-          {
-            id: ROUTE_ID.rulePage,
-            children: [
-              {
-                id: ROUTE_ID.ruleListPage,
-              },
-              {
-                id: ROUTE_ID.ruleEditPage,
-              },
-            ],
-          },
-          {
-            id: ROUTE_ID.sortPage,
-            children: [
-              {
-                id: ROUTE_ID.sortListPage,
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: ROUTE_ID.devPage,
-        children: [
-          {
-            id: ROUTE_ID.apiDevPage,
-          },
-          {
-            id: ROUTE_ID.pageDevPage,
-          },
-          {
-            id: ROUTE_ID.storeDevPage,
-          },
-        ],
-      },
-      {
-        id: ROUTE_ID.helloPage,
-      },
-      {
-        id: ROUTE_ID.notFundPage,
-      },
-      {
-        id: ROUTE_ID.permissionPage,
-      },
-      {
-        id: ROUTE_ID.sysPage,
-        children: [
-          {
-            id: ROUTE_ID.menuPage,
-          },
-          {
-            id: ROUTE_ID.rolePage,
-          },
-          {
-            id: ROUTE_ID.userPage,
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: ROUTE_ID.loginPage,
-  },
+	{
+		id: ROUTE_ID.HomePage,
+		children: [
+			{
+				id: ROUTE_ID.CmsPage,
+				children: [
+					{
+						id: ROUTE_ID.DealPage,
+					},
+				],
+			},
+			{
+				id: ROUTE_ID.CpdPage,
+				children: [
+					{
+						id: ROUTE_ID.CarrierPage,
+						children: [
+							{
+								id: ROUTE_ID.CarrierListPage,
+							},
+						],
+					},
+					{
+						id: ROUTE_ID.FilterPage,
+						children: [
+							{
+								id: ROUTE_ID.FilterListPage,
+							},
+						],
+					},
+					{
+						id: ROUTE_ID.MarketPage,
+						children: [
+							{
+								id: ROUTE_ID.MarketEditPage,
+							},
+							{
+								id: ROUTE_ID.MarketListPage,
+							},
+						],
+					},
+					{
+						id: ROUTE_ID.PosPage,
+						children: [
+							{
+								id: ROUTE_ID.PosEditPage,
+							},
+							{
+								id: ROUTE_ID.PosListPage,
+							},
+						],
+					},
+					{
+						id: ROUTE_ID.SortPage,
+						children: [
+							{
+								id: ROUTE_ID.SortListPage,
+							},
+						],
+					},
+				],
+			},
+			{
+				id: ROUTE_ID.DevPage,
+				children: [
+					{
+						id: ROUTE_ID.ApiDevPage,
+					},
+					{
+						id: ROUTE_ID.PageDevPage,
+					},
+					{
+						id: ROUTE_ID.StoreDevPage,
+					},
+				],
+			},
+			{
+				id: ROUTE_ID.HelloPage,
+			},
+			{
+				id: ROUTE_ID.NotFundPage,
+			},
+			{
+				id: ROUTE_ID.PermissionPage,
+			},
+			{
+				id: ROUTE_ID.SysPage,
+				children: [
+					{
+						id: ROUTE_ID.MenuPage,
+					},
+					{
+						id: ROUTE_ID.RolePage,
+					},
+					{
+						id: ROUTE_ID.UserPage,
+					},
+				],
+			},
+		],
+	},
+	{
+		id: ROUTE_ID.LoginPage,
+	},
 ];
 // MODERATE_AUTO:END

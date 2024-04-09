@@ -9,6 +9,7 @@ const useConfig = () => {
     useFlat("filterStore");
   const { t } = useTranslation(["filter"]);
   const { t: commonT } = useTranslation(["common"]);
+
   return usePageConfig<any>(() => {
     return [
       {
@@ -68,22 +69,51 @@ const useConfig = () => {
             );
           },
         },
+        render: (record, _) => {
+          return <div>{record ? t`filterItem.YES` : t`filterItem.NOT`}</div>;
+        },
       },
       {
         title: t`filterItem.FilterBy`,
-        dataIndex: "allDirect",
-        key: "allDirect",
+        dataIndex: "filterBy",
+        key: "filterBy",
         fieldConfig: {
           scope: ["table"],
           formOptions: {
             label: t`filterItem.FilterBy`,
-            name: "FilterBy",
+            name: "filterBy",
           },
-          // render: () => {
-          //   return (
-              
-          //   );
-          // },
+        },
+        render: (_, record) => {
+          //数据格式转换
+          let strArr: any = [];
+          let createStr = (info: string, infoVal: string) => {
+            let str =
+              info +
+              { 1: " > ", 2: " < ", 3: " = " }[
+                record[infoVal + "Operator"] as "1"
+              ] +
+              record[infoVal] +
+              (infoVal === "travelTime"
+                ? record.travelTimeType === 1
+                  ? ""
+                  : "%"
+                : "");
+            strArr.push(str);
+          };
+          if (record.price !== 0) {
+            createStr("Price", "price");
+          }
+          if (record.travelTime !== 0) {
+            createStr("Travel Time", "travelTime");
+          }
+          if (record.layover !== 0) {
+            createStr("Layover", "layover");
+          }
+          if (record.connectionsOperator !== 0) {
+            createStr("Connections", "connections");
+          }
+          return <div>{strArr.join("；")}</div>;
         },
       },
       {

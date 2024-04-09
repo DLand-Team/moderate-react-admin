@@ -16,7 +16,7 @@ const ErrPage: React.FC = () => {
 					extra={
 						<Button
 							onClick={() => {
-								RouterHelper.jumpTo(ROUTE_ID.helloPage);
+								RouterHelper.jumpTo(ROUTE_ID.HelloPage);
 							}}
 							type="primary"
 						>

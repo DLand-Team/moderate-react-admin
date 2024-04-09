@@ -1,7 +1,7 @@
 import { Form, FormProps, Table } from "antd";
 import { ColumnsType, TableProps } from "antd/es/table";
 import { FormInstance } from "antd/lib/form/Form";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Field, FieldConfig, MyColumnType, UUID } from "src/common/utils";
 
 interface EditableCellProps<T> extends React.HTMLAttributes<HTMLElement> {
@@ -62,11 +62,13 @@ export const useEditTable = <T extends { key?: string } = any>({
   defaultValue,
   tableOptions = {},
   formOptions = {},
+  values,
   Wrapper = ({ children }) => <>{children}</>,
   handleValuesChange,
 }: {
   colCreater: ColumnsCreater<T>;
-  defaultValue: T[];
+  defaultValue?: T[];
+  values?: T[];
   tableOptions?: TableProps<T>;
   formOptions?: FormProps<T>;
   Wrapper?: Wrapper<T>;
@@ -77,7 +79,11 @@ export const useEditTable = <T extends { key?: string } = any>({
   const [itemList, setItemList] = useState<T[]>(defaultValue || []);
   const [isFresh, setIsfresh] = useState(UUID());
   const isEditing = (record: T) => record.key === editingKey;
-
+  useEffect(() => {
+    if (values) {
+      setItemList(values);
+    }
+  }, [values]);
   const edit = (record: Partial<T>) => {
     form.setFieldsValue({ ...record });
     setEditingKey(record.key!);
@@ -173,5 +179,5 @@ export const useEditTable = <T extends { key?: string } = any>({
         </Form>
       </Wrapper>
     );
-  }, [isFresh, columns]);
+  }, [isFresh, columns, defaultValue]);
 };

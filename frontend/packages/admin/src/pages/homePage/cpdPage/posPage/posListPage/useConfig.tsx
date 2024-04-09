@@ -14,13 +14,13 @@ const useConfig = () => {
     return [
       {
         title: "NO",
-        dataIndex: "no",
-        key: "no",
+        dataIndex: "id",
+        key: "id",
         fieldConfig: {
           scope: ["search", "table"],
           formOptions: {
-            label: "no",
-            name: "no",
+            label: "id",
+            name: "id",
             rules: [
               {
                 required: true,
@@ -36,8 +36,8 @@ const useConfig = () => {
       },
       {
         title: t`posPage.posName`,
-        dataIndex: "pos_name",
-        key: "pos_name",
+        dataIndex: "posName",
+        key: "posName",
         render: (item, _) => {
           // const { posId } = record;
           return (
@@ -52,8 +52,8 @@ const useConfig = () => {
         },
         fieldConfig: {
           formOptions: {
-            label: "pos_name",
-            name: "pos_name",
+            label: "posName",
+            name: "posName",
             rules: [
               {
                 required: true,
@@ -72,7 +72,6 @@ const useConfig = () => {
           inputAttrConfig: {
             placeholder: t`posPage.placeholder_posName`,
             maxLength: 30,
-            size: "small",
           },
         },
       },
@@ -113,7 +112,7 @@ const useConfig = () => {
           <Space size="middle">
             <a
               onClick={() => {
-                RouterHelper.jumpTo(ROUTE_ID.posEditPage, {
+                RouterHelper.jumpTo(ROUTE_ID.PosEditPage, {
                   search: {
                     id: record.id,
                   },

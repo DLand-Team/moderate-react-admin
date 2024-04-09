@@ -26,6 +26,8 @@ const initialState = (): StoreState => {
     btnTime: storageHelper.getItem("BTN_TIME") || 60,
     imgUrl: "", //滑块验证码==图片地址
     captcha: "", //滑块验证码===滑动完成标志
+    codeImg: "",
+    captchaVerification: "",
   };
 };
 
@@ -87,6 +89,13 @@ const slice = createSliceCustom({
     //设置图片滑块拼接完成的标志Captcha
     setCaptcha(state, { payload }: PayloadAction<string>) {
       state.captcha = payload;
+    },
+    setCodeImg(state, { payload }: PayloadAction<string>) {
+      state.codeImg = payload;
+    },
+    // 设置验证码
+    setCaptchaVerification(state, { payload }: PayloadAction<string>) {
+      state.captchaVerification = payload;
     },
   },
 });

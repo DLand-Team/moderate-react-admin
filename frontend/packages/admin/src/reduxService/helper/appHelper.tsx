@@ -1,6 +1,6 @@
 import { ROUTE_ID, ROUTE_NAME } from "src/config/routerConfig";
 import { ROUTE_ID_KEY, RouteItem } from "src/config/types";
-import { reduxStore } from "..";
+import { dp, reduxStore } from "..";
 import { MenuPermissionItem } from "../stores/authStore/model";
 import { MenuItem, RouterHelper } from "./routerHelper";
 import iconMap, { MenuIconType } from "src/static/iconMap";
@@ -23,7 +23,7 @@ export class AppHelper {
     // 创建客户端权限配置的菜单信息
     if (routesConfig.length) {
       const temp = routesConfig.find((item) => {
-        return item.id === ROUTE_ID.homePage;
+        return item.id === ROUTE_ID.HomePage;
       });
       if (temp?.children?.length) {
         result = result.concat(
@@ -31,7 +31,6 @@ export class AppHelper {
         );
       }
     }
-    debugger;
     result.sort((a, b) => {
       return ROUTE_NAME[a.key] - ROUTE_NAME[b.key];
     });
@@ -52,6 +51,7 @@ export class AppHelper {
       // 通过后端配置的权限，找到对应的前端配置数据
       // 获取相关信息：图标，国际化等信息
       const configItem = RouterHelper.getRoutItemConfigById(item.componentName);
+      if (!configItem) return;
       const temp: MenuItem = {
         key: item.componentName,
         label: configItem.meta?.title || "",
@@ -128,6 +128,33 @@ export class AppHelper {
       }
     });
     return result;
+  }
+
+  static closeTabByPath({ pathName }: { pathName?: string } = {}) {
+    if (!pathName) {
+      pathName = location.pathname;
+    }
+    const { tabsHistory, activeTabKey } = reduxStore.getState().appStore;
+    const routeId = RouterHelper.getRouteIdByPath(activeTabKey);
+    const routeItemData = RouterHelper.getRoutItemConfigById(
+      routeId as ROUTE_ID_KEY
+    );
+    debugger;
+    if (tabsHistory.length > 1 || routeItemData.depands) {
+      dp("appStore", "deleteTabHistoryAct", {
+        pathName,
+      });
+      if (activeTabKey == pathName) {
+        if (routeItemData.depands) {
+          RouterHelper.jumpTo(routeItemData.parentId as ROUTE_ID_KEY);
+        } else {
+          const item = tabsHistory.find((item) => {
+            return item.pathname !== pathName;
+          });
+          item && RouterHelper.jumpToByPath(item?.pathname);
+        }
+      }
+    }
   }
 }
 export default new AppHelper();

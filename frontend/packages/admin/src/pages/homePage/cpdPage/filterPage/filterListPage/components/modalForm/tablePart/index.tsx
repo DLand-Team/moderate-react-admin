@@ -10,6 +10,7 @@ import {
   Space,
   Table,
   Typography,
+  message,
 } from "antd";
 import { ColumnsType } from "antd/es/table";
 import React, { useState } from "react";
@@ -62,15 +63,16 @@ const CustomTable = () => {
   const { filterItemList, addFilterItem, setFilterItemList } =
     useFlat("filterStore");
   const { t } = useTranslation(["filter"]);
+  const { t: commonT } = useTranslation(["common"]);
   const isEditing = (record: FilterItem) => record.key === editingKey;
 
   const edit = (record: Partial<FilterItem>) => {
     form.setFieldsValue({ ...record });
     setEditingKey(record.key!);
+    form.setFieldValue("pv", 2);
   };
 
   const cancel = () => {
-    console.log(1111111111);
     setEditingKey("");
   };
 
@@ -80,9 +82,10 @@ const CustomTable = () => {
       const newData = [...filterItemList];
       const index = newData.findIndex((item) => key === item.key);
       if (index > -1) {
-        newData[index] = row;
+        newData[index] = { ...row, key: key + "" };
         setFilterItemList(newData);
-        setEditingKey(key.toString());
+        setEditingKey("");
+        form.resetFields();
       }
     } catch (errInfo) {
       console.log("Validate Failed:", errInfo);
@@ -98,10 +101,6 @@ const CustomTable = () => {
       key: "filterBy",
       editable: true,
       fieldConfig: {
-        watch: (newValues, old) => {
-          console.log("newValues" + JSON.stringify(newValues));
-          console.log("oldValues" + JSON.stringify(old));
-        },
         options: [
           {
             key: "travelTime",
@@ -121,8 +120,26 @@ const CustomTable = () => {
           },
         },
         type: "Select",
-        render: ({ inputAttrConfig, options }, form) => {
-          const optionArr = typeof options == "function" ? options() : options;
+        render: (record, form) => {
+          console.log(record);
+          const optionArr =
+            typeof record.options == "function"
+              ? record.options()
+              : record.options;
+          // let targetIndex = filterItemList.findIndex((item) => {
+          //     return item.key == record.key;
+          // });
+          // let filterArrTemp = [...filterItemList];
+          // let recordTemp = { ...record };
+          // if (targetIndex > -1 && form.getFieldValue("filterBy")) {
+          //     recordTemp.filterBy = form.getFieldValue("filterBy");
+          //     filterArrTemp[targetIndex] = recordTemp;
+          // }
+          // optionArr = optionArr.filter((item) => {
+          //     return !filterArrTemp.find((item2) => {
+          //         return item2.filterBy === item[0];
+          //     });
+          // });
           return (
             <Form.Item
               name="filterBy"
@@ -137,9 +154,6 @@ const CustomTable = () => {
               ]}>
               <Select
                 onChange={(value) => {
-                  // form.setFieldsValue({
-                  //   filterBy: undefined,
-                  // });
                   if (value == "connections") {
                     form.setFieldsValue({
                       pv: 2,
@@ -151,7 +165,7 @@ const CustomTable = () => {
                     });
                   }
                 }}
-                {...inputAttrConfig}>
+                {...record.inputAttrConfig}>
                 {optionArr &&
                   optionArr.length > 0 &&
                   optionArr.map((item) => {
@@ -302,13 +316,6 @@ const CustomTable = () => {
       key: "pv",
       editable: true,
       fieldConfig: {
-        formOptions: {
-          name: "pv",
-          style: {
-            margin: 0,
-          },
-          initialValue: 2,
-        },
         options: [
           {
             key: 1,
@@ -321,6 +328,14 @@ const CustomTable = () => {
             value: 2,
           },
         ],
+        formOptions: {
+          name: "pv",
+          style: {
+            margin: 0,
+          },
+          initialValue: 2,
+        },
+
         inputAttrConfig: {
           allowClear: true,
           placeholder: t`filterItem.placeholder_select`,
@@ -396,7 +411,6 @@ const CustomTable = () => {
       dataIndex: "action",
       render: (_: any, record: FilterItem) => {
         const editable = isEditing(record);
-        console.log(editable);
         return editable ? (
           <Space size="middle">
             <Typography.Link
@@ -406,7 +420,7 @@ const CustomTable = () => {
             </Typography.Link>
             <Typography.Link>
               <Popconfirm title={t`filterItem.EditCancel`} onConfirm={cancel}>
-                <DeleteOutlined></DeleteOutlined>
+                <DeleteOutlined />
               </Popconfirm>
             </Typography.Link>
           </Space>
@@ -414,15 +428,25 @@ const CustomTable = () => {
           <Space size="middle">
             <Typography.Link
               disabled={editingKey !== ""}
-              onClick={() => edit(record)}>
+              onClick={() => {
+                edit(record);
+              }}>
               {/* Edit */}
-              {/* <CheckOutlined /> */}
               <EditOutlined />
             </Typography.Link>
             <Typography.Link>
               <DeleteOutlined
                 onClick={(_) => {
-                  console.log(record);
+                  let temp = filterItemList.filter((item) => {
+                    if (Array.isArray(record)) {
+                      return !record.includes(item.key);
+                    } else if (typeof record === "object") {
+                      return item.key != record.key;
+                    } else {
+                      return item.key != record;
+                    }
+                  });
+                  setFilterItemList(temp);
                 }}></DeleteOutlined>
             </Typography.Link>
           </Space>
@@ -482,13 +506,27 @@ const CustomTable = () => {
         }}
       />
       <Button
-        style={{
-          bottom: "45px",
-        }}
+        style={
+          {
+            // bottom: "45px",
+          }
+        }
         onClick={() => {
-          addFilterItem({
-            key: UUID(),
-          } as FilterItem);
+          if (editingKey) {
+            message.warning({
+              content: commonT`blog.editing`,
+            });
+            return;
+          }
+          if (filterItemList.length < 2) {
+            addFilterItem({
+              key: UUID(),
+            } as FilterItem);
+            // return true;
+          } else {
+            message.warning(t`filterItem.warn_addFilterItemLength`);
+            return false;
+          }
         }}
         icon={<PlusOutlined />}
         type="dashed">{t`filterItem.addLine`}</Button>

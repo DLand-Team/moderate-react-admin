@@ -4,5 +4,6 @@
     "blog.modalDeleteTitle": "Are you sure to delete this data?",
     "blog.modalDeleteContent": "It cannot be restored after deletion!",
     "blog.Yes": "Yes",
-    "blog.No": "No"
+    "blog.No": "No",
+    "blog.editing": "One item is still in editing"
 }

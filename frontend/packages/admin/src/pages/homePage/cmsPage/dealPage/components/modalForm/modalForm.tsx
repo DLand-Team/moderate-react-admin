@@ -2,7 +2,7 @@ import { Form, Modal } from "antd";
 import { useEffect } from "react";
 import { useFormFields } from "src/common/hooks";
 import { useFlat } from "src/reduxService";
-import { PageType } from "../../../../../../reduxService/stores/dealStore/model";
+import { PageType } from "../../../../../../../plugins/plugin1/services/dealStore/model";
 import useConfig from "../../useConfig";
 const ModalForm: React.FC = () => {
 	const [form] = Form.useForm<any>();

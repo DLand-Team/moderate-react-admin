@@ -1,6 +1,7 @@
 import { http } from "src/common/http";
 import {
-  GetAgencyDataApiParams,
+  DeleteApiParams,
+  GetRuleDetailApiParams,
   GetRuleListApiParams,
   Rule,
   RuleCarrier,
@@ -17,16 +18,16 @@ function createApi(data: Rule) {
 }
 
 // 删
-function deleteApi(data: any) {
+function deleteApi(params: DeleteApiParams) {
   return http.request({
-    url: baseUrl + "delete",
-    method: "POST",
-    data,
+    url: baseUrl + "deleteByIds",
+    method: "DELETE",
+    params,
   });
 }
 
 // 改
-function upadteApi(data: any) {
+function upadteApi(data: Rule) {
   return http.request({
     url: baseUrl + "update",
     method: "POST",
@@ -49,30 +50,21 @@ function getRuleCarrierListApi() {
     method: "POST",
   });
 }
-
-function getLocationListApi() {
-  return http.request<RuleCarrier[]>({
-    url: baseUrl + "getLocationList",
-    method: "POST",
-  });
-}
-
-function getAgencyDataApi(data: GetAgencyDataApiParams) {
-  return http.request<RuleCarrier[]>({
-    url: baseUrl + "getAgencyData",
-    method: "POST",
-    data,
+function getRuleDetailApi(params: GetRuleDetailApiParams) {
+  return http.request<Rule>({
+    url: baseUrl + "get",
+    method: "GET",
+    params,
   });
 }
 
 const devApi = {
-  getLocationListApi,
-  getAgencyDataApi,
   getRuleCarrierListApi,
   createApi,
   deleteApi,
   upadteApi,
   getRuleListApi,
+  getRuleDetailApi,
 };
 
 export default devApi;

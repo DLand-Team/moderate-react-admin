@@ -1,14 +1,22 @@
 /* Core */
 import { createSliceCustom, PayloadAction } from "redux-eazy";
-import { Market, MarketItem, StoreState } from "./model";
 import names from "src/reduxService/stores/names";
+import {
+  GetMarketListApiRes,
+  Market,
+  MarketCarrier,
+  MarketFilterData,
+  MarketTablePagedata,
+  StoreState,
+} from "./model";
 
 const initialState = (): StoreState => {
   return {
-    marketList: [], // marketList列表，
+    marketList: [], // market列表，s
     marketItemList: [],
     id: "", // 编辑页面查看的当前market的id
-    marketData: null, // 当前market的数据
+    currentData: null, // 当前market的数据
+    marketFilterData: {},
     marketTablePagedata: {
       total: 0,
       pageNum: 1,
@@ -20,6 +28,7 @@ const initialState = (): StoreState => {
       pageSize: 10,
     },
     loading: false,
+    marketCarrierList: [],
     locationList: {}, // 添加marketItem的marketInfo属性枚举值
   };
 };
@@ -28,17 +37,32 @@ const slice = createSliceCustom({
   name: names.marketStore,
   stateInit: initialState,
   reducers: {
-    addMarketItem(state, data: PayloadAction<MarketItem>) {
-      state.marketItemList = [...state.marketItemList, data.payload];
+    // 设置当前的data
+    setCurrentMarketData(state, { payload }: PayloadAction<Market | null>) {
+      state.currentData = payload;
     },
-    setMarketItemList(state, data: PayloadAction<MarketItem[]>) {
-      state.marketItemList = data.payload;
+    setMarketList(state, { payload }: PayloadAction<GetMarketListApiRes>) {
+      state.marketList = payload.list;
+      state.marketTablePagedata.total = payload.total;
     },
-    setMarketList(state, data: PayloadAction<Market[]>) {
-      state.marketList = data.payload;
+    setMarketCarrier(state, data: PayloadAction<MarketCarrier[]>) {
+      state.marketCarrierList = data.payload;
     },
     setLocaionList(state, data: PayloadAction<any>) {
       state.locationList = data.payload;
+    },
+    setMarketFilterData(state, data: PayloadAction<MarketFilterData>) {
+      state.marketFilterData = data.payload;
+    },
+    // 设置market table的翻页数据
+    setMarketTablePageData(
+      state,
+      data: PayloadAction<Partial<MarketTablePagedata>>
+    ) {
+      state.marketTablePagedata = {
+        ...state.marketTablePagedata,
+        ...data.payload,
+      };
     },
   },
 });

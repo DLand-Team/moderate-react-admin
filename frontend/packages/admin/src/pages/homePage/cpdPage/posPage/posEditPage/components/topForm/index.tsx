@@ -6,7 +6,7 @@ import { Pos } from "src/reduxService/stores/posStore/model";
 
 export type TopPartForm = Pick<Pos, "posName" | "comment">;
 const TopForm = ({ formRef }: { formRef?: FormInstance<TopPartForm> }) => {
-  const { currentData, setCurrentData } = useFlat("posStore");
+  const { currentData, setCurrentPosData } = useFlat("posStore");
   const { t } = useTranslation(["pos"]);
   return (
     <div>
@@ -15,7 +15,7 @@ const TopForm = ({ formRef }: { formRef?: FormInstance<TopPartForm> }) => {
           let newData = currentData
             ? { ...currentData, ...values }
             : { ...values };
-          setCurrentData(newData as Pos);
+          setCurrentPosData(newData as Pos);
         }}
         form={formRef}
         layout="vertical"

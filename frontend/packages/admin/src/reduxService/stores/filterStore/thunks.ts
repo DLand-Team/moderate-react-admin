@@ -4,6 +4,7 @@ import names from "src/reduxService/stores/names";
 import httpApi from "./api";
 import { Filter, DeleteApiParams, GetApiParams } from "./model";
 import { dp } from "src/reduxService";
+import { guid } from "src/common/utils/utilFn";
 
 const thunks = createThunks(names.filterStore, {
   createAct: async (params: Filter) => {
@@ -18,6 +19,28 @@ const thunks = createThunks(names.filterStore, {
   getDetailAct: async (params: GetApiParams) => {
     const { data } = await httpApi.getDetail(params);
     dp("filterStore", "setCurrentData", data);
+    let arr = [];
+    if (data.connectionsOperator) {
+      arr.push({
+        filterId: data.id,
+        filterBy: "connections",
+        operator: data.connectionsOperator,
+        number: data.connections,
+        pv: 2,
+        key:guid()
+      });
+    }
+    if (data.travelTime) {
+      arr.push({
+        filterId: data.id,
+        filterBy: "travelTime",
+        operator: data.travelTimeOperator,
+        number: data.travelTime,
+        pv: data.travelTimeType === 1 ? 2 : 1,
+        key:guid()
+      });
+    }
+    dp("filterStore", "setFilterItemList", arr);
   },
   queryListAct: async (_, api) => {
     const { filterData, tablePagedata } = api.getState().carrierStore;

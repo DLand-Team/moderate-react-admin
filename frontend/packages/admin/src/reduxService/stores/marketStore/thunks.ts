@@ -3,38 +3,65 @@ import { dp } from "src/reduxService";
 import { createThunks } from "src/reduxService/setup";
 import names from "src/reduxService/stores/names";
 import httpApi from "./api";
-import { DeleteApiParams, DetailApiParams, Market } from "./model";
+import { GetAgencyDataApiParams, GetDetailActParams, Market } from "./model";
 
 const thunks = createThunks(names.marketStore, {
-  // 添加
-  addAct: async (params: Market) => {
-    await httpApi.createApi(params);
+  initCurrentDataAct: async (params: GetDetailActParams) => {
+    const { id } = params;
+    let marketData: Market;
+    if (id) {
+      const { data } = await httpApi.getMarketDeatilApi(params);
+      const { data: marketItemList } = await httpApi.getMarketItemListApi({
+        marketId: id,
+      });
+      marketData = { ...data, cpdMarketItems: marketItemList };
+    } else {
+      marketData = {
+        marketName: "",
+        comment: "",
+        cpdMarketItems: [],
+      };
+    }
+    dp("marketStore", "setCurrentMarketData", marketData);
   },
-  deleteAct: async (params: DeleteApiParams) => {
+  getDetailAct: async (params: GetDetailActParams) => {
+    const { data } = await httpApi.getMarketDeatilApi(params);
+    dp("marketStore", "setCurrentMarketData", data);
+  },
+  // 添加market的动作
+  addAct: async (_, api) => {
+    const { currentData } = api.getState().marketStore;
+    currentData && (await httpApi.createApi(currentData));
+  },
+  deleteAct: async (params: any) => {
     await httpApi.deleteApi(params);
   },
-  updateAct: async (params: Market) => {
-    await httpApi.upadteApi(params);
+  updateAct: async (_, api) => {
+    const { currentData } = api.getState().marketStore;
+    await httpApi.upadteApi(currentData!);
   },
-  queryMarketListAct: async (_, api) => {
-    // 请求
-    const { marketTablePagedata } = api.getState().marketStore;
+  queryMarkettListAct: async (_, api) => {
+    const { marketTablePagedata, marketFilterData } =
+      api.getState().marketStore;
     const { pageNum, pageSize } = marketTablePagedata;
-    // 请求回来list数据
     const { data } = await httpApi.getMarketListApi({
       pageNo: pageNum,
       pageSize,
+      ...marketFilterData,
     });
-    dp("marketStore", "setMarketList", data.list);
+    data.list && dp("marketStore", "setMarketList", data);
   },
-
+  getMarketCarrierListAct: async () => {
+    const { data } = await httpApi.getMarketCarrierListApi();
+    dp("marketStore", "setMarketCarrier", data);
+  },
   getLocationListAct: async () => {
     const { data } = await httpApi.getLocationListApi();
-    dp("marketStore", "setLocaionList", data);
+    dp("marketStore", "setMarketCarrier", data);
   },
-  getDetailAct: async (_: DetailApiParams) => {
-    // const { data } = await httpApi.getMarketDetailListApi(params);
-    // dp("marketStore", "setCurrentData", data);
+  getAgencyDataAct: async (params: GetAgencyDataApiParams) => {
+    const { data } = await httpApi.getAgencyDataApi(params);
+    dp("marketStore", "setMarketCarrier", data);
   },
 });
 export default thunks;

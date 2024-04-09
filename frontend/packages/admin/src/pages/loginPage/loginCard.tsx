@@ -2,12 +2,13 @@ import { Card, Typography, Collapse } from "antd";
 import type { ReactNode } from "react";
 import styles from "./loginPage.module.scss";
 const { Panel } = Collapse;
+import pic from "src/assets/imgs/pic.png";
 
 const App = (props: { children: ReactNode }) => (
   <div className={styles.loginBox}>
     <div className={styles.loginTitle}>用户中心</div>
     <div className={styles.loginCon}>
-      <img src={require("src/assets/imgs/pic.png")}></img>
+      <img src={pic}></img>
       <Card hoverable className={styles.loginCard}>
         <Typography></Typography>
         {props.children}

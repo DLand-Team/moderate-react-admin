@@ -37,6 +37,11 @@ export type FieldConfigOptions = (
   | { key: string | number; value: string | number; label: string | number }
 )[];
 
+export type CustomFieldRender<T> = (
+  item: FieldConfig<T>,
+  formIns: FormInstance<T>
+) => React.ReactNode;
+
 export interface FieldConfig<T = any> {
   label?: string;
   type?: FieldType;
@@ -56,7 +61,7 @@ export interface FieldConfig<T = any> {
   isHidenInTable?: boolean;
   isSearch?: boolean;
   scope?: ScopeType[];
-  render?: (item: FieldConfig<T>, formIns: FormInstance<T>) => React.ReactNode;
+  render?: CustomFieldRender<T>;
   watch?: (values: T, oldValues: T) => void;
 }
 

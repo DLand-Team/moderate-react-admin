@@ -88,3 +88,7 @@ export interface GetPosListApiParams {
 export interface GetDetailActParams {
   id?: string | number | null;
 }
+
+export interface GetPosItemListParams {
+  posId?: string | number | null;
+}

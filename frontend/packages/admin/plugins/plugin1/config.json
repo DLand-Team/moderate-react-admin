@@ -1,0 +1,8 @@
+{
+	"name": "plugin1",
+	"type": "Page",
+	"dependencies": {
+		"pdfjs-dist": "^4.0.379",
+		"react-pdf": "^7.7.1"
+	}
+}

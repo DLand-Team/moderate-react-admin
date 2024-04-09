@@ -3,15 +3,15 @@ import LoginForm from "./loginForm";
 import styles from "./loginPage.module.scss";
 
 const LoginPage = () => {
-  return (
-    <div className={styles.content}>
-      <div className={styles.loginPanel}>
-        <LoginCard>
-          <LoginForm />
-        </LoginCard>
-      </div>
-    </div>
-  );
+	return (
+		<div className={styles.content}>
+			<div className={styles.loginPanel}>
+				<LoginCard>
+					<LoginForm />
+				</LoginCard>
+			</div>
+		</div>
+	);
 };
 
 export default LoginPage;

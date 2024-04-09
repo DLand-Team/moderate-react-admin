@@ -2,9 +2,11 @@ import { http } from "src/common/http";
 import {
   GetAgencyDataApiParams,
   GetDetailActParams,
+  GetPosItemListParams,
   GetPosListApiParams,
   Pos,
   PosCarrier,
+  PosItem,
 } from "./model";
 
 const baseUrl = "/admin-api/usercenter/cpd-pos/";
@@ -27,10 +29,10 @@ function deleteApi(data: any) {
 }
 
 // 改
-function upadteApi(data: any) {
+function upadteApi(data: Pos) {
   return http.request({
     url: baseUrl + "update",
-    method: "POST",
+    method: "PUT",
     data,
   });
 }
@@ -48,6 +50,15 @@ function getPosListApi(params: GetPosListApiParams) {
 function getPosDeatilApi(params: GetDetailActParams) {
   return http.request<Pos>({
     url: baseUrl + "get",
+    method: "GET",
+    params,
+  });
+}
+
+// 查 posItem
+function getPosItemListApi(params: GetPosItemListParams) {
+  return http.request<PosItem[]>({
+    url: baseUrl + "cpd-pos-item/list-by-pos-id",
     method: "GET",
     params,
   });
@@ -84,6 +95,7 @@ const devApi = {
   deleteApi,
   upadteApi,
   getPosListApi,
+  getPosItemListApi,
 };
 
 export default devApi;

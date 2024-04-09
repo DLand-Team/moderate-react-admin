@@ -23,6 +23,7 @@ const thunks = createThunks(names.authStore, {
     storageHelper.setItem("IS_ADMIN", isAdmin);
   },
   login: async (arg: LoginApiParams) => {
+    ;
     // 第一步：登录获取token，并存储
     const {
       data: { accessToken },
@@ -62,6 +63,10 @@ const thunks = createThunks(names.authStore, {
   getCaptchaAct: async () => {
     const { data } = await httpApi.getCaptchaApi();
     dp("authStore", "setCaptcha", data.captcha);
+  },
+  getLoginCodeAct: async (arg: any) => {
+    const { data } = await httpApi.getLoginCodeApi(arg);
+    dp("authStore", "setCodeImg", data);
   },
 });
 export default thunks;

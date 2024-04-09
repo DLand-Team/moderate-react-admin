@@ -1,9 +1,9 @@
-import { Button, Form } from "antd";
+import { Button, Form, message } from "antd";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import { useGreatAsync } from "src/common/hooks";
-import { RouterHelper, useFlat } from "src/reduxService";
+import { AppHelper, useFlat } from "src/reduxService";
 import PosItemsTable from "./components/tablePart";
 import TopForm, { TopPartForm } from "./components/topForm";
 import "./index.scss";
@@ -13,11 +13,20 @@ const Page = () => {
   const [formRef] = Form.useForm<TopPartForm>();
   let [searchParams] = useSearchParams();
   const id = searchParams.get("id");
-  const { addAct, initCurrentDataAct, currentData } = useFlat("posStore");
+  const {
+    addAct,
+    updateAct,
+    initCurrentDataAct,
+    currentData,
+    setCurrentPosData,
+  } = useFlat("posStore");
   useEffect(() => {
     initCurrentDataAct({
       id,
     });
+    return () => {
+      setCurrentPosData(null);
+    };
   }, []);
   const { t } = useTranslation(["pos"]);
   const { fn: addActDebounce } = useGreatAsync(addAct, {
@@ -38,7 +47,11 @@ const Page = () => {
         <Button
           onClick={async () => {
             await formRef.validateFields();
-            addActDebounce();
+            await (!id ? addActDebounce() : updateAct());
+            message.success({
+              content: "添加成功",
+            });
+            AppHelper.closeTabByPath();
           }}
           style={{ marginRight: 10 }}
           type="primary">
@@ -46,7 +59,7 @@ const Page = () => {
         </Button>
         <Button
           onClick={() => {
-            RouterHelper.goBack();
+            AppHelper.closeTabByPath();
           }}>
           {t`posPage.cancel`}
         </Button>

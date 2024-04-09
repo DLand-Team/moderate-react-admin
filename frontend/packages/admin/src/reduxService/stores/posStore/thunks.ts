@@ -1,5 +1,4 @@
 /* Instruments */
-import { pickBy } from "lodash-es";
 import { dp } from "src/reduxService";
 import { createThunks } from "src/reduxService/setup";
 import names from "src/reduxService/stores/names";
@@ -9,10 +8,13 @@ import { GetAgencyDataApiParams, GetDetailActParams, Pos } from "./model";
 const thunks = createThunks(names.posStore, {
   initCurrentDataAct: async (params: GetDetailActParams) => {
     const { id } = params;
-    let posData;
+    let posData: Pos;
     if (id) {
       const { data } = await httpApi.getPosDeatilApi(params);
-      posData = data;
+      const { data: posItemList } = await httpApi.getPosItemListApi({
+        posId: id,
+      });
+      posData = { ...data, cpdPosItems: posItemList };
     } else {
       posData = {
         posName: "",
@@ -22,11 +24,11 @@ const thunks = createThunks(names.posStore, {
         ownerId: "1",
       } as Pos;
     }
-    dp("posStore", "setCurrentData", posData);
+    dp("posStore", "setCurrentPosData", posData);
   },
   getDetailAct: async (params: GetDetailActParams) => {
     const { data } = await httpApi.getPosDeatilApi(params);
-    dp("posStore", "setCurrentData", data);
+    dp("posStore", "setCurrentPosData", data);
   },
   // 添加pos的动作
   addAct: async (_, api) => {
@@ -36,8 +38,9 @@ const thunks = createThunks(names.posStore, {
   deleteAct: async (params: any) => {
     await httpApi.deleteApi(params);
   },
-  updateAct: async (params: any) => {
-    await httpApi.upadteApi(pickBy(params));
+  updateAct: async (_, api) => {
+    const { currentData } = api.getState().posStore;
+    await httpApi.upadteApi(currentData!);
   },
   queryPostListAct: async (_, api) => {
     const { posTablePagedata } = api.getState().posStore;

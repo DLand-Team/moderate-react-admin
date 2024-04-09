@@ -1,9 +1,13 @@
 import { http } from "src/common/http";
 import {
+  GetAgencyDataApiParams,
+  GetDetailActParams,
+  GetMarketItemListParams,
   GetMarketListApiParams,
+  GetMarketListApiRes,
   Market,
-  DeleteApiParams,
-  DetailApiParams,
+  MarketCarrier,
+  MarketItem,
 } from "./model";
 
 const baseUrl = "/admin-api/usercenter/cpd-market/";
@@ -17,10 +21,10 @@ function createApi(data: Market) {
 }
 
 // 删
-function deleteApi(data: DeleteApiParams) {
+function deleteApi(data: any) {
   return http.request({
-    url: baseUrl + "deleteByIds",
-    method: "DELETE",
+    url: baseUrl + "delete",
+    method: "POST",
     data,
   });
 }
@@ -34,39 +38,65 @@ function upadteApi(data: Market) {
   });
 }
 
-// 查列表
+// 查 market列表
 function getMarketListApi(params: GetMarketListApiParams) {
-  return http.request<{ list: Market[] }>({
+  return http.request<GetMarketListApiRes>({
     url: baseUrl + "page",
     method: "GET",
     params,
   });
 }
 
-//查详情
-function getMarketDetailListApi(params: DetailApiParams) {
-  return http.request({
+// 查 market
+function getMarketDeatilApi(params: GetDetailActParams) {
+  return http.request<Market>({
+    url: baseUrl + "get",
+    method: "GET",
+    params,
+  });
+}
+
+// 查 marketItem
+function getMarketItemListApi(params: GetMarketItemListParams) {
+  return http.request<MarketItem[]>({
     url: baseUrl + "cpd-market-item/list-by-market-id",
     method: "GET",
     params,
   });
 }
 
-//获取locationList列表
+function getMarketCarrierListApi() {
+  return http.request<MarketCarrier[]>({
+    url: baseUrl + "getMarketCarrierList",
+    method: "POST",
+  });
+}
+
 function getLocationListApi() {
-  return http.request({
+  return http.request<MarketCarrier[]>({
     url: baseUrl + "getLocationList",
     method: "POST",
   });
 }
 
+function getAgencyDataApi(data: GetAgencyDataApiParams) {
+  return http.request<MarketCarrier[]>({
+    url: baseUrl + "getAgencyData",
+    method: "POST",
+    data,
+  });
+}
+
 const devApi = {
+  getMarketDeatilApi,
   getLocationListApi,
-  getMarketDetailListApi,
+  getAgencyDataApi,
+  getMarketCarrierListApi,
   createApi,
   deleteApi,
   upadteApi,
   getMarketListApi,
+  getMarketItemListApi,
 };
 
 export default devApi;

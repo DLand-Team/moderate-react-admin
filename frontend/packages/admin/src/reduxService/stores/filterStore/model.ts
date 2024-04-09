@@ -27,7 +27,7 @@ export interface PageData {
 export type FilterData = Partial<Omit<Filter, "id">>;
 
 export interface Filter {
-  id: string;
+  id?: string | number;
   filterItemName: string;
   allDirect: boolean;
   ownerId: string;
@@ -45,9 +45,10 @@ export interface Filter {
 export interface FilterItem {
   filterBy: string;
   operator: number;
-  number: string;
+  number: number | string;
   pv: number;
   key: string;
+  filterId?: string | number;
 }
 
 export type GetListApiParams = {

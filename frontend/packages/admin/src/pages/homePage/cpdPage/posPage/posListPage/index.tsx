@@ -28,7 +28,7 @@ const CategoryPage = () => {
       <Button
         type="primary"
         onClick={() => {
-          RouterHelper.jumpTo(ROUTE_ID.posEditPage);
+          RouterHelper.jumpTo(ROUTE_ID.PosEditPage);
         }}
         style={{
           marginBottom: 12,

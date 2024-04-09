@@ -1,24 +1,26 @@
 import { Modal, Space } from "antd";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { usePageConfig } from "src/common/hooks";
+import { ROUTE_ID } from "src/config/routerConfig";
 import { useFlat } from "src/reduxService";
-import { useTranslation } from "react-i18next";
-import { PageType } from "src/reduxService/stores/marketStore/model";
+import { RouterHelper } from "src/reduxService/helper/routerHelper";
+import { Market } from "src/reduxService/stores/marketStore/model";
 
 const useConfig = () => {
   const { deleteAct, marketList } = useFlat("marketStore");
-  const { t } = useTranslation(["market"]);
-  return usePageConfig<PageType>(() => {
+  const { t } = useTranslation(["pos"]);
+  return usePageConfig<Market>(() => {
     return [
       {
         title: "NO",
-        dataIndex: "no",
-        key: "no",
-        config: {
-          scope: ["table"],
+        dataIndex: "id",
+        key: "id",
+        fieldConfig: {
+          scope: ["search", "table"],
           formOptions: {
-            label: "no",
-            name: "no",
+            label: "id",
+            name: "id",
             rules: [
               {
                 required: true,
@@ -34,66 +36,44 @@ const useConfig = () => {
       },
       {
         title: t`marketPage.marketName`,
-        dataIndex: "market_name",
-        key: "market_name",
-        render: (item, _) => {
-          // const { marketId } = record;
+        dataIndex: "marketName",
+        key: "marketName",
+        render: (item, record) => {
+          const { id } = record;
           return (
             <Link
               to={{
-                pathname: "/userCenter/market/detail",
-                // search: `?title=marketTitle&marketId=${marketId}`,
+                pathname: "/userCenter/marketPage/edit",
+                search: `?title=posTitle&posId=${id}`,
               }}>
               {item}
             </Link>
           );
         },
-        config: {
-          scope: ["search", "table"],
+        fieldConfig: {
           formOptions: {
-            label: "market_name",
-            name: "market_name",
-            rules: [
-              {
-                required: true,
-                message: `${t`marketPage.placeholder_input`} ${t`marketPage.POSName`}`,
-              },
-              {
-                max: 30,
-                message: t`marketPage.rule_marketName_1`,
-              },
-              {
-                pattern: /^[0-9a-zA-z_-]+$/,
-                message: t`marketPage.placeholder_marketName`,
-              },
-            ],
+            label: "marketName",
+            name: "marketName",
           },
           inputAttrConfig: {
-            placeholder: t`marketPage.placeholder_marketName`,
+            placeholder: t`posPage.placeholder_posName`,
             maxLength: 30,
-            size: "small",
           },
         },
       },
       {
-        title: t`marketPage.comment`,
-        dataIndex: "comment",
-        key: "comment",
-        render: (item, _) => {
-          // const { marketId } = record;
-          return (
-            <Link
-              to={{
-                pathname: "/userCenter/market/detail",
-                // search: `?title=marketTitle&marketId=${marketId}`,
-              }}>
-              {item}
-            </Link>
-          );
+        title: t`marketPage.marketType`,
+        dataIndex: "marketType",
+        key: "marketType",
+        render: (item) => {
+          return {
+            0: t`marketPage.NORMAL`,
+            1: t`marketPage.CONNECITON`,
+          }[item * 1];
         },
-        config: {
+        fieldConfig: {
           formOptions: {
-            label: t`marketPage.comment`,
+            label: t`posPage.comment`,
             name: "comment",
             rules: [
               {
@@ -106,18 +86,32 @@ const useConfig = () => {
         },
       },
       {
+        title: t`marketPage.comment`,
+        dataIndex: "comment",
+        key: "comment",
+      },
+      {
         title: t`marketPage.action`,
         key: "action",
         render: (_, record) => (
           <Space size="middle">
-            <a onClick={() => {}}>edit</a>
+            <a
+              onClick={() => {
+                RouterHelper.jumpTo(ROUTE_ID.MarketEditPage, {
+                  search: {
+                    id: record.id,
+                  },
+                });
+              }}>
+              edit
+            </a>
             <a
               onClick={() => {
                 Modal.confirm({
                   content: "are you sure?",
                   onOk: async () => {
                     await deleteAct({
-                      ids: [String(record.id)],
+                      id: record.id,
                     });
                   },
                 });

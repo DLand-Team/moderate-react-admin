@@ -9,16 +9,15 @@ const AuthProvider = ({ children }: React.PropsWithChildren) => {
   const location = useLocation();
   useAsyncEffcet(async () => {
     // 判断是否登陆
-    return;
     if (token) {
       await dp("authStore", "getUserPermissionsAct");
-      const loginPath = RouterHelper.getRoutePathByKey(ROUTE_ID.loginPage);
+      const loginPath = RouterHelper.getRoutePathByKey(ROUTE_ID.LoginPage);
       // 判断是否是登录页
       if (location.pathname === loginPath) {
-        RouterHelper.jumpTo(ROUTE_ID.helloPage);
+        RouterHelper.jumpTo(ROUTE_ID.HelloPage);
       }
     } else {
-      RouterHelper.jumpTo(ROUTE_ID.loginPage);
+      RouterHelper.jumpTo(ROUTE_ID.LoginPage);
     }
   }, [token]);
 

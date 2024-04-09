@@ -64,6 +64,7 @@ export interface IDealMedia {
 	facebook: string;
 	instagram: string;
 	file: Array<string>;
+	attachments: Array<string>;
 }
 
 export interface IDealTeamMember {

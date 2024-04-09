@@ -1,8 +1,12 @@
 export interface StoreState {
   ruleList: Rule[];
   ruleItemList: RuleItem[];
-  ruleTablePagedata: PageData;
   filterData: FilterData;
+  ruleTablePagedata: {
+    total: number | string;
+    pageSize: number | string;
+    pageNum: number | string;
+  };
   ruleItemTablePagedata: {
     total: number;
     pageSize: number;
@@ -11,10 +15,13 @@ export interface StoreState {
   loading: boolean;
   ruleCarrierList: RuleCarrier[];
   id: string | number;
-  ruleData: Rule | null; // 添加的ruleData
+  currentData: Rule | null; // 添加的ruleData
   locationList: Record<PropertyKey, any[]>;
 }
-export type FilterData = Partial<FilterData1>;
+
+export type FilterData = Partial<
+  Omit<GetRuleListApiParams, "pageNo" | "pageSize">
+>;
 
 export interface FilterData1 {
   ruleName: string;
@@ -86,9 +93,75 @@ export interface Rule {
   ruleName: string;
   ownerId: string;
   comment: string;
-  cpdRuleItems: RuleItem[];
+  status: number;
+  sequenceNo: number;
+  fareAllowedCarriers: string;
+  oriRuleId: number;
+  desRuleId: number;
+  posId: number;
+  effectStartDate: string;
+  effectEndDate: string;
+  applyProduct: number;
+  sortItemId: 654;
+  filterItemId: 692;
+  backupResult: 0;
+  cpdRuleItinerarys: RuleItineraryItem[];
 }
 
+export interface RuleItineraryItem {
+  id: number;
+  rankId: number;
+  flightCategory: number;
+  carrier: string;
+  operateCarriers: string;
+  notOperateCarriers: string;
+  allowCodeShare: number;
+  segmentNum: number;
+  ruleId: number;
+  noInterline: boolean;
+  noOverNight: boolean;
+  cpdConnectionList: Connection[];
+  cpdSegmentList: Segment[];
+}
+export interface Connection {
+  createTime: string;
+  updateTime: string;
+  creator: string;
+  updater: string;
+  deleted: boolean;
+  id: number;
+  exclude: boolean;
+  position: number;
+  mct: number;
+  maxConxTime: number;
+  itineraryId: number;
+  ruleId: number;
+}
+export interface Segment {
+  createTime: string;
+  updateTime: string;
+  creator: string;
+  updater: string;
+  deleted: true;
+  id: number;
+  exclude: true;
+  position: number;
+  carrier: string;
+  operateCarriers: string;
+  notOperateCarriers: string;
+  allowCodeShare: number;
+  flightNoStart: number;
+  flightNoEnd: number;
+  itineraryId: number;
+  onlyNonStopFlight: number;
+}
+
+// 删除api的参数
+export interface DeleteApiParams {
+  ids: number[];
+}
+
+// 查api的参数
 export interface GetRuleListApiParams {
   pageNo: string | number;
   pageSize: string | number;
@@ -96,8 +169,8 @@ export interface GetRuleListApiParams {
   ownerId?: string;
   sequenceNo?: string;
   fareAllowedCarriers?: string;
-  oriMarketId?: string;
-  desMarketId?: string;
+  oriRuleId?: string;
+  desRuleId?: string;
   posId?: string;
   effectStartDate?: string;
   effectEndDate?: string;
@@ -107,4 +180,8 @@ export interface GetRuleListApiParams {
   sortItemId?: string;
   filterItemId?: string;
   backupResult?: string;
+}
+// 查rule详情的参数
+export interface GetRuleDetailApiParams {
+  id?: number | string | null;
 }

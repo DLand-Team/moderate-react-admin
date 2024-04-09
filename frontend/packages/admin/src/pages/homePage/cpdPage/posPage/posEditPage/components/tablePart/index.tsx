@@ -302,7 +302,7 @@ const Wrapper: Wrapper<PosItem> = ({
   dataList,
 }) => {
   const { t } = useTranslation(["pos"]);
-  const { currentData, setCurrentData } = useFlat("posStore");
+  const { currentData, setCurrentPosData } = useFlat("posStore");
   return (
     <>
       {children}
@@ -324,7 +324,7 @@ const Wrapper: Wrapper<PosItem> = ({
             } as PosItem,
           ];
           setDataList(newData);
-          setCurrentData({
+          setCurrentPosData({
             ...currentData!,
             cpdPosItems: newData,
           });
@@ -338,14 +338,14 @@ const Wrapper: Wrapper<PosItem> = ({
 };
 
 const PosItemsTable = () => {
-  const { currentData, setCurrentData } = useFlat("posStore");
+  const { currentData, setCurrentPosData } = useFlat("posStore");
   const { t } = useTranslation(["pos"]);
   const tableNode = useEditTable<PosItem>({
     colCreater: colCreater,
     defaultValue: currentData?.cpdPosItems || [],
     Wrapper,
     handleValuesChange: (_, values) => {
-      setCurrentData({
+      setCurrentPosData({
         ...currentData!,
         cpdPosItems: values,
       });

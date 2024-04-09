@@ -14,6 +14,8 @@ export interface StoreState {
   btnTime: number;
   imgUrl: string;
   captcha: string;
+  codeImg: string;
+  captchaVerification: string;
 }
 export interface LoginNestApiParams {
   username: string;
@@ -23,8 +25,6 @@ export interface LoginApiParams {
   username: string;
   password: string;
   captchaVerification: string;
-  code: string;
-  language: string;
 }
 export interface MenuPermissionItem {
   id: number;

@@ -1,7 +1,7 @@
 /* Core */
 import { createSliceCustom, PayloadAction } from "redux-eazy";
-import { Pos, PosCarrier, PosItem, StoreState } from "./model";
 import names from "src/reduxService/stores/names";
+import { Pos, PosCarrier, StoreState } from "./model";
 
 const initialState = (): StoreState => {
   return {
@@ -30,24 +30,14 @@ const slice = createSliceCustom({
   stateInit: initialState,
   reducers: {
     // 设置当前的data
-    setCurrentData(state, { payload }: PayloadAction<Pos>) {
+    setCurrentPosData(state, { payload }: PayloadAction<Pos | null>) {
       state.currentData = payload;
-    },
-    // 添加postItem
-    addPostItem(state, data: PayloadAction<PosItem>) {
-      state.posItemList = [...state.posItemList, data.payload];
-    },
-    setPostItemList(state, data: PayloadAction<PosItem[]>) {
-      state.posItemList = data.payload;
     },
     setPostList(state, data: PayloadAction<Pos[]>) {
       state.posList = data.payload;
     },
     setPosCarrier(state, data: PayloadAction<PosCarrier[]>) {
       state.posCarrierList = data.payload;
-    },
-    setLocaionList(state, data: PayloadAction<any>) {
-      state.locationList = data.payload;
     },
   },
 });

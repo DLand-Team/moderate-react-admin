@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useSearchFields } from "src/common/hooks";
 import { useFlat } from "src/reduxService";
 import useConfig from "../../useConfig";
+import { MarketFilterData } from "src/reduxService/stores/marketStore/model";
 
 const AdvancedSearchForm = () => {
 	const [form] = Form.useForm();
@@ -15,9 +16,10 @@ const AdvancedSearchForm = () => {
 		form,
 	});
 
-	const { queryAct, pageSize } = useFlat("categoryStore");
-	const onFinish = (values: any) => {
-		console.log("Received values of form: ", values);
+	const { setMarketFilterData } = useFlat("marketStore");
+
+	const onFinish = (values: MarketFilterData) => {
+		setMarketFilterData(values);
 	};
 
 	return (
@@ -32,17 +34,7 @@ const AdvancedSearchForm = () => {
 			</Row>
 			<Row>
 				<Col span={24} style={{ textAlign: "right" }}>
-					<Button
-						onClick={() => {
-							queryAct({
-								...form.getFieldsValue(),
-								page: 1,
-								page_size: pageSize,
-							});
-						}}
-						type="primary"
-						htmlType="submit"
-					>
+					<Button type="primary" htmlType="submit">
 						Search
 					</Button>
 					<Button
@@ -67,10 +59,10 @@ const AdvancedSearchForm = () => {
 	);
 };
 
-const App: React.FC = () => (
+const SearchForm: React.FC = () => (
 	<div style={{ marginBottom: "32px" }}>
 		<AdvancedSearchForm />
 	</div>
 );
 
-export default App;
+export default SearchForm;

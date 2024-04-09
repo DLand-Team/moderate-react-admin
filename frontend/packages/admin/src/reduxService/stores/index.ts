@@ -9,23 +9,20 @@ import carrierStore from "./carrierStore";
 import sortStore from "./sortStore";
 import filterStore from "./filterStore";
 import ruleStore from "./ruleStore";
-import dealStore from "./dealStore";
-// 组件划分
-import categoryStore from "src/pages/homePage/cmsPage/categoryPage/services";
+import dealStore from "plugins/plugin1/services/dealStore";
 
 const stores = {
-  appStore,
-  authStore,
-  devStore,
-  routerStore,
-  categoryStore,
-  posStore,
-  marketStore,
-  carrierStore,
-  sortStore,
-  filterStore,
-  ruleStore,
-  dealStore,
+	appStore,
+	authStore,
+	devStore,
+	routerStore,
+	posStore,
+	marketStore,
+	carrierStore,
+	sortStore,
+	filterStore,
+	ruleStore,
+	dealStore,
 };
 
 export { stores };

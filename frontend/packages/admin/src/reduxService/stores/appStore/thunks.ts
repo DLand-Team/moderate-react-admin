@@ -14,25 +14,32 @@ import { createThunks } from "../../setup";
 import names from "../names";
 
 const thunks = createThunks(names.appStore, {
-	deleteTabHistoryAct: async ({ pathName }: { pathName: string }, api) => {
-		const { tabsHistory } = api.getState().appStore;
-		if (Object.values(tabsHistory).length > 1) {
-			const tabsHistoryCopy = { ...tabsHistory };
-			Reflect.deleteProperty(tabsHistoryCopy, pathName);
-			dp("appStore", "setTabsHistory", tabsHistoryCopy);
-		}
-	},
-	addTabHistoryActionAct: async ({ newItem }: { newItem: Location }, api) => {
-		const { tabsHistory } = api.getState().appStore;
-		const tabsHistoryCopy = { ...tabsHistory };
-		tabsHistoryCopy[newItem.pathname] = newItem;
-		dp("appStore", "setTabsHistory", tabsHistoryCopy);
-	},
-	createMenuDataAct: async (_, api) => {
-		const { menuPermissions } = api.getState().authStore;
-		const { children = [] } = menuPermissions || {};
-		const menuData = AppHelper.createMenuData(children);
-		dp("appStore", "setMenuDataAct", menuData);
-	},
+  deleteTabHistoryAct: async ({ pathName }: { pathName: string }, api) => {
+    const { tabsHistory } = api.getState().appStore;
+    {
+      const tabsHistoryCopy = [...tabsHistory];
+      const index = tabsHistoryCopy.findIndex((item) => {
+        return item.pathname === pathName;
+      });
+      tabsHistoryCopy.splice(index, 1);
+      dp("appStore", "setTabsHistory", tabsHistoryCopy);
+    }
+  },
+  addTabHistoryActionAct: async ({ newItem }: { newItem: Location }, api) => {
+    const { tabsHistory } = api.getState().appStore;
+    if (
+      !tabsHistory.some((item) => {
+        return item.pathname === newItem.pathname;
+      })
+    ) {
+      dp("appStore", "setTabsHistory", [...tabsHistory, newItem]);
+    }
+  },
+  createMenuDataAct: async (_, api) => {
+    const { menuPermissions } = api.getState().authStore;
+    const { children = [] } = menuPermissions || {};
+    const menuData = AppHelper.createMenuData(children);
+    dp("appStore", "setMenuDataAct", menuData);
+  },
 });
 export default thunks;

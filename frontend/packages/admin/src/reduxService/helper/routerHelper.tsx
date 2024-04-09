@@ -110,22 +110,22 @@ export class RouterHelper {
     };
   } => {
     let homeChildren = ROUTE_STRUCT_CONFIG.find(
-      (item) => item.id === ROUTE_ID.homePage
+      (item) => item.id === ROUTE_ID.HomePage
     )!.children!;
 
     // 获取客户端显示的路由作为基础，再去融合后端动态配置权限菜单关联的路由
     let routesConfig = [...RouterHelper.createClientRoutesConfig()];
     let targetId = routesConfig.findIndex((item) => {
-      return item.id === ROUTE_ID.homePage;
+      return item.id === ROUTE_ID.HomePage;
     });
     routesConfig[targetId] = Object.assign({}, routesConfig[targetId], {
       children: RouterHelper.createRouteConfigLoop({
         children: [],
         routesStuctData: homeChildren,
-        prefix: "/" + ROUTE_ID[ROUTE_ID.homePage],
+        prefix: "/" + ROUTE_ID[ROUTE_ID.HomePage],
         routesConfigMap,
         routesPermissions,
-        parentId: ROUTE_ID.homePage,
+        parentId: ROUTE_ID.HomePage,
       }),
     });
     return {
@@ -172,6 +172,12 @@ export class RouterHelper {
   static getRoutePathByKey(key: ROUTE_ID_KEY) {
     const routerStore = store.getState().routerStore;
     return routerStore.routesConfigMap[key]?.path;
+  }
+
+  static getRouteParentIdByPath(path: string): ROUTE_ID_KEY {
+    const id = this.getRouteIdByPath(path);
+    const routerStore = store.getState().routerStore;
+    return routerStore.routesConfigMap[id]?.parentId as ROUTE_ID_KEY;
   }
 
   static getRouteTitleByKey(key: ROUTE_ID_KEY) {
@@ -230,8 +236,8 @@ export class RouterHelper {
     }
   }
 
-  static getRouteIdByPath(path: string) {
-    return path.split("/").slice(-1)[0];
+  static getRouteIdByPath(path: string): ROUTE_ID_KEY {
+    return path.split("/").slice(-1)[0] as ROUTE_ID_KEY;
   }
 
   static jumpToByPath(

@@ -1,20 +1,29 @@
+export interface MarketTablePagedata {
+  total: number;
+  pageSize: number;
+  pageNum: number;
+}
 export interface StoreState {
   marketList: Market[];
   marketItemList: MarketItem[];
-  marketTablePagedata: {
-    total: number;
-    pageSize: number;
-    pageNum: number;
-  };
+  marketTablePagedata: MarketTablePagedata;
   marketItemTablePagedata: {
     total: number;
     pageSize: number;
     pageNum: number;
   };
   loading: boolean;
+  marketCarrierList: MarketCarrier[];
   id: string | number;
-  marketData: Market | null; // 添加的marketData
+  currentData: Market | null; // 添加的marketData
   locationList: Record<PropertyKey, any[]>;
+  marketFilterData: MarketFilterData;
+}
+export interface MarketFilterData {
+  id?: string | number;
+  marketName?: string;
+  marketType?: string;
+  comment?: string;
 }
 
 export interface PageType {
@@ -41,6 +50,13 @@ export interface QueryActParams {
   updated_at?: string[];
 }
 
+export interface MarketCarrier {
+  id: number;
+  carrier: string;
+  type: number;
+  deleted: boolean;
+}
+
 export interface GetAgencyDataApiParams {
   marketType: string;
   marketInfo: string;
@@ -54,33 +70,39 @@ export interface MarketItem {
   updater: string;
   deleted: true;
   id: number;
-  locationInfo: string;
-  locationType: string;
-  exclude: string;
+  marketInfo: string;
+  marketType: string;
+  agentOrAirline: string;
+  officeOwner: string;
+  exclude: boolean;
   weight: number;
   marketId: number;
   key?: string;
+  locationInfo: string;
+  locationType: string;
 }
 export interface Market {
-  id: number;
+  id?: number;
   marketName: string;
-  marketType: number;
+  ownerId?: string;
   comment: string;
-  ownerId: string;
   cpdMarketItems: MarketItem[];
 }
 
 export interface GetMarketListApiParams {
   pageNo: string | number;
   pageSize: string | number;
-  marketName?: string;
-  marketType?: string;
-  ownerId?: string;
-  comment?: string;
+  marketName?: string | number;
 }
-export interface DeleteApiParams {
-  ids: string[];
+export interface GetMarketListApiRes {
+  list: Market[];
+  total: number;
 }
-export interface DetailApiParams {
-  marketId: number;
+
+export interface GetDetailActParams {
+  id?: string | number | null;
+}
+
+export interface GetMarketItemListParams {
+  marketId?: string | number | null;
 }

@@ -17,6 +17,7 @@ const ModalForm: React.FC = () => {
     filterItemList,
     allDirect,
     setAllDirect,
+    setFilterItemList,
   } = useFlat("filterStore");
   const { t } = useTranslation(["filter"]);
   useEffect(() => {
@@ -47,20 +48,19 @@ const ModalForm: React.FC = () => {
       onCancel={() => {
         form.resetFields();
         setIsShowModal(false);
+        setFilterItemList([]);
+        setAllDirect(false);
+        form.setFieldValue("allDirect", false);
       }}
       onOk={() => {
         form
           .validateFields()
           .then(async (value) => {
-            console.log(value);
-            console.log(filterItemList);
-            console.log(currentData);
             let result = val();
-            ;
             if (result) {
               //filterArr循环，并给entity赋值
               let entity = {
-                id: currentData ? currentData.id.toString() : "",
+                
                 filterItemName: value.filterItemName,
                 ownerId: "2",
                 allDirect: allDirect,
@@ -85,33 +85,34 @@ const ModalForm: React.FC = () => {
                   entity.connectionsOperator = item.operator;
                 }
               });
-              console.log(entity);
-
               let act = currentData ? updateAct : createAct;
               let values = currentData
                 ? {
                     ...entity,
+                    id: currentData.id,
+                    ownerId: currentData.ownerId,
                     // ...value,
                     // sortString: value.sortString.join(","),
                   }
                 : {
                     ...entity,
-                    ownerId: "2",
+                    ownerId: "FN",
                     // sortString: value.sortString.join(","),
                   };
               await act(values).then((res) => {
                 const { payload } = res;
                 if (payload?.code == 0 || payload?.code == 200) {
+                 
                   message.success({
                     content: t`filterItem.Succeed`,
                   });
                 }
               });
-              message.success({
-                content: t`filterItem.Succeed`,
-              });
               setIsShowModal(false);
               form.resetFields();
+              form.setFieldValue("allDirect", false);
+              setFilterItemList([]);
+              setAllDirect(false);
               queryListAct();
             } else {
               message.warning(t`filterItem.warn_addFilterItem`);

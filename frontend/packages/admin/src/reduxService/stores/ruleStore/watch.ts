@@ -2,19 +2,21 @@ import { dp, getActionType } from "src/reduxService";
 import { startAppListening } from "src/reduxService/setup";
 
 const watch = () => {
-  // 监听查询状态的改变，响应行为就是重新刷新列表数据
+  // 页码一边，就刷新列表
+  // 触发页码改变的情景如：
+  // 赛选条件变了
   startAppListening({
     type: getActionType("ruleStore").setFilterData,
     effect: async () => {
-      await dp("ruleStore", "setPageData", {
+      await dp("ruleStore", "setRuleTablePageData", {
         pageNum: 1,
       });
     },
   });
   startAppListening({
-    type: getActionType("ruleStore").setPageData,
+    type: getActionType("ruleStore").setRuleTablePageData,
     effect: async () => {
-      dp("ruleStore", "queryRuleAct");
+      dp("ruleStore", "queryRuleListAct");
     },
   });
 };
