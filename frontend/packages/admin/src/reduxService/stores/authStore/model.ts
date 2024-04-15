@@ -1,4 +1,4 @@
-import { ROUTE_ID_KEY } from "src/config/types";
+import { ROUTE_ID_KEY } from "src/router/types";
 
 export type PermissionItem = string;
 export interface StoreState {

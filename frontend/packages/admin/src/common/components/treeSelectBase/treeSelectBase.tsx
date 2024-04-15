@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import FormItemHoc, {
 	type FormItemHocProps,
 } from "src/common/hocs/formItemHoc/formItemHoc";
-import { RouteItem } from "src/config/types";
 import { useFlat } from "src/reduxService";
+import { RouteItem } from "src/router/types";
 
 const transformTreeDataLoop: any = (data: RouteItem[]) => {
 	return data.map((item) => {

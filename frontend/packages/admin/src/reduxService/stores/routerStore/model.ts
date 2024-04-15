@@ -1,4 +1,5 @@
-import { ROUTE_ID_KEY, RouteItem } from "src/config/types";
+import { ROUTE_ID_KEY, RouteItem } from "src/router/types";
+
 export type RoutesConfigMap = { [key in ROUTE_ID_KEY]: RouteItem };
 export interface StoreState {
 	routesConfig: RouteItem[];

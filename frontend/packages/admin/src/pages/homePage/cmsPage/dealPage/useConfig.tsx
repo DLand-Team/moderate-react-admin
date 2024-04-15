@@ -16,7 +16,8 @@ import {
 	PageType,
 	Status,
 	TypeEnum,
-} from "plugins/plugin1/services/dealStore/model";
+} from "src/reduxService/stores/dealStore/model";
+
 import { DealType } from "src/types/deal";
 
 const RejectReasonModal = ({

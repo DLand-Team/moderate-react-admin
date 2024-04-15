@@ -10,52 +10,53 @@ import { Button, Table } from "antd";
 import SearchForm from "./components/searchForm/searchForm";
 import styles from "./style.module.scss";
 import { useEffect } from "react";
-import { ROUTE_ID } from "src/config/routerConfig";
 import useConfig from "./useConfig";
+import { ROUTE_ID } from "src/router/name";
 
 const CategoryPage = () => {
-  const { columns } = useConfig();
-  const { queryPostListAct, posList } = useFlat("posStore");
-  useEffect(() => {
-    queryPostListAct();
-  }, []);
+	const { columns } = useConfig();
+	const { queryPostListAct, posList } = useFlat("posStore");
+	useEffect(() => {
+		queryPostListAct();
+	}, []);
 
-  return (
-    <div className={styles.content}>
-      {/* 搜索栏目 */}
-      <SearchForm></SearchForm>
-      {/* 按钮  */}
-      <Button
-        type="primary"
-        onClick={() => {
-          RouterHelper.jumpTo(ROUTE_ID.PosEditPage);
-        }}
-        style={{
-          marginBottom: 12,
-        }}>
-        + 添加
-      </Button>
-      {/* modal */}
-      {/* 表格 */}
-      <Table
-        rowKey={(record) => {
-          return record.id;
-        }}
-        // loading={loading}
-        // pagination={{
-        // 	pageSize,
-        // 	current: pageNum,
-        // 	total,
-        // 	onChange(page, pageSize) {
-        // 		console.log(page, pageSize);
-        // 		handlePageChange(page, pageSize);
-        // 	},
-        // }}
-        columns={columns}
-        dataSource={posList}
-      />
-    </div>
-  );
+	return (
+		<div className={styles.content}>
+			{/* 搜索栏目 */}
+			<SearchForm></SearchForm>
+			{/* 按钮  */}
+			<Button
+				type="primary"
+				onClick={() => {
+					RouterHelper.jumpTo(ROUTE_ID.PosEditPage);
+				}}
+				style={{
+					marginBottom: 12,
+				}}
+			>
+				+ 添加
+			</Button>
+			{/* modal */}
+			{/* 表格 */}
+			<Table
+				rowKey={(record) => {
+					return record.id;
+				}}
+				// loading={loading}
+				// pagination={{
+				// 	pageSize,
+				// 	current: pageNum,
+				// 	total,
+				// 	onChange(page, pageSize) {
+				// 		console.log(page, pageSize);
+				// 		handlePageChange(page, pageSize);
+				// 	},
+				// }}
+				columns={columns}
+				dataSource={posList}
+			/>
+		</div>
+	);
 };
 
 export default CategoryPage;

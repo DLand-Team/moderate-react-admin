@@ -1,8 +1,8 @@
 import { Button, Result } from "antd";
 import React from "react";
-import { ROUTE_ID } from "src/config/routerConfig";
 import { useFlat } from "src/reduxService";
 import { RouterHelper } from "src/reduxService/helper";
+import { ROUTE_ID } from "src/router/name";
 
 const ErrPage: React.FC = () => {
 	const { routesPermissions } = useFlat("authStore");

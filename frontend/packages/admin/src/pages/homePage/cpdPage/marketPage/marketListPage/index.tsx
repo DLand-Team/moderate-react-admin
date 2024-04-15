@@ -10,8 +10,8 @@ import { Button, Table } from "antd";
 import SearchForm from "./components/searchForm/searchForm";
 import styles from "./style.module.scss";
 import { useEffect } from "react";
-import { ROUTE_ID } from "src/config/routerConfig";
 import useConfig from "./useConfig";
+import { ROUTE_ID } from "src/router/name";
 
 const Page = () => {
   const { columns } = useConfig();

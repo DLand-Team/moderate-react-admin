@@ -7,8 +7,6 @@ import {
 import { Button, Layout, Menu, Modal, theme as antdTheme } from "antd";
 import { type Location } from "react-router-dom";
 import useLocationListen from "src/common/hooks/useLocationListen";
-import { ROUTE_ID } from "src/config/routerConfig";
-import { ROUTE_ID_KEY } from "src/config/types";
 import { useFlat, useResetRedux } from "src/reduxService";
 import { AppHelper, RouterHelper } from "src/reduxService/helper";
 import { ThemeName } from "src/reduxService/stores/appStore/modal";
@@ -18,6 +16,8 @@ import OptionsFloatBtn from "../../pages/HomePage/components/optionsFloatBtn";
 import Tabs from "../../pages/HomePage/components/tabs/tabs";
 import styles from "./index.module.scss";
 import storageHelper from "src/common/utils/storageHelper";
+import { ROUTE_ID_KEY } from "src/router/types";
+import { ROUTE_ID } from "src/router/name";
 
 const { Header, Content, Sider } = Layout;
 const ThemeSeq: ThemeName[] = ["light", "dark", "auto"];

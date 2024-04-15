@@ -1,3 +1,5 @@
+import { names as pluginNames } from "plugins/config/services/name";
+
 const names = {
 	authStore: "authStore",
 	appStore: "appStore",
@@ -11,6 +13,7 @@ const names = {
 	filterStore: "filterStore",
 	ruleStore: "ruleStore",
 	dealStore: "dealStore",
+	...pluginNames,
 };
 
 export default names;

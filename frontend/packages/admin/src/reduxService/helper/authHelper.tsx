@@ -1,8 +1,8 @@
-import { ACTION_DICT } from "src/config/permissionConfig";
-import { ROUTE_INFO_CONFIG } from "src/config/routerConfig";
-import { RoutesStructDataItem } from "src/config/types";
+import { ACTION_DICT } from "src/permission/actionPermissionConfig";
 import { MenuPermissionItem } from "../stores/authStore/model";
 import { RouterHelper } from "./routerHelper";
+import { RoutesStructDataItem } from "src/router/types";
+import { ROUTE_INFO_CONFIG } from "src/router/routesConfig";
 type PermissionNode = any;
 export class AuthHelper {
 	/**

@@ -1,4 +1,4 @@
-import { ROUTE_ID_KEY } from "src/config/types";
+import { ROUTE_ID_KEY } from "src/router/types";
 
 export const UUID = () => {
 	return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(

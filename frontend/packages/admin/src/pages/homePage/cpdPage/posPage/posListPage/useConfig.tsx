@@ -5,7 +5,7 @@ import { useFlat } from "src/reduxService";
 import { useTranslation } from "react-i18next";
 import { Pos } from "src/reduxService/stores/posStore/model";
 import { RouterHelper } from "src/reduxService/helper/routerHelper";
-import { ROUTE_ID } from "src/config/routerConfig";
+import { ROUTE_ID } from "src/router/name";
 
 const useConfig = () => {
   const { deleteAct, posList } = useFlat("posStore");

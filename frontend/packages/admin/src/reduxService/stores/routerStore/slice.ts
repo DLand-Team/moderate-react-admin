@@ -1,12 +1,12 @@
 /* Core */
-import { ROUTE_INFO_CONFIG } from "src/config/routerConfig";
-import { RouteItem } from "src/config/types";
 import { RouterHelper } from "src/reduxService/helper";
 import { cloneDeep } from "lodash-es";
 import { PayloadAction, createSliceCustom } from "redux-eazy";
 import names from "../names";
 import { RoutesConfigMap, StoreState } from "./model";
 import storageHelper from "src/common/utils/storageHelper";
+import { ROUTE_INFO_CONFIG } from "src/router/routesConfig";
+import { RouteItem } from "src/router/types";
 
 const initialState = (): StoreState => {
 	const { routesConfig, routesConfigMap } =

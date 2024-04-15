@@ -2,8 +2,8 @@ import { Breadcrumb } from "antd";
 import { useState } from "react";
 import type { Location } from "react-router-dom";
 import useLocationListen from "src/common/hooks/useLocationListen";
-import { ROUTE_ID_KEY } from "src/config/types";
 import { RouterHelper } from "src/reduxService/helper";
+import { ROUTE_ID_KEY } from "src/router/types";
 
 const BreadcrumbComp = () => {
 	const [infoArr, setInfoArr] = useState<{ id: string; title: string }[]>([]);

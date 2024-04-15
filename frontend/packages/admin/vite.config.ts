@@ -20,6 +20,16 @@ export default defineConfig({
 	server: {
 		port: 8032,
 		proxy: {
+			"/pdfWorkerCdn": {
+				target: "https://cdnjs.cloudflare.com",
+				changeOrigin: true, // 允许跨域
+				rewrite: (path) => path.replace(/^\/pdfWorkerCdn/, ""),
+			},
+			"/res": {
+				target: "	https://qiniu.moderate.run",
+				changeOrigin: true, // 允许跨域
+				rewrite: (path) => path.replace(/^\/res/, ""),
+			},
 			"/api": {
 				target: "https://live-admin.scaling.com.au",
 				changeOrigin: true, // 允许跨域

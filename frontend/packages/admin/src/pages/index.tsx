@@ -1,5 +1,6 @@
 import { lazy } from "react";
 
+import { pageList as pluginsPages } from "plugins/config/pages";
 // MODERATE_AUTO_PAGE_LAZY_IMPORT:START
 const HomePage = lazy(() => import("./HomePage/homePage"));
 const LoginPage = lazy(() => import("./LoginPage/loginPage"));
@@ -73,6 +74,9 @@ const CarrierListPage = lazy(
 const MenuPage = lazy(() => import("./HomePage/SysPage/MenuPage/menuPage"));
 
 const DealPage = lazy(() => import("./HomePage/CmsPage/DealPage/dealPage"));
+
+////TestPage
+const TestPage = lazy(() => import("./HomePage/CmsPage/TestPage/TestPage"));
 //MODERATE_AUTO_PAGE_LAZY_IMPORT:END
 export const pageList = {
 	HomePage,
@@ -99,4 +103,6 @@ export const pageList = {
 	CarrierListPage,
 	MenuPage,
 	DealPage,
+	TestPage,
+	...pluginsPages,
 };

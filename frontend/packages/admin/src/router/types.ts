@@ -2,8 +2,8 @@ import { MenuItemType } from "antd/es/menu/hooks/useItems";
 import type { RouteProps } from "react-router-dom";
 import { pageList } from "src/pages";
 import { MenuIconType } from "src/static/iconMap";
-import { ACTION_DICT } from "./permissionConfig";
-import { ROUTE_NAME } from "./routerConfig";
+import { ACTION_DICT } from "src/permission/actionPermissionConfig";
+import { NAME } from "./name";
 
 export interface ExtendRouteConfig {
 	id?: ROUTE_ID_KEY; // 节点id
@@ -24,7 +24,7 @@ export interface ExtendRouteConfig {
 // 详情数据
 export type RouteItem = RouteProps & ExtendRouteConfig;
 
-export type ROUTE_ID_KEY = keyof typeof ROUTE_NAME;
+export type ROUTE_ID_KEY = keyof typeof NAME;
 
 // 结构数据
 export interface RoutesStructDataItem {

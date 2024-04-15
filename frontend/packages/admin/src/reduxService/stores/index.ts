@@ -1,3 +1,4 @@
+import { stores as pluginStores } from "plugins/config/services/stores";
 // 职责功能划分的仓库
 import appStore from "./appStore";
 import authStore from "./authStore";
@@ -9,7 +10,7 @@ import carrierStore from "./carrierStore";
 import sortStore from "./sortStore";
 import filterStore from "./filterStore";
 import ruleStore from "./ruleStore";
-import dealStore from "plugins/plugin1/services/dealStore";
+import dealStore from "./dealStore";
 
 const stores = {
 	appStore,
@@ -23,6 +24,7 @@ const stores = {
 	filterStore,
 	ruleStore,
 	dealStore,
+	...pluginStores,
 };
 
 export { stores };
