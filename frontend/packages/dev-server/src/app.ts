@@ -10,16 +10,16 @@ import {
 	qiniuRouter,
 	rootRouter,
 	storeDevRouter,
+	pluginDevRouter,
 } from "./apis";
-import devHelper from "./helper/devHelper";
 
-devHelper.toWatchFlies();
 const routerArr = [
 	qiniuRouter,
 	rootRouter,
 	apiDevRouter,
 	pageDevRouter,
 	storeDevRouter,
+	pluginDevRouter,
 ];
 const app = new Koa();
 

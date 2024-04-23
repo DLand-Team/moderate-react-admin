@@ -2,42 +2,47 @@ import { RouteItem } from "@/model";
 import fs from "fs";
 import pathHelper from "./pathHelper";
 import ejs from "ejs";
-import regHelper from "@/helper/regHelper";
+import { Options } from "prettier";
+import prettier from "@prettier/sync";
 import path from "path";
-import beautify from "js-beautify/js";
 import storeTemplateConfig from "@/templates/storeTemplate/config.json";
 import apiTemplateConfig from "@/templates/apiTemplate/config.json";
 import pageTemplateConfig from "@/templates/template1/config.json";
+import { merge } from "lodash";
 const chokidar = require("chokidar");
 
-const beautifyOptions = {
-	indent_size: "2",
-	indent_char: " ",
-	max_preserve_newlines: "5",
-	preserve_newlines: true,
-	keep_array_indentation: false,
-	break_chained_methods: false,
-	indent_scripts: "normal",
-	brace_style: "collapse",
-	space_before_conditional: true,
-	unescape_strings: false,
-	jslint_happy: false,
-	end_with_newline: false,
-	wrap_line_length: "0",
-	indent_inner_html: false,
-	comma_first: false,
-	e4x: false,
-	indent_empty_lines: false,
+const beautifyOptions: Options = {
+	parser: "typescript",
+	arrowParens: "always",
+	bracketSameLine: false,
+	bracketSpacing: true,
+	semi: true,
+	experimentalTernaries: false,
+	singleQuote: false,
+	jsxSingleQuote: false,
+	quoteProps: "as-needed",
+	trailingComma: "all",
+	singleAttributePerLine: false,
+	htmlWhitespaceSensitivity: "css",
+	vueIndentScriptAndStyle: false,
+	proseWrap: "preserve",
+	insertPragma: false,
+	printWidth: 65,
+	requirePragma: false,
+	tabWidth: 2,
+	useTabs: false,
+	embeddedLanguageFormatting: "auto",
 };
 
 class devHelper {
+	plguinTreeData = {};
 	beautifyOptions = beautifyOptions;
 	isCreate = false;
 	capitalizeFirstLetter(str) {
 		return str.charAt(0).toUpperCase() + str.slice(1);
 	}
 	toFromat = (str) => {
-		return beautify(str, beautifyOptions);
+		return prettier.format(str, beautifyOptions);
 	};
 
 	// 获取路由数据中的routeArr的数组字符
@@ -64,9 +69,9 @@ class devHelper {
 		return [matches, exportList];
 	};
 
-	getRouteStructStr = () => {
+	getRouteStructStr = (routerConfigPath: string = "") => {
 		const pageCode = fs
-			.readFileSync(pathHelper.webRouterConfigPath)
+			.readFileSync(routerConfigPath || pathHelper.webRouterStructPath)
 			.toString();
 		let oldStructStr = pageCode.match(
 			/\/\/\s*?MODERATE_AUTO:START([\s\S]*?)\/\/ MODERATE_AUTO:END/g,
@@ -75,35 +80,33 @@ class devHelper {
 	};
 
 	// 获得理由config字典
-	getRouteConfig = () => {
+	getRouteConfig = (path: string = "") => {
 		const pageCode = fs
-			.readFileSync(pathHelper.webRouterConfigPath)
+			.readFileSync(path || pathHelper.webRouterConfigPath)
 			.toString();
-		const matches = regHelper.getStrBetween(
-			pageCode,
-			"MODERATE_AUTO_3:START",
-			"//MODERATE_AUTO_3:END",
-		);
-		let configStr = matches[1].split("=")[1].replace(/\n|\t/g, "");
+		let configStr = pageCode.split("=")[1].replace(/\n|\t/g, "");
 		let result = {};
-		eval("result = " + configStr);
+		eval(
+			"let i18n = {t: (str) => {return `'%i18n.t('${str}')%'`}};let PLUGIN_ROUTE_INFO_CONFIG = {};result = " +
+				configStr,
+		);
 		return result;
 	};
 
 	// 注册页面信息
 	toRegistePage = (newItem, path, pageName) => {
+		const namePath = pathHelper.webRouterNamePath;
+		const configPath = pathHelper.webRouterConfigPath;
+		const pagePath = pathHelper.webPageIndexPath;
 		// 写入路由配置数据文件内容
 		{
-			const pageCode = fs
-				.readFileSync(pathHelper.webRouterConfigPath)
-				.toString();
-
+			const pageCode = fs.readFileSync(namePath).toString();
 			let newCode = pageCode;
 			// 第一步：注册name
-			{
-				const regex = /export enum ROUTE_NAME {([\s\S]*?)}/;
-				const match = pageCode.match(regex);
-				if (match) {
+			const regex = /export enum NAME {([\s\S]*?)}/;
+			const match = pageCode.match(regex);
+			if (match) {
+				if (match[1]) {
 					const enumContent = match[1].trim();
 					// 如果enumContent的结尾时逗号，那么就不需要加逗号了
 					if (enumContent.endsWith(",")) {
@@ -119,43 +122,44 @@ class devHelper {
 					}
 				}
 			}
-
+			fs.writeFileSync(namePath, this.toFromat(newCode));
+		}
+		{
+			const pageCode = fs.readFileSync(configPath).toString();
 			// 第二步骤：注册路由
 			// 获得路由数据
 			let routeConfig = this.getRouteConfig();
 			routeConfig[pageName] = newItem;
-			const matchestest = regHelper.getStrBetween(
-				pageCode,
-				"MODERATE_AUTO_3:START",
-				"//MODERATE_AUTO_3:END",
+			// 做个记号，然后替换
+			routeConfig["end"] = "end";
+			let configStr = pageCode.split("=");
+			configStr[1] = JSON.stringify(routeConfig).replace(
+				`"end":"end"`,
+				"...PLUGIN_ROUTE_INFO_CONFIG",
 			);
-			let configStr = matchestest[1].split("=");
-			configStr[1] = JSON.stringify(routeConfig);
-			let newRoutesStr = `\n${configStr.join("=")}\n`;
-			newCode = newCode.replace(
-				matchestest[1],
-				"\n" +
-					this.toFromat(
-						newRoutesStr.replace(/"([^"]+)":/g, "$1:") + "\n",
-					),
-			);
-			fs.writeFileSync(
-				pathHelper.webRouterConfigPath,
-				newCode.replace(/\'/g, '"'),
-			);
-		}
 
+			let newRoutesStr = `\n${configStr.join("=")}\n`;
+			let newCode = newRoutesStr;
+			let str = this.toFromat(newCode);
+			str = str
+				.replace(/\"\'\%/g, "")
+				.replace(/\%\'\"/g, "")
+				.replace(/\'/g, '"');
+			fs.writeFileSync(configPath, str);
+		}
 		// 写入组件表
 		{
-			const pageIndexCode = fs
-				.readFileSync(pathHelper.webPageIndexPath)
-				.toString();
+			const pageIndexCode = fs.readFileSync(pagePath).toString();
 			const [matchExport, exportList] = this.getPageExport(pageIndexCode);
 			exportList.push(newItem.component);
-			const updateString = exportList.join(",");
+			let updateString: string = exportList.join(",");
+			updateString = updateString.replace(
+				"pluginsPages",
+				"...pluginsPages",
+			);
 			let newCode = pageIndexCode.replace(matchExport[1], updateString);
 			// 加个lazyComopnent
-			let lazyStr = `const ${newItem.component} = lazy(() => import("${path}/${pageName}/${pageName}"));`;
+			let lazyStr = `const ${newItem.component} = lazy(() => import("${path}/${pageName}"));`;
 			newCode = newCode.replace(
 				"MODERATE_AUTO_PAGE_LAZY_IMPORT:END",
 				`//${pageName} \n` +
@@ -163,7 +167,100 @@ class devHelper {
 					" \n //MODERATE_AUTO_PAGE_LAZY_IMPORT:END",
 			);
 			fs.writeFileSync(
-				pathHelper.webPageIndexPath,
+				pagePath,
+				this.toFromat(newCode).replace(/\'/g, '"'),
+			);
+		}
+	};
+	// 注册插件页面信息
+	toRegisterPluginPage = ({
+		newItem,
+		pageName,
+		pagePath,
+		isHasIndexPage,
+	}: {
+		newItem;
+		path: string;
+		pageName: string;
+		isPlugin: boolean;
+		pluginConfig;
+		pagePath: string;
+		isHasIndexPage: boolean;
+	}) => {
+		const namePath = pathHelper.pluginRouterNamePath;
+		const routeConfigPath = pathHelper.pluginRouterConfigPath;
+		const pageIndexPath = pathHelper.pluginPageIndexPath;
+		// 第一步：注册name
+		{
+			const pageCode = this.toFromat(
+				fs.readFileSync(namePath).toString(),
+			);
+			let newCode = pageCode;
+			const regex = /export enum PLUGIN_ROUTE_NAME {([\s\S]*?)}/;
+			const match = pageCode.match(regex);
+			if (match) {
+				if (match[1]) {
+					const enumContent = match[1].trim();
+					// 如果enumContent的结尾时逗号，那么就不需要加逗号了
+					if (enumContent.endsWith(",") || !enumContent) {
+						newCode = newCode.replace(
+							match[1],
+							enumContent + "\n" + "  " + pageName + "\n",
+						);
+					} else {
+						newCode = newCode.replace(
+							match[1],
+							enumContent + ",\n" + " " + pageName + "\n",
+						);
+					}
+				} else {
+					newCode = pageCode.replace(
+						match[0],
+						`export enum PLUGIN_ROUTE_NAME {${pageName}=10000}`,
+					);
+				}
+			}
+			fs.writeFileSync(namePath, this.toFromat(newCode));
+		}
+		// 第二步骤：注册路由
+		{
+			const pageCode = fs.readFileSync(routeConfigPath).toString();
+			// 获得路由数据
+			let routeConfig = this.getRouteConfig(
+				pathHelper.pluginRouterConfigPath,
+			);
+			routeConfig[pageName] = newItem;
+			// 做个记号，然后替换
+			let configStr = pageCode.split("=");
+			configStr[1] = JSON.stringify(routeConfig);
+			let newRoutesStr = `\n${configStr.join("=")}\n`;
+			let newCode = newRoutesStr;
+			let str = this.toFromat(newCode);
+			str.replace(/\"\'\%/g, "")
+				.replace(/\%\'\"/g, "")
+				.replace(/\'/g, '"');
+			fs.writeFileSync(routeConfigPath, str);
+		}
+
+		// 写入组件表
+		if (isHasIndexPage) {
+			// 读插件目录，分析页面，然后在page表里进行注册
+			const pageIndexCode = fs.readFileSync(pageIndexPath).toString();
+			// 加个lazyComopnent
+			let lazyStr = `const ${pageName} = lazy(() => import("${pagePath}"));`;
+			// 注入引入组件的代码
+			let newCode = pageIndexCode
+				.replace(
+					"//>>>PAGE_INPORT_SIGN<<<//",
+					lazyStr + " \n //>>>PAGE_INPORT_SIGN<<<//",
+				)
+				.replace(
+					"//>>>PAGE_SIGN<<<//",
+					pageName + " \n //>>>PAGE_SIGN<<<//",
+				);
+
+			fs.writeFileSync(
+				pageIndexPath,
 				this.toFromat(newCode).replace(/\'/g, '"'),
 			);
 		}
@@ -237,7 +334,7 @@ class devHelper {
 				),
 				{ strict: true },
 			);
-			let fileName = `${pageName}.${fileItem.type}`;
+			let fileName = `index.${fileItem.type}`;
 			// 将pageName的首字母大写
 			this.writeFile(
 				filePath + fileItem.path,
@@ -301,37 +398,28 @@ class devHelper {
 	};
 
 	// 创建路由结构数据
-	toCreateRouteStructData = (routerConfigPath, pagePath) => {
-		const pageCode = fs
-			.readFileSync(pathHelper.webRouterConfigPath)
-			.toString();
-		let oldStructStr = this.getRouteStructStr();
+	toCreateRouteStructData = (routerTreePath, pagePath) => {
+		const pageCode = fs.readFileSync(routerTreePath).toString();
+		let oldStructStr = this.getRouteStructStr(routerTreePath);
 		// 创建路由数据，通过分析目录结构
 		const routeStructData = this.createRouteStructDataByDir(pagePath);
 		let newCode = pageCode
 			.replace(oldStructStr, routeStructData)
 			.replace(/\n+$/, "");
-		fs.writeFileSync(routerConfigPath, newCode.replace(/\'/g, '"'));
+		fs.writeFileSync(routerTreePath, newCode.replace(/\'/g, '"'));
 	};
 
 	writeFile = function (filePath, filename, newContent) {
-		if (fs.existsSync(filePath)) {
-			console.log("该路径已存在");
-		} else {
-			console.log("该路径不存在");
+		if (!fs.existsSync(filePath)) {
 			fs.mkdirSync(filePath);
 		}
 		try {
 			const oldContent = fs.readFileSync(filename, "utf8");
 			if (oldContent == newContent) {
-				console.warn(
-					`* Skipping file '${filename}' because it is up-to-date`,
-				);
 				return;
 			}
 		} catch (err) {}
 		fs.writeFileSync(filePath + filename, newContent);
-		console.warn(`* Updating outdated file '${filename}'`);
 	};
 
 	readFilrDirLoop = (path, data) => {
@@ -350,13 +438,77 @@ class devHelper {
 		}
 	};
 
+	readDirForPluginInfoLoop = (path, data) => {
+		try {
+			const files = fs.readdirSync(path);
+			files.forEach((file) => {
+				const stats = fs.statSync(path + "/" + file);
+				// 判断是否是文件夹
+				if (!stats.isFile() && file !== "components") {
+					const subFiles = fs.readdirSync(path + "/" + file);
+					console.log(subFiles);
+					let isHasIndexPage = subFiles.some((item) => {
+						return item == "index.tsx";
+					});
+					data[file] = {
+						pagePath: path + "/" + file,
+						pageName: file,
+						isHasIndexPage,
+					};
+
+					this.readDirForPluginInfoLoop(path + "/" + file, data);
+				}
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	readDirForPageLoop = (path, data) => {
+		try {
+			const files = fs.readdirSync(path);
+			files.forEach((file) => {
+				const stats = fs.statSync(path + "/" + file);
+				// 判断是否是文件夹
+				if (!stats.isFile() && file !== "components") {
+					data[file] = {};
+					this.readFilrDirLoop(path + "/" + file, data[file]);
+				}
+			});
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	readFileDirForPagesLoop = (path, data) => {
+		try {
+			const files = fs.readdirSync(path);
+			files.forEach((file) => {
+				const stats = fs.statSync(path + "/" + file);
+				// 判断是否是文件夹
+				if (!stats.isFile() && file.includes("plugin-")) {
+					let temp = {};
+					let pluginPath = path + "/" + file;
+					this.readFilrDirLoop(pluginPath, temp);
+					if ("pages" in temp) {
+						data[file] = pluginPath + "/pages";
+					}
+				}
+			});
+			console.log(data);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 	createRouteStructDataByDir = (path) => {
 		let data = {};
 		this.readFilrDirLoop(path, data);
+		data = merge(data, this.plguinTreeData);
 		let newCode = `// MODERATE_AUTO:START \n export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = ${this.convertToRouteStructConfig(
 			data,
 		)} \n // MODERATE_AUTO:END`;
-		return beautify(newCode, beautifyOptions);
+		return this.toFromat(newCode);
 	};
 
 	convertToRouteStructConfigLoop = (treeData) => {
@@ -424,43 +576,33 @@ class devHelper {
 			this.convertToRouteStructConfigLoop(data),
 		).replace(/\"/g, "");
 	};
-	toWatchFlies = async () => {
-		const toreWriteRouteStructData = () => {
-			if (this.isCreate) {
-				this.isCreate = false;
-			} else {
-				this.isCreate = true;
-				this.toCreateRouteStructData(
-					pathHelper.webRouterConfigPath,
-					pathHelper.webPagesPath,
-				);
-			}
-		};
-		const rouerConfigWatcher = chokidar.watch(
-			pathHelper.webRouterConfigPath,
-			{
-				ignored: /[\/\\]\./,
-				ignoreInitial: false,
-			},
+	// 创建项目的主路由结构
+	toreWriteRouteStructData = () => {
+		this.toCreateRouteStructData(
+			pathHelper.webRouterStructPath,
+			pathHelper.webPagesPath,
 		);
-		rouerConfigWatcher
-			.on("unlinkDir", function (path) {
-				console.log("Directory", path, "has been removed");
-			})
-			.on("addDir", function (path) {
-				console.log("Directory", path, "has been added");
-			})
-			.on("add", async function (path) {
-				console.log("File", path, "has been change");
-			})
-			.on("change", async function (path) {
-				console.log("File", path, "has been change");
-				toreWriteRouteStructData();
-			})
-			.on("unlink", function (path) {
-				console.log("File", path, "has been delete");
-			});
-		const watcher = chokidar.watch(pathHelper.webPageIndexPath, {
+	};
+	// 创建插件路由的结构
+	toreWritePluginRouteStructData = () => {
+		this.isCreate = true;
+		// page的目录是多个有几个插件就有几个
+		let pluginPagesPathArr = {};
+		this.readFileDirForPagesLoop(
+			pathHelper.adminPlugins,
+			pluginPagesPathArr,
+		);
+		let result = {};
+		Object.values(pluginPagesPathArr).forEach((pluginPagesPath) => {
+			let data = {};
+			this.readFilrDirLoop(pluginPagesPath, data);
+			result = merge(result, data);
+		});
+		return result;
+	};
+	toWatchFlies = async () => {
+		// 监听文件改变
+		const watcher = chokidar.watch(pathHelper.webPagesPath, {
 			ignored: /[\/\\]\./,
 			ignoreInitial: false,
 		});
@@ -468,21 +610,31 @@ class devHelper {
 		// 监听删除文件夹
 		// 监听删除文件
 		watcher
-			.on("unlinkDir", function (path) {
-				console.log("Directory", path, "has been removed");
+			.on("raw", async () => {
+				this.plguinTreeData = this.toreWritePluginRouteStructData();
+				this.toreWriteRouteStructData();
 			})
-			.on("addDir", function (path) {
-				console.log("Directory", path, "has been added");
+			.on("ready", async () => {
+				this.plguinTreeData = this.toreWritePluginRouteStructData();
+				this.toreWriteRouteStructData();
+			});
+	};
+	toWatchPluginsFlies = async () => {
+		const watcher = chokidar.watch(pathHelper.adminPlugins, {
+			ignored: /[\/\\]\./,
+			ignoreInitial: false,
+		});
+		// 监听添加文件夹
+		// 监听删除文件夹
+		// 监听删除文件
+		watcher
+			.on("raw", async () => {
+				this.plguinTreeData = this.toreWritePluginRouteStructData();
+				this.toreWriteRouteStructData();
 			})
-			.on("add", async function (path) {
-				console.log("File", path, "has been change");
-			})
-			.on("change", async function (path) {
-				console.log("File", path, "has been change");
-				toreWriteRouteStructData();
-			})
-			.on("unlink", function (path) {
-				console.log("File", path, "has been delete");
+			.on("ready", async () => {
+				this.plguinTreeData = this.toreWritePluginRouteStructData();
+				this.toreWriteRouteStructData();
 			});
 	};
 }
