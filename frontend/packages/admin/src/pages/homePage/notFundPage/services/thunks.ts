@@ -1,10 +1,10 @@
 /* Instruments */
-import names from "src/reduxService/stores/names";
+import names from "src/service/stores/names";
 import { pickBy } from "lodash-es";
 import httpApi from "./api";
 import type { PageType, QueryActParams } from "./model";
 import { UUID } from "src/common/utils";
-import { createThunks } from "src/reduxService/setup";
+import { createThunks } from "src/service/setup";
 
 const thunks = createThunks(names.categoryStore, {
 	refreshFormVersionAct: () => {

@@ -12,11 +12,10 @@ export interface PluginsConfig {
 }
 
 const addPluginHandler = async (ctx) => {
-	// const name = "PdfPage";
-	// const url = "https://gitee.com/qanglee/moderate-plugin-pdf.git";
 	const { url, type = "pnpm" } = ctx.request.body; //获取post提交的数据
 	const pluginName = url.split("/").at(-1).replace(".git", "");
 	const pluginCachePath = pathHelper.pluginsCache + "/" + pluginName;
+
 	const { dependencies } = await request.get<any, PluginsConfig>(
 		`${url}/raw/master/config.json`,
 	);
@@ -76,6 +75,7 @@ const addPluginHandler = async (ctx) => {
 		const regex = /export enum NAME {([\s\S]*?)}/;
 		const match = pageCode.match(regex);
 		let newResult = {};
+		// 首先排除一下主路由配置中存在的。
 		for (let i in result) {
 			if (!match?.[1].includes(i)) {
 				newResult[i] = result[i];
@@ -112,6 +112,14 @@ const addPluginHandler = async (ctx) => {
 				isHasIndexPage,
 			});
 		}
+	}
+	// 分析page以外的资源：provider,layouts
+	{
+		// 通过plugin的位置读出来内部是否存在provider
+		const providers = devHelper.readProviders(pluginName);
+		providers.forEach((item) => {
+			devHelper.toRegisterProvider(pluginName, item);
+		});
 	}
 
 	ctx.response.body = {

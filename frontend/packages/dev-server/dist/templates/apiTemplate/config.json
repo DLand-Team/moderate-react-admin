@@ -1,0 +1,9 @@
+{
+    "version": 1,
+    "fileList": [
+        {
+            "type": "ts",
+            "template": "api.ejs"
+        }
+    ]
+}

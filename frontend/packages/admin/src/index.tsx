@@ -1,20 +1,22 @@
-import CustomRouter from "src/common/components/customRouter/customRouter";
-
+import { pluginProviders } from "plugins/config/providers";
 import { createRoot } from "react-dom/client";
+import CustomRouter from "src/components/customRouter";
 import App from "./app";
+import AuthProvider from "./providers/authProvider";
 import "./index.css";
-import ServiceProvider from "./reduxService/ServiceProvider";
-import AuthProvider from "./common/provider/authProvider";
-import ThemeProvider from "./theme/provider";
+import { AppHelper } from "./service";
+import ServiceProvider from "./providers/serviceProvider";
+import ThemeProvider from "./providers/themeProvider";
+
+const providerArr = [
+	ServiceProvider,
+	CustomRouter,
+	AuthProvider,
+	ThemeProvider,
+	...pluginProviders,
+	App,
+];
 
 createRoot(document.getElementById("root")!).render(
-	<ServiceProvider>
-		<CustomRouter>
-			<AuthProvider>
-				<ThemeProvider>
-					<App></App>
-				</ThemeProvider>
-			</AuthProvider>
-		</CustomRouter>
-	</ServiceProvider>,
+	AppHelper.createApp(providerArr),
 );

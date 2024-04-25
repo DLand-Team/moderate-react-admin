@@ -9,6 +9,7 @@ import storeTemplateConfig from "@/templates/storeTemplate/config.json";
 import apiTemplateConfig from "@/templates/apiTemplate/config.json";
 import pageTemplateConfig from "@/templates/template1/config.json";
 import { merge } from "lodash";
+import { upFirstcharacter } from "@/utils";
 const chokidar = require("chokidar");
 
 const beautifyOptions: Options = {
@@ -266,6 +267,28 @@ class devHelper {
 		}
 	};
 
+	toRegisterProvider = (pluginName: string, providerName) => {
+		// 获取provider的代码
+		const providerFileCode = fs
+			.readFileSync(pathHelper.providerConfigPath)
+			.toString();
+		const importSign = "//>>>PROVIDER_INPORT_SIGN<<<//";
+		const registerSign = "//>>>PROVIDER_SIGN<<<//";
+		const importCode = `import { ${upFirstcharacter(providerName)} } from "plugins/${pluginName}/providers/${providerName}";`;
+		let newCode = providerFileCode.replace(
+			importSign,
+			importCode + "\n" + importSign,
+		);
+		newCode = newCode.replace(
+			registerSign,
+			upFirstcharacter(providerName) + "\n" + registerSign,
+		);
+		fs.writeFileSync(
+			pathHelper.providerConfigPath,
+			this.toFromat(newCode).replace(/\'/g, '"'),
+		);
+	};
+
 	// 注册仓库信息
 	toRegistStore = (name: string) => {
 		const input = fs.readFileSync(pathHelper.webStoresIndexPath).toString();
@@ -335,7 +358,6 @@ class devHelper {
 				{ strict: true },
 			);
 			let fileName = `index.${fileItem.type}`;
-			// 将pageName的首字母大写
 			this.writeFile(
 				filePath + fileItem.path,
 				`/${fileName}`,
@@ -384,7 +406,6 @@ class devHelper {
 				),
 				{ strict: true },
 			);
-			// 将pageName的首字母大写
 			this.writeFile(
 				filePath,
 				`/${name}.${fileItem.type}`,
@@ -455,13 +476,10 @@ class devHelper {
 						pageName: file,
 						isHasIndexPage,
 					};
-
 					this.readDirForPluginInfoLoop(path + "/" + file, data);
 				}
 			});
-		} catch (err) {
-			console.log(err);
-		}
+		} catch (err) {}
 	};
 
 	readDirForPageLoop = (path, data) => {
@@ -637,6 +655,23 @@ class devHelper {
 				this.toreWriteRouteStructData();
 			});
 	};
+	readProviders(pluginName: string): string[] {
+		const files = fs.readdirSync(
+			pathHelper.pluginsCache + "/" + pluginName,
+		);
+		if (files.includes("providers")) {
+			const providerFiles = fs
+				.readdirSync(
+					pathHelper.pluginsCache + "/" + pluginName + "/providers",
+				)
+				?.map((item) => {
+					return item.replace(".tsx", "");
+				});
+			console.log(providerFiles);
+			return providerFiles;
+		}
+		return [];
+	}
 }
 
 export default new devHelper();

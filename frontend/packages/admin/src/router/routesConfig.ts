@@ -32,19 +32,28 @@ export const ROUTE_INFO_CONFIG: {
 	},
 	SysPage: {
 		id: "SysPage",
-		meta: { title: i18n.t("dev:dev.sys"), icon: "ApartmentOutlined" },
+		meta: {
+			title: i18n.t("dev:dev.sys"),
+			icon: "ApartmentOutlined",
+		},
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
 	},
 	CmsPage: {
 		id: "CmsPage",
-		meta: { title: i18n.t("dev:dev.cms"), icon: "CoffeeOutlined" },
+		meta: {
+			title: i18n.t("dev:dev.cms"),
+			icon: "CoffeeOutlined",
+		},
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
 	},
 	CpdPage: {
 		id: "CpdPage",
-		meta: { title: i18n.t("dev:dev.cpdPage"), icon: "FireOutlined" },
+		meta: {
+			title: i18n.t("dev:dev.cpdPage"),
+			icon: "FireOutlined",
+		},
 		isNoAuth: true,
 	},
 	UserPage: {
@@ -63,7 +72,10 @@ export const ROUTE_INFO_CONFIG: {
 	},
 	DevPage: {
 		id: "DevPage",
-		meta: { title: i18n.t("dev:dev.name"), icon: "LaptopOutlined" },
+		meta: {
+			title: i18n.t("dev:dev.name"),
+			icon: "LaptopOutlined",
+		},
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
 	},
@@ -96,17 +108,6 @@ export const ROUTE_INFO_CONFIG: {
 		isNoAuth: true,
 		actionPermissions: ["ADD", "EDIT"],
 	},
-	PosPage: {
-		id: "PosPage",
-		meta: { title: "PosPage" },
-		component: "PosPage",
-	},
-	PosEditPage: {
-		id: "PosEditPage",
-		meta: { title: "PosEditPage" },
-		component: "PosEditPage",
-		depands: ["PosPage"],
-	},
 	NotFundPage: {
 		id: "NotFundPage",
 		meta: { title: "NotFundPage" },
@@ -115,70 +116,6 @@ export const ROUTE_INFO_CONFIG: {
 		isMenu: false,
 		path: "*",
 	},
-	PosListPage: {
-		id: "PosListPage",
-		meta: { title: "PosListPage" },
-		index: true,
-		component: "PosListPage",
-		depands: ["PosPage"],
-	},
-	FilterPage: {
-		id: "FilterPage",
-		meta: { title: "FilterPage" },
-		component: "FilterPage",
-	},
-	FilterListPage: {
-		id: "FilterListPage",
-		meta: { title: "FilterListPage" },
-		component: "FilterListPage",
-		depands: ["FilterPage"],
-		index: true,
-	},
-	SortPage: {
-		id: "SortPage",
-		meta: { title: "SortPage" },
-		component: "SortPage",
-	},
-	SortListPage: {
-		id: "SortListPage",
-		meta: { title: "SortListPage" },
-		component: "SortListPage",
-		index: true,
-		depands: ["SortPage"],
-	},
-	MarketPage: {
-		id: "MarketPage",
-		meta: { title: "MarketPage" },
-		component: "MarketPage",
-		index: false,
-	},
-	MarketListPage: {
-		id: "MarketListPage",
-		meta: { title: "MarketListPage" },
-		component: "MarketListPage",
-		index: true,
-		depands: ["MarketPage"],
-	},
-	MarketEditPage: {
-		id: "MarketEditPage",
-		meta: { title: "MarketEditPage" },
-		component: "MarketEditPage",
-		index: false,
-		depands: ["MarketPage"],
-	},
-	CarrierPage: {
-		id: "CarrierPage",
-		meta: { title: "CarrierPage" },
-		component: "CarrierPage",
-		index: false,
-	},
-	CarrierListPage: {
-		id: "CarrierListPage",
-		meta: { title: "CarrierListPage" },
-		component: "CarrierListPage",
-		index: true,
-		depands: ["CarrierPage"],
-	},
 	MenuPage: {
 		id: "MenuPage",
 		meta: { title: "MenuPage" },
@@ -186,18 +123,20 @@ export const ROUTE_INFO_CONFIG: {
 		isNoAuth: true,
 		index: false,
 	},
-	DealPage: {
-		id: "DealPage",
-		meta: { title: "DealPage" },
-		component: "DealPage",
-		isNoAuth: true,
-	},
-	TestPage: {
-		id: "TestPage",
-		meta: { title: "TestPage" },
-		component: "TestPage",
+	PluginsPage: {
+		id: "PluginsPage",
+		meta: { title: "Plugins", icon: "ProductOutlined" },
+		component: "PluginsPage",
 		isNoAuth: true,
 		index: false,
+	},
+	PluginListPage: {
+		id: "PluginListPage",
+		meta: { title: "PluginListPage" },
+		component: "PluginListPage",
+		isNoAuth: true,
+		index: true,
+		isMenu: false,
 	},
 	...PLUGIN_ROUTE_INFO_CONFIG,
 };

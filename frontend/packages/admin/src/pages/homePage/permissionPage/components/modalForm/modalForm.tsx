@@ -1,4 +1,4 @@
-import { UploadNormal } from "src/common/components";
+import { UploadNormal } from "src/components";
 import { Button, Form, Image, Input, Modal, Radio, Select } from "antd";
 import { useState } from "react";
 import DropUpload from "../dropUpload/dropUpload";

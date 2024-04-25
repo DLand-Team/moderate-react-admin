@@ -1,13 +1,13 @@
 import { Outlet } from "react-router-dom";
 import themeProviderHoc from "src/common/hocs/themeHoc/themeHoc";
-// import Layout from "./layouts/layout-1";
-import Layout2 from "../../layouts/Layout-2";
+import { layoutMap } from "src/layouts";
 
 const HomePage = () => {
+	const Layout = layoutMap["LayoutA"];
 	return (
-		<Layout2>
+		<Layout>
 			<Outlet />
-		</Layout2>
+		</Layout>
 	);
 };
 

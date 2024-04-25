@@ -1,6 +1,6 @@
 import { Routes } from "react-router-dom";
-import { useFlat } from "./reduxService";
-import { RouterHelper } from "./reduxService/helper";
+import { useFlat } from "./service";
+import { RouterHelper } from "./service/helper";
 const App = () => {
 	const { routesConfig } = useFlat("routerStore");
 

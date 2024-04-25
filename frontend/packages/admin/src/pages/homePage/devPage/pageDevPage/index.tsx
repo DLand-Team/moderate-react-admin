@@ -1,15 +1,15 @@
-import { useGreatAsync } from "src/common/hooks";
-import { Checkbox, Space, Table } from "antd";
+import { Button, Checkbox, Pagination, Space, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { useEffect } from "react";
-import ModalForm from "./components/modalForm/modalForm";
-import styles from "./index.module.scss";
-import { useFlat } from "src/reduxService";
+import { useTranslation } from "react-i18next";
+import { useGreatAsync } from "src/common/hooks";
+import { useFlat } from "src/service";
 import {
 	AdcompanyPageParams,
 	PageType,
-} from "src/reduxService/stores/devStore/model";
-import { useTranslation } from "react-i18next";
+} from "src/service/stores/devStore/model";
+import ModalForm from "./components/modalForm/modalForm";
+import styles from "./index.module.scss";
 
 const columns: ColumnsType<PageType> = [
 	{
@@ -40,6 +40,7 @@ const columns: ColumnsType<PageType> = [
 ];
 
 const PageDevPage = () => {
+	const { addWinBox } = useFlat("appStore");
 	const {
 		pageNum,
 		pageSize,
@@ -48,6 +49,7 @@ const PageDevPage = () => {
 		fetchPageListAct,
 		addPageListAct,
 	} = useFlat("devStore");
+
 	const { t } = useTranslation(["dev"]);
 	const { loading: loading1, fn: createArticleListG } = useGreatAsync(
 		fetchPageListAct,
@@ -70,6 +72,26 @@ const PageDevPage = () => {
 
 	return (
 		<div className={styles.content}>
+			<Button
+				onClick={() => {
+					addWinBox({
+						content: (
+							<div
+								style={{
+									background: "#e9ecf0",
+									width: "100%",
+									height: "100%",
+									color: "black",
+								}}
+							>
+								Test
+							</div>
+						),
+					});
+				}}
+			>
+				show
+			</Button>
 			<div className={styles.operate_board}>
 				<ModalForm
 					btnLabel={t`dev.addRouter`}
@@ -80,17 +102,26 @@ const PageDevPage = () => {
 				rowKey={(record) => {
 					return record.id;
 				}}
+				pagination={false}
 				loading={loading1}
-				pagination={{
-					pageSize,
-					current: pageNum,
-					total,
-					onChange() {
-						handlePageChange();
-					},
-				}}
 				columns={columns}
 				dataSource={pageList || []}
+				footer={() => (
+					<div
+						style={{
+							display: "flex",
+							justifyContent: "flex-end",
+						}}
+					>
+						<Pagination
+							{...{
+								pageSize,
+								current: pageNum,
+								total,
+							}}
+						></Pagination>
+					</div>
+				)}
 			/>
 		</div>
 	);

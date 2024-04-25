@@ -1,7 +1,7 @@
 import { Button, Result } from "antd";
 import React from "react";
-import { useFlat } from "src/reduxService";
-import { RouterHelper } from "src/reduxService/helper";
+import { useFlat } from "src/service";
+import { RouterHelper } from "src/service/helper";
 import { ROUTE_ID } from "src/router/name";
 
 const ErrPage: React.FC = () => {

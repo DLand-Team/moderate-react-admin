@@ -4,9 +4,11 @@ import {
 	CoffeeOutlined,
 	FireOutlined,
 	LaptopOutlined,
+	ProductOutlined,
 } from "@ant-design/icons";
 
 const MenuIconMap = {
+	ProductOutlined,
 	FundProjectionScreenOutlined,
 	ApartmentOutlined,
 	CoffeeOutlined,

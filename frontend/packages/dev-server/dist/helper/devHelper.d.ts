@@ -1,0 +1,51 @@
+import { Options } from "prettier";
+import path from "path";
+declare class devHelper {
+    plguinTreeData: {};
+    beautifyOptions: Options;
+    isCreate: boolean;
+    capitalizeFirstLetter(str: any): any;
+    toFromat: (str: any) => string;
+    getRouteArrStr: (pageCode: any) => RegExpExecArray;
+    getRouteArrPos: (pageCode: any) => RegExpExecArray;
+    getPageExport: (pageCode: any) => any[];
+    getRouteStructStr: (routerConfigPath?: string) => string;
+    getRouteConfig: (path?: string) => {};
+    toRegistePage: (newItem: any, path: any, pageName: any) => void;
+    toRegisterPluginPage: ({ newItem, pageName, pagePath, isHasIndexPage, }: {
+        newItem: any;
+        path: string;
+        pageName: string;
+        isPlugin: boolean;
+        pluginConfig: any;
+        pagePath: string;
+        isHasIndexPage: boolean;
+    }) => void;
+    toRegisterProvider: () => void;
+    toRegistStore: (name: string) => void;
+    toRegistApi: (name: string) => void;
+    toBuildPage: ({ pagePath, pageName, isOutlet, }: {
+        pagePath: string;
+        pageName: string;
+        isOutlet: boolean;
+    }) => void;
+    toBuildStore: (name: string) => void;
+    toBuildApi: (name: string) => void;
+    toCreateRouteStructData: (routerTreePath: any, pagePath: any) => void;
+    writeFile: (filePath: any, filename: any, newContent: any) => void;
+    readFilrDirLoop: (path: any, data: any) => void;
+    readDirForPluginInfoLoop: (path: any, data: any) => void;
+    readDirForPageLoop: (path: any, data: any) => void;
+    readFileDirForPagesLoop: (path: any, data: any) => void;
+    createRouteStructDataByDir: (path: any) => string;
+    convertToRouteStructConfigLoop: (treeData: any) => any[];
+    getStoreList: (name: any) => any[];
+    getApiList: (name: any) => any[];
+    convertToRouteStructConfig: (data: any) => string;
+    toreWriteRouteStructData: () => void;
+    toreWritePluginRouteStructData: () => {};
+    toWatchFlies: () => Promise<void>;
+    toWatchPluginsFlies: () => Promise<void>;
+}
+declare const _default: devHelper;
+export default _default;

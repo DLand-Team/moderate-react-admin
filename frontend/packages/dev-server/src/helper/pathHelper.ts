@@ -19,6 +19,7 @@ export default {
 	pluginRouterNamePath: path.resolve(
 		"../admin/plugins/config/router/name.ts",
 	), // 路由名称
+	providerConfigPath: path.resolve("../admin/plugins/config/providers.ts"), // provider配置数据
 	webPagesPath: path.resolve("../admin/src/pages"),
 	webServicePath: path.resolve("../admin/src/services"),
 	webStoresPath: path.resolve("../admin/src/services/stores"),

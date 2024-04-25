@@ -1,7 +1,7 @@
 /* Core */
 import { createSliceCustom } from "redux-eazy";
 import { StoreState } from "./model";
-import names from "src/reduxService/stores/names";
+import names from "src/service/stores/names";
 
 const initialState = (): StoreState => {
 	return {

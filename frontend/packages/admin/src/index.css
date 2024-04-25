@@ -14,11 +14,14 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
-html,body{
+
+html,
+body {
   height: 100%;
 }
+
 #root {
-  height: 100% ;
+  height: 100%;
 }
 
 body {
@@ -29,3 +32,7 @@ body {
 
 
 
+
+.ant-table-wrapper .ant-table {
+  border-radius: 8px;
+}

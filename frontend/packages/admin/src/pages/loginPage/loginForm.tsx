@@ -3,7 +3,7 @@ import { Fragment, useEffect, useState } from "react";
 import pic from "src/assets/imgs/currency-CNY.png";
 import pic2 from "src/assets/imgs/yingguoguoqi-.png";
 import storageHelper from "src/common/utils/storageHelper";
-import { useFlat } from "src/reduxService";
+import { useFlat } from "src/service";
 const { Option } = Select;
 /**
  * 被注释掉的是滑块拼图验证功能 暂时保留
