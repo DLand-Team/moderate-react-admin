@@ -1,6 +1,6 @@
 import { MenuItemType } from "antd/es/menu/hooks/useItems";
 import type { RouteProps } from "react-router-dom";
-import { pageList } from "src/pages1";
+import { pageList } from "src/pages";
 import { MenuIconType } from "src/static/iconMap";
 import { ACTION_DICT } from "src/static/actionPermission";
 import { PLUGIN_ROUTE_NAME } from "./name";

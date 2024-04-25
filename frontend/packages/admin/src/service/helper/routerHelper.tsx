@@ -3,7 +3,7 @@ import React, { Fragment, Suspense } from "react";
 import { Route } from "react-router-dom";
 import historyInstanse from "src/components/customRouter/historyInstance";
 import { includeOne } from "src/common/utils";
-import { pageList } from "src/pages1";
+import { pageList } from "src/pages";
 import { reduxStore as store } from "..";
 import {
 	ROUTE_ID_KEY,

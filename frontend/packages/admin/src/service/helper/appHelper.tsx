@@ -5,7 +5,7 @@ import iconMap, { MenuIconType } from "src/static/iconMap";
 import { cloneDeep } from "lodash-es";
 import { ROUTE_ID, ROUTE_NAME } from "src/router/name";
 import { ROUTE_ID_KEY, RouteItem } from "src/router/types";
-import { pageList } from "src/pages1";
+import { pageList } from "src/pages";
 import { ReactNode } from "react";
 
 export class AppHelper {
