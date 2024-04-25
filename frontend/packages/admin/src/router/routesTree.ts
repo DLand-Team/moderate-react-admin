@@ -6,7 +6,13 @@ export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [
   {
     id: ROUTE_ID.HomePage,
     children: [
-      { id: ROUTE_ID.CmsPage },
+      {
+        id: ROUTE_ID.CmsPage,
+        children: [
+          { id: ROUTE_ID.PdfPage },
+          { id: ROUTE_ID.WinboxPage },
+        ],
+      },
       {
         id: ROUTE_ID.DevPage,
         children: [
