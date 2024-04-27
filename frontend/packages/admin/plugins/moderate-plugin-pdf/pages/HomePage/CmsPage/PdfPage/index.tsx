@@ -1,5 +1,5 @@
 import { Button, Modal } from "antd";
-import PdfPreview from "plugins/moderate-plugin-markdown/common/components/pdfPreview";
+import PdfPreview from "plugins/moderate-plugin-pdf/common/components/pdfPreview";
 import { useState } from "react";
 
 const PdfPage = () => {

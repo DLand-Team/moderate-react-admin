@@ -4,6 +4,7 @@ import fs from "fs";
 // import { request } from "@/utils/request";
 import { exec } from "child_process";
 import { request } from "@/utils/request";
+import { deleteDir } from "@/utils/fsUtils";
 
 export interface PluginsConfig {
 	name: string;
@@ -21,16 +22,31 @@ const addPluginHandler = async (ctx) => {
 	);
 	// 第一步下载，git下载，可以版本控制
 	{
-		const cmd = `git clone ${url}.git ${pluginName}`;
-		const cwd = pathHelper.pluginsCache;
-		await new Promise((resolve) => {
-			exec(cmd, { cwd }, function (error, _, stderr) {
-				if (error) {
-					console.log(stderr);
-				}
-				resolve(`run ${cwd} successfully`);
+		const files = fs.readdirSync(pathHelper.pluginsCache);
+		// 判断插件是否存在，存在，拉一下代码
+		if (!files.includes(pluginName)) {
+			const cmd = `git clone ${url}.git ${pluginName}`;
+			const cwd = pathHelper.pluginsCache;
+			await new Promise((resolve) => {
+				exec(cmd, { cwd }, function (error, _, stderr) {
+					if (error) {
+						console.log(stderr);
+					}
+					resolve(`run ${cwd} successfully`);
+				});
 			});
-		});
+		} else {
+			const cmd = `git pull`;
+			const cwd = `${pathHelper.pluginsCache}/${pluginName}`;
+			await new Promise((resolve) => {
+				exec(cmd, { cwd }, function (error, _, stderr) {
+					if (error) {
+						console.log(stderr);
+					}
+					resolve(`run ${cwd} successfully`);
+				});
+			});
+		}
 	}
 	// 第二步拷贝，将插件文件拷贝到前端项目中的plugins中
 	{
@@ -38,6 +54,10 @@ const addPluginHandler = async (ctx) => {
 		const pluginPath = pathHelper.pluginsCache + "/" + pluginName;
 		const targetPath = pathHelper.adminPlugins + "/" + pluginName;
 		fs.cpSync(pluginPath, targetPath, { recursive: true });
+		// 删除拷贝过去的git文件夹
+		const files = fs.readdirSync(targetPath);
+		console.log(files)
+		deleteDir(`${targetPath}/.git`);
 	}
 
 	{

@@ -1,17 +1,33 @@
 //@ts-ignore
 import { lazy } from "react";
 
-const PdfPage = lazy(
-  () => import("plugins/moderate-plugin-pdf/pages/HomePage/CmsPage/PdfPage")
+const MdPage = lazy(
+	() =>
+		import(
+			"plugins/moderate-plugin-markdown/pages/HomePage/CmsPage/MdPage"
+		),
 );
 const WinboxPage = lazy(
-  () =>
-    import("plugins/moderate-plugin-winbox/pages/HomePage/CmsPage/WinboxPage")
+	() =>
+		import(
+			"plugins/moderate-plugin-winbox/pages/HomePage/CmsPage/WinboxPage"
+		),
+);
+const PdfPage = lazy(
+	() => import("plugins/moderate-plugin-pdf/pages/HomePage/CmsPage/PdfPage"),
+);
+const MusicPage = lazy(
+	() =>
+		import(
+			"plugins/moderate-plugin-music/pages/HomePage/CmsPage/MusicPage"
+		),
 );
 //>>>PAGE_INPORT_SIGN<<<//
 
 export const pageList = {
-  PdfPage,
-  WinboxPage,
-  //>>>PAGE_SIGN<<<//
+	MdPage,
+	WinboxPage,
+	PdfPage,
+	MusicPage,
+	//>>>PAGE_SIGN<<<//
 };

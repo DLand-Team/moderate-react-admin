@@ -20,6 +20,11 @@ export default defineConfig({
 	server: {
 		port: 8032,
 		proxy: {
+			"/gitee": {
+				target: "https://gitee.com",
+				changeOrigin: true, // 允许跨域
+				rewrite: (path) => path.replace(/^\/gitee/, ""),
+			},
 			"/pdfWorkerCdn": {
 				target: "https://cdnjs.cloudflare.com",
 				changeOrigin: true, // 允许跨域

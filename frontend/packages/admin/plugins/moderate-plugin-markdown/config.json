@@ -1,8 +1,13 @@
 {
-	"name": "plugin-pdf",
-	"type": "Page",
-	"dependencies": {
-		"pdfjs-dist": "^4.0.379",
-		"react-pdf": "^7.7.1"
-	}
+  "name": "plugin-markdown",
+  "dependencies": {
+    "@types/react-syntax-highlighter": "^15.5.11",
+    "hastscript": "^9.0.0",
+    "react-markdown": "^9.0.1",
+    "react-photo-view": "^1.2.4",
+    "react-syntax-highlighter": "^15.5.0",
+    "rehype-components": "^0.3.0",
+    "rehype-raw": "^7.0.0",
+    "remark-gfm": "^4.0.0"
+  }
 }

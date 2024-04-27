@@ -1,13 +1,25 @@
 import { Button } from "antd";
-import { useState } from "react";
+import { useFlat } from "src/service";
 
 const WinboxPage = () => {
-  const [isShowPdf, setIsShowPdf] = useState(false);
+  const { addWinBox } = useFlat("appStore");
   return (
     <div>
       <Button
         onClick={() => {
-          setIsShowPdf(!isShowPdf);
+          addWinBox({
+            content: (
+              <div
+                style={{
+                  background: "#e9ecf0",
+                  width: "100%",
+                  height: "100%",
+                  color: "black",
+                }}>
+                Test
+              </div>
+            ),
+          });
         }}>
         Show winbox
       </Button>

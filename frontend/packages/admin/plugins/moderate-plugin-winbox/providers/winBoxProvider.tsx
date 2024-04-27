@@ -19,11 +19,11 @@ type WinBoxModalFuncProps = Omit<
 type WinBoxModalFunc = (
   props: Omit<WinBoxModalFuncProps, "id" | "handleClose">
 ) => void;
-export const WinBoxProvider = createContext<{
+export const WinBoxContext = createContext<{
   winBoxModal: WinBoxModalFunc;
 } | null>(null);
 
-export const PluginWinBoxProvider = ({ children }: React.PropsWithChildren) => {
+export const WinBoxProvider = ({ children }: React.PropsWithChildren) => {
   const { winBoxList } = useFlat("appStore");
   const winBoxMapRef = useRef<Record<PropertyKey, RefObject<WinBox>>>({});
   const [winBoxMap, setWinBoxMap] = useState<
@@ -51,7 +51,7 @@ export const PluginWinBoxProvider = ({ children }: React.PropsWithChildren) => {
   };
   return (
     <>
-      <WinBoxProvider.Provider
+      <WinBoxContext.Provider
         value={{
           winBoxModal,
         }}>
@@ -70,7 +70,7 @@ export const PluginWinBoxProvider = ({ children }: React.PropsWithChildren) => {
             </WinBoxCustom>
           );
         })}
-      </WinBoxProvider.Provider>
+      </WinBoxContext.Provider>
     </>
   );
 };

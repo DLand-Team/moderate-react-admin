@@ -86,7 +86,7 @@ const appSlice = createSliceCustom({
 			winBoxContent?.set(id, payload.content);
 			state.winBoxList = [...state.winBoxList, id];
 		},
-		deleteWinBox(state, { payload }: PayloadAction<{ key: string }>) {
+		deleteWinBox() {
 			// const id = UUID();
 			// const winBoxContent = GlobalVar.service.get("winBoxContent");
 			// winBoxContent![id] = payload.content;

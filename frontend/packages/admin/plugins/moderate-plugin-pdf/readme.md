@@ -13,4 +13,4 @@
 
 ## 效果图
 
-![分类](/.resources/test.png)
+![分类](https://qiniu.moderate.run/plugins/moderate-plugin-pdf/QQ20210214-140334%E7%9A%84%E5%89%AF%E6%9C%AC.png)
