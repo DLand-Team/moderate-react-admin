@@ -39,6 +39,9 @@ importers:
       '@ant-design/plots':
         specifier: ^1.2.5
         version: 1.2.6(react-dom@18.3.0)(react@18.3.0)
+      '@rive-app/react-canvas':
+        specifier: ^4.9.0
+        version: 4.9.0(react@18.3.0)
       '@types/react-syntax-highlighter':
         specifier: ^15.5.11
         version: 15.5.11
@@ -2351,6 +2354,19 @@ packages:
   /@remix-run/router@1.16.0:
     resolution: {integrity: sha512-Quz1KOffeEf/zwkCBM3kBtH4ZoZ+pT3xIXBG4PPW/XFtDP7EGhtTiC2+gpL9GnR7+Qdet5Oa6cYSvwKYg6kN9Q==}
     engines: {node: '>=14.0.0'}
+    dev: false
+
+  /@rive-app/canvas@2.15.0:
+    resolution: {integrity: sha512-dsqqlCVKBBsn/oX1ql56WgrHNhLhaRUTz/reD7X4O5WLHSoV8QTBGt/3fQjaHrvz1V9JdYr0Sjp8w5v0P0+oAQ==}
+    dev: false
+
+  /@rive-app/react-canvas@4.9.0(react@18.3.0):
+    resolution: {integrity: sha512-oO9uO8fwiWbJbsyDNx9oAgpBhZaEsWZPxp2ZsQ99iurvQDlsukCw4HcotfNZwJbKEulhwewb1bbozqYukqNZcg==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@rive-app/canvas': 2.15.0
+      react: 18.3.0
     dev: false
 
   /@rollup/rollup-android-arm-eabi@4.16.4:
