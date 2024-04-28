@@ -22,6 +22,10 @@ const MusicPage = lazy(
 			"plugins/moderate-plugin-music/pages/HomePage/CmsPage/MusicPage"
 		),
 );
+const RivePage = lazy(
+	() =>
+		import("plugins/moderate-plugin-rive/pages/HomePage/CmsPage/RivePage"),
+);
 //>>>PAGE_INPORT_SIGN<<<//
 
 export const pageList = {
@@ -29,5 +33,6 @@ export const pageList = {
 	WinboxPage,
 	PdfPage,
 	MusicPage,
+	RivePage,
 	//>>>PAGE_SIGN<<<//
 };

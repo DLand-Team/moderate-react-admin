@@ -5,6 +5,7 @@ export enum PLUGIN_ROUTE_NAME {
 	WinboxPage,
 	PdfPage,
 	MusicPage,
+	RivePage,
 }
 
 export const PLUGIN_ROUTE_ID = enumToObject(PLUGIN_ROUTE_NAME);

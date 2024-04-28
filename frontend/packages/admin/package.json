@@ -13,6 +13,7 @@
 		"@alex_xu/react-slider-vertify": "^1.2.0",
 		"@ant-design/icons": "^5.3.4",
 		"@ant-design/plots": "^1.2.5",
+		"@rive-app/react-canvas": "^4.9.0",
 		"@types/react-syntax-highlighter": "^15.5.11",
 		"antd": "^5.16.4",
 		"axios": "^1.1.3",

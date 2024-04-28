@@ -21,10 +21,17 @@ export const ROUTE_INFO_CONFIG: {
 		isNoAuth: true,
 		component: "PdfPage",
 	},
+
 	MusicPage: {
 		id: "MusicPage",
 		meta: { title: "MusicPage" },
 		isNoAuth: true,
 		component: "MusicPage",
+	},
+	RivePage: {
+		id: "RivePage",
+		meta: { title: "RivePage" },
+		isNoAuth: true,
+		component: "RivePage",
 	},
 };

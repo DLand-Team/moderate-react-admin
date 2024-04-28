@@ -12,6 +12,7 @@ export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [
           { id: ROUTE_ID.MdPage },
           { id: ROUTE_ID.MusicPage },
           { id: ROUTE_ID.PdfPage },
+          { id: ROUTE_ID.RivePage },
           { id: ROUTE_ID.WinboxPage },
         ],
       },
