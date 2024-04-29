@@ -75,7 +75,6 @@ const Card = ({
 			if (dragIndex > hoverIndex && hoverClientX > hoverMiddleX) {
 				return;
 			}
-			debugger;
 			// Time to actually perform the action
 			moveCard(dragIndex, hoverIndex);
 

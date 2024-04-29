@@ -1,7 +1,6 @@
 import { Space, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { useEffect } from "react";
-import { useGreatAsync } from "src/common/hooks";
 import { useFlat } from "src/service";
 import { CommonType } from "src/service/stores/devStore/model";
 import ModalForm from "./components/modalForm/modalForm";
@@ -28,16 +27,8 @@ const ApiDevPage = () => {
 	const { pageNum, pageSize, addApiAct, total, apiList, fetchApiListAct } =
 		useFlat("devStore");
 
-	const { loading: loading1, run: createApiListG } = useGreatAsync(
-		fetchApiListAct,
-		{
-			auto: true,
-			debounceTime: 1000,
-		},
-	);
-
 	const handlePageChange = async () => {
-		await createApiListG();
+		await fetchApiListAct();
 	};
 	const handleUpload = (values: any) => {
 		addApiAct(values);
@@ -56,7 +47,6 @@ const ApiDevPage = () => {
 				rowKey={(record) => {
 					return record.id;
 				}}
-				loading={loading1}
 				pagination={{
 					pageSize,
 					current: pageNum,

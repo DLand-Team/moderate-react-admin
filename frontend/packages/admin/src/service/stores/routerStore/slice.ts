@@ -1,22 +1,21 @@
 /* Core */
-import { RouterHelper } from "src/service/helper";
 import { cloneDeep } from "lodash-es";
 import { PayloadAction, createSliceCustom } from "redux-eazy";
+import { ROUTE_CONFIG_MAP } from "src/router/routesConfig";
+import { RouteItem } from "src/router/types";
+import { RouterHelper } from "src/service/helper";
 import names from "../names";
 import { RoutesConfigMap, StoreState } from "./model";
-import storageHelper from "src/common/utils/storageHelper";
-import { ROUTE_INFO_CONFIG } from "src/router/routesConfig";
-import { RouteItem } from "src/router/types";
 
 const initialState = (): StoreState => {
-	const { routesConfig, routesConfigMap } =
+	const { routesMapData, routesTreeData } =
 		RouterHelper.createRoutesConfigByPermissions({
 			routesPermissions: [],
-			routesConfigMap: cloneDeep(ROUTE_INFO_CONFIG),
+			routesConfigMap: cloneDeep(ROUTE_CONFIG_MAP),
 		});
 	return {
-		routesConfig,
-		routesConfigMap,
+		routesMap: routesMapData,
+		routesTree: routesTreeData,
 	};
 };
 
@@ -25,12 +24,10 @@ const slice = createSliceCustom({
 	stateInit: initialState,
 	reducers: {
 		setRoutesConfigMap(state, { payload }: PayloadAction<RoutesConfigMap>) {
-			state.routesConfigMap = payload;
-			storageHelper.setItem("ROUTES_CONFIG_MAP", payload);
+			state.routesMap = payload;
 		},
-		setRouterConfig: (state, { payload }: PayloadAction<RouteItem[]>) => {
-			state.routesConfig = payload;
-			storageHelper.setItem("ROUTES_CONFIG", payload);
+		setRoutesTree(state, { payload }: PayloadAction<RouteItem[]>) {
+			state.routesTree = payload;
 		},
 	},
 });

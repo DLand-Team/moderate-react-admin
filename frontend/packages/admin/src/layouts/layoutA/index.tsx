@@ -75,7 +75,7 @@ export const LayoutA = ({ children }: React.PropsWithChildren) => {
 							color: antdThemeToken.token.colorText,
 						}}
 					>
-						{isCollapsedMenu ? "Moderate" : "Moderate Admin"}
+						{isCollapsedMenu ? "Admin" : "Moderate Admin"}
 					</div>
 					{menuData.length > 0 &&
 						menuDefaultOpenKeys &&

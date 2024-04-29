@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import ModalForm from "./components/modalForm/modalForm";
 import styles from "./permissionPage.module.scss";
 import { useFlat } from "src/service";
-import { useGreatAsync } from "src/common/hooks";
 
 const columns: ColumnsType<any> = [
 	{
@@ -37,16 +36,9 @@ const columns: ColumnsType<any> = [
 const PermissionPage = () => {
 	const { pageNum, pageSize, total, pageList, fetchPageListAct } =
 		useFlat("devStore");
-	const { loading: loading1, run: createArticleListG } = useGreatAsync(
-		fetchPageListAct,
-		{
-			auto: true,
-			debounceTime: 1000,
-		},
-	);
 
 	const handlePageChange = async () => {
-		await createArticleListG();
+		await fetchPageListAct();
 	};
 	const handleUpload = () => {};
 	useEffect(() => {
@@ -61,7 +53,6 @@ const PermissionPage = () => {
 				rowKey={(record) => {
 					return record.id;
 				}}
-				loading={loading1}
 				pagination={{
 					pageSize,
 					current: pageNum,

@@ -7,7 +7,7 @@ import { NAME } from "./name";
 
 export interface ExtendRouteConfig {
 	id?: ROUTE_ID_KEY; // 节点id
-	parentId?: string; // 父节点id
+	parentId?: ROUTE_ID_KEY; // 父节点id
 	isMenu?: boolean; // 是否是菜单
 	isNoAuth?: boolean; // 无权限
 	depands?: ROUTE_ID_KEY[];

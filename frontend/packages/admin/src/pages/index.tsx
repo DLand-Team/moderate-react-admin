@@ -29,6 +29,7 @@ const PageDevPage = isProd
 	: lazy(() => import("./HomePage/DevPage/PageDevPage"));
 ////notFundPage
 const NotFundPage = lazy(() => import("./HomePage/NotFundPage/notFundPage"));
+const ErrorPage = lazy(() => import("./HomePage/NotFundPage/notFundPage"));
 
 //menuPage
 const MenuPage = lazy(() => import("./HomePage/SysPage/MenuPage/menuPage"));
@@ -59,4 +60,5 @@ export const pageList = {
 	MenuPage,
 	PluginsPage,
 	PluginListPage,
+	ErrorPage,
 };

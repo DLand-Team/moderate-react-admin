@@ -2,7 +2,7 @@ import { ACTION_DICT } from "src/static/actionPermission";
 import { MenuPermissionItem } from "../stores/authStore/model";
 import { RouterHelper } from "./routerHelper";
 import { RoutesStructDataItem } from "src/router/types";
-import { ROUTE_INFO_CONFIG } from "src/router/routesConfig";
+import { ROUTE_CONFIG_MAP } from "src/router/routesConfig";
 type PermissionNode = any;
 export class AuthHelper {
 	/**
@@ -43,7 +43,7 @@ export class AuthHelper {
 	) {
 		routesConfig.forEach((routeStructItem) => {
 			const { id } = routeStructItem;
-			const routeInfoItem = ROUTE_INFO_CONFIG[id];
+			const routeInfoItem = ROUTE_CONFIG_MAP[id];
 			let item: PermissionNode = {
 				title: RouterHelper.getRouteTitleByKey(id),
 				value: id,

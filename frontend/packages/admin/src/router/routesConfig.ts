@@ -1,23 +1,21 @@
 import i18n from "src/i18n";
 import { ROUTE_ID_KEY, RouteItem } from "./types";
-import { ROUTE_INFO_CONFIG as PLUGIN_ROUTE_INFO_CONFIG } from "plugins/config/router/routesConfig";
+import { ROUTE_CONFIG_MAP as PLUGIN_ROUTE_CONFIG_MAP } from "plugins/config/router/routesConfig";
 
-export const ROUTE_INFO_CONFIG: {
+export const ROUTE_CONFIG_MAP: {
 	[key in ROUTE_ID_KEY]: RouteItem;
 } = {
+	HomePage: {
+		id: "HomePage",
+		meta: { title: "Home" },
+		component: "HomePage",
+		actionPermissions: ["ADD", "EDIT"],
+		isNoAuth: true,
+	},
 	LoginPage: {
 		id: "LoginPage",
 		meta: { title: "Login" },
 		component: "LoginPage",
-		path: "/login",
-		isNoAuth: true,
-	},
-	HomePage: {
-		id: "HomePage",
-		meta: { title: "Home" },
-		path: "/",
-		component: "HomePage",
-		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
 	},
 	HelloPage: {
@@ -29,6 +27,7 @@ export const ROUTE_INFO_CONFIG: {
 		component: "HelloPage",
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
+		index: true,
 	},
 	SysPage: {
 		id: "SysPage",
@@ -69,6 +68,7 @@ export const ROUTE_INFO_CONFIG: {
 		component: "RolePage",
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
+		path: undefined,
 	},
 	DevPage: {
 		id: "DevPage",
@@ -116,27 +116,33 @@ export const ROUTE_INFO_CONFIG: {
 		isMenu: false,
 		path: "*",
 	},
+	ErrorPage: {
+		id: "ErrorPage",
+		meta: { title: "ErrorPage" },
+		component: "ErrorPage",
+		isNoAuth: true,
+		isMenu: false,
+		path: "*",
+	},
 	MenuPage: {
 		id: "MenuPage",
 		meta: { title: "MenuPage" },
 		component: "MenuPage",
 		isNoAuth: true,
-		index: false,
 	},
 	PluginsPage: {
 		id: "PluginsPage",
 		meta: { title: "Plugins", icon: "ProductOutlined" },
 		component: "PluginsPage",
 		isNoAuth: true,
-		index: false,
 	},
 	PluginListPage: {
 		id: "PluginListPage",
 		meta: { title: "PluginListPage" },
 		component: "PluginListPage",
 		isNoAuth: true,
-		index: true,
 		isMenu: false,
+		index: true,
 	},
-	...PLUGIN_ROUTE_INFO_CONFIG,
+	...PLUGIN_ROUTE_CONFIG_MAP,
 };

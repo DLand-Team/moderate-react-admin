@@ -88,7 +88,7 @@ class devHelper {
 		let configStr = pageCode.split("=")[1].replace(/\n|\t/g, "");
 		let result = {};
 		eval(
-			"let i18n = {t: (str) => {return `'%i18n.t('${str}')%'`}};let PLUGIN_ROUTE_INFO_CONFIG = {};result = " +
+			"let i18n = {t: (str) => {return `'%i18n.t('${str}')%'`}};let PLUGIN_ROUTE_CONFIG_MAP = {};result = " +
 				configStr,
 		);
 		return result;
@@ -136,7 +136,7 @@ class devHelper {
 			let configStr = pageCode.split("=");
 			configStr[1] = JSON.stringify(routeConfig).replace(
 				`"end":"end"`,
-				"...PLUGIN_ROUTE_INFO_CONFIG",
+				"...PLUGIN_ROUTE_CONFIG_MAP",
 			);
 
 			let newRoutesStr = `\n${configStr.join("=")}\n`;

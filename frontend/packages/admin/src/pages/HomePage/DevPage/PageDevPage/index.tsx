@@ -2,7 +2,6 @@ import { Button, Checkbox, Pagination, Space, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useGreatAsync } from "src/common/hooks";
 import { useFlat } from "src/service";
 import {
 	AdcompanyPageParams,
@@ -51,15 +50,9 @@ const PageDevPage = () => {
 	} = useFlat("devStore");
 
 	const { t } = useTranslation(["dev"]);
-	const { loading: loading1, fn: createArticleListG } = useGreatAsync(
-		fetchPageListAct,
-		{
-			auto: true,
-			debounceTime: 1000,
-		},
-	);
+
 	const handlePageChange = async () => {
-		await createArticleListG();
+		await fetchPageListAct();
 	};
 
 	const handleUpload = (values: AdcompanyPageParams) => {
@@ -103,7 +96,6 @@ const PageDevPage = () => {
 					return record.id;
 				}}
 				pagination={false}
-				loading={loading1}
 				columns={columns}
 				dataSource={pageList || []}
 				footer={() => (

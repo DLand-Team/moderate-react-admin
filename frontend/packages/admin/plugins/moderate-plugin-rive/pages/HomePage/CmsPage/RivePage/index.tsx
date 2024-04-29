@@ -21,8 +21,8 @@ export const RiveDemo = () => {
 // Another example loading a Rive file from a URL
 export const UrlDemo = () => {
 	const { RiveComponent } = useRive({
-		src: "https://qiniu.moderate.run/plugins/moderate-plugin-rive/clean_the_car.riv",
-		stateMachines: "Motion",
+		src: "https://qiniu.moderate.run/plugins/moderate-plugin-rive/sophia_iii2.riv",
+		stateMachines: "SOPHIA_III_DASHBOARD_SEQ",
 		// This is optional.Provides additional layout control.
 		layout: new Layout({
 			fit: Fit.FitWidth, // Change to: rive.Fit.Contain, or Cover

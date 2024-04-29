@@ -3,6 +3,7 @@ import { RoutesStructDataItem } from "./types";
 
 // MODERATE_AUTO:START
 export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [
+  { id: ROUTE_ID.ErrorPage },
   {
     id: ROUTE_ID.HomePage,
     children: [

@@ -1,4 +1,3 @@
-import { useGreatAsync } from "src/common/hooks";
 import { useFlat, useResetRedux } from "src/service";
 import { Button, Form, Modal, Table, notification } from "antd";
 import type { ColumnsType } from "antd/es/table";
@@ -30,13 +29,6 @@ const RolePage = () => {
 	const resetAllSotres = useResetRedux();
 	const { updatePermissionsAct } = useFlat("authStore");
 
-	const { loading, run: updatePermissionsG } = useGreatAsync(
-		updatePermissionsAct,
-		{
-			auto: false,
-			single: true,
-		},
-	);
 	const [checked] = useState<any>();
 	const navigate = useNavigate();
 	const handleSubmit = () => {
@@ -46,7 +38,7 @@ const RolePage = () => {
 			onOk: () => {
 				if (Array.isArray(checked)) {
 					if (checked.includes("helloPage")) {
-						updatePermissionsG(checked).then(() => {
+						updatePermissionsAct(checked).then(() => {
 							resetAllSotres();
 							navigate("/");
 						});
@@ -115,7 +107,7 @@ const RolePage = () => {
 	];
 	return (
 		<div>
-			<Table loading={loading} columns={columns} dataSource={data} />
+			<Table columns={columns} dataSource={data} />
 		</div>
 	);
 };

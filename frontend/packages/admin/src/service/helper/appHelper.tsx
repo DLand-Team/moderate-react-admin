@@ -21,10 +21,10 @@ export class AppHelper {
 			? AppHelper.createMenuDataLoopByPermissions(data, [])
 			: {};
 		result = result.concat(menuData);
-		const { routesConfig } = reduxStore.getState().routerStore;
+		const { routesMap } = reduxStore.getState().routerStore;
 		// 创建客户端权限配置的菜单信息
-		if (routesConfig.length) {
-			const temp = routesConfig.find((item) => {
+		if (Object.values(routesMap).length) {
+			const temp = Object.values(routesMap).find((item) => {
 				return item.id === ROUTE_ID.HomePage;
 			});
 			if (temp?.children?.length) {
@@ -80,14 +80,17 @@ export class AppHelper {
 	 */
 	static createMenuDataLoop = (data: RouteItem[], result: MenuItem[]) => {
 		data.forEach((item) => {
-			const { isMenu = true, isNoAuth, component = "HomePage" } = item;
-			if (component == "PluginsPage") {
-			}
+			const {
+				isMenu = true,
+				isNoAuth,
+				component = "HomePage",
+				index,
+			} = item;
 			if (!isMenu || !isNoAuth || !pageList[component]) {
 				return;
 			}
 			const temp: MenuItem = {
-				key: item.id!,
+				key: index ? item.parentId! : item.id!,
 				icon: item.meta?.icon,
 				label: item.meta!?.title! || "",
 			};
@@ -95,7 +98,7 @@ export class AppHelper {
 			if (item?.children?.length) {
 				const children = this.createMenuDataLoop(item.children, []);
 				if (children.length) {
-					temp.children = this.createMenuDataLoop(item.children, []);
+					temp.children = children;
 				}
 			}
 		});
@@ -106,14 +109,12 @@ export class AppHelper {
 		const selectedKeysTemp = pathName.split("/").filter((item) => {
 			return item;
 		});
-		const { depands = [] } =
-			RouterHelper.getRoutItemConfigById(
-				selectedKeysTemp.slice(-1)[0] as ROUTE_ID_KEY,
-			) || {};
-
 		const openKeysTemp = selectedKeysTemp.slice(1, -1);
 		return {
-			selectedKeys: selectedKeysTemp.concat(depands),
+			selectedKeys:
+				selectedKeysTemp.length > 1
+					? selectedKeysTemp.slice(1)
+					: selectedKeysTemp,
 			openKeys: openKeysTemp.length ? openKeysTemp : [],
 			newTabItem: location,
 		};
@@ -144,7 +145,6 @@ export class AppHelper {
 		const routeItemData = RouterHelper.getRoutItemConfigById(
 			routeId as ROUTE_ID_KEY,
 		);
-		debugger;
 		if (tabsHistory.length > 1 || routeItemData.depands) {
 			dp("appStore", "deleteTabHistoryAct", {
 				pathName,

@@ -1,8 +1,8 @@
-import defaultTheme from "./default";
+import antd from "./default";
 import themeA from "./themeA";
 
 const themeMap = {
-	defaultTheme,
+	antd,
 	themeA,
 };
 export default themeMap;

@@ -76,7 +76,7 @@ class devHelper {
                 .toString();
             let configStr = pageCode.split("=")[1].replace(/\n|\t/g, "");
             let result = {};
-            eval("let i18n = {t: (str) => {return `'%i18n.t('${str}')%'`}};let PLUGIN_ROUTE_INFO_CONFIG = {};result = " +
+            eval("let i18n = {t: (str) => {return `'%i18n.t('${str}')%'`}};let PLUGIN_ROUTE_CONFIG_MAP = {};result = " +
                 configStr);
             return result;
         };
@@ -115,7 +115,7 @@ class devHelper {
                 // 做个记号，然后替换
                 routeConfig["end"] = "end";
                 let configStr = pageCode.split("=");
-                configStr[1] = JSON.stringify(routeConfig).replace(`"end":"end"`, "...PLUGIN_ROUTE_INFO_CONFIG");
+                configStr[1] = JSON.stringify(routeConfig).replace(`"end":"end"`, "...PLUGIN_ROUTE_CONFIG_MAP");
                 let newRoutesStr = `\n${configStr.join("=")}\n`;
                 let newCode = newRoutesStr;
                 let str = this.toFromat(newCode);

@@ -2,7 +2,7 @@ import type { DrawerProps } from "antd";
 import { Button, Drawer, Space, theme } from "antd";
 import React, { useState } from "react";
 import { useFlat } from "src/service";
-
+import SettingContent from "./content/index";
 const OptionsDrawer: React.FC = () => {
 	const { isShowOptionsDrawer, setIsShowOptionsDrawer } = useFlat("appStore");
 	const [placement] = useState<DrawerProps["placement"]>("right");
@@ -15,7 +15,7 @@ const OptionsDrawer: React.FC = () => {
 	return (
 		<>
 			<Drawer
-				title="Drawer with extra actions"
+				title="setting"
 				placement={placement}
 				width={500}
 				onClose={onClose}
@@ -32,7 +32,7 @@ const OptionsDrawer: React.FC = () => {
 					</Space>
 				}
 			>
-				hello
+				<SettingContent />
 			</Drawer>
 		</>
 	);

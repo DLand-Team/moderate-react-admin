@@ -157,7 +157,7 @@ const VinylMachineComponent = forwardRef<
 		if (hasVideo && videoRef.current != null) {
 			videoRef.current.currentTime = time;
 			if (props.playing) {
-				videoRef.current.play().then((r) => {
+				videoRef.current.play().then(() => {
 					videoPlayingRef.current = true;
 				});
 			}

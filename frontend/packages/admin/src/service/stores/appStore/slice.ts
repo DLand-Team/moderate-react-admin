@@ -4,18 +4,20 @@ import storageHelper from "src/common/utils/storageHelper";
 import { AppHelper, MenuItem, RouterHelper } from "src/service/helper";
 import names from "../names";
 import { StoreState, TabItem, TabsHistory, ThemeName } from "./modal";
-import { ROUTE_INFO_CONFIG } from "src/router/routesConfig";
+import { ROUTE_CONFIG_MAP } from "src/router/routesConfig";
 import { ROUTE_ID } from "src/router/name";
 import { ReactNode } from "react";
 import GlobalVar from "src/static/globalVar";
 import { UUID } from "src/common/utils";
 
 const initialState = (): StoreState => {
-	const { routesConfig = [] } = RouterHelper.createRoutesConfigByPermissions({
-		routesPermissions: [],
-		routesConfigMap: cloneDeep(ROUTE_INFO_CONFIG),
-	});
-	const children = routesConfig.find((item) => {
+	// 初始化菜单，根据当前的homePage的路由结构，分析出菜单来
+	const { routesTreeData = [] } =
+		RouterHelper.createRoutesConfigByPermissions({
+			routesPermissions: [],
+			routesConfigMap: cloneDeep(ROUTE_CONFIG_MAP),
+		});
+	const children = routesTreeData.find((item) => {
 		return item!?.id === ROUTE_ID.HomePage;
 	})?.children;
 	const menuData = AppHelper.createMenuDataLoop(children!, []);

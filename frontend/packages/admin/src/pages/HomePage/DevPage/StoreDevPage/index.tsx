@@ -1,7 +1,6 @@
 import { Space, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { useEffect } from "react";
-import { useGreatAsync } from "src/common/hooks";
 import { useFlat } from "src/service";
 import { CommonType } from "src/service/stores/devStore/model";
 import ModalForm from "./components/modalForm/modalForm";
@@ -34,16 +33,8 @@ const StoreDevPage = () => {
 		fetchStoreListAct,
 	} = useFlat("devStore");
 
-	const { loading: loading1, run: createStoreListG } = useGreatAsync(
-		fetchStoreListAct,
-		{
-			auto: true,
-			debounceTime: 1000,
-		},
-	);
-
 	const handlePageChange = async () => {
-		await createStoreListG();
+		await fetchStoreListAct();
 	};
 	const handleUpload = (values: any) => {
 		addStoreAct(values);
@@ -63,7 +54,6 @@ const StoreDevPage = () => {
 				rowKey={(record) => {
 					return record.id;
 				}}
-				loading={loading1}
 				pagination={{
 					pageSize,
 					current: pageNum,

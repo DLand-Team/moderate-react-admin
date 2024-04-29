@@ -10,7 +10,7 @@ import {
 	RouteItem,
 	RoutesStructDataItem,
 } from "src/router/types";
-import { ROUTE_INFO_CONFIG } from "src/router/routesConfig";
+import { ROUTE_CONFIG_MAP } from "src/router/routesConfig";
 import { ROUTE_ID } from "src/router/name";
 import { ROUTE_STRUCT_CONFIG } from "src/router/routesTree";
 
@@ -28,7 +28,7 @@ export type TreeSelectItem = {
 
 export class RouterHelper {
 	static createClientRoutesConfig() {
-		return Object.values(ROUTE_INFO_CONFIG)
+		return Object.values(ROUTE_CONFIG_MAP)
 			.filter((item) => {
 				return item.isNoAuth;
 			})
@@ -55,11 +55,11 @@ export class RouterHelper {
 			[key in ROUTE_ID_KEY]: RouteItem;
 		};
 		routesPermissions: string[];
-		parentId: string;
+		parentId: ROUTE_ID_KEY;
 	}) => {
 		routesStuctData.forEach((routeStructItem) => {
 			const { id } = routeStructItem;
-			const { depands, path: pathE } = routesConfigMap[id];
+			const { depands, path: pathE, index } = routesConfigMap[id];
 			// 如果有权限或者是必须显示的，或者是管理员
 			if (
 				routesPermissions?.includes(id) ||
@@ -67,15 +67,21 @@ export class RouterHelper {
 				routesConfigMap[id].isNoAuth
 			) {
 				const { component, ...rest } = routesConfigMap[id];
-				const path = prefix + "/" + id;
-				routesConfigMap[id].parentId = parentId as ROUTE_ID_KEY;
-				routesConfigMap[id].id = id as ROUTE_ID_KEY;
-				routesConfigMap[id].path = pathE || path;
+				const path = index ? prefix : prefix + "/" + id;
+				routesConfigMap[id].parentId = parentId;
+				routesConfigMap[id].id = id;
+				routesConfigMap[id].path = pathE
+					? pathE === "*"
+						? prefix + "/" + pathE
+						: pathE
+					: path;
+
 				let routesConfig: RouteItem = {
 					...rest,
-					path: pathE || path,
+					path: routesConfigMap[id].path,
 					id,
 					component,
+					parentId: parentId,
 				};
 				// 沿途记录，然后拼接成path
 				children!.push(routesConfig);
@@ -83,7 +89,7 @@ export class RouterHelper {
 					routesConfig.children = this.createRouteConfigLoop({
 						children: [],
 						routesStuctData: routeStructItem.children!,
-						prefix: routesConfig.path || "",
+						prefix: routesConfigMap[id].path || "",
 						routesPermissions,
 						routesConfigMap,
 						parentId: id,
@@ -108,8 +114,8 @@ export class RouterHelper {
 			[key in ROUTE_ID_KEY]: RouteItem;
 		};
 	}): {
-		routesConfig: RouteItem[];
-		routesConfigMap: {
+		routesTreeData: RouteItem[];
+		routesMapData: {
 			[key in ROUTE_ID_KEY]: RouteItem;
 		};
 	} => {
@@ -118,11 +124,12 @@ export class RouterHelper {
 		)!.children!;
 
 		// 获取客户端显示的路由作为基础，再去融合后端动态配置权限菜单关联的路由
-		let routesConfig = [...RouterHelper.createClientRoutesConfig()];
-		let targetId = routesConfig.findIndex((item) => {
+		let routesTreeData = [...RouterHelper.createClientRoutesConfig()];
+		debugger;
+		let targetId = routesTreeData.findIndex((item) => {
 			return item.id === ROUTE_ID.HomePage;
 		});
-		routesConfig[targetId] = Object.assign({}, routesConfig[targetId], {
+		routesTreeData[targetId] = Object.assign({}, routesTreeData[targetId], {
 			children: RouterHelper.createRouteConfigLoop({
 				children: [],
 				routesStuctData: homeChildren,
@@ -132,9 +139,15 @@ export class RouterHelper {
 				parentId: ROUTE_ID.HomePage,
 			}),
 		});
+		routesTreeData =
+			routesTreeData.filter((item) => {
+				return ROUTE_STRUCT_CONFIG.some((item2) => {
+					return item2.id === item.id;
+				});
+			}) || [];
 		return {
-			routesConfig: [...routesConfig],
-			routesConfigMap: routesConfigMap,
+			routesTreeData,
+			routesMapData: routesConfigMap,
 		};
 	};
 
@@ -161,12 +174,11 @@ export class RouterHelper {
 		}
 		return (
 			<Route
-				children={routeChildren}
+				children={index ? null : routeChildren}
 				key={item.id}
-				// index是官方的配置项https://reactrouter.com/en/main/route/route#index
-				// 这句话很神奇的，当配置了index了之后，那么他便没有了path，父组件路由是啥就会路由到这个子组件
-				path={index ? "" : path}
+				path={path || item.id}
 				element={item.element || element}
+				index={index}
 				{...(rest as any)}
 			></Route>
 		);
@@ -177,22 +189,23 @@ export class RouterHelper {
 
 	static getRoutePathByKey(key: ROUTE_ID_KEY) {
 		const routerStore = store.getState().routerStore;
-		return routerStore.routesConfigMap[key]?.path;
+		let path = routerStore.routesMap[key]?.path;
+		return path || "/" + key;
 	}
 
 	static getRouteParentIdByPath(path: string): ROUTE_ID_KEY {
 		const id = this.getRouteIdByPath(path);
 		const routerStore = store.getState().routerStore;
-		return routerStore.routesConfigMap[id]?.parentId as ROUTE_ID_KEY;
+		return routerStore.routesMap[id]?.parentId as ROUTE_ID_KEY;
 	}
 
 	static getRouteTitleByKey(key: ROUTE_ID_KEY) {
 		const routerStore = store.getState().routerStore;
-		return routerStore.routesConfigMap[key]?.meta?.title;
+		return routerStore.routesMap[key]?.meta?.title;
 	}
 
 	static getKeepAliveRoutePath() {
-		return Object.values(ROUTE_INFO_CONFIG)
+		return Object.values(ROUTE_CONFIG_MAP)
 			.filter((item) => {
 				return item.keepAlive;
 			})
@@ -203,7 +216,7 @@ export class RouterHelper {
 
 	static getRoutItemConfigById(key: ROUTE_ID_KEY) {
 		const routerStore = store.getState().routerStore;
-		return routerStore.routesConfigMap[key];
+		return routerStore.routesMap[key];
 	}
 
 	static getHistory() {
