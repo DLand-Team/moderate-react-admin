@@ -38,7 +38,6 @@ const ThemeSetting: React.FC = () => {
 	return (
 		<Cascader
 			options={options}
-			expandTrigger="hover"
 			displayRender={displayRender}
 			onChange={onChange}
 			changeOnSelect

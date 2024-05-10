@@ -1,4 +1,4 @@
-import { Button, Checkbox, Pagination, Space, Table } from "antd";
+import { Button, Checkbox, Input, Pagination, Space, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -65,6 +65,7 @@ const PageDevPage = () => {
 
 	return (
 		<div className={styles.content}>
+			<Input></Input>
 			<Button
 				onClick={() => {
 					addWinBox({

@@ -125,7 +125,6 @@ export class RouterHelper {
 
 		// 获取客户端显示的路由作为基础，再去融合后端动态配置权限菜单关联的路由
 		let routesTreeData = [...RouterHelper.createClientRoutesConfig()];
-		debugger;
 		let targetId = routesTreeData.findIndex((item) => {
 			return item.id === ROUTE_ID.HomePage;
 		});
