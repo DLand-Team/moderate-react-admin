@@ -5,13 +5,15 @@ import useLocationListen from "src/common/hooks/useLocationListen";
 import { RouterHelper } from "src/service/helper";
 import { ROUTE_ID_KEY } from "src/router/types";
 
-const Bread = () => {
+const CustomBreadcrumb = () => {
 	const [infoArr, setInfoArr] = useState<{ id: string; title: string }[]>([]);
 	useLocationListen((location: Location) => {
 		const { pathname } = location;
-		const pathArr = pathname.split("/").filter((item) => {
-			return item;
-		});
+		const pathArr = pathname
+			.split("/")
+			.filter((item) => {
+				return item;
+			})
 		const temp2 = pathArr.map((path: string) => {
 			const info = RouterHelper.getRouteTitleByKey(path as ROUTE_ID_KEY);
 			return {
@@ -27,4 +29,4 @@ const Bread = () => {
 	);
 };
 
-export default Bread;
+export default CustomBreadcrumb;

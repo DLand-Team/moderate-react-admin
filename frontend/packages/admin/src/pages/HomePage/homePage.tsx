@@ -1,9 +1,17 @@
 import KeepAliveOutlet from "src/common/hocs/keepAlive/keepAliveOutlet";
 import themeProviderHoc from "src/common/hocs/themeHoc/themeHoc";
-import { layoutMap } from "src/layouts";
+import layoutMap from "src/layouts";
+import { useFlat } from "src/service";
 
 const HomePage = () => {
-	const Layout = layoutMap["LayoutA"];
+	const { settingData, currentTheme } = useFlat("appStore");
+	const layoutName =
+		(currentTheme == "dark"
+			? settingData?.layoutSet?.dark
+			: settingData?.layoutSet?.light) || "antd";
+	const Layout =
+		layoutMap[layoutName as keyof typeof layoutMap] ||
+		(layoutMap.antd as any);
 	return (
 		<Layout>
 			<KeepAliveOutlet></KeepAliveOutlet>

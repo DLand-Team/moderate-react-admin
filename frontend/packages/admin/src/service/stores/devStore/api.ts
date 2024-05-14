@@ -7,6 +7,7 @@ import {
 	FetchStoreListRes,
 	GetPluginListApiRes,
 } from "./model";
+import { Setting } from "../appStore/modal";
 const baseUrl = "/devApi";
 const api = {
 	fetchPageList() {
@@ -65,6 +66,13 @@ const api = {
 	addPluginApi(params: AddPluginApiParams) {
 		return http.request({
 			url: baseUrl + "/pluginDev/addPlugin",
+			method: "POST",
+			data: params,
+		});
+	},
+	saveSettingApi(params: Setting) {
+		return http.request({
+			url: "/admin-api/usercenter/cpd-rule/" + "getRuleCarrierList",
 			method: "POST",
 			data: params,
 		});

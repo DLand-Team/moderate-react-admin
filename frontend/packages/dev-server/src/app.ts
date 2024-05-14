@@ -11,6 +11,7 @@ import {
 	rootRouter,
 	storeDevRouter,
 	pluginDevRouter,
+	settingDevRouter,
 } from "./apis";
 
 const routerArr = [
@@ -20,6 +21,7 @@ const routerArr = [
 	pageDevRouter,
 	storeDevRouter,
 	pluginDevRouter,
+	settingDevRouter,
 ];
 const app = new Koa();
 

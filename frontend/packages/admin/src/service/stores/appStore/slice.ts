@@ -3,12 +3,20 @@ import { PayloadAction, createSliceCustom } from "redux-eazy";
 import storageHelper from "src/common/utils/storageHelper";
 import { AppHelper, MenuItem, RouterHelper } from "src/service/helper";
 import names from "../names";
-import { StoreState, TabItem, TabsHistory, ThemeName } from "./modal";
+import {
+	Setting,
+	StoreState,
+	TabItem,
+	TabsHistory,
+	ThemeColor,
+	ThemeName,
+} from "./modal";
 import { ROUTE_CONFIG_MAP } from "src/router/routesConfig";
 import { ROUTE_ID } from "src/router/name";
 import { ReactNode } from "react";
 import GlobalVar from "src/static/globalVar";
 import { UUID } from "src/common/utils";
+import settingData from "src/setting.json";
 
 const initialState = (): StoreState => {
 	// 初始化菜单，根据当前的homePage的路由结构，分析出菜单来
@@ -28,12 +36,14 @@ const initialState = (): StoreState => {
 		tabsHistory: storageHelper.getItem("TABS_HISTORY") || [],
 		tabItems: [],
 		activeTabKey: "",
-		theme: storageHelper.getItem("THEME") || "light",
+		currentTheme: "light",
+		themeMode: storageHelper.getItem("THEME") || "light",
 		isShowOptionsDrawer: false,
 		isCollapsedMenu: false,
 		isShowMdDrawer: false,
 		mdContent: "",
 		winBoxList: [],
+		settingData: settingData as Setting,
 	};
 };
 
@@ -48,7 +58,7 @@ const appSlice = createSliceCustom({
 			state.isShowOptionsDrawer = payload;
 		},
 		setTheme(state, { payload }: PayloadAction<ThemeName>) {
-			state.theme = payload;
+			state.themeMode = payload;
 			storageHelper.setItem("THEME", payload);
 		},
 		setTabsHistory(state, { payload }: PayloadAction<TabsHistory>) {
@@ -94,6 +104,12 @@ const appSlice = createSliceCustom({
 			// winBoxContent![id] = payload.content;
 			// GlobalVar.service.set("winBoxContent", winBoxContent!);
 			// state.winBoxList = [...state.winBoxList, id];
+		},
+		setSettingData(state, { payload }: PayloadAction<Setting>) {
+			state.settingData = payload;
+		},
+		setCurrentTheme(state, { payload }: PayloadAction<ThemeColor>) {
+			state.currentTheme = payload;
 		},
 	},
 

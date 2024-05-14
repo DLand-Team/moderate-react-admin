@@ -1,11 +1,13 @@
 import { type Location } from "react-router-dom";
+import { LayoutMapkey } from "src/layouts";
 import { MenuItem } from "src/service/helper";
-
+import type { ThemeMapkey } from "src/theme";
 export type ThemeName = "dark" | "light" | "auto";
 export interface TabItem {
 	label: string;
 	key: string;
 }
+export type ThemeColor = Exclude<ThemeName, "auto">;
 export type TabsHistory = Location[];
 export interface StoreState {
 	// 菜单相关信息
@@ -17,7 +19,8 @@ export interface StoreState {
 	tabItems: TabItem[];
 	activeTabKey: string;
 	// theme
-	theme: ThemeName;
+	themeMode: ThemeName;
+	currentTheme: ThemeColor;
 	// 设置窗口的打开
 	isShowOptionsDrawer: boolean;
 	// 切换
@@ -26,4 +29,10 @@ export interface StoreState {
 	isShowMdDrawer: boolean;
 	winBoxList: string[];
 	mdContent: string;
+	settingData: Setting | null;
+}
+
+export interface Setting {
+	paletteSet?: { light: ThemeMapkey; dark: ThemeMapkey };
+	layoutSet?: { light: LayoutMapkey; dark: LayoutMapkey };
 }

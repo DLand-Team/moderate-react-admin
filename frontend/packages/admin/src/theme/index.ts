@@ -1,8 +1,10 @@
 import antd from "./default";
-import themeA from "./themeA";
+import pluginThemeMap from "plugins/config/themes";
 
 const themeMap = {
 	antd,
-	themeA,
+	...pluginThemeMap,
 };
+
+export type ThemeMapkey = keyof typeof themeMap;
 export default themeMap;

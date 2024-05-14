@@ -6,7 +6,6 @@ export const ROUTE_CONFIG_MAP: {
 	[key in ROUTE_ID_KEY]: RouteItem;
 } = {
 	HomePage: {
-		path: "/",
 		id: "HomePage",
 		meta: { title: "Home" },
 		component: "HomePage",
@@ -18,6 +17,7 @@ export const ROUTE_CONFIG_MAP: {
 		meta: { title: "Login" },
 		component: "LoginPage",
 		isNoAuth: true,
+		path: "/",
 	},
 	HelloPage: {
 		id: "HelloPage",

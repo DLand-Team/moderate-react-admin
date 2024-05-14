@@ -8,6 +8,7 @@ import type {
 	AddPluginApiParams,
 	AddStoreParams,
 } from "./model";
+import { Setting } from "../appStore/modal";
 
 const thunks = createThunks(names.appStore, {
 	fetchPageListAct: async () => {
@@ -56,6 +57,9 @@ const thunks = createThunks(names.appStore, {
 	getPluginAct: async (params: { url: string }) => {
 		const { data } = await httpApi.getPluginApi(params);
 		dp("appStore", "setMdContent", data.content);
+	},
+	saveSettingAct: async (params: Setting) => {
+		await httpApi.saveSettingApi(params);
 	},
 });
 export default thunks;

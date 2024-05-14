@@ -20,6 +20,7 @@ const addPluginHandler = async (ctx) => {
 	const { dependencies } = await request.get<any, PluginsConfig>(
 		`${url}/raw/master/config.json`,
 	);
+
 	// 第一步下载，git下载，可以版本控制
 	{
 		const files = fs.readdirSync(pathHelper.pluginsCache);
@@ -56,7 +57,7 @@ const addPluginHandler = async (ctx) => {
 		fs.cpSync(pluginPath, targetPath, { recursive: true });
 		// 删除拷贝过去的git文件夹
 		const files = fs.readdirSync(targetPath);
-		console.log(files)
+		console.log(files);
 		deleteDir(`${targetPath}/.git`);
 	}
 
@@ -139,6 +140,16 @@ const addPluginHandler = async (ctx) => {
 		const providers = devHelper.readProviders(pluginName);
 		providers.forEach((item) => {
 			devHelper.toRegisterProvider(pluginName, item);
+		});
+
+		const themes = devHelper.readThemes(pluginName);
+		themes.forEach((item) => {
+			devHelper.toRegisterTheme(pluginName, item);
+		});
+
+		const layouts = devHelper.readLayouts(pluginName);
+		layouts.forEach((item) => {
+			devHelper.toRegisterLayout(pluginName, item);
 		});
 	}
 

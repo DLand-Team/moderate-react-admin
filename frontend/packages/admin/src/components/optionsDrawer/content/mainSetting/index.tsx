@@ -1,6 +1,10 @@
 import ThemeSetting from "./themeSetting";
 
 const MainSetting = () => {
-	return <ThemeSetting />;
+	return (
+		<>
+			<ThemeSetting />
+		</>
+	);
 };
 export default MainSetting;

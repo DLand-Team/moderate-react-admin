@@ -10,9 +10,7 @@ import useLocationListen from "src/common/hooks/useLocationListen";
 import { useFlat, useResetRedux } from "src/service";
 import { AppHelper, RouterHelper } from "src/service/helper";
 import { ThemeName } from "src/service/stores/appStore/modal";
-import Breadcrumb from "src/components/bread";
-import OptionsDrawer from "src/components/optionsDrawer";
-import OptionsFloatBtn from "src/components/optionsFloatBtn";
+import Breadcrumb from "src/components/customBreadcrumb";
 import Tabs from "src/components/navTabs";
 import styles from "./index.module.scss";
 import storageHelper from "src/common/utils/storageHelper";
@@ -22,14 +20,14 @@ import { useMemo } from "react";
 
 const { Header, Content, Sider } = Layout;
 const ThemeSeq: ThemeName[] = ["light", "dark", "auto"];
-export const LayoutA = ({ children }: React.PropsWithChildren) => {
+export const dland = ({ children }: React.PropsWithChildren) => {
 	const {
 		menuData,
 		menuDefaultOpenKeys,
 		menuDefaultSelectedKeys,
 		setMenuDefaultOpenKeys,
 		setMenuDefaultSelectedKeys,
-		theme,
+		themeMode,
 		setTheme,
 		isCollapsedMenu,
 		setIsCollapsedMenu,
@@ -37,7 +35,7 @@ export const LayoutA = ({ children }: React.PropsWithChildren) => {
 	// todo loop一下menuData里面的icon
 	// redux不让存在element，必须存在传统类型，无语
 	let themIndex = ThemeSeq.findIndex((item) => {
-		return item === theme;
+		return item === themeMode;
 	});
 	const resetAllStores = useResetRedux();
 	const antdThemeToken = antdTheme.useToken();
@@ -183,13 +181,6 @@ export const LayoutA = ({ children }: React.PropsWithChildren) => {
 					</Content>
 				</Layout>
 			</Layout>
-			{/* 仅开发模式 */}
-			{process.env.NODE_ENV == "development" && (
-				<>
-					<OptionsFloatBtn />
-					<OptionsDrawer />
-				</>
-			)}
 		</Layout>
 	);
 };

@@ -4,7 +4,9 @@ import React, { useState } from "react";
 import { useFlat } from "src/service";
 import SettingContent from "./content/index";
 const OptionsDrawer: React.FC = () => {
-	const { isShowOptionsDrawer, setIsShowOptionsDrawer } = useFlat("appStore");
+	const { saveSettingAct } = useFlat("devStore");
+	const { isShowOptionsDrawer, setIsShowOptionsDrawer, settingData } =
+		useFlat("appStore");
 	const [placement] = useState<DrawerProps["placement"]>("right");
 	const antdToken = theme.useToken();
 
@@ -15,7 +17,7 @@ const OptionsDrawer: React.FC = () => {
 	return (
 		<>
 			<Drawer
-				title="setting"
+				title="设置"
 				placement={placement}
 				width={500}
 				onClose={onClose}
@@ -23,11 +25,18 @@ const OptionsDrawer: React.FC = () => {
 				style={{
 					color: antdToken.token.colorText,
 				}}
+				destroyOnClose
 				extra={
 					<Space>
-						<Button onClick={onClose}>Cancel</Button>
-						<Button type="primary" onClick={onClose}>
-							OK
+						<Button onClick={onClose}>取消</Button>
+						<Button
+							type="primary"
+							onClick={() => {
+								settingData && saveSettingAct(settingData);
+								onClose();
+							}}
+						>
+							保存
 						</Button>
 					</Space>
 				}

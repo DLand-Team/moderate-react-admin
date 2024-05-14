@@ -1,4 +1,4 @@
-export default (isDark: boolean) => {
+export const dland = (isDark: boolean) => {
 	return {
 		components: {
 			Button: {

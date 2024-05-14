@@ -5,31 +5,23 @@ import type { CSSProperties } from "react";
 import React from "react";
 import MainSetting from "./mainSetting";
 
-const text = `
-  A dog is a type of domesticated animal.
-  Known for its loyalty and faithfulness,
-  it can be found as a welcome guest in many households across the world.
-`;
-
 const getItems: (panelStyle: CSSProperties) => CollapseProps["items"] = (
 	panelStyle,
 ) => [
 	{
 		key: "1",
-		label: "全局设置",
+		label: (
+			<div
+				style={{
+					fontSize: "20px",
+					lineHeight: "20px",
+					fontWeight: "bold",
+				}}
+			>
+				{"主题设置"}
+			</div>
+		),
 		children: <MainSetting />,
-		style: panelStyle,
-	},
-	{
-		key: "2",
-		label: "This is panel header 2",
-		children: <p>{text}</p>,
-		style: panelStyle,
-	},
-	{
-		key: "3",
-		label: "This is panel header 3",
-		children: <p>{text}</p>,
 		style: panelStyle,
 	},
 ];
@@ -46,6 +38,7 @@ const SettingContent: React.FC = () => {
 
 	return (
 		<Collapse
+			collapsible={"icon"}
 			bordered={false}
 			defaultActiveKey={["1"]}
 			expandIcon={({ isActive }) => (

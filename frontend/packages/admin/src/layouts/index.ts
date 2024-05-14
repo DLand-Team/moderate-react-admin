@@ -1,5 +1,10 @@
-import { LayoutA } from "./layoutA";
+import { antd } from "./antd";
+import { pluginLayoutMap } from "plugins/config/layouts";
 
-export const layoutMap = {
-	LayoutA,
+const layoutMap = {
+	...pluginLayoutMap,
+	antd,
 };
+
+export default layoutMap;
+export type LayoutMapkey = keyof typeof layoutMap;

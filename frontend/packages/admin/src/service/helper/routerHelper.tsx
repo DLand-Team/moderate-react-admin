@@ -2,7 +2,7 @@ import { ItemType } from "antd/es/menu/hooks/useItems";
 import React, { Fragment, Suspense } from "react";
 import { Route } from "react-router-dom";
 import historyInstanse from "src/components/customRouter/historyInstance";
-import { includeOne } from "src/common/utils";
+import { includeOne, upFirstcharacter } from "src/common/utils";
 import { pageList } from "src/pages";
 import { reduxStore as store } from "..";
 import {
@@ -200,7 +200,8 @@ export class RouterHelper {
 
 	static getRouteTitleByKey(key: ROUTE_ID_KEY) {
 		const routerStore = store.getState().routerStore;
-		return routerStore.routesMap[key]?.meta?.title;
+		return routerStore.routesMap[upFirstcharacter(key) as ROUTE_ID_KEY]
+			?.meta?.title;
 	}
 
 	static getKeepAliveRoutePath() {

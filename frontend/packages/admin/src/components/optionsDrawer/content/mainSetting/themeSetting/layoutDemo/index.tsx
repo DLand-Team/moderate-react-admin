@@ -7,7 +7,7 @@ import {
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Breadcrumb, ConfigProvider, Layout, Menu, theme } from "antd";
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 
 const { Header, Content, Sider } = Layout;
 
@@ -42,10 +42,11 @@ const items: MenuItem[] = [
 	getItem("Files", "9", <FileOutlined />),
 ];
 
-const LayoutDemo: React.FC<{ themeConfig: any; isDark: boolean }> = ({
-	themeConfig,
-	isDark,
-}) => {
+const LayoutDemo: React.FC<{
+	themeConfig: any;
+	isDark: boolean;
+	CustomLayout?: FC;
+}> = ({ themeConfig, isDark, CustomLayout = Layout }) => {
 	const [collapsed, setCollapsed] = useState(false);
 	const {
 		token: { borderRadiusLG },
@@ -57,7 +58,7 @@ const LayoutDemo: React.FC<{ themeConfig: any; isDark: boolean }> = ({
 	};
 	return (
 		<ConfigProvider theme={themeValue}>
-			<Layout
+			<CustomLayout
 				style={{
 					width: "888px",
 					height: "600px",
@@ -105,7 +106,7 @@ const LayoutDemo: React.FC<{ themeConfig: any; isDark: boolean }> = ({
 						</div>
 					</Content>
 				</Layout>
-			</Layout>
+			</CustomLayout>
 		</ConfigProvider>
 	);
 };

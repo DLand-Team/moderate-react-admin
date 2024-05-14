@@ -10,6 +10,6 @@ export { default as OptionsDrawer } from "./optionsDrawer";
 export { default as OptionsFloatBtn } from "./optionsFloatBtn";
 //--->>>布局相关<<<---//
 // 面包屑
-export { default as Bread } from "./bread";
+export { default as Bread } from "./customBreadcrumb";
 // 导航tabs
 export { default as NavTabs } from "./navTabs";

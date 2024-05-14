@@ -42,8 +42,8 @@ class devHelper {
 	capitalizeFirstLetter(str) {
 		return str.charAt(0).toUpperCase() + str.slice(1);
 	}
-	toFromat = (str) => {
-		return prettier.format(str, beautifyOptions);
+	toFromat = (str, optionExtra: Options = {}) => {
+		return prettier.format(str, { ...beautifyOptions, ...optionExtra });
 	};
 
 	// 获取路由数据中的routeArr的数组字符
@@ -285,6 +285,49 @@ class devHelper {
 		);
 		fs.writeFileSync(
 			pathHelper.providerConfigPath,
+			this.toFromat(newCode).replace(/\'/g, '"'),
+		);
+	};
+
+	toRegisterTheme = (pluginName: string, themeName) => {
+		// 获取provider的代码
+		const themeFileCode = fs
+			.readFileSync(pathHelper.themeConfigPath)
+			.toString();
+		const importSign = "//>>>THEME_INPORT_SIGN<<<//";
+		const registerSign = "//>>>THEME_SIGN<<<//";
+		const importCode = `import { ${themeName} } from "plugins/${pluginName}/theme/${themeName}";`;
+		let newCode = themeFileCode.replace(
+			importSign,
+			importCode + "\n" + importSign,
+		);
+		newCode = newCode.replace(
+			registerSign,
+			themeName + "\n" + registerSign,
+		);
+		fs.writeFileSync(
+			pathHelper.themeConfigPath,
+			this.toFromat(newCode).replace(/\'/g, '"'),
+		);
+	};
+	toRegisterLayout = (pluginName: string, layoutName) => {
+		// 获取provider的代码
+		const lyoutFileCode = fs
+			.readFileSync(pathHelper.layoutConfigPath)
+			.toString();
+		const importSign = "//>>>LAYOUT_INPORT_SIGN<<<//";
+		const registerSign = "//>>>LAYOUT_SIGN<<<//";
+		const importCode = `import { ${layoutName} } from "plugins/${pluginName}/layouts/${layoutName}";`;
+		let newCode = lyoutFileCode.replace(
+			importSign,
+			importCode + "\n" + importSign,
+		);
+		newCode = newCode.replace(
+			registerSign,
+			layoutName + "\n" + registerSign,
+		);
+		fs.writeFileSync(
+			pathHelper.layoutConfigPath,
 			this.toFromat(newCode).replace(/\'/g, '"'),
 		);
 	};
@@ -589,6 +632,14 @@ class devHelper {
 		return matches.filter((item) => item);
 	};
 
+	// 获得设置信息
+	getSetting = () => {
+		const str = fs.readFileSync(pathHelper.webSettingPath).toString();
+		let settingData = {};
+		eval("settingData = " + str);
+		return settingData;
+	};
+
 	convertToRouteStructConfig = (data) => {
 		return JSON.stringify(
 			this.convertToRouteStructConfigLoop(data),
@@ -669,6 +720,38 @@ class devHelper {
 				});
 			console.log(providerFiles);
 			return providerFiles;
+		}
+		return [];
+	}
+	readThemes(pluginName: string): string[] {
+		const files = fs.readdirSync(
+			pathHelper.pluginsCache + "/" + pluginName,
+		);
+		if (files.includes("theme")) {
+			const themes = fs
+				.readdirSync(
+					pathHelper.pluginsCache + "/" + pluginName + "/theme",
+				)
+				?.map((item) => {
+					return item.replace(".ts", "");
+				});
+			return themes;
+		}
+		return [];
+	}
+	readLayouts(pluginName: string): string[] {
+		const files = fs.readdirSync(
+			pathHelper.pluginsCache + "/" + pluginName,
+		);
+		if (files.includes("layouts")) {
+			const layouts = fs
+				.readdirSync(
+					pathHelper.pluginsCache + "/" + pluginName + "/layouts",
+				)
+				?.map((item) => {
+					return item.replace(".ts", "");
+				});
+			return layouts;
 		}
 		return [];
 	}

@@ -15,7 +15,7 @@
 		"@ant-design/plots": "^1.2.5",
 		"@rive-app/react-canvas": "^4.9.0",
 		"@types/react-syntax-highlighter": "^15.5.11",
-		"antd": "^5.16.4",
+		"antd": "^5.17.1",
 		"axios": "^1.1.3",
 		"dayjs": "^1.11.9",
 		"hastscript": "^9.0.0",
