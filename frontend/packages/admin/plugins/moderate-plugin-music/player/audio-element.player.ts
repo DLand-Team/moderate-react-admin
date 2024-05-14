@@ -1,4 +1,5 @@
 export class AudioElementPlayer {
+
 	private isDestroyed: boolean = false;
 
 	public audioDom: HTMLAudioElement;
@@ -18,34 +19,33 @@ export class AudioElementPlayer {
 	private readonly finishCallback: () => void;
 
 	constructor(option: {
-		file: string;
-		loadFinish: (e: number) => void;
-		playCallback: (e: number) => void;
-		statusToPlayCallback: () => void;
-		statusToPauseCallback: () => void;
-		finishCallback: () => void;
+		file: string,
+		loadFinish: (e: number) => void,
+		playCallback: (e: number) => void,
+		statusToPlayCallback: () => void,
+		statusToPauseCallback: () => void,
+		finishCallback: () => void,
 	}) {
 		this.loadFinish = option.loadFinish;
 		this.playCallback = option.playCallback;
 		this.statusToPlayCallback = option.statusToPlayCallback;
 		this.statusToPauseCallback = option.statusToPauseCallback;
 		this.finishCallback = option.finishCallback;
-		this.audioDom = document.createElement("audio");
+		this.audioDom = document.createElement('audio');
 		this.loadMusic(option.file);
 	}
 
 	private loadMusic(musicFile: string): void {
-		this.audioDom.style.display = "none";
+		this.audioDom.style.display = 'none';
 		this.audioDom.src = musicFile;
 		this.audioDom.load();
 		// this.audioDom.setAttribute('autoplay', 'autoplay'); // IOS不支持直接canplay，需要通过自动播放来触发
-		this.audioDom.addEventListener("canplay", () => {
+		this.audioDom.addEventListener('canplay', () => {
 			if (!this.canPlay) {
 				this.canPlay = true;
 				this.audioDom.pause();
 				this.audioDuration = this.audioDom.duration;
-				this.timeDivide =
-					this.playTimeSecond - this.audioDom.currentTime;
+				this.timeDivide = this.playTimeSecond - this.audioDom.currentTime;
 				setTimeout(() => {
 					this.loadFinish(this.audioDom.duration);
 				});
@@ -54,13 +54,13 @@ export class AudioElementPlayer {
 		// this.audioDom.addEventListener('timeupdate', () => {
 		//     this.playCallback(this.audioDom.currentTime);
 		// });
-		this.audioDom.addEventListener("play", () => {
+		this.audioDom.addEventListener('play', () => {
 			this.statusToPlayCallback();
 		});
-		this.audioDom.addEventListener("pause", () => {
+		this.audioDom.addEventListener('pause', () => {
 			this.statusToPauseCallback();
 		});
-		this.audioDom.addEventListener("ended", () => {
+		this.audioDom.addEventListener('ended', () => {
 			this.playCallback(this.audioDom.duration);
 			this.finishCallback();
 		});
@@ -71,7 +71,7 @@ export class AudioElementPlayer {
 		if (this.isDestroyed) {
 			return;
 		}
-		this.audioDom.play().then(() => {
+		this.audioDom.play().then(r => {
 			this.audioIsPlaying = true;
 			this.startAudioPlayingProcessListener();
 		});
@@ -118,7 +118,7 @@ export class AudioElementPlayer {
 		this.isDestroyed = true;
 		this.stopAudioPlayingProcessListener();
 		this.audioDom.pause();
-		this.audioDom.src = "";
+		this.audioDom.src = '';
 		this.audioDom.remove();
 	}
 
@@ -130,8 +130,7 @@ export class AudioElementPlayer {
 			}
 			this.playTimeSecond = this.audioDom.currentTime + this.timeDivide;
 			if (this.playTimeSecond >= this.audioDuration) {
-				this.timeDivide =
-					this.playTimeSecond - this.audioDom.currentTime;
+				this.timeDivide = this.playTimeSecond - this.audioDom.currentTime;
 				this.playCallback(this.audioDuration);
 				this.finishCallback();
 				this.stopAudioPlayingProcessListener();
@@ -145,4 +144,5 @@ export class AudioElementPlayer {
 	private stopAudioPlayingProcessListener(): void {
 		clearInterval(this.audioPlayProcessInterval);
 	}
+
 }

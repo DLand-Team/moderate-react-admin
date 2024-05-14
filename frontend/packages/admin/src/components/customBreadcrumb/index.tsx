@@ -9,11 +9,9 @@ const CustomBreadcrumb = () => {
 	const [infoArr, setInfoArr] = useState<{ id: string; title: string }[]>([]);
 	useLocationListen((location: Location) => {
 		const { pathname } = location;
-		const pathArr = pathname
-			.split("/")
-			.filter((item) => {
-				return item;
-			})
+		const pathArr = pathname.split("/").filter((item) => {
+			return item;
+		});
 		const temp2 = pathArr.map((path: string) => {
 			const info = RouterHelper.getRouteTitleByKey(path as ROUTE_ID_KEY);
 			return {

@@ -1,7 +1,9 @@
 import dev from "./dev.json";
-import pos from "./pos.json";
+import app from "./app.json";
+import pluginsResourcesZh from "plugins/config/i18n/locales/zh";
 const resourcesZh = {
-  dev,
-  pos,
+	dev,
+	app,
+	...pluginsResourcesZh,
 };
 export default resourcesZh;

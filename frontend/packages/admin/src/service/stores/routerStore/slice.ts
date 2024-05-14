@@ -13,7 +13,6 @@ const initialState = (): StoreState => {
 			routesPermissions: [],
 			routesConfigMap: cloneDeep(ROUTE_CONFIG_MAP),
 		});
-	debugger;
 	return {
 		routesMap: routesMapData,
 		routesTree: routesTreeData,

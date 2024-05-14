@@ -1,7 +1,6 @@
 import devHelper from "@/helper/devHelper";
 import pathHelper from "@/helper/pathHelper";
 import fs from "fs";
-// import { request } from "@/utils/request";
 import { exec } from "child_process";
 import { request } from "@/utils/request";
 import { deleteDir } from "@/utils/fsUtils";
@@ -90,6 +89,9 @@ const addPluginHandler = async (ctx) => {
 			{ pageName: string; pagePath: string; isHasIndexPage: boolean }
 		> = {};
 		devHelper.readDirForPluginInfoLoop(pluginCachePath + "/pages", result);
+		Object.keys(result).forEach((item) => {
+			if (!item.endsWith("Page")) delete result[item];
+		});
 		const pageCode = devHelper.toFromat(
 			fs.readFileSync(pathHelper.webRouterNamePath).toString(),
 		);
@@ -112,17 +114,22 @@ const addPluginHandler = async (ctx) => {
 		for (let i in result) {
 			const { pageName, pagePath, isHasIndexPage } = result[i];
 			let pathNew = `../${pageName}/pages`;
+			let transform = (str) => {
+				return `'%i18n.t('${str}')%'`;
+			};
 			const newRouteItem: any = {
 				id: pageName,
 				meta: {
-					title: pageName,
+					title: transform(`${pageName}:${pageName}Title`),
 				},
 				isNoAuth: true,
 			};
+
 			if (isHasIndexPage) {
 				newRouteItem.component =
 					devHelper.capitalizeFirstLetter(pageName);
 			}
+
 			devHelper.toRegisterPluginPage({
 				newItem: newRouteItem,
 				path: pathNew,
@@ -150,6 +157,15 @@ const addPluginHandler = async (ctx) => {
 		const layouts = devHelper.readLayouts(pluginName);
 		layouts.forEach((item) => {
 			devHelper.toRegisterLayout(pluginName, item);
+		});
+
+		const i18nZh = devHelper.readI18n(pluginName, "zh");
+		const i18nEn = devHelper.readI18n(pluginName, "en");
+		i18nZh.forEach((item) => {
+			devHelper.toRegisterI18n(pluginName, item, "zh");
+		});
+		i18nEn.forEach((item) => {
+			devHelper.toRegisterI18n(pluginName, item, "en");
 		});
 	}
 

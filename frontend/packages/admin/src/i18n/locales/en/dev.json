@@ -1,9 +1,3 @@
 {
-	"dev.name": "dev tools",
-	"dev.addRouter": "Add Router",
-	"dev.roleManagement": "Role Management",
-	"dev.sys": "System Management",
-	"dev.cms": "Examples",
-	"dev.Dashboard": "Dashboard",
-	"dev.cpdPage": "Cpd"
+	"dev.addRouter": "Add Router"
 }

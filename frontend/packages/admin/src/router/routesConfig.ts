@@ -7,14 +7,13 @@ export const ROUTE_CONFIG_MAP: {
 } = {
 	HomePage: {
 		id: "HomePage",
-		meta: { title: "Home" },
+		meta: { title: i18n.t("app:HomePageTile") },
 		component: "HomePage",
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
 	},
 	LoginPage: {
 		id: "LoginPage",
-		meta: { title: "Login" },
 		component: "LoginPage",
 		isNoAuth: true,
 		path: "/",
@@ -22,7 +21,7 @@ export const ROUTE_CONFIG_MAP: {
 	HelloPage: {
 		id: "HelloPage",
 		meta: {
-			title: i18n.t("dev:dev.Dashboard"),
+			title: i18n.t("app:HelloPageTile"),
 			icon: "FundProjectionScreenOutlined",
 		},
 		component: "HelloPage",
@@ -33,7 +32,7 @@ export const ROUTE_CONFIG_MAP: {
 	SysPage: {
 		id: "SysPage",
 		meta: {
-			title: i18n.t("dev:dev.sys"),
+			title: i18n.t("app:SysPageTitle"),
 			icon: "ApartmentOutlined",
 		},
 		actionPermissions: ["ADD", "EDIT"],
@@ -42,30 +41,22 @@ export const ROUTE_CONFIG_MAP: {
 	CmsPage: {
 		id: "CmsPage",
 		meta: {
-			title: i18n.t("dev:dev.cms"),
+			title: i18n.t("app:CmsPageTitle"),
 			icon: "CoffeeOutlined",
 		},
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
 	},
-	CpdPage: {
-		id: "CpdPage",
-		meta: {
-			title: i18n.t("dev:dev.cpdPage"),
-			icon: "FireOutlined",
-		},
-		isNoAuth: true,
-	},
 	UserPage: {
 		id: "UserPage",
-		meta: { title: "User Management" },
+		meta: { title: i18n.t("app:UserPageTitle") },
 		actionPermissions: ["ADD", "EDIT"],
 		component: "UserPage",
 		isNoAuth: true,
 	},
 	RolePage: {
 		id: "RolePage",
-		meta: { title: "Role Management" },
+		meta: { title: i18n.t("app:RolePageTitle") },
 		component: "RolePage",
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
@@ -74,7 +65,7 @@ export const ROUTE_CONFIG_MAP: {
 	DevPage: {
 		id: "DevPage",
 		meta: {
-			title: i18n.t("dev:dev.name"),
+			title: i18n.t("app:DevPageTitle"),
 			icon: "LaptopOutlined",
 		},
 		actionPermissions: ["ADD", "EDIT"],
@@ -82,36 +73,21 @@ export const ROUTE_CONFIG_MAP: {
 	},
 	PageDevPage: {
 		id: "PageDevPage",
-		meta: { title: "Router Management" },
+		meta: { title: i18n.t("app:PageDevPageTitle") },
 		component: "PageDevPage",
-		actionPermissions: ["ADD", "EDIT"],
-		isNoAuth: true,
-	},
-	PermissionPage: {
-		id: "PermissionPage",
-		meta: { title: "Permission Management" },
-		component: "PermissionPage",
-		isMenu: false,
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
 	},
 	StoreDevPage: {
 		id: "StoreDevPage",
-		meta: { title: "Store Management" },
+		meta: { title: i18n.t("app:StoreDevPageTitle") },
 		component: "StoreDevPage",
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
 	},
-	ApiDevPage: {
-		id: "ApiDevPage",
-		meta: { title: "API Management" },
-		component: "ApiDevPage",
-		isNoAuth: true,
-		actionPermissions: ["ADD", "EDIT"],
-	},
 	NotFundPage: {
 		id: "NotFundPage",
-		meta: { title: "NotFundPage" },
+		meta: { title: i18n.t("app:NotFundPageTitle") },
 		component: "NotFundPage",
 		isNoAuth: true,
 		isMenu: false,
@@ -119,7 +95,7 @@ export const ROUTE_CONFIG_MAP: {
 	},
 	ErrorPage: {
 		id: "ErrorPage",
-		meta: { title: "ErrorPage" },
+		meta: { title: i18n.t("app:ErrorPageTitle") },
 		component: "ErrorPage",
 		isNoAuth: true,
 		isMenu: false,
@@ -127,19 +103,21 @@ export const ROUTE_CONFIG_MAP: {
 	},
 	MenuPage: {
 		id: "MenuPage",
-		meta: { title: "MenuPage" },
+		meta: { title: i18n.t("app:MenuPageTitle") },
 		component: "MenuPage",
 		isNoAuth: true,
 	},
 	PluginsPage: {
 		id: "PluginsPage",
-		meta: { title: "Plugins", icon: "ProductOutlined" },
+		meta: {
+			title: i18n.t("app:PluginsPageTitle"),
+			icon: "ProductOutlined",
+		},
 		component: "PluginsPage",
 		isNoAuth: true,
 	},
 	PluginListPage: {
 		id: "PluginListPage",
-		meta: { title: "PluginListPage" },
 		component: "PluginListPage",
 		isNoAuth: true,
 		isMenu: false,

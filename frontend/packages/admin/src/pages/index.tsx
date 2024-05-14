@@ -11,18 +11,10 @@ const HelloPage = lazy(() => import("./HomePage/HelloPage/helloPage"));
 const UserPage = lazy(() => import("./HomePage/SysPage/UserPage/userPage"));
 // 角色管理
 const RolePage = lazy(() => import("./HomePage/SysPage/RolePage/rolePage"));
-//permissionPage
-const PermissionPage = lazy(
-	() => import("./HomePage/PermissionPage/permissionPage"),
-);
 //storeDevPage
 const StoreDevPage = isProd
 	? null
 	: lazy(() => import("./HomePage/DevPage/StoreDevPage"));
-//apiDevPage
-const ApiDevPage = isProd
-	? null
-	: lazy(() => import("./HomePage/DevPage/ApiDevPage"));
 // 页面管理
 const PageDevPage = isProd
 	? null
@@ -53,9 +45,7 @@ export const pageList = {
 	UserPage,
 	RolePage,
 	PageDevPage,
-	PermissionPage,
 	StoreDevPage,
-	ApiDevPage,
 	NotFundPage,
 	MenuPage,
 	PluginsPage,

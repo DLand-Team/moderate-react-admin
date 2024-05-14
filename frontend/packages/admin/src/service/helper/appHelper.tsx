@@ -36,6 +36,7 @@ export class AppHelper {
 		result.sort((a, b) => {
 			return ROUTE_NAME[a.key] - ROUTE_NAME[b.key];
 		});
+		debugger;
 		return result;
 	}
 	/**
@@ -101,6 +102,9 @@ export class AppHelper {
 					temp.children = children;
 				}
 			}
+		});
+		result.sort((a, b) => {
+			return ROUTE_NAME[a.key] - ROUTE_NAME[b.key];
 		});
 		return result;
 	};

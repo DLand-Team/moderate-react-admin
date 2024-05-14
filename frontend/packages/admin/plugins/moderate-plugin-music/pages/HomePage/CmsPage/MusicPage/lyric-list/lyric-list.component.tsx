@@ -43,7 +43,7 @@ const LyricListComponent = forwardRef<
 		turnTo: (e: number) => void;
 		ref?: React.Ref<LyricListRef>;
 	}
->((props) => {
+>((props, ref: React.Ref<LyricListRef>) => {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const lrcItemsRef = useRef<Array<HTMLDivElement | null>>([]);
 
@@ -154,7 +154,7 @@ const LyricListComponent = forwardRef<
 		setLyricsHighlightIndex(index);
 		lyricsScroll(index, false);
 		props.turnTo(
-			formatMilliseconds(props.musicInfo.lyrics[index].time) / 1000,
+			formatMilliseconds(props.musicInfo.lyrics[index].time) / 1000
 		);
 	};
 

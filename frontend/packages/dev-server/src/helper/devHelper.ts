@@ -237,7 +237,7 @@ class devHelper {
 			let newRoutesStr = `\n${configStr.join("=")}\n`;
 			let newCode = newRoutesStr;
 			let str = this.toFromat(newCode);
-			str.replace(/\"\'\%/g, "")
+			str = str.replace(/\"\'\%/g, "")
 				.replace(/\%\'\"/g, "")
 				.replace(/\'/g, '"');
 			fs.writeFileSync(routeConfigPath, str);
@@ -328,6 +328,27 @@ class devHelper {
 		);
 		fs.writeFileSync(
 			pathHelper.layoutConfigPath,
+			this.toFromat(newCode).replace(/\'/g, '"'),
+		);
+	};
+
+	toRegisterI18n = (pluginName: string, name: string, lang: string) => {
+		let langRootPath = pathHelper.webLocalesPath + `/${lang}/index.ts`;
+		// 获取provider的代码
+		const lyoutFileCode = fs.readFileSync(langRootPath).toString();
+		const importSign = "//>>>I18n_INPORT_SIGN<<<//";
+		const registerSign = "//>>>I18n_SIGN<<<//";
+		const importCode = `import ${name} from "plugins/${pluginName}/i18n/${lang}/${name}.json";`;
+		let newCode = lyoutFileCode.replace(
+			importSign,
+			importCode + "\n" + importSign,
+		);
+		newCode = newCode.replace(
+			registerSign,
+			name + "\n" + registerSign,
+		);
+		fs.writeFileSync(
+			langRootPath,
 			this.toFromat(newCode).replace(/\'/g, '"'),
 		);
 	};
@@ -752,6 +773,27 @@ class devHelper {
 					return item.replace(".ts", "");
 				});
 			return layouts;
+		}
+		return [];
+	}
+
+	readI18n(pluginName: string, lang: string): string[] {
+		const files = fs.readdirSync(
+			pathHelper.pluginsCache + "/" + pluginName,
+		);
+		if (files.includes("i18n")) {
+			const list = fs
+				.readdirSync(
+					pathHelper.pluginsCache +
+						"/" +
+						pluginName +
+						"/i18n/" +
+						lang,
+				)
+				?.map((item) => {
+					return item.replace(".json", "");
+				});
+			return list;
 		}
 		return [];
 	}

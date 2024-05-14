@@ -7,7 +7,7 @@ devHelper.toWatchPluginsFlies();
 // 获得页面列表
 pluginDevRouter.get("/getPluginList", getPluginListHr);
 
-// 创建页面
+// 添加插件
 pluginDevRouter.post("/addPlugin", addPluginHr);
 
 //获取插件详情

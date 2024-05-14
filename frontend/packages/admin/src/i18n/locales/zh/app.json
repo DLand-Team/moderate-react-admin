@@ -1,0 +1,15 @@
+{
+	"HelloPageTile": "主页",
+	"HomePageTile": "主页",
+	"PluginsPageTitle": "插件市场",
+	"RolePageTitle": "角色管理",
+	"UserPageTitle": "用户管理",
+	"CmsPageTitle": "功能预览",
+	"SysPageTitle": "系统配置",
+	"MenuPageTitle": "菜单管理",
+	"DevPageTitle": "开发助手",
+	"PageDevPageTitle": "路由助手",
+	"StoreDevPageTitle": "状态助手",
+	"NotFundPageTitle": "未找到",
+	"ErrorPageTitle": "错误页"
+}

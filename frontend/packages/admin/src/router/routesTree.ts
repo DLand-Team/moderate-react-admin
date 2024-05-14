@@ -20,14 +20,12 @@ export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [
       {
         id: ROUTE_ID.DevPage,
         children: [
-          { id: ROUTE_ID.ApiDevPage },
           { id: ROUTE_ID.PageDevPage },
           { id: ROUTE_ID.StoreDevPage },
         ],
       },
       { id: ROUTE_ID.HelloPage },
       { id: ROUTE_ID.NotFundPage },
-      { id: ROUTE_ID.PermissionPage },
       {
         id: ROUTE_ID.PluginsPage,
         children: [{ id: ROUTE_ID.PluginListPage }],

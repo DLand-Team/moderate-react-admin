@@ -72,7 +72,7 @@ const api = {
 	},
 	saveSettingApi(params: Setting) {
 		return http.request({
-			url: "/admin-api/usercenter/cpd-rule/" + "getRuleCarrierList",
+			url: baseUrl + "/settingDev/updateSetting",
 			method: "POST",
 			data: params,
 		});

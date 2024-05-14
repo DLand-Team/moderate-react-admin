@@ -22,6 +22,7 @@ export default {
 	providerConfigPath: path.resolve("../admin/plugins/config/providers.ts"), // provider配置数据
 	themeConfigPath: path.resolve("../admin/plugins/config/themes.ts"), // theme主题
 	layoutConfigPath: path.resolve("../admin/plugins/config/layouts.ts"), // 布局主题
+	webLocalesPath: path.resolve("../admin/plugins/config/i18n/locales"),
 	webPagesPath: path.resolve("../admin/src/pages"),
 	webServicePath: path.resolve("../admin/src/services"),
 	webStoresPath: path.resolve("../admin/src/services/stores"),
@@ -30,5 +31,5 @@ export default {
 	webApisIndexPath: path.resolve("../admin/src/services/apis/index.ts"),
 	webPageIndexPath: path.resolve("../admin/src/pages/index.tsx"),
 	pluginPageIndexPath: path.resolve("../admin/plugins/config/pages.ts"),
-	webSettingPath: path.resolve("../admin/setting.json"),
+	webSettingPath: path.resolve("../admin/src/setting.json"),
 };
