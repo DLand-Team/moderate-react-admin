@@ -7,7 +7,7 @@ export type KeepAliveComponentProps = React.PropsWithChildren<{
 	pageKey: string;
 }>;
 
-function KeepAliveComponent(props: KeepAliveComponentProps) {
+function keepAliveRoute(props: KeepAliveComponentProps) {
 	const { parentDomRef, activeKey, children, pageKey } = props;
 	const isActive = activeKey == pageKey;
 	const aliveDom = useMemo(() => {
@@ -37,4 +37,4 @@ function KeepAliveComponent(props: KeepAliveComponentProps) {
 		: null;
 }
 
-export default KeepAliveComponent;
+export default keepAliveRoute;
