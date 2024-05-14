@@ -1,4 +1,4 @@
-import KeepAliveOutlet from "src/common/hocs/keepAliveOutlet";
+import KeepAliveOutlet from "src/common/hocs/keepAlive/keepAliveOutlet";
 import themeProviderHoc from "src/common/hocs/themeHoc/themeHoc";
 import { layoutMap } from "src/layouts";
 
