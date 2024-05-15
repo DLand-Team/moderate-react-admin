@@ -17,6 +17,7 @@ import storageHelper from "src/common/utils/storageHelper";
 import { ROUTE_ID_KEY } from "src/router/types";
 import { ROUTE_ID } from "src/router/name";
 import { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 const { Header, Content, Sider } = Layout;
 const ThemeSeq: (ThemeName | "auto")[] = ["light", "dark", "auto"];
@@ -32,8 +33,7 @@ export const dland = ({ children }: React.PropsWithChildren) => {
 		isCollapsedMenu,
 		setIsCollapsedMenu,
 	} = useFlat("appStore");
-	// todo loop一下menuData里面的icon
-	// redux不让存在element，必须存在传统类型，无语
+	const { t } = useTranslation();
 	let themIndex = ThemeSeq.findIndex((item) => {
 		return item === currentTheme;
 	});
@@ -160,7 +160,7 @@ export const dland = ({ children }: React.PropsWithChildren) => {
 									});
 								}}
 							>
-								退出
+								{t("app:logout")}
 							</Button>
 						</div>
 					</Header>

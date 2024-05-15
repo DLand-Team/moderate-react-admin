@@ -11,5 +11,16 @@
 	"PageDevPageTitle": "PageDevPageTitle",
 	"StoreDevPageTitle": "StoreDevPageTitle",
 	"NotFundPageTitle": "NotFundPageTitle",
-	"ErrorPageTitle": "ErrorPageTitle"
+	"ErrorPageTitle": "ErrorPageTitle",
+	"themeSet": "Theme",
+	"paletteSet": "Palette",
+	"layoutSet": "Layout",
+	"setting": "Setting",
+	"cancel": "Cancel",
+	"save": "Save",
+	"light": "Light",
+	"dark": "Dark",
+	"sys": "Auto",
+	"sys2": "System",
+	"logout": "Logout"
 }

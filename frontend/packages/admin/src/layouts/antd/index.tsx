@@ -4,9 +4,12 @@ import MainContent from "./mainContent";
 import NavHeader from "./navHeader";
 import SliderMenu from "./sliderMenu";
 
-export const DefaultLayout = ({ children }: React.PropsWithChildren) => {
+export const DefaultLayout = ({
+	children,
+	...rest
+}: React.PropsWithChildren) => {
 	return (
-		<Layout className={styles.content}>
+		<Layout className={styles.content} {...rest}>
 			<SliderMenu />
 			<Layout>
 				<NavHeader />

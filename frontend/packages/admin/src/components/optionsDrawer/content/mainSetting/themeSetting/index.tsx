@@ -6,6 +6,7 @@ import { useFlat } from "src/service";
 import { ThemeName } from "src/service/stores/appStore/modal";
 import themeMap from "src/theme";
 import LayoutDemo from "./layoutDemo";
+import { useTranslation } from "react-i18next";
 
 interface Option {
 	value: string;
@@ -20,7 +21,7 @@ const displayRender = (labels: string[]) => labels[labels.length - 1];
 
 const ThemeSetting: React.FC = () => {
 	const { settingData, setSettingData } = useFlat("appStore");
-
+	const { t } = useTranslation();
 	const { paletteSet, layoutSet } = settingData || {};
 	const onChange = (value: any, themeColor: ThemeName) => {
 		let settingDataTemp = cloneDeep(settingData);
@@ -73,20 +74,22 @@ const ThemeSetting: React.FC = () => {
 						fontWeight: "bold",
 					}}
 				>
-					配色方案
+					{t("app:paletteSet")}
 				</div>
 				<div
 					style={{
 						display: "flex",
 						alignItems: "center",
 						marginBottom: "16px",
+						paddingLeft: "20px",
 					}}
 				>
 					<div>
-						<Text>明：</Text>
+						<Text>{t("app:Light")}：</Text>
 					</div>
 
 					<Cascader
+						expandTrigger={"hover"}
 						defaultValue={[
 							paletteSet?.light! in themeMap
 								? paletteSet?.light!
@@ -142,10 +145,12 @@ const ThemeSetting: React.FC = () => {
 					style={{
 						display: "flex",
 						alignItems: "center",
+						paddingLeft: "20px",
 					}}
 				>
-					<Typography>暗：</Typography>
+					<Typography>{t("app:Dark")}：</Typography>
 					<Cascader
+						expandTrigger={"hover"}
 						defaultValue={[
 							paletteSet?.dark! in themeMap
 								? paletteSet?.dark!
@@ -209,20 +214,22 @@ const ThemeSetting: React.FC = () => {
 						fontWeight: "bold",
 					}}
 				>
-					布局方案
+					{t("app:layoutSet")}
 				</div>
 				<div
 					style={{
 						display: "flex",
 						alignItems: "center",
 						marginBottom: "16px",
+						paddingLeft: "20px",
 					}}
 				>
 					<div>
-						<Text>明：</Text>
+						<Text>{t("app:light")}：</Text>
 					</div>
 
 					<Cascader
+						expandTrigger={"hover"}
 						defaultValue={[
 							layoutSet?.light! in layoutMap
 								? layoutSet?.light!
@@ -235,56 +242,56 @@ const ThemeSetting: React.FC = () => {
 						}}
 						changeOnSelect
 						allowClear={false}
-						// optionRender={(option) => {
-						// 	if (option.level == 1) {
-						// 		return (
-						// 			<div
-						// 				style={{
-						// 					height: "162px",
-						// 				}}
-						// 			>
-						// 				<div
-						// 					style={{
-						// 						width: "200px",
-						// 						height: "580px",
-						// 						transform:
-						// 							"scale(0.24) translate(-340px,-880px)",
-						// 					}}
-						// 				>
-						// 					<LayoutDemo
-						// 						CustomLayout={
-						// 							layoutMap[
-						// 								layout?.light || "antd"
-						// 							] as any
-						// 						}
-						// 						isDark={false}
-						// 						themeConfig={{}}
-						// 					/>
-						// 				</div>
-						// 			</div>
-						// 		);
-						// 	} else {
-						// 		return option.label;
-						// 	}
-						// }}
-						// dropdownRender={(menus: React.ReactNode) => {
-						// 	return (
-						// 		<div>
-						// 			{menus}
-						// 			<Divider style={{ margin: 0 }} />
-						// 		</div>
-						// 	);
-						// }}
+						optionRender={(option) => {
+							if (option.level == 1) {
+								return (
+									<div
+										style={{
+											height: "162px",
+										}}
+									>
+										<div
+											style={{
+												width: "200px",
+												height: "580px",
+												transform:
+													"scale(0.24) translate(-340px,-880px)",
+											}}
+										>
+											<LayoutDemo
+												CustomLayout={
+													layoutMap["Default"]
+												}
+												isDark={false}
+												themeConfig={{}}
+											/>
+										</div>
+									</div>
+								);
+							} else {
+								return option.label;
+							}
+						}}
+						dropdownRender={(menus: React.ReactNode) => {
+							return (
+								<div>
+									{menus}
+									<Divider style={{ margin: 0 }} />
+								</div>
+							);
+						}}
 					/>
 				</div>
 				<div
 					style={{
 						display: "flex",
 						alignItems: "center",
+						paddingLeft: "20px",
 					}}
 				>
-					<Typography>暗：</Typography>
+					<Typography>{t("app:Dark")}：</Typography>
 					<Cascader
+						expandTrigger={"hover"}
 						defaultValue={[
 							layoutSet?.dark! in layoutMap
 								? layoutSet?.dark!
@@ -297,46 +304,47 @@ const ThemeSetting: React.FC = () => {
 						}}
 						changeOnSelect
 						allowClear={false}
-						// optionRender={(option) => {
-						// 	if (option.level == 1) {
-						// 		return (
-						// 			<div
-						// 				style={{
-						// 					height: "162px",
-						// 				}}
-						// 			>
-						// 				<div
-						// 					style={{
-						// 						width: "200px",
-						// 						height: "580px",
-						// 						transform:
-						// 							"scale(0.24) translate(-340px,-880px)",
-						// 					}}
-						// 				>
-						// 					<LayoutDemo
-						// 						CustomLayout={
-						// 							layoutMap[
-						// 								layout?.dark || "antd"
-						// 							] as any
-						// 						}
-						// 						isDark={true}
-						// 						themeConfig={{}}
-						// 					/>
-						// 				</div>
-						// 			</div>
-						// 		);
-						// 	} else {
-						// 		return option.label;
-						// 	}
-						// }}
-						// dropdownRender={(menus: React.ReactNode) => {
-						// 	return (
-						// 		<div>
-						// 			{menus}
-						// 			<Divider style={{ margin: 0 }} />
-						// 		</div>
-						// 	);
-						// }}
+						optionRender={(option) => {
+							if (option.level == 1) {
+								return (
+									<div
+										style={{
+											height: "162px",
+										}}
+									>
+										<div
+											style={{
+												width: "200px",
+												height: "580px",
+												transform:
+													"scale(0.24) translate(-340px,-880px)",
+											}}
+										>
+											<LayoutDemo
+												CustomLayout={
+													layoutMap[
+														layoutSet?.dark ||
+															"Default"
+													]
+												}
+												isDark={true}
+												themeConfig={{}}
+											/>
+										</div>
+									</div>
+								);
+							} else {
+								return option.label;
+							}
+						}}
+						dropdownRender={(menus: React.ReactNode) => {
+							return (
+								<div>
+									{menus}
+									<Divider style={{ margin: 0 }} />
+								</div>
+							);
+						}}
 					/>
 				</div>
 			</div>

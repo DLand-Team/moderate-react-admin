@@ -45,8 +45,8 @@ const items: MenuItem[] = [
 const LayoutDemo: React.FC<{
 	themeConfig: any;
 	isDark: boolean;
-	CustomLayout?: FC;
-}> = ({ themeConfig, isDark, CustomLayout = Layout }) => {
+	CustomLayout?: FC<any>;
+}> = ({ themeConfig, isDark, CustomLayout }) => {
 	const [collapsed, setCollapsed] = useState(false);
 	const {
 		token: { borderRadiusLG },
@@ -56,9 +56,21 @@ const LayoutDemo: React.FC<{
 		algorithm: isDark ? [theme.darkAlgorithm] : null,
 		...themeConfig,
 	};
+	if (CustomLayout) {
+		return (
+			<ConfigProvider theme={themeValue}>
+				<CustomLayout
+					style={{
+						width: "888px",
+						height: "600px",
+					}}
+				/>
+			</ConfigProvider>
+		);
+	}
 	return (
 		<ConfigProvider theme={themeValue}>
-			<CustomLayout
+			<Layout
 				style={{
 					width: "888px",
 					height: "600px",
@@ -106,7 +118,7 @@ const LayoutDemo: React.FC<{
 						</div>
 					</Content>
 				</Layout>
-			</CustomLayout>
+			</Layout>
 		</ConfigProvider>
 	);
 };

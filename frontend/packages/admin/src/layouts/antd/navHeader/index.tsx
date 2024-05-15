@@ -22,28 +22,8 @@ import { RouterHelper, useFlat, useResetRedux } from "src/service";
 import styles from "./index.module.scss";
 import { ThemeColor } from "src/service/stores/appStore/slice";
 import { useTranslation } from "react-i18next";
-const items = [
-	{
-		icon: <MoonOutlined />,
-		label: "月光",
-		key: ThemeColor.dark,
-	},
-	{
-		icon: <SunOutlined />,
-		label: "明亮",
-		key: ThemeColor.light,
-	},
-	{
-		icon: <SyncOutlined />,
-		label: "系统",
-		key: "auto",
-	},
-];
-const CustomDropdownButton = themeHoc(Dropdown.Button, {
-	token: {
-		colorPrimary: "red",
-	},
-});
+
+const CustomDropdownButton = themeHoc(Dropdown.Button, {});
 
 const lngList: MenuProps["items"] = [
 	{
@@ -69,7 +49,24 @@ const NavHeader = () => {
 	} = useFlat("appStore");
 	const resetAllStores = useResetRedux();
 	const antdThemeToken = antdTheme.useToken();
-	const { i18n } = useTranslation();
+	const { t, i18n } = useTranslation();
+	const items = [
+		{
+			icon: <MoonOutlined />,
+			label: t("app:dark"),
+			key: ThemeColor.dark,
+		},
+		{
+			icon: <SunOutlined />,
+			label: t("app:light"),
+			key: ThemeColor.light,
+		},
+		{
+			icon: <SyncOutlined />,
+			label: t("app:sys"),
+			key: "auto",
+		},
+	];
 	return (
 		<Layout.Header
 			style={{
@@ -127,7 +124,7 @@ const NavHeader = () => {
 						return [
 							<Button type="primary">
 								{isThemeAuto
-									? "跟随系统"
+									? t("app:sys2")
 									: items.find((item) => {
 											return item.key == currentTheme;
 										})?.label}
@@ -172,7 +169,7 @@ const NavHeader = () => {
 						});
 					}}
 				>
-					退出
+					{t("app:logout")}
 				</Button>
 			</div>
 		</Layout.Header>

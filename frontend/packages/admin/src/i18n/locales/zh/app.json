@@ -11,5 +11,16 @@
 	"PageDevPageTitle": "路由助手",
 	"StoreDevPageTitle": "状态助手",
 	"NotFundPageTitle": "未找到",
-	"ErrorPageTitle": "错误页"
+	"ErrorPageTitle": "错误页",
+	"themeSet": "主题",
+	"paletteSet": "配色",
+	"layoutSet": "布局",
+	"setting": "设置",
+	"cancel": "取消",
+	"save": "保存",
+	"light": "明亮",
+	"dark": "暗黑",
+	"sys": "自动",
+	"sys2": "跟随系统",
+	"logout": "退出"
 }

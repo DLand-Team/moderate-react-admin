@@ -4,31 +4,31 @@ import { Collapse, theme } from "antd";
 import type { CSSProperties } from "react";
 import React from "react";
 import MainSetting from "./mainSetting";
-
-const getItems: (panelStyle: CSSProperties) => CollapseProps["items"] = (
-	panelStyle,
-) => [
-	{
-		key: "1",
-		label: (
-			<div
-				style={{
-					fontSize: "20px",
-					lineHeight: "20px",
-					fontWeight: "bold",
-				}}
-			>
-				{"主题设置"}
-			</div>
-		),
-		children: <MainSetting />,
-		style: panelStyle,
-	},
-];
+import { useTranslation } from "react-i18next";
 
 const SettingContent: React.FC = () => {
 	const { token } = theme.useToken();
-
+	const { t } = useTranslation();
+	const getItems: (panelStyle: CSSProperties) => CollapseProps["items"] = (
+		panelStyle,
+	) => [
+		{
+			key: "1",
+			label: (
+				<div
+					style={{
+						fontSize: "20px",
+						lineHeight: "20px",
+						fontWeight: "bold",
+					}}
+				>
+					{t("app:themeSet")}
+				</div>
+			),
+			children: <MainSetting />,
+			style: panelStyle,
+		},
+	];
 	const panelStyle: React.CSSProperties = {
 		marginBottom: 24,
 		background: token.colorFillAlter,

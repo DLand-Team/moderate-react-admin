@@ -1,24 +1,19 @@
-import { CommentOutlined, OpenAIOutlined } from "@ant-design/icons";
-import React from "react";
+import { SettingOutlined } from "@ant-design/icons";
 import { FloatButton } from "antd";
+import React from "react";
 import { useFlat } from "src/service";
 
 const OptionsFloatBtn: React.FC = () => {
 	const { setIsShowOptionsDrawer } = useFlat("appStore");
 	return (
 		<>
-			<FloatButton.Group
-				trigger="hover"
+			<FloatButton
 				type="primary"
-				icon={<OpenAIOutlined />}
-			>
-				<FloatButton
-					onClick={() => {
-						setIsShowOptionsDrawer(true);
-					}}
-					icon={<CommentOutlined />}
-				/>
-			</FloatButton.Group>
+				onClick={() => {
+					setIsShowOptionsDrawer(true);
+				}}
+				icon={<SettingOutlined />}
+			/>
 		</>
 	);
 };
