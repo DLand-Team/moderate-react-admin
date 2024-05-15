@@ -3,27 +3,51 @@ import {
 	MenuUnfoldOutlined,
 	MoonOutlined,
 	SunOutlined,
+	SyncOutlined,
 } from "@ant-design/icons";
-import { Button, Layout, Modal, theme as antdTheme } from "antd";
+import { Button, Dropdown, Layout, Modal, theme as antdTheme } from "antd";
+import themeHoc from "src/common/hocs/themeHoc/themeHoc";
+import storageHelper from "src/common/utils/storageHelper";
 import CustomBreadcrumb from "src/components/customBreadcrumb";
+import { ROUTE_ID } from "src/router/name";
 import { RouterHelper, useFlat, useResetRedux } from "src/service";
 import styles from "./index.module.scss";
-import { ThemeName } from "src/service/stores/appStore/modal";
-import storageHelper from "src/common/utils/storageHelper";
-import { ROUTE_ID } from "src/router/name";
-
-const ThemeSeq: (ThemeName | "auto")[] = ["light", "dark", "auto"];
+import { ThemeColor } from "src/service/stores/appStore/slice";
+const items = [
+	{
+		icon: <MoonOutlined />,
+		label: "月光",
+		key: ThemeColor.dark,
+	},
+	{
+		icon: <SunOutlined />,
+		label: "明亮",
+		key: ThemeColor.light,
+	},
+	{
+		icon: <SyncOutlined />,
+		label: "系统",
+		key: "auto",
+	},
+];
+const CustomDropdownButton = themeHoc(Dropdown.Button, {
+	token: {
+		colorPrimary: "red",
+	},
+});
 
 const NavHeader = () => {
-	const { setTheme, currentTheme, isCollapsedMenu, setIsCollapsedMenu } =
-		useFlat("appStore");
-	// todo loop一下menuData里面的icon
-	// redux不让存在element，必须存在传统类型，无语
-	let themIndex = ThemeSeq.findIndex((item) => {
-		return item === currentTheme;
-	});
+	const {
+		isThemeAuto,
+		setTheme,
+		setIsThemeAuto,
+		currentTheme,
+		isCollapsedMenu,
+		setIsCollapsedMenu,
+	} = useFlat("appStore");
 	const resetAllStores = useResetRedux();
 	const antdThemeToken = antdTheme.useToken();
+
 	return (
 		<Layout.Header
 			style={{
@@ -51,26 +75,43 @@ const NavHeader = () => {
 				)}
 			</Button>
 			<CustomBreadcrumb />
-			<div className={styles.resetBtn}>
-				<Button
-					style={{
-						width: "50px",
+			<div className={styles.toolBtnList}>
+				<CustomDropdownButton
+					trigger={["click", "hover"]}
+					placement="bottomRight"
+					buttonsRender={() => {
+						return [
+							<Button type="primary">
+								{isThemeAuto
+									? "跟随系统"
+									: items.find((item) => {
+											return item.key == currentTheme;
+										})?.label}
+							</Button>,
+							<Button
+								type="primary"
+								icon={
+									items.find((item) => {
+										return item.key == currentTheme;
+									})?.icon
+								}
+							></Button>,
+						];
 					}}
-					onClick={() => {
-						themIndex++;
-						if (themIndex > ThemeSeq.length - 1) {
-							themIndex = 0;
-						}
-						if (ThemeSeq[themIndex] !== "auto") {
-							setTheme(ThemeSeq[themIndex] as ThemeName);
-						}
+					type="primary"
+					menu={{
+						items: items,
+						onClick: (e) => {
+							if (e.key == "auto") {
+								setIsThemeAuto(true);
+							} else {
+								setIsThemeAuto(false);
+								setTheme(e.key as ThemeColor);
+							}
+						},
 					}}
-					icon={
-						[<SunOutlined />, <MoonOutlined />, <div>AUTO</div>][
-							themIndex
-						]
-					}
-				></Button>
+					icon={<MoonOutlined />}
+				></CustomDropdownButton>
 				<Button
 					type="primary"
 					onClick={() => {

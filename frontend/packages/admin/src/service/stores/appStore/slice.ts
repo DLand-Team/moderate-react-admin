@@ -11,6 +11,11 @@ import GlobalVar from "src/static/globalVar";
 import names from "../names";
 import { Setting, StoreState, TabItem, TabsHistory, ThemeName } from "./modal";
 
+export enum ThemeColor {
+	light = "light",
+	dark = "dark",
+}
+
 const initialState = (): StoreState => {
 	// 初始化菜单，根据当前的homePage的路由结构，分析出菜单来
 	const { routesTreeData = [] } =
@@ -30,7 +35,7 @@ const initialState = (): StoreState => {
 		tabItems: [],
 		activeTabKey: "",
 		isThemeAuto: storageHelper.getItem("IS_THEME_AUTO"),
-		currentTheme: storageHelper.getItem("THEME"),
+		currentTheme: storageHelper.getItem("THEME") || ThemeColor.light,
 		isShowOptionsDrawer: false,
 		isCollapsedMenu: false,
 		isShowMdDrawer: false,
@@ -100,6 +105,9 @@ const appSlice = createSliceCustom({
 		},
 		setSettingData(state, { payload }: PayloadAction<Setting>) {
 			state.settingData = payload;
+		},
+		setIsThemeAuto(state, { payload }: PayloadAction<boolean>) {
+			state.isThemeAuto = payload;
 		},
 	},
 

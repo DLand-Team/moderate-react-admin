@@ -1,26 +1,7 @@
-.content {
-	height: 100%;
-	overflow: hidden;
-
-	.logo {
-		height: 31px;
-		margin: 18px;
-		text-align: center;
-		display: flex;
-		display: flex;
-		align-items: center;
-		font-weight: bold;
-		font-size: 20px;
-		position: relative;
-		white-space: nowrap;
-	}
-
-	.resetBtn {
-		position: absolute;
-		right: 50px;
-		top: 15px;
-		display: flex;
-		align-items: "center";
-		gap: 12px;
-	}
+.toolBtnList {
+	position: absolute;
+	right: 50px;
+	display: flex;
+	align-items: center;
+	gap: 5px;
 }
