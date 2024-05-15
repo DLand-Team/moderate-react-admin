@@ -1,7 +1,7 @@
 import { Cascader, Divider, Typography } from "antd";
 import { cloneDeep } from "lodash-es";
 import React from "react";
-import layoutMap from "src/layouts";
+import layoutMap, { LayoutMapkey } from "src/layouts";
 import { useFlat } from "src/service";
 import { ThemeName } from "src/service/stores/appStore/modal";
 import themeMap from "src/theme";
@@ -260,7 +260,9 @@ const ThemeSetting: React.FC = () => {
 										>
 											<LayoutDemo
 												CustomLayout={
-													layoutMap["Default"]
+													layoutMap[
+														option.value as LayoutMapkey
+													]
 												}
 												isDark={false}
 												themeConfig={{}}
@@ -323,8 +325,7 @@ const ThemeSetting: React.FC = () => {
 											<LayoutDemo
 												CustomLayout={
 													layoutMap[
-														layoutSet?.dark ||
-															"Default"
+														option.value as LayoutMapkey
 													]
 												}
 												isDark={true}

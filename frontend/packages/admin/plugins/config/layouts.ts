@@ -1,7 +1,11 @@
-import { dland } from "plugins/moderate-plugin-layout-dland/layouts/dland";
+import { Dland } from "plugins/moderate-plugin-layout-dland/layouts/dland";
+import { Wind } from "plugins/moderate-plugin-layout-wind/layouts/wind";
+import { Rain } from "plugins/moderate-plugin-layout-rain/layouts/rain";
 //>>>LAYOUT_INPORT_SIGN<<<//
 
 export const pluginLayoutMap = {
-	dland,
+	Dland,
+	Wind,
+	Rain,
 	//>>>LAYOUT_SIGN<<<//
 };

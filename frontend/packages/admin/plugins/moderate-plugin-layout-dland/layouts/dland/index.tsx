@@ -21,7 +21,7 @@ import { useTranslation } from "react-i18next";
 
 const { Header, Content, Sider } = Layout;
 const ThemeSeq: (ThemeName | "auto")[] = ["light", "dark", "auto"];
-export const dland = ({ children }: React.PropsWithChildren) => {
+export const Dland = ({ children }: React.PropsWithChildren) => {
 	const {
 		menuData,
 		menuDefaultOpenKeys,
