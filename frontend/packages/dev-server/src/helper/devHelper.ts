@@ -237,7 +237,8 @@ class devHelper {
 			let newRoutesStr = `\n${configStr.join("=")}\n`;
 			let newCode = newRoutesStr;
 			let str = this.toFromat(newCode);
-			str = str.replace(/\"\'\%/g, "")
+			str = str
+				.replace(/\"\'\%/g, "")
 				.replace(/\%\'\"/g, "")
 				.replace(/\'/g, '"');
 			fs.writeFileSync(routeConfigPath, str);
@@ -343,10 +344,7 @@ class devHelper {
 			importSign,
 			importCode + "\n" + importSign,
 		);
-		newCode = newCode.replace(
-			registerSign,
-			name + "\n" + registerSign,
-		);
+		newCode = newCode.replace(registerSign, name + "\n" + registerSign);
 		fs.writeFileSync(
 			langRootPath,
 			this.toFromat(newCode).replace(/\'/g, '"'),

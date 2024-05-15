@@ -2,12 +2,11 @@ import { type Location } from "react-router-dom";
 import { LayoutMapkey } from "src/layouts";
 import { MenuItem } from "src/service/helper";
 import type { ThemeMapkey } from "src/theme";
-export type ThemeName = "dark" | "light" | "auto";
+export type ThemeName = "dark" | "light";
 export interface TabItem {
 	label: string;
 	key: string;
 }
-export type ThemeColor = Exclude<ThemeName, "auto">;
 export type TabsHistory = Location[];
 export interface StoreState {
 	// 菜单相关信息
@@ -18,9 +17,8 @@ export interface StoreState {
 	tabsHistory: TabsHistory;
 	tabItems: TabItem[];
 	activeTabKey: string;
-	// theme
-	themeMode: ThemeName;
-	currentTheme: ThemeColor;
+	isThemeAuto: boolean; // 是否主题跟随系统
+	currentTheme: ThemeName;
 	// 设置窗口的打开
 	isShowOptionsDrawer: boolean;
 	// 切换

@@ -71,7 +71,7 @@ export class AudioElementPlayer {
 		if (this.isDestroyed) {
 			return;
 		}
-		this.audioDom.play().then(r => {
+		this.audioDom.play().then(_ => {
 			this.audioIsPlaying = true;
 			this.startAudioPlayingProcessListener();
 		});

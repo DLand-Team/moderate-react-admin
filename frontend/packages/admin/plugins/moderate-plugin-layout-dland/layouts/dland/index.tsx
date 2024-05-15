@@ -10,7 +10,7 @@ import useLocationListen from "src/common/hooks/useLocationListen";
 import { useFlat, useResetRedux } from "src/service";
 import { AppHelper, RouterHelper } from "src/service/helper";
 import { ThemeName } from "src/service/stores/appStore/modal";
-import Breadcrumb from "src/components/customBreadcrumb";
+import CustomBreadcrumb from "src/components/customBreadcrumb";
 import Tabs from "src/components/navTabs";
 import styles from "./index.module.scss";
 import storageHelper from "src/common/utils/storageHelper";
@@ -19,7 +19,7 @@ import { ROUTE_ID } from "src/router/name";
 import { useMemo } from "react";
 
 const { Header, Content, Sider } = Layout;
-const ThemeSeq: ThemeName[] = ["light", "dark", "auto"];
+const ThemeSeq: (ThemeName | "auto")[] = ["light", "dark", "auto"];
 export const dland = ({ children }: React.PropsWithChildren) => {
 	const {
 		menuData,
@@ -27,15 +27,15 @@ export const dland = ({ children }: React.PropsWithChildren) => {
 		menuDefaultSelectedKeys,
 		setMenuDefaultOpenKeys,
 		setMenuDefaultSelectedKeys,
-		themeMode,
 		setTheme,
+		currentTheme,
 		isCollapsedMenu,
 		setIsCollapsedMenu,
 	} = useFlat("appStore");
 	// todo loop一下menuData里面的icon
 	// redux不让存在element，必须存在传统类型，无语
 	let themIndex = ThemeSeq.findIndex((item) => {
-		return item === themeMode;
+		return item === currentTheme;
 	});
 	const resetAllStores = useResetRedux();
 	const antdThemeToken = antdTheme.useToken();
@@ -117,7 +117,7 @@ export const dland = ({ children }: React.PropsWithChildren) => {
 								<MenuFoldOutlined />
 							)}
 						</Button>
-						<Breadcrumb />
+						<CustomBreadcrumb />
 						<div className={styles.resetBtn}>
 							<Button
 								style={{
@@ -128,7 +128,11 @@ export const dland = ({ children }: React.PropsWithChildren) => {
 									if (themIndex > ThemeSeq.length - 1) {
 										themIndex = 0;
 									}
-									setTheme(ThemeSeq[themIndex]);
+									if (ThemeSeq[themIndex] !== "auto") {
+										setTheme(
+											ThemeSeq[themIndex] as ThemeName,
+										);
+									}
 								}}
 								icon={
 									[

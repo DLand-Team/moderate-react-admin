@@ -5,7 +5,7 @@ let DPR: number = window.devicePixelRatio;
 let nozokuRate: number = 3.5;
 
 export class Music3Effect implements MusicEffect {
-
+	public isDestroyed = false;
 	private containerWidth = 0;
 	private containerHeight = 0;
 	private resizeObserver!: ResizeObserverWrap;
@@ -21,27 +21,23 @@ export class Music3Effect implements MusicEffect {
 
 	private sliderType: 1 | 2 | 3 = 1; // 1无滑块，2半高滑块，3全高滑块
 
-	private isDestroyed = false;
-
-	constructor(
-		private dom: HTMLDivElement,
-	) {
+	constructor(private dom: HTMLDivElement) {
 		this.containerWidth = dom.clientWidth;
 		this.containerHeight = dom.clientHeight;
 		this.init();
 	}
 
 	private init(): void {
-		this.canvas = document.createElement('canvas');
-		this.canvas.style.position = 'relative';
-		this.canvas.style.pointerEvents = 'none';
-		this.canvas.style.width = this.containerWidth + 'px';
-		this.canvas.style.height = this.containerHeight + 'px';
-		this.canvas.style.bottom = '0';
-		this.canvas.style.left = '0';
+		this.canvas = document.createElement("canvas");
+		this.canvas.style.position = "relative";
+		this.canvas.style.pointerEvents = "none";
+		this.canvas.style.width = this.containerWidth + "px";
+		this.canvas.style.height = this.containerHeight + "px";
+		this.canvas.style.bottom = "0";
+		this.canvas.style.left = "0";
 		this.dom.appendChild(this.canvas);
 		this.addResizeListener();
-		this.ctx = this.canvas.getContext('2d')!;
+		this.ctx = this.canvas.getContext("2d")!;
 		if (this.canvas != null && this.ctx != null) {
 			this.onResize();
 		}
@@ -51,8 +47,8 @@ export class Music3Effect implements MusicEffect {
 		DPR = window.devicePixelRatio;
 		this.containerWidth = this.dom.clientWidth;
 		this.containerHeight = this.dom.clientHeight;
-		this.canvas.style.width = this.containerWidth + 'px';
-		this.canvas.style.height = this.containerHeight + 'px';
+		this.canvas.style.width = this.containerWidth + "px";
+		this.canvas.style.height = this.containerHeight + "px";
 		this.canvas.width = this.containerWidth * DPR;
 		this.canvas.height = this.containerHeight * DPR;
 		if (this.containerHeight >= 200) {
@@ -62,7 +58,7 @@ export class Music3Effect implements MusicEffect {
 		} else {
 			nozokuRate = 5;
 		}
-		this.ctx.fillStyle = 'rgba(255, 255, 255, 0.25)';
+		this.ctx.fillStyle = "rgba(255, 255, 255, 0.25)";
 		this.rtResizeOrGenerate();
 	}
 
@@ -77,13 +73,17 @@ export class Music3Effect implements MusicEffect {
 			this.rt_array = [];
 			this.rt_length = len;
 			for (let i = 0; i < this.rt_length; i++) {
-				this.rt_array.push(new RetAngle(
-					this.canvas, this.sliderType, i,
-					this.rt_width * DPR, // width
-					this.rt_height * DPR, // height
-					i * aw, // x
-					this.canvas.height / 2 // y
-				))
+				this.rt_array.push(
+					new RetAngle(
+						this.canvas,
+						this.sliderType,
+						i,
+						this.rt_width * DPR, // width
+						this.rt_height * DPR, // height
+						i * aw, // x
+						this.canvas.height / 2, // y
+					),
+				);
 			}
 		}
 	}
@@ -117,11 +117,9 @@ export class Music3Effect implements MusicEffect {
 		this.removeResizeListener();
 		this.canvas?.remove();
 	}
-
 }
 
 class RetAngle {
-
 	private ctx: CanvasRenderingContext2D;
 	jh: number = 2 * DPR;
 	jd: number = 1 * DPR;
@@ -142,7 +140,7 @@ class RetAngle {
 		public x: number,
 		public y: number,
 	) {
-		this.ctx = this.canvas.getContext('2d')!;
+		this.ctx = this.canvas.getContext("2d")!;
 	}
 
 	resize(): void {
@@ -158,13 +156,14 @@ class RetAngle {
 	}
 
 	update(power: number): void {
-		this.power = power * DPR / nozokuRate;
+		this.power = (power * DPR) / nozokuRate;
 		this.num = ~~(this.power / this.h + 0.5 * DPR);
 		// 更新小红块的位置，如果音频条长度高于红块位置，则红块位置则为音频条高度，否则让小红块下降
 		if (this.sliderType == 2 || this.sliderType == 3) {
 			let nh = this.dy + this.h; // 小红块当前位置
 			if (this.power >= this.y - nh) {
-				this.dy = this.y - this.power - this.h - (this.power == 0 ? 0 : 1);
+				this.dy =
+					this.y - this.power - this.h - (this.power == 0 ? 0 : 1);
 			} else if (nh > this.y) {
 				this.dy = this.y - this.h;
 			} else {
@@ -175,47 +174,37 @@ class RetAngle {
 	}
 
 	draw(): void {
-		let h = (~~(this.power / (this.h + this.jh))) * (this.h + this.jh);
+		let h = ~~(this.power / (this.h + this.jh)) * (this.h + this.jh);
 		let rightX = this.canvas.width / 2 + this.x - this.w / 2;
 		let leftX = this.canvas.width / 2 - this.x - this.w / 2;
 		// 右上
-		this.ctx.fillRect(
-			~~(rightX),
-			~~(this.y - h),
-			~~this.w,
-			~~(h)
-		);
+		this.ctx.fillRect(~~rightX, ~~(this.y - h), ~~this.w, ~~h);
 		for (let i = 0; i < this.num; i++) {
 			let y = this.y - i * (this.h + this.jh);
 			this.ctx.clearRect(
 				~~(rightX - this.jd),
 				~~(y - this.jd),
 				~~(this.w + 2 * this.jd),
-				~~(this.jh)
+				~~this.jh,
 			);
 		}
 		// 左上
-		this.ctx.fillRect(
-			~~(leftX),
-			~~(this.y - h),
-			~~(this.w),
-			~~(h)
-		);
+		this.ctx.fillRect(~~leftX, ~~(this.y - h), ~~this.w, ~~h);
 		for (let i = 0; i < this.num; i++) {
 			let y = this.y - i * (this.h + this.jh);
 			this.ctx.clearRect(
 				~~(leftX - this.jd),
 				~~(y - this.jd),
 				~~(this.w + 2 * this.jd),
-				~~(this.jh)
+				~~this.jh,
 			);
 		}
 		// 右下
 		this.ctx.fillRect(
-			~~(rightX),
+			~~rightX,
 			~~(this.canvas.height - this.y),
-			~~(this.w),
-			~~(h)
+			~~this.w,
+			~~h,
 		);
 		for (let i = 0; i < this.num; i++) {
 			let y = this.y - i * (this.h + this.jh);
@@ -223,15 +212,15 @@ class RetAngle {
 				~~(rightX - this.jd),
 				~~(this.canvas.height - (y + this.jd)),
 				~~(this.w + 2 * this.jd),
-				~~(this.jh)
+				~~this.jh,
 			);
 		}
 		// 左下
 		this.ctx.fillRect(
-			~~(leftX),
+			~~leftX,
 			~~(this.canvas.height - this.y),
-			~~(this.w),
-			~~(h)
+			~~this.w,
+			~~h,
 		);
 		for (let i = 0; i < this.num; i++) {
 			let y = this.y - i * (this.h + this.jh);
@@ -239,7 +228,7 @@ class RetAngle {
 				~~(leftX - this.jd),
 				~~(this.canvas.height - (y + this.jd)),
 				~~(this.w + 2 * this.jd),
-				~~(this.jh)
+				~~this.jh,
 			);
 		}
 		// ----------------------------
@@ -258,36 +247,35 @@ class RetAngle {
 			// 右上
 			if (this.index != 0) {
 				this.ctx.fillRect(
-					~~(rightX),
+					~~rightX,
 					~~(this.dy + this.h - sh - this.jh / 2),
-					~~(this.w),
-					~~(sh)
+					~~this.w,
+					~~sh,
 				);
 			}
 			// 左上
 			this.ctx.fillRect(
-				~~(leftX),
+				~~leftX,
 				~~(this.dy + this.h - sh - this.jh / 2),
-				~~(this.w),
-				~~(sh)
+				~~this.w,
+				~~sh,
 			);
 			// 右下
 			if (this.index != 0) {
 				this.ctx.fillRect(
-					~~(rightX),
+					~~rightX,
 					~~(this.canvas.height - this.dy - this.h + this.jh / 2),
-					~~(this.w),
-					~~(sh)
+					~~this.w,
+					~~sh,
 				);
 			}
 			// 左下
 			this.ctx.fillRect(
-				~~(leftX),
+				~~leftX,
 				~~(this.canvas.height - this.dy - this.h + this.jh / 2),
-				~~(this.w),
-				~~(sh)
+				~~this.w,
+				~~sh,
 			);
 		}
 	}
-
 }

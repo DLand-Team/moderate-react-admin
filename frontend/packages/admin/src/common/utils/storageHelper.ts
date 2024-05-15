@@ -7,7 +7,8 @@ type ItemKey =
 	| "TABS_HISTORY"
 	| "THEME"
 	| "BTN_TIME"
-	| "BTN_CON";
+	| "BTN_CON"
+	| "IS_THEME_AUTO";
 
 const storageHelper = {
 	setItem: (

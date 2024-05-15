@@ -8,10 +8,10 @@ const HomePage = () => {
 	const layoutName =
 		(currentTheme == "dark"
 			? settingData?.layoutSet?.dark
-			: settingData?.layoutSet?.light) || "antd";
+			: settingData?.layoutSet?.light) || "DefaultLayout";
 	const Layout =
 		layoutMap[layoutName as keyof typeof layoutMap] ||
-		(layoutMap.antd as any);
+		(layoutMap.DefaultLayout as any);
 	return (
 		<Layout>
 			<KeepAliveOutlet></KeepAliveOutlet>

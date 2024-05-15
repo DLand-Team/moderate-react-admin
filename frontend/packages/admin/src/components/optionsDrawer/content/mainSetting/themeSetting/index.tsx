@@ -1,12 +1,11 @@
 import { Cascader, Divider, Typography } from "antd";
-import type { SingleCascaderProps } from "antd/es/cascader";
+import { cloneDeep } from "lodash-es";
 import React from "react";
+import layoutMap from "src/layouts";
 import { useFlat } from "src/service";
+import { ThemeName } from "src/service/stores/appStore/modal";
 import themeMap from "src/theme";
 import LayoutDemo from "./layoutDemo";
-import layoutMap from "src/layouts";
-import { cloneDeep } from "lodash-es";
-import { ThemeColor } from "src/service/stores/appStore/modal";
 
 interface Option {
 	value: string;
@@ -23,7 +22,7 @@ const ThemeSetting: React.FC = () => {
 	const { settingData, setSettingData } = useFlat("appStore");
 
 	const { paletteSet, layoutSet } = settingData || {};
-	const onChange = (value: any, themeColor: ThemeColor) => {
+	const onChange = (value: any, themeColor: ThemeName) => {
 		let settingDataTemp = cloneDeep(settingData);
 		if (!settingDataTemp!.paletteSet) {
 			settingDataTemp!.paletteSet = {} as any;
@@ -31,7 +30,7 @@ const ThemeSetting: React.FC = () => {
 		settingDataTemp!.paletteSet![themeColor] = value[0] as any;
 		settingDataTemp && setSettingData(settingDataTemp);
 	};
-	const onLayoutChange = (value: any, themeColor: ThemeColor) => {
+	const onLayoutChange = (value: any, themeColor: ThemeName) => {
 		let settingDataTemp = cloneDeep(settingData);
 		if (!settingDataTemp!.layoutSet) {
 			settingDataTemp!.layoutSet = {} as any;

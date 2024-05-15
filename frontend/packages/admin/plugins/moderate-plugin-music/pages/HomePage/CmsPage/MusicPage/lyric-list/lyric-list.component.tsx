@@ -43,7 +43,7 @@ const LyricListComponent = forwardRef<
 		turnTo: (e: number) => void;
 		ref?: React.Ref<LyricListRef>;
 	}
->((props, ref: React.Ref<LyricListRef>) => {
+>((props) => {
 	const containerRef = useRef<HTMLDivElement>(null);
 	const lrcItemsRef = useRef<Array<HTMLDivElement | null>>([]);
 

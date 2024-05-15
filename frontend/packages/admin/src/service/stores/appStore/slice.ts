@@ -1,22 +1,15 @@
 import { cloneDeep } from "lodash-es";
-import { PayloadAction, createSliceCustom } from "redux-eazy";
-import storageHelper from "src/common/utils/storageHelper";
-import { AppHelper, MenuItem, RouterHelper } from "src/service/helper";
-import names from "../names";
-import {
-	Setting,
-	StoreState,
-	TabItem,
-	TabsHistory,
-	ThemeColor,
-	ThemeName,
-} from "./modal";
-import { ROUTE_CONFIG_MAP } from "src/router/routesConfig";
-import { ROUTE_ID } from "src/router/name";
 import { ReactNode } from "react";
-import GlobalVar from "src/static/globalVar";
+import { PayloadAction, createSliceCustom } from "redux-eazy";
 import { UUID } from "src/common/utils";
+import storageHelper from "src/common/utils/storageHelper";
+import { ROUTE_ID } from "src/router/name";
+import { ROUTE_CONFIG_MAP } from "src/router/routesConfig";
+import { AppHelper, MenuItem, RouterHelper } from "src/service/helper";
 import settingData from "src/setting.json";
+import GlobalVar from "src/static/globalVar";
+import names from "../names";
+import { Setting, StoreState, TabItem, TabsHistory, ThemeName } from "./modal";
 
 const initialState = (): StoreState => {
 	// 初始化菜单，根据当前的homePage的路由结构，分析出菜单来
@@ -36,8 +29,8 @@ const initialState = (): StoreState => {
 		tabsHistory: storageHelper.getItem("TABS_HISTORY") || [],
 		tabItems: [],
 		activeTabKey: "",
-		currentTheme: "light",
-		themeMode: storageHelper.getItem("THEME") || "light",
+		isThemeAuto: storageHelper.getItem("IS_THEME_AUTO"),
+		currentTheme: storageHelper.getItem("THEME"),
 		isShowOptionsDrawer: false,
 		isCollapsedMenu: false,
 		isShowMdDrawer: false,
@@ -58,7 +51,7 @@ const appSlice = createSliceCustom({
 			state.isShowOptionsDrawer = payload;
 		},
 		setTheme(state, { payload }: PayloadAction<ThemeName>) {
-			state.themeMode = payload;
+			state.currentTheme = payload;
 			storageHelper.setItem("THEME", payload);
 		},
 		setTabsHistory(state, { payload }: PayloadAction<TabsHistory>) {
@@ -107,9 +100,6 @@ const appSlice = createSliceCustom({
 		},
 		setSettingData(state, { payload }: PayloadAction<Setting>) {
 			state.settingData = payload;
-		},
-		setCurrentTheme(state, { payload }: PayloadAction<ThemeColor>) {
-			state.currentTheme = payload;
 		},
 	},
 

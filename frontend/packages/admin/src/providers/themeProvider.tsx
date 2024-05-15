@@ -6,7 +6,7 @@ import themeMap from "src/theme";
 
 const ThemeProvider = (props: React.PropsWithChildren) => {
 	const { children } = props;
-	const { themeMode, settingData, setCurrentTheme, currentTheme } =
+	const { isThemeAuto, settingData, setTheme, currentTheme } =
 		useFlat("appStore");
 	// 监听设备的主题
 	const isSysDark = useMediaQuery(
@@ -16,17 +16,16 @@ const ThemeProvider = (props: React.PropsWithChildren) => {
 		undefined,
 		(isSystemDark: boolean) => {
 			const newValue = isSystemDark ? "dark" : "light";
-			if (themeMode == "auto") {
-				setCurrentTheme(newValue);
+			if (isThemeAuto) {
+				setTheme(newValue);
 			}
 		},
 	);
 
 	// 如果是auto，那么就跟随系统
 	const isDark = useMemo(() => {
-		const isDarkValue =
-			themeMode == "auto" ? isSysDark : currentTheme == "dark";
-		setCurrentTheme(isDarkValue ? "dark" : "light");
+		const isDarkValue = isThemeAuto ? isSysDark : currentTheme == "dark";
+		setTheme(isDarkValue ? "dark" : "light");
 		return isDarkValue;
 	}, [isSysDark]);
 
