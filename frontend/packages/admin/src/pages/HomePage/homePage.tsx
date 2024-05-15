@@ -6,12 +6,12 @@ import { useFlat } from "src/service";
 const HomePage = () => {
 	const { settingData, currentTheme } = useFlat("appStore");
 	const layoutName =
-		(currentTheme == "dark"
+		currentTheme == "dark"
 			? settingData?.layoutSet?.dark
-			: settingData?.layoutSet?.light) || "DefaultLayout";
+			: settingData?.layoutSet?.light;
 	const Layout =
 		layoutMap[layoutName as keyof typeof layoutMap] ||
-		(layoutMap.DefaultLayout as any);
+		(layoutMap.Default as any);
 	return (
 		<Layout>
 			<KeepAliveOutlet></KeepAliveOutlet>
