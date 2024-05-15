@@ -28,6 +28,7 @@ export interface StoreState {
 	winBoxList: string[];
 	mdContent: string;
 	settingData: Setting | null;
+	language: string;
 }
 
 export interface Setting {

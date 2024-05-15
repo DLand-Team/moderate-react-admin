@@ -114,13 +114,10 @@ const addPluginHandler = async (ctx) => {
 		for (let i in result) {
 			const { pageName, pagePath, isHasIndexPage } = result[i];
 			let pathNew = `../${pageName}/pages`;
-			let transform = (str) => {
-				return `'%i18n.t('${str}')%'`;
-			};
 			const newRouteItem: any = {
 				id: pageName,
 				meta: {
-					title: transform(`${pageName}:${pageName}Title`),
+					title: `${pageName}:${pageName}Title`,
 				},
 				isNoAuth: true,
 			};

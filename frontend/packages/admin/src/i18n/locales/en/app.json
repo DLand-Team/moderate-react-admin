@@ -1,1 +1,15 @@
-{}
+{
+	"HelloPageTile": "HelloPageTile",
+	"HomePageTile": "HomePageTile",
+	"PluginsPageTitle": "PluginsPageTitle",
+	"RolePageTitle": "RolePageTitle",
+	"UserPageTitle": "UserPageTitle",
+	"CmsPageTitle": "CmsPageTitle",
+	"SysPageTitle": "SysPageTitle",
+	"MenuPageTitle": "MenuPageTitle",
+	"DevPageTitle": "DevPageTitle",
+	"PageDevPageTitle": "PageDevPageTitle",
+	"StoreDevPageTitle": "StoreDevPageTitle",
+	"NotFundPageTitle": "NotFundPageTitle",
+	"ErrorPageTitle": "ErrorPageTitle"
+}

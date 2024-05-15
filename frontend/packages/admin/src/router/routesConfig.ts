@@ -1,13 +1,12 @@
-import i18n from "src/i18n";
-import { ROUTE_ID_KEY, RouteItem } from "./types";
 import { ROUTE_CONFIG_MAP as PLUGIN_ROUTE_CONFIG_MAP } from "plugins/config/router/routesConfig";
+import { ROUTE_ID_KEY, RouteItem } from "./types";
 
 export const ROUTE_CONFIG_MAP: {
 	[key in ROUTE_ID_KEY]: RouteItem;
 } = {
 	HomePage: {
 		id: "HomePage",
-		meta: { title: i18n.t("app:HomePageTile") },
+		meta: { title: "app:HomePageTile" },
 		component: "HomePage",
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
@@ -21,7 +20,7 @@ export const ROUTE_CONFIG_MAP: {
 	HelloPage: {
 		id: "HelloPage",
 		meta: {
-			title: i18n.t("app:HelloPageTile"),
+			title: "app:HelloPageTile",
 			icon: "FundProjectionScreenOutlined",
 		},
 		component: "HelloPage",
@@ -32,7 +31,7 @@ export const ROUTE_CONFIG_MAP: {
 	SysPage: {
 		id: "SysPage",
 		meta: {
-			title: i18n.t("app:SysPageTitle"),
+			title: "app:SysPageTitle",
 			icon: "ApartmentOutlined",
 		},
 		actionPermissions: ["ADD", "EDIT"],
@@ -41,7 +40,7 @@ export const ROUTE_CONFIG_MAP: {
 	CmsPage: {
 		id: "CmsPage",
 		meta: {
-			title: i18n.t("app:CmsPageTitle"),
+			title: "app:CmsPageTitle",
 			icon: "CoffeeOutlined",
 		},
 		actionPermissions: ["ADD", "EDIT"],
@@ -49,14 +48,14 @@ export const ROUTE_CONFIG_MAP: {
 	},
 	UserPage: {
 		id: "UserPage",
-		meta: { title: i18n.t("app:UserPageTitle") },
+		meta: { title: "app:UserPageTitle" },
 		actionPermissions: ["ADD", "EDIT"],
 		component: "UserPage",
 		isNoAuth: true,
 	},
 	RolePage: {
 		id: "RolePage",
-		meta: { title: i18n.t("app:RolePageTitle") },
+		meta: { title: "app:RolePageTitle" },
 		component: "RolePage",
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
@@ -65,7 +64,7 @@ export const ROUTE_CONFIG_MAP: {
 	DevPage: {
 		id: "DevPage",
 		meta: {
-			title: i18n.t("app:DevPageTitle"),
+			title: "app:DevPageTitle",
 			icon: "LaptopOutlined",
 		},
 		actionPermissions: ["ADD", "EDIT"],
@@ -73,21 +72,21 @@ export const ROUTE_CONFIG_MAP: {
 	},
 	PageDevPage: {
 		id: "PageDevPage",
-		meta: { title: i18n.t("app:PageDevPageTitle") },
+		meta: { title: "app:PageDevPageTitle" },
 		component: "PageDevPage",
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
 	},
 	StoreDevPage: {
 		id: "StoreDevPage",
-		meta: { title: i18n.t("app:StoreDevPageTitle") },
+		meta: { title: "app:StoreDevPageTitle" },
 		component: "StoreDevPage",
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
 	},
 	NotFundPage: {
 		id: "NotFundPage",
-		meta: { title: i18n.t("app:NotFundPageTitle") },
+		meta: { title: "app:NotFundPageTitle" },
 		component: "NotFundPage",
 		isNoAuth: true,
 		isMenu: false,
@@ -95,7 +94,7 @@ export const ROUTE_CONFIG_MAP: {
 	},
 	ErrorPage: {
 		id: "ErrorPage",
-		meta: { title: i18n.t("app:ErrorPageTitle") },
+		meta: { title: "app:ErrorPageTitle" },
 		component: "ErrorPage",
 		isNoAuth: true,
 		isMenu: false,
@@ -103,14 +102,14 @@ export const ROUTE_CONFIG_MAP: {
 	},
 	MenuPage: {
 		id: "MenuPage",
-		meta: { title: i18n.t("app:MenuPageTitle") },
+		meta: { title: "app:MenuPageTitle" },
 		component: "MenuPage",
 		isNoAuth: true,
 	},
 	PluginsPage: {
 		id: "PluginsPage",
 		meta: {
-			title: i18n.t("app:PluginsPageTitle"),
+			title: "app:PluginsPageTitle",
 			icon: "ProductOutlined",
 		},
 		component: "PluginsPage",

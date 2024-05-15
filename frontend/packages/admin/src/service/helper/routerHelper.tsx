@@ -18,6 +18,7 @@ export type MenuItem = Partial<ItemType> & {
 	key: ROUTE_ID_KEY;
 	children?: MenuItem[];
 	icon?: React.ReactNode;
+	label?: string;
 };
 
 export type TreeSelectItem = {

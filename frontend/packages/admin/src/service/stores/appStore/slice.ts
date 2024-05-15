@@ -26,6 +26,7 @@ const initialState = (): StoreState => {
 	const children = routesTreeData.find((item) => {
 		return item!?.id === ROUTE_ID.HomePage;
 	})?.children;
+	debugger;
 	const menuData = AppHelper.createMenuDataLoop(children!, []);
 	return {
 		menuDefaultSelectedKeys: [],
@@ -42,6 +43,7 @@ const initialState = (): StoreState => {
 		mdContent: "",
 		winBoxList: [],
 		settingData: settingData as Setting,
+		language: storageHelper.getItem("LANGUAGE") || "zh",
 	};
 };
 
@@ -108,6 +110,10 @@ const appSlice = createSliceCustom({
 		},
 		setIsThemeAuto(state, { payload }: PayloadAction<boolean>) {
 			state.isThemeAuto = payload;
+		},
+		setLanguage(state, { payload }: PayloadAction<string>) {
+			state.language = payload;
+			storageHelper.setItem("LANGUAGE", payload);
 		},
 	},
 

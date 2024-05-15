@@ -5,7 +5,15 @@ import {
 	SunOutlined,
 	SyncOutlined,
 } from "@ant-design/icons";
-import { Button, Dropdown, Layout, Modal, theme as antdTheme } from "antd";
+import {
+	Button,
+	Dropdown,
+	Layout,
+	MenuProps,
+	Modal,
+	Space,
+	theme as antdTheme,
+} from "antd";
 import themeHoc from "src/common/hocs/themeHoc/themeHoc";
 import storageHelper from "src/common/utils/storageHelper";
 import CustomBreadcrumb from "src/components/customBreadcrumb";
@@ -13,6 +21,7 @@ import { ROUTE_ID } from "src/router/name";
 import { RouterHelper, useFlat, useResetRedux } from "src/service";
 import styles from "./index.module.scss";
 import { ThemeColor } from "src/service/stores/appStore/slice";
+import { useTranslation } from "react-i18next";
 const items = [
 	{
 		icon: <MoonOutlined />,
@@ -36,6 +45,17 @@ const CustomDropdownButton = themeHoc(Dropdown.Button, {
 	},
 });
 
+const lngList: MenuProps["items"] = [
+	{
+		key: "zh",
+		label: "中文",
+	},
+	{
+		key: "en",
+		label: "英文",
+	},
+];
+
 const NavHeader = () => {
 	const {
 		isThemeAuto,
@@ -44,10 +64,12 @@ const NavHeader = () => {
 		currentTheme,
 		isCollapsedMenu,
 		setIsCollapsedMenu,
+		setLanguage,
+		language,
 	} = useFlat("appStore");
 	const resetAllStores = useResetRedux();
 	const antdThemeToken = antdTheme.useToken();
-
+	const { i18n } = useTranslation();
 	return (
 		<Layout.Header
 			style={{
@@ -76,6 +98,28 @@ const NavHeader = () => {
 			</Button>
 			<CustomBreadcrumb />
 			<div className={styles.toolBtnList}>
+				<Dropdown
+					menu={{
+						items: lngList,
+						selectable: true,
+						defaultSelectedKeys: ["3"],
+						onClick: (e) => {
+							i18n.changeLanguage(e.key);
+							setLanguage(e.key);
+						},
+					}}
+				>
+					<Space>
+						<Button>
+							{
+								{
+									zh: "中文",
+									en: "EN",
+								}[language]
+							}
+						</Button>
+					</Space>
+				</Dropdown>
 				<CustomDropdownButton
 					trigger={["click", "hover"]}
 					placement="bottomRight"

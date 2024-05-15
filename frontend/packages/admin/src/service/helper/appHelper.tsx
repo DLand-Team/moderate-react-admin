@@ -7,6 +7,7 @@ import { ROUTE_ID, ROUTE_NAME } from "src/router/name";
 import { ROUTE_ID_KEY, RouteItem } from "src/router/types";
 import { pageList } from "src/pages";
 import { ReactNode } from "react";
+import i18n from "src/i18n";
 
 export class AppHelper {
 	/**
@@ -36,7 +37,6 @@ export class AppHelper {
 		result.sort((a, b) => {
 			return ROUTE_NAME[a.key] - ROUTE_NAME[b.key];
 		});
-		debugger;
 		return result;
 	}
 	/**
@@ -129,6 +129,9 @@ export class AppHelper {
 	static transMenuForAntdLoop(data: MenuItem[]) {
 		const result: MenuItem[] = cloneDeep(data);
 		result.forEach((item) => {
+			if (item.label) {
+				item.label = i18n.t(item.label);
+			}
 			if (item.icon) {
 				const IconNode = iconMap[item.icon as MenuIconType];
 				item.icon = <IconNode />;

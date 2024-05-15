@@ -1,9 +1,9 @@
 import { Layout, Menu, theme as antdTheme } from "antd";
 import { useMemo } from "react";
+import { type Location } from "react-router-dom";
 import { useLocationListen } from "src/common/hooks";
 import { ROUTE_ID_KEY } from "src/router/types";
 import { AppHelper, RouterHelper, useFlat } from "src/service";
-import { type Location } from "react-router-dom";
 
 const { Sider } = Layout;
 
@@ -15,11 +15,12 @@ const SliderMenu = () => {
 		setMenuDefaultOpenKeys,
 		setMenuDefaultSelectedKeys,
 		isCollapsedMenu,
+		language,
 	} = useFlat("appStore");
 	const antdThemeToken = antdTheme.useToken();
 	const MenuItems = useMemo(() => {
 		return AppHelper.transMenuForAntdLoop(menuData);
-	}, [menuData]);
+	}, [menuData, language]);
 	useLocationListen(
 		(location: Location) => {
 			const { pathname } = location;

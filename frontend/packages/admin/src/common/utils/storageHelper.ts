@@ -8,7 +8,8 @@ type ItemKey =
 	| "THEME"
 	| "BTN_TIME"
 	| "BTN_CON"
-	| "IS_THEME_AUTO";
+	| "IS_THEME_AUTO"
+	| "LANGUAGE";
 
 const storageHelper = {
 	setItem: (
