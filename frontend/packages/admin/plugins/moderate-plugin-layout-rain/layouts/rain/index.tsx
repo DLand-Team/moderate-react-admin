@@ -13,15 +13,20 @@ export const Rain = ({ children, ...rest }: React.PropsWithChildren) => {
 	return (
 		<Layout {...rest} className={styles.content}>
 			<NavHeader></NavHeader>
-
-			<Content style={{ padding: "10px 48px" }}>
+			<Content
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					padding: "10px 48px",
+				}}
+			>
 				<CustomBreadcrumb />
 				<Layout
 					style={{
-						padding: "24px 0",
+						flex: 1,
 						background: colorBgContainer,
 						borderRadius: borderRadiusLG,
-						height: "100%",
+						overflow: "auto",
 					}}
 				>
 					<MainContent>{children}</MainContent>

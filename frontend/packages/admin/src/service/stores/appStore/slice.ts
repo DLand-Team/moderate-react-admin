@@ -26,7 +26,6 @@ const initialState = (): StoreState => {
 	const children = routesTreeData.find((item) => {
 		return item!?.id === ROUTE_ID.HomePage;
 	})?.children;
-	debugger;
 	const menuData = AppHelper.createMenuDataLoop(children!, []);
 	return {
 		menuDefaultSelectedKeys: [],

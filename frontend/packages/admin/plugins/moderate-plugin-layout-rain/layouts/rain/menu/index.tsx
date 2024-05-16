@@ -39,7 +39,6 @@ const SliderMenu = () => {
 						triggerSubMenuAction="click"
 						mode="horizontal"
 						selectedKeys={menuDefaultSelectedKeys}
-						defaultOpenKeys={menuDefaultOpenKeys!}
 						style={{
 							flex: 1,
 							borderRight: 0,

@@ -11,8 +11,9 @@ const MainContent = ({ children }: React.PropsWithChildren) => {
 				padding: "12px",
 				display: "flex",
 				flexDirection: "column",
-				height: "100%",
 				background: currentTheme == "dark" ? "#282c34" : "#eff1f3",
+				overflow: "auto",
+				flex: 1,
 			}}
 		>
 			<Tabs />
