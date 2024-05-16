@@ -1,8 +1,8 @@
-import antd from "./default";
+import defaultTheme from "./default";
 import pluginThemeMap from "plugins/config/themes";
 
 const themeMap = {
-	antd,
+	default: defaultTheme,
 	...pluginThemeMap,
 };
 

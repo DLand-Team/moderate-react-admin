@@ -1,9 +1,9 @@
-import { DefaultLayout as Default } from "./antd";
+import { DefaultLayout as Default } from "./default";
 import { pluginLayoutMap } from "plugins/config/layouts";
 
 const layoutMap = {
-	...pluginLayoutMap,
 	Default,
+	...pluginLayoutMap,
 };
 
 export default layoutMap;

@@ -6,6 +6,7 @@ import {
 	FetchPageListRes,
 	FetchStoreListRes,
 	GetPluginListApiRes,
+	RemovePluginApiParams,
 } from "./model";
 import { Setting } from "../appStore/modal";
 const baseUrl = "/devApi";
@@ -66,6 +67,13 @@ const api = {
 	addPluginApi(params: AddPluginApiParams) {
 		return http.request({
 			url: baseUrl + "/pluginDev/addPlugin",
+			method: "POST",
+			data: params,
+		});
+	},
+	removePluginApi(params: RemovePluginApiParams) {
+		return http.request({
+			url: baseUrl + "/pluginDev/removePlugin",
 			method: "POST",
 			data: params,
 		});

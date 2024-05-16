@@ -1,10 +1,10 @@
 import {
+	CheckOutlined,
 	DownloadOutlined,
 	EllipsisOutlined,
 	GithubOutlined,
-	CheckOutlined,
 } from "@ant-design/icons";
-import { Avatar, Card, Modal, Tooltip, message } from "antd";
+import { Avatar, Card, Dropdown, Modal, Space, Tooltip, message } from "antd";
 import React from "react";
 import { useFlat } from "src/service";
 import { Plugin } from "src/service/stores/devStore/model";
@@ -13,7 +13,7 @@ const { Meta } = Card;
 
 const PluginCard: React.FC<{ data: Plugin }> = ({ data }) => {
 	const { setIsShowMdDrawer } = useFlat("appStore");
-	const { addPluginAct, getPluginAct } = useFlat("devStore");
+	const { addPluginAct, getPluginAct, removePluginAct } = useFlat("devStore");
 	const { cover, name, author, desc, gitee, isInstalled } = data;
 	const { name: authorName, avatar } = author;
 	const [messageApi, contextHolder] = message.useMessage();
@@ -68,8 +68,31 @@ const PluginCard: React.FC<{ data: Plugin }> = ({ data }) => {
 					<div>源码</div>
 				</div>,
 				<div>
-					<EllipsisOutlined key="ellipsis" />
-					<div>更多</div>
+					<Dropdown
+						placement="topCenter"
+						menu={{
+							items: [
+								{
+									label: "卸载",
+									key: "remove",
+								},
+							],
+							selectable: true,
+							defaultSelectedKeys: ["3"],
+							onClick: () => {
+								removePluginAct({
+									url: gitee,
+								});
+							},
+						}}
+					>
+						<Space>
+							<div>
+								<EllipsisOutlined key="ellipsis" />
+								<div>更多</div>
+							</div>
+						</Space>
+					</Dropdown>
 				</div>,
 			]}
 		>

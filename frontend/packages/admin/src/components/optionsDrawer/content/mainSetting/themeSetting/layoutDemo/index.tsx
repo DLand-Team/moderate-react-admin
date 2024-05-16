@@ -60,6 +60,7 @@ const LayoutDemo: React.FC<{
 		return (
 			<ConfigProvider theme={themeValue}>
 				<CustomLayout
+					isDark={isDark}
 					style={{
 						width: "888px",
 						height: "600px",

@@ -1,15 +1,13 @@
+import { dp, getActionType } from "src/service";
+import { startAppListening } from "src/service/setup";
+
 const watch = () => {
-	// startAppListening({
-	// 	type: getActionType('appStore').setAppInfo,
-	// 	effect: () => {},
-	// });
-	// // 监听例子
-	// startAppListening({
-	// 	predicate: (action, currentState, previousState) => {
-	// 		return false;
-	// 	},
-	// 	effect: async (action, listenerApi) => {},
-	// });
+	startAppListening({
+		type: getActionType("devStore").removePluginAct + "/fulfilled",
+		effect: () => {
+			dp("devStore", "getPluginListAct");
+		},
+	});
 };
 
 export default watch;

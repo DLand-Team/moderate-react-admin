@@ -60,3 +60,7 @@ export type GetPluginListApiRes = {
 export interface AddPluginApiParams {
 	url: string;
 }
+
+export interface RemovePluginApiParams {
+	url: string;
+}

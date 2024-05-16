@@ -115,8 +115,6 @@ const appSlice = createSliceCustom({
 			storageHelper.setItem("LANGUAGE", payload);
 		},
 	},
-
-	extraReducers: () => {},
 });
 
 export default appSlice;

@@ -7,6 +7,7 @@ import type {
 	AdcompanyPageParams,
 	AddPluginApiParams,
 	AddStoreParams,
+	RemovePluginApiParams,
 } from "./model";
 import { Setting } from "../appStore/modal";
 
@@ -60,6 +61,9 @@ const thunks = createThunks(names.appStore, {
 	},
 	saveSettingAct: async (params: Setting) => {
 		await httpApi.saveSettingApi(params);
+	},
+	removePluginAct: async (params: RemovePluginApiParams) => {
+		await httpApi.removePluginApi(params);
 	},
 });
 export default thunks;

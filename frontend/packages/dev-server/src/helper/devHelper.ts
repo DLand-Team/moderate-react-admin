@@ -10,6 +10,8 @@ import apiTemplateConfig from "@/templates/apiTemplate/config.json";
 import pageTemplateConfig from "@/templates/template1/config.json";
 import { merge } from "lodash";
 import { upFirstcharacter } from "@/utils";
+import regHelper from "./regHelper";
+import { deleteDir } from "@/utils/fsUtils";
 const chokidar = require("chokidar");
 
 const beautifyOptions: Options = {
@@ -311,6 +313,23 @@ class devHelper {
 			this.toFromat(newCode).replace(/\'/g, '"'),
 		);
 	};
+
+	toRemoveLayout = (pluginName: string, layoutName: string) => {
+		const name = upFirstcharacter(layoutName);
+		const reg = regHelper.matchInport(
+			name,
+			`plugins/${pluginName}/layouts/${layoutName}`,
+		);
+		const reg2 = regHelper.mathItem(name);
+		let oldCode = this.toFromat(
+			fs.readFileSync(pathHelper.layoutConfigPath).toString(),
+		);
+		let newCode = oldCode.replace(reg, "").replace(reg2, "");
+		fs.writeFileSync(pathHelper.layoutConfigPath, this.toFromat(newCode));
+		// 删除插件文件夹
+		const targetPath = pathHelper.adminPlugins + "/" + pluginName;
+		deleteDir(`${targetPath}`);
+	};
 	toRegisterLayout = (pluginName: string, layoutName) => {
 		// 获取provider的代码
 		const lyoutFileCode = fs
@@ -318,14 +337,14 @@ class devHelper {
 			.toString();
 		const importSign = "//>>>LAYOUT_INPORT_SIGN<<<//";
 		const registerSign = "//>>>LAYOUT_SIGN<<<//";
-		const importCode = `import { ${layoutName} } from "plugins/${pluginName}/layouts/${layoutName}";`;
+		const importCode = `import { ${upFirstcharacter(layoutName)} } from "plugins/${pluginName}/layouts/${layoutName}";`;
 		let newCode = lyoutFileCode.replace(
 			importSign,
 			importCode + "\n" + importSign,
 		);
 		newCode = newCode.replace(
 			registerSign,
-			layoutName + "\n" + registerSign,
+			upFirstcharacter(layoutName) + "\n" + registerSign,
 		);
 		fs.writeFileSync(
 			pathHelper.layoutConfigPath,
@@ -726,14 +745,17 @@ class devHelper {
 			});
 	};
 	readProviders(pluginName: string): string[] {
-		const files = fs.readdirSync(
-			pathHelper.pluginsCache + "/" + pluginName,
-		);
+		let pathStr = pathHelper.pluginsCache + "/" + pluginName;
+		const files = fs.readdirSync(pathStr);
 		if (files.includes("providers")) {
 			const providerFiles = fs
-				.readdirSync(
-					pathHelper.pluginsCache + "/" + pluginName + "/providers",
-				)
+				.readdirSync(pathStr + "/providers")
+				.filter((item) => {
+					const stats = fs.statSync(pathStr + "/providers/" + item);
+					if (stats.isDirectory()) {
+						return true;
+					}
+				})
 				?.map((item) => {
 					return item.replace(".tsx", "");
 				});
@@ -743,14 +765,17 @@ class devHelper {
 		return [];
 	}
 	readThemes(pluginName: string): string[] {
-		const files = fs.readdirSync(
-			pathHelper.pluginsCache + "/" + pluginName,
-		);
+		let pathStr = pathHelper.pluginsCache + "/" + pluginName;
+		const files = fs.readdirSync(pathStr);
 		if (files.includes("theme")) {
 			const themes = fs
-				.readdirSync(
-					pathHelper.pluginsCache + "/" + pluginName + "/theme",
-				)
+				.readdirSync(pathStr + "/theme")
+				.filter((item) => {
+					const stats = fs.statSync(pathStr + "/theme/" + item);
+					if (stats.isDirectory()) {
+						return true;
+					}
+				})
 				?.map((item) => {
 					return item.replace(".ts", "");
 				});
@@ -759,14 +784,17 @@ class devHelper {
 		return [];
 	}
 	readLayouts(pluginName: string): string[] {
-		const files = fs.readdirSync(
-			pathHelper.pluginsCache + "/" + pluginName,
-		);
+		let pathStr = pathHelper.pluginsCache + "/" + pluginName;
+		const files = fs.readdirSync(pathStr);
 		if (files.includes("layouts")) {
 			const layouts = fs
-				.readdirSync(
-					pathHelper.pluginsCache + "/" + pluginName + "/layouts",
-				)
+				.readdirSync(pathStr + "/layouts")
+				.filter((item) => {
+					const stats = fs.statSync(pathStr + "/layouts/" + item);
+					if (stats.isDirectory()) {
+						return true;
+					}
+				})
 				?.map((item) => {
 					return item.replace(".ts", "");
 				});
@@ -774,20 +802,18 @@ class devHelper {
 		}
 		return [];
 	}
-
 	readI18n(pluginName: string, lang: string): string[] {
-		const files = fs.readdirSync(
-			pathHelper.pluginsCache + "/" + pluginName,
-		);
+		let pathStr = pathHelper.pluginsCache + "/" + pluginName;
+		const files = fs.readdirSync(pathStr);
 		if (files.includes("i18n")) {
 			const list = fs
-				.readdirSync(
-					pathHelper.pluginsCache +
-						"/" +
-						pluginName +
-						"/i18n/" +
-						lang,
-				)
+				.readdirSync(pathStr + "/i18n/" + lang)
+				.filter((item) => {
+					const stats = fs.statSync(pathStr + "/i18n/" + item);
+					if (stats.isDirectory()) {
+						return true;
+					}
+				})
 				?.map((item) => {
 					return item.replace(".json", "");
 				});
