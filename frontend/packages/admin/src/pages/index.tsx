@@ -10,7 +10,9 @@ const HelloPage = lazy(() => import("./HomePage/HelloPage/helloPage"));
 // 用户管理
 const UserPage = lazy(() => import("./HomePage/SysPage/UserPage/userPage"));
 // 角色管理
-const RolePage = lazy(() => import("./HomePage/SysPage/RolePage/rolePage"));
+export const RolePage = lazy(
+	() => import("./HomePage/SysPage/RolePage/rolePage"),
+);
 //storeDevPage
 const StoreDevPage = isProd
 	? null

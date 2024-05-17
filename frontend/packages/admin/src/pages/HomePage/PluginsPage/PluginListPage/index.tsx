@@ -10,10 +10,10 @@ const PluginListPage = () => {
 	}, []);
 
 	return (
-		<Row gutter={[16, 26]}>
+		<Row gutter={[16, 26]} wrap={true}>
 			{pluginList.map((item) => {
 				return (
-					<Col key={item.gitee} span={6}>
+					<Col xs={24} sm={12} md={8} lg={8} xl={6} key={item.gitee}>
 						<PluginCard data={item} />
 					</Col>
 				);

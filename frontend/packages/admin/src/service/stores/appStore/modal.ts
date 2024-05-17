@@ -8,6 +8,7 @@ export interface TabItem {
 	key: string;
 }
 export type TabsHistory = Location[];
+export type XY_POS = { x: number; y: number };
 export interface StoreState {
 	// 菜单相关信息
 	menuDefaultSelectedKeys: string[];
@@ -26,9 +27,12 @@ export interface StoreState {
 	// 显示md的drawer：起作用的前提是安装了对应的插件
 	isShowMdDrawer: boolean;
 	winBoxList: string[];
+	winPosTemp: XY_POS;
+	winBoxTitleTemp: string;
 	mdContent: string;
 	settingData: Setting | null;
 	language: string;
+
 }
 
 export interface Setting {

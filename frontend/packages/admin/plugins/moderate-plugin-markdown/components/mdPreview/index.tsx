@@ -8,25 +8,26 @@ import rehypeComponents from "rehype-components";
 import { PropsWithChildren } from "react";
 
 const DocumentationPage = (properties: any, children: any) =>
-  h("article.documentation", [h("button", properties.title), ...children]);
+	h("article.documentation", [h("button", properties.title), ...children]);
 
 export function MdPreview({ children }: PropsWithChildren) {
-  return (
-    <ReactMarkdown
-      className={styles.markdown_body}
-      rehypePlugins={[
-        rehypeRaw,
-        [
-          rehypeComponents,
-          {
-            components: {
-              "info-box": DocumentationPage,
-            },
-          },
-        ],
-      ]}
-      children={children as string}
-      remarkPlugins={[gfm]}
-      components={{ ...codeBlock() }}></ReactMarkdown>
-  );
+	return (
+		<ReactMarkdown
+			className={styles.markdown_body}
+			rehypePlugins={[
+				rehypeRaw,
+				[
+					rehypeComponents,
+					{
+						components: {
+							"info-box": DocumentationPage,
+						},
+					},
+				],
+			]}
+			children={children as string}
+			remarkPlugins={[gfm]}
+			components={{ ...codeBlock() }}
+		></ReactMarkdown>
+	);
 }

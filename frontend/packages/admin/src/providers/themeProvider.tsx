@@ -27,7 +27,7 @@ const ThemeProvider = (props: React.PropsWithChildren) => {
 	const isDark = currentTheme == "dark";
 	const themePlan =
 		themeMap[settingData!?.paletteSet![currentTheme]]?.(isDark) ||
-		themeMap.default(isDark);
+		themeMap.Default(isDark);
 	const themeConfig = {
 		algorithm: isDark ? [antdTheme.darkAlgorithm] : [],
 		...themePlan,

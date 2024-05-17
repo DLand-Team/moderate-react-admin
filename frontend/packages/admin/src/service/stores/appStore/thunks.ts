@@ -29,7 +29,7 @@ const thunks = createThunks(names.appStore, {
 		const { tabsHistory } = api.getState().appStore;
 		if (
 			!tabsHistory.some((item) => {
-				return item.pathname === newItem.pathname;
+				return item?.pathname === newItem.pathname;
 			})
 		) {
 			dp("appStore", "setTabsHistory", [...tabsHistory, newItem]);

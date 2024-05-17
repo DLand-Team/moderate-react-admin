@@ -26,6 +26,7 @@ const OptionsDrawer: React.FC = () => {
 				style={{
 					color: antdToken.token.colorText,
 				}}
+				
 				destroyOnClose
 				extra={
 					<Space>

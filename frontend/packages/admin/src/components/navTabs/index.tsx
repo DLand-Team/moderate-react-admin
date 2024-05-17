@@ -30,6 +30,9 @@ const NavTabs = () => {
 		const tabsHistoryArr = tabsHistory;
 		setTabItems(
 			tabsHistoryArr
+				.filter((item) => {
+					return item;
+				})
 				.map((item) => {
 					const { pathname } = item;
 					const id = pathname.split("/").slice(-1)[0];
@@ -73,7 +76,11 @@ const NavTabs = () => {
 		const temp = tabsHistoryTemp[dragIndex];
 		tabsHistoryTemp[dragIndex] = tabsHistoryTemp[hoverIndex];
 		tabsHistoryTemp[hoverIndex] = temp;
-		setTabsHistory(tabsHistoryTemp);
+		setTabsHistory(
+			tabsHistoryTemp.filter((item) => {
+				return item;
+			}),
+		);
 	};
 	return (
 		<>
@@ -91,14 +98,10 @@ const NavTabs = () => {
 				}}
 				activeKey={activeTabKey}
 				renderTabBar={(tabBarProps, DefaultTabBar) => {
+					debugger;
 					return (
 						<DndProvider backend={HTML5Backend}>
 							<DefaultTabBar {...tabBarProps}>
-								{/* {(node) => (
-									<DraggableTabNode {...node.props} key={node.key}>
-										{node}
-									</DraggableTabNode>
-								)} */}
 								{(node) => {
 									// TODO 没给index，我自己去判断顺序
 									const targetIndex = tabsHistory.findIndex(

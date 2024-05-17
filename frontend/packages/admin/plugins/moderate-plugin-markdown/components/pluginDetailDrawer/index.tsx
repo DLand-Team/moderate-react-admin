@@ -1,20 +1,23 @@
 import { Drawer } from "antd";
 import { dp, useFlat } from "src/service";
-import Md from "react-markdown";
+import { MdPreview } from "../mdPreview";
 
 export const PluginDetailDrawer = () => {
-  const { isShowMdDrawer, mdContent } = useFlat("appStore");
-  return (
-    <Drawer
-      width={"50vw"}
-      open={isShowMdDrawer}
-      onClose={() => {
-        dp("appStore", "setState", {
-          isShowMdDrawer: false,
-          mdContent: "",
-        });
-      }}>
-      <Md>{mdContent}</Md>
-    </Drawer>
-  );
+	const { isShowMdDrawer, mdContent } = useFlat("appStore");
+	return (
+		<Drawer
+			getContainer={"main"}
+			destroyOnClose
+			width={"50vw"}
+			open={isShowMdDrawer}
+			onClose={() => {
+				dp("appStore", "setState", {
+					isShowMdDrawer: false,
+					mdContent: "",
+				});
+			}}
+		>
+			<MdPreview>{mdContent}</MdPreview>
+		</Drawer>
+	);
 };

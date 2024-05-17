@@ -1,12 +1,12 @@
 import { PluginDetailDrawer } from "../components/pluginDetailDrawer";
 
 export const PluginMarkDownProvider = ({
-  children,
+	children,
 }: React.PropsWithChildren) => {
-  return (
-    <>
-      <PluginDetailDrawer />
-      {children}
-    </>
-  );
+	return (
+		<>
+			<PluginDetailDrawer />
+			{children}
+		</>
+	);
 };

@@ -32,7 +32,6 @@ class Reghelper {
 		return match;
 	};
 	generateImportRegex = (moduleName, modulePath) => {
-		// Escape moduleName and modulePath for safe regex use
 		const escapedModuleName = moduleName.replace(
 			/[.*+?^${}()|[\]\\]/g,
 			"\\$&",
@@ -42,7 +41,6 @@ class Reghelper {
 			"\\$&",
 		);
 
-		// Create the regex pattern
 		let pattern = `import\\s*{\\s*${escapedModuleName}\\s*}\\s*from\\s*"${escapedModulePath}"\\s*;`;
 
 		// Allow for any amount of whitespace (spaces, tabs, newlines) between components
@@ -55,13 +53,11 @@ class Reghelper {
 		return regex;
 	}
 	mathItem(moduleName) {
-		// Escape moduleName for safe regex use
 		const escapedModuleName = moduleName.replace(
 			/[.*+?^${}()|[\]\\]/g,
 			"\\$&",
 		);
 
-		// Create the regex pattern
 		const pattern = `\\b${escapedModuleName}\\b\\s*,?\\s*`;
 
 		return new RegExp(pattern);

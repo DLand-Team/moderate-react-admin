@@ -1,4 +1,4 @@
-import { Button, Checkbox, Input, Pagination, Space, Table } from "antd";
+import { Checkbox, Input, Pagination, Space, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -39,7 +39,6 @@ const columns: ColumnsType<PageType> = [
 ];
 
 const PageDevPage = () => {
-	const { addWinBox } = useFlat("appStore");
 	const {
 		pageNum,
 		pageSize,
@@ -66,26 +65,6 @@ const PageDevPage = () => {
 	return (
 		<div className={styles.content}>
 			<Input></Input>
-			<Button
-				onClick={() => {
-					addWinBox({
-						content: (
-							<div
-								style={{
-									background: "#e9ecf0",
-									width: "100%",
-									height: "100%",
-									color: "black",
-								}}
-							>
-								Test
-							</div>
-						),
-					});
-				}}
-			>
-				show
-			</Button>
 			<div className={styles.operate_board}>
 				<ModalForm
 					btnLabel={t`dev.addRouter`}

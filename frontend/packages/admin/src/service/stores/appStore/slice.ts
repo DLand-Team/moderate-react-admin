@@ -1,15 +1,20 @@
 import { cloneDeep } from "lodash-es";
-import { ReactNode } from "react";
 import { PayloadAction, createSliceCustom } from "redux-eazy";
-import { UUID } from "src/common/utils";
 import storageHelper from "src/common/utils/storageHelper";
 import { ROUTE_ID } from "src/router/name";
 import { ROUTE_CONFIG_MAP } from "src/router/routesConfig";
 import { AppHelper, MenuItem, RouterHelper } from "src/service/helper";
 import settingData from "src/setting.json";
-import GlobalVar from "src/static/globalVar";
+
 import names from "../names";
-import { Setting, StoreState, TabItem, TabsHistory, ThemeName } from "./modal";
+import {
+	Setting,
+	StoreState,
+	TabItem,
+	TabsHistory,
+	ThemeName,
+	XY_POS,
+} from "./modal";
 
 export enum ThemeColor {
 	light = "light",
@@ -43,6 +48,11 @@ const initialState = (): StoreState => {
 		winBoxList: [],
 		settingData: settingData as Setting,
 		language: storageHelper.getItem("LANGUAGE") || "zh",
+		winPosTemp: {
+			x: 0,
+			y: 0,
+		},
+		winBoxTitleTemp: "",
 	};
 };
 
@@ -91,11 +101,15 @@ const appSlice = createSliceCustom({
 		setMdContent(state, { payload }: PayloadAction<string>) {
 			state.mdContent = payload;
 		},
-		addWinBox(state, { payload }: PayloadAction<{ content: ReactNode }>) {
-			const id = UUID();
-			const winBoxContent = GlobalVar.service.get("winBoxContent");
-			winBoxContent?.set(id, payload.content);
+		addWinBox(
+			state,
+			{
+				payload: { id, pos, title },
+			}: PayloadAction<{ id: string; pos: XY_POS; title: string }>,
+		) {
 			state.winBoxList = [...state.winBoxList, id];
+			state.winPosTemp = pos;
+			state.winBoxTitleTemp = title;
 		},
 		deleteWinBox() {
 			// const id = UUID();

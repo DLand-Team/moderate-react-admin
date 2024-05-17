@@ -2,7 +2,7 @@ import defaultTheme from "./default";
 import pluginThemeMap from "plugins/config/themes";
 
 const themeMap = {
-	default: defaultTheme,
+	Default: defaultTheme,
 	...pluginThemeMap,
 };
 

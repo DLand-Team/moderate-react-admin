@@ -55,7 +55,7 @@ const thunks = createThunks(names.appStore, {
 	addPluginAct: async (params: AddPluginApiParams) => {
 		await httpApi.addPluginApi(params);
 	},
-	getPluginAct: async (params: { url: string }) => {
+	loadPluginDetailAct: async (params: { url: string }) => {
 		const { data } = await httpApi.getPluginApi(params);
 		dp("appStore", "setMdContent", data.content);
 	},

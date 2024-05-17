@@ -1,12 +1,14 @@
 import React, { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
+import { useOutlet } from "react-router-dom";
+import { AppHelper, useFlat } from "src/service";
 
 export const ItemTypes = {
 	CARD: "card",
 };
 
 export interface CardProps {
-	id: any;
+	id: string;
 	text: string;
 	index: number;
 	moveCard: (dragIndex: number, hoverIndex: number) => void;
@@ -24,6 +26,9 @@ const Card = ({
 	moveCard,
 	children,
 }: React.PropsWithChildren<CardProps>) => {
+	const { tabItems } = useFlat("appStore");
+	const { routesMap } = useFlat("routerStore");
+	const outlet = useOutlet();
 	const ref = useRef<HTMLDivElement>(null);
 	const [{ handlerId }, drop] = useDrop<
 		DragItem,
@@ -31,15 +36,14 @@ const Card = ({
 		{ handlerId: any | null }
 	>({
 		accept: ItemTypes.CARD,
-		collect(monitor) {
-			return {
-				handlerId: monitor.getHandlerId(),
-			};
-		},
+
 		hover(item: DragItem, monitor) {
 			if (!ref.current) {
 				return;
 			}
+			const clientOffset = monitor.getClientOffset();
+			const hoverBoundingRect = ref.current?.getBoundingClientRect();
+
 			// ref.current.style.display = "none";
 			const dragIndex = item.index;
 			const hoverIndex = index;
@@ -49,14 +53,12 @@ const Card = ({
 				return;
 			}
 			// Determine rectangle on screen
-			const hoverBoundingRect = ref.current?.getBoundingClientRect();
 
 			// Get vertical middle
 			const hoverMiddleX =
 				(hoverBoundingRect.right - hoverBoundingRect.left) / 2;
 
 			// Determine mouse position
-			const clientOffset = monitor.getClientOffset();
 
 			// Get pixels to the top
 			const hoverClientX =
@@ -91,7 +93,29 @@ const Card = ({
 		item: () => {
 			return { id, index };
 		},
-		end: () => {},
+		end(_, monitor) {
+			const clientOffset = monitor.getClientOffset();
+			const hoverBoundingRect = ref.current?.getBoundingClientRect();
+			if (
+				tabItems.length > 1 &&
+				hoverBoundingRect!.y - clientOffset!?.y < 30
+			) {
+				if (
+					!routesMap.HelloPage.path!.includes(
+						id.split("/").slice(-1)[0],
+					)
+				) {
+					setTimeout(() => {
+						AppHelper.closeTabByPath();
+						AppHelper.addWinbox({
+							content: outlet,
+							pos: clientOffset as { x: number; y: number },
+							title: id,
+						});
+					}, 500);
+				}
+			}
+		},
 		collect: (monitor: any) => ({
 			isDragging: monitor.isDragging(),
 		}),

@@ -13,7 +13,8 @@ const { Meta } = Card;
 
 const PluginCard: React.FC<{ data: Plugin }> = ({ data }) => {
 	const { setIsShowMdDrawer } = useFlat("appStore");
-	const { addPluginAct, getPluginAct, removePluginAct } = useFlat("devStore");
+	const { addPluginAct, loadPluginDetailAct, removePluginAct } =
+		useFlat("devStore");
 	const { cover, name, author, desc, gitee, isInstalled } = data;
 	const { name: authorName, avatar } = author;
 	const [messageApi, contextHolder] = message.useMessage();
@@ -22,7 +23,7 @@ const PluginCard: React.FC<{ data: Plugin }> = ({ data }) => {
 			style={{ width: 300, boxShadow: "0 0 8px rgba(0, 0, 0, 0.1)" }}
 			cover={<img height={"160px"} alt="example" src={cover} />}
 			onClick={async () => {
-				await getPluginAct({
+				await loadPluginDetailAct({
 					url: gitee,
 				});
 				setIsShowMdDrawer(true);

@@ -8,6 +8,8 @@ import { ROUTE_ID_KEY, RouteItem } from "src/router/types";
 import { pageList } from "src/pages";
 import { ReactNode } from "react";
 import i18n from "src/i18n";
+import GlobalVar from "src/static/globalVar";
+import { UUID } from "src/common/utils";
 
 export class AppHelper {
 	/**
@@ -188,6 +190,21 @@ export class AppHelper {
 		}
 		const Pv = providerList[i];
 		return <Pv key={i}>{this.providerLoop(providerList, i + 1)}</Pv>;
+	}
+	static addWinbox({
+		content,
+		pos = { x: 0, y: 0 },
+		title = "",
+	}: {
+		content: ReactNode;
+		pos?: { x: number; y: number };
+		title?: string;
+	}) {
+		const winBoxContent = GlobalVar.service.get("winBoxContent");
+		const id = UUID();
+		winBoxContent?.set(id, content);
+		debugger;
+		dp("appStore", "addWinBox", { id: id, pos, title });
 	}
 }
 export default new AppHelper();
