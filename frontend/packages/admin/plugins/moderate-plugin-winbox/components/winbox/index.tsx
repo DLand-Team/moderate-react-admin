@@ -112,6 +112,7 @@ function WinBoxModal({
 					height: "100%",
 					padding: "12px",
 					background: token.colorBgContainer,
+					overflow: "auto",
 				}}
 			>
 				{children}
