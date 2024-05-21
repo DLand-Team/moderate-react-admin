@@ -203,7 +203,6 @@ export class AppHelper {
 		const winBoxContent = GlobalVar.service.get("winBoxContent");
 		const id = UUID();
 		winBoxContent?.set(id, content);
-		debugger;
 		dp("appStore", "addWinBox", { id: id, pos, title });
 	}
 }

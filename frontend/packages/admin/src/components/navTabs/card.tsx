@@ -93,7 +93,7 @@ const Card = ({
 		item: () => {
 			return { id, index };
 		},
-		end(_, monitor) {
+		end(item, monitor) {
 			const clientOffset = monitor.getClientOffset();
 			const hoverBoundingRect = ref.current?.getBoundingClientRect();
 			if (
@@ -105,14 +105,14 @@ const Card = ({
 						id.split("/").slice(-1)[0],
 					)
 				) {
-					setTimeout(() => {
-						AppHelper.closeTabByPath();
-						AppHelper.addWinbox({
-							content: outlet,
-							pos: clientOffset as { x: number; y: number },
-							title: id,
-						});
-					}, 500);
+					AppHelper.addWinbox({
+						content: outlet,
+						pos: clientOffset as { x: number; y: number },
+						title: id,
+					});
+					AppHelper.closeTabByPath({
+						pathName: item.id,
+					});
 				}
 			}
 		},
