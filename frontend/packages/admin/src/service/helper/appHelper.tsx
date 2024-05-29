@@ -1,6 +1,6 @@
 import { dp, reduxStore } from "..";
 import { MenuPermissionItem } from "../stores/authStore/model";
-import { MenuItem, RouterHelper } from "./routerHelper";
+import { MenuItem, RouterHelper } from "src/service";
 import iconMap, { MenuIconType } from "src/static/iconMap";
 import { cloneDeep } from "lodash-es";
 import { ROUTE_ID, ROUTE_NAME } from "src/router/name";
@@ -15,7 +15,6 @@ export class AppHelper {
 	/**
 	 * @description: 创建菜单
 	 * @param {MenuPermissionItem} data 若依后台的菜单权限数组
-	 * @return {*} 适用于antd的菜单组件数据
 	 */
 	static createMenuData(data: MenuPermissionItem[]) {
 		let result: MenuItem[] = [];
@@ -41,12 +40,11 @@ export class AppHelper {
 		});
 		return result;
 	}
+
 	/**
 	 * @description: 递归生成菜单根据后端权限 “服务端权限控制专属“
 	 * @param {MenuPermissionItem} data
 	 * @param {MenuItem} result
-	 * @param {*} data
-	 * @return {*} {menuData 菜单数据}
 	 */
 	static createMenuDataLoopByPermissions = (
 		data: MenuPermissionItem[],
@@ -79,7 +77,6 @@ export class AppHelper {
 	 * @description: 递归生成菜单数据 “客户端权限控制专属”
 	 * @param {RouteItem} data
 	 * @param {MenuItem} result
-	 * @return {*}
 	 */
 	static createMenuDataLoop = (data: RouteItem[], result: MenuItem[]) => {
 		data.forEach((item) => {
@@ -125,6 +122,7 @@ export class AppHelper {
 			newTabItem: location,
 		};
 	}
+
 	// 根据菜单数据（纯原始类型），转换为适用于antd，包含element的完整结构
 	// 为啥转？因为redux内部不可以直接存element类型的数据
 	// 该loop主要是补全icon
@@ -149,27 +147,28 @@ export class AppHelper {
 		if (!pathName) {
 			pathName = location.pathname;
 		}
-		const { tabsHistory, activeTabKey } = reduxStore.getState().appStore;
+		const { tabItems, activeTabKey } = reduxStore.getState().appStore;
 		const routeId = RouterHelper.getRouteIdByPath(activeTabKey);
 		const routeItemData = RouterHelper.getRoutItemConfigById(
 			routeId as ROUTE_ID_KEY,
 		);
-		if (tabsHistory.length > 1 || routeItemData.depands) {
+		if (tabItems.length > 1 || routeItemData.depends) {
 			dp("appStore", "deleteTabHistoryAct", {
 				pathName,
 			});
 			if (activeTabKey == pathName) {
-				if (routeItemData.depands) {
+				if (routeItemData.depends) {
 					RouterHelper.jumpTo(routeItemData.parentId as ROUTE_ID_KEY);
 				} else {
-					const item = tabsHistory.find((item) => {
-						return item.pathname !== pathName;
+					const item = tabItems.find((item) => {
+						return item.key !== pathName;
 					});
-					item && RouterHelper.jumpToByPath(item?.pathname);
+					item && RouterHelper.jumpToByPath(item?.key);
 				}
 			}
 		}
 	}
+
 	static createApp(
 		providerList: (
 			| ((props: { children?: ReactNode }) => JSX.Element)
@@ -178,6 +177,7 @@ export class AppHelper {
 	) {
 		return this.providerLoop(providerList);
 	}
+
 	static providerLoop(
 		providerList: (
 			| ((props: { children?: ReactNode }) => JSX.Element)
@@ -191,19 +191,41 @@ export class AppHelper {
 		const Pv = providerList[i];
 		return <Pv key={i}>{this.providerLoop(providerList, i + 1)}</Pv>;
 	}
+
 	static addWinbox({
 		content,
 		pos = { x: 0, y: 0 },
 		title = "",
+		type = "",
 	}: {
 		content: ReactNode;
 		pos?: { x: number; y: number };
 		title?: string;
+		type?: string;
 	}) {
 		const winBoxContent = GlobalVar.service.get("winBoxContent");
 		const id = UUID();
 		winBoxContent?.set(id, content);
-		dp("appStore", "addWinBox", { id: id, pos, title });
+		dp("appStore", "addWinBox", { id: id, pos, title, type });
+	}
+
+	static saveKeepAliveComponent({ comp, id }: { comp: any; id: string }) {
+		const keepAliveContent = GlobalVar.service.get("keepAliveComp");
+		keepAliveContent?.set(id, comp);
+	}
+
+	static isHasKeepAliveComponent({ id }: { id: string }) {
+		const keepAliveContent = GlobalVar.service.get("keepAliveComp");
+		return !!keepAliveContent?.get(id);
+	}
+
+	static getKeepAliveComponentList() {
+		const keepAliveContent = GlobalVar.service.get("keepAliveComp");
+		return keepAliveContent!;
+	}
+
+	static getKeepAliveComponentById({ id }: { id: string }) {
+		const keepAliveContent = GlobalVar.service.get("keepAliveComp");
+		return keepAliveContent!.get(id);
 	}
 }
-export default new AppHelper();

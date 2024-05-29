@@ -12,9 +12,10 @@ const HomePage = () => {
 	const Layout =
 		layoutMap[layoutName as keyof typeof layoutMap] ||
 		(layoutMap.Default as any);
+
 	return (
 		<Layout>
-			<KeepAliveOutlet></KeepAliveOutlet>
+			<KeepAliveOutlet />
 		</Layout>
 	);
 };

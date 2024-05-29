@@ -26,8 +26,8 @@ const handleError = ({
 	message: string;
 }) => {
 	if (Number(code) === 401) {
-		storageHelper.clear();
-		window.location.href = "/";
+		// storageHelper.clear();
+		// window.location.href = "/";
 		throw new HttpError(message, Number(code));
 	}
 };
@@ -50,6 +50,7 @@ _http.interceptors.response.use(
 		return response.data;
 	},
 	(_) => {
+		message.error(_.response.data?.message || "error");
 		handleError({
 			code: "",
 			message: "",

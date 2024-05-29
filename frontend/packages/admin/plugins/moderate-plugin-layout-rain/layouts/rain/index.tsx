@@ -3,6 +3,7 @@ import CustomBreadcrumb from "src/components/customBreadcrumb";
 import styles from "./index.module.scss";
 import MainContent from "./mainContent";
 import NavHeader from "./navHeader";
+import React from "react";
 const { Content, Footer } = Layout;
 export const Rain = ({ children, ...rest }: React.PropsWithChildren) => {
 	const {

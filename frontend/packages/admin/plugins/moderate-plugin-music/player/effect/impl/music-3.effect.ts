@@ -125,6 +125,7 @@ class RetAngle {
 	jd: number = 1 * DPR;
 	power: number = 0;
 	num: number = 0;
+	//@ts-ignore
 	dy: number = this.y;
 	// lastDPR: number = CommonUtil.cloneDeep<number>(DPR);
 	// lastNozokuRate: number = CommonUtil.cloneDeep<number>(nozokuRate);

@@ -27,6 +27,12 @@ const MusicPage = lazy(
 			"plugins/moderate-plugin-music/pages/HomePage/CmsPage/MusicPage"
 		),
 );
+const ShikitorPage = lazy(
+	() =>
+		import(
+			"plugins/moderate-plugin-shikitor/pages/HomePage/CmsPage/ShikitorPage"
+		),
+);
 //>>>PAGE_INPORT_SIGN<<<//
 
 export const pageList = {
@@ -35,5 +41,6 @@ export const pageList = {
 	PdfPage,
 	RivePage,
 	MusicPage,
+	ShikitorPage,
 	//>>>PAGE_SIGN<<<//
 };

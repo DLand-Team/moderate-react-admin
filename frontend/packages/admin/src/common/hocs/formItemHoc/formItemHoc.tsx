@@ -1,4 +1,5 @@
 import { Form, FormItemProps } from "antd";
+import React from "react";
 
 export type FormItemHocProps = FormItemProps & {
 	isForm?: boolean;

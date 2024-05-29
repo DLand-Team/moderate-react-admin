@@ -44,7 +44,7 @@ export interface FieldConfig<T = any> {
 		TextAreaProps;
 	searchFromRender?: () => JSX.Element;
 	formRender?: () => JSX.Element;
-	isHidenInTable?: boolean;
+	isHideInTable?: boolean;
 	isSearch?: boolean;
 	scope?: ScopeType[];
 	render?: any;

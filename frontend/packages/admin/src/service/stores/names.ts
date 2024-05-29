@@ -6,12 +6,10 @@ const names = {
 	devStore: "devStore",
 	routerStore: "routerStore",
 	categoryStore: "categoryStore",
-	posStore: "posStore",
-	marketStore: "marketStore",
-	carrierStore: "carrierStore",
-	sortStore: "sortStore",
-	filterStore: "filterStore",
 	ruleStore: "ruleStore",
+	dealStore: "dealStore",
+	userStore: "userStore",
+	enquiryStore: "enquiryStore",
 	...pluginNames,
 };
 

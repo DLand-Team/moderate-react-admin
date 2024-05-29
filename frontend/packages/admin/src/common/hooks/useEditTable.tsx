@@ -2,7 +2,12 @@ import { Form, FormProps, Table } from "antd";
 import { ColumnsType, TableProps } from "antd/es/table";
 import { FormInstance } from "antd/lib/form/Form";
 import React, { useEffect, useMemo, useState } from "react";
-import { Field, FieldConfig, MyColumnType, UUID } from "src/common/utils";
+import {
+	getField as Field,
+	FieldConfig,
+	MyColumnType,
+	UUID,
+} from "src/common/utils";
 
 interface EditableCellProps<T> extends React.HTMLAttributes<HTMLElement> {
 	editing: boolean;
@@ -127,7 +132,7 @@ export const useEditTable = <T extends { key?: string } = any>({
 			): {
 				record: T;
 				editing: boolean;
-				form: FormInstance<any>;
+				form: FormInstance;
 			} => ({
 				record,
 				editing: isEditing(record),

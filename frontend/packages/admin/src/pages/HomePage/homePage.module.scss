@@ -1,27 +1,19 @@
 .content {
-  height: 100%;
-  overflow: hidden;
+	height: 100%;
+	overflow: hidden;
 
-  .logo {
-    float: left;
-    height: 31px;
-    margin: 16px 24px 16px 0;
-    text-align: center;
-    display: flex;
-    display: flex;
-    align-items: center;
-    font-weight: bold;
-    font-size: 20px;
-    position: relative;
-    left: -25px;
-  }
+	.logo {
+		float: left;
+		height: 31px;
+		margin: 16px 24px 16px 0;
+		text-align: center;
+		display: flex;
+		align-items: center;
+		font-weight: bold;
+		font-size: 20px;
+		position: relative;
+		left: -25px;
+	}
 
-  .resetBtn {
-    position: absolute;
-    right: 50px;
-    top: 15px;
-    display: flex;
-    align-items: "center";
-    gap: 12px;
-  }
+
 }

@@ -1,7 +1,7 @@
 import { Routes } from "react-router-dom";
-import { useFlat } from "./service";
-import { RouterHelper } from "./service/helper";
 import { OptionsDrawer, OptionsFloatBtn } from "./components";
+import { useFlat } from "./service";
+import { RouterHelper } from "src/service";
 const App = () => {
 	const { routesTree } = useFlat("routerStore");
 	return (

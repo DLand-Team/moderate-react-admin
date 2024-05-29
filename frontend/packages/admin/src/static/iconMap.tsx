@@ -5,6 +5,7 @@ import {
 	FireOutlined,
 	LaptopOutlined,
 	ProductOutlined,
+	StarOutlined,
 } from "@ant-design/icons";
 
 const MenuIconMap = {
@@ -12,6 +13,7 @@ const MenuIconMap = {
 	FundProjectionScreenOutlined,
 	ApartmentOutlined,
 	CoffeeOutlined,
+	StarOutlined,
 	FireOutlined,
 	LaptopOutlined,
 };

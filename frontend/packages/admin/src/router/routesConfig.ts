@@ -10,6 +10,7 @@ export const ROUTE_CONFIG_MAP: {
 		component: "HomePage",
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
+		keepAlive: true,
 	},
 	LoginPage: {
 		id: "LoginPage",
@@ -25,8 +26,9 @@ export const ROUTE_CONFIG_MAP: {
 		},
 		component: "HelloPage",
 		actionPermissions: ["ADD", "EDIT"],
-		isNoAuth: true,
 		index: true,
+		keepAlive: true,
+		isNoAuth: true,
 	},
 	SysPage: {
 		id: "SysPage",
@@ -35,13 +37,22 @@ export const ROUTE_CONFIG_MAP: {
 			icon: "ApartmentOutlined",
 		},
 		actionPermissions: ["ADD", "EDIT"],
-		isNoAuth: true,
+		isNoAuth: false,
 	},
 	CmsPage: {
 		id: "CmsPage",
 		meta: {
 			title: "app:CmsPageTitle",
 			icon: "CoffeeOutlined",
+		},
+		actionPermissions: ["ADD", "EDIT"],
+		isNoAuth: true,
+	},
+	TemplatePage: {
+		id: "TemplatePage",
+		meta: {
+			title: "app:TemplatePage",
+			icon: "StarOutlined",
 		},
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
@@ -121,6 +132,66 @@ export const ROUTE_CONFIG_MAP: {
 		isNoAuth: true,
 		isMenu: false,
 		index: true,
+	},
+	DealPage: {
+		id: "DealPage",
+		component: "DealPage",
+		meta: {
+			title: "DealPage",
+		},
+		isNoAuth: true,
+	},
+	DealApprovalPage: {
+		id: "DealApprovalPage",
+		component: "DealApprovalPage",
+		meta: {
+			title: "DealApprovalPage",
+		},
+		isNoAuth: true,
+		keepAlive: true,
+	},
+	DealListPage: {
+		id: "DealListPage",
+		component: "DealListPage",
+		meta: {
+			title: "DealListPage",
+		},
+		isNoAuth: true,
+		keepAlive: true,
+	},
+	DealRankPage: {
+		id: "DealRankPage",
+		component: "DealRankPage",
+		meta: {
+			title: "DealRankPage",
+		},
+		keepAlive: true,
+		isNoAuth: true,
+	},
+	LoadingPage: {
+		id: "LoadingPage",
+		component: "LoadingPage",
+		meta: {
+			title: "LoadingPage",
+		},
+		isMenu: false,
+		isNoAuth: true,
+	},
+	CategoryPage: {
+		id: "CategoryPage",
+		component: "CategoryPage",
+		meta: {
+			title: "CategoryPage",
+		},
+		isNoAuth: true,
+	},
+	EnquiryPage: {
+		id: "EnquiryPage",
+		component: "EnquiryPage",
+		meta: {
+			title: "EnquiryPage",
+		},
+		isNoAuth: true,
 	},
 	...PLUGIN_ROUTE_CONFIG_MAP,
 };

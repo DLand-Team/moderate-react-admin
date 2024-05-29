@@ -1,5 +1,5 @@
 import { Button, Modal } from "antd";
-import { useState } from "react";
+import React, { useState } from "react";
 
 const ModalForm = (props: {
 	children: React.ReactNode;

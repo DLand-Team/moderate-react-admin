@@ -10,27 +10,14 @@ import {
 } from "react";
 import WinBox, { WinBoxPropType } from "react-winbox";
 import { reduxStore } from "src/service";
+import { RouterHelper } from "src/service/helper/routerHelper";
 import "winbox/dist/css/themes/modern.min.css"; // optional
 import "winbox/dist/css/themes/white.min.css"; // optional
 import "winbox/dist/css/winbox.min.css";
 
-const IconsTable = [
-	{
-		class: "wb-gh",
-		image: "",
-		click: () => {
-			window.open("https://github.com/rickonono3/react-winbox", "_blank");
-		},
-	},
-	{
-		image: "",
-		class: "wb-logo",
-		click: () => alert("Hello!"),
-	},
-];
-
 export interface WinBoxModalProps {
 	id: string | number;
+	type?: string;
 	handleClose: (
 		force: boolean,
 		id: string | number,
@@ -44,6 +31,7 @@ function WinBoxModal({
 	children,
 	id,
 	winBoxMapRef,
+	type,
 }: WinBoxModalProps) {
 	const ref = useRef<WinBox>(null);
 	const pos_x = useMemo(() => {
@@ -59,7 +47,7 @@ function WinBoxModal({
 	// const [left] = useState(260);
 	// const [theme] = useState("modern");
 	const [icon] = useState("");
-	const [icons] = useState([0]);
+	// const [icons] = useState(type == "page" ? [0] : []);
 	const [noMin] = useState(false);
 	const [noMax] = useState(false);
 	const [noFull] = useState(false);
@@ -80,6 +68,20 @@ function WinBoxModal({
 				.appendChild(document.getElementById(ref.current.getId()!)!);
 	}, []);
 	const { token } = theme.useToken();
+	const aref = useRef(
+		type == "page"
+			? [
+					{
+						class: "wb-gh",
+						image: "/link.svg",
+						click: () => {
+							handleClose(true, id);
+							RouterHelper.jumpToByPath(winBoxTitle);
+						},
+					},
+				]
+			: [],
+	);
 	return (
 		<WinBox
 			ref={ref}
@@ -104,7 +106,7 @@ function WinBoxModal({
 			}}
 			onFocus={() => isFocus[1](true)}
 			onBlur={() => isFocus[1](false)}
-			customControls={icons.map((i) => IconsTable[i])}
+			customControls={aref.current}
 		>
 			<div
 				style={{
@@ -112,7 +114,6 @@ function WinBoxModal({
 					height: "100%",
 					padding: "12px",
 					background: token.colorBgContainer,
-					overflow: "auto",
 				}}
 			>
 				{children}

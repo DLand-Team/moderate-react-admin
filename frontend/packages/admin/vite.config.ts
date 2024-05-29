@@ -1,6 +1,9 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
+import { bootstrap } from "global-agent";
+process.env.GLOBAL_AGENT_HTTP_PROXY = "http://127.0.0.1:8118"; // 代理地址:端口
+bootstrap();
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -36,7 +39,7 @@ export default defineConfig({
 				rewrite: (path) => path.replace(/^\/res/, ""),
 			},
 			"/api": {
-				target: "https://live-admin.scaling.com.au",
+				target: "https://admin.scaling.com.au",
 				changeOrigin: true, // 允许跨域
 			},
 			"/devApi": {

@@ -1,5 +1,6 @@
 import { Alignment, Fit, Layout, useRive } from "@rive-app/react-canvas";
 import "./styles.css";
+import { UUID } from "src/common/utils";
 
 export const RiveDemo = () => {
 	const { RiveComponent } = useRive({
@@ -21,8 +22,7 @@ export const RiveDemo = () => {
 // Another example loading a Rive file from a URL
 export const UrlDemo = () => {
 	const { RiveComponent } = useRive({
-		src: "https://qiniu.moderate.run/plugins/moderate-plugin-rive/sophia_iii2.riv",
-		stateMachines: "SOPHIA_III_DASHBOARD_SEQ",
+		src: "https://cdn.rive.app/animations/vehicles.riv",
 		// This is optional.Provides additional layout control.
 		layout: new Layout({
 			fit: Fit.FitWidth, // Change to: rive.Fit.Contain, or Cover
@@ -35,7 +35,7 @@ export const UrlDemo = () => {
 
 export default function RivePage() {
 	return (
-		<div className="RiveContainer">
+		<div className="RiveContainer" key={UUID()}>
 			{/* <RiveDemo /> */}
 			<UrlDemo />
 		</div>

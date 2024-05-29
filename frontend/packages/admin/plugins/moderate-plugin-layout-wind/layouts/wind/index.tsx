@@ -1,31 +1,58 @@
 import { Layout, theme } from "antd";
 import styles from "./index.module.scss";
-import MainContent from "./mainContent";
+
 import NavHeader from "./navHeader";
 import SliderMenu from "./sliderMenu";
+import React, { Suspense, lazy } from "react";
+
+const MainContent = lazy(() => import("./mainContent"));
 const { Content, Footer } = Layout;
-export const Wind = ({ children, ...rest }: React.PropsWithChildren) => {
+export const Wind = ({ children }: React.PropsWithChildren) => {
 	const {
-		token: { colorBgContainer, borderRadiusLG },
+		token: { colorBgContainer, borderRadiusLG, colorBgLayout },
 	} = theme.useToken();
 
 	return (
-		<Layout {...rest} className={styles.content}>
+		<div
+			className={styles.content}
+			style={{
+				background: colorBgLayout,
+			}}
+		>
 			<NavHeader></NavHeader>
-			<Content style={{ padding: "10px 48px" }}>
-				<Layout
+			<div
+				style={{
+					display: "flex",
+					padding: "10px 48px",
+					flex: 1,
+					height: 0,
+					overflowY: "auto",
+					
+					overflowX: "hidden",
+				}}
+			>
+				<div
 					style={{
-						padding: "24px 0",
+						display: "flex",
 						background: colorBgContainer,
 						borderRadius: borderRadiusLG,
+						flex: 1,
 						height: "100%",
+						overflow: "auto",
+						width: 0,
 					}}
 				>
 					<SliderMenu />
-					<MainContent>{children}</MainContent>
-				</Layout>
-			</Content>
-			<Footer style={{ textAlign: "center" }}>闲D岛🏝️</Footer>
-		</Layout>
+					<Suspense>
+						<MainContent>{children}</MainContent>
+					</Suspense>
+				</div>
+			</div>
+			<Footer
+				style={{ textAlign: "center", height: "30px", padding: "10px" }}
+			>
+				闲D岛🏝️
+			</Footer>
+		</div>
 	);
 };

@@ -47,7 +47,7 @@ const thunks = createThunks(names.categoryStore, {
 		await httpApi.deleteApi(params);
 	},
 	updateAct: async (params: any) => {
-		await httpApi.upadteApi(pickBy(params));
+		await httpApi.updateApi(pickBy(params));
 	},
 	queryAct:
 		(params: QueryActParams = {}) =>

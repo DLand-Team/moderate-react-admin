@@ -20,7 +20,7 @@ const thunks = createThunks(names.appStore, {
 		});
 	},
 	addPageListAct: async (params: AdcompanyPageParams) => {
-		await httpApi.adcompanyPageList(params);
+		await httpApi.addPageApi(params);
 	},
 	fetchStoreListAct: async () => {
 		const { data } = await httpApi.fetchStoreList();

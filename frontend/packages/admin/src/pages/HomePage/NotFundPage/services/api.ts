@@ -1,6 +1,7 @@
 import { http } from "src/common/http";
 
 const baseUrl = "";
+
 // 增
 function addApi(data: any) {
 	return http.request({
@@ -20,7 +21,7 @@ function deleteApi(data: any) {
 }
 
 // 改
-function upadteApi(data: any) {
+function updateApi(data: any) {
 	return http.request({
 		url: baseUrl + "update",
 		method: "POST",
@@ -40,7 +41,7 @@ function queryApi<T>(data: any) {
 const devApi = {
 	addApi,
 	deleteApi,
-	upadteApi,
+	updateApi,
 	queryApi,
 };
 

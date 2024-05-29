@@ -9,6 +9,7 @@ import {
 	RemovePluginApiParams,
 } from "./model";
 import { Setting } from "../appStore/modal";
+
 const baseUrl = "/devApi";
 const api = {
 	fetchPageList() {
@@ -17,7 +18,7 @@ const api = {
 			method: "GET",
 		});
 	},
-	adcompanyPageList(params: AdcompanyPageParams) {
+	addPageApi(params: AdcompanyPageParams) {
 		return http.request({
 			url: baseUrl + "/pageDev/addPage",
 			method: "POST",

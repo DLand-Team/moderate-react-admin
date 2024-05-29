@@ -3,43 +3,62 @@ import { RoutesStructDataItem } from "./types";
 
 // MODERATE_AUTO:START
 export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [
-  { id: ROUTE_ID.ErrorPage },
-  {
-    id: ROUTE_ID.HomePage,
-    children: [
-      {
-        id: ROUTE_ID.CmsPage,
-        children: [
-          { id: ROUTE_ID.MdPage },
-          { id: ROUTE_ID.MusicPage },
-          { id: ROUTE_ID.PdfPage },
-          { id: ROUTE_ID.RivePage },
-          { id: ROUTE_ID.WinboxPage },
-        ],
-      },
-      {
-        id: ROUTE_ID.DevPage,
-        children: [
-          { id: ROUTE_ID.PageDevPage },
-          { id: ROUTE_ID.StoreDevPage },
-        ],
-      },
-      { id: ROUTE_ID.HelloPage },
-      { id: ROUTE_ID.NotFundPage },
-      {
-        id: ROUTE_ID.PluginsPage,
-        children: [{ id: ROUTE_ID.PluginListPage }],
-      },
-      {
-        id: ROUTE_ID.SysPage,
-        children: [
-          { id: ROUTE_ID.MenuPage },
-          { id: ROUTE_ID.RolePage },
-          { id: ROUTE_ID.UserPage },
-        ],
-      },
-    ],
-  },
-  { id: ROUTE_ID.LoginPage },
+	{ id: ROUTE_ID.ErrorPage },
+	{
+		id: ROUTE_ID.HomePage,
+		children: [
+			{
+				id: ROUTE_ID.CmsPage,
+				children: [
+					{ id: ROUTE_ID.MdPage },
+					{ id: ROUTE_ID.MusicPage },
+					{ id: ROUTE_ID.PdfPage },
+					{ id: ROUTE_ID.RivePage },
+					{ id: ROUTE_ID.WinboxPage },
+					{ id: ROUTE_ID.ShikitorPage },
+				],
+			},
+
+			{
+				id: ROUTE_ID.DevPage,
+				children: [
+					{ id: ROUTE_ID.PageDevPage },
+					{ id: ROUTE_ID.StoreDevPage },
+				],
+			},
+
+			{ id: ROUTE_ID.HelloPage },
+			{ id: ROUTE_ID.LoadingPage },
+			{ id: ROUTE_ID.NotFundPage },
+			{
+				id: ROUTE_ID.PluginsPage,
+				children: [{ id: ROUTE_ID.PluginListPage }],
+			},
+			{
+				id: ROUTE_ID.SysPage,
+				children: [
+					{ id: ROUTE_ID.MenuPage },
+					{ id: ROUTE_ID.RolePage },
+				],
+			},
+			{
+				id: ROUTE_ID.TemplatePage,
+				children: [
+					{ id: ROUTE_ID.UserPage },
+					{ id: ROUTE_ID.EnquiryPage },
+					{ id: ROUTE_ID.CategoryPage },
+					{
+						id: ROUTE_ID.DealPage,
+						children: [
+							{ id: ROUTE_ID.DealApprovalPage },
+							{ id: ROUTE_ID.DealListPage },
+							{ id: ROUTE_ID.DealRankPage },
+						],
+					},
+				],
+			},
+		],
+	},
+	{ id: ROUTE_ID.LoginPage },
 ];
 // MODERATE_AUTO:END

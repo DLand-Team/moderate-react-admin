@@ -7,14 +7,7 @@ import { AppHelper, MenuItem, RouterHelper } from "src/service/helper";
 import settingData from "src/setting.json";
 
 import names from "../names";
-import {
-	Setting,
-	StoreState,
-	TabItem,
-	TabsHistory,
-	ThemeName,
-	XY_POS,
-} from "./modal";
+import { Setting, StoreState, TabItem, ThemeName, XY_POS } from "./modal";
 
 export enum ThemeColor {
 	light = "light",
@@ -36,8 +29,7 @@ const initialState = (): StoreState => {
 		menuDefaultSelectedKeys: [],
 		menuDefaultOpenKeys: null,
 		menuData: menuData,
-		tabsHistory: storageHelper.getItem("TABS_HISTORY") || [],
-		tabItems: [],
+		tabItems: storageHelper.getItem("TABS_HISTORY") || [],
 		activeTabKey: "",
 		isThemeAuto: storageHelper.getItem("IS_THEME_AUTO"),
 		currentTheme: storageHelper.getItem("THEME") || ThemeColor.light,
@@ -47,12 +39,13 @@ const initialState = (): StoreState => {
 		mdContent: "",
 		winBoxList: [],
 		settingData: settingData as Setting,
-		language: storageHelper.getItem("LANGUAGE") || "zh",
+		language: storageHelper.getItem("LANGUAGE") || "en",
 		winPosTemp: {
 			x: 0,
 			y: 0,
 		},
 		winBoxTitleTemp: "",
+		refreshKey: [],
 	};
 };
 
@@ -70,15 +63,12 @@ const appSlice = createSliceCustom({
 			state.currentTheme = payload;
 			storageHelper.setItem("THEME", payload);
 		},
-		setTabsHistory(state, { payload }: PayloadAction<TabsHistory>) {
-			state.tabsHistory = payload;
-			storageHelper.setItem("TABS_HISTORY", payload);
-		},
 		setActiveTabKey(state, { payload }: PayloadAction<string>) {
 			state.activeTabKey = payload;
 		},
 		setTabItems(state, { payload }: PayloadAction<TabItem[]>) {
 			state.tabItems = payload;
+			storageHelper.setItem("TABS_HISTORY", payload);
 		},
 		setMenuDefaultSelectedKeys: (
 			state,
@@ -104,19 +94,40 @@ const appSlice = createSliceCustom({
 		addWinBox(
 			state,
 			{
-				payload: { id, pos, title },
-			}: PayloadAction<{ id: string; pos: XY_POS; title: string }>,
+				payload: { id, pos, title, type },
+			}: PayloadAction<{
+				id: string;
+				pos: XY_POS;
+				title: string;
+				type?: string;
+			}>,
 		) {
-			state.winBoxList = [...state.winBoxList, id];
+			state.winBoxList = [
+				...state.winBoxList,
+				{
+					type,
+					id,
+				},
+			];
 			state.winPosTemp = pos;
 			state.winBoxTitleTemp = title;
 		},
-		deleteWinBox() {
-			// const id = UUID();
-			// const winBoxContent = GlobalVar.service.get("winBoxContent");
-			// winBoxContent![id] = payload.content;
-			// GlobalVar.service.set("winBoxContent", winBoxContent!);
-			// state.winBoxList = [...state.winBoxList, id];
+		deleteWinBox(
+			state,
+			{
+				payload: { id },
+			}: PayloadAction<{
+				id: string | number;
+			}>,
+		) {
+			let temp = cloneDeep(state.winBoxList);
+			let targetId = temp.findIndex((item) => {
+				return item.id == id;
+			});
+			if (targetId != -1) {
+				temp.splice(targetId, 1);
+			}
+			state.winBoxList = temp;
 		},
 		setSettingData(state, { payload }: PayloadAction<Setting>) {
 			state.settingData = payload;
@@ -127,6 +138,9 @@ const appSlice = createSliceCustom({
 		setLanguage(state, { payload }: PayloadAction<string>) {
 			state.language = payload;
 			storageHelper.setItem("LANGUAGE", payload);
+		},
+		setRefreshKey(state, { payload }: PayloadAction<string[]>) {
+			state.refreshKey = payload;
 		},
 	},
 });

@@ -27,7 +27,7 @@ const slice = createSliceCustom({
 			state.routesMap = payload;
 		},
 		setRoutesTree(state, { payload }: PayloadAction<RouteItem[]>) {
-			state.routesTree = payload;
+			state.routesTree = payload as RouteItem[];
 		},
 	},
 });

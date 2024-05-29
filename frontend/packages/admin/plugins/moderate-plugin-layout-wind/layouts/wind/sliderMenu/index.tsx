@@ -37,8 +37,12 @@ const SliderMenu = () => {
 			collapsible
 			collapsed={isCollapsedMenu}
 			width={260}
+			style={{
+				height: "100%",
+				overflowY: "auto",
+				overflowX: "hidden",
+			}}
 		>
-			
 			{menuData.length > 0 &&
 				menuDefaultOpenKeys &&
 				menuDefaultSelectedKeys && (
@@ -47,8 +51,8 @@ const SliderMenu = () => {
 						mode="inline"
 						selectedKeys={menuDefaultSelectedKeys}
 						defaultOpenKeys={menuDefaultOpenKeys!}
-						style={{ height: "100%", borderRight: 0 }}
-						items={MenuItems}
+						style={{ borderRight: 0, margin: "10px 0px" }}
+						items={MenuItems as any}
 						onClick={({ key }) => {
 							RouterHelper.jumpTo(key as ROUTE_ID_KEY);
 						}}

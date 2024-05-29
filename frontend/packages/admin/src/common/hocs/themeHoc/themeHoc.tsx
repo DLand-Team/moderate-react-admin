@@ -1,4 +1,5 @@
 import { ConfigProvider, ThemeConfig } from "antd";
+import React from "react";
 
 const themeHoc = <P extends any>(
 	Comp: React.ComponentType<P>,

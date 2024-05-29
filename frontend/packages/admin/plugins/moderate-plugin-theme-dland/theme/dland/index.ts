@@ -16,7 +16,7 @@ export const dland = (isDark: boolean) => {
 				borderRadiusLG: 8,
 				activeBarWidth: 10,
 				lineWidth: -20,
-				itemMarginInline: 12,
+				itemMarginInline: 10,
 				colorBgContainer: isDark
 					? "rgba(22, 28, 36,0)"
 					: "rgb(244, 246, 248)",

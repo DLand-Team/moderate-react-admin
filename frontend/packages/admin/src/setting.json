@@ -1,4 +1,4 @@
 {
-  "paletteSet": { "light": "Default", "dark": "Default" },
-  "layoutSet": { "light": "Rain", "dark": "Rain" }
+  "paletteSet": { "light": "dland", "dark": "dland" },
+  "layoutSet": { "light": "Wind", "dark": "Wind" }
 }

@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
-import { useOutlet } from "react-router-dom";
 import { AppHelper, useFlat } from "src/service";
+import { TabItem } from "src/service/stores/appStore/modal";
 
 export const ItemTypes = {
 	CARD: "card",
@@ -12,6 +12,8 @@ export interface CardProps {
 	text: string;
 	index: number;
 	moveCard: (dragIndex: number, hoverIndex: number) => void;
+	data: TabItem;
+	winboxUrlRef: any;
 }
 
 interface DragItem {
@@ -25,10 +27,10 @@ const Card = ({
 	index,
 	moveCard,
 	children,
+	data,
 }: React.PropsWithChildren<CardProps>) => {
 	const { tabItems } = useFlat("appStore");
 	const { routesMap } = useFlat("routerStore");
-	const outlet = useOutlet();
 	const ref = useRef<HTMLDivElement>(null);
 	const [{ handlerId }, drop] = useDrop<
 		DragItem,
@@ -36,7 +38,6 @@ const Card = ({
 		{ handlerId: any | null }
 	>({
 		accept: ItemTypes.CARD,
-
 		hover(item: DragItem, monitor) {
 			if (!ref.current) {
 				return;
@@ -91,7 +92,7 @@ const Card = ({
 	const [_, drag] = useDrag({
 		type: ItemTypes.CARD,
 		item: () => {
-			return { id, index };
+			return { id, index, data };
 		},
 		end(item, monitor) {
 			const clientOffset = monitor.getClientOffset();
@@ -100,19 +101,30 @@ const Card = ({
 				tabItems.length > 1 &&
 				hoverBoundingRect!.y - clientOffset!?.y < 30
 			) {
-				if (
-					!routesMap.HelloPage.path!.includes(
-						id.split("/").slice(-1)[0],
-					)
-				) {
-					AppHelper.addWinbox({
-						content: outlet,
-						pos: clientOffset as { x: number; y: number },
-						title: id,
-					});
-					AppHelper.closeTabByPath({
-						pathName: item.id,
-					});
+				let routeId = id.split("/").slice(-1)[0];
+				if (!routesMap.HelloPage.path!?.includes(routeId)) {
+					if (item.data.location?.pathname) {
+						AppHelper.addWinbox({
+							content: AppHelper.getKeepAliveComponentById({
+								id: routeId,
+							}),
+							pos: clientOffset as {
+								x: number;
+								y: number;
+							},
+							title: item.data.key,
+							type: "page",
+						});
+						AppHelper.closeTabByPath({
+							pathName: item.data.key,
+						});
+						// setActiveTabKey(item.data.location?.pathname);
+						// winboxUrlRef.current = {
+						// 	clientOffset,
+						// 	locationData: item.data.location,
+						// 	id: item.data.key,
+						// };
+					}
 				}
 			}
 		},

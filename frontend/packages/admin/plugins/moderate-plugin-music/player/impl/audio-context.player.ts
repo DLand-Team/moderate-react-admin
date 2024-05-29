@@ -59,14 +59,14 @@ export class AudioContextPlayer extends EffectAudioContextPlayer implements Audi
 			if (this.isDestroyed) {
 				return;
 			}
-			this.decoded = await this.actx.decodeAudioData(buf);
+			this.decoded = await this.acts.decodeAudioData(buf);
 			if (this.isDestroyed) {
 				return;
 			}
 			this.isLoadFinish = true;
 			this.audioDuration = this.decoded.duration;
 			this.suspend();
-			this.timeDivide = this.playTimeSecond - this.actx.currentTime;
+			this.timeDivide = this.playTimeSecond - this.acts.currentTime;
 			this.loadFinish(this.decoded.duration);
 		}
 	}
@@ -76,7 +76,7 @@ export class AudioContextPlayer extends EffectAudioContextPlayer implements Audi
 			throw new Error('load is not finish');
 		}
 		if (!this.audioIsStart) {
-			this.sourceNode = this.actx.createBufferSource();
+			this.sourceNode = this.acts.createBufferSource();
 			this.createAnalyser();
 			// 开始播放
 			this.sourceNode.onended = () => {
@@ -96,7 +96,7 @@ export class AudioContextPlayer extends EffectAudioContextPlayer implements Audi
 				this.start(this.playTimeSecond);
 			}
 			this.effectController.startLoop();
-			this.actx.resume();
+			this.acts.resume();
 			this.startAudioPlayingProcessListener();
 			this.audioIsPlaying = true;
 			this.audioIsSuspend = false;
@@ -118,7 +118,7 @@ export class AudioContextPlayer extends EffectAudioContextPlayer implements Audi
 		this.audioIsStart = false;
 		this.sourceNode?.stop();
 		this.sourceNode?.disconnect(this.analyser);
-		this.analyser?.disconnect(this.actx.destination);
+		this.analyser?.disconnect(this.acts.destination);
 		this.statusToPauseCallback();
 	}
 
@@ -129,7 +129,7 @@ export class AudioContextPlayer extends EffectAudioContextPlayer implements Audi
 		}
 		if (!this.audioIsSuspend) {
 			this.effectController.stopLoop();
-			this.actx.suspend();
+			this.acts.suspend();
 			this.stopAudioPlayingProcessListener();
 			this.audioIsPlaying = false;
 			this.audioIsSuspend = true;
@@ -146,7 +146,7 @@ export class AudioContextPlayer extends EffectAudioContextPlayer implements Audi
 		this.stopAudioPlayingProcessListener();
 		this.stop();
 		this.playTimeSecond = sec;
-		this.timeDivide = this.playTimeSecond - this.actx.currentTime;
+		this.timeDivide = this.playTimeSecond - this.acts.currentTime;
 		setTimeout(() => {
 			this.start(sec);
 			if (cache) {
@@ -165,7 +165,7 @@ export class AudioContextPlayer extends EffectAudioContextPlayer implements Audi
 		this.stopAudioPlayingProcessListener();
 		this.effectController.destroy();
 		this.stop();
-		this.actx.close();
+		this.acts.close();
 		this.decoded = null;
 		this.sourceNode = null;
 		this.analyser = null;
@@ -178,9 +178,9 @@ export class AudioContextPlayer extends EffectAudioContextPlayer implements Audi
 			if (!this.audioIsPlaying) {
 				return;
 			}
-			this.playTimeSecond = this.actx.currentTime + this.timeDivide;
+			this.playTimeSecond = this.acts.currentTime + this.timeDivide;
 			if (this.playTimeSecond >= this.audioDuration) {
-				this.timeDivide = this.playTimeSecond - this.actx.currentTime;
+				this.timeDivide = this.playTimeSecond - this.acts.currentTime;
 				this.playCallback(this.audioDuration);
 				this.finishCallback();
 				this.stopAudioPlayingProcessListener();

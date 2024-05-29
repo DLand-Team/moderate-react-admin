@@ -1,4 +1,4 @@
-import { RefObject, useLayoutEffect, useMemo, useRef } from "react";
+import React, { RefObject, memo, useEffect, useMemo, useRef } from "react";
 import { createPortal } from "react-dom";
 
 export type KeepAliveComponentProps = React.PropsWithChildren<{
@@ -12,6 +12,7 @@ function keepAliveRoute(props: KeepAliveComponentProps) {
 	const isActive = activeKey == pageKey;
 	const aliveDom = useMemo(() => {
 		const aliveDom = document.createElement("div");
+		aliveDom.setAttribute("id", "alive");
 		aliveDom.setAttribute("page-name", pageKey);
 		aliveDom.setAttribute("style", "height: 100%");
 		return aliveDom;
@@ -22,19 +23,22 @@ function keepAliveRoute(props: KeepAliveComponentProps) {
 	if (isActive && !isAliveRef.current) {
 		isAliveRef.current = isActive;
 	}
-	useLayoutEffect(() => {
+	useEffect(() => {
 		const containerDiv = parentDomRef.current;
 		if (isActive) {
+			let oldDom = document.getElementById("alive");
+			containerDiv?.contains(oldDom) &&
+				containerDiv?.removeChild(oldDom!);
 			containerDiv?.appendChild(aliveDom);
 		} else {
 			containerDiv?.contains(aliveDom) &&
 				containerDiv?.removeChild(aliveDom);
 		}
-	}, [isActive, parentDomRef.current]);
+	}, [isActive]);
 
 	return isAliveRef.current
 		? createPortal(children, aliveDom, pageKey)
 		: null;
 }
 
-export default keepAliveRoute;
+export default memo(keepAliveRoute);

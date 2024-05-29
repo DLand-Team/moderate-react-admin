@@ -71,11 +71,11 @@ const VinylMachineComponent = forwardRef<
 					let imageContentWidth = 0;
 					let imageContentHeight = 0;
 					if (width >= height) {
-						imageContentWidth = height;
+						imageContentWidth = height as any;
 						imageContentHeight = height;
 					} else {
 						imageContentWidth = width;
-						imageContentHeight = width;
+						imageContentHeight = width as any;
 					}
 					// effectSwitch
 					let effectSwitchWidth = imageContentWidth * 0.08;

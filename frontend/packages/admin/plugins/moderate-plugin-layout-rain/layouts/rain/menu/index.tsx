@@ -5,7 +5,6 @@ import { useLocationListen } from "src/common/hooks";
 import { ROUTE_ID_KEY } from "src/router/types";
 import { AppHelper, RouterHelper, useFlat } from "src/service";
 
-
 const SliderMenu = () => {
 	const {
 		menuData,
@@ -43,9 +42,9 @@ const SliderMenu = () => {
 							height: "100%",
 							position: "relative",
 							bottom: "-5px",
-							background:'initial'
+							background: "initial",
 						}}
-						items={MenuItems}
+						items={MenuItems as any}
 						onClick={({ key }) => {
 							RouterHelper.jumpTo(key as ROUTE_ID_KEY);
 						}}

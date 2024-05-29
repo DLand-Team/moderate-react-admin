@@ -1,4 +1,4 @@
-import {
+import React, {
 	ReactElement,
 	RefObject,
 	createContext,
@@ -10,6 +10,7 @@ import { UUID } from "src/common/utils";
 import { useFlat } from "src/service";
 import WinBoxCustom, { WinBoxModalProps } from "../components/winbox";
 import GlobalVar from "src/static/globalVar";
+
 type WinBoxModalFuncProps = Omit<
 	WinBoxModalProps,
 	"winBoxMapRef" | "handleClose"
@@ -24,16 +25,15 @@ export const WinBoxContext = createContext<{
 } | null>(null);
 
 export const WinBoxProvider = ({ children }: React.PropsWithChildren) => {
-	const { winBoxList } = useFlat("appStore");
+	const { winBoxList, deleteWinBox } = useFlat("appStore");
 	const winBoxMapRef = useRef<Record<PropertyKey, RefObject<WinBox>>>({});
 	const [winBoxMap, setWinBoxMap] = useState<
 		Record<PropertyKey, WinBoxModalFuncProps>
 	>({});
 	const handleClose: WinBoxModalProps["handleClose"] = (_, id) => {
-		if (id in winBoxMap) {
-			const temp = { ...winBoxMap };
-			Reflect.deleteProperty(temp, id);
-			setWinBoxMap(temp);
+		if (id in winBoxMapRef.current) {
+			Reflect.deleteProperty(winBoxMapRef.current, id);
+			deleteWinBox({ id });
 		}
 	};
 
@@ -57,21 +57,24 @@ export const WinBoxProvider = ({ children }: React.PropsWithChildren) => {
 				}}
 			>
 				{children}
-				{winBoxList.map((item) => {
-					const Comp = GlobalVar.service
-						.get("winBoxContent")
-						?.get(item) as ReactElement;
-					return (
-						<WinBoxCustom
-							id={item}
-							handleClose={handleClose}
-							winBoxMapRef={winBoxMapRef}
-							key={item}
-						>
-							{Comp}
-						</WinBoxCustom>
-					);
-				})}
+				<div id="winboxWrapper" style={{ zIndex: 100 }}>
+					{winBoxList.map((item) => {
+						const Comp = GlobalVar.service
+							.get("winBoxContent")
+							?.get(item.id) as ReactElement;
+						return (
+							<WinBoxCustom
+								id={item.id}
+								handleClose={handleClose}
+								winBoxMapRef={winBoxMapRef}
+								key={item.id}
+								type={item.type}
+							>
+								{Comp}
+							</WinBoxCustom>
+						);
+					})}
+				</div>
 			</WinBoxContext.Provider>
 		</>
 	);

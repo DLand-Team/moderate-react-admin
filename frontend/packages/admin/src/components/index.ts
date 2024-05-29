@@ -13,3 +13,4 @@ export { default as OptionsFloatBtn } from "./optionsFloatBtn";
 export { default as Bread } from "./customBreadcrumb";
 // 导航tabs
 export { default as NavTabs } from "./navTabs";
+export { default as DragSortTable } from "./dragSortTable";

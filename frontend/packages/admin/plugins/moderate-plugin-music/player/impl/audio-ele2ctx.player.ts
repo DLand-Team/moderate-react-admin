@@ -48,7 +48,7 @@ export class AudioEle2CtxPlayer extends EffectAudioContextPlayer implements Audi
 	}
 
 	private loadAndCreate(): void {
-		this.sourceNode = this.actx.createMediaElementSource(this.player.audioDom);
+		this.sourceNode = this.acts.createMediaElementSource(this.player.audioDom);
 		this.createAnalyser();
 	}
 
@@ -99,8 +99,8 @@ export class AudioEle2CtxPlayer extends EffectAudioContextPlayer implements Audi
 		this.player.stop();
 		this.effectController.destroy();
 		this.sourceNode?.disconnect(this.analyser);
-		this.analyser?.disconnect(this.actx.destination);
-		this.actx.close();
+		this.analyser?.disconnect(this.acts.destination);
+		this.acts.close();
 		this.decoded = null;
 		this.sourceNode = null;
 		this.analyser = null;

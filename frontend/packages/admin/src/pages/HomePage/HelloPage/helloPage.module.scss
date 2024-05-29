@@ -3,17 +3,16 @@
 	height: 100%;
 	padding: 32px;
 	overflow: auto;
+
 	.title {
 		text-align: center;
 		font-weight: bold;
-		font-size: 50px;
 		background: -webkit-linear-gradient(315deg, #42d392 25%, #647eff);
 		background-clip: text;
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		font-size: 76px;
 		line-height: 1.25;
-		font-weight: 900;
 		letter-spacing: -1.5px;
 	}
 
@@ -27,9 +26,5 @@
 		align-items: center;
 	}
 
-	.infoBoard {
-		padding: 30px;
-		background-color: #c9fdfb;
-		color: #7dd431;
-	}
+	
 }

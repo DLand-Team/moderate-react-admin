@@ -1,8 +1,7 @@
 import { Col } from "antd";
 import { Rule } from "antd/es/form";
 import { cloneDeep } from "lodash-es";
-import { MyColumnType } from "../model/fieldsHooks";
-import { Field } from "../utils";
+import { getField as Field, MyColumnType } from "../utils";
 
 const useSearchFields = <T,>(
 	columns: MyColumnType<T>[],
@@ -13,7 +12,8 @@ const useSearchFields = <T,>(
 ) => {
 	const { count, form } = options;
 	return columns.map((item, index) => {
-		const { fieldConfig = {} } = item;
+		const { dataIndex, fieldConfig = {} } = item;
+
 		let fieldConfigTemp = cloneDeep(fieldConfig);
 		const {
 			searchFromRender,
@@ -21,6 +21,21 @@ const useSearchFields = <T,>(
 			formOptions,
 			isSearch = true,
 		} = fieldConfigTemp;
+		if (!formOptions) {
+			fieldConfigTemp.formOptions = {
+				label: dataIndex as string,
+				name: dataIndex as string,
+			};
+		}
+		if (
+			fieldConfigTemp.formOptions &&
+			!fieldConfigTemp.formOptions?.label
+		) {
+			fieldConfigTemp.formOptions.label = dataIndex as string;
+		}
+		if (fieldConfigTemp.formOptions && !fieldConfigTemp.formOptions?.name) {
+			fieldConfigTemp.formOptions.name = dataIndex as string;
+		}
 		let InputItem;
 		if (!isSearch) return;
 		if (searchFromRender) {

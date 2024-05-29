@@ -33,4 +33,10 @@ export const ROUTE_CONFIG_MAP: {
 		isNoAuth: true,
 		component: "MusicPage",
 	},
+	ShikitorPage: {
+		id: "ShikitorPage",
+		meta: { title: "ShikitorPage:ShikitorPageTitle" },
+		isNoAuth: true,
+		component: "ShikitorPage",
+	},
 };

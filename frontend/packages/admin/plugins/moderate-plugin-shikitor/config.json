@@ -1,0 +1,18 @@
+{
+	"name": "moderate-plugin-shikitor",
+	"dependencies": {
+		"@shikitor/core": "^0.0.8",
+		"@shikitor/react": "^0.1.3",
+		"shiki": "^1.6.0",
+		"tdesign-icons-react": "^0.3.2",
+		"tdesign-react": "^1.7.3",
+		"markdown-it": "^14.1.0",
+		"@shikijs/markdown-it": "^1.6.0",
+		"lz-string": "^1.5.0",
+		"openai": "^4.47.1"
+	},
+	"devDependencies": {
+		"@types/markdown-it": "^14.1.1",
+		"vite-plugin-glob-accept": "^0.1.0"
+	}
+}

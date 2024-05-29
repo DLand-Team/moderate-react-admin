@@ -61,7 +61,7 @@ const SliderMenu = () => {
 						selectedKeys={menuDefaultSelectedKeys}
 						defaultOpenKeys={menuDefaultOpenKeys!}
 						style={{ height: "100%", borderRight: 0 }}
-						items={MenuItems}
+						items={MenuItems as any}
 						onClick={({ key }) => {
 							RouterHelper.jumpTo(key as ROUTE_ID_KEY);
 						}}

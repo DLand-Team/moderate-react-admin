@@ -1,26 +1,27 @@
-import { MenuItemType } from "antd/es/menu/hooks/useItems";
 import type { RouteProps } from "react-router-dom";
 import { pageList } from "src/pages";
-import { MenuIconType } from "src/static/iconMap";
 import { ACTION_DICT } from "src/static/actionPermission";
+import { MenuIconType } from "src/static/iconMap";
 import { NAME } from "./name";
+import React from "react";
 
 export interface ExtendRouteConfig {
 	id?: ROUTE_ID_KEY; // 节点id
 	parentId?: ROUTE_ID_KEY; // 父节点id
 	isMenu?: boolean; // 是否是菜单
 	isNoAuth?: boolean; // 无权限
-	depands?: ROUTE_ID_KEY[];
+	depends?: ROUTE_ID_KEY[];
 	meta?: {
 		title?: string;
 		icon?: MenuIconType;
-	} & Partial<MenuItemType>;
+	};
 	children?: RouteItem[];
 	component?: keyof typeof pageList; // 路由组件
 	page?: React.LazyExoticComponent<(props: unknown) => JSX.Element>;
 	actionPermissions?: (keyof typeof ACTION_DICT)[];
 	keepAlive?: boolean;
 }
+
 // 详情数据
 export type RouteItem = RouteProps & ExtendRouteConfig;
 

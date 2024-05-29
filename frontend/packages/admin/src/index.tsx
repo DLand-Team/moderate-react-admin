@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import CustomRouter from "src/components/customRouter";
 import App from "./app";
 import AuthProvider from "./providers/authProvider";
-import "./index.css";
+import "./index.scss";
 import { AppHelper } from "./service";
 import ServiceProvider from "./providers/serviceProvider";
 import ThemeProvider from "./providers/themeProvider";

@@ -1,12 +1,12 @@
-import { useEffect } from "react";
-import { useLocation, Location } from "react-router-dom";
+import { useLayoutEffect } from "react";
+import { Location, useLocation } from "react-router-dom";
 
 const useLocationListen = (
 	listener: (location: Location) => void,
 	depArr: any[] = [],
 ) => {
 	let location = useLocation();
-	useEffect(() => {
+	useLayoutEffect(() => {
 		listener(location);
 	}, [location, ...depArr]);
 };

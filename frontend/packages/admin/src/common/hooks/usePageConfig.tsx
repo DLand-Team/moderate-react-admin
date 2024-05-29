@@ -20,13 +20,13 @@ const usePageConfig = <T,>(
 			const { fieldConfig = {} } = item;
 			const {
 				formOptions = {},
-				isHidenInTable,
+				isHideInTable: isHideInTable,
 				scope = ["modal", "search", "table"],
 			} = fieldConfig;
 			const { name } = formOptions;
 			return (
 				(typeof name == "string" || !name) &&
-				!isHidenInTable &&
+				!isHideInTable &&
 				scope?.includes("table")
 			);
 		});

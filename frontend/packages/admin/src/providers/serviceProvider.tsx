@@ -1,6 +1,7 @@
 import { Provider } from "redux-eazy";
 import { reduxStore } from "../service";
 import "../service/setup";
+import React from "react";
 
 const App = (props: React.PropsWithChildren<{}>) => {
 	return <>{props.children}</>;

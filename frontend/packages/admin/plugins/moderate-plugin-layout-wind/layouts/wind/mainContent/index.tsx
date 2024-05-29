@@ -1,33 +1,39 @@
 import { Layout, theme } from "antd";
+import React, { Suspense } from "react";
 import Tabs from "src/components/navTabs";
-
 const { Content } = Layout;
 const MainContent = ({ children }: React.PropsWithChildren) => {
 	const {
 		token: { colorFillAlter },
 	} = theme.useToken();
 	return (
-		<Content
+		<div
 			style={{
-				margin: "12px",
 				display: "flex",
 				flexDirection: "column",
-				height: "100%",
 				background: colorFillAlter,
+				flex: 1,
+				overflow: "auto",
+				height: "100%",
+				paddingLeft: "6px",
 			}}
 		>
-			<Tabs />
-			<div
+			<Suspense>
+				<Tabs />
+			</Suspense>
+
+			<Content
 				style={{
 					flex: 1,
 					overflow: "auto",
 					padding: 32,
 					height: "100%",
+					overflowX: "hidden",
 				}}
 			>
 				{children}
-			</div>
-		</Content>
+			</Content>
+		</div>
 	);
 };
 export default MainContent;

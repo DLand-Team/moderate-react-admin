@@ -6,8 +6,8 @@ export type ThemeName = "dark" | "light";
 export interface TabItem {
 	label: string;
 	key: string;
+	location?: Location;
 }
-export type TabsHistory = Location[];
 export type XY_POS = { x: number; y: number };
 export interface StoreState {
 	// 菜单相关信息
@@ -15,7 +15,6 @@ export interface StoreState {
 	menuDefaultOpenKeys: string[] | null;
 	menuData: MenuItem[];
 	// 页面tab栏信息
-	tabsHistory: TabsHistory;
 	tabItems: TabItem[];
 	activeTabKey: string;
 	isThemeAuto: boolean; // 是否主题跟随系统
@@ -26,13 +25,13 @@ export interface StoreState {
 	isCollapsedMenu: boolean;
 	// 显示md的drawer：起作用的前提是安装了对应的插件
 	isShowMdDrawer: boolean;
-	winBoxList: string[];
+	winBoxList: { id: string; type?: string }[];
 	winPosTemp: XY_POS;
 	winBoxTitleTemp: string;
 	mdContent: string;
 	settingData: Setting | null;
 	language: string;
-
+	refreshKey: string[];
 }
 
 export interface Setting {

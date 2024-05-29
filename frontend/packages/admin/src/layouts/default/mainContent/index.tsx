@@ -1,5 +1,6 @@
 import { Layout } from "antd";
 import Tabs from "src/components/navTabs";
+import React from "react";
 
 const { Content } = Layout;
 const MainContent = ({ children }: React.PropsWithChildren) => {

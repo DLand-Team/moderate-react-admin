@@ -3,7 +3,9 @@ import { MenuPermissionItem } from "../stores/authStore/model";
 import { RouterHelper } from "./routerHelper";
 import { RoutesStructDataItem } from "src/router/types";
 import { ROUTE_CONFIG_MAP } from "src/router/routesConfig";
+
 type PermissionNode = any;
+
 export class AuthHelper {
 	/**
 	 * @description: 根据权限创建菜单
@@ -73,7 +75,3 @@ export class AuthHelper {
 		});
 	}
 }
-
-const authHelper = new AuthHelper();
-
-export default authHelper;
