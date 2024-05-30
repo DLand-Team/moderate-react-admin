@@ -1,6 +1,7 @@
 import { Alignment, Fit, Layout, useRive } from "@rive-app/react-canvas";
 import "./styles.css";
 import { UUID } from "src/common/utils";
+import { RiveNode } from "plugins/moderate-plugin-rive/common/components/riveNode";
 
 export const RiveDemo = () => {
 	const { RiveComponent } = useRive({
@@ -20,24 +21,20 @@ export const RiveDemo = () => {
 };
 
 // Another example loading a Rive file from a URL
-export const UrlDemo = () => {
-	const { RiveComponent } = useRive({
-		src: "https://cdn.rive.app/animations/vehicles.riv",
-		// This is optional.Provides additional layout control.
-		layout: new Layout({
-			fit: Fit.FitWidth, // Change to: rive.Fit.Contain, or Cover
-			alignment: Alignment.Center,
-		}),
-		autoplay: true,
-	});
-	return <RiveComponent />;
-};
-
 export default function RivePage() {
 	return (
 		<div className="RiveContainer" key={UUID()}>
-			{/* <RiveDemo /> */}
-			<UrlDemo />
+			<RiveNode
+				options={{
+					// This is optional.Provides additional layout control.
+					layout: new Layout({
+						fit: Fit.FitWidth, // Change to: rive.Fit.Contain, or Cover
+						alignment: Alignment.Center,
+					}),
+					autoplay: true,
+				}}
+				url="https://cdn.rive.app/animations/vehicles.riv"
+			/>
 		</div>
 	);
 }

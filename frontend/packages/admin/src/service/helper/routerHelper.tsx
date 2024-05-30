@@ -12,6 +12,7 @@ import {
 	RoutesStructDataItem,
 } from "src/router/types";
 import { reduxStore as store } from "..";
+import RiveLoading from "plugins/moderate-plugin-rive/common/components/riveLoading";
 
 export type MenuItem = {
 	key: ROUTE_ID_KEY;
@@ -165,7 +166,7 @@ export class RouterHelper {
 				// 排除部分组件：发布环境上无需存在的路由组件
 				const Comp = pageList[component] || Fragment;
 				element = (
-					<Suspense>
+					<Suspense fallback={<RiveLoading />}>
 						<Comp />
 					</Suspense>
 				);

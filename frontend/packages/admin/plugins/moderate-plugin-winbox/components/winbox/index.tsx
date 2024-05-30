@@ -11,9 +11,9 @@ import {
 import WinBox, { WinBoxPropType } from "react-winbox";
 import { reduxStore } from "src/service";
 import { RouterHelper } from "src/service/helper/routerHelper";
-import "winbox/dist/css/themes/modern.min.css"; // optional
 import "winbox/dist/css/themes/white.min.css"; // optional
 import "winbox/dist/css/winbox.min.css";
+import "./index.scss";
 
 export interface WinBoxModalProps {
 	id: string | number;
@@ -84,6 +84,7 @@ function WinBoxModal({
 	);
 	return (
 		<WinBox
+			className="modern"
 			ref={ref}
 			title={winBoxTitle}
 			icon={icon}
@@ -112,8 +113,8 @@ function WinBoxModal({
 				style={{
 					width: "100%",
 					height: "100%",
-					padding: "12px",
 					background: token.colorBgContainer,
+					overflow: "auto",
 				}}
 			>
 				{children}

@@ -70,7 +70,6 @@ const PluginCard: React.FC<{ data: Plugin }> = ({ data }) => {
 				</div>,
 				<div>
 					<Dropdown
-						placement="topCenter"
 						menu={{
 							items: [
 								{

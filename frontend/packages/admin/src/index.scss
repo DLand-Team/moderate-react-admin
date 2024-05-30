@@ -56,3 +56,25 @@ body {
 
 	border-radius: 4px;
 }
+
+.loading {
+	// 整个页面的 DOM 结构
+}
+
+.g-glossy {
+	position: fixed;
+	backdrop-filter: blur(4px);
+}
+
+.g-glossy-firefox {
+	display: none;
+}
+
+@supports (background: -moz-element(loading)) {
+	.g-glossy-firefox {
+		display: block;
+		position: fixed;
+		background: -moz-element(loading) no-repeat;
+		filter: blur(2px);
+	}
+}
