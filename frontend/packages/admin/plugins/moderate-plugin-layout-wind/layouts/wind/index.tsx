@@ -1,12 +1,12 @@
 import { Layout, theme } from "antd";
 import styles from "./index.module.scss";
 
+import React, { Suspense, lazy } from "react";
 import NavHeader from "./navHeader";
 import SliderMenu from "./sliderMenu";
-import React, { Suspense, lazy } from "react";
 
 const MainContent = lazy(() => import("./mainContent"));
-const { Content, Footer } = Layout;
+const { Footer } = Layout;
 export const Wind = ({ children }: React.PropsWithChildren) => {
 	const {
 		token: { colorBgContainer, borderRadiusLG, colorBgLayout },
@@ -27,7 +27,7 @@ export const Wind = ({ children }: React.PropsWithChildren) => {
 					flex: 1,
 					height: 0,
 					overflowY: "auto",
-					
+
 					overflowX: "hidden",
 				}}
 			>

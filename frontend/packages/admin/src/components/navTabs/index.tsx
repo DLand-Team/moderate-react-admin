@@ -1,4 +1,10 @@
-import React, { useMemo, useReducer, useRef, useState } from "react";
+import {
+	BlockOutlined,
+	CloseCircleOutlined,
+	DeleteRowOutlined,
+	HeartOutlined,
+	ReloadOutlined,
+} from "@ant-design/icons";
 import type { DragEndEvent } from "@dnd-kit/core";
 import {
 	DndContext,
@@ -7,31 +13,21 @@ import {
 	useSensor,
 } from "@dnd-kit/core";
 import {
+	SortableContext,
 	arrayMove,
 	horizontalListSortingStrategy,
-	SortableContext,
 	useSortable,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Button, Dropdown, MenuProps, Tabs, theme } from "antd";
-import { AppHelper, RouterHelper, useFlat } from "src/service";
+import { Dropdown, MenuProps, Tabs, theme } from "antd";
+import { cloneDeep } from "lodash-es";
+import React, { useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useLocationListen } from "src/common/hooks";
 import { ROUTE_ID } from "src/router/name";
 import { ROUTE_ID_KEY } from "src/router/types";
-import { cloneDeep } from "lodash-es";
-import { useLocationListen } from "src/common/hooks";
-import { useTranslation } from "react-i18next";
+import { AppHelper, RouterHelper, useFlat } from "src/service";
 import styles from "./index.module.scss";
-import {
-	BlockOutlined,
-	CloseCircleOutlined,
-	DeleteRowOutlined,
-	HeartOutlined,
-	ReloadOutlined,
-} from "@ant-design/icons";
-import {
-	restrictToParentElement,
-	restrictToWindowEdges,
-} from "@dnd-kit/modifiers";
 
 interface DraggableTabPaneProps extends React.HTMLAttributes<HTMLDivElement> {
 	"data-node-key": string;
@@ -73,7 +69,7 @@ const DraggableTabNode = ({
 			<div
 				style={{
 					...style,
-					width: "100px",
+					width: "200px",
 					zIndex: 2,
 				}}
 				ref={setNodeRef}
@@ -177,7 +173,6 @@ const App: React.FC = () => {
 		},
 		[language],
 	);
-	const onDragStart = () => {};
 	const onDragEnd = ({ active, over }: DragEndEvent) => {
 		setTabClassName(styles.test);
 		const { rect } = active;
@@ -201,7 +196,6 @@ const App: React.FC = () => {
 
 			return;
 		}
-		debugger;
 		currentDragRef.current = undefined;
 		if (!over) return;
 		const tabsHistoryTemp = [...tabItems];
@@ -266,7 +260,7 @@ const App: React.FC = () => {
 				height: "40px",
 				zIndex: 2,
 			}}
-			tabBarGutter={3}
+			tabBarGutter={2}
 			type="editable-card"
 			indicator={{ size: (origin) => origin - 20, align: "center" }}
 			items={tabItems.map((item) => {
@@ -287,6 +281,7 @@ const App: React.FC = () => {
 					onDragStart={({ active }) => {
 						currentDragRef.current = active.id as string;
 						setTabClassName(styles.content);
+						RouterHelper.jumpToByPath(currentDragRef.current);
 					}}
 					sensors={[sensor]}
 					onDragEnd={onDragEnd}

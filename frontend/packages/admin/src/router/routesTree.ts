@@ -62,3 +62,5 @@ export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [
 	{ id: ROUTE_ID.LoginPage },
 ];
 // MODERATE_AUTO:END
+
+
