@@ -7,7 +7,6 @@ const useLocationListen = (
 ) => {
 	let location = useLocation();
 	useLayoutEffect(() => {
-		listener(location);
 		const handler = () => {
 			listener(location);
 		};
