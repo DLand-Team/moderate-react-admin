@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios, { AxiosInstance } from "axios";
 import storageHelper from "../utils/storageHelper";
 import { HttpError } from "./HttpError";
 import { overrideHttpType } from "./overrideHttpType";
 import { message } from "antd";
-
+import { dp } from "src/service";
 const _http = axios.create({
 	timeout: 1000 * 30,
 });
@@ -61,3 +61,14 @@ _http.interceptors.response.use(
 export const http = overrideHttpType(_http);
 export const httpBase = _http;
 export const http2 = _http;
+
+_http.fetch = ((config, options) => {
+	if (options?.showLoading) {
+		dp("appStore", "setIsLoading", true);
+	}
+	return _http.request(config).finally(() => {
+		if (options?.showLoading) {
+			dp("appStore", "setIsLoading", false);
+		}
+	});
+}) as typeof _http.fetch;

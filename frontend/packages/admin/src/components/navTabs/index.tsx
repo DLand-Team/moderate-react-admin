@@ -2,7 +2,6 @@ import {
 	BlockOutlined,
 	CloseCircleOutlined,
 	DeleteRowOutlined,
-	HeartOutlined,
 	ReloadOutlined,
 } from "@ant-design/icons";
 import type { DragEndEvent } from "@dnd-kit/core";
@@ -21,12 +20,12 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import { Dropdown, MenuProps, Tabs, theme } from "antd";
 import { cloneDeep } from "lodash-es";
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocationListen } from "src/common/hooks";
 import { ROUTE_ID } from "src/router/name";
 import { ROUTE_ID_KEY } from "src/router/types";
-import { AppHelper, RouterHelper, useFlat } from "src/service";
+import { AppHelper, RouterHelper, reduxStore, useFlat } from "src/service";
 import styles from "./index.module.scss";
 
 interface DraggableTabPaneProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -129,6 +128,7 @@ const App: React.FC = () => {
 		language,
 		setRefreshKey,
 	} = useFlat("appStore");
+	// const currentPosRef = useRef<{ x: number; y: number }>();
 	const currentTabRef = useRef<string>();
 	const [tabClassName, setTabClassName] = useState("");
 	const currentDragRef = useRef<string>();
@@ -136,18 +136,11 @@ const App: React.FC = () => {
 		activationConstraint: { distance: 10 },
 	});
 
-	useEffect(() => {
-		window.addEventListener('', function (event) {
-			// event.state 包含 pushState 方法设置的状态对象
-			if (event.state) {
-				// 在这里执行与状态变化相关的操作
-				console.log("URL 发生了变化，新的状态对象为：", event.state);
-			}
-		});
-	}, []);
 	useLocationListen(
 		(location) => {
-			const tabItemsTemp = cloneDeep(tabItems).filter((item) => {
+			const tabItems = cloneDeep(reduxStore.getState().appStore.tabItems);
+			debugger;
+			const tabItemsTemp = tabItems.filter((item) => {
 				return item;
 			});
 			if (
@@ -158,7 +151,7 @@ const App: React.FC = () => {
 				const { pathname } = location;
 				const id = pathname.split("/").slice(-1)[0];
 				if (
-					!tabItems.some((item) => {
+					!tabItemsTemp.some((item) => {
 						return (
 							item.location?.pathname.toLocaleLowerCase() ==
 							location.pathname.toLocaleLowerCase()
@@ -174,9 +167,17 @@ const App: React.FC = () => {
 						key: location.pathname,
 					});
 				} else {
-					let targetIndex = tabItems.findIndex((item) => {
+					let targetIndex = tabItemsTemp.findIndex((item) => {
 						return item.key === location.pathname;
 					});
+					tabItemsTemp[targetIndex] = {
+						location,
+						label:
+							RouterHelper.getRouteTitleByKey(
+								id as ROUTE_ID_KEY,
+							) || "",
+						key: location.pathname,
+					};
 				}
 			}
 			let temp = tabItemsTemp.map((item) => {
@@ -246,23 +247,70 @@ const App: React.FC = () => {
 				key: "0",
 				icon: <ReloadOutlined />,
 			},
+			// {
+			// 	label: <a>Favourite</a>,
+			// 	key: "1",
+			// 	icon: <HeartOutlined />,
+			// },
 			{
-				label: <a href="https://www.aliyun.com">Favourite</a>,
-				key: "1",
-				icon: <HeartOutlined />,
-			},
-			{
-				label: <a href="https://www.aliyun.com">Float</a>,
+				label: (
+					<a
+						onClick={() => {
+							AppHelper.addWinbox({
+								content: AppHelper.getKeepAliveComponentById({
+									id: (currentTabRef.current as string)
+										.split("/")
+										.slice(-1)[0],
+								}),
+								pos: {
+									x: 500,
+									y: 200,
+								},
+								title: currentTabRef.current
+									?.split("/")
+									.slice(-1)[0],
+								type: "page",
+							});
+							debugger;
+							AppHelper.closeTabByPath({
+								pathName: currentTabRef.current as string,
+							});
+						}}
+					>
+						Float
+					</a>
+				),
 				icon: <BlockOutlined />,
 				key: "3",
 			},
 			{
-				label: <a href="https://www.aliyun.com">Close Right</a>,
+				label: (
+					<a
+						onClick={() => {
+							AppHelper.closeRightTabByPath({
+								pathName: currentTabRef.current,
+							});
+						}}
+					>
+						Close Right
+					</a>
+				),
 				icon: <DeleteRowOutlined />,
 				key: "4",
 			},
 			{
-				label: <a href="https://www.aliyun.com">Close Other</a>,
+				label: (
+					<a
+						onClick={() => {
+							currentTabRef.current &&
+								AppHelper.closeOtherTabByPath({
+									pathName: currentTabRef.current,
+								});
+						}}
+					>
+						Close Other
+					</a>
+				),
 				icon: <CloseCircleOutlined />,
 				key: "5",
 			},
@@ -358,6 +406,7 @@ const App: React.FC = () => {
 												if (open) {
 													currentTabRef.current =
 														node.key!;
+													debugger;
 												} else {
 													currentTabRef.current =
 														undefined;

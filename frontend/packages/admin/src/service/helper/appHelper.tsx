@@ -153,9 +153,11 @@ export class AppHelper {
 			routeId as ROUTE_ID_KEY,
 		);
 		if (tabItems.length > 1 || routeItemData.depends) {
+			debugger;
 			dp("appStore", "deleteTabHistoryAct", {
 				pathName,
 			});
+			debugger;
 			if (activeTabKey == pathName) {
 				if (routeItemData.depends) {
 					RouterHelper.jumpTo(routeItemData.parentId as ROUTE_ID_KEY);
@@ -168,7 +170,31 @@ export class AppHelper {
 			}
 		}
 	}
-
+	static closeOtherTabByPath({ pathName }: { pathName?: string } = {}) {
+		const { tabItems, activeTabKey } = reduxStore.getState().appStore;
+		if (pathName && activeTabKey !== pathName) {
+			RouterHelper.jumpToByPath(pathName);
+		}
+		const item = tabItems.find((item) => {
+			return item.key == pathName;
+		});
+		item && dp("appStore", "setTabItems", [item]);
+	}
+	static closeRightTabByPath({ pathName }: { pathName?: string } = {}) {
+		const { tabItems, activeTabKey } = reduxStore.getState().appStore;
+		const targetIndex = tabItems.findIndex((item) => {
+			return item.key == pathName;
+		});
+		if (
+			pathName &&
+			tabItems.slice(targetIndex).some((item) => {
+				return item.key === activeTabKey;
+			})
+		) {
+			RouterHelper.jumpToByPath(pathName);
+		}
+		dp("appStore", "setTabItems", tabItems.slice(0, targetIndex + 1));
+	}
 	static createApp(
 		providerList: (
 			| ((props: { children?: ReactNode }) => JSX.Element)

@@ -46,6 +46,7 @@ const initialState = (): StoreState => {
 		},
 		winBoxTitleTemp: "",
 		refreshKey: [],
+		isLoading: false,
 	};
 };
 
@@ -141,6 +142,9 @@ const appSlice = createSliceCustom({
 		},
 		setRefreshKey(state, { payload }: PayloadAction<string[]>) {
 			state.refreshKey = payload;
+		},
+		setIsLoading(state, { payload }: PayloadAction<boolean>) {
+			state.isLoading = payload;
 		},
 	},
 });

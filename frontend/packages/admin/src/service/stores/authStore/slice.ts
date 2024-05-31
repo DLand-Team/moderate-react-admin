@@ -4,6 +4,8 @@ import names from "../names";
 import { MenuPermissionItem, StoreState } from "./model";
 import { ROUTE_CONFIG_MAP } from "src/router/routesConfig";
 import { ROUTE_ID_KEY } from "src/router/types";
+import thunks from "./thunks";
+import { dp } from "src/service";
 
 const initialState = (): StoreState => {
 	const defaultPermissions = Object.values(ROUTE_CONFIG_MAP)

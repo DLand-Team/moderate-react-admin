@@ -5,7 +5,7 @@ import styles from "./loginPage.module.scss";
 
 const App = (props: { children: ReactNode }) => (
 	<div className={styles.loginBox}>
-		<div className={styles.loginTitle}>Scalling Admin</div>
+		<div className={styles.loginTitle}>Moderate Admin</div>
 		<div className={styles.loginCon}>
 			<img src={pic}></img>
 			<Card hoverable className={styles.loginCard}>
@@ -17,7 +17,7 @@ const App = (props: { children: ReactNode }) => (
 						marginBottom: "20px",
 					}}
 				>
-					Scalling Admin
+					Moderate Admin
 				</Typography>
 				{props.children}
 			</Card>

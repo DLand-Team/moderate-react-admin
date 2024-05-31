@@ -28,7 +28,7 @@ export default function RivePage() {
 				options={{
 					// This is optional.Provides additional layout control.
 					layout: new Layout({
-						fit: Fit.FitWidth, // Change to: rive.Fit.Contain, or Cover
+						fit: Fit.Cover, // Change to: rive.Fit.Contain, or Cover
 						alignment: Alignment.Center,
 					}),
 					autoplay: true,

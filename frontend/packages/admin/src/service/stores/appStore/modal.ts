@@ -32,6 +32,7 @@ export interface StoreState {
 	settingData: Setting | null;
 	language: string;
 	refreshKey: string[];
+	isLoading: boolean;
 }
 
 export interface Setting {

@@ -2,14 +2,15 @@
 /// <reference types="vite-plugin-glob-accept/client" />
 declare module "*.riv" {}
 type AddEventListenerType = Parameters<typeof window.addEventListener>;
+import { AxiosInstance, AxiosRequestConfig } from "axios";
 
-declare interface Window {
-	addEventListenerPro: (
-		type: "pushState" | "replaceState" | keyof WindowEventMap,
-		handler: AddEventListenerType[1],
-	) => void;
-	removeEventListenerPro: (
-		type: "pushState" | "replaceState" | keyof WindowEventMap,
-		handler: AddEventListenerType[1],
-	) => void;
+declare module "axios" {
+	export interface AxiosInstance {
+		fetch: <T = any, R = AxiosResponse<T, any>, D = any>(
+			config: AxiosRequestConfig<D>,
+			options?: {
+				showLoading?: boolean;
+			},
+		) => Promise<R>;
+	}
 }

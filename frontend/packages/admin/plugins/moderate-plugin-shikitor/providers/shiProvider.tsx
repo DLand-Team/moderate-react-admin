@@ -1,5 +1,4 @@
 import { QueriesProvider } from "../common/hooks/useQueries";
-
 export const ShiProvider = ({
 	children,
 }: React.PropsWithChildren) => {

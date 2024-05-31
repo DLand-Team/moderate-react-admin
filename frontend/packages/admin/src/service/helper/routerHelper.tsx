@@ -35,19 +35,6 @@ const bindHistoryEvent = function (type: "pushState" | "replaceState") {
 		return newEvent;
 	};
 };
-type AddEventListenerType = Parameters<typeof window.addEventListener>;
-window.addEventListenerPro = (
-	type: "pushState" | "replaceState" | AddEventListenerType[0],
-	handler: AddEventListenerType[1],
-) => {
-	return window.addEventListener(type, handler);
-};
-window.removeEventListenerPro = (
-	type: "pushState" | "replaceState" | AddEventListenerType[0],
-	handler: AddEventListenerType[1],
-) => {
-	return window.removeEventListener(type, handler);
-};
 history.pushState = bindHistoryEvent("pushState");
 history.replaceState = bindHistoryEvent("replaceState");
 
