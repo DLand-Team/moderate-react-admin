@@ -6,6 +6,8 @@ import CodeEditorPreview from "plugins/moderate-plugin-shikitor/common/component
 import MessengerPreview from "plugins/moderate-plugin-shikitor/common/components/Messenger/Preview";
 import { useQueries } from "plugins/moderate-plugin-shikitor/common/hooks/useQueries";
 import { lazy, Suspense, useMemo } from "react";
+import { Button } from "antd";
+import { RouterHelper } from "src/service";
 
 const examples = [
 	[
@@ -48,6 +50,24 @@ export default function App() {
 				height: "100%",
 			}}
 		>
+			<Button
+				onClick={() => {
+					RouterHelper.jumpToByPath(
+						"/HomePage/CmsPage/ShikitorPage?active=Code+Editor",
+					);
+				}}
+			>
+				Editor
+			</Button>
+			<Button
+				onClick={() => {
+					RouterHelper.jumpToByPath(
+						"/HomePage/CmsPage/ShikitorPage?active=Messenger",
+					);
+				}}
+			>
+				Messenger
+			</Button>
 			{ActiveComponent ? (
 				<Suspense fallback={<div className="loading">Loading...</div>}>
 					<ActiveComponent />

@@ -26,6 +26,30 @@ export type TreeSelectItem = {
 	title: string;
 	children?: TreeSelectItem[];
 };
+const bindHistoryEvent = function (type: "pushState" | "replaceState") {
+	const historyEvent = history[type];
+	return function (...arg: any) {
+		const newEvent = historyEvent.apply(history, arg); //执行history函数
+		const e = new Event(type);
+		window.dispatchEvent(e);
+		return newEvent;
+	};
+};
+type AddEventListenerType = Parameters<typeof window.addEventListener>;
+window.addEventListenerPro = (
+	type: "pushState" | "replaceState" | AddEventListenerType[0],
+	handler: AddEventListenerType[1],
+) => {
+	return window.addEventListener(type, handler);
+};
+window.removeEventListenerPro = (
+	type: "pushState" | "replaceState" | AddEventListenerType[0],
+	handler: AddEventListenerType[1],
+) => {
+	return window.removeEventListener(type, handler);
+};
+history.pushState = bindHistoryEvent("pushState");
+history.replaceState = bindHistoryEvent("replaceState");
 
 export class RouterHelper {
 	static createClientRoutesConfig() {

@@ -8,6 +8,13 @@ const useLocationListen = (
 	let location = useLocation();
 	useLayoutEffect(() => {
 		listener(location);
+		const handler = () => {
+			listener(location);
+		};
+		window.addEventListener("pushState", handler);
+		return () => {
+			return window.addEventListener("pushState", handler);
+		};
 	}, [location, ...depArr]);
 };
 

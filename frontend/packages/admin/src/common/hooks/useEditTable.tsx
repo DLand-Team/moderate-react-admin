@@ -109,9 +109,7 @@ export const useEditTable = <T extends { key?: string } = any>({
 				setEditingKey("");
 				handleValuesChange?.(row, newData);
 			}
-		} catch (errInfo) {
-			console.log("Validate Failed:", errInfo);
-		}
+		} catch (errInfo) {}
 	};
 	const columns = colCreater({
 		editingKey,

@@ -67,7 +67,7 @@ const NavHeader = () => {
 				display: "flex",
 				alignItems: "center",
 				position: "relative",
-				paddingLeft: "60px",
+				paddingLeft: "20px",
 			}}
 		>
 			<NameInfo />

@@ -21,7 +21,7 @@ import {
 import { CSS } from "@dnd-kit/utilities";
 import { Dropdown, MenuProps, Tabs, theme } from "antd";
 import { cloneDeep } from "lodash-es";
-import React, { useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocationListen } from "src/common/hooks";
 import { ROUTE_ID } from "src/router/name";
@@ -47,7 +47,6 @@ const DraggableTabNode = ({
 	const {
 		token: { colorBgLayout },
 	} = theme.useToken();
-	console.log(path);
 	const { attributes, listeners, setNodeRef, transform, transition } =
 		useSortable({
 			id: props["data-node-key"],
@@ -60,11 +59,11 @@ const DraggableTabNode = ({
 	};
 	let routeId = path.split("/").slice(-1)[0];
 
-	let a = AppHelper.getKeepAliveComponentById({
+	let cacheComp = AppHelper.getKeepAliveComponentById({
 		id: routeId,
 	});
 
-	if (currentId.current == path && a && transform!?.y > 50) {
+	if (currentId.current == path && cacheComp && transform!?.y > 50) {
 		return (
 			<div
 				style={{
@@ -99,7 +98,7 @@ const DraggableTabNode = ({
 						overflow: "auto",
 					}}
 				>
-					{a}
+					{cacheComp}
 				</div>
 			</div>
 		);
@@ -136,31 +135,49 @@ const App: React.FC = () => {
 	const sensor = useSensor(PointerSensor, {
 		activationConstraint: { distance: 10 },
 	});
+
+	useEffect(() => {
+		window.addEventListener('', function (event) {
+			// event.state 包含 pushState 方法设置的状态对象
+			if (event.state) {
+				// 在这里执行与状态变化相关的操作
+				console.log("URL 发生了变化，新的状态对象为：", event.state);
+			}
+		});
+	}, []);
 	useLocationListen(
 		(location) => {
 			const tabItemsTemp = cloneDeep(tabItems).filter((item) => {
 				return item;
 			});
 			if (
-				!tabItems.some((item) => {
-					return (
-						item.location?.pathname.toLocaleLowerCase() ==
-						location.pathname.toLocaleLowerCase()
-					);
-				}) &&
 				![ROUTE_ID.NotFundPage, ROUTE_ID.LoadingPage].includes(
 					RouterHelper.getRouteIdByPath(location.pathname),
 				)
 			) {
 				const { pathname } = location;
 				const id = pathname.split("/").slice(-1)[0];
-				tabItemsTemp.push({
-					location,
-					label:
-						RouterHelper.getRouteTitleByKey(id as ROUTE_ID_KEY) ||
-						"",
-					key: location.pathname,
-				});
+				if (
+					!tabItems.some((item) => {
+						return (
+							item.location?.pathname.toLocaleLowerCase() ==
+							location.pathname.toLocaleLowerCase()
+						);
+					})
+				) {
+					tabItemsTemp.push({
+						location,
+						label:
+							RouterHelper.getRouteTitleByKey(
+								id as ROUTE_ID_KEY,
+							) || "",
+						key: location.pathname,
+					});
+				} else {
+					let targetIndex = tabItems.findIndex((item) => {
+						return item.key === location.pathname;
+					});
+				}
 			}
 			let temp = tabItemsTemp.map((item) => {
 				if (item.label) {
@@ -252,6 +269,17 @@ const App: React.FC = () => {
 		];
 	}, []);
 
+	const onEdit = (
+		targetKey: React.MouseEvent | React.KeyboardEvent | string,
+		action: "add" | "remove",
+	) => {
+		if (action === "remove") {
+			AppHelper.closeTabByPath({
+				pathName: targetKey as string,
+			});
+		}
+	};
+
 	return (
 		<Tabs
 			className={tabClassName}
@@ -260,6 +288,7 @@ const App: React.FC = () => {
 				height: "40px",
 				zIndex: 2,
 			}}
+			onEdit={onEdit}
 			tabBarGutter={2}
 			type="editable-card"
 			indicator={{ size: (origin) => origin - 20, align: "center" }}
@@ -273,7 +302,16 @@ const App: React.FC = () => {
 			activeKey={activeTabKey}
 			onChange={(e) => {
 				setActiveTabKey(e);
-				RouterHelper.jumpToByPath(e);
+				let target = tabItems.find((item) => {
+					return item.key === e;
+				});
+				if (target) {
+					RouterHelper.jumpToByPath(
+						e + target.location?.search + target.location?.hash,
+					);
+				} else {
+					RouterHelper.jumpToByPath(e);
+				}
 			}}
 			renderTabBar={(tabBarProps, DefaultTabBar) => (
 				<DndContext
@@ -281,7 +319,18 @@ const App: React.FC = () => {
 					onDragStart={({ active }) => {
 						currentDragRef.current = active.id as string;
 						setTabClassName(styles.content);
-						RouterHelper.jumpToByPath(currentDragRef.current);
+						let target = tabItems.find((item) => {
+							return item.key === currentDragRef.current;
+						});
+						if (target) {
+							RouterHelper.jumpToByPath(
+								currentDragRef.current +
+									target.location?.search +
+									target.location?.hash,
+							);
+						} else {
+							RouterHelper.jumpToByPath(currentDragRef.current);
+						}
 					}}
 					sensors={[sensor]}
 					onDragEnd={onDragEnd}

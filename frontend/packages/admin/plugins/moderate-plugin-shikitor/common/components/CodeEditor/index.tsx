@@ -72,7 +72,7 @@ export default function CodeEditor() {
 	} = useQueries<{
 		theme: BundledTheme;
 		language: BundledLanguage;
-	}>() || { value: { theme: "github-dark", language: "typescript" } };
+	}>();
 
 	const shikitorRef = useRef<Shikitor>(null);
 	const shikitorCreate = useShikitorCreate();

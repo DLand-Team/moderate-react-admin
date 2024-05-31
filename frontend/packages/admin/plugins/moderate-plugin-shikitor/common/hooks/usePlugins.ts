@@ -19,9 +19,7 @@ export const usePlugins = (shikitorRef: RefObject<Shikitor>) => {
 						module,
 						findIndex === -1 ? undefined : findIndex,
 					)
-					.then(() => {
-						console.log("Plugin updated:", id);
-					});
+					.then(() => {});
 			}),
 		[shikitorRef],
 	);

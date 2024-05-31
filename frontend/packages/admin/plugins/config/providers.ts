@@ -5,7 +5,7 @@ import { ShiProvider } from "plugins/moderate-plugin-shikitor/providers/shiProvi
 
 export const pluginProviders = [
 	PluginMarkDownProvider,
-	WinBoxProvider,
 	ShiProvider,
+	WinBoxProvider,
 	//>>>PROVIDER_SIGN<<<//
 ];
