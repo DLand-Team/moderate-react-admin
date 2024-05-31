@@ -139,10 +139,10 @@ const App: React.FC = () => {
 	useLocationListen(
 		(location) => {
 			const tabItems = cloneDeep(reduxStore.getState().appStore.tabItems);
-			debugger;
 			const tabItemsTemp = tabItems.filter((item) => {
 				return item;
 			});
+			debugger;
 			if (
 				![ROUTE_ID.NotFundPage, ROUTE_ID.LoadingPage].includes(
 					RouterHelper.getRouteIdByPath(location.pathname),
@@ -271,7 +271,6 @@ const App: React.FC = () => {
 									.slice(-1)[0],
 								type: "page",
 							});
-							debugger;
 							AppHelper.closeTabByPath({
 								pathName: currentTabRef.current as string,
 							});
@@ -406,7 +405,6 @@ const App: React.FC = () => {
 												if (open) {
 													currentTabRef.current =
 														node.key!;
-													debugger;
 												} else {
 													currentTabRef.current =
 														undefined;

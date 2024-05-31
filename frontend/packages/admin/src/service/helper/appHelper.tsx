@@ -153,11 +153,9 @@ export class AppHelper {
 			routeId as ROUTE_ID_KEY,
 		);
 		if (tabItems.length > 1 || routeItemData.depends) {
-			debugger;
 			dp("appStore", "deleteTabHistoryAct", {
 				pathName,
 			});
-			debugger;
 			if (activeTabKey == pathName) {
 				if (routeItemData.depends) {
 					RouterHelper.jumpTo(routeItemData.parentId as ROUTE_ID_KEY);
