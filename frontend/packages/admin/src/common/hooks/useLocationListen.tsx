@@ -12,7 +12,7 @@ const useLocationListen = (
 	}, [...depArr]);
 	useLayoutEffect(() => {
 		const handler = () => {
-			debugger;
+			;
 			listener({
 				pathname: window.location.pathname,
 				search: window.location.search,

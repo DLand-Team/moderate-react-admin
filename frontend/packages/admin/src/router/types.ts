@@ -9,6 +9,8 @@ export interface ExtendRouteConfig {
 	id?: ROUTE_ID_KEY; // 节点id
 	parentId?: ROUTE_ID_KEY; // 父节点id
 	isMenu?: boolean; // 是否是菜单
+	isPublish?: boolean;
+	isNotRoute?: boolean;
 	isNoAuth?: boolean; // 无权限
 	depends?: ROUTE_ID_KEY[];
 	meta?: {

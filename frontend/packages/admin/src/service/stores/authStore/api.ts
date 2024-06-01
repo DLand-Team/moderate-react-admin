@@ -1,36 +1,44 @@
-import { http, httpBase } from "src/common/http";
+import { http } from "src/common/http";
 
-import {
-	LoginApiParams,
-	LoginNestApiParams,
-	MenuPermissionItem,
-} from "./model";
+import { LoginApiParams, MenuPermissionItem } from "./model";
+import { dp } from "src/service";
 
 const baseUrl = "/api/system";
 
 const api = {
-	loginNestApi(params: LoginNestApiParams) {
-		return httpBase.fetch<
-			any,
-			{
-				code: number;
-				data: {
-					content: string;
-				};
-			}
-		>(
-			{
-				url: "/api/auth/login/local",
-				method: "POST",
-				data: {
-					email: params.username,
-					password: params.password,
-				},
-			},
-			{
-				showLoading: true,
-			},
-		);
+	loginNestApi(_: any) {
+		return new Promise((resolve) => {
+			dp("appStore", "setIsLoading", true);
+			setTimeout(() => {
+				dp("appStore", "setIsLoading", false);
+				resolve({
+					data: {
+						content: "http://localhost:8681",
+					},
+				});
+			}, 3000);
+		});
+		// return httpBase.fetch<
+		// 	any,
+		// 	{
+		// 		code: number;
+		// 		data: {
+		// 			content: string;
+		// 		};
+		// 	}
+		// >(
+		// 	{
+		// 		url: "/api/auth/login/local",
+		// 		method: "POST",
+		// 		data: {
+		// 			email: params.username,
+		// 			password: params.password,
+		// 		},
+		// 	},
+		// 	{
+		// 		showLoading: true,
+		// 	},
+		// );
 	},
 	loginApi(params: LoginApiParams) {
 		return http.request<{ accessToken: string }>({

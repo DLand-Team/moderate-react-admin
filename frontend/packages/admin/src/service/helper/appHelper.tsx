@@ -29,6 +29,7 @@ export class AppHelper {
 			const temp = Object.values(routesMap).find((item) => {
 				return item.id === ROUTE_ID.HomePage;
 			});
+
 			if (temp?.children?.length) {
 				result = result.concat(
 					AppHelper.createMenuDataLoop(temp?.children, []),
@@ -79,14 +80,24 @@ export class AppHelper {
 	 * @param {MenuItem} result
 	 */
 	static createMenuDataLoop = (data: RouteItem[], result: MenuItem[]) => {
+		debugger;
 		data.forEach((item) => {
 			const {
+				isNotRoute,
+				isPublish = true,
 				isMenu = true,
 				isNoAuth,
-				component = "HomePage",
+				component,
 				index,
 			} = item;
-			if (!isMenu || !isNoAuth || !pageList[component]) {
+			if (!isPublish && process.env.NODE_ENV == "production") {
+				return;
+			}
+			if (
+				!isMenu ||
+				!isNoAuth ||
+				(!isNotRoute && !(component! in pageList))
+			) {
 				return;
 			}
 			const temp: MenuItem = {

@@ -50,7 +50,7 @@ _http.interceptors.response.use(
 		return response.data;
 	},
 	(_) => {
-		message.error(_.response.data?.message || "error");
+		// message.error(_.response.data?.message || "error");
 		handleError({
 			code: "",
 			message: "",

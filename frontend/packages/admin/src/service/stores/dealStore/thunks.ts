@@ -50,7 +50,7 @@ const thunks = createThunks(names.dealStore, {
 				dp("dealStore", "setLoading", false);
 			});
 		const { content: dataList, count } = res.data;
-		debugger;
+		;
 		dp("dealStore", "setDealList", {
 			list: dataList,
 			total: count,

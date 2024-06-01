@@ -9,12 +9,11 @@ import { useFlat } from "src/service";
 const LoginForm = () => {
 	const [form] = Form.useForm();
 	let { loginNest } = useFlat("authStore");
-	const onFinish = async (values: any) => {
+	const onFinish = async (values: { name: string; password: string }) => {
 		// 开发环境使用默认账号密码
 		loginNest({
-			username: "Avarile@gmail.com",
-			password: "1q2w3e4r",
-			captchaVerification: values.code,
+			username: values.name,
+			password: values.password,
 		})
 			.then(() => {
 				storageHelper.setItem("BTN_CON", "点击获取验证码");

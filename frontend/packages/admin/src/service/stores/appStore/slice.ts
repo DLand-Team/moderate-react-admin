@@ -25,6 +25,7 @@ const initialState = (): StoreState => {
 		return item!?.id === ROUTE_ID.HomePage;
 	})?.children;
 	const menuData = AppHelper.createMenuDataLoop(children!, []);
+	debugger;
 	return {
 		menuDefaultSelectedKeys: [],
 		menuDefaultOpenKeys: null,

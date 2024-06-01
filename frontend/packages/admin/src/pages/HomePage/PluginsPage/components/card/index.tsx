@@ -31,6 +31,9 @@ const PluginCard: React.FC<{ data: Plugin }> = ({ data }) => {
 			actions={[
 				<div
 					onClick={(e) => {
+						if (process.env.NODE_ENV === "production") {
+							return message.info("仅支持开发环境中操作～");
+						}
 						e.stopPropagation();
 						if (isInstalled) return;
 						messageApi.open({
@@ -80,6 +83,11 @@ const PluginCard: React.FC<{ data: Plugin }> = ({ data }) => {
 							selectable: true,
 							defaultSelectedKeys: ["3"],
 							onClick: () => {
+								if (process.env.NODE_ENV === "production") {
+									return message.info(
+										"仅支持开发环境中操作～",
+									);
+								}
 								removePluginAct({
 									url: gitee,
 								});

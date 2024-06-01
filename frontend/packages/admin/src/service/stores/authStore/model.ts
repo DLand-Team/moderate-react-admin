@@ -24,7 +24,7 @@ export interface LoginNestApiParams {
 export interface LoginApiParams {
   username: string;
   password: string;
-  captchaVerification: string;
+  // captchaVerification: string;
 }
 export interface MenuPermissionItem {
   id: number;

@@ -38,6 +38,7 @@ export const ROUTE_CONFIG_MAP: {
 		},
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: false,
+		isNotRoute: true,
 	},
 	CmsPage: {
 		id: "CmsPage",
@@ -47,6 +48,7 @@ export const ROUTE_CONFIG_MAP: {
 		},
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
+		isNotRoute: true,
 	},
 	TemplatePage: {
 		id: "TemplatePage",
@@ -56,6 +58,7 @@ export const ROUTE_CONFIG_MAP: {
 		},
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
+		isNotRoute: true,
 	},
 	UserPage: {
 		id: "UserPage",
@@ -80,6 +83,8 @@ export const ROUTE_CONFIG_MAP: {
 		},
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
+		isPublish: false,
+		isNotRoute:true
 	},
 	PageDevPage: {
 		id: "PageDevPage",

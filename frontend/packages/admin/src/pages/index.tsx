@@ -26,20 +26,22 @@ const ErrorPage = lazy(() => import("./HomePage/NotFundPage/notFundPage"));
 const MenuPage = lazy(() => import("./HomePage/SysPage/MenuPage/menuPage"));
 
 //PluginsPage
-const PluginsPage = isProd
-	? null
-	: lazy(() => import("./HomePage/PluginsPage"));
+const PluginsPage = lazy(() => import("./HomePage/PluginsPage"));
 
 //PluginListPage
-const PluginListPage = isProd
-	? null
-	: lazy(() => import("./HomePage/PluginsPage/PluginListPage"));
+const PluginListPage = lazy(
+	() => import("./HomePage/PluginsPage/PluginListPage"),
+);
 const DealPage = lazy(() => import("./HomePage/TemplatePage/DealPage"));
-const DealListPage = lazy(() => import("./HomePage/TemplatePage/DealPage/DealListPage"));
+const DealListPage = lazy(
+	() => import("./HomePage/TemplatePage/DealPage/DealListPage"),
+);
 const DealApprovalPage = lazy(
 	() => import("./HomePage/TemplatePage/DealPage/DealApprovalPage"),
 );
-const DealRankPage = lazy(() => import("./HomePage/TemplatePage/DealPage/DealRankPage"));
+const DealRankPage = lazy(
+	() => import("./HomePage/TemplatePage/DealPage/DealRankPage"),
+);
 const LoadingPage = lazy(() => import("./HomePage/LoadingPage"));
 const UserPage = lazy(() => import("./HomePage/TemplatePage/UserPage"));
 const CategoryPage = lazy(() => import("./HomePage/TemplatePage/CategoryPage"));
