@@ -1,28 +1,59 @@
-import { Card, Typography } from "antd";
+import { Typography } from "antd";
 import type { ReactNode } from "react";
-import pic from "src/assets/imgs/pic.png";
 import styles from "./loginPage.module.scss";
 
-const App = (props: { children: ReactNode }) => (
-	<div className={styles.loginBox}>
-		<div className={styles.loginTitle}>Moderate Admin</div>
-		<div className={styles.loginCon}>
-			<img src={pic}></img>
-			<Card hoverable className={styles.loginCard}>
+const LoginCard = (props: { children: ReactNode }) => {
+	return (
+		<div className={styles.loginCard}>
+			<div
+				style={{
+					display: "flex",
+					alignItems: "center",
+					paddingBottom: "80px",
+					paddingTop: "50px",
+					position: "relative",
+					left: "-20px",
+					width: "100%",
+					whiteSpace: "nowrap",
+				}}
+			>
+				<img width={"68px"} src="/logo.png" />
 				<Typography
 					style={{
-						textAlign: "center",
-						fontSize: "20px",
+						fontSize: "38px",
 						fontWeight: "bold",
-						marginBottom: "20px",
+						color: "#3a6bc4",
 					}}
 				>
-					Moderate Admin
+					Dland
 				</Typography>
-				{props.children}
-			</Card>
-		</div>
-	</div>
-);
+			</div>
+			<div>
+				<div
+					style={{
+						paddingBottom: "80px",
+					}}
+				>
+					<Typography
+						style={{
+							fontSize: "32px",
+							fontWeight: "bold",
+							color: "black",
+							paddingBottom: "20px",
+						}}
+					>
+						Login
+					</Typography>
+					<Typography>
+						Don’t have an account?{" "}
+						<Typography.Link>Get Started</Typography.Link>
+					</Typography>
+				</div>
 
-export default App;
+				{props.children}
+			</div>
+		</div>
+	);
+};
+
+export default LoginCard;

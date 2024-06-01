@@ -1,40 +1,38 @@
 .content {
-    background-image:url('src/assets/imgs/bg.png');
-    background-size: cover;
-    background-color: #e6ebf2;
-    height: 100%;
-    width: 100%;
-    .loginPanel{
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        z-index: 999;
-    }
-    .loginBox{
-        position: relative;
-        top:16%;
-        .loginTitle{
-            text-align: center;
-            font-size: 26px;
-            font-family: cursive;
-            margin-bottom: 1.4%;
-            font-weight: bold;
-            color: #888;
-        }
-        .loginCon{
-            display: flex;
-            width: 50%;
-            margin: 0 auto;
-            padding: 1%;
-            .loginCard{
-                width: 50%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-            }
-        }
-
-    }
-
+	background-color: #e6ebf2;
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+	display: flex;
+	.loginPanel {
+		position: absolute;
+		width: 100%;
+		height: 100vh;
+		z-index: 999;
+	}
+	.loginBox {
+		position: relative;
+		height: 100%;
+		.loginTitle {
+			text-align: center;
+			font-size: 26px;
+			font-family: cursive;
+			margin-bottom: 1.4%;
+			font-weight: bold;
+			color: #888;
+		}
+		.loginCon {
+			display: flex;
+			width: 50%;
+			margin: 0 auto;
+			padding: 1%;
+		}
+	}
+}
+.loginCard {
+	height: 100vh;
+	width: 360px;
+	border-radius: 0px;
+	background: white;
+	padding: 0px 80px;
 }

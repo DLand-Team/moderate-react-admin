@@ -354,7 +354,9 @@ const App: React.FC = () => {
 				});
 				if (target) {
 					RouterHelper.jumpToByPath(
-						e + target.location?.search + target.location?.hash,
+						e +
+							(target.location?.search || "") +
+							(target.location?.hash || ""),
 					);
 				} else {
 					RouterHelper.jumpToByPath(e);

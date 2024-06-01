@@ -1,4 +1,4 @@
-import { Button, Form, Input, message } from "antd";
+import { Button, Form, Input, Typography, message } from "antd";
 import { Fragment } from "react";
 import storageHelper from "src/common/utils/storageHelper";
 import { useFlat } from "src/service";
@@ -12,8 +12,8 @@ const LoginForm = () => {
 	const onFinish = async (values: any) => {
 		// 开发环境使用默认账号密码
 		loginNest({
-			username: values.name,
-			password: values.password,
+			username: "Avarile@gmail.com",
+			password: "1q2w3e4r",
 			captchaVerification: values.code,
 		})
 			.then(() => {
@@ -39,7 +39,6 @@ const LoginForm = () => {
 				onFinish={onFinish}
 				onFinishFailed={onFinishFailed}
 				autoComplete="off"
-				style={{ padding: "0 15px" }}
 			>
 				<Form.Item
 					label=""
@@ -55,7 +54,13 @@ const LoginForm = () => {
 						},
 					]}
 				>
-					<Input placeholder={"请输入用户名"} />
+					<Input
+						style={{
+							height: "53px",
+						}}
+						variant="filled"
+						placeholder={"请输入用户名"}
+					/>
 				</Form.Item>
 
 				<Form.Item
@@ -72,13 +77,37 @@ const LoginForm = () => {
 						},
 					]}
 				>
-					<Input.Password placeholder={"请输入密码"} />
+					<Input.Password
+						variant="filled"
+						style={{
+							height: "53px",
+						}}
+						placeholder={"请输入密码"}
+					/>
 				</Form.Item>
-				<Form.Item wrapperCol={{ span: 24 }}>
+				<div
+					style={{
+						textAlign: "right",
+					}}
+				>
+					<Typography.Link
+						style={{
+							textAlign: "right",
+						}}
+					>
+						Forgot password?
+					</Typography.Link>
+				</div>
+				<Form.Item
+					style={{
+						marginTop: "30px",
+					}}
+					wrapperCol={{ span: 24 }}
+				>
 					<Button
 						type="primary"
 						htmlType="submit"
-						style={{ width: "100%" }}
+						style={{ height: "48px", width: "100%" }}
 					>
 						Login
 					</Button>
