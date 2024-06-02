@@ -7,7 +7,9 @@ import "./index.scss";
 import { AppHelper } from "./service";
 import ServiceProvider from "./providers/serviceProvider";
 import ThemeProvider from "./providers/themeProvider";
-
+document.ondblclick = function (e) {
+	e.preventDefault();
+};
 const providerArr = [
 	ServiceProvider,
 	CustomRouter,

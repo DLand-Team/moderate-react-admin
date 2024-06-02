@@ -265,9 +265,7 @@ const App: React.FC = () => {
 									x: 500,
 									y: 200,
 								},
-								title: currentTabRef.current
-									?.split("/")
-									.slice(-1)[0],
+								title: currentTabRef.current,
 								type: "page",
 							});
 							AppHelper.closeTabByPath({

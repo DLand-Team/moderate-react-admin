@@ -222,14 +222,14 @@ export default () => {
 		>
 			<div
 				style={{
-					height: imgHeight,
+					height: "100%",
 					marginBottom: "32px",
 					borderRadius: "24px",
 				}}
 			>
 				<div
 					style={{
-						height: imgHeight,
+						height: "100%",
 						width: "100%",
 						pointerEvents: "none",
 						overflow: "hidden",
@@ -243,7 +243,8 @@ export default () => {
 							left: 0,
 							right: 0,
 							bottom: 0,
-							position: "absolute",
+							position: isMobile ? "initial" : "absolute",
+							paddingTop: "20px",
 							zIndex: 1,
 							display: "flex",
 							alignItems: "center",
@@ -253,16 +254,18 @@ export default () => {
 						<Banner />
 					</div>
 
-					<iframe
-						style={{
-							border: "none",
-							height: "100%",
-							width: "150%",
-							position: "absolute",
-							top: 0,
-						}}
-						src="https://my.spline.design/dunes-7ca97654d1f72bd2c09471e9e424c50b/"
-					></iframe>
+					{!isMobile && (
+						<iframe
+							style={{
+								border: "none",
+								height: "100%",
+								width: "150%",
+								position: "absolute",
+								top: 0,
+							}}
+							src="https://my.spline.design/dunes-7ca97654d1f72bd2c09471e9e424c50b/"
+						></iframe>
+					)}
 				</div>
 			</div>
 			<div

@@ -41,8 +41,7 @@ function HomepageHeader() {
 								<img
 									style={{
 										position: "absolute",
-										width: "380px",
-										height: "380px",
+										width: "100%",
 									}}
 									src="/logoBig.png"
 								></img>

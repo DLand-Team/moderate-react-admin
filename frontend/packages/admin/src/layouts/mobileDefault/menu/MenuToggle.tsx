@@ -11,7 +11,7 @@ export const MenuToggle = ({
 	<Button
 		style={{
 			position: "absolute",
-			zIndex: 301,
+			zIndex: 4,
 		}}
 		icon={isOpen ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
 		onClick={toggle}
