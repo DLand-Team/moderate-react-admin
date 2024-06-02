@@ -17,7 +17,7 @@ export const Rain = ({ children, ...rest }: React.PropsWithChildren) => {
 				style={{
 					display: "flex",
 					flexDirection: "column",
-					padding: "10px 48px",
+					padding: "10px 68px",
 				}}
 			>
 				<CustomBreadcrumb />

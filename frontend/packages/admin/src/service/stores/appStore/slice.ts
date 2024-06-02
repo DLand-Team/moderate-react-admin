@@ -25,7 +25,6 @@ const initialState = (): StoreState => {
 		return item!?.id === ROUTE_ID.HomePage;
 	})?.children;
 	const menuData = AppHelper.createMenuDataLoop(children!, []);
-	debugger;
 	return {
 		menuDefaultSelectedKeys: [],
 		menuDefaultOpenKeys: null,
@@ -39,7 +38,11 @@ const initialState = (): StoreState => {
 		isShowMdDrawer: false,
 		mdContent: "",
 		winBoxList: [],
-		settingData: settingData as Setting,
+		settingData:
+			process.env.NODE_ENV === "production" &&
+			storageHelper.getItem("SETTING", "local")
+				? storageHelper.getItem("SETTING", "local")
+				: (settingData as Setting),
 		language: storageHelper.getItem("LANGUAGE") || "en",
 		winPosTemp: {
 			x: 0,
@@ -133,6 +136,7 @@ const appSlice = createSliceCustom({
 		},
 		setSettingData(state, { payload }: PayloadAction<Setting>) {
 			state.settingData = payload;
+			storageHelper.setItem("SETTING", payload, "local");
 		},
 		setIsThemeAuto(state, { payload }: PayloadAction<boolean>) {
 			state.isThemeAuto = payload;

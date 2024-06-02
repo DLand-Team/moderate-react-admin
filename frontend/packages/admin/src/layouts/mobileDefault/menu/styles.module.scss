@@ -1,0 +1,41 @@
+.background {
+	position: absolute;
+	height: 100vh;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 300px;
+	background: #fff;
+	width: 80vw;
+	z-index: 300;
+}
+
+.icon-placeholder {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	flex: 40px 0;
+	margin-right: 20px;
+}
+
+.text-placeholder {
+	border-radius: 5px;
+	width: 200px;
+	height: 20px;
+	flex: 1;
+}
+
+.refresh {
+	padding: 10px;
+	position: absolute;
+	background: rgba(0, 0, 0, 0.4);
+	border-radius: 10px;
+	width: 20px;
+	height: 20px;
+	top: 10px;
+	right: 10px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}

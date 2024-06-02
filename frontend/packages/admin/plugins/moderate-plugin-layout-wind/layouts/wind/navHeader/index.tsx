@@ -11,12 +11,11 @@ import {
 import { useTranslation } from "react-i18next";
 import themeHoc from "src/common/hocs/themeHoc/themeHoc";
 import storageHelper from "src/common/utils/storageHelper";
-import { ROUTE_ID } from "src/router/name";
-import { RouterHelper, useFlat, useResetRedux } from "src/service";
+import CustomBreadcrumb from "src/components/customBreadcrumb";
+import { useFlat } from "src/service";
 import { ThemeColor } from "src/service/stores/appStore/slice";
 import NameInfo from "../nameInfo";
 import styles from "./index.module.scss";
-import CustomBreadcrumb from "src/components/customBreadcrumb";
 
 const CustomDropdownButton = themeHoc(Dropdown.Button, {});
 
@@ -40,7 +39,6 @@ const NavHeader = () => {
 		setLanguage,
 		language,
 	} = useFlat("appStore");
-	const resetAllStores = useResetRedux();
 	const antdThemeToken = antdTheme.useToken();
 	const { t, i18n } = useTranslation();
 	const items = [

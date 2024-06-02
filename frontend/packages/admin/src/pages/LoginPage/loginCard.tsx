@@ -17,12 +17,13 @@ const LoginCard = (props: { children: ReactNode }) => {
 					whiteSpace: "nowrap",
 				}}
 			>
-				<img width={"68px"} src="/logo.png" />
+				<img width={"55px"} src="/logo.png" />
 				<Typography
 					style={{
 						fontSize: "38px",
 						fontWeight: "bold",
 						color: "#3a6bc4",
+						paddingLeft:"12px"
 					}}
 				>
 					Dland

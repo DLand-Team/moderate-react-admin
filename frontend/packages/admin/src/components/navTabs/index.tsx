@@ -142,7 +142,6 @@ const App: React.FC = () => {
 			const tabItemsTemp = tabItems.filter((item) => {
 				return item;
 			});
-			;
 			if (
 				![ROUTE_ID.NotFundPage, ROUTE_ID.LoadingPage].includes(
 					RouterHelper.getRouteIdByPath(location.pathname),
@@ -196,7 +195,7 @@ const App: React.FC = () => {
 		const { rect } = active;
 		const { current } = rect;
 		const { top, left } = current.translated!;
-		if (top > 130) {
+		if (top - current.initial?.top! > 80) {
 			AppHelper.addWinbox({
 				content: AppHelper.getKeepAliveComponentById({
 					id: (active.id as string).split("/").slice(-1)[0],

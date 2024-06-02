@@ -11,12 +11,11 @@ import {
 import { useTranslation } from "react-i18next";
 import themeHoc from "src/common/hocs/themeHoc/themeHoc";
 import storageHelper from "src/common/utils/storageHelper";
-import { ROUTE_ID } from "src/router/name";
-import { RouterHelper, useFlat, useResetRedux } from "src/service";
+import { useFlat } from "src/service";
 import { ThemeColor } from "src/service/stores/appStore/slice";
+import SliderMenu from "../menu";
 import NameInfo from "../nameInfo";
 import styles from "./index.module.scss";
-import SliderMenu from "../menu";
 
 const CustomDropdownButton = themeHoc(Dropdown.Button, {});
 
@@ -40,7 +39,6 @@ const NavHeader = () => {
 		setLanguage,
 		language,
 	} = useFlat("appStore");
-	const resetAllStores = useResetRedux();
 	const antdThemeToken = antdTheme.useToken();
 	const { t, i18n } = useTranslation();
 	const items = [
@@ -68,7 +66,6 @@ const NavHeader = () => {
 				display: "flex",
 				alignItems: "center",
 				position: "relative",
-				paddingLeft: "60px",
 				height: "72px",
 			}}
 		>

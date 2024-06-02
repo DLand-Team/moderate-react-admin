@@ -62,7 +62,7 @@ let temp = [
 		name: "moderate-plugin-layout-wind",
 		gitee: "https://gitee.com/qanglee/moderate-plugin-layout-wind.git",
 		cover: "https://qiniu.moderate.run/plugins/moderate-plugin-layout-wind/wind.gif",
-		desc: "官方布局-dland",
+		desc: "官方布局-Wind",
 		author: {
 			name: "闲D阿强",
 			avatar: "https://qiniu.moderate.run/plugins/moderate-plugin-pdf/test.gif",
@@ -73,10 +73,21 @@ let temp = [
 		name: "moderate-plugin-layout-rain",
 		gitee: "https://gitee.com/qanglee/moderate-plugin-layout-rain.git",
 		cover: "https://qiniu.moderate.run/plugins/moderate-plugin-layout-wind/rain.gif",
-		desc: "官方布局-dland",
+		desc: "官方布局-Rain",
 		author: {
 			name: "闲D阿强",
 			avatar: "https://qiniu.moderate.run/plugins/moderate-plugin-pdf/test.gif",
+		},
+		isInstalled: true,
+	},
+	{
+		name: "moderate-plugin-shiki",
+		gitee: "https://gitee.com/qanglee/moderate-plugin-shiki",
+		cover: "https://qiniu.moderate.run/plugins/moderate-plugin-shiki/shiki.gif",
+		desc: "shiki，一款精致的，面向未来的ai代码编辑器",
+		author: {
+			name: "一介",
+			avatar: "https://qiniu.moderate.run/plugins/moderate-plugin-shiki/51358815.jpeg",
 		},
 		isInstalled: true,
 	},
@@ -84,7 +95,6 @@ let temp = [
 const PluginListPage = () => {
 	const { getPluginListAct, pluginList } = useFlat("devStore");
 
-	debugger;
 	useEffect(() => {
 		getPluginListAct();
 	}, []);

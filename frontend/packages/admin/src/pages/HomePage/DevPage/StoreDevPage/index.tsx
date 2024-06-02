@@ -58,7 +58,7 @@ const StoreDevPage = () => {
 					pageSize,
 					current: pageNum,
 					total,
-					onChange(page, pageSize) {
+					onChange() {
 						handlePageChange();
 					},
 				}}

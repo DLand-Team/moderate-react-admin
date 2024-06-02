@@ -7,7 +7,7 @@ import SliderMenu from "./sliderMenu";
 
 const MainContent = lazy(() => import("./mainContent"));
 const { Footer } = Layout;
-export const Wind = ({ children }: React.PropsWithChildren) => {
+export const Wind = ({ children, ...rest }: React.PropsWithChildren) => {
 	const {
 		token: { colorBgContainer, borderRadiusLG, colorBgLayout },
 	} = theme.useToken();
@@ -18,6 +18,7 @@ export const Wind = ({ children }: React.PropsWithChildren) => {
 			style={{
 				background: colorBgLayout,
 			}}
+			{...rest}
 		>
 			<NavHeader></NavHeader>
 			<div
@@ -27,7 +28,6 @@ export const Wind = ({ children }: React.PropsWithChildren) => {
 					flex: 1,
 					height: 0,
 					overflowY: "auto",
-
 					overflowX: "hidden",
 				}}
 			>

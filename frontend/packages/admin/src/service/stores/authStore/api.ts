@@ -7,7 +7,9 @@ const baseUrl = "/api/system";
 
 const api = {
 	loginNestApi(_: any) {
-		return new Promise((resolve) => {
+		return new Promise<{
+			data: { content: string };
+		}>((resolve) => {
 			dp("appStore", "setIsLoading", true);
 			setTimeout(() => {
 				dp("appStore", "setIsLoading", false);

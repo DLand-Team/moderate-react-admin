@@ -1,4 +1,4 @@
-import { Alignment, Fit, Layout } from "@rive-app/react-canvas";
+import { Fit, Layout } from "@rive-app/react-canvas";
 import { RiveAni } from "plugins/moderate-plugin-rive/common/components/riveAni";
 import LoginCard from "./loginCard";
 import LoginForm from "./loginForm";

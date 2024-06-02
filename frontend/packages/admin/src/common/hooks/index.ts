@@ -3,3 +3,4 @@ export { default as useLocationListen } from "./useLocationListen";
 export { default as useSearchFields } from "./useSearchFields";
 export { default as usePageConfig } from "./usePageConfig";
 export { default as useFormFields } from "./useFormFields";
+export { useIsMobile } from "./useIsMobile";

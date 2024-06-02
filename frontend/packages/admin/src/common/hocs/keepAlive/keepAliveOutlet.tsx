@@ -91,8 +91,14 @@ const KeepAlive = () => {
 	return (
 		<>
 			<AnimationWrapper>
-				<div ref={aliveParentRef}></div>
-				{!isKeepAlive && <Outlet />}
+				<div
+					style={{
+						height: "100%",
+					}}
+					ref={aliveParentRef}
+				>
+					{!isKeepAlive && <Outlet />}
+				</div>
 			</AnimationWrapper>
 
 			{Array.from(componentList.current).map(([key, component]) => (
@@ -102,7 +108,7 @@ const KeepAlive = () => {
 					activeKey={activeKey.current}
 					pageKey={key as string}
 				>
-					<div key={key as string}>{component}</div>
+					{component}
 				</KeepAliveRoute>
 			))}
 		</>

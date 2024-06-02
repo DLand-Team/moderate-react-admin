@@ -14,12 +14,10 @@ const App = () => {
 					return RouterHelper.toRenderRouteLoop(item);
 				})}
 			</Routes>
-			{process.env.NODE_ENV == "development" && (
-				<>
-					<OptionsFloatBtn />
-					<OptionsDrawer />
-				</>
-			)}
+			<>
+				<OptionsFloatBtn />
+				<OptionsDrawer />
+			</>
 			{isLoading && (
 				<div className="loading g-glossy">
 					<RiveLoading />

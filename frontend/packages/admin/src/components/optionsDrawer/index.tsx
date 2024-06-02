@@ -26,7 +26,6 @@ const OptionsDrawer: React.FC = () => {
 				style={{
 					color: antdToken.token.colorText,
 				}}
-				
 				destroyOnClose
 				extra={
 					<Space>
@@ -34,7 +33,9 @@ const OptionsDrawer: React.FC = () => {
 						<Button
 							type="primary"
 							onClick={() => {
-								settingData && saveSettingAct(settingData);
+								if (process.env.NODE_ENV !== "production") {
+									settingData && saveSettingAct(settingData);
+								}
 								onClose();
 							}}
 						>

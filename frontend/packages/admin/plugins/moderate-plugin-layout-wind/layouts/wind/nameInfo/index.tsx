@@ -18,8 +18,9 @@ const NameInfo = () => {
 		>
 			<img
 				style={{
-					width: "50px",
-					height: "50px",
+					width: "36px",
+					height: "36px",
+					marginRight: "5px",
 				}}
 				src="/logo.png"
 			></img>

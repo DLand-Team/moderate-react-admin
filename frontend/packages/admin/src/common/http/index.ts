@@ -1,9 +1,9 @@
-import axios, { AxiosInstance } from "axios";
+import { message } from "antd";
+import axios from "axios";
+import { dp } from "src/service";
 import storageHelper from "../utils/storageHelper";
 import { HttpError } from "./HttpError";
 import { overrideHttpType } from "./overrideHttpType";
-import { message } from "antd";
-import { dp } from "src/service";
 const _http = axios.create({
 	timeout: 1000 * 30,
 });

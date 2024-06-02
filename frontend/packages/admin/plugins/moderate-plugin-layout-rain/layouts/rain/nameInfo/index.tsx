@@ -13,8 +13,17 @@ const NameInfo = () => {
 				fontWeight: "bold",
 				whiteSpace: "nowrap",
 				color: antdThemeToken.token.colorText,
+				alignItems: "center",
 			}}
 		>
+			<img
+				style={{
+					width: "36px",
+					height: "36px",
+					marginRight: "5px",
+				}}
+				src="/logo.png"
+			></img>
 			{isCollapsedMenu ? "Admin" : "Moderate Admin"}
 		</div>
 	);

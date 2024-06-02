@@ -44,12 +44,24 @@ const SliderMenu = () => {
 					display: "flex",
 					justifyContent: "center",
 					fontSize: "20px",
-					margin: "18px",
+					margin: "8px 0px 18px 0px",
 					fontWeight: "bold",
 					whiteSpace: "nowrap",
 					color: antdThemeToken.token.colorText,
+					alignItems: "center",
+					position: "relative",
+					left: "-15px",
 				}}
 			>
+				<img
+					style={{
+						width: "36px",
+						height: "36px",
+						marginRight: "5px",
+						marginTop: "5px",
+					}}
+					src="/logo.png"
+				></img>
 				{isCollapsedMenu ? "Admin" : "Moderate Admin"}
 			</div>
 			{menuData.length > 0 &&

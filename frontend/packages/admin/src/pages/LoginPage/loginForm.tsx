@@ -58,7 +58,7 @@ const LoginForm = () => {
 							height: "53px",
 						}}
 						variant="filled"
-						placeholder={"请输入用户名"}
+						placeholder={"请输入用户名(测试账号：admin)"}
 					/>
 				</Form.Item>
 
@@ -81,7 +81,7 @@ const LoginForm = () => {
 						style={{
 							height: "53px",
 						}}
-						placeholder={"请输入密码"}
+						placeholder={"请输入密码(测试密码：123)"}
 					/>
 				</Form.Item>
 				<div

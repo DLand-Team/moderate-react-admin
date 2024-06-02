@@ -80,7 +80,6 @@ export class AppHelper {
 	 * @param {MenuItem} result
 	 */
 	static createMenuDataLoop = (data: RouteItem[], result: MenuItem[]) => {
-		debugger;
 		data.forEach((item) => {
 			const {
 				isNotRoute,

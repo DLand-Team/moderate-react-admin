@@ -1,8 +1,4 @@
-import {
-	RiveParameters,
-	useRive,
-	useStateMachineInput,
-} from "@rive-app/react-canvas";
+import { RiveParameters, useRive } from "@rive-app/react-canvas";
 
 export const RiveAni = ({
 	url,
@@ -11,10 +7,9 @@ export const RiveAni = ({
 	url: string;
 	options?: Partial<RiveParameters>;
 }) => {
-	const { RiveComponent, rive } = useRive({
+	const { RiveComponent } = useRive({
 		src: url,
 		...options,
-
 	});
 	return <RiveComponent />;
 };

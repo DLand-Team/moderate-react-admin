@@ -43,7 +43,7 @@ export default defineConfig({
 				rewrite: (path) => path.replace(/^\/pdfWorkerCdn/, ""),
 			},
 			"/res": {
-				target: "	https://qiniu.moderate.run",
+				target: "https://qiniu.moderate.run",
 				changeOrigin: true, // 允许跨域
 				rewrite: (path) => path.replace(/^\/res/, ""),
 			},
