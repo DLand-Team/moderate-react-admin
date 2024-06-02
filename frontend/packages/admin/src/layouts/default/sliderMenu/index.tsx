@@ -62,7 +62,7 @@ const SliderMenu = () => {
 					}}
 					src="/logo.png"
 				></img>
-				{isCollapsedMenu ? "Admin" : "Moderate Admin"}
+				{isCollapsedMenu ? "" : "Moderate Admin"}
 			</div>
 			{menuData.length > 0 &&
 				menuDefaultOpenKeys &&

@@ -1,10 +1,17 @@
 import { Typography } from "antd";
 import type { ReactNode } from "react";
 import styles from "./loginPage.module.scss";
+import { useIsMobile } from "src/common/hooks";
 
 const LoginCard = (props: { children: ReactNode }) => {
+	const isMobile = useIsMobile();
 	return (
-		<div className={styles.loginCard}>
+		<div
+			className={styles.loginCard}
+			style={{
+				padding: isMobile ? "0px 36px" : "0px 80px",
+			}}
+		>
 			<div
 				style={{
 					display: "flex",
@@ -23,7 +30,7 @@ const LoginCard = (props: { children: ReactNode }) => {
 						fontSize: "38px",
 						fontWeight: "bold",
 						color: "#3a6bc4",
-						paddingLeft:"12px"
+						paddingLeft: "12px",
 					}}
 				>
 					Dland
