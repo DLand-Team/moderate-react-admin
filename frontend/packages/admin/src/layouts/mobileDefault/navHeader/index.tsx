@@ -1,10 +1,8 @@
 import {
-	MenuFoldOutlined,
-	MenuUnfoldOutlined,
 	MoonOutlined,
 	SunOutlined,
 	SyncOutlined,
-	UserAddOutlined,
+	UserAddOutlined
 } from "@ant-design/icons";
 import {
 	Button,
@@ -18,11 +16,10 @@ import {
 import { useTranslation } from "react-i18next";
 import themeHoc from "src/common/hocs/themeHoc/themeHoc";
 import storageHelper from "src/common/utils/storageHelper";
-import CustomBreadcrumb from "src/components/customBreadcrumb";
 import { useFlat } from "src/service";
 import { ThemeColor } from "src/service/stores/appStore/slice";
-import styles from "./index.module.scss";
 import { MenuAni } from "../menu";
+import styles from "./index.module.scss";
 
 const CustomDropdownButton = themeHoc(Dropdown.Button, {});
 
@@ -43,8 +40,6 @@ const NavHeader = () => {
 		setTheme,
 		setIsThemeAuto,
 		currentTheme,
-		isCollapsedMenu,
-		setIsCollapsedMenu,
 		setLanguage,
 		language,
 	} = useFlat("appStore");

@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 // a window or resize listener. Also use state/layoutEffect instead of ref/effect
 // if this is important to know on initial client render.
 // It would be safer to  return null for unmeasured states.
-export const useDimensions = (ref) => {
+export const useDimensions = (ref: any) => {
 	const dimensions = useRef({ width: 0, height: 0 });
 
 	useEffect(() => {

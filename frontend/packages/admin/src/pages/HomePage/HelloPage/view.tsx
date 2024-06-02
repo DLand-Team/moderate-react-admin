@@ -253,7 +253,7 @@ export default () => {
 						<Banner />
 					</div>
 
-					{/* <iframe
+					<iframe
 						style={{
 							border: "none",
 							height: "100%",
@@ -262,7 +262,7 @@ export default () => {
 							top: 0,
 						}}
 						src="https://my.spline.design/dunes-7ca97654d1f72bd2c09471e9e424c50b/"
-					></iframe> */}
+					></iframe>
 				</div>
 			</div>
 			<div
@@ -280,7 +280,7 @@ export default () => {
 							display: "flex",
 							flexDirection: "column",
 							alignItems: "center",
-							marginTop: "200px",
+							marginTop: isMobile ? "36px" : "200px",
 						}}
 					>
 						<div

@@ -1,4 +1,4 @@
-import { Layout, Menu, theme as antdTheme } from "antd";
+import { Menu, theme as antdTheme } from "antd";
 import { useMemo } from "react";
 import { type Location } from "react-router-dom";
 import { useLocationListen } from "src/common/hooks";
