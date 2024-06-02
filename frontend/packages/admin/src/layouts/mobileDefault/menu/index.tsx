@@ -5,6 +5,7 @@ import { useDimensions } from "./use-dimensions";
 import styles from "./styles.module.scss";
 import { theme } from "antd";
 import SliderMenu from "../sliderMenu";
+import { useLocationListen } from "src/common/hooks";
 const sidebar = {
 	open: (height = 1000) => ({
 		clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
@@ -32,6 +33,9 @@ export const MenuAni = () => {
 	const {
 		token: { colorBgContainer },
 	} = theme.useToken();
+	useLocationListen(() => {
+		toggleOpen();
+	});
 	return (
 		<motion.nav
 			initial={false}
