@@ -33,8 +33,10 @@ export const MenuAni = () => {
 	const {
 		token: { colorBgContainer },
 	} = theme.useToken();
+	const ref = useRef(false);
+	ref.current = isOpen;
 	useLocationListen(() => {
-		toggleOpen();
+		ref.current && toggleOpen();
 	});
 	return (
 		<motion.nav
