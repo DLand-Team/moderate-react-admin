@@ -5,8 +5,6 @@ import { useLocationListen } from "src/common/hooks";
 import { ROUTE_ID_KEY } from "src/router/types";
 import { AppHelper, RouterHelper, useFlat } from "src/service";
 
-const { Sider } = Layout;
-
 const SliderMenu = () => {
 	const {
 		menuData,
@@ -38,13 +36,12 @@ const SliderMenu = () => {
 					display: "flex",
 					justifyContent: "center",
 					fontSize: "20px",
-					margin: "8px 0px 18px 0px",
 					fontWeight: "bold",
 					whiteSpace: "nowrap",
 					color: antdThemeToken.token.colorText,
 					alignItems: "center",
 					position: "relative",
-					left: "-15px",
+					marginLeft: "10px",
 				}}
 			>
 				<img
@@ -56,7 +53,7 @@ const SliderMenu = () => {
 					}}
 					src="/logo.png"
 				></img>
-				{isCollapsedMenu ? "Admin" : "Moderate Admin"}
+				{isCollapsedMenu ? "" : "Moderate Admin"}
 			</div>
 			{menuData.length > 0 &&
 				menuDefaultOpenKeys &&

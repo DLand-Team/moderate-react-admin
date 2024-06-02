@@ -4,6 +4,7 @@ import {
 	MoonOutlined,
 	SunOutlined,
 	SyncOutlined,
+	UserAddOutlined,
 } from "@ant-design/icons";
 import {
 	Button,
@@ -138,7 +139,9 @@ const NavHeader = () => {
 					icon={<MoonOutlined />}
 				></CustomDropdownButton>
 				<Button
+					icon={<UserAddOutlined></UserAddOutlined>}
 					type="primary"
+					shape="circle"
 					onClick={() => {
 						Modal.confirm({
 							title: "确定么？",
@@ -149,9 +152,7 @@ const NavHeader = () => {
 							},
 						});
 					}}
-				>
-					{t("app:logout")}
-				</Button>
+				></Button>
 			</div>
 		</Layout.Header>
 	);

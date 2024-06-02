@@ -54,7 +54,7 @@ export const MenuAni = () => {
 			>
 				<SliderMenu></SliderMenu>
 			</motion.div>
-			<MenuToggle toggle={() => toggleOpen()} />
+			<MenuToggle isOpen={isOpen} toggle={() => toggleOpen()} />
 		</motion.nav>
 	);
 };

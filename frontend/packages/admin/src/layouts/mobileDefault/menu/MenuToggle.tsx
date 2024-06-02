@@ -1,22 +1,19 @@
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Button } from "antd";
-import { motion } from "framer-motion";
 
-const Path = (props) => (
-	<motion.path
-		fill="transparent"
-		strokeWidth="3"
-		stroke="hsl(0, 0%, 18%)"
-		strokeLinecap="round"
-		{...props}
-	/>
-);
-
-export const MenuToggle = ({ toggle }) => (
+export const MenuToggle = ({
+	toggle,
+	isOpen,
+}: {
+	toggle: any;
+	isOpen: boolean;
+}) => (
 	<Button
 		style={{
 			position: "absolute",
 			zIndex: 301,
 		}}
+		icon={isOpen ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
 		onClick={toggle}
 	></Button>
 );
