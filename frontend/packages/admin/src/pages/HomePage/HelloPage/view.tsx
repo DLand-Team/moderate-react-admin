@@ -213,6 +213,7 @@ export default () => {
 				height: "100%",
 				overflow: "auto",
 				overflowX: "hidden",
+				scrollbarWidth: "none",
 			}}
 			ref={(e) => {
 				if (e) {
