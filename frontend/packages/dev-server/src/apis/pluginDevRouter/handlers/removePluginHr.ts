@@ -13,11 +13,6 @@ const removePluginHandler = async (ctx) => {
 	const { url } = ctx.request.body; //获取post提交的数据
 	const pluginName = url.split("/").at(-1).replace(".git", "");
 	const pluginCachePath = pathHelper.pluginsCache + "/" + pluginName;
-
-	// const { dependencies } = await request.get<any, PluginsConfig>(
-	// 	`${url}/raw/master/config.json`,
-	// );
-
 	// 第三步 注册
 	{
 		// 分析目录信息:获得了
@@ -50,51 +45,53 @@ const removePluginHandler = async (ctx) => {
 				"plugins",
 			);
 		});
-		// for (let i in result) {
-		// 	const { pageName, pagePath, isHasIndexPage } = result[i];
-		// 	let pathNew = `../${pageName}/pages`;
-		// 	const newRouteItem: any = {
-		// 		id: pageName,
-		// 		meta: {
-		// 			title: `${pageName}:${pageName}Title`,
-		// 		},
-		// 		isNoAuth: true,
-		// 	};
+		for (let i in result) {
+			const { pageName, isHasIndexPage } = result[i];
+			const newRouteItem: any = {
+				id: pageName,
+				meta: {
+					title: `${pageName}:${pageName}Title`,
+				},
+				isNoAuth: true,
+			};
 
-		// 	if (isHasIndexPage) {
-		// 		newRouteItem.component =
-		// 			devHelper.capitalizeFirstLetter(pageName);
-		// 	}
+			if (isHasIndexPage) {
+				newRouteItem.component =
+					devHelper.capitalizeFirstLetter(pageName);
+			}
 
-		// 	//todo
-		// }
+			devHelper.toRemovePluginPage({
+				pluginName,
+				pageName: pageName,
+			});
+		}
 	}
 	// 分析page以外的资源：provider,layouts
 	{
 		// 通过plugin的位置读出来内部是否存在provider
-		// const providers = devHelper.readProviders(pluginName);
-		// providers.forEach((item) => {
-		// 	devHelper.toRegisterProvider(pluginName, item);
-		// });
+		const providers = devHelper.readProviders(pluginName);
+		providers.forEach((item) => {
+			devHelper.toRemoveProvider(pluginName, item);
+		});
 
-		// const themes = devHelper.readThemes(pluginName);
-		// themes.forEach((item) => {
-		// 	devHelper.toRegisterTheme(pluginName, item);
-		// });
+		const themes = devHelper.readThemes(pluginName);
+		themes.forEach((item) => {
+			devHelper.toRemoveTheme(pluginName, item);
+		});
 
 		const layouts = devHelper.readLayouts(pluginName);
 		layouts.forEach((item) => {
 			devHelper.toRemoveLayout(pluginName, item);
 		});
 
-		// const i18nZh = devHelper.readI18n(pluginName, "zh");
-		// const i18nEn = devHelper.readI18n(pluginName, "en");
-		// i18nZh.forEach((item) => {
-		// 	devHelper.toRegisterI18n(pluginName, item, "zh");
-		// });
-		// i18nEn.forEach((item) => {
-		// 	devHelper.toRegisterI18n(pluginName, item, "en");
-		// });
+		const i18nZh = devHelper.readI18n(pluginName, "zh");
+		const i18nEn = devHelper.readI18n(pluginName, "en");
+		i18nZh.forEach((item) => {
+			devHelper.toRemoveI18n(pluginName, item + ".json", "zh");
+		});
+		i18nEn.forEach((item) => {
+			devHelper.toRegisterI18n(pluginName, item + ".json", "en");
+		});
 	}
 
 	ctx.response.body = {

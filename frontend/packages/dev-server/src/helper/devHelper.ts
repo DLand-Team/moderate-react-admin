@@ -269,7 +269,62 @@ class devHelper {
 			);
 		}
 	};
-
+	toRemoveProvider = (pluginName: string, name: string) => {
+		const reg = regHelper.matchInport(
+			upFirstcharacter(name),
+			`plugins/${pluginName}/providers/${name}`,
+		);
+		name = upFirstcharacter(name);
+		const reg2 = regHelper.mathItem(name);
+		let oldCode = this.toFromat(
+			fs.readFileSync(pathHelper.providerConfigPath).toString(),
+		);
+		let newCode = oldCode.replace(reg, "").replace(reg2, "");
+		fs.writeFileSync(pathHelper.providerConfigPath, this.toFromat(newCode));
+		// 删除插件文件夹
+		const targetPath = pathHelper.adminPlugins + "/" + pluginName;
+		deleteDir(`${targetPath}`);
+	};
+	toRemovePluginPage = ({
+		pageName,
+		pluginName,
+	}: {
+		pluginName: string;
+		pageName: string;
+	}) => {
+		// 干掉name
+		{
+			const namePath = pathHelper.pluginRouterNamePath;
+			const reg2 = regHelper.mathItem(pageName);
+			let oldCode = this.toFromat(fs.readFileSync(namePath).toString());
+			let newCode = oldCode.replace(reg2, "");
+			fs.writeFileSync(namePath, this.toFromat(newCode));
+		}
+		// 干掉路由配置数据
+		{
+			const routeConfigPath = pathHelper.pluginRouterConfigPath;
+			const reg = regHelper.matchByKey(pageName);
+			let oldCode = this.toFromat(
+				fs.readFileSync(routeConfigPath).toString(),
+			);
+			let newCode = oldCode.replace(reg, "");
+			fs.writeFileSync(routeConfigPath, this.toFromat(newCode));
+		}
+		// 干掉page
+		{
+			const pageIndexPath = pathHelper.pluginPageIndexPath;
+			const reg = regHelper.matchLazyInport(upFirstcharacter(pageName));
+			const reg2 = regHelper.mathItem(upFirstcharacter(pageName));
+			let oldCode = this.toFromat(
+				fs.readFileSync(pageIndexPath).toString(),
+			);
+			let newCode = oldCode.replace(reg, "").replace(reg2, "");
+			fs.writeFileSync(pageIndexPath, this.toFromat(newCode));
+		}
+		// 删除插件文件夹
+		const targetPath = pathHelper.adminPlugins + "/" + pluginName;
+		deleteDir(`${targetPath}`);
+	};
 	toRegisterProvider = (pluginName: string, providerName) => {
 		// 获取provider的代码
 		const providerFileCode = fs
@@ -312,6 +367,22 @@ class devHelper {
 			pathHelper.themeConfigPath,
 			this.toFromat(newCode).replace(/\'/g, '"'),
 		);
+	};
+
+	toRemoveTheme = (pluginName: string, name: string) => {
+		const reg = regHelper.matchInport(
+			name,
+			`plugins/${pluginName}/theme/${name}`,
+		);
+		const reg2 = regHelper.mathItem(name);
+		let oldCode = this.toFromat(
+			fs.readFileSync(pathHelper.themeConfigPath).toString(),
+		);
+		let newCode = oldCode.replace(reg, "").replace(reg2, "");
+		fs.writeFileSync(pathHelper.themeConfigPath, this.toFromat(newCode));
+		// 删除插件文件夹
+		const targetPath = pathHelper.adminPlugins + "/" + pluginName;
+		deleteDir(`${targetPath}`);
 	};
 
 	toRemoveLayout = (pluginName: string, layoutName: string) => {
@@ -822,6 +893,10 @@ class devHelper {
 			return list;
 		}
 		return [];
+	}
+	toRemoveI18n(pluginName: string, name: string, lang: string) {
+		let pathStr = pathHelper.pluginsCache + "/" + pluginName;
+		fs.unlinkSync(`${pathStr}/i18n/${lang}/${name}`);
 	}
 }
 

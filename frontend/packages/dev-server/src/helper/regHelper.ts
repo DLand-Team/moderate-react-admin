@@ -48,6 +48,15 @@ class Reghelper {
 
 		return new RegExp(pattern, "m");
 	};
+	matchLazyInport(variableName: string) {
+		const regex = new RegExp(
+			`const\\s+${variableName}\\s*=[\\s\\S]*?;\\s*|^\\s*${variableName}\\s*:\\s*.*,?\\s*`,
+			"gs",
+		);
+
+		// 使用replace方法替换匹配到的lazy导入语句为空字符串，'g'标志表示全局匹配，'m'标志表示多行模式
+		return regex;
+	}
 	matchInport(moduleName, modulePath) {
 		const regex = this.generateImportRegex(moduleName, modulePath);
 		return regex;
@@ -61,6 +70,13 @@ class Reghelper {
 		const pattern = `\\b${escapedModuleName}\\b\\s*,?\\s*`;
 
 		return new RegExp(pattern);
+	}
+	matchByKey(key: string) {
+		const regex = new RegExp(
+			`\\s*${key}:\\s*\\{(?:[^{}]|\\{[^{}]*\\})*\\},`,
+			"g",
+		);
+		return regex;
 	}
 }
 
