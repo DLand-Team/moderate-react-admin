@@ -10,7 +10,8 @@ type ItemKey =
 	| "BTN_CON"
 	| "IS_THEME_AUTO"
 	| "LANGUAGE"
-	| "SETTING";
+	| "SETTING"
+	| "IS_PLUGIN_INSTALLING";
 
 const storageHelper = {
 	setItem: (

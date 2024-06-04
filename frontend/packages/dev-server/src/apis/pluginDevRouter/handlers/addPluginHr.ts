@@ -4,11 +4,13 @@ import fs from "fs";
 import { exec } from "child_process";
 import { request } from "@/utils/request";
 import { deleteDir } from "@/utils/fsUtils";
+import { io } from "..";
 
 export interface PluginsConfig {
 	name: string;
 	type: string;
 	dependencies: Record<PropertyKey, string>;
+	devDependencies: Record<PropertyKey, string>;
 }
 
 const addPluginHandler = async (ctx) => {
@@ -16,9 +18,10 @@ const addPluginHandler = async (ctx) => {
 	const pluginName = url.split("/").at(-1).replace(".git", "");
 	const pluginCachePath = pathHelper.pluginsCache + "/" + pluginName;
 
-	const { dependencies } = await request.get<any, PluginsConfig>(
-		`${url}/raw/master/config.json`,
-	);
+	const { dependencies = {}, devDependencies = {} } = await request.get<
+		any,
+		PluginsConfig
+	>(`${url}/raw/master/config.json`);
 
 	// 第一步下载，git下载，可以版本控制
 	{
@@ -75,6 +78,21 @@ const addPluginHandler = async (ctx) => {
 					console.log(stderr);
 				}
 				resolve(`run ${cwd} successfully`);
+			});
+		});
+		// 第二步安装依赖
+		const devDepStr = Object.entries(devDependencies)
+			.map(([moduleName, moduleVersion]) => {
+				return `${moduleName}@${moduleVersion}`;
+			})
+			.join(" ");
+		const devCmd = `${type} add ${devDepStr} -D`;
+		await new Promise((resolve) => {
+			exec(devCmd, { cwd }, function (error, _, stderr) {
+				if (error) {
+					console.log(stderr);
+				}
+				resolve(`run ${devCmd} successfully`);
 			});
 		});
 	}
@@ -174,7 +192,14 @@ const addPluginHandler = async (ctx) => {
 			// routerStr,
 		},
 	};
+	let timer;
+	io.on("isRecived", () => {
+		clearInterval(timer);
+	});
+	io.emit("addPluginSuccessed");
+	setTimeout(() => {
+		io.emit("addPluginSuccessed");
+	}, 3000);
 };
-
 
 export default addPluginHandler;

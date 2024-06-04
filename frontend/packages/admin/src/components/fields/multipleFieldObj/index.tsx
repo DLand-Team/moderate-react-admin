@@ -1,28 +1,28 @@
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Form, FormInstance, Typography } from "antd";
 import React from "react";
-import { getField as Field, FieldConfig } from "src/common/utils";
+import { Field, FieldConfig } from "src/common/utils";
 
 const MultipleFieldObj: React.FC<{
 	fieldConfig: FieldConfig;
 	formIns: FormInstance;
 }> = (props) => {
-	const {fieldConfig, formIns} = props;
-	const {formOptions, childFieldConfig} = fieldConfig;
+	const { fieldConfig, formIns } = props;
+	const { formOptions, childFieldConfig } = fieldConfig;
 	const list = Object.entries(childFieldConfig || {});
 
 	return (
 		<>
 			<Typography.Title level={5}>{formOptions?.label}</Typography.Title>
 			<Form.List {...(formOptions as any)}>
-				{(fields, {add, remove}) => {
+				{(fields, { add, remove }) => {
 					return (
 						<>
-							{fields.map(({key, name, ...restField}) => {
+							{fields.map(({ key, name, ...restField }) => {
 								return (
-									<div key={key} style={{marginBottom: 8}}>
+									<div key={key} style={{ marginBottom: 8 }}>
 										{list.map(([p, value]) => {
-											const {formOptions, ...rest} =
+											const { formOptions, ...rest } =
 												value;
 											return (
 												<Field
@@ -51,7 +51,7 @@ const MultipleFieldObj: React.FC<{
 									type="dashed"
 									onClick={() => add()}
 									block
-									icon={<PlusOutlined/>}
+									icon={<PlusOutlined />}
 								>
 									Add field
 								</Button>

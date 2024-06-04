@@ -29,13 +29,15 @@ export interface StoreState {
 	winPosTemp: XY_POS;
 	winBoxTitleTemp: string;
 	mdContent: string;
-	settingData: Setting | null;
+	settingData: Setting;
 	language: string;
 	refreshKey: string[];
 	isLoading: boolean;
 }
 
 export interface Setting {
+	logo: string;
+	projectName: string;
 	paletteSet?: { light: ThemeMapkey; dark: ThemeMapkey };
 	layoutSet?: { light: LayoutMapkey; dark: LayoutMapkey };
 }

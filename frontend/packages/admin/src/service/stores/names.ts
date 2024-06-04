@@ -6,7 +6,6 @@ const names = {
 	devStore: "devStore",
 	routerStore: "routerStore",
 	categoryStore: "categoryStore",
-	ruleStore: "ruleStore",
 	dealStore: "dealStore",
 	userStore: "userStore",
 	enquiryStore: "enquiryStore",

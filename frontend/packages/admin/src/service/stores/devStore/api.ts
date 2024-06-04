@@ -1,4 +1,4 @@
-import { http } from "src/common/http";
+import { http, httpBase } from "src/common/http";
 import {
 	AdcompanyPageParams,
 	AddPluginApiParams,
@@ -66,11 +66,16 @@ const api = {
 		});
 	},
 	addPluginApi(params: AddPluginApiParams) {
-		return http.request({
-			url: baseUrl + "/pluginDev/addPlugin",
-			method: "POST",
-			data: params,
-		});
+		return httpBase.fetch(
+			{
+				url: baseUrl + "/pluginDev/addPlugin",
+				method: "POST",
+				data: params,
+			},
+			{
+				showLoading: true,
+			},
+		);
 	},
 	removePluginApi(params: RemovePluginApiParams) {
 		return http.request({

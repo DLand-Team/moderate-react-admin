@@ -22,7 +22,7 @@ export class AuthHelper {
 			menuPermissions?.children || [],
 			[],
 		);
-
+	
 		return { menuPermissions, routesPermissions };
 	};
 

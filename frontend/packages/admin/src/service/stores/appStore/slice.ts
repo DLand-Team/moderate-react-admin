@@ -50,7 +50,7 @@ const initialState = (): StoreState => {
 		},
 		winBoxTitleTemp: "",
 		refreshKey: [],
-		isLoading: false,
+		isLoading: sessionStorage.getItem("IS_PLUGIN_INSTALLING") == "1",
 	};
 };
 

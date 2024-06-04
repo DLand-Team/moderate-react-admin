@@ -1,7 +1,8 @@
 import { theme as antdTheme } from "antd";
 import { useFlat } from "src/service";
 const NameInfo = () => {
-	const { isCollapsedMenu } = useFlat("appStore");
+	const { isCollapsedMenu, settingData } = useFlat("appStore");
+	const { projectName, logo } = settingData;
 	const antdThemeToken = antdTheme.useToken();
 	return (
 		<div
@@ -22,9 +23,9 @@ const NameInfo = () => {
 					height: "36px",
 					marginRight: "5px",
 				}}
-				src="/logo.png"
+				src={logo}
 			></img>
-			{isCollapsedMenu ? "Admin" : "Moderate Admin"}
+			{isCollapsedMenu ? "" : projectName}
 		</div>
 	);
 };

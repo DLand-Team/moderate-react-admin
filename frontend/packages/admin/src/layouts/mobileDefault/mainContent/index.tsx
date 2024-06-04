@@ -18,6 +18,7 @@ const MainContent = ({ children }: React.PropsWithChildren) => {
 					flex: 1,
 					overflow: "auto",
 					height: "100%",
+					overflowX: "hidden",
 				}}
 			>
 				{children}

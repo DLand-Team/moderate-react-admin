@@ -752,7 +752,7 @@ class devHelper {
 				.readdirSync(pathStr + "/providers")
 				.filter((item) => {
 					const stats = fs.statSync(pathStr + "/providers/" + item);
-					if (stats.isDirectory()) {
+					if (!stats.isDirectory()) {
 						return true;
 					}
 				})
@@ -809,7 +809,9 @@ class devHelper {
 			const list = fs
 				.readdirSync(pathStr + "/i18n/" + lang)
 				.filter((item) => {
-					const stats = fs.statSync(pathStr + "/i18n/" + item);
+					const stats = fs.statSync(
+						pathStr + "/i18n/" + lang + "/" + item,
+					);
 					if (stats.isDirectory()) {
 						return true;
 					}

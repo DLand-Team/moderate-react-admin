@@ -100,7 +100,13 @@ const PluginListPage = () => {
 	}, []);
 
 	return (
-		<Row gutter={[16, 26]} wrap={true}>
+		<Row
+			style={{
+				paddingTop: "30px",
+			}}
+			gutter={[16, 26]}
+			wrap={true}
+		>
 			{process.env.NODE_ENV == "production" &&
 				temp.map((item) => {
 					return (
@@ -111,6 +117,10 @@ const PluginListPage = () => {
 							lg={8}
 							xl={6}
 							key={item.gitee}
+							style={{
+								display: "flex",
+								justifyContent: "center",
+							}}
 						>
 							<PluginCard data={item} />
 						</Col>
@@ -126,6 +136,10 @@ const PluginListPage = () => {
 							lg={8}
 							xl={6}
 							key={item.gitee}
+							style={{
+								display: "flex",
+								justifyContent: "center",
+							}}
 						>
 							<PluginCard data={item} />
 						</Col>

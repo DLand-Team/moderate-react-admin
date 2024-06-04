@@ -36,6 +36,7 @@ const thunks = createThunks(names.authStore, {
 		});
 		storageHelper.setItem("ACCESS_TOKEN", accessToken);
 		storageHelper.setItem("IS_ADMIN", accessToken);
+		await httpApi.createCpdSortItemDefaultApi();
 	},
 	getUserPermissionsAct: async () => {
 		const {

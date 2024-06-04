@@ -6,6 +6,10 @@ import {
 	getPluginDetailHr,
 	removePluginHandler,
 } from "./handlers";
+import { createServer } from "http";
+const httpServer = createServer();
+export const io = require("socket.io")(httpServer, { cors: true });
+httpServer.listen(666, () => {});
 const pluginDevRouter = new Router({ prefix: "/pluginDev" });
 
 devHelper.toWatchPluginsFlies();

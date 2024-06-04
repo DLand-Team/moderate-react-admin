@@ -64,11 +64,13 @@ export const http2 = _http;
 
 _http.fetch = ((config, options) => {
 	if (options?.showLoading) {
+		storageHelper.setItem("IS_PLUGIN_INSTALLING", 1);
 		dp("appStore", "setIsLoading", true);
 	}
 	return _http.request(config).finally(() => {
 		if (options?.showLoading) {
 			dp("appStore", "setIsLoading", false);
+			storageHelper.setItem("IS_PLUGIN_INSTALLING", 0);
 		}
 	});
 }) as typeof _http.fetch;

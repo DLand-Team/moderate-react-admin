@@ -4,8 +4,8 @@ import { MenuToggle } from "./MenuToggle";
 import { useDimensions } from "./use-dimensions";
 import styles from "./styles.module.scss";
 import { theme } from "antd";
-import SliderMenu from "../sliderMenu";
 import { useLocationListen } from "src/common/hooks";
+import { SliderMenu } from "src/components";
 const sidebar = {
 	open: (height = 1000) => ({
 		clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
@@ -39,28 +39,40 @@ export const MenuAni = () => {
 		ref.current && toggleOpen();
 	});
 	return (
-		<motion.nav
-			initial={false}
-			animate={isOpen ? "open" : "closed"}
-			custom={height}
-			ref={containerRef}
-			style={{
-				display: "flex",
-				alignItems: "center",
-				justifyContent: "center",
-				width: "60px",
-			}}
-		>
-			<motion.div
-				className={styles.background}
-				variants={sidebar}
+		<div>
+			<motion.nav
+				initial={false}
+				animate={isOpen ? "open" : "closed"}
+				custom={height}
+				ref={containerRef}
 				style={{
-					background: colorBgContainer,
+					display: "flex",
+					alignItems: "center",
+					justifyContent: "center",
+					width: "60px",
 				}}
+				onClick={() => {}}
 			>
-				<SliderMenu></SliderMenu>
-			</motion.div>
-			<MenuToggle isOpen={isOpen} toggle={() => toggleOpen()} />
-		</motion.nav>
+				<motion.div
+					className={styles.background}
+					variants={sidebar}
+					style={{
+						background: colorBgContainer,
+					}}
+				>
+					<div
+						style={{
+							position: "relative",
+							top: "-10px",
+							height: "100%",
+							overflow: "hidden",
+						}}
+					>
+						<SliderMenu isMobile={true}></SliderMenu>
+					</div>
+				</motion.div>
+				<MenuToggle isOpen={isOpen} toggle={() => toggleOpen()} />
+			</motion.nav>
+		</div>
 	);
 };

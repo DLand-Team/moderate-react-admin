@@ -57,7 +57,7 @@ export const WinBoxProvider = ({ children }: React.PropsWithChildren) => {
 				}}
 			>
 				{children}
-				<div id="winboxWrapper" style={{ zIndex: 100 }}>
+				<div id="winboxWrapper" style={{ zIndex: 1000 }}>
 					{winBoxList.map((item) => {
 						const Comp = GlobalVar.service
 							.get("winBoxContent")

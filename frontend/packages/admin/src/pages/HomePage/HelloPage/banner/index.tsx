@@ -18,10 +18,11 @@ function HomepageHeader() {
 							一个能被插件分解的轻量管理后台
 						</p>
 						<p className={styles.title3}>
-							Dland生态 + React & Redux & Vite & Antd
+							Dland生态 + React & Redux & Vite & Antd & Ts
 						</p>
 						<div className={styles.btnPart}>
 							<Link
+								href="https://dland-core.github.io/mui-eazy/"
 								className={styles.btn}
 								style={{
 									color: "white",
@@ -29,7 +30,10 @@ function HomepageHeader() {
 							>
 								Get Started
 							</Link>
-							<Link className={`${styles.btn} ${styles.btn2}`}>
+							<Link
+								href="https://github.com/DLand-Team/moderate-react-admin"
+								className={`${styles.btn} ${styles.btn2}`}
+							>
 								View on GitHub
 							</Link>
 						</div>

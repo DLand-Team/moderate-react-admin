@@ -4,18 +4,15 @@ import appStore from "./appStore";
 import authStore from "./authStore";
 import devStore from "./devStore";
 import routerStore from "./routerStore";
-import ruleStore from "./ruleStore";
 import dealStore from "./dealStore";
 import categoryStore from "./categoryStore";
 import userStore from "./userStore";
 import enquiryStore from "./enquiryStore";
-
 const stores = {
 	appStore,
 	authStore,
 	devStore,
 	routerStore,
-	ruleStore,
 	dealStore,
 	categoryStore,
 	userStore,

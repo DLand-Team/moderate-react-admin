@@ -1,7 +1,7 @@
 import { Divider, FormInstance } from "antd";
 import { cloneDeep } from "lodash-es";
 import { Fragment } from "react";
-import { MyColumnType, getField } from "src/common/utils";
+import { MyColumnType, Field } from "src/common/utils";
 
 const useFormFields = <T,>(
 	formList: MyColumnType<T>[],
@@ -62,7 +62,7 @@ const useFormFields = <T,>(
 						fieldConfig.inputAttrConfig.disabled = false;
 					}
 				}
-				InputItem = getField<T>({ fieldConfig, formIns });
+				InputItem = Field<T>({ fieldConfig, formIns });
 			}
 			return (
 				<Fragment key={item.key || String(item.dataIndex)}>

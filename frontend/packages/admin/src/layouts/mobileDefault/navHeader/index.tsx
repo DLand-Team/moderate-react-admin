@@ -2,7 +2,7 @@ import {
 	MoonOutlined,
 	SunOutlined,
 	SyncOutlined,
-	UserAddOutlined
+	UserAddOutlined,
 } from "@ant-design/icons";
 import {
 	Button,

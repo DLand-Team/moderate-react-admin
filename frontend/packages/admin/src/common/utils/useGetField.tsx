@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { getField } from ".";
+import { Field } from ".";
 import { Form } from "antd";
 
 export const useGetField = <T,>(config: any, formIns: any) => {
@@ -9,5 +9,5 @@ export const useGetField = <T,>(config: any, formIns: any) => {
 		config.watch?.(watchState, record.current!);
 		record.current = formIns.getFieldsValue();
 	}, [watchState]);
-	return getField({ fieldConfig: config, formIns });
+	return Field({ fieldConfig: config, formIns });
 };

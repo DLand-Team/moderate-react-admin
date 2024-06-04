@@ -1,7 +1,7 @@
 import { Col } from "antd";
 import { Rule } from "antd/es/form";
 import { cloneDeep } from "lodash-es";
-import { getField as Field, MyColumnType } from "../utils";
+import { Field, MyColumnType } from "../utils";
 
 const useSearchFields = <T,>(
 	columns: MyColumnType<T>[],

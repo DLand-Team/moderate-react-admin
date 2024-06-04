@@ -19,6 +19,7 @@ const BtnItem = ({
 	const [isHover, setIsHover] = useState(false);
 	return (
 		<Card
+			hoverable
 			onMouseEnter={() => setIsHover(true)}
 			onMouseLeave={() => setIsHover(false)}
 			style={{
@@ -231,7 +232,7 @@ export default () => {
 					style={{
 						height: "100%",
 						width: "100%",
-						pointerEvents: "none",
+
 						overflow: "hidden",
 						borderRadius: "24px",
 						position: "relative",
@@ -261,6 +262,7 @@ export default () => {
 								height: "100%",
 								width: "150%",
 								position: "absolute",
+								pointerEvents: "none",
 								top: 0,
 							}}
 							src="https://my.spline.design/dunes-7ca97654d1f72bd2c09471e9e424c50b/"
@@ -276,10 +278,12 @@ export default () => {
 				<div
 					style={{
 						flex: 1,
+						padding: "0 20px",
 					}}
 				>
 					<div
 						style={{
+							width: "100%",
 							display: "flex",
 							flexDirection: "column",
 							alignItems: "center",
@@ -289,7 +293,6 @@ export default () => {
 						<div
 							style={{
 								width: "100%",
-								maxWidth: "640px",
 								margin: "24px 0px",
 							}}
 						>
@@ -429,7 +432,6 @@ export default () => {
 							ref={ref2}
 							style={{
 								width: "100%",
-								maxWidth: "640px",
 								margin: "24px 0px",
 							}}
 						>
@@ -486,6 +488,7 @@ export default () => {
 					</div>
 					<div
 						style={{
+							width: "100%",
 							display: "flex",
 							flexDirection: "column",
 							alignItems: "center",
@@ -495,7 +498,6 @@ export default () => {
 							ref={ref3}
 							style={{
 								width: "100%",
-								maxWidth: "640px",
 								margin: "24px 0px",
 							}}
 						>
