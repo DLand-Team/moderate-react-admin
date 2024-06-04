@@ -17,7 +17,6 @@ const ServiceProvider = (props: React.PropsWithChildren<{}>) => {
 			storageHelper.removeItem("IS_PLUGIN_INSTALLING");
 			message.success("yeah~ plguin add success!");
 		});
-		debugger
 		DevHelper.socket.emit("isRecived");
 	}, []);
 	return (

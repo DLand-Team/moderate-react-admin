@@ -88,6 +88,16 @@ const PluginCard: React.FC<{ data: Plugin }> = ({ data }) => {
 										"仅支持开发环境中操作～",
 									);
 								}
+								if (
+									[
+										"moderate-plugin-winbox",
+										"moderate-plugin-rive",
+									].includes(name)
+								) {
+									return message.info(
+										"核心插件，仅支持手动删除",
+									);
+								}
 								removePluginAct({
 									url: gitee,
 								});

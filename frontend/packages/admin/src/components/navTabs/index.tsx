@@ -179,7 +179,6 @@ const App: React.FC = () => {
 					};
 				}
 			}
-			debugger
 			let temp = tabItemsTemp.map((item) => {
 				if (item.label) {
 					item.label = t(item.label);

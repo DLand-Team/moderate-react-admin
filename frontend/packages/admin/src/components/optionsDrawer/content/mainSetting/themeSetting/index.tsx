@@ -93,7 +93,7 @@ const ThemeSetting: React.FC = () => {
 						defaultValue={[
 							paletteSet?.light! in themeMap
 								? paletteSet?.light!
-								: "antd",
+								: "default",
 						]}
 						options={options}
 						displayRender={displayRender}
@@ -154,7 +154,7 @@ const ThemeSetting: React.FC = () => {
 						defaultValue={[
 							paletteSet?.dark! in themeMap
 								? paletteSet?.dark!
-								: "antd",
+								: "default",
 						]}
 						options={options}
 						displayRender={displayRender}
@@ -233,7 +233,7 @@ const ThemeSetting: React.FC = () => {
 						defaultValue={[
 							layoutSet?.light! in layoutMap
 								? layoutSet?.light!
-								: ("antd" as any),
+								: ("default" as any),
 						]}
 						options={layoutOptions}
 						displayRender={displayRender}
@@ -297,7 +297,7 @@ const ThemeSetting: React.FC = () => {
 						defaultValue={[
 							layoutSet?.dark! in layoutMap
 								? layoutSet?.dark!
-								: ("antd" as any),
+								: ("default" as any),
 						]}
 						options={layoutOptions}
 						displayRender={displayRender}
