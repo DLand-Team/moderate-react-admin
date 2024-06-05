@@ -11,13 +11,18 @@ const App = (props: React.PropsWithChildren<{}>) => {
 
 const ServiceProvider = (props: React.PropsWithChildren<{}>) => {
 	useEffect(() => {
-		DevHelper.SocketSetup();
-		DevHelper.socket.on("addPluginSuccessed", () => {
-			dp("appStore", "setIsLoading", false);
-			storageHelper.removeItem("IS_PLUGIN_INSTALLING");
-			message.success("yeah~ plguin add success!");
-		});
-		DevHelper.socket.emit("isRecived");
+		if (process.env.NODE_ENV === "development") {
+			DevHelper.SocketSetup();
+			DevHelper.socket.on("addPluginSuccessed", () => {
+				dp("appStore", "setIsLoading", false);
+				storageHelper.removeItem("IS_PLUGIN_INSTALLING");
+				message.success("yeah~ plguin add success!");
+			});
+			DevHelper.socket.emit("isRecived");
+			DevHelper.socket.on("connect_error", () => {
+				DevHelper.socket.close();
+			});
+		}
 	}, []);
 	return (
 		<Provider store={reduxStore}>

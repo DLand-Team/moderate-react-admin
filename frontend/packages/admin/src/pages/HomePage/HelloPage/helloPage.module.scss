@@ -1,8 +1,9 @@
 .content {
 	width: 100%;
 	height: 100%;
-	padding: 32px;
-	overflow: auto;
+	scrollbar-width: none;
+	overflow-y: auto;
+	overflow-x: hidden;
 
 	.title {
 		text-align: center;
@@ -25,6 +26,4 @@
 		color: black;
 		align-items: center;
 	}
-
-	
 }

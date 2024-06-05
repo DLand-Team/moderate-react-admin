@@ -31,7 +31,8 @@ const initialState = (): StoreState => {
 		menuData: menuData,
 		tabItems: storageHelper.getItem("TABS_HISTORY") || [],
 		activeTabKey: "",
-		isThemeAuto: storageHelper.getItem("IS_THEME_AUTO"),
+		isThemeAuto:
+			storageHelper.getItem("IS_THEME_AUTO") == "1" ? true : false,
 		currentTheme: storageHelper.getItem("THEME") || ThemeColor.light,
 		isShowOptionsDrawer: false,
 		isCollapsedMenu: false,
@@ -140,6 +141,7 @@ const appSlice = createSliceCustom({
 		},
 		setIsThemeAuto(state, { payload }: PayloadAction<boolean>) {
 			state.isThemeAuto = payload;
+			storageHelper.setItem("IS_THEME_AUTO", payload ? 1 : 0, "local");
 		},
 		setLanguage(state, { payload }: PayloadAction<string>) {
 			state.language = payload;
