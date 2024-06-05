@@ -20,8 +20,17 @@ const PluginCard: React.FC<{ data: Plugin }> = ({ data }) => {
 	const [messageApi, contextHolder] = message.useMessage();
 	return (
 		<Card
-			style={{ width: 300, boxShadow: "0 0 8px rgba(0, 0, 0, 0.1)" }}
-			cover={<img height={"160px"} alt="example" src={cover} />}
+			style={{ width: "100%", boxShadow: "0 0 8px rgba(0, 0, 0, 0.1)" }}
+			cover={
+				<img
+					height={"160px"}
+					alt="example"
+					src={cover}
+					style={{
+						objectFit: "cover",
+					}}
+				/>
+			}
 			onClick={async () => {
 				await loadPluginDetailAct({
 					url: gitee,
