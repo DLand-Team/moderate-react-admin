@@ -1,5 +1,5 @@
 /* Core */
-import { createSliceCustom } from "redux-eazy";
+import { createSliceE } from "redux-eazy";
 import { StoreState } from "./model";
 import names from "src/service/stores/names";
 
@@ -18,7 +18,7 @@ const initialState = (): StoreState => {
 	};
 };
 
-const slice = createSliceCustom({
+const slice = createSliceE({
 	name: names.categoryStore,
 	stateInit: initialState,
 	reducers: {},

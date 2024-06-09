@@ -1,4 +1,4 @@
-import { PayloadAction, createSliceCustom } from "redux-eazy";
+import { PayloadAction, createSliceE } from "redux-eazy";
 import names from "../names";
 import { PageData, StoreState, UserEntity } from "./model";
 import thunks from "./thunks";
@@ -17,7 +17,7 @@ const initialState = (): StoreState => {
 	};
 };
 
-const slice = createSliceCustom({
+const slice = createSliceE({
 	name: names.userStore,
 	stateInit: initialState,
 	reducers: {

@@ -8,13 +8,6 @@ export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [
     id: ROUTE_ID.HomePage,
     children: [
       {
-        id: ROUTE_ID.CmsPage,
-        children: [
-          { id: ROUTE_ID.RivePage },
-          { id: ROUTE_ID.WinboxPage },
-        ],
-      },
-      {
         id: ROUTE_ID.DevPage,
         children: [
           { id: ROUTE_ID.PageDevPage },
@@ -49,6 +42,13 @@ export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [
           },
           { id: ROUTE_ID.EnquiryPage },
           { id: ROUTE_ID.UserPage },
+        ],
+      },
+      {
+        id: ROUTE_ID.CmsPage,
+        children: [
+          { id: ROUTE_ID.RivePage },
+          { id: ROUTE_ID.WinboxPage },
         ],
       },
     ],

@@ -1,5 +1,5 @@
 /* Core */
-import { createSliceCustom } from "redux-eazy";
+import { createSliceE } from "redux-eazy";
 import { PayloadAction } from "redux-eazy";
 import names from "../names";
 import { DealEntity, PageData, StoreState } from "./model";
@@ -34,7 +34,7 @@ const initialState = (): StoreState => {
 	};
 };
 
-const slice = createSliceCustom({
+const slice = createSliceE({
 	name: names.dealStore,
 	stateInit: initialState,
 	reducers: {

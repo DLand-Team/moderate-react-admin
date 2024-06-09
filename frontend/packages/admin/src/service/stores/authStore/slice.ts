@@ -1,4 +1,4 @@
-import { PayloadAction, createSliceCustom } from "redux-eazy";
+import { PayloadAction, createSliceE } from "redux-eazy";
 import storageHelper from "src/common/utils/storageHelper";
 import { ROUTE_CONFIG_MAP } from "src/router/routesConfig";
 import { ROUTE_ID_KEY } from "src/router/types";
@@ -31,7 +31,7 @@ const initialState = (): StoreState => {
 	};
 };
 
-const slice = createSliceCustom({
+const slice = createSliceE({
 	name: names.authStore,
 	stateInit: initialState,
 	reducers: {

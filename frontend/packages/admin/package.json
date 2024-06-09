@@ -43,7 +43,7 @@
 		"react-router-dom": "^6.22.3",
 		"react-syntax-highlighter": "^15.5.0",
 		"react-winbox": "^1.5.0",
-		"redux-eazy": "0.0.20",
+		"redux-eazy": "workspace:^",
 		"rehype-components": "^0.3.0",
 		"rehype-raw": "^7.0.0",
 		"remark-gfm": "^4.0.0",

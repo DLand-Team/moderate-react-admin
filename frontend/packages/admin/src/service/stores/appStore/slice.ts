@@ -1,5 +1,5 @@
 import { cloneDeep } from "lodash-es";
-import { PayloadAction, createSliceCustom } from "redux-eazy";
+import { PayloadAction, createSliceE } from "redux-eazy";
 import storageHelper from "src/common/utils/storageHelper";
 import { ROUTE_ID } from "src/router/name";
 import { ROUTE_CONFIG_MAP } from "src/router/routesConfig";
@@ -55,7 +55,7 @@ const initialState = (): StoreState => {
 	};
 };
 
-const appSlice = createSliceCustom({
+const appSlice = createSliceE({
 	name: names.appStore,
 	stateInit: initialState,
 	reducers: {

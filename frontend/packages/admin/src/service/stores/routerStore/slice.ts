@@ -1,6 +1,6 @@
 /* Core */
 import { cloneDeep } from "lodash-es";
-import { PayloadAction, createSliceCustom } from "redux-eazy";
+import { PayloadAction, createSliceE } from "redux-eazy";
 import { ROUTE_CONFIG_MAP } from "src/router/routesConfig";
 import { RouteItem } from "src/router/types";
 import { RouterHelper } from "src/service/helper";
@@ -19,15 +19,17 @@ const initialState = (): StoreState => {
     };
 };
 
-const slice = createSliceCustom({
+const slice = createSliceE({
     name: names.routerStore,
     stateInit: initialState,
     reducers: {
         setRoutesConfigMap(state, { payload }: PayloadAction<RoutesConfigMap>) {
             state.routesMap = payload;
+            debugger
         },
         setRoutesTree(state, { payload }: PayloadAction<RouteItem[]>) {
             state.routesTree = payload as RouteItem[];
+            debugger
         },
     },
 });
