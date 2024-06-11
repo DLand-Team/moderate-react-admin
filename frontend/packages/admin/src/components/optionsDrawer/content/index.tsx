@@ -3,8 +3,10 @@ import type { CollapseProps } from "antd";
 import { Collapse, theme } from "antd";
 import type { CSSProperties } from "react";
 import React from "react";
-import MainSetting from "./mainSetting";
 import { useTranslation } from "react-i18next";
+import ThemeSetting from "./themeSetting";
+import ProjectSetting from "./projectSetting";
+import OtherSetting from "./otherSetting";
 
 const SettingContent: React.FC = () => {
 	const { token } = theme.useToken();
@@ -22,10 +24,42 @@ const SettingContent: React.FC = () => {
 						fontWeight: "bold",
 					}}
 				>
+					{t("app:projectSet")}
+				</div>
+			),
+			children: <ProjectSetting />,
+			style: panelStyle,
+		},
+		{
+			key: "2",
+			label: (
+				<div
+					style={{
+						fontSize: "20px",
+						lineHeight: "20px",
+						fontWeight: "bold",
+					}}
+				>
 					{t("app:themeSet")}
 				</div>
 			),
-			children: <MainSetting />,
+			children: <ThemeSetting />,
+			style: panelStyle,
+		},
+		{
+			key: "3",
+			label: (
+				<div
+					style={{
+						fontSize: "20px",
+						lineHeight: "20px",
+						fontWeight: "bold",
+					}}
+				>
+					{t("app:otherSet")}
+				</div>
+			),
+			children: <OtherSetting />,
 			style: panelStyle,
 		},
 	];
@@ -40,10 +74,10 @@ const SettingContent: React.FC = () => {
 		<Collapse
 			collapsible={"icon"}
 			bordered={false}
-			defaultActiveKey={["1"]}
 			expandIcon={({ isActive }) => (
 				<CaretRightOutlined rotate={isActive ? 90 : 0} />
 			)}
+			defaultActiveKey={["1", "2", "3"]}
 			style={{
 				background:
 					token.Menu?.["colorBgContainer" as keyof typeof token.Menu],
