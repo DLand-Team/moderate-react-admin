@@ -1,7 +1,7 @@
 {
-	"projectName": "Dland Admin",
-	"logo": "/logoBig.png",
-	"icon": "/logo.png",
-	"paletteSet": { "light": "dland", "dark": "dland" },
-	"layoutSet": { "light": "Wind", "dark": "Wind" }
+  "projectName": "Dland Admin",
+  "logo": "/logoBig.png",
+  "icon": "/logo.png",
+  "paletteSet": { "light": "Default", "dark": "Default" },
+  "layoutSet": { "light": "Default", "dark": "Default" }
 }

@@ -4,4 +4,4 @@ packages:
     - "packages/dev-server"
     - "packages/redux-eazy/packages/core"
     - "packages/react"
-    - "packages/newAdmin"
+    - "packages/core"

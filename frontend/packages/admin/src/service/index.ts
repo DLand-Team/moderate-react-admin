@@ -3,6 +3,7 @@ import {
 	flatInjectHookCreater,
 	getActionTypeCreater,
 	getDp,
+	getDpChain,
 	resetReduxHookCreater,
 } from "redux-eazy";
 import { stores } from "./stores";
@@ -22,4 +23,5 @@ export const useResetRedux = resetReduxHookCreater(stores);
 export const useFlat = flatInjectHookCreater(stores, reduxStore);
 /* utils */
 export const dp = getDp(reduxStore, stores);
+export const dpChain = getDpChain(reduxStore, stores);
 export * from "./helper";

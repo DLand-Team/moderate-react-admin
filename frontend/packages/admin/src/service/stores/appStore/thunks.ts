@@ -15,7 +15,7 @@ const thunks = createThunks(names.appStore, {
 		tabsHistoryCopy.splice(index, 1);
 		dp("appStore", "setTabItems", tabsHistoryCopy);
 	},
-	createMenuDataAct: async (_, api) => {
+	createMenuDataAct: async (_: null, api) => {
 		const { menuPermissions, routesPermissions } = api.getState().authStore;
 		const { children = [] } = menuPermissions || {};
 		const menuData = AppHelper.createMenuData(children, routesPermissions);

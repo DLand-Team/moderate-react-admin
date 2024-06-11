@@ -26,6 +26,7 @@ const initialState = (): StoreState => {
 	})?.children;
 	const menuData = AppHelper.createMenuDataLoop(children!, []);
 	return {
+		sign: "",
 		menuDefaultSelectedKeys: [],
 		menuDefaultOpenKeys: null,
 		menuData: menuData,
@@ -58,7 +59,20 @@ const initialState = (): StoreState => {
 const appSlice = createSliceE({
 	name: names.appStore,
 	stateInit: initialState,
+	computed: {
+		testValueCP(state, params: { a: string }) {
+			return state.sign + "" + params.a;
+		},
+		testObjCP(state, params: { a: string }) {
+			return {
+				testObj: state.sign + "" + params.a,
+			};
+		},
+	},
 	reducers: {
+		setSign(state, { payload }: PayloadAction<string>) {
+			state.sign = payload;
+		},
 		setIsCollapsedMenu(state, { payload }: PayloadAction<boolean>) {
 			state.isCollapsedMenu = payload;
 		},
