@@ -53,7 +53,7 @@ const SliderMenu = ({ isMobile }: { isMobile?: boolean }) => {
 					color: antdThemeToken.token.colorText,
 					alignItems: "center",
 					position: "relative",
-					left: "-15px",
+					left: isCollapsedMenu ? "0px" : "-15px",
 				}}
 			>
 				<img
