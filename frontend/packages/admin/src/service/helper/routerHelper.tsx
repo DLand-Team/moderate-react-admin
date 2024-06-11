@@ -243,6 +243,11 @@ export class RouterHelper {
 		return routerStore.routesMap[key];
 	}
 
+	static getRoutItemConfigByPath(path: string) {
+		const routerId = this.getRouteIdByPath(path);
+		return this.getRoutItemConfigById(routerId);
+	}
+
 	static getHistory() {
 		return historyInstance;
 	}

@@ -180,11 +180,15 @@ const App: React.FC = () => {
 				}
 			}
 			let temp = tabItemsTemp.map((item) => {
-				if (item.label) {
-					item.label = t(item.label);
+				const metaTitle = RouterHelper.getRoutItemConfigByPath(
+					item.location?.pathname!,
+				).meta?.title;
+				if (metaTitle) {
+					item.label = t(metaTitle);
 				}
 				return item;
 			});
+			debugger;
 			setTabItems(temp);
 			setActiveTabKey(location.pathname);
 		},
