@@ -44,7 +44,16 @@ const initialState = (): StoreState => {
 			process.env.NODE_ENV === "production" &&
 			storageHelper.getItem("SETTING", "local")
 				? storageHelper.getItem("SETTING", "local")
-				: (settingData as Setting),
+				: {
+						...{
+							projectName: "Dland Admin",
+							logo: "/logoBig.png",
+							icon: "/logo.png",
+							paletteSet: { light: "Default", dark: "Default" },
+							layoutSet: { light: "Rain", dark: "Wind" },
+						},
+						...settingData,
+					},
 		language: storageHelper.getItem("LANGUAGE") || "en",
 		winPosTemp: {
 			x: 0,
