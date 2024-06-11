@@ -64,7 +64,6 @@ const PageDevPage = () => {
 
 	return (
 		<div className={styles.content}>
-			<Input></Input>
 			<div className={styles.operate_board}>
 				<ModalForm
 					btnLabel={t`dev.addRouter`}

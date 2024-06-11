@@ -1,9 +1,10 @@
-import { Layout, Menu, theme as antdTheme } from "antd";
+import { Layout, Menu } from "antd";
 import { useMemo } from "react";
 import { type Location } from "react-router-dom";
 import { useLocationListen } from "src/common/hooks";
 import { ROUTE_ID_KEY } from "src/router/types";
 import { AppHelper, RouterHelper, useFlat } from "src/service";
+import { NameInfo } from "..";
 
 const { Sider } = Layout;
 
@@ -16,10 +17,7 @@ const SliderMenu = ({ isMobile }: { isMobile?: boolean }) => {
 		setMenuDefaultSelectedKeys,
 		isCollapsedMenu,
 		language,
-		settingData,
 	} = useFlat("appStore");
-	const { projectName, logo } = settingData;
-	const antdThemeToken = antdTheme.useToken();
 	const MenuItems = useMemo(() => {
 		return AppHelper.transMenuForAntdLoop(menuData);
 	}, [menuData, language]);
@@ -42,31 +40,7 @@ const SliderMenu = ({ isMobile }: { isMobile?: boolean }) => {
 				flexDirection: "column",
 			}}
 		>
-			<div
-				style={{
-					display: "flex",
-					justifyContent: "center",
-					fontSize: "20px",
-					margin: "8px 0px 18px 0px",
-					fontWeight: "bold",
-					whiteSpace: "nowrap",
-					color: antdThemeToken.token.colorText,
-					alignItems: "center",
-					position: "relative",
-					left: isCollapsedMenu ? "0px" : "-15px",
-				}}
-			>
-				<img
-					style={{
-						width: "36px",
-						height: "36px",
-						marginRight: "5px",
-						marginTop: "5px",
-					}}
-					src={logo}
-				></img>
-				{isCollapsedMenu ? "" : projectName}
-			</div>
+			<NameInfo />
 			{menuData.length > 0 &&
 				menuDefaultOpenKeys &&
 				menuDefaultSelectedKeys && (

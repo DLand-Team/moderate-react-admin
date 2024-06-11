@@ -15,3 +15,4 @@ export { default as Bread } from "./customBreadcrumb";
 export { default as NavTabs } from "./navTabs";
 export { default as DragSortTable } from "./dragSortTable";
 export { default as SliderMenu } from "./sliderMenu";
+export { default as NameInfo } from "./nameInfo";
