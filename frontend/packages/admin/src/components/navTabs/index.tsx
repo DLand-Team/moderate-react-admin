@@ -128,7 +128,6 @@ const App: React.FC = () => {
 		language,
 		setRefreshKey,
 	} = useFlat("appStore");
-	// const currentPosRef = useRef<{ x: number; y: number }>();
 	const currentTabRef = useRef<string>();
 	const [tabClassName, setTabClassName] = useState("");
 	const currentDragRef = useRef<string>();
