@@ -97,7 +97,10 @@ const NavHeader = () => {
 								{
 									resetAllStores();
 									storageHelper.clear();
-									RouterHelper.jumpTo(ROUTE_ID.LoginPage);
+									window.location.href =
+										RouterHelper.getRoutePathByKey(
+											ROUTE_ID.LoginPage,
+										);
 								}
 							},
 						});

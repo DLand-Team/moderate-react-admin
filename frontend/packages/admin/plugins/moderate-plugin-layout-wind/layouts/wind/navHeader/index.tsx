@@ -1,11 +1,5 @@
 import { MoonOutlined, SunOutlined, SyncOutlined } from "@ant-design/icons";
-import {
-	Button,
-	Dropdown,
-	Layout,
-	Modal,
-	theme as antdTheme
-} from "antd";
+import { Button, Dropdown, Layout, Modal, theme as antdTheme } from "antd";
 import { useTranslation } from "react-i18next";
 import themeHoc from "src/common/hocs/themeHoc/themeHoc";
 import storageHelper from "src/common/utils/storageHelper";
@@ -19,12 +13,8 @@ import styles from "./index.module.scss";
 const CustomDropdownButton = themeHoc(Dropdown.Button, {});
 
 const NavHeader = () => {
-	const {
-		isThemeAuto,
-		setTheme,
-		setIsThemeAuto,
-		currentTheme,
-	} = useFlat("appStore");
+	const { isThemeAuto, setTheme, setIsThemeAuto, currentTheme } =
+		useFlat("appStore");
 	const resetAllStores = useResetRedux();
 	const antdThemeToken = antdTheme.useToken();
 	const { t } = useTranslation();
@@ -105,7 +95,10 @@ const NavHeader = () => {
 								{
 									resetAllStores();
 									storageHelper.clear();
-									RouterHelper.jumpTo(ROUTE_ID.LoginPage);
+									window.location.href =
+										RouterHelper.getRoutePathByKey(
+											ROUTE_ID.LoginPage,
+										);
 								}
 							},
 						});
