@@ -491,7 +491,7 @@ export const Info = ({
 								fontWeight: "400",
 							}}
 						>
-							Discord（待建）
+							Discord
 						</Typography>
 						<div
 							style={{
@@ -508,6 +508,7 @@ export const Info = ({
 								desc={""}
 								tag={[]}
 								title="Discord"
+								url="https://discord.gg/pA5xvehD4G"
 							/>
 						</div>
 					</div>
