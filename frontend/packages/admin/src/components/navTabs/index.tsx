@@ -180,11 +180,13 @@ const App: React.FC = () => {
 				}
 			}
 			let temp = tabItemsTemp.map((item) => {
-				const metaTitle = RouterHelper.getRoutItemConfigByPath(
-					item.location?.pathname!,
-				).meta?.title;
-				if (metaTitle) {
-					item.label = t(metaTitle);
+				if (item.location) {
+					const metaTitle = RouterHelper.getRoutItemConfigByPath(
+						item.location?.pathname!,
+					)?.meta?.title;
+					if (metaTitle) {
+						item.label = t(metaTitle);
+					}
 				}
 				return item;
 			});
