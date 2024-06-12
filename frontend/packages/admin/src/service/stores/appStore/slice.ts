@@ -25,6 +25,21 @@ const initialState = (): StoreState => {
 		return item!?.id === ROUTE_ID.HomePage;
 	})?.children;
 	const menuData = AppHelper.createMenuDataLoop(children!, []);
+	const settingDataPreset = {
+		projectName: "Dland Admin",
+		logo: "/logoBig.png",
+		icon: "/logo.png",
+		paletteSet: { light: "Default", dark: "Default" },
+		layoutSet: { light: "Rain", dark: "Wind" },
+		routerAni: "fade",
+		...(process.env.NODE_ENV === "production" &&
+		storageHelper.getItem("SETTING", "local")
+			? storageHelper.getItem("SETTING", "local")
+			: {
+					...settingData,
+				}),
+	};
+
 	return {
 		sign: "",
 		menuDefaultSelectedKeys: [],
@@ -40,21 +55,7 @@ const initialState = (): StoreState => {
 		isShowMdDrawer: false,
 		mdContent: "",
 		winBoxList: [],
-		settingData:
-			process.env.NODE_ENV === "production" &&
-			storageHelper.getItem("SETTING", "local")
-				? storageHelper.getItem("SETTING", "local")
-				: {
-						...{
-							projectName: "Dland Admin",
-							logo: "/logoBig.png",
-							icon: "/logo.png",
-							paletteSet: { light: "Default", dark: "Default" },
-							layoutSet: { light: "Rain", dark: "Wind" },
-							routerAni: "fade",
-						},
-						...settingData,
-					},
+		settingData: settingDataPreset,
 		language: storageHelper.getItem("LANGUAGE") || "zh",
 		winPosTemp: {
 			x: 0,
