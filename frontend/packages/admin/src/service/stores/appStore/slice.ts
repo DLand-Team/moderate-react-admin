@@ -54,7 +54,7 @@ const initialState = (): StoreState => {
 						},
 						...settingData,
 					},
-		language: storageHelper.getItem("LANGUAGE") || "en",
+		language: storageHelper.getItem("LANGUAGE") || "zh",
 		winPosTemp: {
 			x: 0,
 			y: 0,
