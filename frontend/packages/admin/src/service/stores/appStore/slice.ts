@@ -51,6 +51,7 @@ const initialState = (): StoreState => {
 							icon: "/logo.png",
 							paletteSet: { light: "Default", dark: "Default" },
 							layoutSet: { light: "Rain", dark: "Wind" },
+							routerAni: "fade",
 						},
 						...settingData,
 					},
@@ -158,8 +159,8 @@ const appSlice = createSliceE({
 			}
 			state.winBoxList = temp;
 		},
-		setSettingData(state, { payload }: PayloadAction<Setting>) {
-			state.settingData = payload;
+		setSettingData(state, { payload }: PayloadAction<Partial<Setting>>) {
+			state.settingData = { ...state.settingData, ...payload };
 			storageHelper.setItem("SETTING", payload, "local");
 		},
 		setIsThemeAuto(state, { payload }: PayloadAction<boolean>) {

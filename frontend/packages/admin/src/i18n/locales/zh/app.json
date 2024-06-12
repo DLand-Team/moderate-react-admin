@@ -22,5 +22,9 @@
 	"dark": "暗黑",
 	"sys": "自动",
 	"sys2": "跟随系统",
-	"logout": "退出"
+	"logout": "退出",
+	"projectName": "项目名称",
+	"projectSet": "基础设置",
+	"otherSet": "其他设置",
+	"routerAni": "路由动画"
 }

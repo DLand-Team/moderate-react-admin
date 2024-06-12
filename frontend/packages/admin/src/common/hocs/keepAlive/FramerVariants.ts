@@ -1,6 +1,5 @@
 import { Transition, Variants } from "framer-motion";
-
-export type IRouterAnimationMode = "fade" | "slide" | "up" | "none";
+import { RouterAni } from "src/service/stores/appStore/modal";
 
 const RouteTransition: Transition = {
 	type: "spring",
@@ -12,7 +11,7 @@ const RouteFadeTransition: Transition = {
 	duration: 1.6,
 };
 
-function getTransition(mode: IRouterAnimationMode) {
+function getTransition(mode: RouterAni) {
 	if (mode === "fade") {
 		return {
 			PushVariants: {
@@ -106,7 +105,7 @@ function getTransition(mode: IRouterAnimationMode) {
 	return {} as Variants;
 }
 
-function getRouteTransition(mode: IRouterAnimationMode) {
+function getRouteTransition(mode: RouterAni) {
 	if (mode === "fade") {
 		return RouteFadeTransition;
 	}

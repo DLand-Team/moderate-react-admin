@@ -16,3 +16,4 @@ export { default as NavTabs } from "./navTabs";
 export { default as DragSortTable } from "./dragSortTable";
 export { default as SliderMenu } from "./sliderMenu";
 export { default as NameInfo } from "./nameInfo";
+export { default as I18nMenu } from "./i18nMenu";

@@ -85,7 +85,7 @@ const ThemeSetting: React.FC = () => {
 					}}
 				>
 					<div>
-						<Text>{t("app:Light")}：</Text>
+						<Text>{t("app:light")}：</Text>
 					</div>
 
 					<Cascader
@@ -148,7 +148,7 @@ const ThemeSetting: React.FC = () => {
 						paddingLeft: "20px",
 					}}
 				>
-					<Typography>{t("app:Dark")}：</Typography>
+					<Typography>{t("app:dark")}：</Typography>
 					<Cascader
 						expandTrigger={"hover"}
 						defaultValue={[
@@ -291,7 +291,7 @@ const ThemeSetting: React.FC = () => {
 						paddingLeft: "20px",
 					}}
 				>
-					<Typography>{t("app:Dark")}：</Typography>
+					<Typography>{t("app:dark")}：</Typography>
 					<Cascader
 						expandTrigger={"hover"}
 						defaultValue={[

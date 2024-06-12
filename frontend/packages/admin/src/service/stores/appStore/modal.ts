@@ -35,8 +35,10 @@ export interface StoreState {
 	refreshKey: string[];
 	isLoading: boolean;
 }
-
+export type RouterAni = "fade" | "slide" | "up" | "none";
 export interface Setting {
+	routerAni: RouterAni;
+	icon: string;
 	logo: string;
 	projectName: string;
 	paletteSet?: { light: ThemeMapkey; dark: ThemeMapkey };
