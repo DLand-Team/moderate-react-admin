@@ -1,0 +1,52 @@
+#app {
+  width: 100%;
+  height: 100%;
+}
+.examples {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  gap: 20px;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  margin-right: -30px;
+  width: 220px;
+  transform: translateY(-50%);
+  .example {
+    position: relative;
+    right: 0;
+    padding: 10px;
+    width: calc(100% - 20px);
+    cursor: pointer;
+    border: 1px solid color-mix(in srgb, var(--bg), var(--fg) 50%);
+    border-radius: 4px;
+    background-color: var(--fg);
+    transition: .3s;
+    h4 {
+      user-select: none;
+      color: var(--bg);
+      margin: 0 0 5px;
+      font-weight: normal;
+    }
+    &:not(.active):hover {
+      box-shadow: 0 0 8px rgba(0, 0, 0, .2);
+    }
+    &.active {
+      cursor: default;
+    }
+    &:hover, &.active {
+      right: 30px;
+      scale: 1.1;
+      h4 {
+        font-weight: bold;
+      }
+    }
+  }
+  .preview {
+    font-size: 12px;
+    user-select: none;
+    overflow: hidden;
+  }
+}

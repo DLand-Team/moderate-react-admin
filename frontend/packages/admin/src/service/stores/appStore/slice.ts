@@ -35,9 +35,7 @@ const initialState = (): StoreState => {
 		...(process.env.NODE_ENV === "production" &&
 		storageHelper.getItem("SETTING", "local")
 			? storageHelper.getItem("SETTING", "local")
-			: {
-					...settingData,
-				}),
+			: settingData),
 	};
 
 	return {
