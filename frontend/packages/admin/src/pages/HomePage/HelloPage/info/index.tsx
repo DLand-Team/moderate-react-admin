@@ -14,12 +14,14 @@ const BtnItem = ({
 	tag = [],
 	logo,
 	logoStyle = {},
+	url,
 }: {
 	logo: string;
 	title: string;
 	desc: React.ReactNode;
 	tag: string[];
 	logoStyle?: CSSProperties;
+	url?: string;
 }) => {
 	const [isHover, setIsHover] = useState(false);
 	return (
@@ -32,6 +34,9 @@ const BtnItem = ({
 				width: "100%",
 				minHeight: "198px",
 				borderRadius: "24px",
+			}}
+			onClick={() => {
+				url && window.open(url, "_blank");
 			}}
 		>
 			<div
@@ -314,6 +319,7 @@ export const Info = ({
 								"已投产Nexjs、Admin和公众号h5",
 							]}
 							logo="/mui-eazy.svg"
+							url="https://dland-team.github.io/redux-eazy/"
 						/>
 						<BtnItem
 							desc={
@@ -333,6 +339,7 @@ export const Info = ({
 							]}
 							logo="/redux-eazy-logo.png"
 							title="Mui Eazy"
+							url="https://dland-core.github.io/mui-eazy/"
 						/>
 						<BtnItem
 							title="DevServer Eazy"
@@ -349,6 +356,7 @@ export const Info = ({
 								width: "35px",
 								margin: "0px 10px 0 6px",
 							}}
+							url="https://github.com/DLand-Team/moderate-react-admin/tree/master/frontend/packages/dev-server"
 						/>
 					</div>
 				</div>

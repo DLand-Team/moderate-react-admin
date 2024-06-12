@@ -14,38 +14,10 @@ const RivePage = lazy(
     ),
 );
 
-const MdPage = lazy(
-  () =>
-    import(
-      "plugins/moderate-plugin-markdown/pages/HomePage/CmsPage/MdPage"
-    ),
-);
-const PdfPage = lazy(
-  () =>
-    import(
-      "plugins/moderate-plugin-pdf/pages/HomePage/CmsPage/PdfPage"
-    ),
-);
-const MusicPage = lazy(
-  () =>
-    import(
-      "plugins/moderate-plugin-music/pages/HomePage/CmsPage/MusicPage"
-    ),
-);
-const ShikitorPage = lazy(
-  () =>
-    import(
-      "plugins/moderate-plugin-shikitor/pages/HomePage/CmsPage/ShikitorPage"
-    ),
-);
 //>>>PAGE_INPORT_SIGN<<<//
 
 export const pageList = {
   WinboxPage,
   RivePage,
-  MdPage,
-  PdfPage,
-  MusicPage,
-  ShikitorPage,
   //>>>PAGE_SIGN<<<//
 };
