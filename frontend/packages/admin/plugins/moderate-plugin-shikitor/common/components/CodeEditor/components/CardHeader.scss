@@ -1,0 +1,63 @@
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  padding: 8px 20px;
+  border-bottom: var(--border-size) transparent;
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: calc(100% + var(--border-size) * 2);
+    height: var(--border-size);
+    background-color: var(--fg, white);
+    opacity: 0.2;
+  }
+  > .right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    filter: invert(.5);
+  }
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    color: var(--fg, white);
+    text-decoration: none;
+    opacity: .8;
+    transition: .2s;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+.card-header > .left {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  > .t-select__wrap { width: 180px; }
+  .t-select .t-fake-arrow {
+    color: var(--fg, white);
+  }
+  .t-input {
+    background-color: transparent;
+    transition: .2s;
+    .t-input__inner {
+      color: var(--fg, white);
+      &::placeholder {
+        color: var(--fg, white);
+        opacity: .6;
+      }
+    }
+    &:hover, &.t-input--focused {
+      background-color: transparent !important;
+      opacity: .6;
+      outline: none;
+    }
+  }
+}

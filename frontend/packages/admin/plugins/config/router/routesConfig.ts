@@ -15,4 +15,28 @@ export const ROUTE_CONFIG_MAP: {
     isNoAuth: true,
     component: "RivePage",
   },
+  PdfPage: {
+    id: "PdfPage",
+    meta: { title: "PdfPage:PdfPageTitle" },
+    isNoAuth: true,
+    component: "PdfPage",
+  },
+  MusicPage: {
+    id: "MusicPage",
+    meta: { title: "MusicPage:MusicPageTitle" },
+    isNoAuth: true,
+    component: "MusicPage",
+  },
+  ShikitorPage: {
+    id: "ShikitorPage",
+    meta: { title: "ShikitorPage:ShikitorPageTitle" },
+    isNoAuth: true,
+    component: "ShikitorPage",
+  },
+  MdPage: {
+    id: "MdPage",
+    meta: { title: "MdPage:MdPageTitle" },
+    isNoAuth: true,
+    component: "MdPage",
+  },
 };

@@ -1,7 +1,8 @@
 {
-	"projectName": "Dland Admin",
-	"logo": "/logoBig.png",
-	"icon": "/logo.png",
-	"paletteSet": { "light": "Default", "dark": "Default" },
-	"layoutSet": { "light": "Rain", "dark": "Wind" }
+  "projectName": "Dland Admin",
+  "logo": "/logoBig.png",
+  "icon": "/logo.png",
+  "paletteSet": { "light": "dland", "dark": "dland" },
+  "layoutSet": { "light": "Rain", "dark": "Wind" },
+  "routerAni": "fade"
 }
