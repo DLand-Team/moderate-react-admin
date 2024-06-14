@@ -2,9 +2,12 @@ import { Typography } from "antd";
 import type { ReactNode } from "react";
 import styles from "./loginPage.module.scss";
 import { useIsMobile } from "src/common/hooks";
+import { useFlat } from "src/service";
 
 const LoginCard = (props: { children: ReactNode }) => {
 	const isMobile = useIsMobile();
+	const { settingData } = useFlat("appStore");
+	const { projectName } = settingData;
 	return (
 		<div
 			className={styles.loginCard}
@@ -34,7 +37,7 @@ const LoginCard = (props: { children: ReactNode }) => {
 						paddingLeft: "12px",
 					}}
 				>
-					Dland
+					{projectName}
 				</Typography>
 			</div>
 			<div>

@@ -160,7 +160,7 @@ const appSlice = createSliceE({
 		},
 		setSettingData(state, { payload }: PayloadAction<Partial<Setting>>) {
 			state.settingData = { ...state.settingData, ...payload };
-			storageHelper.setItem("SETTING", payload, "local");
+			storageHelper.setItem("SETTING", state.settingData, "local");
 		},
 		setIsThemeAuto(state, { payload }: PayloadAction<boolean>) {
 			state.isThemeAuto = payload;

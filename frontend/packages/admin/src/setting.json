@@ -4,5 +4,5 @@
   "icon": "/logo.png",
   "paletteSet": { "light": "dland", "dark": "dland" },
   "layoutSet": { "light": "Rain", "dark": "Wind" },
-  "routerAni": "fade"
+  "routerAni": "slide"
 }
