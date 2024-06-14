@@ -16,7 +16,7 @@ export function Banner() {
 				paddingTop: isMobile ? "32px" : "0px",
 			}}
 		>
-			{!isMobile && (
+			{/* {!isMobile && (
 				<iframe
 					style={{
 						border: "none",
@@ -28,7 +28,8 @@ export function Banner() {
 					}}
 					src="https://my.spline.design/dunes-7ca97654d1f72bd2c09471e9e424c50b/"
 				></iframe>
-			)}
+			)} */}
+			<img className={styles.imgBg} src={"/bg_group1.png"}></img>
 			<div className={styles.header}>
 				<div className={styles.infoPart}>
 					<div className={styles.title}>中用</div>

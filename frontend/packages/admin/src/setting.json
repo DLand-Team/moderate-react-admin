@@ -3,6 +3,6 @@
   "logo": "/logoBig.png",
   "icon": "/logo.png",
   "paletteSet": { "light": "dland", "dark": "dland" },
-  "layoutSet": { "light": "Rain", "dark": "Wind" },
+  "layoutSet": { "light": "Default", "dark": "Default" },
   "routerAni": "slide"
 }
