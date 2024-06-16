@@ -32,7 +32,7 @@ const CustomBreadcrumb = () => {
 	);
 
 	return (
-		<Breadcrumb items={infoArr} style={{ margin: "16px 0" }}></Breadcrumb>
+		<Breadcrumb items={infoArr} style={{ margin: "16px 10px" }}></Breadcrumb>
 	);
 };
 
