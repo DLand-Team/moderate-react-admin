@@ -20,6 +20,7 @@
 		left: 0;
 		bottom: 0;
 		right: 0;
+		object-fit: cover;
 	}
 	.buttons {
 		display: flex;
@@ -61,7 +62,7 @@
 		margin-bottom: 30px;
 	}
 	.title2 {
-		color: rgba(53, 53, 187);
+		color: rgba(53, 75, 187, 0.853);
 		flex: 1;
 		font-size: 56px;
 		line-height: 64px;
