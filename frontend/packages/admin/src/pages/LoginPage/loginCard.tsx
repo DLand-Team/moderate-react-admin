@@ -1,4 +1,4 @@
-import { Typography } from "antd";
+import { Typography, theme } from "antd";
 import type { ReactNode } from "react";
 import styles from "./loginPage.module.scss";
 import { useIsMobile } from "src/common/hooks";
@@ -8,12 +8,16 @@ const LoginCard = (props: { children: ReactNode }) => {
 	const isMobile = useIsMobile();
 	const { settingData } = useFlat("appStore");
 	const { projectName } = settingData;
+	const {
+		token: { colorBgBase, colorTextBase },
+	} = theme.useToken();
 	return (
 		<div
 			className={styles.loginCard}
 			style={{
 				padding: isMobile ? "0px 36px" : "0px 80px",
 				width: isMobile ? "100%" : "360px",
+				background: colorBgBase,
 			}}
 		>
 			<div
@@ -50,7 +54,7 @@ const LoginCard = (props: { children: ReactNode }) => {
 						style={{
 							fontSize: "32px",
 							fontWeight: "bold",
-							color: "black",
+							color: colorTextBase,
 							paddingBottom: "20px",
 						}}
 					>
