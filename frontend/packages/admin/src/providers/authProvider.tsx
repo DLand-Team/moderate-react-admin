@@ -19,7 +19,7 @@ const AuthProvider = ({ children }: React.PropsWithChildren) => {
 				RouterHelper.jumpTo(ROUTE_ID.HomePage);
 			}
 		} else {
-			// RouterHelper.jumpTo(ROUTE_ID.LoginPage);
+			RouterHelper.jumpTo(ROUTE_ID.LoginPage);
 		}
 	}, [token]);
 

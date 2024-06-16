@@ -200,9 +200,9 @@ export class AppHelper {
 			if (item.icon) {
 				const IconNode = iconMap[item.icon as MenuIconType];
 				item.icon = <IconNode />;
-				if (item.children?.length) {
-					item.children = this.transMenuForAntdLoop(item.children);
-				}
+			}
+			if (item.children?.length) {
+				item.children = this.transMenuForAntdLoop(item.children);
 			}
 		});
 		return result;
