@@ -65,7 +65,7 @@ export class RouterHelper {
 		routesConfigMap: {
 			[key in ROUTE_ID_KEY]: RouteItem;
 		};
-		routesPermissions: string[];
+		routesPermissions: string[] | null;
 		parentId: ROUTE_ID_KEY;
 	}) => {
 		routesStructData.forEach((routeStructItem) => {
@@ -76,6 +76,7 @@ export class RouterHelper {
 			const { depends, path: pathE, index } = routesConfigMap[id];
 			// 如果有权限或者是必须显示的，或者是管理员
 			if (
+				!routesPermissions ||
 				routesPermissions?.includes(id) ||
 				(depends && includeOne(routesPermissions, depends)) ||
 				routesConfigMap[id].isNoAuth
@@ -124,7 +125,7 @@ export class RouterHelper {
 		routesPermissions,
 		routesConfigMap,
 	}: {
-		routesPermissions: string[];
+		routesPermissions: string[] | null;
 		routesConfigMap: {
 			[key in ROUTE_ID_KEY]: RouteItem;
 		};

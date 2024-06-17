@@ -1,7 +1,8 @@
-import { Input, Typography } from "antd";
+import { Input, Select, Typography } from "antd";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useFlat } from "src/service";
+import { ThemeName } from "src/service/stores/appStore/modal";
 
 const ProjectSetting: React.FC = () => {
 	const { t } = useTranslation();
@@ -69,6 +70,7 @@ const ProjectSetting: React.FC = () => {
 						display: "flex",
 						alignItems: "center",
 						paddingLeft: "20px",
+						marginBottom: "16px",
 					}}
 				>
 					<Typography
@@ -90,6 +92,29 @@ const ProjectSetting: React.FC = () => {
 						value={icon}
 					/>
 				</div>
+				{/* <div
+					style={{
+						display: "flex",
+						alignItems: "center",
+						paddingLeft: "20px",
+					}}
+				>
+					<Typography
+						style={{
+							width: "70px",
+						}}
+					>
+						{t("app:locale")}：
+					</Typography>
+					<Input
+						onChange={(e) => {
+						}}
+						style={{
+							flex: 0.5,
+						}}
+						value={icon}
+					/>
+				</div> */}
 			</>
 		</>
 	);

@@ -1,4 +1,4 @@
-import { Cascader, Divider, Typography } from "antd";
+import { Cascader, Divider, Select, Typography } from "antd";
 import { cloneDeep } from "lodash-es";
 import React from "react";
 import layoutMap, { LayoutMapkey } from "src/layouts";
@@ -22,7 +22,7 @@ const displayRender = (labels: string[]) => labels[labels.length - 1];
 const ThemeSetting: React.FC = () => {
 	const { settingData, setSettingData } = useFlat("appStore");
 	const { t } = useTranslation();
-	const { paletteSet, layoutSet } = settingData || {};
+	const { paletteSet, layoutSet, color } = settingData || {};
 	const onChange = (value: any, themeColor: ThemeName) => {
 		let settingDataTemp = cloneDeep(settingData);
 		if (!settingDataTemp!.paletteSet) {
@@ -67,6 +67,37 @@ const ThemeSetting: React.FC = () => {
 	});
 	return (
 		<>
+			<div
+				style={{
+					display: "flex",
+					alignItems: "center",
+					paddingLeft: "20px",
+					marginBottom: "12px",
+				}}
+			>
+				<Typography style={{}}>{t("app:themeMode")}：</Typography>
+				<Select
+					options={[
+						{
+							value: "dark",
+							label: "Dark",
+						},
+						{
+							value: "light",
+							label: "Light",
+						},
+					]}
+					onChange={(e) => {
+						setSettingData({
+							color: e,
+						});
+					}}
+					value={color}
+					style={{
+						flex: 0.5,
+					}}
+				/>
+			</div>
 			<>
 				<div
 					style={{

@@ -22,5 +22,6 @@
 	"dark": "Dark",
 	"sys": "Auto",
 	"sys2": "System",
-	"logout": "Logout"
+	"logout": "Logout",
+	"themeMode": "Theme Mode"
 }

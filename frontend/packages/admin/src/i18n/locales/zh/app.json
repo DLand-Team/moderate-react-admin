@@ -27,5 +27,7 @@
 	"projectSet": "基础设置",
 	"otherSet": "其他设置",
 	"routerAni": "路由动画",
-	"TemplatePage": "通用模版"
+	"TemplatePage": "通用模版",
+	"themeMode": "亮/暗",
+	"locale": "语言"
 }

@@ -36,6 +36,7 @@ export interface StoreState {
 	isLoading: boolean;
 }
 export type RouterAni = "fade" | "slide" | "up" | "none";
+export type LocaleType = "zh" | "en";
 export interface Setting {
 	routerAni: RouterAni;
 	icon: string;
@@ -43,4 +44,6 @@ export interface Setting {
 	projectName: string;
 	paletteSet?: { light: ThemeMapkey; dark: ThemeMapkey };
 	layoutSet?: { light: LayoutMapkey; dark: LayoutMapkey };
+	color: ThemeName;
+	locale: LocaleType;
 }
