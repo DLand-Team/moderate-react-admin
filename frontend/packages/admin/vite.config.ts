@@ -31,6 +31,7 @@ export default defineConfig({
 	},
 	server: {
 		port: 8032,
+		host: "0.0.0.0",
 		proxy: {
 			"/gitee": {
 				target: "https://gitee.com",

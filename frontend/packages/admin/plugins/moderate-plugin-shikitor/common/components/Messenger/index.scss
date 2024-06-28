@@ -1,0 +1,113 @@
+.chatroom {
+	--elevation-depth: 10;
+
+	display: flex;
+	flex-direction: column;
+
+	position: absolute;
+	width: 60vw;
+	height: 100%;
+	overflow: hidden;
+
+	border-radius: 8px;
+	// dprint-ignore
+	box-shadow:
+		0 calc(0.4 * var(--elevation-depth, 0) * 1px)
+			calc(0.9 * var(--elevation-depth, 0) * 1px) 0
+			rgba(
+				0,
+				0,
+				0,
+				calc(
+					0.13441 - 0.00063 * var(--elevation-depth, 0) + 0.00003 *
+						var(--elevation-depth, 0) * var(--elevation-depth, 0)
+				)
+			),
+		0 calc(0.075 * var(--elevation-depth, 0) * 1px)
+			calc(0.225 * var(--elevation-depth, 0) * 1px) 0
+			rgba(
+				0,
+				0,
+				0,
+				calc(
+					0.10997 - 0.00051 * var(--elevation-depth, 0) + 0.00003 *
+						var(--elevation-depth, 0) * var(--elevation-depth, 0)
+				)
+			);
+	background-color: var(--td-bg-color-component);
+	.t-avatar {
+		min-width: 32px;
+		max-width: 32px;
+		min-height: 32px;
+		max-height: 32px;
+		border: 2px solid color-mix(in srgb, var(--bg), var(--fg) 50%);
+	}
+}
+.header {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 10px 20px;
+	color: var(--td-text-color-primary);
+	background-color: var(--td-bg-color-secondarycomponent);
+	border-bottom: 1px solid color-mix(in srgb, var(--fg), var(--bg) 50%);
+	> .left,
+	> .right {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+	}
+	> .left {
+		flex-grow: 1;
+		.t-button--variant-text {
+			color: var(--fg);
+		}
+	}
+}
+.messages {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+
+	flex: 1;
+	height: 0;
+	padding: 10px 50px;
+
+	overflow-y: auto;
+	color: var(--td-text-color-primary);
+	.not-initialized {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+	}
+}
+.message-sender {
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 10px;
+	margin: 20px;
+	border: 2px solid color-mix(in srgb, var(--bg), var(--fg) 50%);
+	background-color: var(--bg);
+	border-radius: 5px;
+	.send-tooltip {
+		position: absolute;
+		top: 15px;
+		right: 10px;
+		padding: 2px;
+		color: color-mix(in srgb, var(--fg), var(--bg) 50%);
+		font-size: 12px;
+		background-color: color-mix(in srgb, var(--bg), var(--fg) 10%);
+		border-radius: 2px;
+		box-shadow: 2px 2px color-mix(in srgb, var(--fg), var(--bg) 50%);
+		opacity: 0.5;
+	}
+	.shikitor {
+		width: 100%;
+	}
+	.shikitor-gutter-line-highlighted::before {
+		content: unset;
+	}
+}

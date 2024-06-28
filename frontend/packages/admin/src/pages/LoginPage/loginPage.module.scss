@@ -1,12 +1,12 @@
 .content {
-	height: 100vh;
+	height: 100%;
 	width: 100vw;
 	overflow: hidden;
 	display: flex;
 	.loginPanel {
 		position: absolute;
 		width: 100%;
-		height: 100vh;
+		height: 100%;
 		z-index: 999;
 	}
 	.loginBox {
@@ -29,7 +29,7 @@
 	}
 }
 .loginCard {
-	height: 100vh;
+	height: 100%;
 	border-radius: 0px;
 	padding: 0px 80px;
 }

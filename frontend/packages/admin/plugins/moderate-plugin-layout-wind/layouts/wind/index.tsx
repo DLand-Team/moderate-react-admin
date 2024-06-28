@@ -16,13 +16,17 @@ export const Wind = ({
 	return (
 		<Layout {...rest} className={styles.content}>
 			<NavHeader></NavHeader>
-			<Content style={{ padding: "10px 48px" }}>
+			<Content
+				style={{
+					padding: "10px 48px",
+				}}
+			>
 				<Layout
 					style={{
-						padding: "24px 0",
 						background: colorBgContainer,
 						borderRadius: borderRadiusLG,
 						height: "100%",
+						overflow: "hidden",
 					}}
 				>
 					<SliderMenu />

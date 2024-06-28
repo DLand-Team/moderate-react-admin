@@ -37,8 +37,13 @@ const SliderMenu = () => {
 			collapsible
 			collapsed={isCollapsedMenu}
 			width={260}
+			style={{
+				height: "100%",
+				overflowX: "hidden",
+				overflowY: "auto",
+				padding: "8px 0px",
+			}}
 		>
-			
 			{menuData.length > 0 &&
 				menuDefaultOpenKeys &&
 				menuDefaultSelectedKeys && (

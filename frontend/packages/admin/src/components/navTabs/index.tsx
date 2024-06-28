@@ -154,7 +154,8 @@ const App: React.FC = () => {
 							item.location?.pathname.toLocaleLowerCase() ==
 							location.pathname.toLocaleLowerCase()
 						);
-					})
+					}) &&
+					RouterHelper.getRouteTitleByKey(id as ROUTE_ID_KEY)
 				) {
 					tabItemsTemp.push({
 						location,
@@ -190,7 +191,6 @@ const App: React.FC = () => {
 
 				return item;
 			});
-			debugger;
 			setTabItems(temp);
 			setActiveTabKey(location.pathname);
 		},

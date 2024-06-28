@@ -1,10 +1,10 @@
 {
-	"projectName": "Dland Admin",
-	"logo": "/logoBig.png",
-	"icon": "/logo.png",
-	"color": "light",
-	"locale": "zh",
-	"paletteSet": { "light": "dland", "dark": "dland" },
-	"layoutSet": { "light": "Default", "dark": "Default" },
-	"routerAni": "fade"
+  "projectName": "Dland Admin",
+  "logo": "/logoBig.png",
+  "icon": "/logo.png",
+  "paletteSet": { "light": "dland", "dark": "dland" },
+  "layoutSet": { "light": "Wind", "dark": "Rain" },
+  "routerAni": "fade",
+  "color": "light",
+  "locale": "zh"
 }
