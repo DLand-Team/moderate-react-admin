@@ -27,7 +27,6 @@ const sidebar = {
 	},
 };
 
-
 export const MenuAni = () => {
 	const [isOpen, toggleOpen] = useCycle(false, true);
 	const containerRef = useRef(null);
