@@ -6,6 +6,7 @@ import styles from "./styles.module.scss";
 import { theme } from "antd";
 import { useLocationListen } from "src/common/hooks";
 import { SliderMenu } from "src/components";
+import { cloneDeep } from "lodash-es";
 const sidebar = {
 	open: (height = 1000) => ({
 		clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
@@ -26,6 +27,7 @@ const sidebar = {
 	},
 };
 
+
 export const MenuAni = () => {
 	const [isOpen, toggleOpen] = useCycle(false, true);
 	const containerRef = useRef(null);
@@ -38,6 +40,7 @@ export const MenuAni = () => {
 	useLocationListen(() => {
 		ref.current && toggleOpen();
 	});
+
 	return (
 		<div>
 			<motion.nav
@@ -63,8 +66,7 @@ export const MenuAni = () => {
 					<div
 						style={{
 							position: "relative",
-							top: "-10px",
-							height: "100%",
+							height: "100vh",
 							overflow: "hidden",
 						}}
 					>
