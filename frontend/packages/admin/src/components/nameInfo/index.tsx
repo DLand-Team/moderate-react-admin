@@ -10,7 +10,6 @@ const NameInfo = () => {
 				display: "flex",
 				justifyContent: "center",
 				fontSize: "20px",
-				margin: "8px 0px 18px 0px",
 				fontWeight: "bold",
 				whiteSpace: "nowrap",
 				color: antdThemeToken.token.colorText,

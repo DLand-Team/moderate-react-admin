@@ -53,18 +53,12 @@ export const MenuAni = () => {
 				}}
 				onClick={() => {}}
 			>
-				<motion.div
-					className={styles.background}
-					variants={sidebar}
-					style={{
-						background: colorBgContainer,
-					}}
-				>
+				<motion.div className={styles.background} variants={sidebar}>
 					<div
 						style={{
+							background: colorBgContainer,
 							position: "relative",
-							top: "-10px",
-							height: "100%",
+							height: "100dvh",
 							overflow: "hidden",
 						}}
 					>
