@@ -22,12 +22,16 @@ const EditableCell: <T>(props: EditableCellProps<T>) => React.ReactElement = ({
 	children,
 	fieldConfig,
 	form,
+	record,
 	...rest
 }) => {
 	return (
 		<td {...rest}>
 			{editing ? (
-				<Field fieldConfig={fieldConfig || {}} formIns={form}></Field>
+				<Field
+					fieldConfig={fieldConfig || {}}
+					formIns={form}
+				></Field>
 			) : (
 				children
 			)}

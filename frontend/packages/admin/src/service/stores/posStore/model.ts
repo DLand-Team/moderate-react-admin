@@ -61,8 +61,8 @@ export interface PosItem {
 	updateTime: string;
 	creator: string;
 	updater: string;
-	deleted: true;
-	id: number;
+	deleted: boolean;
+	id: string | number;
 	posInfo: string;
 	posType: string;
 	agentOrAirline: string;
@@ -75,6 +75,7 @@ export interface PosItem {
 }
 export interface Pos {
 	id?: number;
+	uid?: string;
 	posName: string;
 	ownerId: string;
 	comment: string;

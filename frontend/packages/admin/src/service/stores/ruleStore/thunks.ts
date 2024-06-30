@@ -19,28 +19,28 @@ const thunks = createThunks(["ruleStore", slice.branch], {
 		dpChain(["ruleStore", branchName]).setItineraryList(data);
 	},
 	// 初始化
-	initCurrentDataAct: async (
+	initCurrentDetailAct: async (_, __, branchName) => {
+		let ruleData: Rule;
+		ruleData = {
+			ruleName: "",
+			comment: "",
+			id: 1,
+			ownerId: "1",
+		} as Rule;
+		dpChain(["ruleStore", branchName]).initItineraryListAct(null);
+		dpChain(["ruleStore", branchName]).setCurrentRuleData(ruleData);
+	},
+	getCurrentDetailAct: async (
 		params: GetRuleDetailApiParams,
 		_,
 		branchName,
 	) => {
-		const { id } = params;
 		let ruleData: Rule;
-		if (id) {
-			const { data } = await httpApi.getRuleDetailApi(params);
-			ruleData = { ...data } as Rule;
-			dpChain(["ruleStore", branchName]).setItineraryList(
-				data!?.cpdRuleItinerarys || [],
-			);
-		} else {
-			ruleData = {
-				ruleName: "",
-				comment: "",
-				id: 1,
-				ownerId: "1",
-			} as Rule;
-			dpChain(["ruleStore", branchName]).initItineraryListAct(null);
-		}
+		const { data } = await httpApi.getRuleDetailApi(params);
+		ruleData = { ...data } as Rule;
+		dpChain(["ruleStore", branchName]).setItineraryList(
+			data!?.cpdRuleItinerarys || [],
+		);
 		dpChain(["ruleStore", branchName]).setCurrentRuleData(ruleData);
 	},
 	// 查询rule的table列表数据

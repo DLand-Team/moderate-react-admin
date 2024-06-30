@@ -5,5 +5,10 @@
 	"blog.modalDeleteContent": "删除后不可恢复！",
 	"blog.Yes": "确认",
 	"blog.No": "取消",
-	"blog.editing": "当前正处在编辑阶段！"
+	"blog.editing": "当前正处在编辑阶段！",
+	"cancel": "取消",
+	"save": "保存",
+	"edit": "编辑",
+	"add": "添加",
+	"operation": "操作"
 }

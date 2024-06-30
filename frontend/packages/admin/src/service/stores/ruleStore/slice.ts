@@ -11,6 +11,7 @@ import {
 	Segment,
 	StoreState,
 } from "./model";
+import { ROUTE_ID } from "src/router/name";
 
 const initialState = (): StoreState => {
 	return {
@@ -51,7 +52,11 @@ const initialState = (): StoreState => {
 const slice = createSlice({
 	name: "ruleStore",
 	stateInit: initialState,
-	branch: ["add", "edit", "detail"],
+	branch: [
+		ROUTE_ID.RuleAddPage,
+		ROUTE_ID.RuleDetailPage,
+		ROUTE_ID.RuleEditPage,
+	],
 	reducers: {
 		setIsDetail(state, { payload }: PayloadAction<boolean>) {
 			state.isDetail = payload;

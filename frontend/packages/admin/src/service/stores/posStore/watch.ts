@@ -1,21 +1,22 @@
-import { dp, getActionType } from "src/service";
+import { dp, dpChain, getActionType } from "src/service";
 import { startAppListening } from "src/service/setup";
 
-const watch = () => {
-    startAppListening({
-        type: getActionType("posStore").setPosFilterData,
-        effect: async () => {
-          await dp("posStore", "setPosTablePageData", {
-            pageNum: 1,
-          });
-        },
-      });
-      startAppListening({
-        type: getActionType("posStore").setPosTablePageData,
-        effect: async () => {
-          dp("posStore", "queryPostListAct");
-        },
-      });
+const watch = (branchName: string) => {
+	startAppListening({
+		type: getActionType(["posStore", branchName]).setPosFilterData,
+		effect: async () => {
+			await dpChain(["posStore", branchName]).setPosTablePageData({
+				pageNum: 1,
+			});
+		},
+	});
+	startAppListening({
+		type: getActionType(["posStore", branchName]).setPosTablePageData,
+		effect: async () => {
+			dp("posStore", "queryPostListAct");
+			await dpChain(["posStore", branchName]).queryPostListAct(null);
+		},
+	});
 };
 
 export default watch;

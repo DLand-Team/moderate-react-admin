@@ -81,3 +81,7 @@ export function getTextWidth(str: string, fontSize: string) {
 	document.documentElement.removeChild(ele);
 	return result;
 }
+
+export function delay(ms: number) {
+	return new Promise((resolve) => setTimeout(resolve, ms));
+}

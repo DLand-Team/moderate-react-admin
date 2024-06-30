@@ -2,6 +2,7 @@ import { PayloadAction } from "redux-eazy";
 import { createSlice } from "src/service/setup";
 import { Pos, PosCarrier, PosFilterData, StoreState } from "./model";
 import { PageBaseData } from "src/types/common";
+import { ROUTE_ID } from "src/router/name";
 
 const initialState = (): StoreState => {
 	return {
@@ -31,9 +32,10 @@ const initialState = (): StoreState => {
 const slice = createSlice({
 	name: "posStore",
 	stateInit: initialState,
+	branch: [ROUTE_ID.PosDetailPage, ROUTE_ID.PosEditPage, ROUTE_ID.PosAddPage],
 	reducers: {
 		// 设置当前的data
-		setCurrentPosData(state, { payload }: PayloadAction<Pos | null>) {
+		setCurrentDetail(state, { payload }: PayloadAction<Pos | null>) {
 			state.currentData = payload;
 		},
 		setPostList(state, data: PayloadAction<Pos[]>) {

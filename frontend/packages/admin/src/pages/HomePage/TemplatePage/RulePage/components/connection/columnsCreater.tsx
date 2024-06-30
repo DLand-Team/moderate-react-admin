@@ -13,9 +13,6 @@ const columnsCreater: ColumnsCreater<Connection> = ({
 	edit,
 	form,
 }) => {
-	const { marketList } = useFlat("marketStore", {
-		marketList: "IN",
-	});
 	const { t } = useTranslation(["rule"]);
 	const { t: commonT } = useTranslation(["common"]);
 	const { isDetail, setIsEditing, deleteConnectionAct } = useFlat(
@@ -43,45 +40,6 @@ const columnsCreater: ColumnsCreater<Connection> = ({
 					valuePropName: "checked",
 					initialValue: false,
 				},
-			},
-		},
-		{
-			title: t("rulePage_connectionMarket"),
-			dataIndex: "marketId",
-			key: "marketId",
-			editable: true,
-			fieldConfig: {
-				formOptions: {
-					style: {
-						margin: 0,
-					},
-				},
-				options: [
-					...marketList
-						.filter((item) => {
-							return item.marketType == 2;
-						})
-						.map((item) => {
-							return {
-								key: item.id!,
-								value: item.id!,
-								label: item.marketName,
-							};
-						}),
-				],
-				inputAttrConfig: {
-					placeholder: t("rulePage_placeholder_connectionMarket"),
-					style: {
-						width: "150px",
-					},
-				},
-				type: "Select",
-			},
-			render: (value) => {
-				let targetItem = marketList.find((item) => {
-					return item.id === value;
-				});
-				return targetItem ? targetItem.id : "";
 			},
 		},
 		{
@@ -167,7 +125,7 @@ const columnsCreater: ColumnsCreater<Connection> = ({
 	];
 	if (!isDetail) {
 		value.push({
-			title: t("operation"),
+			title: commonT("operation"),
 			dataIndex: "operation",
 			align: "center",
 			render: (_: any, record) => {

@@ -11,10 +11,10 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { useTranslation } from "react-i18next";
 import { dpChain, useFlat } from "src/service";
-import { itineraryItem } from "src/shapes/index.ts";
-import "./index.scss";
-import ItineraryItem from "./itineraryItem.tsx";
 import { RuleItineraryItem } from "src/service/stores/ruleStore/model.ts";
+import { itineraryItem } from "src/shapes/index.ts";
+import styles from "./style.module.scss";
+import ItineraryItem from "./itineraryItem.tsx";
 
 export interface DragItem {
 	rankId: number;
@@ -56,7 +56,7 @@ const SliderMenu = (props: any) => {
 			},
 		});
 	};
-	const { t } = useTranslation("rule");
+	const { t } = useTranslation();
 	const [isSort, setIsSort] = useState(false);
 	const {
 		setTargetRankId,
@@ -73,9 +73,9 @@ const SliderMenu = (props: any) => {
 		setIsSort(!isSort);
 	};
 	return (
-		<div className="sliderMenu">
+		<div className={styles.container}>
 			{!isJustShow && (
-				<div className="btn">
+				<div className={styles.btn}>
 					<a
 						onClick={() => {
 							const newItem = itineraryItem();
@@ -86,8 +86,8 @@ const SliderMenu = (props: any) => {
 						}}
 					>
 						<PlusOutlined />
-						<span className="btnLabel">
-							{t("rulePage_add2") + t("rulePage_rank")}
+						<span className={styles.btnLabel}>
+							{t("common:add") + t("rule:rulePage_rank")}
 						</span>
 					</a>
 				</div>
@@ -96,8 +96,7 @@ const SliderMenu = (props: any) => {
 			<DndProvider backend={HTML5Backend}>
 				<Menu
 					selectedKeys={[`${targetRankId}-${targetItineraryId}`]}
-					// openKeys={openKeysTemp}
-					className="menuItem"
+					className={styles.menuItem}
 					mode="inline"
 					onClick={({ key, keyPath }) => {
 						setTargetRankId(Number(keyPath[keyPath.length - 1]));
@@ -113,12 +112,12 @@ const SliderMenu = (props: any) => {
 									title={
 										<span>
 											<span>
-												{t("rulePage_rank")}{" "}
+												{t("rule:rulePage_rank")}
 												{rankIndex + 1}
 											</span>
 											{!isJustShow && !isSort && (
 												<Typography.Link
-													className="itemClose"
+													className={styles.itemClose}
 													onClick={(e) => {
 														e.stopPropagation();
 														deleteItineraryByRankAct(
@@ -133,7 +132,7 @@ const SliderMenu = (props: any) => {
 									}
 								>
 									{!isJustShow && (
-										<div className="btn">
+										<div className={styles.btn}>
 											<a
 												onClick={() => {
 													const newItem =
@@ -144,9 +143,13 @@ const SliderMenu = (props: any) => {
 												}}
 											>
 												<PlusOutlined />
-												<span className="btnLabel">
-													{t("rulePage_add2") +
-														t("rulePage_itinerary")}
+												<span
+													className={styles.btnLabel}
+												>
+													{t("common:add") +
+														t(
+															"rule:rulePage_itinerary",
+														)}
 												</span>
 											</a>
 										</div>
@@ -179,11 +182,15 @@ const SliderMenu = (props: any) => {
 												<Menu.Item
 													key={`${rankIndex}-${itIndex}`}
 												>
-													{t("rulePage_itinerary")}{" "}
+													{t(
+														"rule:rulePage_itinerary",
+													)}{" "}
 													{itIndex + 1}{" "}
 													{!isJustShow && (
 														<DeleteOutlined
-															className="itemClose"
+															className={
+																styles.itemClose
+															}
 															onClick={(e) => {
 																e.stopPropagation();
 																deleteItineraryAct(

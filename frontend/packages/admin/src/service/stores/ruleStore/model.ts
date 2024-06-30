@@ -111,6 +111,7 @@ export interface Rule {
 	oriMarketId: number;
 	desMarketId: number;
 	posId: number;
+	effectDateData?: string[];
 	effectStartDate: string;
 	effectEndDate: string;
 	applyProduct: number;

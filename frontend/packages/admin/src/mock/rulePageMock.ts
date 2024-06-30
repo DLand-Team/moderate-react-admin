@@ -5,7 +5,7 @@ export let mockRuleListData: Rule[] = [];
 Array.from(Array(16), (_, k) => {
 	mockRuleListData.push({
 		id: k,
-		ruleName: "rule",
+		ruleName: "rule" + k,
 		ownerId: "rule",
 		comment: "rule",
 		status: 0,
@@ -21,5 +21,5 @@ Array.from(Array(16), (_, k) => {
 		filterItemId: k,
 		backupResult: 0,
 		cpdRuleItinerarys: RuleHelper.getItDefault(),
-	});
+	} as Rule);
 });

@@ -71,7 +71,7 @@ const slice = createSlice({
 					}
 				: null;
 		},
-		//设置要删除的航司
+		//设置要删除的
 		setSelectedRowKeys(state, data: PayloadAction<string[]>) {
 			state.selectedRowKeys = data.payload;
 		},

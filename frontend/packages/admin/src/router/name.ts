@@ -18,7 +18,6 @@ export enum NAME {
 	DealPage,
 	DealListPage,
 	LoadingPage,
-	UserPage,
 	PluginsPage,
 	PluginListPage,
 	// pos
@@ -27,12 +26,6 @@ export enum NAME {
 	PosDetailPage,
 	PosEditPage,
 	PosAddPage,
-	// market
-	MarketPage,
-	MarketDetailPage,
-	MarketListPage,
-	MarketAddPage,
-	MarketEditPage,
 	// rule
 	RulePage,
 	RuleDetailPage,
@@ -42,9 +35,6 @@ export enum NAME {
 	// filter
 	FilterPage,
 	FilterListPage,
-	// sort
-	SortPage,
-	SortListPage,
 }
 
 export const ROUTE_NAME = { ...NAME, ...PLUGIN_ROUTE_NAME };

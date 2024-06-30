@@ -1,12 +1,14 @@
 import { Button, message, theme } from "antd";
 import { cloneDeep } from "lodash-es";
+import { useTranslation } from "react-i18next";
+import { ROUTE_ID } from "src/router/name";
 import { useFlat } from "src/service";
 import { connectionItem, segmentItem } from "src/shapes";
 import ConnectionItem from "../connection";
-import FlightCategory from "../flightCategory";
+import CategoryEdit from "../flightCategory/categoryEdit";
+import CategroyDetail from "../flightCategory/categroyDetail";
 import SegmentItem from "../segment";
-import "./index.scss";
-import { useTranslation } from "react-i18next";
+import styles from "./style.module.scss";
 
 export const Itinenarary = (props: any) => {
 	const { carrierList, carrierFamilyList, branchName } = props;
@@ -53,14 +55,17 @@ export const Itinenarary = (props: any) => {
 		});
 	};
 
+	const Category =
+		branchName == ROUTE_ID.RuleDetailPage ? CategroyDetail : CategoryEdit;
+
 	return (
 		<div
-			className="connection"
+			className={styles.container}
 			style={{
 				background: colorBgLayout,
 			}}
 		>
-			<FlightCategory
+			<Category
 				branchName={branchName}
 				isJustShow={isJustShow}
 				handleFcChange={() => {}}
@@ -117,7 +122,7 @@ export const Itinenarary = (props: any) => {
 				<Button
 					onClick={handleConnectionAdd}
 					type="dashed"
-					className="addConnectionBtn"
+					className={styles.addConnectionBtn}
 				>
 					{`${t("add")} ${t("rulePage_connection")}`}
 				</Button>

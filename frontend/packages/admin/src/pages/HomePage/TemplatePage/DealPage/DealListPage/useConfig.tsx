@@ -227,7 +227,7 @@ const useConfig = (form?: FormInstance) => {
 		];
 	}
 	if (recordData?.type == DealType.PARTNERSHIPS) {
-		debugger;
+		;
 		askData = [
 			{
 				dataIndex: "ask.partnerships.partners",

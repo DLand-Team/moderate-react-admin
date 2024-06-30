@@ -11,24 +11,22 @@ const TablePart = ({ branchName = "" }: { branchName?: string }) => {
 	const handleUpdateRankList = () => {};
 
 	return (
-		<>
-			<Row>
-				<Col span={5}>
-					<SliderMenu branchName={branchName} isJustShow={false} />
-				</Col>
-				<Col span={19}>
-					<Itinenarary
-						branchName={branchName}
-						isJustShow={false}
-						handleUpdateRankList={handleUpdateRankList}
-						targetRankId={targetRankId}
-						targetItineraryId={targetItineraryId}
-						carrierList={[]}
-						carrierFamilyList={[]}
-					/>
-				</Col>
-			</Row>
-		</>
+		<Row>
+			<Col span={5}>
+				<SliderMenu branchName={branchName} isJustShow={false} />
+			</Col>
+			<Col span={19}>
+				<Itinenarary
+					branchName={branchName}
+					isJustShow={false}
+					handleUpdateRankList={handleUpdateRankList}
+					targetRankId={targetRankId}
+					targetItineraryId={targetItineraryId}
+					carrierList={[]}
+					carrierFamilyList={[]}
+				/>
+			</Col>
+		</Row>
 	);
 };
 

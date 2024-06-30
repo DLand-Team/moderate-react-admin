@@ -37,7 +37,6 @@ const DealListPage = lazy(
 	() => import("./HomePage/TemplatePage/DealPage/DealListPage"),
 );
 const LoadingPage = lazy(() => import("./HomePage/LoadingPage"));
-const UserPage = lazy(() => import("./HomePage/TemplatePage/UserPage"));
 
 // rule页面
 const RulePage = lazy(() => import("./HomePage/TemplatePage/RulePage"));
@@ -58,22 +57,14 @@ const PosPage = lazy(() => import("./HomePage/TemplatePage/PosPage"));
 const PosDetailPage = lazy(
 	() => import("./HomePage/TemplatePage/PosPage/PosDetailPage"),
 );
+const PosAddPage = lazy(
+	() => import("./HomePage/TemplatePage/PosPage/PosAddPage"),
+);
 const PosEditPage = lazy(
 	() => import("./HomePage/TemplatePage/PosPage/PosEditPage"),
 );
 const PosListPage = lazy(
 	() => import("./HomePage/TemplatePage/PosPage/PosListPage"),
-);
-////marketPage
-const MarketPage = lazy(() => import("./HomePage/TemplatePage/MarketPage"));
-const MarketDetailPage = lazy(
-	() => import("./HomePage/TemplatePage/MarketPage/MarketDetailPage"),
-);
-const MarketListPage = lazy(
-	() => import("./HomePage/TemplatePage/MarketPage/MarketListPage"),
-);
-const MarketEditPage = lazy(
-	() => import("./HomePage/TemplatePage/MarketPage/MarketEditPage"),
 );
 
 // filterPage
@@ -82,11 +73,6 @@ const FilterPage = lazy(() => import("./HomePage/TemplatePage/FilterPage"));
 const FilterListPage = lazy(
 	() => import("./HomePage/TemplatePage/FilterPage/FilterListPage"),
 );
-////sortPage
-const SortPage = lazy(() => import("./HomePage/TemplatePage/SortPage"));
-const SortListPage = lazy(
-	() => import("./HomePage/TemplatePage/SortPage/SortListPage"),
-);
 
 //MODERATE_AUTO_PAGE_LAZY_IMPORT:END
 export const pageList = {
@@ -94,7 +80,6 @@ export const pageList = {
 	HomePage,
 	LoginPage,
 	HelloPage,
-	UserPage,
 	RolePage,
 	PageDevPage,
 	StoreDevPage,
@@ -111,11 +96,7 @@ export const pageList = {
 	PosListPage,
 	PosDetailPage,
 	PosEditPage,
-	// market
-	MarketPage,
-	MarketDetailPage,
-	MarketListPage,
-	MarketEditPage,
+	PosAddPage,
 	// rule
 	RulePage,
 	RuleDetailPage,
@@ -125,7 +106,4 @@ export const pageList = {
 	// filter
 	FilterPage,
 	FilterListPage,
-	// sort
-	SortPage,
-	SortListPage,
 };

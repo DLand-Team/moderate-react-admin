@@ -60,13 +60,6 @@ export const ROUTE_CONFIG_MAP: {
 		isNoAuth: true,
 		isNotRoute: true,
 	},
-	UserPage: {
-		id: "UserPage",
-		meta: { title: "app:UserPageTitle" },
-		actionPermissions: ["ADD", "EDIT"],
-		component: "UserPage",
-		isNoAuth: true,
-	},
 	RolePage: {
 		id: "RolePage",
 		meta: { title: "app:RolePageTitle" },
@@ -186,7 +179,6 @@ export const ROUTE_CONFIG_MAP: {
 		meta: {
 			title: "dev:posListPage",
 		},
-		index: true,
 		component: "PosListPage",
 		depends: ["PosPage"],
 		isNoAuth: true,
@@ -196,7 +188,7 @@ export const ROUTE_CONFIG_MAP: {
 		meta: {
 			title: "dev:dev.posAddPage",
 		},
-		component: "PosEditPage",
+		component: "PosAddPage",
 		depends: ["PosPage"],
 		isNoAuth: true,
 	},
@@ -228,7 +220,6 @@ export const ROUTE_CONFIG_MAP: {
 	},
 	RuleListPage: {
 		id: "RuleListPage",
-		index: true,
 		meta: {
 			title: "dev:dev.ruleListPage",
 		},
@@ -273,73 +264,6 @@ export const ROUTE_CONFIG_MAP: {
 		depends: ["FilterPage"],
 		index: true,
 		isMenu: false,
-		isNoAuth: true,
-	},
-	SortPage: {
-		id: "SortPage",
-		meta: {
-			title: "dev:dev.sortPage",
-		},
-		component: "SortPage",
-		isNoAuth: true,
-	},
-	SortListPage: {
-		id: "SortListPage",
-		meta: {
-			title: "dev:sortlListPage",
-		},
-		component: "SortListPage",
-		index: true,
-		depends: ["SortPage"],
-		isMenu: false,
-		isNoAuth: true,
-	},
-	MarketPage: {
-		id: "MarketPage",
-		meta: {
-			title: "dev:dev.marketPage",
-		},
-		component: "MarketPage",
-		index: false,
-		isNoAuth: true,
-	},
-	MarketDetailPage: {
-		id: "MarketDetailPage",
-		meta: {
-			title: "dev:dev.marketDetailPage",
-		},
-		component: "MarketDetailPage",
-		depends: ["PosPage"],
-		isNoAuth: true,
-	},
-	MarketListPage: {
-		id: "MarketListPage",
-		meta: {
-			title: "dev:marketlListPage",
-		},
-		component: "MarketListPage",
-		index: true,
-		depends: ["MarketPage"],
-		isNoAuth: true,
-	},
-	MarketEditPage: {
-		id: "MarketEditPage",
-		meta: {
-			title: "dev:dev.marketEditPage",
-		},
-		component: "MarketEditPage",
-		index: false,
-		depends: ["MarketPage"],
-		isNoAuth: true,
-	},
-	MarketAddPage: {
-		id: "MarketAddPage",
-		meta: {
-			title: "dev:dev.marketAddPage",
-		},
-		component: "MarketEditPage",
-		index: false,
-		depends: ["MarketPage"],
 		isNoAuth: true,
 	},
 	...PLUGIN_ROUTE_CONFIG_MAP,

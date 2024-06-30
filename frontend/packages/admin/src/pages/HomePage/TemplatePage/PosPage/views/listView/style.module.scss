@@ -1,0 +1,12 @@
+.container {
+    width: 100%;
+    .titleWapper {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row-reverse;
+        margin: 12px;
+    }
+    .btn {
+		margin-right: 12px;
+	}
+}

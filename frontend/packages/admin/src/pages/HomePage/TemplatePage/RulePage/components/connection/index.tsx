@@ -7,7 +7,7 @@ import { useFlat } from "src/service";
 import { Connection } from "src/service/stores/ruleStore/model";
 import { connectionItem } from "src/shapes";
 import columnsCreater from "./columnsCreater";
-import "./index.scss";
+import styles from "./style.module.scss";
 
 const connection = (
 	props: React.PropsWithChildren<{
@@ -36,8 +36,8 @@ const connection = (
 		addConnectionAct(newCon);
 	};
 	return (
-		<div className="connection">
-			<div className="connectionTile">
+		<div className={styles.container}>
+			<div className={styles.connectionTile}>
 				{`${t("rulePage_connection")}${position}`}
 				{!isJustShow && (
 					<Button
