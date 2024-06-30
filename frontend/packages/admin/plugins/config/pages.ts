@@ -49,6 +49,5 @@ export const pageList = {
 	MdPage,
 	MusicPage,
 	ShikitorPage,
-	LiteFlowEditorPage,
 	//>>>PAGE_SIGN<<<//
 };
