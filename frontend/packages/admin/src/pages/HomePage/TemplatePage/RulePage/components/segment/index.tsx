@@ -15,6 +15,7 @@ const SegmentItem = (props: any) => {
 			isDetail: "IN",
 		},
 	);
+	const { t: commonT } = useTranslation("common");
 	const { t } = useTranslation("rule");
 	return (
 		<Collapse
@@ -26,7 +27,7 @@ const SegmentItem = (props: any) => {
 				<EditTable
 					tableOptions={{
 						scroll: {
-							x: "1000px",
+							x: "100%",
 						},
 					}}
 					handleValuesChange={(data) => {
@@ -42,7 +43,7 @@ const SegmentItem = (props: any) => {
 							addSegmentAct(newData);
 						}}
 					>
-						add
+						{commonT("add")}
 					</Button>
 				)}
 			</Panel>

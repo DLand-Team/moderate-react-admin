@@ -5,18 +5,14 @@ import { ColumnsCreater } from "src/common/hooks/editTable";
 import { useFlat } from "src/service";
 import { Connection } from "src/service/stores/ruleStore/model";
 
-const columnsCreater: ColumnsCreater<Connection> = ({
-	editingKey,
-	save,
-	isEditing,
-	cancel,
-	edit,
-	form,
-}) => {
+const columnsCreater: ColumnsCreater<Connection, { branchName?: string }> = (
+	{ editingKey, save, isEditing, cancel, edit, form },
+	extranProps = {},
+) => {
 	const { t } = useTranslation(["rule"]);
 	const { t: commonT } = useTranslation(["common"]);
 	const { isDetail, setIsEditing, deleteConnectionAct } = useFlat(
-		"ruleStore",
+		["ruleStore", extranProps?.branchName],
 		{ isDetail: "IN" },
 	);
 	let value: ReturnType<ColumnsCreater<Connection>> = [
@@ -47,6 +43,7 @@ const columnsCreater: ColumnsCreater<Connection> = ({
 			dataIndex: "maxConxTime",
 			key: "maxConxTime",
 			editable: true,
+			width: "200px",
 			fieldConfig: {
 				render: (_, formIns) => {
 					return (
@@ -99,6 +96,7 @@ const columnsCreater: ColumnsCreater<Connection> = ({
 			title: t("rulePage_minConnectTime"),
 			dataIndex: "minConxTime",
 			key: "minConxTime",
+			width: "200px",
 			editable: true,
 			fieldConfig: {
 				inputAttrConfig: {

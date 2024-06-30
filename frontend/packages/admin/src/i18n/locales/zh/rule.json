@@ -19,5 +19,16 @@
 	"rulePage_itinerary": "旅游行程",
 	"rulePage_exclude": "排除",
 	"rulePage_maxConnectTime": "最大链接时间",
-	"rulePage_minConnectTime": "最小链接时间"
+	"rulePage_minConnectTime": "最小链接时间",
+	"rulePage_allowCodeShare": "选项1",
+	"rulePage_carriers": "选项2",
+	"rulePage_operateCarriers": "选项3",
+	"rulePage_connection": "途径点",
+	"rulePage_segment": "景点",
+	"rulePage_noOverNight": "不过夜",
+	"rulePage_NONSTOP": "不停",
+	"rulePage_DIRECT": "直达",
+	"rulePage_CONNECTION": "途经",
+	"rulePage_flightRange": "预算区间",
+	"connectItem": "子节点"
 }

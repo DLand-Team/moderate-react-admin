@@ -3,6 +3,7 @@ import { Button, Popover } from "antd";
 import { Fragment, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { EditTable } from "src/common/hooks/editTable";
+import { ROUTE_ID } from "src/router/name";
 import { useFlat } from "src/service";
 import { Connection } from "src/service/stores/ruleStore/model";
 import { connectionItem } from "src/shapes";
@@ -16,11 +17,10 @@ const connection = (
 		branchName: string;
 	}>,
 ) => {
-	const { isDetail: isJustShow } = useFlat("ruleStore", {
-		isDetail: "IN",
-	});
 	const { data = [], position, children, branchName } = props;
+	const isJustShow = branchName == ROUTE_ID.RuleDetailPage;
 	const { t } = useTranslation("rule");
+	const { t: commonT } = useTranslation("common");
 	const { updateConnectionAct, addConnectionAct, deleteConnectionByPosAct } =
 		useFlat(["ruleStore", branchName]);
 	const { queryMarkettListAct } = useFlat("marketStore");
@@ -68,34 +68,38 @@ const connection = (
 								</div>
 							}
 						>
-							{/* <Icon className="titleBtn" type="question-circle" /> */}
 							<InfoCircleOutlined />
 						</Popover>
 					</Fragment>
+				)}
+				{!isJustShow && (
+					<Button
+						style={{
+							margin: "12px 0px",
+							position: "absolute",
+							right: 0,
+						}}
+						onClick={handleCreate}
+					>
+						{`${commonT("add")} ${t("connectItem")}`}
+					</Button>
 				)}
 			</div>
 			<EditTable
 				tableOptions={{
 					scroll: {
-						x: "1000px",
+						x: "100%",
 					},
 				}}
-				columnCreater={columnsCreater}
+				columnCreater={(props) => {
+					return columnsCreater(props, { branchName });
+				}}
 				values={data}
 				handleValuesChange={(changedData) => {
 					updateConnectionAct(changedData);
 				}}
 			/>
-			{!isJustShow && (
-				<Button
-					style={{
-						margin: "12px 0px",
-					}}
-					onClick={handleCreate}
-				>
-					add
-				</Button>
-			)}
+
 			{children}
 		</div>
 	);

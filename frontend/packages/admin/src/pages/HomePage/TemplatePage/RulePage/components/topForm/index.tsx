@@ -116,6 +116,7 @@ const TopForm = ({
 		queryFilterListAct();
 	}, []);
 	const { t } = useTranslation(["rule"]);
+	const { t: commonT } = useTranslation(["common"]);
 
 	useEffect(() => {
 		formRef?.resetFields();
@@ -151,7 +152,7 @@ const TopForm = ({
 								{
 									required: true,
 									message:
-										t`placeholder_input` +
+										commonT`placeholder_input` +
 										t`rulePage_ruleName`,
 								},
 								{
@@ -164,7 +165,7 @@ const TopForm = ({
 								},
 							]}
 						>
-							<Input placeholder={t`placeholder_input`} />
+							<Input placeholder={commonT`placeholder_input`} />
 						</Form.Item>
 					</Col>
 					<Col span={6}>
@@ -180,6 +181,9 @@ const TopForm = ({
 						>
 							<CustomSelect
 								branchName={branchName}
+								inputAttrConfig={{
+									placeholder: commonT`placeholder_input`,
+								}}
 								optionArr={marketList
 									.filter((item) => {
 										return item.marketType === 0;
@@ -210,6 +214,9 @@ const TopForm = ({
 							]}
 						>
 							<CustomSelect
+								inputAttrConfig={{
+									placeholder: commonT`placeholder_input`,
+								}}
 								branchName={branchName}
 								optionArr={marketList
 									.filter((item) => {
@@ -232,6 +239,9 @@ const TopForm = ({
 							name="posId"
 						>
 							<CustomSelect
+								inputAttrConfig={{
+									placeholder: commonT`placeholder_input`,
+								}}
 								branchName={branchName}
 								optionArr={posList.map((item) => {
 									return {
@@ -265,10 +275,10 @@ const TopForm = ({
 								},
 							]}
 						>
-							<Select>
+							<Select placeholder={t("placeholder_input")}>
 								{[
-									[1, "ISHOP"],
-									[2, "DSHOP"],
+									[1, "A"],
+									[2, "B"],
 								].map((item) => {
 									return (
 										<Option value={item[0]} key={item[0]}>
@@ -305,11 +315,11 @@ const TopForm = ({
 							]}
 						>
 							<CustomSelect
+								inputAttrConfig={{
+									placeholder: commonT`placeholder_input`,
+								}}
 								branchName={branchName}
 								optionArr={sortList.map((item) => {
-									if (!item.id) {
-										alert(123);
-									}
 									return {
 										id: item.id,
 										value: item.id,
@@ -326,6 +336,9 @@ const TopForm = ({
 							name="filterItemId"
 						>
 							<CustomSelect
+								inputAttrConfig={{
+									placeholder: commonT`placeholder_input`,
+								}}
 								optionArr={filterList.map((item) => {
 									if (!item.id) {
 										alert(123);
@@ -358,7 +371,9 @@ const TopForm = ({
 								},
 							]}
 						>
-							<InputNumber />
+							<InputNumber
+								placeholder={commonT`placeholder_input`}
+							/>
 						</Form.Item>
 					</Col>
 					<Col span={6}>
@@ -382,7 +397,9 @@ const TopForm = ({
 							label={t`rulePage.comment`}
 							name="comment"
 						>
-							<Input.TextArea />
+							<Input.TextArea
+								placeholder={commonT`placeholder_input`}
+							/>
 						</Form.Item>
 					</Col>
 				</Row>

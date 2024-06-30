@@ -15,7 +15,7 @@ export interface PosDetailViewProps {
 
 /* Main */
 const DetailView = ({ handleCancel, branchName = "" }: PosDetailViewProps) => {
-	const { t } = useTranslation();
+	const { t } = useTranslation('pos');
 	const detailConfig = useDetailConfig(branchName);
 	const { currentData } = useFlat(["posStore", branchName], {
 		currentData: "IN",
@@ -59,7 +59,7 @@ const DetailView = ({ handleCancel, branchName = "" }: PosDetailViewProps) => {
 							marginBottom: "30px",
 						}}
 					>
-						{t("posPage.itemListTitle")}
+						{t("pos:posPage.itemListTitle")}
 					</Typography>
 					<Table
 						loading={!currentData}
@@ -68,7 +68,7 @@ const DetailView = ({ handleCancel, branchName = "" }: PosDetailViewProps) => {
 					/>
 				</Card>
 			</>
-			<div className="btnTable">
+			<div className={styles.btnTable}>
 				<Button
 					onClick={() => {
 						if (handleCancel) {

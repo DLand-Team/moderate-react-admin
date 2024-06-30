@@ -20,6 +20,7 @@ const TopForm = ({
 		},
 	);
 	const { t } = useTranslation(["pos"]);
+	const { t: commonT } = useTranslation(["common"]);
 	useEffect(() => {
 		currentData && formRef?.setFieldsValue(currentData);
 	}, [currentData]);
@@ -66,13 +67,16 @@ const TopForm = ({
 								},
 							]}
 						>
-							<Input />
+							<Input placeholder={commonT("placeholder_input")} />
 						</Form.Item>
 					</Col>
 
 					<Col span={12}>
 						<Form.Item<FieldType> label="描述" name="comment">
-							<Input.TextArea style={{ height: 120 }} />
+							<Input.TextArea
+								placeholder={commonT("placeholder_input")}
+								style={{ height: 120 }}
+							/>
 						</Form.Item>
 					</Col>
 				</Row>

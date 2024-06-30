@@ -28,10 +28,7 @@ const EditableCell: <T>(props: EditableCellProps<T>) => React.ReactElement = ({
 	return (
 		<td {...rest}>
 			{editing ? (
-				<Field
-					fieldConfig={fieldConfig || {}}
-					formIns={form}
-				></Field>
+				<Field fieldConfig={fieldConfig || {}} formIns={form}></Field>
 			) : (
 				children
 			)}
@@ -55,16 +52,19 @@ export type Wrapper<T> = (
 		deleteByKey: (key: string) => void;
 	}>,
 ) => React.ReactElement;
-export type ColumnsCreater<T> = (props: {
-	editingKey: string;
-	form: FormInstance<T>;
-	save: (key: string) => void;
-	cancel: () => void;
-	edit: (record: T) => void;
-	isEditing: (record: T) => boolean;
-	deleteByKey: (key: string) => void;
-	record: Partial<T>;
-}) => MyColumnType<T>[];
+export type ColumnsCreater<T, extra = any> = (
+	props: {
+		editingKey: string;
+		form: FormInstance<T>;
+		save: (key: string) => void;
+		cancel: () => void;
+		edit: (record: T) => void;
+		isEditing: (record: T) => boolean;
+		deleteByKey: (key: string) => void;
+		record: Partial<T>;
+	},
+	extraProps?: extra,
+) => MyColumnType<T>[];
 
 export const EditTable = <T extends { uid?: string } = any>({
 	columnCreater,

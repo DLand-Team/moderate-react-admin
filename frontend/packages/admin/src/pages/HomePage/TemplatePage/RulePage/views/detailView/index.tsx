@@ -1,20 +1,12 @@
-import {
-	Button,
-	Card,
-	DescriptionsProps,
-	Drawer,
-	Form,
-	Modal,
-	Skeleton,
-} from "antd";
+import { Button, Card, DescriptionsProps, Drawer, Skeleton } from "antd";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import InfoCard from "src/components/infoCard";
 import TablePart from "src/pages/HomePage/TemplatePage/RulePage/components/tablePart";
 import { ROUTE_ID } from "src/router/name";
-import { AppHelper, useFlat } from "src/service";
-import { AddItemDrawerType, Rule } from "src/service/stores/ruleStore/model";
+import { AppHelper, RouterHelper, useFlat } from "src/service";
+import { AddItemDrawerType } from "src/service/stores/ruleStore/model";
 import PosEditPage from "../../../PosPage/PosEditPage";
 import styles from "./style.module.scss";
 
@@ -23,19 +15,16 @@ export interface DetailViewProps {
 }
 
 const DetailView = ({ branchName }: DetailViewProps) => {
-	const [formRef] = Form.useForm<Rule>();
 	let [searchParams] = useSearchParams();
 	const id = searchParams.get("id");
 	const {
-		addAct,
-		updateAct,
-		itineraryList,
 		currentData,
 		isAddItemDrawerFlag,
 		setIsAddItemDrawerFlag,
 		addItemType,
 	} = useFlat(["ruleStore", branchName]);
-	const { t } = useTranslation();
+	const { t } = useTranslation("rule");
+	const { t: commonT } = useTranslation("common");
 	const { posList } = useFlat(["posStore", ROUTE_ID.RuleDetailPage], {
 		posList: "IN",
 	});
@@ -52,7 +41,9 @@ const DetailView = ({ branchName }: DetailViewProps) => {
 	const items: DescriptionsProps["items"] = [
 		{
 			label: t`rulePage_ruleName`,
-			children: currentData?.ruleName || (
+			children: currentData ? (
+				currentData.ruleName
+			) : (
 				<Skeleton.Input block={true} active={true} />
 			),
 			span: { xl: 4, xxl: 4 },
@@ -210,38 +201,23 @@ const DetailView = ({ branchName }: DetailViewProps) => {
 			<div className={styles.btnTable}>
 				<Button
 					onClick={async () => {
-						await formRef.validateFields();
-						const values = formRef.getFieldsValue();
-						Modal.info({
-							content: JSON.stringify(values),
+						RouterHelper.jumpTo(ROUTE_ID.RuleEditPage, {
+							search: {
+								id,
+							},
 						});
-						values.effectStartDate = values.effectDateData![0];
-						values.effectEndDate = values.effectDateData![1];
-						delete values.effectDateData;
-						const newData = {
-							...values,
-							cpdRuleItinerarys: itineraryList,
-						};
-						// 转换生效日期范围
-						await (!id
-							? addAct(newData)
-							: updateAct({ ...currentData, ...newData }));
-						// message.success({
-						//   content: t`rulePage_succeed`,
-						// });
-						// AppHelper.closeTabByPath();
 					}}
 					style={{ marginRight: 10 }}
 					type="primary"
 				>
-					{t`rulePage_save`}
+					{commonT`edit`}
 				</Button>
 				<Button
 					onClick={() => {
 						AppHelper.closeTabByPath();
 					}}
 				>
-					{t`rulePage_cancel`}
+					{commonT`cancel`}
 				</Button>
 			</div>
 			<Drawer

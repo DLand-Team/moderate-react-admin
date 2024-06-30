@@ -1,11 +1,11 @@
 import { Checkbox, Col, Row, Select } from "antd";
+import classNames from "classnames";
 import { Fragment } from "react";
 import { useTranslation } from "react-i18next";
 import { RuleHelper, useFlat } from "src/service";
 import OperateCarriersSelect from "../operateCarriersSelect";
 import SearchSelect from "../searchSelect";
 import styles from "./style.module.scss";
-import classNames from "classnames";
 
 const CategoryEdit = (props: any) => {
 	const { searchSelectData, targetItinerary, branchName } = props;
@@ -14,7 +14,6 @@ const CategoryEdit = (props: any) => {
 	const {
 		flightCategory = 1,
 		noOverNight = 0,
-		noInterline = 0,
 		carrier,
 		operateCarriers,
 		notOperateCarriers,
@@ -77,18 +76,6 @@ const CategoryEdit = (props: any) => {
 							}}
 						>
 							{t("rule:rulePage_noOverNight")}
-						</Checkbox>
-						<Checkbox
-							onChange={(e) => {
-								e.target.checked;
-								updateItineraryAct({
-									...targetItinerary,
-									noInterline: e.target.checked ? 1 : 0,
-								});
-							}}
-							checked={noInterline}
-						>
-							{t("rule:rulePage_noInterline")}
 						</Checkbox>
 					</Fragment>
 				) : (

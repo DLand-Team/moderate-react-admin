@@ -8,7 +8,6 @@ const CategroyDetail = (props: any) => {
 	const { flightCategory, targetItinerary } = props;
 	const {
 		noOverNight,
-		noInterline,
 		carrier,
 		operateCarriers,
 		notOperateCarriers,
@@ -55,21 +54,8 @@ const CategroyDetail = (props: any) => {
 							></div>
 
 							<span>
-								{noOverNight && t("rule:rulePage_no")}
-								{t("rule:rulePage_overNight")}
-							</span>
-						</div>
-						<div className={styles.itFormItemFlex2}>
-							<div
-								className={
-									!noInterline
-										? styles.redPoint
-										: styles.noRedPoint
-								}
-							></div>
-							<span>
-								{noInterline && t("rule:rulePage_no")}
-								{t("rule:rulePage_interline")}
+								{noOverNight && t("rule:rulePage_noOverNight")}
+								{t("rule:rulePage_noOverNight")}
 							</span>
 						</div>
 					</Fragment>

@@ -1,5 +1,6 @@
 {
 	"blog.warn_select": "Please select one to delete!",
+	"placeholder_input": "Please input",
 	"blog.action": "Actions",
 	"blog.modalDeleteTitle": "Are you sure to delete this data?",
 	"blog.modalDeleteContent": "It cannot be restored after deletion!",

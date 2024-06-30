@@ -124,7 +124,7 @@ export const Itinenarary = (props: any) => {
 					type="dashed"
 					className={styles.addConnectionBtn}
 				>
-					{`${t("add")} ${t("rulePage_connection")}`}
+					{`${t("common:add")} ${t("rulePage_connection")}`}
 				</Button>
 			)}
 		</div>

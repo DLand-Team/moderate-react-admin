@@ -19,5 +19,16 @@
 	"rulePage_itinerary": "Tour",
 	"rulePage_exclude": "exclude",
 	"rulePage_maxConnectTime": "Max ConnectTime",
-	"rulePage_minConnectTime": "Min ConnectTime"
+	"rulePage_minConnectTime": "Min ConnectTime",
+	"rulePage_allowCodeShare": "Option1",
+	"rulePage_carriers": "Option2",
+	"rulePage_operateCarriers": "Option3",
+	"rulePage_connection": "Connection",
+	"rulePage_segment": "Attractions",
+	"rulePage_noOverNight": "No OverNight",
+	"rulePage_NONSTOP": "NONSTOP",
+	"rulePage_DIRECT": "DIRECT",
+	"rulePage_CONNECTION": "CONNECTION",
+	"rulePage_flightRange": "Cost Range",
+	"connectItem": "connectItem"
 }

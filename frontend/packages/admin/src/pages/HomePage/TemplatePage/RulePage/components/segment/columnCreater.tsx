@@ -10,9 +10,8 @@ import {
 	Input,
 	Popconfirm,
 	Row,
-	Select,
 	Switch,
-	Typography,
+	Typography
 } from "antd";
 import { useTranslation } from "react-i18next";
 import { ColumnsCreater } from "src/common/hooks/editTable";
@@ -71,44 +70,6 @@ const columnCreater: ColumnsCreater<Segment> = ({
 							initValue={carrier || "ALL"}
 							dataSource={searchSelectData}
 						/>
-					);
-				},
-			},
-		},
-		{
-			title: t("rulePage_operateCarriers"),
-			dataIndex: "operateCarriersAll",
-			key: "operateCarriersAll",
-			editable: true,
-			render: (_, record) => {
-				const { operateCarriers, notOperateCarriers } = record;
-				let useFlagInitValue = "use",
-					searchSelectInitValue = "";
-				if (operateCarriers) {
-					useFlagInitValue = "use";
-					searchSelectInitValue = operateCarriers;
-				} else if (notOperateCarriers) {
-					useFlagInitValue = "not";
-					searchSelectInitValue = notOperateCarriers;
-				}
-				return (
-					searchSelectInitValue &&
-					`${useFlagInitValue}-${searchSelectInitValue}`
-				);
-			},
-			fieldConfig: {
-				render: (_, record) => {
-					console.log(record.getFieldsValue());
-					return (
-						<Form.Item
-							style={{
-								margin: 0,
-							}}
-						>
-							<Select
-								disabled={record.getFieldsValue().exclude}
-							/>
-						</Form.Item>
 					);
 				},
 			},
@@ -264,7 +225,7 @@ const columnCreater: ColumnsCreater<Segment> = ({
 	];
 	if (!isDetail) {
 		value.push({
-			title: t("operation"),
+			title: commonT("operation"),
 			dataIndex: "operation",
 			align: "center",
 			render: (_: any, record) => {
