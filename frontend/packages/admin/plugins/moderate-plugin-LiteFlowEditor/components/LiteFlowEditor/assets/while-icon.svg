@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 18 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <title>编组</title>
+  <g id="页面-1" stroke="none" stroke-width="1.6" fill="none" fill-rule="evenodd" stroke-linecap="round">
+    <g id="流程编排" transform="translate(-95, -314)" stroke="#10B2CC">
+        <g id="编组-24" transform="translate(0, 128)">
+            <g id="编组-22" transform="translate(18, 59)">
+                <g id="编组-25备份-3" transform="translate(56, 113)">
+                    <g id="编组" transform="translate(0, 15)">
+                        <g transform="translate(23, 2) scale(0.8)" id="路径">
+                            <path d="M16.31005,5 C14.83735,2.03655 11.7793,0 8.2456,0 C4.71185,0 1.7227,2.03655 0.25,5"></path>
+                            <line x1="0.25" y1="1" x2="0.25" y2="5"></line>
+                            <line x1="3.64015" y1="5" x2="0.250065" y2="5"></line>
+                            <path d="M0.25,13 C1.7227,15.96345 4.78075,18 8.3145,18 C11.8482,18 14.83735,15.96345 16.31005,13"></path>
+                            <line x1="16.31005" y1="17" x2="16.31005" y2="13"></line>
+                            <line x1="12.9199" y1="13" x2="16.31" y2="13"></line>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+  </g>
+</svg>

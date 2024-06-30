@@ -1,0 +1,9 @@
+{
+	"name": "moderate-plugin-LiteFlowEditor",
+	"dependencies": {
+		"@antv/layout": "^0.1.31",
+		"@antv/x6": "^1.7.12",
+		"@antv/x6-react-components": "^1.1.15",
+		"@antv/x6-react-shape": "^1.6.0"
+	}
+}

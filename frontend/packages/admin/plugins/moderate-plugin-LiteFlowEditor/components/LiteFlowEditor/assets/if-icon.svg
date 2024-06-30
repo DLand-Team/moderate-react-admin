@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>结束备份 3</title>
+    <g id="结束备份-3" stroke="#EFA13B" stroke-width="1.6" fill="none" fill-rule="evenodd">
+        <polygon id="多边形" points="12 5 22 12.5 12 20 2 12.5"></polygon>
+        <g id="编组" transform="translate(8, 9) scale(0.4)" stroke-width="3.2">
+          <path d="M13.5,5 C14.8807,5 16,3.8807 16,2.5 C16,1.11929 14.8807,0 13.5,0 C12.1193,0 11,1.11929 11,2.5 C11,3.8807 12.1193,5 13.5,5 Z" id="路径"></path>
+          <path d="M2.5,11.5 C3.8807,11.5 5,10.3807 5,9 C5,7.6193 3.8807,6.5 2.5,6.5 C1.1193,6.5 0,7.6193 0,9 C0,10.3807 1.1193,11.5 2.5,11.5 Z" id="路径"></path>
+          <line x1="11.0002" y1="3.78725" x2="4.66965" y2="7.6227" id="路径" stroke-linecap="round"></line>
+          <line x1="4.66925" y1="10.28195" x2="11.33945" y2="14.22345" id="路径" stroke-linecap="round"></line>
+          <path d="M13.5,13 C14.8807,13 16,14.1193 16,15.5 C16,16.8807 14.8807,18 13.5,18 C12.1193,18 11,16.8807 11,15.5 C11,14.1193 12.1193,13 13.5,13 Z" id="路径"></path>
+        </g>
+    </g>
+</svg>

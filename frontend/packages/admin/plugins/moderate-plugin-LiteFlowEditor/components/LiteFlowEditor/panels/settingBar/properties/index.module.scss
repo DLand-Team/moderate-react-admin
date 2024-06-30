@@ -1,0 +1,19 @@
+.liteflowEditorPropertiesEditorContainer {
+  height: 900px;
+  overflow-y: auto;
+  padding: 10px;
+  :global {
+    .ant-form-item {
+      margin-bottom: 8px;
+    }
+    .ant-input-number {
+      width: 100%;
+    }
+  }
+  .liteflowEditorPropertiesInformation {
+    padding: 0 12px;
+  }
+  .liteflowEditorPropertiesDataPropertyInformation {
+    padding-left: 8px;
+  }
+}
