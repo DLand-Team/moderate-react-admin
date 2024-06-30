@@ -25,7 +25,6 @@ const DealPage = () => {
 
 	return (
 		<div className={styles.content}>
-			搜索栏目
 			<SearchForm></SearchForm>
 			{/* modal */}
 			<ModalForm />

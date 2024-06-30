@@ -1,12 +1,12 @@
-import { dp, getActionType } from "src/service";
-import { startAppListening } from "../../setup";
+import { dpChain, getActionType } from "src/service";
+import { startAppListening } from "src/service/setup";
 
 const watch = () => {
 	// 监听权限数据，动态生成菜单
 	startAppListening({
 		type: getActionType("routerStore").setRoutesConfigMap,
 		effect: async () => {
-			dp("appStore", "createMenuDataAct");
+			dpChain("appStore").createMenuDataAct();
 		},
 	});
 };

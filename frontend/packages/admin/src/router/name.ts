@@ -1,5 +1,5 @@
-import { enumToObject } from "src/common/utils";
 import { PLUGIN_ROUTE_NAME } from "plugins/config/router/name";
+import { enumToObject } from "src/common/utils";
 
 export enum NAME {
 	HomePage,
@@ -17,14 +17,34 @@ export enum NAME {
 	ErrorPage,
 	DealPage,
 	DealListPage,
-	DealApprovalPage,
-	DealRankPage,
 	LoadingPage,
 	UserPage,
 	PluginsPage,
 	PluginListPage,
-	CategoryPage,
-	EnquiryPage,
+	// pos
+	PosPage,
+	PosListPage,
+	PosDetailPage,
+	PosEditPage,
+	PosAddPage,
+	// market
+	MarketPage,
+	MarketDetailPage,
+	MarketListPage,
+	MarketAddPage,
+	MarketEditPage,
+	// rule
+	RulePage,
+	RuleDetailPage,
+	RuleListPage,
+	RuleEditPage,
+	RuleAddPage,
+	// filter
+	FilterPage,
+	FilterListPage,
+	// sort
+	SortPage,
+	SortListPage,
 }
 
 export const ROUTE_NAME = { ...NAME, ...PLUGIN_ROUTE_NAME };

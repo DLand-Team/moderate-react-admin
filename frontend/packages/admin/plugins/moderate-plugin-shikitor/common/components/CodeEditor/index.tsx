@@ -98,7 +98,9 @@ export default function CodeEditor() {
 		<div className="code-editor">
 			<CardHeader />
 			<WithoutCoreEditor
+				//@ts-ignore
 				ref={shikitorRef}
+				//@ts-ignore
 				create={shikitorCreate}
 				value={code}
 				onChange={setCode}
@@ -109,8 +111,10 @@ export default function CodeEditor() {
 					}),
 					[theme, language],
 				)}
+				//@ts-ignore
 				plugins={plugins}
 				onColorChange={setColor}
+				//@ts-ignore
 				onMounted={initPlaygroundShikitor}
 			/>
 		</div>

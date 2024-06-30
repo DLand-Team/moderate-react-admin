@@ -1,7 +1,6 @@
-/* Core */
-import { createSliceE } from "redux-eazy";
+
 import { PayloadAction } from "redux-eazy";
-import names from "../names";
+import { createSlice } from "src/service/setup";
 import { StoreState } from "./model";
 
 const initialState = (): StoreState => {
@@ -17,8 +16,8 @@ const initialState = (): StoreState => {
 	};
 };
 
-const slice = createSliceE({
-	name: names.appStore,
+const slice = createSlice({
+	name: "devStore",
 	stateInit: initialState,
 	reducers: {
 		setPageList(state, { payload }: PayloadAction<any>) {

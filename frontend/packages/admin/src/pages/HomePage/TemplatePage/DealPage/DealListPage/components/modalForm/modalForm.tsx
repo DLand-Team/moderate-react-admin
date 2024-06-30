@@ -25,12 +25,6 @@ const ModalForm: React.FC = () => {
 	useEffect(() => {
 		if (recordData) {
 			let recordDataTemp = cloneDeep(recordData);
-			if (recordData) {
-				//@ts-ignore
-				recordDataTemp.ask = {
-					partnerships: { partners: ["1", "2", "3"] },
-				};
-			}
 			form.setFieldsValue(recordDataTemp);
 		}
 	}, [recordData]);

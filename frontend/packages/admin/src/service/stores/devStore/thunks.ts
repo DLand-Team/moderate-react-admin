@@ -1,7 +1,6 @@
-/* Instruments */
-import { dp } from "src/service";
-import { createThunks } from "../../setup";
-import names from "../names";
+import { dp, dpChain } from "src/service";
+import { createThunks } from "src/service/setup";
+import { Setting } from "../appStore/modal";
 import httpApi from "./api";
 import type {
 	AdcompanyPageParams,
@@ -9,12 +8,11 @@ import type {
 	AddStoreParams,
 	RemovePluginApiParams,
 } from "./model";
-import { Setting } from "../appStore/modal";
 
-const thunks = createThunks(names.appStore, {
+const thunks = createThunks("dealStore", {
 	fetchPageListAct: async () => {
 		const { data } = await httpApi.fetchPageList();
-		dp("devStore", "setPageList", {
+		dpChain("devStore").setPageList({
 			pageList: data.pageList,
 			total: data.pageList.length,
 		});
@@ -57,7 +55,7 @@ const thunks = createThunks(names.appStore, {
 	},
 	loadPluginDetailAct: async (params: { url: string }) => {
 		const { data } = await httpApi.getPluginApi(params);
-		dp("appStore", "setMdContent", data.content);
+		dpChain("appStore").setMdContent(data.content);
 	},
 	saveSettingAct: async (params: Setting) => {
 		await httpApi.saveSettingApi(params);

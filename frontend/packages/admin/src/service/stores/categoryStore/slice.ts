@@ -1,7 +1,7 @@
 /* Core */
-import { createSliceE, PayloadAction } from "redux-eazy";
+import { PayloadAction } from "redux-eazy";
+import { createSlice } from "src/service/setup";
 import { Category, PageData, StoreState } from "./model";
-import names from "src/service/stores/names";
 
 const initialState = (): StoreState => {
 	return {
@@ -20,8 +20,8 @@ const initialState = (): StoreState => {
 	};
 };
 
-const slice = createSliceE({
-	name: names.categoryStore,
+const slice = createSlice({
+	name: "categoryStore",
 	stateInit: initialState,
 	reducers: {
 		setIsDetailAct(state, { payload }: PayloadAction<boolean>) {

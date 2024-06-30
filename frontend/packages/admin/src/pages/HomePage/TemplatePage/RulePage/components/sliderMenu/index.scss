@@ -1,0 +1,23 @@
+.sliderMenu {
+    .menuItem {
+        width: "100%";
+        border-right: #ffffff;
+    }
+    .btn {
+        width: 100%;
+        display: flex;
+        padding-left: 24px;
+        height: 40px;
+        align-items: center;
+    }
+    .btnLabel {
+        margin-left: 10px;
+    }
+    .itemClose {
+        margin-left: 6px;
+    }
+    .itemSwap {
+        margin-left: 6px;
+        transform: rotate(-90deg);
+    }
+}

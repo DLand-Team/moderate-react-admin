@@ -1,0 +1,36 @@
+.segmentItem {
+    .flightRangeInput {
+        display: flex;
+    }
+}
+.flightRangeInput {
+    display: flex;
+    border: 1px solid #d9d9d9;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 3px;
+}
+.flightRangeInputItem {
+    width: 60px;
+}
+
+.likePointWrap_bottom {
+    margin-top: 0.1rem;
+    height: 0.34rem;
+
+    div {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    input {
+      height: 100%;
+      width: 2rem;
+      margin-left: 0.26rem;
+    }
+
+    & > div:nth-child(2) {
+      margin-left: 0.54rem;
+    }
+  }

@@ -227,6 +227,7 @@ const useConfig = (form?: FormInstance) => {
 		];
 	}
 	if (recordData?.type == DealType.PARTNERSHIPS) {
+		debugger;
 		askData = [
 			{
 				dataIndex: "ask.partnerships.partners",
@@ -234,7 +235,8 @@ const useConfig = (form?: FormInstance) => {
 					type: "MultipleOne",
 					scope: ["modal"],
 					formOptions: {
-						initialValue: recordData?.ask?.partnerships?.partners,
+						initialValue:
+							recordData?.ask?.partnerships?.partners || [],
 						childRule: [
 							{
 								required: true,
@@ -309,7 +311,7 @@ const useConfig = (form?: FormInstance) => {
 							recordData?.ask?.sell_a_business.vendor_finance,
 						rules: [
 							{
-								required: true,
+								required: false,
 							},
 						],
 						label: "usage",
@@ -663,20 +665,20 @@ const useConfig = (form?: FormInstance) => {
 						label: "business_website",
 						name: ["components", "business_website"],
 						rules: [
-							{
-								validator(_, value) {
-									if (!value) {
-										return Promise.resolve();
-									}
-									if (value.length > 0 && !value.match(URL)) {
-										return Promise.reject({
-											message:
-												"Please provide a valid website url!",
-										});
-									}
-									return Promise.resolve();
-								},
-							},
+							// {
+							// 	validator(_, value) {
+							// 		if (!value) {
+							// 			return Promise.resolve();
+							// 		}
+							// 		if (value.length > 0 && !value.match(URL)) {
+							// 			return Promise.reject({
+							// 				message:
+							// 					"Please provide a valid website url!",
+							// 			});
+							// 		}
+							// 		return Promise.resolve();
+							// 	},
+							// },
 						],
 					},
 				},

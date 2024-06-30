@@ -1,12 +1,10 @@
-/* Instruments */
 import { pickBy } from "lodash-es";
-import { dp } from "src/service";
-import { createThunks } from "../../setup";
-import names from "../names";
+import { dpChain } from "src/service";
+import { createThunks } from "src/service/setup";
 import httpApi from "./api";
 import { DealEntity, QueryActParams, RankApiParams } from "./model";
 
-const thunks = createThunks(names.dealStore, {
+const thunks = createThunks("dealStore", {
 	setIsDetailAct: (isDetail: boolean) => {
 		return {
 			isDetail,
@@ -35,7 +33,7 @@ const thunks = createThunks(names.dealStore, {
 	},
 	// 请求deal列表
 	queryDealListAct: async (params: QueryActParams, api) => {
-		dp("dealStore", "setLoading", true);
+		dpChain("dealStore").setLoading(true);
 		const res = await httpApi
 			.queryApi<DealEntity>({
 				page: api.getState().dealStore.pageData.pageNum || 1,
@@ -47,17 +45,16 @@ const thunks = createThunks(names.dealStore, {
 				...params,
 			})
 			.finally(() => {
-				dp("dealStore", "setLoading", false);
+				dpChain("dealStore").setLoading(false);
 			});
 		const { content: dataList, count } = res.data;
-		;
-		dp("dealStore", "setDealList", {
+		dpChain("dealStore").setDealList({
 			list: dataList,
 			total: count,
 		});
 	},
 	queryApprovalDealListAct: async (params: QueryActParams, api) => {
-		dp("dealStore", "setLoading", true);
+		dpChain("dealStore").setLoading(true);
 		const res = await httpApi
 			.queryApi<DealEntity>({
 				page: api.getState().dealStore.approvalPageData.pageNum || 1,
@@ -69,16 +66,16 @@ const thunks = createThunks(names.dealStore, {
 				...params,
 			})
 			.finally(() => {
-				dp("dealStore", "setLoading", false);
+				dpChain("dealStore").setLoading(false);
 			});
 		const { content: dataList, count } = res.data;
-		dp("dealStore", "setApprovalDealList", {
+		dpChain("dealStore").setApprovalDealList({
 			list: dataList,
 			total: count,
 		});
 	},
 	queryRankDealListAct: async (params: QueryActParams, api) => {
-		dp("dealStore", "setLoading", true);
+		dpChain("dealStore").setLoading(true);
 		const res = await httpApi
 			.queryApi<DealEntity>({
 				page: api.getState().dealStore.rankPageData.pageNum || 1,
@@ -93,10 +90,11 @@ const thunks = createThunks(names.dealStore, {
 				...params,
 			})
 			.finally(() => {
-				dp("dealStore", "setLoading", false);
+				dpChain("dealStore").setLoading(false);
 			});
 		const { content: dataList, count } = res.data;
-		dp("dealStore", "setRankList", {
+
+		dpChain("dealStore").setRankList({
 			list: dataList,
 			total: count,
 		});
@@ -105,7 +103,7 @@ const thunks = createThunks(names.dealStore, {
 		httpApi.rankApi(params);
 	},
 	querySearchListAct: async () => {
-		dp("dealStore", "setLoading", true);
+		dpChain("dealStore").setLoading(true);
 		const res = await httpApi
 			.queryApi<DealEntity>({
 				is_approved: true,
@@ -113,9 +111,9 @@ const thunks = createThunks(names.dealStore, {
 				status: "active",
 			})
 			.finally(() => {
-				dp("dealStore", "setLoading", false);
+				dpChain("dealStore").setLoading(false);
 			});
-		dp("dealStore", "setSearchList", res.data.content);
+		dpChain("dealStore").setSearchList(res.data.content);
 	},
 });
 export default thunks;

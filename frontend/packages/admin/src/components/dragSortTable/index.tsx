@@ -112,35 +112,6 @@ const DragSortTable: React.FC<
 				restrictToParentElement,
 				restrictToFirstScrollableAncestor,
 			]}
-			// onDragOver={(e) => {
-			// 	console.log(isOverEndRef.current);
-			// 	if (isOverEndRef.current) return;
-			// 	if (e.over?.id === endIdRef.current) {
-			// 		timer.current = setInterval(() => {
-			// 			if (isOverEndRef.current) return;
-			// 			percentValye.current = Math.min(
-			// 				percentValye.current + 1,
-			// 				100,
-			// 			);
-			// 			setPercent(percentValye.current);
-			// 			if (percentValye.current == 100) {
-			// 				setPageSize(pageSize + 16);
-			// 				setIsLoadding(true);
-			// 				isOverEndRef.current = true;
-			// 				console.log("yes");
-			// 				setPercent(0);
-			// 				clearInterval(timer.current);
-			// 				timer.current = null;
-			// 			}
-			// 		}, 10);
-			// 	} else {
-			// 		// console.log("no");
-			// 		percentValye.current = 0;
-			// 		setPercent(0);
-			// 		clearInterval(timer.current);
-			// 		timer.current = null;
-			// 	}
-			// }}
 			onDragStart={() => {
 				endIdRef.current =
 					props.dataSource?.slice(-1)[0][

@@ -1,8 +1,7 @@
-import { Input, Select, Typography } from "antd";
+import { Input, Typography } from "antd";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useFlat } from "src/service";
-import { ThemeName } from "src/service/stores/appStore/modal";
 
 const ProjectSetting: React.FC = () => {
 	const { t } = useTranslation();

@@ -129,7 +129,7 @@ export default function Messenger() {
 		}
 		const bot = bots.documentHelper;
 		const completions = await openaiRef.current.chat.completions.create({
-			model: 'gpt-4o',
+			model: "gpt-4o",
 			// eslint-disable-next-line camelcase
 			max_tokens: 4096,
 			messages: [
@@ -310,7 +310,9 @@ export default function Messenger() {
 			<div className="message-sender">
 				<Avatar size="small">YiJie</Avatar>
 				<WithoutCoreEditor
+					//@ts-ignore
 					ref={shikitorRef}
+					//@ts-ignore
 					create={shikitorCreate}
 					value={text}
 					onChange={setText}
@@ -324,6 +326,7 @@ export default function Messenger() {
 						}),
 						[theme],
 					)}
+					//@ts-ignore
 					plugins={bundledPlugins}
 					onColorChange={setColor}
 					//@ts-ignore

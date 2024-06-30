@@ -25,7 +25,6 @@ const UserPage = () => {
 
 	return (
 		<div className={styles.content}>
-			搜索栏目
 			<SearchForm></SearchForm>
 			<ModalForm />
 			{/* 表格 */}

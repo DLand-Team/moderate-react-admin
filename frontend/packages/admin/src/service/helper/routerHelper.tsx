@@ -69,6 +69,7 @@ export class RouterHelper {
 		parentId: ROUTE_ID_KEY;
 	}) => {
 		routesStructData.forEach((routeStructItem) => {
+			debugger;
 			const { id } = routeStructItem;
 			if (!(id in routesConfigMap)) {
 				return;

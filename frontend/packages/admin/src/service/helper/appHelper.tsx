@@ -43,11 +43,23 @@ export class AppHelper {
 				result = result.concat(menuData);
 			}
 		}
+		this.sortLoop(result);
 		result.sort((a, b) => {
 			return ROUTE_NAME[a.key] - ROUTE_NAME[b.key];
 		});
 		return result;
 	}
+
+	static sortLoop = (result: MenuItem[]) => {
+		result.sort((a, b) => {
+			return ROUTE_NAME[a.key] - ROUTE_NAME[b.key];
+		});
+		result.forEach((item) => {
+			if (item.children?.length) {
+				this.sortLoop(item.children);
+			}
+		});
+	};
 
 	/**
 	 * @description: 递归生成菜单根据后端权限 “服务端权限控制专属“
@@ -134,12 +146,14 @@ export class AppHelper {
 				isMenu = true,
 				isNoAuth,
 				component,
-				index,
 			} = item;
 
 			if (!isPublish && process.env.NODE_ENV == "production") {
 				return;
 			}
+			// 不是menu，排除
+			// 不是客户端鉴权，排除
+			// 如果是路由，但是组件却没注册，排除
 			if (
 				!isMenu ||
 				!isNoAuth ||
@@ -151,7 +165,7 @@ export class AppHelper {
 				return;
 			}
 			const temp: MenuItem = {
-				key: index ? item.parentId! : item.id!,
+				key: item.id!,
 				icon: item.meta?.icon,
 				label: item.meta!?.title! || "",
 			};

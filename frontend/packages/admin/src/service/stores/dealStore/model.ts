@@ -1,3 +1,5 @@
+import { PageBaseData } from "src/types/common";
+
 export interface IBaseModel {
 	id: number;
 
@@ -224,11 +226,8 @@ export interface IDealUpdateModel {
 
 	prime_category_name: string;
 }
-export interface PageData {
+export interface PageData extends PageBaseData {
 	dataList: DealEntity[];
-	pageSize: number;
-	pageNum: number;
-	total: number;
 }
 export interface StoreState {
 	searchList: DealEntity[];
