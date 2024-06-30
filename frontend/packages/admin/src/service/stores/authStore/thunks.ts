@@ -1,12 +1,11 @@
 import storageHelper from "src/common/utils/storageHelper";
-import { dp } from "src/service";
+import { dpChain } from "src/service";
 import { AuthHelper } from "src/service/helper";
-import { createThunks } from "../../setup";
-import names from "../names";
+import { createThunks } from "src/service/setup";
 import httpApi from "./api";
 import { LoginApiParams } from "./model";
 
-const thunks = createThunks(names.authStore, {
+const thunks = createThunks("authStore", {
 	loginNest: async (arg: LoginApiParams) => {
 		// 第一步：登录获取token，并存储
 		const {
@@ -14,7 +13,7 @@ const thunks = createThunks(names.authStore, {
 		} = await httpApi.loginNestApi(arg);
 		// 第二步：根据token获取权限，并存储
 		const isAdmin = true;
-		dp("authStore", "setUserInfo", {
+		dpChain("authStore").setUserInfo({
 			userName: arg.username,
 			token: content,
 			isAdmin: isAdmin,
@@ -29,7 +28,7 @@ const thunks = createThunks(names.authStore, {
 		} = await httpApi.loginApi(arg);
 		// 第二步：根据token获取权限，并存储
 		const isAdmin = true;
-		dp("authStore", "setUserInfo", {
+		dpChain("authStore").setUserInfo({
 			userName: arg.username,
 			token: accessToken,
 			isAdmin: isAdmin,
@@ -49,7 +48,7 @@ const thunks = createThunks(names.authStore, {
 			AuthHelper.createRoutesPermissionsByMenu(menus || []);
 		// redux存储一下
 		menuPermissions &&
-			dp("authStore", "setPermissions", {
+			dpChain("authStore").setPermissions({
 				menuPermissions,
 				permissions,
 				routesPermissions,
@@ -58,15 +57,15 @@ const thunks = createThunks(names.authStore, {
 	updatePermissionsAct: async () => {},
 	getImageUrlAct: async () => {
 		const { data } = await httpApi.getImageUrlApi();
-		dp("authStore", "setImageUrl", data.url);
+		dpChain("authStore").setImageUrl(data.url);
 	},
 	getCaptchaAct: async () => {
 		const { data } = await httpApi.getCaptchaApi();
-		dp("authStore", "setCaptcha", data.captcha);
+		dpChain("authStore").setCaptcha(data.captcha);
 	},
 	getLoginCodeAct: async (arg: any) => {
 		const { data } = await httpApi.getLoginCodeApi(arg);
-		dp("authStore", "setCodeImg", data);
+		dpChain("authStore").setCodeImg(data);
 	},
 });
 export default thunks;

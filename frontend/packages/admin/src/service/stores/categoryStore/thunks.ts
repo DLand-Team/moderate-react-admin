@@ -1,12 +1,11 @@
 /* Instruments */
 import { pickBy } from "lodash-es";
 import { UUID } from "src/common/utils";
+import { dpChain } from "src/service";
 import { createThunks } from "src/service/setup";
-import names from "src/service/stores/names";
 import httpApi from "./api";
-import { dp } from "src/service";
 
-const thunks = createThunks(names.categoryStore, {
+const thunks = createThunks("categoryStore", {
 	refreshFormVersionAct: () => {
 		return {
 			formVersion: UUID(),
@@ -47,7 +46,10 @@ const thunks = createThunks(names.categoryStore, {
 			page: api.getState().categoryStore.pageData.pageNum || 1,
 			...pickBy(params),
 		});
-		dp("categoryStore", "setCategoryList", { list, total: list.length });
+		dpChain("categoryStore").setCategoryList({
+			list,
+			total: list.length,
+		});
 	},
 });
 export default thunks;

@@ -1,4 +1,4 @@
-/* Instruments */
+
 import names from "src/reduxService/stores/names";
 import { pickBy } from "lodash-es";
 import httpApi from "./api";

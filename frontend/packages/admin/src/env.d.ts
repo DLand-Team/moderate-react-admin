@@ -13,3 +13,4 @@ declare module "axios" {
 		) => Promise<R>;
 	}
 }
+

@@ -1,14 +1,13 @@
+import { PageBaseData } from "src/types/common";
+
 export interface StoreState {
 	pageData: PageData;
 	loading: boolean;
 	isShowDeatilModal: boolean;
 	currentData: UserEntity | null;
 }
-export interface PageData {
+export interface PageData extends PageBaseData {
 	dataList: UserEntity[];
-	pageSize: number;
-	pageNum: number;
-	total: number;
 }
 export interface UserEntity {
 	email: string;

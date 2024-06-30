@@ -139,28 +139,6 @@ table {
 	border-radius: 8px;
 }
 
-/*整个滚动条*/
-::-webkit-scrollbar {
-	width: 5px;
-
-	height: 8px;
-
-	background-color: #ffffff00;
-}
-
-/*定义滚动条轨道*/
-
-::-webkit-scrollbar-track {
-	background-color: #ffffff00;
-}
-
-/*定义滑块*/
-
-::-webkit-scrollbar-thumb {
-	background-color: #acb1bf;
-
-	border-radius: 4px;
-}
 
 .loading {
 	position: fixed;
@@ -187,4 +165,22 @@ table {
 		background: -moz-element(loading) no-repeat;
 		filter: blur(2px);
 	}
+}
+
+
+
+#root::-webkit-scrollbar {
+	width: 6px;
+	height: 6px
+}
+
+#root::-webkit-scrollbar-thumb {
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	background-color: #666;
+}
+
+#root::-webkit-scrollbar-track {
+	background-color: #eee;
 }

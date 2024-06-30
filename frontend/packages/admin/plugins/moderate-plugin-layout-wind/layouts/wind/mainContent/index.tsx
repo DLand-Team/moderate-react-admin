@@ -1,17 +1,14 @@
-import { Layout } from "antd";
+import { Divider, Layout, theme } from "antd";
 import Tabs from "src/components/navTabs";
-import { useFlat } from "src/service";
 
 const { Content } = Layout;
 const MainContent = ({
 	children,
-	isDark,
 }: React.PropsWithChildren<{ isDark?: boolean }>) => {
-	const { currentTheme } = useFlat("appStore");
-	let darkFlag = currentTheme == "dark";
-	if (isDark !== undefined) {
-		darkFlag = isDark;
-	}
+	const {
+		token: { colorBgLayout },
+	} = theme.useToken();
+	
 	return (
 		<Content
 			style={{
@@ -19,15 +16,20 @@ const MainContent = ({
 				display: "flex",
 				flexDirection: "column",
 				height: "100%",
-				background: darkFlag ? "#282c34" : "#eff1f3",
+				background: colorBgLayout,
 			}}
 		>
 			<Tabs />
+			<Divider
+				style={{
+					margin: 0,
+				}}
+			/>
 			<div
 				style={{
 					flex: 1,
 					overflow: "auto",
-					padding: 32,
+					padding: "12px",
 					height: "100%",
 				}}
 			>

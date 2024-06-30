@@ -1,5 +1,5 @@
-import { lazy } from "react";
 import { pageList as pluginsPages } from "plugins/config/pages";
+import { lazy } from "react";
 
 const isProd = process.env.NODE_ENV == "production";
 // MODERATE_AUTO_PAGE_LAZY_IMPORT:START
@@ -36,23 +36,50 @@ const DealPage = lazy(() => import("./HomePage/TemplatePage/DealPage"));
 const DealListPage = lazy(
 	() => import("./HomePage/TemplatePage/DealPage/DealListPage"),
 );
-const DealApprovalPage = lazy(
-	() => import("./HomePage/TemplatePage/DealPage/DealApprovalPage"),
-);
-const DealRankPage = lazy(
-	() => import("./HomePage/TemplatePage/DealPage/DealRankPage"),
-);
 const LoadingPage = lazy(() => import("./HomePage/LoadingPage"));
-const UserPage = lazy(() => import("./HomePage/TemplatePage/UserPage"));
-const CategoryPage = lazy(() => import("./HomePage/TemplatePage/CategoryPage"));
-const EnquiryPage = lazy(() => import("./HomePage/TemplatePage/EnquiryPage"));
+
+// rule页面
+const RulePage = lazy(() => import("./HomePage/TemplatePage/RulePage"));
+const RuleDetailPage = lazy(
+	() => import("./HomePage/TemplatePage/RulePage/RuleDetailPage"),
+);
+const RuleListPage = lazy(
+	() => import("./HomePage/TemplatePage/RulePage/RuleListPage"),
+);
+const RuleEditPage = lazy(
+	() => import("./HomePage/TemplatePage/RulePage/RuleEditPage"),
+);
+const RuleAddPage = lazy(
+	() => import("./HomePage/TemplatePage/RulePage/RuleAddPage"),
+);
+////posPage
+const PosPage = lazy(() => import("./HomePage/TemplatePage/PosPage"));
+const PosDetailPage = lazy(
+	() => import("./HomePage/TemplatePage/PosPage/PosDetailPage"),
+);
+const PosAddPage = lazy(
+	() => import("./HomePage/TemplatePage/PosPage/PosAddPage"),
+);
+const PosEditPage = lazy(
+	() => import("./HomePage/TemplatePage/PosPage/PosEditPage"),
+);
+const PosListPage = lazy(
+	() => import("./HomePage/TemplatePage/PosPage/PosListPage"),
+);
+
+// filterPage
+const FilterPage = lazy(() => import("./HomePage/TemplatePage/FilterPage"));
+////filterListPage
+const FilterListPage = lazy(
+	() => import("./HomePage/TemplatePage/FilterPage/FilterListPage"),
+);
+
 //MODERATE_AUTO_PAGE_LAZY_IMPORT:END
 export const pageList = {
 	...pluginsPages,
 	HomePage,
 	LoginPage,
 	HelloPage,
-	UserPage,
 	RolePage,
 	PageDevPage,
 	StoreDevPage,
@@ -63,9 +90,20 @@ export const pageList = {
 	ErrorPage,
 	DealPage,
 	DealListPage,
-	DealApprovalPage,
-	DealRankPage,
 	LoadingPage,
-	CategoryPage,
-	EnquiryPage,
+	// pos
+	PosPage,
+	PosListPage,
+	PosDetailPage,
+	PosEditPage,
+	PosAddPage,
+	// rule
+	RulePage,
+	RuleDetailPage,
+	RuleListPage,
+	RuleAddPage,
+	RuleEditPage,
+	// filter
+	FilterPage,
+	FilterListPage,
 };

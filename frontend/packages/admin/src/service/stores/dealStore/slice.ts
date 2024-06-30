@@ -1,7 +1,6 @@
-/* Core */
-import { createSliceE } from "redux-eazy";
+
 import { PayloadAction } from "redux-eazy";
-import names from "../names";
+import { createSlice } from "src/service/setup";
 import { DealEntity, PageData, StoreState } from "./model";
 
 const initialState = (): StoreState => {
@@ -34,8 +33,8 @@ const initialState = (): StoreState => {
 	};
 };
 
-const slice = createSliceE({
-	name: names.dealStore,
+const slice = createSlice({
+	name: "dealStore",
 	stateInit: initialState,
 	reducers: {
 		// 设置loading

@@ -1,13 +1,13 @@
 import { cloneDeep } from "lodash-es";
-import { PayloadAction, createSliceE } from "redux-eazy";
+import { PayloadAction } from "redux-eazy";
 import storageHelper from "src/common/utils/storageHelper";
 import { ROUTE_ID } from "src/router/name";
 import { ROUTE_CONFIG_MAP } from "src/router/routesConfig";
 import { AppHelper, MenuItem, RouterHelper } from "src/service/helper";
 import settingData from "src/setting.json";
 
-import names from "../names";
 import { Setting, StoreState, TabItem, ThemeName, XY_POS } from "./modal";
+import { createSlice } from "src/service/setup";
 
 export enum ThemeColor {
 	light = "light",
@@ -65,8 +65,8 @@ const initialState = (): StoreState => {
 	};
 };
 
-const appSlice = createSliceE({
-	name: names.appStore,
+const appSlice = createSlice({
+	name: "appStore",
 	stateInit: initialState,
 	computed: {
 		testValueCP(state, params: { a: string }) {

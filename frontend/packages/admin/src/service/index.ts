@@ -24,4 +24,22 @@ export const useFlat = flatInjectHookCreater(stores, reduxStore);
 /* utils */
 export const dp = getDp(reduxStore, stores);
 export const dpChain = getDpChain(reduxStore, stores);
+
 export * from "./helper";
+export const getStore = (
+	storeName: keyof typeof stores | [keyof typeof stores, string | undefined],
+) => {
+	if (Array.isArray(storeName)) {
+		if (
+			storeName[1] &&
+			stores[storeName[0]].slice.branch?.includes(storeName[1])
+		) {
+			//@ts-ignore
+			return reduxStore.getState()[`${storeName[0]}.${storeName[1]}`];
+		} else {
+			return reduxStore.getState()[storeName[0]];
+		}
+	} else {
+		return reduxStore.getState()[storeName];
+	}
+};

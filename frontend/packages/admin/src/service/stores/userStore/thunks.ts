@@ -1,13 +1,6 @@
-import { dp } from "src/service";
-import { createThunks } from "../../setup";
-import names from "../names";
-import httpApi from "./api";
-import { QueryListParams } from "./model";
+import { createThunks } from "src/service/setup";
 
-const thunks = createThunks(names.userStore, {
-	queryListAct: async (params: QueryListParams) => {
-		const data = await httpApi.queryList(params);
-		dp("userStore", "setUserList", { list: data, total: data.length });
-	},
+const thunks = createThunks("userStore", {
+	queryListAct: async (_: null) => {},
 });
 export default thunks;

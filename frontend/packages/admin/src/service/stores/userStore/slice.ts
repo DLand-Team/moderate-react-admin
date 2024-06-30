@@ -1,7 +1,7 @@
-import { PayloadAction, createSliceE } from "redux-eazy";
-import names from "../names";
+import { PayloadAction } from "redux-eazy";
 import { PageData, StoreState, UserEntity } from "./model";
 import thunks from "./thunks";
+import { createSlice } from "src/service/setup";
 
 const initialState = (): StoreState => {
 	return {
@@ -17,8 +17,8 @@ const initialState = (): StoreState => {
 	};
 };
 
-const slice = createSliceE({
-	name: names.userStore,
+const slice = createSlice({
+	name: "userStore",
 	stateInit: initialState,
 	reducers: {
 		setIsShowDeatilModal(state, { payload }: PayloadAction<boolean>) {

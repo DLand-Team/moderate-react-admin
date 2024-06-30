@@ -4,7 +4,6 @@ import { type Location } from "react-router-dom";
 import { useLocationListen } from "src/common/hooks";
 import { ROUTE_ID_KEY } from "src/router/types";
 import { AppHelper, RouterHelper, useFlat } from "src/service";
-import { NameInfo } from "..";
 
 const { Sider } = Layout;
 
@@ -40,7 +39,6 @@ const SliderMenu = ({ isMobile }: { isMobile?: boolean }) => {
 				flexDirection: "column",
 			}}
 		>
-			<NameInfo />
 			{menuData.length > 0 &&
 				menuDefaultOpenKeys &&
 				menuDefaultSelectedKeys && (

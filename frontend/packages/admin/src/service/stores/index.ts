@@ -1,22 +1,32 @@
 import { stores as pluginStores } from "plugins/config/services/stores";
-// 职责功能划分的仓库
 import appStore from "./appStore";
 import authStore from "./authStore";
-import devStore from "./devStore";
-import routerStore from "./routerStore";
 import dealStore from "./dealStore";
-import categoryStore from "./categoryStore";
+import devStore from "./devStore";
+import filterStore from "./filterStore";
+import marketStore from "./marketStore";
+import posStore from "./posStore";
+import routerStore from "./routerStore";
+import ruleStore from "./ruleStore";
+import sortStore from "./sortStore";
 import userStore from "./userStore";
-import enquiryStore from "./enquiryStore";
+import commonStore from "./commonStore";
+import categoryStore from "./categoryStore";
+
 const stores = {
 	appStore,
+	commonStore,
 	authStore,
 	devStore,
 	routerStore,
 	dealStore,
-	categoryStore,
 	userStore,
-	enquiryStore,
+	ruleStore,
+	marketStore,
+	posStore,
+	sortStore,
+	filterStore,
+	categoryStore,
 	...pluginStores,
 };
 

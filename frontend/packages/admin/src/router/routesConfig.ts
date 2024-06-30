@@ -60,13 +60,6 @@ export const ROUTE_CONFIG_MAP: {
 		isNoAuth: true,
 		isNotRoute: true,
 	},
-	UserPage: {
-		id: "UserPage",
-		meta: { title: "app:UserPageTitle" },
-		actionPermissions: ["ADD", "EDIT"],
-		component: "UserPage",
-		isNoAuth: true,
-	},
 	RolePage: {
 		id: "RolePage",
 		meta: { title: "app:RolePageTitle" },
@@ -142,36 +135,18 @@ export const ROUTE_CONFIG_MAP: {
 		id: "DealPage",
 		component: "DealPage",
 		meta: {
-			title: "DealPage",
+			title: "dev:dealPage",
 		},
 		isNoAuth: true,
-	},
-	DealApprovalPage: {
-		id: "DealApprovalPage",
-		component: "DealApprovalPage",
-		meta: {
-			title: "DealApprovalPage",
-		},
-		isNoAuth: true,
-		keepAlive: true,
 	},
 	DealListPage: {
 		id: "DealListPage",
 		component: "DealListPage",
 		meta: {
-			title: "DealListPage",
+			title: "dev:dealListPage",
 		},
-		isNoAuth: true,
+		index: true,
 		keepAlive: true,
-	},
-	DealRankPage: {
-		id: "DealRankPage",
-		component: "DealRankPage",
-		meta: {
-			title: "DealRankPage",
-		},
-		keepAlive: true,
-		isNoAuth: true,
 	},
 	LoadingPage: {
 		id: "LoadingPage",
@@ -182,20 +157,113 @@ export const ROUTE_CONFIG_MAP: {
 		isMenu: false,
 		isNoAuth: true,
 	},
-	CategoryPage: {
-		id: "CategoryPage",
-		component: "CategoryPage",
+	PosPage: {
+		id: "PosPage",
 		meta: {
-			title: "CategoryPage",
+			title: "dev:dev.posPage",
 		},
+		component: "PosPage",
 		isNoAuth: true,
 	},
-	EnquiryPage: {
-		id: "EnquiryPage",
-		component: "EnquiryPage",
+	PosDetailPage: {
+		id: "PosDetailPage",
 		meta: {
-			title: "EnquiryPage",
+			title: "dev:dev.posDetailPage",
 		},
+		component: "PosDetailPage",
+		depends: ["PosPage"],
+		isNoAuth: true,
+	},
+	PosListPage: {
+		id: "PosListPage",
+		meta: {
+			title: "dev:posListPage",
+		},
+		component: "PosListPage",
+		depends: ["PosPage"],
+		isNoAuth: true,
+	},
+	PosAddPage: {
+		id: "PosAddPage",
+		meta: {
+			title: "dev:dev.posAddPage",
+		},
+		component: "PosAddPage",
+		depends: ["PosPage"],
+		isNoAuth: true,
+	},
+	PosEditPage: {
+		id: "PosEditPage",
+		meta: {
+			title: "dev:dev.posEditPage",
+		},
+		component: "PosEditPage",
+		depends: ["PosPage"],
+		isNoAuth: true,
+	},
+	RulePage: {
+		id: "RulePage",
+		meta: {
+			title: "dev:dev.rulePage",
+		},
+		component: "RulePage",
+		isNoAuth: true,
+	},
+	RuleDetailPage: {
+		id: "RuleDetailPage",
+		meta: {
+			title: "dev:dev.ruleDetailPage",
+		},
+		component: "RuleDetailPage",
+		depends: ["RulePage"],
+		isNoAuth: true,
+	},
+	RuleListPage: {
+		id: "RuleListPage",
+		meta: {
+			title: "dev:dev.ruleListPage",
+		},
+		component: "RuleListPage",
+		depends: ["RulePage"],
+		isNoAuth: true,
+	},
+	RuleEditPage: {
+		id: "RuleEditPage",
+		meta: {
+			title: "dev:dev.ruleEditPage",
+		},
+		component: "RuleEditPage",
+		depends: ["RulePage"],
+		isNoAuth: true,
+		keepAlive: true,
+	},
+	RuleAddPage: {
+		id: "RuleAddPage",
+		meta: {
+			title: "dev:dev.ruleAddPage",
+		},
+		component: "RuleAddPage",
+		depends: ["RulePage"],
+		isNoAuth: true,
+		keepAlive: true,
+	},
+	FilterPage: {
+		id: "FilterPage",
+		meta: {
+			title: "dev:dev.filterPage",
+		},
+		component: "FilterPage",
+		isNoAuth: true,
+	},
+	FilterListPage: {
+		id: "FilterListPage",
+		meta: {
+			title: "dev:filterlListPage",
+		},
+		component: "FilterListPage",
+		depends: ["FilterPage"],
+		index: true,
+		isMenu: false,
 		isNoAuth: true,
 	},
 	...PLUGIN_ROUTE_CONFIG_MAP,

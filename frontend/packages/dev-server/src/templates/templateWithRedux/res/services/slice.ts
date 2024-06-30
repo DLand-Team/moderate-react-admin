@@ -1,4 +1,4 @@
-/* Core */
+
 import { createSliceCustom } from "redux-eazy";
 import { StoreState } from "./model";
 import names from "src/reduxService/stores/names";

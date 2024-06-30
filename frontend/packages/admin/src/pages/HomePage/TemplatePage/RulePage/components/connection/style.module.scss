@@ -1,0 +1,32 @@
+.container {
+	margin-left: 10px;
+	padding: 15px;
+	.addConnectionBtn {
+		margin-top: 15px;
+		padding: 10px 0px;
+		width: 100%;
+		height: 50px;
+	}
+	.connectionTile {
+		position: relative;
+		margin-top: 8px;
+		height: 35px;
+		font-family: PingFang SC;
+		font-style: normal;
+		font-weight: 500;
+		font-size: 16px;
+		line-height: 24px;
+		color: #000000;
+		margin-bottom: 15px;
+		display: flex;
+		align-items: center;
+	}
+	.titleBtn {
+		margin-left: 15px;
+		color: rgba(0, 0, 0, 0.3);
+	}
+	.titleBtnDisable {
+		margin-left: 15px;
+		color: rgba(0, 0, 0, 0.15);
+	}
+}

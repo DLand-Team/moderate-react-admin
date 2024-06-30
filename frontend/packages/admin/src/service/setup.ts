@@ -1,6 +1,9 @@
-import { Action, ThunkAction, TypedStartListening } from "redux-eazy";
 import {
+	Action,
+	ThunkAction,
+	TypedStartListening,
 	appSelectorHookCreater,
+	createSliceCreater,
 	getCreateThunkWithName,
 	getCreateThunks,
 	listenerMiddleware,
@@ -27,3 +30,4 @@ export type AppStartListening = TypedStartListening<ReduxState, ReduxDispatch>;
 export const startAppListening =
 	listenerMiddleware.startListening as AppStartListening;
 export const createThunks = getCreateThunks<ReduxState, ReduxDispatch>();
+export const createSlice = createSliceCreater<keyof ReduxState>();

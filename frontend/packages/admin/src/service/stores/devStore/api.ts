@@ -1,4 +1,5 @@
 import { http, httpBase } from "src/common/http";
+import { Setting } from "../appStore/modal";
 import {
 	AdcompanyPageParams,
 	AddPluginApiParams,
@@ -8,7 +9,6 @@ import {
 	GetPluginListApiRes,
 	RemovePluginApiParams,
 } from "./model";
-import { Setting } from "../appStore/modal";
 
 const baseUrl = "/devApi";
 const api = {

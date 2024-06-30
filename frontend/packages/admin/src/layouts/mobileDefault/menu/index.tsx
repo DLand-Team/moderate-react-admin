@@ -1,12 +1,11 @@
+import { theme } from "antd";
 import { motion, useCycle } from "framer-motion";
 import { useRef } from "react";
-import { MenuToggle } from "./MenuToggle";
-import { useDimensions } from "./use-dimensions";
-import styles from "./styles.module.scss";
-import { theme } from "antd";
 import { useLocationListen } from "src/common/hooks";
 import { SliderMenu } from "src/components";
-import { cloneDeep } from "lodash-es";
+import { MenuToggle } from "./MenuToggle";
+import styles from "./styles.module.scss";
+import { useDimensions } from "./use-dimensions";
 const sidebar = {
 	open: (height = 1000) => ({
 		clipPath: `circle(${height * 2 + 200}px at 40px 40px)`,
@@ -55,17 +54,12 @@ export const MenuAni = () => {
 				}}
 				onClick={() => {}}
 			>
-				<motion.div
-					className={styles.background}
-					variants={sidebar}
-					style={{
-						background: colorBgContainer,
-					}}
-				>
+				<motion.div className={styles.background} variants={sidebar}>
 					<div
 						style={{
+							background: colorBgContainer,
 							position: "relative",
-							height: "100vh",
+							height: "100dvh",
 							overflow: "hidden",
 						}}
 					>

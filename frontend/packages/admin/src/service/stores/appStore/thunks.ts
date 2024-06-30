@@ -1,25 +1,22 @@
-/* Instruments */
+import { dpChain } from "src/service";
 import { AppHelper } from "src/service/helper";
-import { dp } from "../..";
-import { createThunks } from "../../setup";
-import names from "../names";
+import { createThunks } from "src/service/setup";
 
-const thunks = createThunks(names.appStore, {
+const thunks = createThunks("appStore", {
 	deleteTabHistoryAct: async ({ pathName }: { pathName: string }, api) => {
-		debugger;
 		const { tabItems } = api.getState().appStore;
 		const tabsHistoryCopy = [...tabItems];
 		const index = tabsHistoryCopy.findIndex((item) => {
 			return item.key === pathName;
 		});
 		tabsHistoryCopy.splice(index, 1);
-		dp("appStore", "setTabItems", tabsHistoryCopy);
+		dpChain("appStore").setTabItems(tabsHistoryCopy);
 	},
 	createMenuDataAct: async (_: null, api) => {
 		const { menuPermissions, routesPermissions } = api.getState().authStore;
 		const { children = [] } = menuPermissions || {};
 		const menuData = AppHelper.createMenuData(children, routesPermissions);
-		dp("appStore", "setMenuDataAct", menuData);
+		dpChain("appStore").setMenuDataAct(menuData);
 	},
 });
 export default thunks;

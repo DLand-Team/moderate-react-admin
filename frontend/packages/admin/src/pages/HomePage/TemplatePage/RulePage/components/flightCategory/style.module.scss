@@ -1,0 +1,43 @@
+.container {
+	.itFormItem {
+		width: 100%;
+		margin-bottom: 20px;
+	}
+	.itFormItemFlex {
+		display: flex;
+		align-items: center;
+	}
+	.itFormItemFlex2 {
+		display: flex;
+		align-items: center;
+		margin-right: 20px;
+	}
+	.itFormItemText {
+		margin-bottom: 10px;
+	}
+	.itFormItemText2 {
+		margin: 0 10px;
+	}
+	.itFormItemText3 {
+		margin: 0 0px;
+	}
+	.redPoint {
+		width: 6px;
+		height: 6px;
+		background: #ff4d4f;
+
+		border-radius: 3px;
+		margin-right: 10px;
+	}
+	.noRedPoint {
+		width: 6px;
+		height: 6px;
+		background: #52c41a;
+		border-radius: 3px;
+		margin-right: 10px;
+	}
+	.selectdrop {
+		white-space: normal;
+		word-break: break-all;
+	}
+}
