@@ -6,7 +6,7 @@ const MainContent = ({
 	children,
 }: React.PropsWithChildren<{ isDark?: boolean }>) => {
 	const {
-		token: { colorFillQuaternary },
+		token: { colorBgTextHover },
 	} = theme.useToken();
 
 	return (
@@ -16,7 +16,7 @@ const MainContent = ({
 				display: "flex",
 				flexDirection: "column",
 				height: "100%",
-				background: colorFillQuaternary,
+				background: colorBgTextHover,
 			}}
 		>
 			<Tabs />

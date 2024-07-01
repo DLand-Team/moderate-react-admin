@@ -47,7 +47,9 @@ const SliderMenu = ({ isMobile }: { isMobile?: boolean }) => {
 						triggerSubMenuAction="click"
 						mode="inline"
 						selectedKeys={menuDefaultSelectedKeys}
-						openKeys={menuDefaultOpenKeys!}
+						openKeys={
+							isCollapsedMenu ? undefined : menuDefaultOpenKeys!
+						}
 						onOpenChange={(e) => {
 							setMenuDefaultOpenKeys(e);
 						}}
