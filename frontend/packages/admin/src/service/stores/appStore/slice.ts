@@ -110,10 +110,7 @@ const appSlice = createSlice({
 			state,
 			{ payload }: PayloadAction<string[]>,
 		) => {
-			state.menuDefaultOpenKeys = removeDuplicatesInArray([
-				...(state.menuDefaultOpenKeys || []),
-				...payload,
-			]);
+			state.menuDefaultOpenKeys = payload;
 		},
 		setMenuDataAct: (state, { payload }: PayloadAction<MenuItem[]>) => {
 			state.menuData = payload;

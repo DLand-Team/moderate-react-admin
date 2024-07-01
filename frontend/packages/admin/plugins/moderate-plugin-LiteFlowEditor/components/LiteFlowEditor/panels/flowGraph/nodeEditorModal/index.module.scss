@@ -1,0 +1,11 @@
+.depsInfoModalContent {
+  padding: 20px;
+}
+
+.liteflowEditorModal {
+  :global {
+    .ant-modal-body {
+      padding: 0;
+    }
+  }
+}
