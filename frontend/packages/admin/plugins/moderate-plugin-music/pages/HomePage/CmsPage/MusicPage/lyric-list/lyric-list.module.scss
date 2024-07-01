@@ -1,0 +1,152 @@
+$active-green: rgb(30, 204, 148);
+
+.container {
+	width: 100%;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: scroll;
+	touch-action: pan-y;
+
+	--antd-dust-red: #f5222d;
+	--antd-volcano: #fa541c;
+	--antd-sunset-orange: #fa8c16;
+	--antd-calendula-gold: #faad14;
+	--antd-sunrise-yellow: #fadb14;
+	--antd-lime: #a0d911;
+	--antd-polar-green: #52c41a;
+	--antd-cyan: #13c2c2;
+	--antd-daybreak-blue: #1890ff;
+	--antd-geek-blue: #2f54eb;
+	--antd-golden-purple: #722ed1;
+	--antd-magenta: #eb2f96;
+
+	> .lyrics {
+		> .item {
+			position: relative;
+			padding: 12px 8px;
+			width: 100%;
+			height: auto;
+			text-align: left;
+			overflow: hidden;
+			cursor: pointer;
+
+			> .ori {
+				color: #ffffff;
+				opacity: 0.8;
+				font-weight: normal;
+				font-size: 16px;
+				transition: 0.1s;
+			}
+
+			> .abc {
+				color: #ffffff;
+				opacity: 0.8;
+				font-weight: normal;
+				font-size: 14px;
+				transition: 0.1s;
+			}
+
+			> .trans {
+				color: #ffffff;
+				opacity: 0.8;
+				font-weight: normal;
+				font-size: 14px;
+				transition: 0.1s;
+			}
+		}
+
+		> .active {
+			> .ori {
+				opacity: 1 !important;
+				font-weight: bolder;
+				font-size: 20px;
+			}
+
+			> .oriColor1 {
+				-webkit-background-clip: text !important;
+				-webkit-text-fill-color: transparent !important;
+				-webkit-box-decoration-break: clone !important;
+				background: -webkit-linear-gradient(
+					135deg,
+					var(--antd-dust-red) 0%,
+					var(--antd-volcano) 8.33%,
+					var(--antd-sunset-orange) 16.667%,
+					var(--antd-calendula-gold) 25%,
+					var(--antd-sunrise-yellow) 33.333%,
+					var(--antd-lime) 41.667%,
+					var(--antd-polar-green) 50%,
+					var(--antd-cyan) 58.333%,
+					var(--antd-daybreak-blue) 66.667%,
+					var(--antd-geek-blue) 75%,
+					var(--antd-golden-purple) 83.333%,
+					var(--antd-magenta) 91.666%,
+					var(--antd-dust-red) 100%
+				);
+			}
+
+			> .oriColor2 {
+				-webkit-background-clip: text !important;
+				-webkit-text-fill-color: transparent !important;
+				-webkit-box-decoration-break: clone !important;
+				background: -webkit-linear-gradient(
+					135deg,
+					var(--antd-sunset-orange) 0%,
+					var(--antd-calendula-gold) 25%,
+					var(--antd-sunrise-yellow) 50%,
+					var(--antd-lime) 757%,
+					var(--antd-polar-green) 100%
+				);
+			}
+
+			> .oriColor3 {
+				-webkit-background-clip: text !important;
+				-webkit-text-fill-color: transparent !important;
+				-webkit-box-decoration-break: clone !important;
+				background: -webkit-linear-gradient(
+					135deg,
+					var(--antd-daybreak-blue) 0%,
+					var(--antd-geek-blue) 25%,
+					var(--antd-golden-purple) 50%,
+					var(--antd-magenta) 75%,
+					var(--antd-dust-red) 100%
+				);
+			}
+
+			> .oriColor4 {
+				color: var(--antd-volcano);
+			}
+
+			> .oriColor5 {
+				color: var(--antd-sunrise-yellow);
+			}
+
+			> .oriColor6 {
+				color: var(--antd-polar-green);
+			}
+
+			> .oriColor7 {
+				color: var(--antd-daybreak-blue);
+			}
+
+			> .oriColor8 {
+				color: var(--antd-golden-purple);
+			}
+
+			> .oriColor9 {
+				color: var(--antd-magenta);
+			}
+
+			> .abc {
+				color: $active-green !important;
+				opacity: 1 !important;
+				font-size: 16px !important;
+			}
+
+			> .trans {
+				color: $active-green !important;
+				opacity: 1 !important;
+				font-size: 16px !important;
+			}
+		}
+	}
+}

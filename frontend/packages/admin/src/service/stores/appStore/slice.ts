@@ -6,8 +6,9 @@ import { ROUTE_CONFIG_MAP } from "src/router/routesConfig";
 import { AppHelper, MenuItem, RouterHelper } from "src/service/helper";
 import settingData from "src/setting.json";
 
-import { Setting, StoreState, TabItem, ThemeName, XY_POS } from "./modal";
+import { removeDuplicatesInArray } from "src/common/utils";
 import { createSlice } from "src/service/setup";
+import { Setting, StoreState, TabItem, ThemeName, XY_POS } from "./modal";
 
 export enum ThemeColor {
 	light = "light",
@@ -109,7 +110,10 @@ const appSlice = createSlice({
 			state,
 			{ payload }: PayloadAction<string[]>,
 		) => {
-			state.menuDefaultOpenKeys = payload;
+			state.menuDefaultOpenKeys = removeDuplicatesInArray([
+				...(state.menuDefaultOpenKeys || []),
+				...payload,
+			]);
 		},
 		setMenuDataAct: (state, { payload }: PayloadAction<MenuItem[]>) => {
 			state.menuData = payload;

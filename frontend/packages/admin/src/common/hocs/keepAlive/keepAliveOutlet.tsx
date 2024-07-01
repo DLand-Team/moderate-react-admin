@@ -15,12 +15,13 @@ import {
 	useNavigationType,
 	useOutlet,
 } from "react-router-dom";
-import { AppHelper, RouterHelper, useFlat } from "src/service";
+import { AppHelper, dpChain, RouterHelper, useFlat } from "src/service";
 import KeepAliveRoute from "./keepAliveRoute";
 
 import { motion, Variants } from "framer-motion";
 import { getRouteTransition, getTransition } from "./FramerVariants";
 import { UUID } from "src/common/utils";
+import { ROUTE_ID_KEY } from "src/router/types";
 
 export const AnimationWrapper = ({ children }: PropsWithChildren) => {
 	const action: ReturnType<typeof useNavigationType> = useNavigationType();
@@ -87,9 +88,10 @@ const KeepAlive = () => {
 		() => pathname.split("/").slice(-1)[0],
 		[pathname],
 	);
-	const activeKey = useRef<string>(cacheKey);
+	const activeKey = useRef<ROUTE_ID_KEY>(cacheKey as ROUTE_ID_KEY);
 	useEffect(() => {
-		activeKey.current = cacheKey;
+		activeKey.current = cacheKey as ROUTE_ID_KEY;
+		dpChain("routerStore").setRouterActiveKey(activeKey.current);
 		AppHelper.saveKeepAliveComponent({
 			id: cacheKey,
 			comp: outlet,
@@ -116,9 +118,9 @@ const KeepAlive = () => {
 			{Array.from(componentList.current).map(([key, component]) => (
 				<KeepAliveRoute
 					parentDomRef={aliveParentRef}
-					key={key as string}
+					key={key as ROUTE_ID_KEY}
 					activeKey={activeKey.current}
-					pageKey={key as string}
+					pageKey={key as ROUTE_ID_KEY}
 				>
 					{component}
 				</KeepAliveRoute>
