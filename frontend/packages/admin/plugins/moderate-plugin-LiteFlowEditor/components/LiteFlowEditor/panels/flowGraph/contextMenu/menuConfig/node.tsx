@@ -1,10 +1,7 @@
-import React from 'react';
 
-import { CopyOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined } from '@ant-design/icons';
 
-import { Graph } from '@antv/x6';
 import { shortcuts } from '../../../../common/shortcuts';
-import { getSelectedNodes } from '../../../../utils/flowChartUtils';
 
 const nodeMenuConfig = [
   {

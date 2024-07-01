@@ -6,7 +6,7 @@ import styles from "./style.module.scss";
 import useConfig from "./useConfig";
 
 export interface ListViewProps {
-	branchName: string;
+	branchName?: string;
 }
 const ListView = ({ branchName }: ListViewProps) => {
 	const { columns } = useConfig();

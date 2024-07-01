@@ -45,7 +45,9 @@ export default class CatchOperator extends ELNode {
   condition: ELNode = new NodeOperator(this, NodeTypeEnum.COMMON, 'x');
   children: ELNode[] = [];
   properties?: Properties;
+  //@ts-ignore
   startNode?: Node;
+  //@ts-ignore
   endNode?: Node;
 
   constructor(parent?: ELNode, condition?: ELNode, children?: ELNode[], properties?: Properties) {

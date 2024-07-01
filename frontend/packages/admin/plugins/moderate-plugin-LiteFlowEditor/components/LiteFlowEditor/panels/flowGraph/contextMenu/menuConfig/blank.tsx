@@ -1,6 +1,5 @@
-import React from 'react';
-import { shortcuts } from '../../../../common/shortcuts';
 import { SnippetsOutlined } from '@ant-design/icons';
+import { shortcuts } from '../../../../common/shortcuts';
 
 const blankMenuConfig = [
   {

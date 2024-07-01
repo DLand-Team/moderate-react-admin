@@ -44,7 +44,9 @@ export default class SwitchOperator extends ELNode {
   condition: ELNode = new NodeOperator(this, NodeTypeEnum.SWITCH, 'x');
   children: ELNode[] = [];
   properties?: Properties;
+  //@ts-ignore
   startNode?: Node;
+  //@ts-ignore
   endNode?: Node;
 
   constructor(

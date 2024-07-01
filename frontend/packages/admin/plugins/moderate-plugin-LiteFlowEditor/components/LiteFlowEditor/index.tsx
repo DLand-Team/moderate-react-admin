@@ -154,7 +154,7 @@ const LiteFlowEditor = forwardRef<React.FC, IProps>(function (props, ref) {
 	}, [flowGraph]);
 
 	return (
-		// @ts-ignore
+	
 		<GraphContext.Provider // @ts-ignore
 			value={{ graph: flowGraph, graphWrapper: wrapperRef, model: null }}
 		>

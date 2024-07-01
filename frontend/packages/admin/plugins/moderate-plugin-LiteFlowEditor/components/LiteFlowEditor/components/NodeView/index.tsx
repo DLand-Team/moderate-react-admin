@@ -1,10 +1,10 @@
-import React from 'react';
 import { Node } from '@antv/x6';
 import classNames from 'classnames';
+import { PropsWithChildren } from 'react';
 
 import styles from './index.module.scss';
 
-const NodeView: React.FC<{ icon: string; node: Node }> = (props) => {
+const NodeView = (props:PropsWithChildren<{ icon: string; node: Node }>) => {
   const { icon, children } = props;
   return (
     <div className={classNames(styles.liteflowShapeWrapper)}>

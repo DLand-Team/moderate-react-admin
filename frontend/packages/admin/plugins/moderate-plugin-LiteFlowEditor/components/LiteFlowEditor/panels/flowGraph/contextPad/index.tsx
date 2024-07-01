@@ -47,6 +47,7 @@ const FlowGraphContextPad: React.FC<IProps> = (props) => {
     [flowGraph],
   );
   const onClickMenu = useCallback(
+    //@ts-ignore
     (cellType) => {
       if (edge) {
         let targetNode = edge.getTargetNode();

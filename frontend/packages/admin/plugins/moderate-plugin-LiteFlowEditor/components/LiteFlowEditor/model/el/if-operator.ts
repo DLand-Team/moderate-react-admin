@@ -36,7 +36,9 @@ export default class IfOperator extends ELNode {
   condition: ELNode = new NodeOperator(this, NodeTypeEnum.IF, 'x');
   children: ELNode[] = [];
   properties?: Properties;
+  //@ts-ignore
   startNode?: Node;
+  //@ts-ignore
   endNode?: Node;
 
   constructor(

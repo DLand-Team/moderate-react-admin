@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
 import { Graph } from '@antv/x6';
-import { Button, Modal, Radio, Table, Select, Input } from 'antd';
+import { Button, Input, Modal, Radio, Select, Table } from 'antd';
+import React, { useEffect, useState } from 'react';
 import styles from './index.module.scss';
 
 interface IProps {
@@ -66,7 +66,7 @@ const NodeEditModal: React.FC<IProps> = (props) => {
               title: '上一节点输出结果',
               dataIndex: 'position',
               key: 'position',
-              render: (text) => (
+              render: () => (
                 <Select value="档位">
                   <Select.Option value="档位">档位</Select.Option>
                 </Select>
@@ -76,7 +76,7 @@ const NodeEditModal: React.FC<IProps> = (props) => {
               title: '条件关系',
               dataIndex: 'relationship',
               key: 'relationship',
-              render: (text) => (
+              render: () => (
                 <Select value=">">
                   <Select.Option value=">">&gt;</Select.Option>
                 </Select>
@@ -86,7 +86,7 @@ const NodeEditModal: React.FC<IProps> = (props) => {
               title: '阈值',
               dataIndex: 'limit',
               key: 'limit',
-              render: (text) => <Input placeholder="请输入"></Input>,
+              render: () => <Input placeholder="请输入"></Input>,
             },
           ]}
           dataSource={[

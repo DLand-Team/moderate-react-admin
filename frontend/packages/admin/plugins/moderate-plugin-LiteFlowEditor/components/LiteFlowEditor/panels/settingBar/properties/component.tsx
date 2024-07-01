@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, Input } from 'antd';
-import { debounce } from 'lodash';
+import { debounce } from 'lodash-es';
 import { history } from '../../../hooks/useHistory';
 import ELNode from '../../../model/node';
 import styles from './index.module.scss';

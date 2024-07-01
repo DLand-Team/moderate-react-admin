@@ -44,7 +44,9 @@ export default class ForOperator extends ELNode {
   condition: ELNode = new NodeOperator(this, NodeTypeEnum.FOR, 'x');
   children: ELNode[] = [];
   properties?: Properties;
+  //@ts-ignore
   startNode?: Node;
+  //@ts-ignore
   endNode?: Node;
 
   constructor(

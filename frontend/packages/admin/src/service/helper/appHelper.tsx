@@ -236,13 +236,21 @@ export class AppHelper {
 				pathName,
 			});
 			if (activeTabKey == pathName) {
-				if (routeItemData.depends) {
-					RouterHelper.jumpTo(routeItemData.parentId as ROUTE_ID_KEY);
-				} else {
-					const item = tabItems.find((item) => {
-						return item.key !== pathName;
+				// if (routeItemData.depends) {
+				//   RouterHelper.jumpTo(routeItemData.parentId as ROUTE_ID_KEY);
+				// } else
+				{
+					const itemIndex = tabItems.findIndex((item) => {
+						return item.key == pathName;
 					});
-					item && RouterHelper.jumpToByPath(item?.key);
+					itemIndex != -1 &&
+						RouterHelper.jumpToByPath(
+							tabItems[
+								itemIndex == tabItems.length - 1
+									? itemIndex - 1
+									: itemIndex + 1
+							]?.key,
+						);
 				}
 			}
 		}
@@ -271,6 +279,14 @@ export class AppHelper {
 			RouterHelper.jumpToByPath(pathName);
 		}
 		dp("appStore", "setTabItems", tabItems.slice(0, targetIndex + 1));
+	}
+	// 判断tab是否存在
+	static judeIsHasTabByPath(pathName: string) {
+		const { tabItems } = reduxStore.getState().appStore;
+		const targetIndex = tabItems.findIndex((item) => {
+			return item.key.toLowerCase() == pathName.toLowerCase();
+		});
+		return targetIndex != -1;
 	}
 	static createApp(
 		providerList: (

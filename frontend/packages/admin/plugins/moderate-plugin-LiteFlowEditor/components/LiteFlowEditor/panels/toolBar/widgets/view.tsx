@@ -37,7 +37,7 @@ const View: React.FC<IProps> = makeBtnWidget({
 	getIcon() {
 		return <EyeOutlined />;
 	},
-	disabled(flowGraph: Graph) {
+	disabled() {
 		return false;
 	},
 });

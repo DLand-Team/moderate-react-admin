@@ -85,3 +85,7 @@ export function getTextWidth(str: string, fontSize: string) {
 export function delay(ms: number) {
 	return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+export function removeDuplicatesInArray(array: string[]): string[] {
+	return Array.from(new Set(array));
+}

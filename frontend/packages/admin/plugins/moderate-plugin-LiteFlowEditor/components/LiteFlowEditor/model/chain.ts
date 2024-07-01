@@ -39,7 +39,9 @@ import { ThenOperator } from './el';
 export default class Chain extends ELNode {
   type = ConditionTypeEnum.CHAIN;
   children: ELNode[] = [];
+  //@ts-ignore
   startNode?: Node;
+  //@ts-ignore
   endNode?: Node;
 
   constructor(children?: ELNode[]) {

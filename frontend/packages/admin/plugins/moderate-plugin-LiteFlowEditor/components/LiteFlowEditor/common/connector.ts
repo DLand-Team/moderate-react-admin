@@ -4,7 +4,6 @@ import { NODE_HEIGHT } from '../constant';
 export default function connector(
   sourcePoint: Point.PointLike,
   targetPoint: Point.PointLike,
-  routePoints: Point.PointLike[],
   args: any,
 ) {
   let path: Path;

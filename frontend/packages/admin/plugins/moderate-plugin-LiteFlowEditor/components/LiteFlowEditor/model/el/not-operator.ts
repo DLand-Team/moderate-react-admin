@@ -46,7 +46,9 @@ export default class NotOperator extends ELNode {
   parent?: ELNode;
   children: ELNode[] = [];
   properties?: Properties;
+  //@ts-ignore
   startNode?: Node;
+  //@ts-ignore
   endNode?: Node;
 
   constructor(parent?: ELNode, children?: ELNode[], properties?: Properties) {

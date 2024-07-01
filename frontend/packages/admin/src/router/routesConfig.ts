@@ -182,6 +182,7 @@ export const ROUTE_CONFIG_MAP: {
 		component: "PosListPage",
 		depends: ["PosPage"],
 		isNoAuth: true,
+		keepAlive: true,
 	},
 	PosAddPage: {
 		id: "PosAddPage",
@@ -191,6 +192,7 @@ export const ROUTE_CONFIG_MAP: {
 		component: "PosAddPage",
 		depends: ["PosPage"],
 		isNoAuth: true,
+		keepAlive: true,
 	},
 	PosEditPage: {
 		id: "PosEditPage",
@@ -200,6 +202,7 @@ export const ROUTE_CONFIG_MAP: {
 		component: "PosEditPage",
 		depends: ["PosPage"],
 		isNoAuth: true,
+		keepAlive: true,
 	},
 	RulePage: {
 		id: "RulePage",
@@ -208,6 +211,7 @@ export const ROUTE_CONFIG_MAP: {
 		},
 		component: "RulePage",
 		isNoAuth: true,
+		keepAlive: true,
 	},
 	RuleDetailPage: {
 		id: "RuleDetailPage",
@@ -217,6 +221,7 @@ export const ROUTE_CONFIG_MAP: {
 		component: "RuleDetailPage",
 		depends: ["RulePage"],
 		isNoAuth: true,
+		keepAlive: true,
 	},
 	RuleListPage: {
 		id: "RuleListPage",
@@ -226,6 +231,7 @@ export const ROUTE_CONFIG_MAP: {
 		component: "RuleListPage",
 		depends: ["RulePage"],
 		isNoAuth: true,
+		keepAlive: true,
 	},
 	RuleEditPage: {
 		id: "RuleEditPage",

@@ -2,6 +2,7 @@ import { Layout, Menu } from "antd";
 import { useMemo } from "react";
 import { type Location } from "react-router-dom";
 import { useLocationListen } from "src/common/hooks";
+import { removeDuplicatesInArray } from "src/common/utils";
 import { ROUTE_ID_KEY } from "src/router/types";
 import { AppHelper, RouterHelper, useFlat } from "src/service";
 
@@ -26,7 +27,7 @@ const SliderMenu = ({ isMobile }: { isMobile?: boolean }) => {
 			const { selectedKeys, openKeys } =
 				AppHelper.getMenuConfigByPathName(pathname);
 			setMenuDefaultSelectedKeys(selectedKeys);
-			setMenuDefaultOpenKeys(openKeys);
+			setMenuDefaultOpenKeys(removeDuplicatesInArray([...openKeys]));
 		},
 		[menuData],
 	);
@@ -46,7 +47,10 @@ const SliderMenu = ({ isMobile }: { isMobile?: boolean }) => {
 						triggerSubMenuAction="click"
 						mode="inline"
 						selectedKeys={menuDefaultSelectedKeys}
-						defaultOpenKeys={menuDefaultOpenKeys!}
+						openKeys={menuDefaultOpenKeys!}
+						onOpenChange={(e) => {
+							setMenuDefaultOpenKeys(e);
+						}}
 						style={{
 							height: "100%",
 							borderRight: 0,
