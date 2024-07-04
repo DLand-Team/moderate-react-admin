@@ -2,7 +2,7 @@ import { theme } from "antd";
 import { motion, useCycle } from "framer-motion";
 import { useRef } from "react";
 import { useLocationListen } from "src/common/hooks";
-import { SliderMenu } from "src/components";
+import { NameInfo, SliderMenu } from "src/components";
 import { MenuToggle } from "./MenuToggle";
 import styles from "./styles.module.scss";
 import { useDimensions } from "./use-dimensions";
@@ -63,6 +63,7 @@ export const MenuAni = () => {
 							overflow: "hidden",
 						}}
 					>
+						<NameInfo />
 						<SliderMenu isMobile={true}></SliderMenu>
 					</div>
 				</motion.div>

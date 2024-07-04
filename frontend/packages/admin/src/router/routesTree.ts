@@ -8,6 +8,22 @@ export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [
     id: ROUTE_ID.HomePage,
     children: [
       {
+        id: ROUTE_ID.CpdPage,
+        children: [
+          {
+            id: ROUTE_ID.PosPage,
+            children: [
+              { id: ROUTE_ID.PosAddPage },
+              { id: ROUTE_ID.PosEditPage },
+            ],
+          },
+          {
+            id: ROUTE_ID.RulePage,
+            children: [{ id: ROUTE_ID.RuleEditPage }],
+          },
+        ],
+      },
+      {
         id: ROUTE_ID.DevPage,
         children: [
           { id: ROUTE_ID.PageDevPage },
