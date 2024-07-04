@@ -1,0 +1,9 @@
+*.md linguist-language=TypeScript 
+*.yml linguist-language=TypeScript 
+*.html linguist-language=TypeScript 
+*.js linguist-language=TypeScript 
+*.xml linguist-language=TypeScript
+*.css linguist-language=TypeScript 
+*.sql linguist-language=TypeScript
+*.uml linguist-language=TypeScript 
+*.cmd linguist-language=TypeScriptÏ
