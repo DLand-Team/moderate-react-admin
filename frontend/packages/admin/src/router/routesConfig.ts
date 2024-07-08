@@ -30,6 +30,17 @@ export const ROUTE_CONFIG_MAP: {
 		keepAlive: true,
 		isNoAuth: true,
 	},
+	AnalyticsPage: {
+		id: "AnalyticsPage",
+		meta: {
+			title: "app:AnalyticsPageTile",
+			icon: "FundProjectionScreenOutlined",
+		},
+		component: "AnalyticsPage",
+		actionPermissions: ["ADD", "EDIT"],
+		keepAlive: true,
+		isNoAuth: true,
+	},
 	SysPage: {
 		id: "SysPage",
 		meta: {

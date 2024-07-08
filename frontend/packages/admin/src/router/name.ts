@@ -5,6 +5,7 @@ export enum NAME {
 	HomePage,
 	LoginPage,
 	HelloPage,
+	AnalyticsPage,
 	SysPage,
 	CmsPage,
 	TemplatePage,

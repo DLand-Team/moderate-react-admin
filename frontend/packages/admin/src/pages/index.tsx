@@ -5,7 +5,8 @@ const isProd = process.env.NODE_ENV == "production";
 // MODERATE_AUTO_PAGE_LAZY_IMPORT:START
 const HomePage = lazy(() => import("./HomePage/homePage"));
 const LoginPage = lazy(() => import("./LoginPage/loginPage"));
-const HelloPage = lazy(() => import("./HomePage/HelloPage/helloPage"));
+const HelloPage = lazy(() => import("./HomePage/HelloPage"));
+const AnalyticsPage = lazy(() => import("./HomePage/AnalyticsPage"));
 // 角色管理
 export const RolePage = lazy(
 	() => import("./HomePage/SysPage/RolePage/rolePage"),
@@ -79,6 +80,7 @@ export const pageList = {
 	...pluginsPages,
 	HomePage,
 	LoginPage,
+	AnalyticsPage,
 	HelloPage,
 	RolePage,
 	PageDevPage,

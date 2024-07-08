@@ -7,6 +7,7 @@ export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [
   {
     id: ROUTE_ID.HomePage,
     children: [
+      { id: ROUTE_ID.AnalyticsPage },
       {
         id: ROUTE_ID.CpdPage,
         children: [
