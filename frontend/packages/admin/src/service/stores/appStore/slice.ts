@@ -6,7 +6,6 @@ import { ROUTE_CONFIG_MAP } from "src/router/routesConfig";
 import { AppHelper, MenuItem, RouterHelper } from "src/service/helper";
 import settingData from "src/setting.json";
 
-import { removeDuplicatesInArray } from "src/common/utils";
 import { createSlice } from "src/service/setup";
 import { Setting, StoreState, TabItem, ThemeName, XY_POS } from "./modal";
 

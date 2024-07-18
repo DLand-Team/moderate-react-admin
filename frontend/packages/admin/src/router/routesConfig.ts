@@ -39,7 +39,6 @@ export const ROUTE_CONFIG_MAP: {
 		component: "AnalyticsPage",
 		actionPermissions: ["ADD", "EDIT"],
 		keepAlive: true,
-		isNoAuth: true,
 	},
 	SysPage: {
 		id: "SysPage",

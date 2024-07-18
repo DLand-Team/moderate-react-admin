@@ -10,36 +10,36 @@ let temp = [
 		desc: "支持pdf预览",
 		author: {
 			name: "闲D阿强",
-			avatar: "https://qiniu.moderate.run/plugins/moderate-plugin-pdf/test.gif",
+			avatar: "/gif/test.gif",
 		},
 		isInstalled: true,
 	},
 	{
 		name: "moderate-plugin-markdown",
 		gitee: "https://gitee.com/qanglee/moderate-plugin-markdown.git",
-		cover: "https://qiniu.moderate.run/plugins/moderate-plugins-mardown/mdplugin.gif",
+		cover: "/gif/mdplugin.gif",
 		desc: "支持MarkDown预览",
 		author: {
 			name: "闲D阿强",
-			avatar: "https://qiniu.moderate.run/plugins/moderate-plugin-pdf/test.gif",
+			avatar: "/gif/test.gif",
 		},
 		isInstalled: true,
 	},
 	{
 		name: "moderate-plugin-winbox",
 		gitee: "https://gitee.com/qanglee/moderate-plugin-winbox.git",
-		cover: "https://qiniu.moderate.run/plugins/moderate-plugin-winbox/Google%20Chrome.gif",
+		cover: "/gif/Google Chrome.gif",
 		desc: "winbox继承，实现更自由，实用的Modal框",
 		author: {
 			name: "闲D阿强",
-			avatar: "https://qiniu.moderate.run/plugins/moderate-plugin-pdf/test.gif",
+			avatar: "/gif/test.gif",
 		},
 		isInstalled: true,
 	},
 	{
 		name: "moderate-plugin-music",
 		gitee: "https://gitee.com/qanglee/moderate-plugin-music.git",
-		cover: "https://qiniu.moderate.run/plugins/moderate-plugin-music/player/music.gif",
+		cover: "/gif/music.gif",
 		desc: "深红老师的酷炫的音乐播放器，你值得拥有～",
 		author: {
 			name: "Crimson",
@@ -50,40 +50,40 @@ let temp = [
 	{
 		name: "moderate-plugin-rive",
 		gitee: "https://gitee.com/qanglee/moderate-plugin-rive.git",
-		cover: "https://qiniu.moderate.run/plugins/moderate-plugin-rive/rive.gif",
+		cover: "/gif/rive.gif",
 		desc: "酷炫的动画，使用Rive轻松实现～",
 		author: {
 			name: "闲D阿强",
-			avatar: "https://qiniu.moderate.run/plugins/moderate-plugin-pdf/test.gif",
+			avatar: "/gif/test.gif",
 		},
 		isInstalled: true,
 	},
 	{
 		name: "moderate-plugin-layout-wind",
 		gitee: "https://gitee.com/qanglee/moderate-plugin-layout-wind.git",
-		cover: "https://qiniu.moderate.run/plugins/moderate-plugin-layout-wind/wind.gif",
+		cover: "/gif/wind.gif",
 		desc: "官方布局-Wind",
 		author: {
 			name: "闲D阿强",
-			avatar: "https://qiniu.moderate.run/plugins/moderate-plugin-pdf/test.gif",
+			avatar: "/gif/test.gif",
 		},
 		isInstalled: true,
 	},
 	{
 		name: "moderate-plugin-layout-rain",
 		gitee: "https://gitee.com/qanglee/moderate-plugin-layout-rain.git",
-		cover: "https://qiniu.moderate.run/plugins/moderate-plugin-layout-wind/rain.gif",
+		cover: "/gif/rain.gif",
 		desc: "官方布局-Rain",
 		author: {
 			name: "闲D阿强",
-			avatar: "https://qiniu.moderate.run/plugins/moderate-plugin-pdf/test.gif",
+			avatar: "/gif/test.gif",
 		},
 		isInstalled: true,
 	},
 	{
 		name: "moderate-plugin-shiki",
 		gitee: "https://gitee.com/qanglee/moderate-plugin-shiki",
-		cover: "https://qiniu.moderate.run/plugins/moderate-plugin-shiki/shiki.gif",
+		cover: "/gif/ai.gif",
 		desc: "shiki，一款精致的，面向未来的ai代码编辑器",
 		author: {
 			name: "一介",
@@ -94,7 +94,6 @@ let temp = [
 ];
 const PluginListPage = () => {
 	const { getPluginListAct, pluginList } = useFlat("devStore");
-
 	useEffect(() => {
 		getPluginListAct();
 	}, []);
