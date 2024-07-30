@@ -1,5 +1,5 @@
 import { dp, getActionType } from "src/service";
-import { startAppListening } from "src/service/setup";
+import { startAppListening } from "src/service";
 
 const watch = () => {
 	startAppListening({

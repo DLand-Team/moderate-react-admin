@@ -12,22 +12,26 @@ import sortStore from "./sortStore";
 import userStore from "./userStore";
 import commonStore from "./commonStore";
 import categoryStore from "./categoryStore";
+import carrierStore from "./carrierStore";
+import ruleSimulationStore from "./ruleSimulationStore";
 
 const stores = {
-	appStore,
-	commonStore,
-	authStore,
-	devStore,
-	routerStore,
-	dealStore,
-	userStore,
-	ruleStore,
-	marketStore,
-	posStore,
-	sortStore,
-	filterStore,
-	categoryStore,
-	...pluginStores,
+    appStore,
+    commonStore,
+    authStore,
+    devStore,
+    routerStore,
+    dealStore,
+    userStore,
+    ruleStore,
+    marketStore,
+    posStore,
+    sortStore,
+    filterStore,
+    categoryStore,
+    carrierStore,
+    ruleSimulationStore,
+    ...pluginStores,
 };
 
 export { stores };

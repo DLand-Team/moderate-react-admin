@@ -1,7 +1,7 @@
 /* Core */
 import { PayloadAction } from "redux-eazy";
 import { FilterData, GetListApiRes, PageData, StoreState, Sort } from "./model";
-import { createSlice } from "src/service/setup";
+import { createSlice } from "src/service";
 
 const initialState = (): StoreState => {
 	return {
@@ -57,7 +57,7 @@ const slice = createSlice({
 						...data.payload,
 						sortString:
 							typeof data?.payload?.sortString === "string"
-								? data?.payload?.sortString?.split(",")
+								? data?.payload?.sortString?.split("-")
 								: data?.payload?.sortString,
 					}
 				: null;

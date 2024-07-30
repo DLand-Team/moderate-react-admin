@@ -2,8 +2,8 @@ import { DefaultLayout as Default } from "./default";
 import { pluginLayoutMap } from "plugins/config/layouts";
 
 const layoutMap = {
-	Default,
-	...pluginLayoutMap,
+    Default,
+    ...pluginLayoutMap,
 };
 
 export default layoutMap;

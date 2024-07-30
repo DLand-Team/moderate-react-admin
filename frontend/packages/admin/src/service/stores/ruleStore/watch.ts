@@ -1,5 +1,5 @@
 import { dpChain, getActionType } from "src/service";
-import { startAppListening } from "src/service/setup";
+import { startAppListening } from "src/service";
 
 // 更新Itinerary的工作流
 const updateItineraryWorkFlow = (branchName: string) => {

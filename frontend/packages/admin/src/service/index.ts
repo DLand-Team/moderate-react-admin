@@ -1,22 +1,38 @@
 import {
-	createStoreE,
-	flatInjectHookCreater,
-	getActionTypeCreater,
-	getDp,
-	getDpChain,
-	resetReduxHookCreater,
+    createStoreE,
+    flatInjectHookCreater,
+    getActionTypeCreater,
+    getDp,
+    getDpChain,
+    resetReduxHookCreater,
 } from "redux-eazy";
+import {
+    appHelper,
+    authHelper,
+    devHelper,
+    routerHelper,
+    ruleHelper,
+} from "./helpers";
+import "./setup";
 import { stores } from "./stores";
+
 declare global {
-	interface Window {
-		reduxStore: ReturnType<typeof createStoreE<typeof stores>>;
-	}
+    interface Window {
+        reduxStore: ReturnType<typeof createStoreE<typeof stores>>;
+    }
 }
 // 前置基本
 export const getActionType = getActionTypeCreater(stores);
 
-export const reduxStore = window.reduxStore || createStoreE(stores);
+export const reduxStore =
+    window.reduxStore ||
+    createStoreE(stores, {
+        middleware: {
+            isLogger: false,
+        },
+    });
 window.reduxStore = reduxStore;
+export type ReduxState = ReturnType<typeof reduxStore.getState>;
 // 后置
 /* Hooks */
 export const useResetRedux = resetReduxHookCreater(stores);
@@ -25,21 +41,46 @@ export const useFlat = flatInjectHookCreater(stores, reduxStore);
 export const dp = getDp(reduxStore, stores);
 export const dpChain = getDpChain(reduxStore, stores);
 
-export * from "./helper";
-export const getStore = (
-	storeName: keyof typeof stores | [keyof typeof stores, string | undefined],
-) => {
-	if (Array.isArray(storeName)) {
-		if (
-			storeName[1] &&
-			stores[storeName[0]].slice.branch?.includes(storeName[1])
-		) {
-			//@ts-ignore
-			return reduxStore.getState()[`${storeName[0]}.${storeName[1]}`];
-		} else {
-			return reduxStore.getState()[storeName[0]];
-		}
-	} else {
-		return reduxStore.getState()[storeName];
-	}
+export const getStore = <
+    T extends keyof typeof stores | [keyof typeof stores, string | undefined]
+>(
+    storeName: T
+): ReduxState[T extends keyof typeof stores ? T : T[0]] => {
+    if (Array.isArray(storeName)) {
+        if (
+            storeName[1] &&
+            stores[storeName[0]].slice.branch?.includes(storeName[1])
+        ) {
+            return reduxStore.getState()[
+                `${storeName[0]}.${storeName[1]}` as T extends keyof typeof stores
+                    ? T
+                    : T[0]
+            ];
+        } else {
+            let c = reduxStore.getState()[storeName[0]];
+            return c as ReduxState[T extends keyof typeof stores ? T : T[0]];
+        }
+    } else {
+        return reduxStore.getState()[
+            storeName as T extends keyof typeof stores ? T : T[0]
+        ];
+    }
 };
+export * from "./helpers";
+export * from "./setup";
+
+export const serviceManager = {
+    dpChain,
+    reduxStore,
+    dp,
+    getStore,
+};
+
+export type ServiceManagerType = typeof serviceManager;
+
+// 依赖注入serviceManager
+appHelper.injectServiceManager(serviceManager);
+routerHelper.injectServiceManager(serviceManager);
+authHelper.injectServiceManager(serviceManager);
+devHelper.injectServiceManager(serviceManager);
+ruleHelper.injectServiceManager(serviceManager);

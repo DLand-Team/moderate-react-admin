@@ -1,13 +1,12 @@
-import { dp, getActionType } from "src/service";
-import { startAppListening } from "src/service/setup";
+import { dpChain, getActionType, startAppListening } from "src/service";
 
 const watch = () => {
-	startAppListening({
-		type: getActionType("authStore").setPermissions,
-		effect: () => {
-			dp("routerStore", "createRoutesDataAct");
-		},
-	});
+    startAppListening({
+        type: getActionType("authStore").setPermissions,
+        effect: () => {
+            dpChain("routerStore").createRoutesDataAct(null);
+        },
+    });
 };
 
 export default watch;

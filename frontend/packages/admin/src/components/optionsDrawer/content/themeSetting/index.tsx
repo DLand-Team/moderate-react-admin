@@ -1,9 +1,9 @@
 import { Cascader, Divider, Select, Typography } from "antd";
-import { cloneDeep } from "lodash-es";
+import { cloneDeep } from "src/common/utils";
 import React from "react";
 import layoutMap, { LayoutMapkey } from "src/layouts";
 import { useFlat } from "src/service";
-import { ThemeName } from "src/service/stores/appStore/modal";
+import type { ThemeName } from "src/service/stores/appStore/model";
 import themeMap from "src/theme";
 import LayoutDemo from "./layoutDemo";
 import { useTranslation } from "react-i18next";

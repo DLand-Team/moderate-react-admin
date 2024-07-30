@@ -1,4 +1,4 @@
-import TreeSelectBase from "src/components/treeSelectBase/treeSelectBase";
+import TreeSelectBase from "src/components/treeSelectBase";
 import { Button, Form, Input, Modal } from "antd";
 import React, { useState } from "react";
 

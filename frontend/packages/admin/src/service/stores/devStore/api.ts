@@ -1,5 +1,5 @@
-import { http, httpBase } from "src/common/http";
-import { Setting } from "../appStore/modal";
+import { http, http2 } from "src/common/http";
+import { Setting } from "../appStore/model";
 import {
 	AdcompanyPageParams,
 	AddPluginApiParams,
@@ -66,7 +66,7 @@ const api = {
 		});
 	},
 	addPluginApi(params: AddPluginApiParams) {
-		return httpBase.fetch(
+		return http2.fetch(
 			{
 				url: baseUrl + "/pluginDev/addPlugin",
 				method: "POST",

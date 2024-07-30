@@ -686,7 +686,7 @@ class devHelper {
 		for (const key in treeData) {
 			if (treeData.hasOwnProperty(key) && key.endsWith("Page")) {
 				const element = treeData[key];
-				let id = `ROUTE_ID.${key}`;
+				let id = `ROUTE_ID.${key.replace(/Page$/, "")}`;
 				let temp: RouteItem = {
 					id: id,
 				};
@@ -787,11 +787,15 @@ class devHelper {
 		// 监听添加文件夹
 		// 监听删除文件夹
 		// 监听删除文件
+		const handler = () => {
+			this.plguinTreeData = this.toreWritePluginRouteStructData();
+			this.toreWriteRouteStructData();
+		};
 		watcher
-			.on("raw", async () => {
-				this.plguinTreeData = this.toreWritePluginRouteStructData();
-				this.toreWriteRouteStructData();
-			})
+			.on("addDir", handler)
+			.on("unlinkDir", handler)
+			.on("unlink", handler)
+			.on("add", handler)
 			.on("ready", async () => {
 				this.plguinTreeData = this.toreWritePluginRouteStructData();
 				this.toreWriteRouteStructData();

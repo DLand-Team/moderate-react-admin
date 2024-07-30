@@ -1,7 +1,7 @@
 import { Alignment, Fit, Layout, useRive } from "@rive-app/react-canvas";
 import "./styles.css";
-import { UUID } from "src/common/utils";
 import { RiveNode } from "plugins/moderate-plugin-rive/common/components/riveNode";
+import { UUID } from "src/common/utils";
 
 export const RiveDemo = () => {
 	const { RiveComponent } = useRive({

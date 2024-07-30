@@ -1,0 +1,72 @@
+---
+sidebar_position: 2
+---
+
+# createSliceE
+
+跟官方`createSlice`基本用法一致，替代使用以支持强化后的功能。
+
+不同之处就是加入了`stateInit`函数替代`initialState`来配置状态库的**state 集合**
+
+目的就是可以支持初始化操作，同时借助函数的特性能够实现更动态的操作。
+
+## 用法
+
+```ts
+const slice = createSliceE({
+	name: names.appStore,
+	stateInit: initialState,
+	computed: {
+		testCP(state, params: { a: string }) {
+			return { test: state.sign + "" + params.a };
+		},
+	},
+	reducers: {
+		setTitle(state, { payload }: PayloadAction<Partial<string>>) {
+			state.title = payload;
+		},
+		setPagination(state, { payload }: PayloadAction<Partial<Pagination>>) {
+			state.pagination = {
+				...state.pagination,
+				...payload,
+			};
+		},
+		setDataList(state, action: PayloadAction<QueryApiRes["data"]>) {
+			const { list = [], total = 0 } = action.payload ?? {};
+			state.dataList = list;
+			state.pagination = {
+				...state.pagination,
+				total,
+			};
+		},
+	},
+});
+```
+
+## 扩展的特性
+
+### 添加 stateInit 函数，取代原生 initialState
+
+用函数来实现`initialState`的初始化，为扩展的**初始化 Reducer**提供强力支持
+
+### 添加计算属性 computed
+
+计算属性，即当返回的计算属性值发生变化时，则会刷新。
+
+**使用**
+
+```ts
+const App = () => {
+	...
+	const { testValueCP, testObjCP } = useFlat("appStore");
+	testValueCP({ a: "123" });
+	testObjCP({ a: "123" }).testObj;
+	...
+};
+```
+
+:::tip
+当你执行`testValueCP`或`testObjCP`的时候，实际上就向组件内注入了计算属性状态，当计算属性的值发生变化，组件就会自动刷新。
+
+同时，也支持动态传入参数。
+:::

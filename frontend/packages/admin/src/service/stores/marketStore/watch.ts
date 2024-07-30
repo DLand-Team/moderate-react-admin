@@ -1,5 +1,5 @@
 import { dpChain, getActionType } from "src/service";
-import { startAppListening } from "src/service/setup";
+import { startAppListening } from "src/service";
 
 const watch = () => {
 	// 页码一边，就刷新列表

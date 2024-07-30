@@ -1,5 +1,5 @@
 import { UUID } from "src/common/utils";
-import { Pos, PosItem } from "src/service/stores/posStore/model";
+import type { Pos, PosItem } from "src/service/stores/posStore/model";
 
 export const posCreater = (params: Partial<Pos>={}): Pos => {
 	return {

@@ -1,0 +1,16 @@
+{
+   "hello.title" :"audit",
+   "hello.Save":"save",
+   "hello.Cancel":"cancel",
+   "hello.Succeed":"succeed",
+   "hello.prompts":"No more prompts",
+   "hello.name":"name",
+   "hello.username":"username",
+   "hello.email":"email",
+   "hello.phone":"phone",
+   "hello.deptFirst":"deptFirst",
+   "hello.deptSecond":"deptSecond",
+   "hello.rightPhone":"Please enter the correct mobile phone number.",
+   "hello.rightEmail":"Incorrect mailbox format",
+   "hello.tips":"Please fill in the real audit information, and the audit data will update the personal information of the account synchronously."
+}

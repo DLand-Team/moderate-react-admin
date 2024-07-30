@@ -1,0 +1,29 @@
+---
+sidebar_position: 4
+---
+
+# createWatchMatcher
+
+创建可以提供给`Watch`匹配`action`的`matcher`。
+
+## 用法
+
+```ts
+import { createMatcher } from "redux-eazy";
+import { dp, getActionType } from "../..";
+import { startAppListening } from "../../setup";
+
+const watch = () => {
+	startAppListening({
+		matcher: createMatcher((action) => {
+			return action.type == `${getActionType("appStore").setPagination}`;
+		}),
+		effect: async () => {
+			dp("appStore", "queryAct");
+		},
+	});
+};
+
+export default watch;
+```
+

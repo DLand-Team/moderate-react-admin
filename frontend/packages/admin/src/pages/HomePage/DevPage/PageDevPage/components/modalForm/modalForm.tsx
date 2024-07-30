@@ -1,6 +1,6 @@
 import { Button, Checkbox, Form, Input, Modal } from "antd";
 import React, { useState } from "react";
-import TreeSelectBase from "src/components/treeSelectBase/treeSelectBase";
+import TreeSelectBase from "src/components/treeSelectBase";
 
 interface Values {
 	title: string;

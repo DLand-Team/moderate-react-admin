@@ -1,7 +1,7 @@
 {
-  "projectName": "Dland Admin",
-  "logo": "/logoBig.png",
-  "icon": "/logo.png",
+  "projectName": "UserCenter",
+  "logo": "logo.png",
+  "icon": "",
   "paletteSet": { "light": "dland", "dark": "dland" },
   "layoutSet": { "light": "Wind", "dark": "Wind" },
   "routerAni": "fade",

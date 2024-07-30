@@ -4,283 +4,323 @@ import { ROUTE_ID_KEY, RouteItem } from "./types";
 export const ROUTE_CONFIG_MAP: {
 	[key in ROUTE_ID_KEY]: RouteItem;
 } = {
-	HomePage: {
-		id: "HomePage",
-		meta: { title: "app:HomePageTile" },
+	Home: {
+		id: "Home",
+		meta: { title: "common:HomePageTile" },
 		component: "HomePage",
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
 		keepAlive: true,
+		isTab: false,
 	},
-	LoginPage: {
-		id: "LoginPage",
+	Login: {
+		id: "Login",
 		component: "LoginPage",
 		isNoAuth: true,
 		path: "/",
 	},
-	HelloPage: {
-		id: "HelloPage",
+	Hello: {
+		id: "Hello",
 		meta: {
-			title: "app:HelloPageTile",
+			title: "common:HelloPageTile",
 			icon: "FundProjectionScreenOutlined",
 		},
 		component: "HelloPage",
 		actionPermissions: ["ADD", "EDIT"],
-		index: true,
 		keepAlive: true,
 		isNoAuth: true,
+		index: true,
 	},
-	AnalyticsPage: {
-		id: "AnalyticsPage",
+	Sys: {
+		id: "Sys",
 		meta: {
-			title: "app:AnalyticsPageTile",
-			icon: "FundProjectionScreenOutlined",
-		},
-		component: "AnalyticsPage",
-		actionPermissions: ["ADD", "EDIT"],
-		keepAlive: true,
-	},
-	SysPage: {
-		id: "SysPage",
-		meta: {
-			title: "app:SysPageTitle",
+			title: "common:SysPageTitle",
 			icon: "ApartmentOutlined",
 		},
 		actionPermissions: ["ADD", "EDIT"],
-		isNoAuth: false,
-		isNotRoute: true,
 	},
-	CmsPage: {
-		id: "CmsPage",
+	Cms: {
+		id: "Cms",
 		meta: {
-			title: "app:CmsPageTitle",
+			title: "common:CmsPageTitle",
 			icon: "CoffeeOutlined",
 		},
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
-		isNotRoute: true,
 	},
-	TemplatePage: {
-		id: "TemplatePage",
+	Template: {
+		id: "Template",
 		meta: {
-			title: "app:TemplatePage",
+			title: "common:TemplatePage",
+			icon: "StarOutlined",
+		},
+		actionPermissions: ["ADD", "EDIT"],
+	},
+	Cpd: {
+		id: "Cpd",
+		meta: {
+			title: "common:cpdPage",
 			icon: "StarOutlined",
 		},
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: true,
-		isNotRoute: true,
 	},
-	RolePage: {
-		id: "RolePage",
-		meta: { title: "app:RolePageTitle" },
+	Role: {
+		id: "Role",
+		meta: { title: "common:RolePageTitle" },
 		component: "RolePage",
 		actionPermissions: ["ADD", "EDIT"],
-		isNoAuth: true,
 		path: undefined,
 	},
-	DevPage: {
-		id: "DevPage",
+	Dev: {
+		id: "Dev",
 		meta: {
-			title: "app:DevPageTitle",
+			title: "common:DevPageTitle",
 			icon: "LaptopOutlined",
 		},
 		actionPermissions: ["ADD", "EDIT"],
-		isNoAuth: true,
 		isPublish: false,
-		isNotRoute: true,
+		isNoAuth: true,
 	},
-	PageDevPage: {
-		id: "PageDevPage",
-		meta: { title: "app:PageDevPageTitle" },
+	PageDev: {
+		id: "PageDev",
+		meta: { title: "common:PageDevPageTitle" },
 		component: "PageDevPage",
 		actionPermissions: ["ADD", "EDIT"],
-		isNoAuth: true,
 	},
-	StoreDevPage: {
-		id: "StoreDevPage",
-		meta: { title: "app:StoreDevPageTitle" },
+	StoreDev: {
+		id: "StoreDev",
+		meta: { title: "common:StoreDevPageTitle" },
 		component: "StoreDevPage",
 		actionPermissions: ["ADD", "EDIT"],
-		isNoAuth: true,
+		isNoAuth: false,
 	},
-	NotFundPage: {
-		id: "NotFundPage",
-		meta: { title: "app:NotFundPageTitle" },
+	NotFund: {
+		id: "NotFund",
+		meta: { title: "common:NotFundPageTitle" },
 		component: "NotFundPage",
 		isNoAuth: true,
 		isMenu: false,
 		path: "*",
+		isTab: false,
 	},
-	ErrorPage: {
-		id: "ErrorPage",
-		meta: { title: "app:ErrorPageTitle" },
+	Error: {
+		id: "Error",
+		meta: { title: "common:ErrorPageTitle" },
 		component: "ErrorPage",
 		isNoAuth: true,
 		isMenu: false,
 		path: "*",
+		isTab: false,
 	},
-	MenuPage: {
-		id: "MenuPage",
-		meta: { title: "app:MenuPageTitle" },
+	Menu: {
+		id: "Menu",
+		meta: { title: "common:MenuPageTitle" },
 		component: "MenuPage",
-		isNoAuth: true,
 	},
-	PluginsPage: {
-		id: "PluginsPage",
+	Plugins: {
+		id: "Plugins",
 		meta: {
-			title: "app:PluginsPageTitle",
+			title: "common:PluginsPageTitle",
 			icon: "ProductOutlined",
 		},
 		component: "PluginsPage",
 		isNoAuth: true,
 	},
-	PluginListPage: {
-		id: "PluginListPage",
+	PluginList: {
+		id: "PluginList",
 		component: "PluginListPage",
 		isNoAuth: true,
 		isMenu: false,
 		index: true,
 	},
-	DealPage: {
-		id: "DealPage",
-		component: "DealPage",
-		meta: {
-			title: "dev:dealPage",
-		},
-		isNoAuth: true,
-	},
-	DealListPage: {
-		id: "DealListPage",
-		component: "DealListPage",
-		meta: {
-			title: "dev:dealListPage",
-		},
-		index: true,
-		keepAlive: true,
-	},
-	LoadingPage: {
-		id: "LoadingPage",
+	Loading: {
+		id: "Loading",
 		component: "LoadingPage",
 		meta: {
 			title: "LoadingPage",
 		},
 		isMenu: false,
 		isNoAuth: true,
+		isTab: false,
 	},
-	PosPage: {
-		id: "PosPage",
+	Market: {
+		index: true,
+		id: "Market",
 		meta: {
-			title: "dev:dev.posPage",
+			title: "common:marketPage",
+		},
+		component: "MarketPage",
+		isNoAuth: true,
+	},
+	MarketDetail: {
+		id: "MarketDetail",
+		meta: {
+			title: "common:marketDetailPage",
+		},
+		component: "MarketDetailPage",
+		depends: ["Market"],
+		isMenu: false,
+		isNoAuth: true,
+	},
+	MarketList: {
+		id: "MarketList",
+		meta: {
+			title: "common:marketListPage",
+		},
+		component: "MarketListPage",
+		index: true,
+		depends: ["Market"],
+		isMenu: false,
+		isNoAuth: true,
+	},
+	MarketEdit: {
+		id: "MarketEdit",
+		meta: {
+			title: "common:marketEditPage",
+		},
+		component: "MarketEditPage",
+		depends: ["Market"],
+		isMenu: false,
+		isNoAuth: true,
+	},
+	MarketAdd: {
+		id: "MarketAdd",
+		meta: {
+			title: "common:marketAddPage",
+		},
+		component: "MarketAddPage",
+		isMenu: false,
+		depends: ["Market"],
+		isNoAuth: true,
+	},
+	Pos: {
+		id: "Pos",
+		meta: {
+			title: "common:posPage",
 		},
 		component: "PosPage",
 		isNoAuth: true,
 	},
-	PosDetailPage: {
-		id: "PosDetailPage",
+	PosDetail: {
+		id: "PosDetail",
 		meta: {
-			title: "dev:dev.posDetailPage",
+			title: "common:posDetailPage",
 		},
 		component: "PosDetailPage",
-		depends: ["PosPage"],
+		depends: ["Pos"],
+		isMenu: false,
 		isNoAuth: true,
 	},
-	PosListPage: {
-		id: "PosListPage",
+	PosList: {
+		id: "PosList",
 		meta: {
-			title: "dev:posListPage",
+			title: "common:posListPage",
 		},
 		component: "PosListPage",
-		depends: ["PosPage"],
-		isNoAuth: true,
+		depends: ["Pos"],
+		isMenu: false,
 		keepAlive: true,
+		index: true,
+		isNoAuth: true,
 	},
-	PosAddPage: {
-		id: "PosAddPage",
+	PosAdd: {
+		id: "PosAdd",
 		meta: {
-			title: "dev:dev.posAddPage",
+			title: "common:posAddPage",
 		},
 		component: "PosAddPage",
-		depends: ["PosPage"],
-		isNoAuth: true,
+		depends: ["Pos"],
+		isMenu: false,
 		keepAlive: true,
+		isNoAuth: true,
 	},
-	PosEditPage: {
-		id: "PosEditPage",
+	PosEdit: {
+		id: "PosEdit",
 		meta: {
-			title: "dev:dev.posEditPage",
+			title: "common:posEditPage",
 		},
 		component: "PosEditPage",
-		depends: ["PosPage"],
-		isNoAuth: true,
+		depends: ["Pos"],
 		keepAlive: true,
+		isMenu: false,
+		isNoAuth: true,
 	},
-	RulePage: {
-		id: "RulePage",
+	Rule: {
+		id: "Rule",
 		meta: {
-			title: "dev:dev.rulePage",
+			title: "common:rulePage",
 		},
 		component: "RulePage",
 		isNoAuth: true,
 		keepAlive: true,
 	},
-	RuleDetailPage: {
-		id: "RuleDetailPage",
+	RuleDetail: {
+		id: "RuleDetail",
 		meta: {
-			title: "dev:dev.ruleDetailPage",
+			title: "common:ruleDetailPage",
 		},
 		component: "RuleDetailPage",
-		depends: ["RulePage"],
-		isNoAuth: true,
+		depends: ["Rule"],
 		keepAlive: true,
+		isMenu: false,
+		isTab: false,
+		isNoAuth: true,
 	},
-	RuleListPage: {
-		id: "RuleListPage",
+	RuleList: {
+		id: "RuleList",
 		meta: {
-			title: "dev:dev.ruleListPage",
+			title: "common:ruleListPage",
 		},
 		component: "RuleListPage",
-		depends: ["RulePage"],
-		isNoAuth: true,
+		depends: ["Rule"],
 		keepAlive: true,
+		isMenu: false,
+		index: true,
+		isNoAuth: true,
 	},
-	RuleEditPage: {
-		id: "RuleEditPage",
+	RuleEdit: {
+		id: "RuleEdit",
 		meta: {
-			title: "dev:dev.ruleEditPage",
+			title: "common:ruleEditPage",
 		},
 		component: "RuleEditPage",
-		depends: ["RulePage"],
-		isNoAuth: true,
+		depends: ["Rule"],
 		keepAlive: true,
+		isMenu: false,
+		isTab: false,
+		isNoAuth: true,
 	},
-	RuleAddPage: {
-		id: "RuleAddPage",
+	RuleAdd: {
+		id: "RuleAdd",
 		meta: {
-			title: "dev:dev.ruleAddPage",
+			title: "common:ruleAddPage",
 		},
 		component: "RuleAddPage",
-		depends: ["RulePage"],
-		isNoAuth: true,
+		depends: ["Rule"],
 		keepAlive: true,
-	},
-	FilterPage: {
-		id: "FilterPage",
-		meta: {
-			title: "dev:dev.filterPage",
-		},
-		component: "FilterPage",
+		isMenu: false,
+		isTab: false,
 		isNoAuth: true,
 	},
-	FilterListPage: {
-		id: "FilterListPage",
+	Sort: {
+		id: "Sort",
 		meta: {
-			title: "dev:filterlListPage",
+			title: "common:sortPage",
 		},
-		component: "FilterListPage",
-		depends: ["FilterPage"],
+		component: "SortPage",
+		isNoAuth: true,
+	},
+	SortList: {
+		id: "SortList",
+		meta: {
+			title: "common:sortPage",
+		},
+		component: "SortListPage",
 		index: true,
 		isMenu: false,
 		isNoAuth: true,
 	},
+
 	...PLUGIN_ROUTE_CONFIG_MAP,
 };

@@ -1,0 +1,71 @@
+{
+	"brand.saleStartDate": "FIRST_SALE_DATE",
+	"brand.saleEndDate": "LAST_SALE_DATE",
+	"brand.travelStartDate": "FIRST_TRAVEL_DATE",
+	"brand.travelEndDate": "LAST_TRAVEL_DATE",
+
+	"brand.area": "LOC",
+	"brand.area-1": "loc1",
+	"brand.area-2": "loc2",
+
+	"brand.priorityNo": "SEQUENCE_NUMBER",
+	"brand.priority1": "number1",
+	"brand.priority2": "number2",
+
+	"brand.releaseStatus": "PUBLISHED_STATUS",
+	"brand.unreleased": "UNPUBLISHED",
+	"brand.released": "PUBLISHED",
+
+	"brand.effectiveState": "EFFECTIVE_STATUS",
+	"brand.NoTakeEffect": "INEFFECTIVE",
+	"brand.effective": "EFFECTIVE",
+	"brand.expired": "EXPIRED",
+
+	"brand.query": "SEARCH",
+	"brand.resetBtn": "RESET",
+
+	"brand.brandSetList": "PROGRAM_LIST",
+	"brand.createBrandSet": "CERATE_PROGRAM",
+	"brand.release": "PUBLISH",
+	"brand.up": "MODIFY",
+	"brand.delete": "DELETE",
+
+	"brand.status": "STATUS",
+	"brand.no": "ID",
+	"brand.passengerType": "PTC",
+	"brand.saleDate": "SALE_DATE",
+	"brand.travelDate": "TRAVEL_DATE",
+	"brand.operation": "ACTION",
+
+	"brand.selectSaleDate": "please select sale date!",
+	"brand.selectTravelDate": "please select travel date!",
+	"brand.input": "please input info!",
+
+	"brand.addBrand": "ADD_BRAND",
+	"brand.inputArea": "please input uppercase letters or numbers!",
+	"brand.inputPriorityNo": "please input priorityNo!",
+	"brand.confirmDelete": "Are you sure you want to delete?",
+	"brand.confirmReleased": "Are you sure you want to release?",
+	"brand.maxLengthArea": "Within the character length limit (only enter three)!",
+	"brand.inputNumber": "Only enter numbers (up to 7 digits)!",
+	"brand.numberError": "Please enter the correct interval value!",
+
+	"brand.selectDelete": "Please select the item to delete!",
+	"brand.selectRelease": "Please select the item to release!",
+	"brand.confirmRelease": "Are you sure you want to publish this?",
+	"brand.confirmEdit": "Are you sure you want to edit this?",
+	"brand.selectEdit": "Please select the item to edit!",
+
+	"brand.uid": "TIER:",
+	"brand.brandName": "BRAND_NAME:",
+	"brand.noData": "NO DATA",
+	"brand.loading": "Loading...",
+	"brand.actionSuccess": "Handle success!",
+	"brand.disabled": "Do not meet the opration conditions!",
+	"brand.deleteConfirm": "Sure to delete?",
+	"brand.english": "You do not have permission to view it!",
+
+	"brand.publishError": "Only unpublished and unexpired data can be published!",
+	"brand.jzError": "Only data that has been published but not expired can be ended!",
+	"brand.deleteError": "Only unpublished data can be deleted!"
+}

@@ -1,6 +1,6 @@
 /* Core */
 import { PayloadAction } from "redux-eazy";
-import { createSlice } from "src/service/setup";
+import { createSlice } from "src/service";
 import { Category, PageData, StoreState } from "./model";
 
 const initialState = (): StoreState => {

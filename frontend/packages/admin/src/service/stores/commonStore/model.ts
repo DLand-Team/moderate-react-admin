@@ -6,7 +6,17 @@ export interface MarketTablePagedata {
 export interface StoreState {
     locationList: Record<PropertyKey, any[]>;
     agencyData: any;
+    redisData: RedisData | null;
+    isAudit:boolean;
 }
+
+export type RedisData = {
+    cpdDshopAgentRules: string;
+    cpdIshopAgentRules: string;
+    cpdRuleList: string;
+    dshopCpdRuleList: string;
+};
+
 export interface MarketFilterData {
     id?: string | number;
     marketName?: string;

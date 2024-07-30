@@ -1,6 +1,6 @@
 import { dp, dpChain } from "src/service";
-import { createThunks } from "src/service/setup";
-import { Setting } from "../appStore/modal";
+import { createThunks } from "src/service";
+import { Setting } from "../appStore/model";
 import httpApi from "./api";
 import type {
 	AdcompanyPageParams,

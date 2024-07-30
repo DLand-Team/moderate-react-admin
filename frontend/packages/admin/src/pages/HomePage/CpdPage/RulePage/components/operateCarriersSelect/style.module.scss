@@ -1,0 +1,19 @@
+.operateCarriersSelect {
+    display: flex !important;
+    align-items: center;
+    position: relative;
+    .customInputItemSelect {
+        width: 80px;
+    }
+    .customInputItemInput {
+        width: 80px;
+    }
+    :global(.ant-select-selector) {
+        border-radius: 8px 0 0 8px;
+    }
+    .selectCustom {
+        :global(.ant-select-selector) {
+            border-radius: 0 8px 8px 0 !important;
+        }
+    }
+}

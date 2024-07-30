@@ -1,5 +1,5 @@
-import { RuleHelper } from "src/service";
-import { Rule } from "src/service/stores/ruleStore/model";
+import { ruleHelper } from "src/service";
+import type { Rule } from "src/service/stores/ruleStore/model";
 export let mockRuleListData: Rule[] = [];
 
 Array.from(Array(16), (_, k) => {
@@ -20,6 +20,6 @@ Array.from(Array(16), (_, k) => {
 		sortItemId: k,
 		filterItemId: k,
 		backupResult: 0,
-		cpdRuleItinerarys: RuleHelper.getItDefault(),
+		cpdRuleItinerarys: ruleHelper.getItDefault(),
 	} as Rule);
 });

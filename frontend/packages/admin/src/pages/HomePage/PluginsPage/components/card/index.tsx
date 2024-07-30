@@ -7,7 +7,7 @@ import {
 import { Avatar, Card, Dropdown, Modal, Space, Tooltip, message } from "antd";
 import React from "react";
 import { useFlat } from "src/service";
-import { Plugin } from "src/service/stores/devStore/model";
+import type { Plugin } from "src/service/stores/devStore/model";
 
 const { Meta } = Card;
 

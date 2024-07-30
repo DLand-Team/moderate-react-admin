@@ -3,77 +3,74 @@ import { RoutesStructDataItem } from "./types";
 
 // MODERATE_AUTO:START
 export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [
-  { id: ROUTE_ID.ErrorPage },
+  { id: ROUTE_ID.Error },
   {
-    id: ROUTE_ID.HomePage,
+    id: ROUTE_ID.Home,
     children: [
-      { id: ROUTE_ID.AnalyticsPage },
       {
-        id: ROUTE_ID.DevPage,
-        children: [
-          { id: ROUTE_ID.PageDevPage },
-          { id: ROUTE_ID.StoreDevPage },
-        ],
-      },
-      { id: ROUTE_ID.HelloPage },
-      { id: ROUTE_ID.LoadingPage },
-      { id: ROUTE_ID.NotFundPage },
-      {
-        id: ROUTE_ID.PluginsPage,
-        children: [{ id: ROUTE_ID.PluginListPage }],
-      },
-      {
-        id: ROUTE_ID.SysPage,
-        children: [
-          { id: ROUTE_ID.MenuPage },
-          { id: ROUTE_ID.RolePage },
-        ],
-      },
-      {
-        id: ROUTE_ID.TemplatePage,
+        id: ROUTE_ID.Cpd,
         children: [
           {
-            id: ROUTE_ID.DealPage,
-            children: [{ id: ROUTE_ID.DealListPage }],
-          },
-          {
-            id: ROUTE_ID.FilterPage,
-            children: [{ id: ROUTE_ID.FilterListPage }],
-          },
-          {
-            id: ROUTE_ID.PosPage,
+            id: ROUTE_ID.Market,
             children: [
-              { id: ROUTE_ID.PosAddPage },
-              { id: ROUTE_ID.PosDetailPage },
-              { id: ROUTE_ID.PosEditPage },
-              { id: ROUTE_ID.PosListPage },
+              { id: ROUTE_ID.MarketAdd },
+              { id: ROUTE_ID.MarketDetail },
+              { id: ROUTE_ID.MarketEdit },
+              { id: ROUTE_ID.MarketList },
             ],
           },
           {
-            id: ROUTE_ID.RulePage,
+            id: ROUTE_ID.Pos,
             children: [
-              { id: ROUTE_ID.RuleAddPage },
-              { id: ROUTE_ID.RuleDetailPage },
-              { id: ROUTE_ID.RuleEditPage },
-              { id: ROUTE_ID.RuleListPage },
+              { id: ROUTE_ID.PosAdd },
+              { id: ROUTE_ID.PosDetail },
+              { id: ROUTE_ID.PosEdit },
+              { id: ROUTE_ID.PosList },
             ],
+          },
+          {
+            id: ROUTE_ID.Rule,
+            children: [
+              { id: ROUTE_ID.RuleAdd },
+              { id: ROUTE_ID.RuleDetail },
+              { id: ROUTE_ID.RuleEdit },
+              { id: ROUTE_ID.RuleList },
+            ],
+          },
+          {
+            id: ROUTE_ID.Sort,
+            children: [{ id: ROUTE_ID.SortList }],
           },
         ],
       },
       {
-        id: ROUTE_ID.CmsPage,
+        id: ROUTE_ID.Dev,
         children: [
-          { id: ROUTE_ID.LiteFlowEditorPage },
-          { id: ROUTE_ID.MdPage },
-          { id: ROUTE_ID.MusicPage },
-          { id: ROUTE_ID.PdfPage },
-          { id: ROUTE_ID.RivePage },
-          { id: ROUTE_ID.ShikitorPage },
-          { id: ROUTE_ID.WinboxPage },
+          { id: ROUTE_ID.PageDev },
+          { id: ROUTE_ID.StoreDev },
+        ],
+      },
+      { id: ROUTE_ID.Hello },
+      { id: ROUTE_ID.Loading },
+      { id: ROUTE_ID.NotFund },
+      {
+        id: ROUTE_ID.Plugins,
+        children: [{ id: ROUTE_ID.PluginList }],
+      },
+      {
+        id: ROUTE_ID.Sys,
+        children: [{ id: ROUTE_ID.Menu }, { id: ROUTE_ID.Role }],
+      },
+      {
+        id: ROUTE_ID.Cms,
+        children: [
+          { id: ROUTE_ID.Pdf },
+          { id: ROUTE_ID.Rive },
+          { id: ROUTE_ID.Winbox },
         ],
       },
     ],
   },
-  { id: ROUTE_ID.LoginPage },
+  { id: ROUTE_ID.Login },
 ];
 // MODERATE_AUTO:END

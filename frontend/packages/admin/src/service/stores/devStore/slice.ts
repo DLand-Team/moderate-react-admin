@@ -1,6 +1,6 @@
 
 import { PayloadAction } from "redux-eazy";
-import { createSlice } from "src/service/setup";
+import { createSlice } from "src/service";
 import { StoreState } from "./model";
 
 const initialState = (): StoreState => {

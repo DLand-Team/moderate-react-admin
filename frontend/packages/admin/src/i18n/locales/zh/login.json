@@ -1,0 +1,18 @@
+{
+	"login.localZh": "中文",
+	"login.localEn": "英文",
+	"login.title": "用户中心",
+	"login.username": "请输入用户名",
+	"login.usernameEmpty": "用户名不能为空！",
+	"login.maxLength": "用户名不得多于100个字符",
+	"login.password": "请输入密码",
+	"login.chinese": "中文",
+	"login.english": "英文",
+	"login.login": "登录",
+	"login.code": "请输入验证码",
+	"login.codeEmpty": "验证码不能为空！",
+	"login.passwordEmpty": "密码不能为空！",
+	"login.pwdMaxLength": "密码长度不能多于19个字符",
+	"login.securityNote": "安全声明：",
+	"login.note": ""
+}

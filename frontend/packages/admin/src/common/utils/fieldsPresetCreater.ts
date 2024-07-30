@@ -1,4 +1,4 @@
-import { MyColumnType } from "../model/fieldsHooks";
+import { MyColumnType } from "./getField";
 
 export const fieldCreater = <T>(
 	name: string,

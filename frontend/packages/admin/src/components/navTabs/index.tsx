@@ -19,13 +19,13 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Dropdown, MenuProps, Tabs, theme } from "antd";
-import { cloneDeep } from "lodash-es";
 import React, { useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { useLocationListen } from "src/common/hooks";
-import { ROUTE_ID } from "src/router/name";
-import { ROUTE_ID_KEY } from "src/router/types";
-import { AppHelper, RouterHelper, reduxStore, useFlat } from "src/service";
+import { cloneDeep } from "src/common/utils";
+import { ROUTE_ID, ROUTE_ID_KEY } from "src/router";
+import { appHelper, getStore, routerHelper, useFlat } from "src/service";
 import styles from "./index.module.scss";
 
 interface DraggableTabPaneProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -58,7 +58,7 @@ const DraggableTabNode = ({
 	};
 	let routeId = path.split("/").slice(-1)[0];
 
-	let cacheComp = AppHelper.getKeepAliveComponentById({
+	let cacheComp = appHelper.getKeepAliveComponentById({
 		id: routeId,
 	});
 
@@ -118,7 +118,7 @@ const DraggableTabNode = ({
 	);
 };
 
-const App: React.FC = () => {
+const NavTabs: React.FC = () => {
 	const { t } = useTranslation();
 	const {
 		setTabItems,
@@ -137,32 +137,81 @@ const App: React.FC = () => {
 
 	useLocationListen(
 		(location) => {
-			const tabItems = cloneDeep(reduxStore.getState().appStore.tabItems);
-			const tabItemsTemp = tabItems.filter((item) => {
+			const tabItemsTemp = cloneDeep(
+				getStore("appStore").tabItems,
+			).filter((item) => {
 				return item;
 			});
-			if (
-				![ROUTE_ID.NotFundPage, ROUTE_ID.LoadingPage].includes(
-					RouterHelper.getRouteIdByPath(location.pathname),
-				)
-			) {
-				const { pathname } = location;
-				const id = pathname.split("/").slice(-1)[0];
+			const { pathname } = location;
+			const routeConfigItem =
+				routerHelper.getRoutItemConfigByPath(pathname);
+
+			const {
+				id,
+				meta,
+				isTab = true,
+				depends,
+				component,
+				index,
+			} = routeConfigItem || {};
+			if (!component) return;
+
+			const parentConfigItem = routerHelper.getRoutItemConfigById(
+				depends!?.[0],
+			);
+			if (!isTab) {
+				if (!depends?.length) return;
+				const indexRoute = routerHelper.getIndexRouteByPath(
+					parentConfigItem.path!,
+				);
+				let targetIndex = tabItemsTemp.findIndex((item) => {
+					return item.key === indexRoute.path;
+				});
+
+				tabItemsTemp[targetIndex] = {
+					...tabItemsTemp[targetIndex],
+					location,
+					label:
+						routerHelper.getRouteTitleByKey(id as ROUTE_ID_KEY) ||
+						"",
+				};
+				setActiveTabKey(indexRoute.path!);
+			} else {
+				const label =
+					depends?.length && index
+						? parentConfigItem?.meta?.title
+						: meta?.title;
 				if (
 					!tabItemsTemp.some((item) => {
 						return (
-							item.location?.pathname.toLocaleLowerCase() ==
+							item.key.toLocaleLowerCase() ==
 							location.pathname.toLocaleLowerCase()
 						);
 					}) &&
-					RouterHelper.getRouteTitleByKey(id as ROUTE_ID_KEY)
+					meta?.title
 				) {
-					tabItemsTemp.push({
+					// 判断一下，如果自己父节点是否存在，如果存在，就在其旁边创建tab
+					let insertIndex = tabItemsTemp.length;
+					if (parentConfigItem?.id) {
+						const indexRoute =
+							routerHelper.getIndexRoute(parentConfigItem?.id) ||
+							parentConfigItem;
+						let insertIndexTemp = tabItemsTemp.findIndex((item) => {
+							return (
+								item.key.toLocaleLowerCase() ==
+								indexRoute.path!?.toLocaleLowerCase()
+							);
+						});
+						debugger;
+						insertIndex =
+							insertIndexTemp !== -1
+								? insertIndexTemp + 1
+								: insertIndex;
+					}
+					debugger;
+					tabItemsTemp.splice(insertIndex, 0, {
 						location,
-						label:
-							RouterHelper.getRouteTitleByKey(
-								id as ROUTE_ID_KEY,
-							) || "",
+						label: label!,
 						key: location.pathname,
 					});
 				} else {
@@ -171,28 +220,18 @@ const App: React.FC = () => {
 					});
 					tabItemsTemp[targetIndex] = {
 						location,
-						label:
-							RouterHelper.getRouteTitleByKey(
-								id as ROUTE_ID_KEY,
-							) || "",
+						label: label || "",
 						key: location.pathname,
 					};
 				}
+				setActiveTabKey(location.pathname);
 			}
-			let temp = tabItemsTemp.map((item) => {
-				if (item.location) {
-					const metaTitle = RouterHelper.getRoutItemConfigByPath(
-						item.location?.pathname!,
-					)?.meta?.title;
-					if (metaTitle) {
-						item.label = t(metaTitle);
-					}
-				}
 
+			let temp = tabItemsTemp.map((item) => {
+				item.label = t(item.label);
 				return item;
 			});
 			setTabItems(temp);
-			setActiveTabKey(location.pathname);
 		},
 		[language],
 	);
@@ -202,8 +241,8 @@ const App: React.FC = () => {
 		const { current } = rect;
 		const { top, left } = current.translated!;
 		if (top - current.initial?.top! > 80) {
-			AppHelper.addWinbox({
-				content: AppHelper.getKeepAliveComponentById({
+			appHelper.addWinbox({
+				content: appHelper.getKeepAliveComponentById({
 					id: (active.id as string).split("/").slice(-1)[0],
 				}),
 				pos: {
@@ -213,7 +252,7 @@ const App: React.FC = () => {
 				title: active.id as string,
 				type: "page",
 			});
-			AppHelper.closeTabByPath({
+			appHelper.closeTabByPath({
 				pathName: active.id as string,
 			});
 
@@ -233,18 +272,10 @@ const App: React.FC = () => {
 			{
 				label: (
 					<a
-						onClick={(e) => {
-							e.preventDefault();
-							if (currentTabRef.current === location.pathname) {
-								RouterHelper.jumpTo(ROUTE_ID.LoadingPage);
-							}
-							currentTabRef.current &&
-								setRefreshKey([
-									currentTabRef.current
-										.split("/")
-										.slice(-1)[0],
-								]);
-						}}
+					// onClick={(e) => {
+					//     e.preventDefault();
+
+					// }}
 					>
 						Refesh
 					</a>
@@ -261,8 +292,8 @@ const App: React.FC = () => {
 				label: (
 					<a
 						onClick={() => {
-							AppHelper.addWinbox({
-								content: AppHelper.getKeepAliveComponentById({
+							appHelper.addWinbox({
+								content: appHelper.getKeepAliveComponentById({
 									id: (currentTabRef.current as string)
 										.split("/")
 										.slice(-1)[0],
@@ -274,7 +305,7 @@ const App: React.FC = () => {
 								title: currentTabRef.current,
 								type: "page",
 							});
-							AppHelper.closeTabByPath({
+							appHelper.closeTabByPath({
 								pathName: currentTabRef.current as string,
 							});
 						}}
@@ -289,7 +320,7 @@ const App: React.FC = () => {
 				label: (
 					<a
 						onClick={() => {
-							AppHelper.closeRightTabByPath({
+							appHelper.closeRightTabByPath({
 								pathName: currentTabRef.current,
 							});
 						}}
@@ -305,7 +336,7 @@ const App: React.FC = () => {
 					<a
 						onClick={() => {
 							currentTabRef.current &&
-								AppHelper.closeOtherTabByPath({
+								appHelper.closeOtherTabByPath({
 									pathName: currentTabRef.current,
 								});
 						}}
@@ -324,12 +355,15 @@ const App: React.FC = () => {
 		action: "add" | "remove",
 	) => {
 		if (action === "remove") {
-			AppHelper.closeTabByPath({
-				pathName: targetKey as string,
+			debugger;
+			appHelper.closeTabByPath({
+				pathName: tabItems.find((item) => {
+					return item.key == targetKey;
+				})?.location?.pathname!,
 			});
 		}
 	};
-
+	const navi = useNavigate();
 	return (
 		<Tabs
 			className={tabClassName}
@@ -356,13 +390,13 @@ const App: React.FC = () => {
 					return item.key === e;
 				});
 				if (target) {
-					RouterHelper.jumpToByPath(
-						e +
+					navi(
+						target.location?.pathname +
 							(target.location?.search || "") +
 							(target.location?.hash || ""),
 					);
 				} else {
-					RouterHelper.jumpToByPath(e);
+					navi(e);
 				}
 			}}
 			renderTabBar={(tabBarProps, DefaultTabBar) => (
@@ -375,13 +409,13 @@ const App: React.FC = () => {
 							return item.key === currentDragRef.current;
 						});
 						if (target) {
-							RouterHelper.jumpToByPath(
+							routerHelper.jumpToByPath(
 								currentDragRef.current +
 									target.location?.search +
 									target.location?.hash,
 							);
 						} else {
-							RouterHelper.jumpToByPath(currentDragRef.current);
+							routerHelper.jumpToByPath(currentDragRef.current);
 						}
 					}}
 					sensors={[sensor]}
@@ -417,6 +451,23 @@ const App: React.FC = () => {
 											}}
 											menu={{
 												items,
+												onClick() {
+													const key = node.key;
+													if (!key) return;
+													if (
+														key == location.pathname
+													) {
+														routerHelper.jumpTo(
+															ROUTE_ID.Loading,
+														);
+													}
+
+													setRefreshKey([
+														key
+															.split("/")
+															.slice(-1)[0],
+													]);
+												},
 											}}
 											trigger={["contextMenu"]}
 										>
@@ -433,4 +484,4 @@ const App: React.FC = () => {
 	);
 };
 
-export default App;
+export default NavTabs;

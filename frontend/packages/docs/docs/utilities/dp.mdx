@@ -1,0 +1,39 @@
+---
+sidebar_position: 1
+---
+
+# dp
+
+命名**dp**（推荐，可自行命名），是`dispatch`的简写，意为**派发，触发**之意。
+
+## 创建
+
+该函数是由一个**能触发 store 状态更新**的`dispatch`的工厂函数创建。
+
+```ts
+export const dp = getDp(reduxStore, stores);
+```
+
+（_基本全局调用一次即可_）
+
+## 用法
+
+```ts
+dp("appStore", "queryAct", {
+	/* 参数 */
+});
+```
+
+## 参数
+
+-   `storeName (string)`: 仓库名称。例如，"`appStore`"。
+-   `actionName (string)`: 对应的操作，可以是同步的`reducer`或者异步`thunk`，都属于**action**。
+-   `params (object)`: 参数。
+
+## 返回
+
+-   `Promise<{ payload }>` payload 的返回值取决于 thunk 返回的值，不返回就是空，**并且支持类型提示**
+
+:::tip
+该函数提供了强大的类型支持，当传入仓库名字，后续的参数都会随着前面的参数进行推导，类似级联 select 的体验。
+:::

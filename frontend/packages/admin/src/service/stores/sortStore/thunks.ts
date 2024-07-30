@@ -1,6 +1,6 @@
 /* Instruments */
 import { dp } from "src/service";
-import { createThunks } from "src/service/setup";
+import { createThunks } from "src/service";
 import httpApi from "./api";
 import { DeleteApiParams, GetApiParams, Sort } from "./model";
 

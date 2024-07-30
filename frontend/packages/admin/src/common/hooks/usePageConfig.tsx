@@ -1,5 +1,5 @@
-import { MyColumnType } from "src/common/model/fieldsHooks";
 import { useMemo } from "react";
+import { MyColumnType } from "../utils/getField";
 
 const usePageConfig = <T,>(
 	pageConfigCreater: () => (MyColumnType<T> | false)[],

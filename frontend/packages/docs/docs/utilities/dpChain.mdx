@@ -1,0 +1,41 @@
+---
+sidebar_position: 1
+---
+
+# dpChain
+
+命名**dpChain**（推荐，可自行命名），是`dispatch`的简写，意为**派发，触发**之意，链条写法，好处多多，最主要的就是可以跳转对应的 Reducer 和 Thunk 的代码位置。
+
+## 创建
+
+该函数是由一个**能触发 store 状态更新**的`dispatch`的工厂函数创建。
+
+```ts
+export const dpChain = getDpChain(reduxStore, stores);
+```
+
+（_基本全局调用一次即可_）
+
+## 用法
+
+### 触发 Action
+
+```ts
+dpChain("appStore").createMenuDataAct();
+```
+
+### 触发 Reducer
+
+## 参数
+
+-   `storeName (string)`: 仓库名称。例如，"`appStore`"。
+    -   返回
+        -   `actionName (string)`: 对应的操作，可以是同步的`reducer`或者异步`thunk`，都属于**action**。
+
+## 返回
+
+-   `Promise<{ payload }>` payload 的返回值取决于 thunk 返回的值，不返回就是空，**并且支持类型提示**
+
+:::tip
+该函数提供了强大的类型支持，当传入仓库名字，后续的参数都会随着前面的参数进行推导，类似级联 select 的体验。该方式为链方式，非常好用
+:::

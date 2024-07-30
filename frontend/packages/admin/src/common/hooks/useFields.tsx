@@ -1,5 +1,5 @@
-import { FormInstance } from "antd";
 import { useFormFields } from "src/common/hooks";
+import { FormInstance } from "antd";
 import { MyColumnType } from "../utils";
 const formConfigCreater = <T,>(
 	config: MyColumnType<T>[],

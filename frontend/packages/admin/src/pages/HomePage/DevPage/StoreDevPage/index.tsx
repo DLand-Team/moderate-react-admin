@@ -2,7 +2,7 @@ import { Space, Table } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { useEffect } from "react";
 import { useFlat } from "src/service";
-import { CommonType } from "src/service/stores/devStore/model";
+import type { CommonType } from "src/service/stores/devStore/model";
 import ModalForm from "./components/modalForm/modalForm";
 import styles from "./index.module.scss";
 

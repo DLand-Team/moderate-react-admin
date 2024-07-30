@@ -1,19 +1,24 @@
+import { LoadingOutlined } from "@ant-design/icons";
 import RiveLoading from "plugins/moderate-plugin-rive/common/components/riveLoading";
 import { Routes } from "react-router-dom";
-import { RouterHelper } from "src/service";
+import { routerHelper } from "src/service";
 import { OptionsDrawer, OptionsFloatBtn } from "./components";
 import { useFlat } from "./service";
+
 const App = () => {
 	const { isLoading } = useFlat("appStore", {
 		isCollapsedMenu: "IN",
 		isLoading: "IN",
 	});
-	const { routesTree } = useFlat("routerStore");
+	const { routesTree } = useFlat("routerStore", {
+		routesTree: "IN",
+	});
+
 	return (
 		<>
 			<Routes>
 				{routesTree.map((item) => {
-					return RouterHelper.toRenderRouteLoop(item);
+					return routerHelper.toRenderRouteLoop(item);
 				})}
 			</Routes>
 			<>

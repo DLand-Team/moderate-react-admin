@@ -1,7 +1,7 @@
 import { PayloadAction } from "redux-eazy";
 import { PageData, StoreState, UserEntity } from "./model";
 import thunks from "./thunks";
-import { createSlice } from "src/service/setup";
+import { createSlice } from "src/service";
 
 const initialState = (): StoreState => {
 	return {

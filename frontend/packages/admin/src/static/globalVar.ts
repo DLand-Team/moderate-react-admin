@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-const globalVar = {
+export const globalVar = {
 	service: new Map<
 		"winBoxContent" | "keepAliveComp",
 		Map<PropertyKey, ReactNode>
@@ -9,5 +9,3 @@ const globalVar = {
 		["keepAliveComp", new Map()],
 	]),
 };
-
-export default globalVar;

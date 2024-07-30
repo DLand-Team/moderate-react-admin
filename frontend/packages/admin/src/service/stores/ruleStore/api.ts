@@ -1,4 +1,4 @@
-import { http } from "src/common/http";
+import { http, http2 } from "src/common/http";
 import {
 	DeleteApiParams,
 	GetRuleDetailApiParams,
@@ -6,6 +6,7 @@ import {
 	Rule,
 	RuleCarrier,
 } from "./model";
+import { Carrier } from "../filterStore/model";
 import { mockRuleListData } from "src/mock/rulePageMock";
 
 const baseUrl = "/admin-api/usercenter/cpd-rule/";
@@ -44,38 +45,50 @@ function getRuleListApi(_: GetRuleListApiParams) {
 		},
 	});
 	// return http.request<{ list: Rule[] }>({
-	//   url: baseUrl + "page",
-	//   method: "GET",
-	//   params,
-	// });
-}
-
-function getRuleCarrierListApi() {
-	return http.request<RuleCarrier[]>({
-		url: baseUrl + "getRuleCarrierList",
-		method: "POST",
-	});
-}
-function getRuleDetailApi(params: GetRuleDetailApiParams) {
-	return Promise.resolve({
-		data: mockRuleListData.find((item) => {
-      return item.id == params.id;
-    })
-	});
-	// return http.request<Rule>({
-	// 	url: baseUrl + "get",
+	// 	url: baseUrl + "page",
 	// 	method: "GET",
 	// 	params,
 	// });
 }
 
+function getRuleDetailApi(params: GetRuleDetailApiParams) {
+	return Promise.resolve({
+		data: mockRuleListData.find((item) => {
+			return item.id == params.id;
+		}),
+	});
+	// return http2.fetch<Rule>(
+	//     {
+	//         url: baseUrl + "get",
+	//         method: "GET",
+	//         params,
+	//     },
+	//     {
+	//         showLoading: true,
+	//     }
+	// );
+}
+
 const devApi = {
-	getRuleCarrierListApi,
+	fetchRuleCarrierListApi() {
+		return http.request<RuleCarrier[]>({
+			url: baseUrl + "getRuleCarrierList",
+			method: "POST",
+		});
+	},
 	createApi,
 	deleteApi,
 	upadteApi,
 	getRuleListApi,
 	getRuleDetailApi,
+	fetchRuleInitApi() {
+		return http.request<{
+			carrierFamilyList: Carrier[];
+		}>({
+			url: baseUrl + "init",
+			method: "POST",
+		});
+	},
 };
 
 export default devApi;

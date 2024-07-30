@@ -1,26 +1,26 @@
 import { Button } from "antd";
-import { AppHelper } from "src/service/helper/appHelper";
-import { RolePage } from "src/pages";
 import { Suspense } from "react";
+import { RolePage } from "src/pages";
+import { appHelper } from "src/service";
 
 const WinboxPage = () => {
-	return (
-		<div>
-			<Button
-				onClick={() => {
-					AppHelper.addWinbox({
-						content: (
-							<Suspense>
-								<RolePage />
-							</Suspense>
-						),
-					});
-				}}
-			>
-				Show winbox
-			</Button>
-		</div>
-	);
+    return (
+        <div>
+            <Button
+                onClick={() => {
+                    appHelper.addWinbox({
+                        content: (
+                            <Suspense>
+                                <RolePage />
+                            </Suspense>
+                        ),
+                    });
+                }}
+            >
+                Show winbox
+            </Button>
+        </div>
+    );
 };
 
 export default WinboxPage;

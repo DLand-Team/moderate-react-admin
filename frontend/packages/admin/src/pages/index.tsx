@@ -3,109 +3,121 @@ import { lazy } from "react";
 
 const isProd = process.env.NODE_ENV == "production";
 // MODERATE_AUTO_PAGE_LAZY_IMPORT:START
-const HomePage = lazy(() => import("./HomePage/homePage"));
-const LoginPage = lazy(() => import("./LoginPage/loginPage"));
+const HomePage = lazy(() => import("./HomePage"));
+const LoginPage = lazy(() => import("./LoginPage"));
 const HelloPage = lazy(() => import("./HomePage/HelloPage"));
-const AnalyticsPage = lazy(() => import("./HomePage/AnalyticsPage"));
 // 角色管理
-export const RolePage = lazy(
-	() => import("./HomePage/SysPage/RolePage/rolePage"),
-);
+export const RolePage = lazy(() => import("./HomePage/SysPage/RolePage"));
 //storeDevPage
 const StoreDevPage = isProd
-	? null
-	: lazy(() => import("./HomePage/DevPage/StoreDevPage"));
+    ? null
+    : lazy(() => import("./HomePage/DevPage/StoreDevPage"));
 // 页面管理
 const PageDevPage = isProd
-	? null
-	: lazy(() => import("./HomePage/DevPage/PageDevPage"));
+    ? null
+    : lazy(() => import("./HomePage/DevPage/PageDevPage"));
 ////notFundPage
-const NotFundPage = lazy(() => import("./HomePage/NotFundPage/notFundPage"));
-const ErrorPage = lazy(() => import("./HomePage/NotFundPage/notFundPage"));
+const NotFundPage = lazy(() => import("./HomePage/NotFundPage"));
+const ErrorPage = lazy(() => import("./HomePage/NotFundPage"));
 
 //menuPage
-const MenuPage = lazy(() => import("./HomePage/SysPage/MenuPage/menuPage"));
+const MenuPage = lazy(() => import("./HomePage/SysPage/MenuPage"));
 
 //PluginsPage
 const PluginsPage = lazy(() => import("./HomePage/PluginsPage"));
 
 //PluginListPage
 const PluginListPage = lazy(
-	() => import("./HomePage/PluginsPage/PluginListPage"),
-);
-const DealPage = lazy(() => import("./HomePage/TemplatePage/DealPage"));
-const DealListPage = lazy(
-	() => import("./HomePage/TemplatePage/DealPage/DealListPage"),
+    () => import("./HomePage/PluginsPage/PluginListPage")
 );
 const LoadingPage = lazy(() => import("./HomePage/LoadingPage"));
 
 // rule页面
-const RulePage = lazy(() => import("./HomePage/TemplatePage/RulePage"));
+const RulePage = lazy(() => import("./HomePage/CpdPage/RulePage"));
 const RuleDetailPage = lazy(
-	() => import("./HomePage/TemplatePage/RulePage/RuleDetailPage"),
+    () => import("./HomePage/CpdPage/RulePage/RuleDetailPage")
 );
 const RuleListPage = lazy(
-	() => import("./HomePage/TemplatePage/RulePage/RuleListPage"),
+    () => import("./HomePage/CpdPage/RulePage/RuleListPage")
 );
 const RuleEditPage = lazy(
-	() => import("./HomePage/TemplatePage/RulePage/RuleEditPage"),
+    () => import("./HomePage/CpdPage/RulePage/RuleEditPage")
 );
 const RuleAddPage = lazy(
-	() => import("./HomePage/TemplatePage/RulePage/RuleAddPage"),
+    () => import("./HomePage/CpdPage/RulePage/RuleAddPage")
 );
 ////posPage
-const PosPage = lazy(() => import("./HomePage/TemplatePage/PosPage"));
+const PosPage = lazy(() => import("./HomePage/CpdPage/PosPage"));
 const PosDetailPage = lazy(
-	() => import("./HomePage/TemplatePage/PosPage/PosDetailPage"),
+    () => import("./HomePage/CpdPage/PosPage/PosDetailPage")
 );
-const PosAddPage = lazy(
-	() => import("./HomePage/TemplatePage/PosPage/PosAddPage"),
-);
+const PosAddPage = lazy(() => import("./HomePage/CpdPage/PosPage/PosAddPage"));
 const PosEditPage = lazy(
-	() => import("./HomePage/TemplatePage/PosPage/PosEditPage"),
+    () => import("./HomePage/CpdPage/PosPage/PosEditPage")
 );
 const PosListPage = lazy(
-	() => import("./HomePage/TemplatePage/PosPage/PosListPage"),
+    () => import("./HomePage/CpdPage/PosPage/PosListPage")
 );
-
-// filterPage
-const FilterPage = lazy(() => import("./HomePage/TemplatePage/FilterPage"));
+//market
+////marketPage
+const MarketPage = lazy(() => import("./HomePage/CpdPage/MarketPage"));
+const MarketDetailPage = lazy(
+    () => import("./HomePage/CpdPage/MarketPage/MarketDetailPage")
+);
+////marketListPage
+const MarketListPage = lazy(
+    () => import("./HomePage/CpdPage/MarketPage/MarketListPage")
+);
+////marketEditPage
+const MarketEditPage = lazy(
+    () => import("./HomePage/CpdPage/MarketPage/MarketEditPage")
+);
+////marketAddPage
+const MarketAddPage = lazy(
+    () => import("./HomePage/CpdPage/MarketPage/MarketAddPage")
+);
+// sortPage
+const SortPage = lazy(() => import("./HomePage/CpdPage/SortPage"));
 ////filterListPage
-const FilterListPage = lazy(
-	() => import("./HomePage/TemplatePage/FilterPage/FilterListPage"),
+const SortListPage = lazy(
+    () => import("./HomePage/CpdPage/SortPage/SortListPage")
 );
 
 //MODERATE_AUTO_PAGE_LAZY_IMPORT:END
+export type PageKey = keyof typeof pageList;
 export const pageList = {
-	...pluginsPages,
-	HomePage,
-	LoginPage,
-	AnalyticsPage,
-	HelloPage,
-	RolePage,
-	PageDevPage,
-	StoreDevPage,
-	NotFundPage,
-	MenuPage,
-	PluginsPage,
-	PluginListPage,
-	ErrorPage,
-	DealPage,
-	DealListPage,
-	LoadingPage,
-	// pos
-	PosPage,
-	PosListPage,
-	PosDetailPage,
-	PosEditPage,
-	PosAddPage,
-	// rule
-	RulePage,
-	RuleDetailPage,
-	RuleListPage,
-	RuleAddPage,
-	RuleEditPage,
-	// filter
-	FilterPage,
-	FilterListPage,
+    ...pluginsPages,
+    HomePage,
+    LoginPage,
+    HelloPage,
+    RolePage,
+    PageDevPage,
+    StoreDevPage,
+    NotFundPage,
+    MenuPage,
+    PluginsPage,
+    PluginListPage,
+    ErrorPage,
+    LoadingPage,
+    //market
+    MarketPage,
+    MarketDetailPage,
+    MarketListPage,
+    MarketEditPage,
+    MarketAddPage,
+    // pos
+    PosPage,
+    PosListPage,
+    PosDetailPage,
+    PosEditPage,
+    PosAddPage,
+    // rule
+    RulePage,
+    RuleDetailPage,
+    RuleListPage,
+    RuleAddPage,
+    RuleEditPage,
+    // sort
+    SortPage,
+    SortListPage,
 };

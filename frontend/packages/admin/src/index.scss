@@ -84,12 +84,12 @@ time,
 mark,
 audio,
 video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article,
@@ -103,81 +103,84 @@ hgroup,
 menu,
 nav,
 section {
-	display: block;
+    display: block;
 }
 body {
-	line-height: 1;
-	height: 100dvh;
+    line-height: 1;
+    height: 100dvh;
 }
 ol,
 ul {
-	list-style: none;
+    list-style: none;
 }
 blockquote,
 q {
-	quotes: none;
+    quotes: none;
 }
 blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-	content: "";
-	content: none;
+    content: "";
+    content: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
 #root {
-	position: absolute;
-	height: 100%;
-	width: 100%;
+    position: absolute;
+    height: 100%;
+    width: 100%;
 }
 
 .ant-table-wrapper .ant-table {
-	border-radius: 8px;
+    border-radius: 8px;
 }
 
 .loading {
-	position: fixed;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	top: 0;
-	z-index: 20000;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    z-index: 20000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .g-glossy {
-	position: fixed;
-	backdrop-filter: blur(4px);
+    position: fixed;
+    backdrop-filter: blur(4px);
 }
 
 .g-glossy-firefox {
-	display: none;
+    display: none;
 }
 
 @supports (background: -moz-element(loading)) {
-	.g-glossy-firefox {
-		display: block;
-		position: fixed;
-		background: -moz-element(loading) no-repeat;
-		filter: blur(2px);
-	}
+    .g-glossy-firefox {
+        display: block;
+        position: fixed;
+        background: -moz-element(loading) no-repeat;
+        filter: blur(2px);
+    }
 }
 
 #root::-webkit-scrollbar {
-	width: 6px !important;
-	height: 6px !important;
+    width: 6px !important;
+    height: 6px !important;
 }
 
 #root::-webkit-scrollbar-thumb {
-	border-radius: 3px !important;
-	-moz-border-radius: 3px !important;
-	-webkit-border-radius: 3px !important;
-	background-color: #666 !important;
+    border-radius: 3px !important;
+    -moz-border-radius: 3px !important;
+    -webkit-border-radius: 3px !important;
+    background-color: #666 !important;
 }
 
 #root::-webkit-scrollbar-track {
-	background-color: #eee !important;
+    background-color: #eee !important;
 }

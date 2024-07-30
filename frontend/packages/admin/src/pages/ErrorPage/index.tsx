@@ -1,26 +1,31 @@
 import { Button, Result } from "antd";
 import React from "react";
-import { useFlat } from "src/service";
-import { RouterHelper } from "src/service/helper";
-import { ROUTE_ID } from "src/router/name";
+import { ROUTE_ID } from "src/router";
+import { routerHelper, useFlat } from "src/service";
+import { useTranslation } from "react-i18next";
+
 
 const ErrPage: React.FC = () => {
 	const { routesPermissions } = useFlat("authStore");
+	const { t } = useTranslation(["errorPage"]);
 	return (
 		<>
 			{routesPermissions && (
 				<Result
 					status="404"
 					title="404"
-					subTitle="对不起，没有页面匹配当前url."
+
+					subTitle={t`error.url`}
 					extra={
 						<Button
 							onClick={() => {
-								RouterHelper.jumpTo(ROUTE_ID.HelloPage);
+
+								routerHelper.jumpTo(ROUTE_ID.Hello);
 							}}
 							type="primary"
 						>
-							返回首页
+
+							{t`error.home`}
 						</Button>
 					}
 				/>

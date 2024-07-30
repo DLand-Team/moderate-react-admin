@@ -1,14 +1,16 @@
 import { Breadcrumb } from "antd";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import type { Location } from "react-router-dom";
 import useLocationListen from "src/common/hooks/useLocationListen";
-import { RouterHelper } from "src/service/helper";
-import { ROUTE_ID_KEY } from "src/router/types";
+import { ROUTE_ID_KEY } from "src/router";
 import { useFlat } from "src/service";
-import { useTranslation } from "react-i18next";
+import { routerHelper } from "src/service";
 
 const CustomBreadcrumb = () => {
-	const [infoArr, setInfoArr] = useState<{ id: string; title: string }[]>([]);
+	const [infoArr, setInfoArr] = useState<
+		{ id: string; title: string | JSX.Element }[]
+	>([]);
 	const { language } = useFlat("appStore");
 	const { t } = useTranslation();
 	useLocationListen(
@@ -17,22 +19,45 @@ const CustomBreadcrumb = () => {
 			const pathArr = pathname.split("/").filter((item) => {
 				return item;
 			});
-			const temp2 = pathArr.map((path: string) => {
-				const info = RouterHelper.getRouteTitleByKey(
-					path as ROUTE_ID_KEY,
-				);
+			const temp2 = pathArr.map((path: string, index) => {
+				const { meta, path: pathStr } =
+					routerHelper.getRoutItemConfigById(path as ROUTE_ID_KEY) ||
+					{};
 				return {
 					id: path,
-					title: t(info!) || "",
+					title:
+						index == pathArr.length - 1 ? (
+							t(meta?.title || "")
+						) : (
+							<a
+								target="_blank"
+								rel="noopener noreferrer"
+								onClick={() => {
+									pathStr &&
+										routerHelper.jumpToIndexChild(
+											path as ROUTE_ID_KEY,
+										);
+								}}
+							>
+								{t(meta?.title || "")}
+							</a>
+						),
 				};
 			});
-			setInfoArr(temp2);
+			setInfoArr(
+				temp2.filter((item) => {
+					return item.title;
+				}),
+			);
 		},
 		[language],
 	);
 
 	return (
-		<Breadcrumb items={infoArr} style={{ margin: "16px 10px" }}></Breadcrumb>
+		<Breadcrumb
+			items={infoArr}
+			style={{ margin: "16px 10px" }}
+		></Breadcrumb>
 	);
 };
 

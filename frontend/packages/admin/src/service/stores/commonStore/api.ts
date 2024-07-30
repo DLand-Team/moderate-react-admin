@@ -1,77 +1,5 @@
 import { http } from "src/common/http";
-import {
-    GetAgencyDataApiParams,
-    GetDetailActParams,
-    GetMarketItemListParams,
-    GetMarketListApiParams,
-    GetMarketListApiRes,
-    Market,
-    MarketCarrier,
-    MarketItem,
-    DeleteApiParams,
-} from "./model";
-
-const baseUrl = "/admin-api/usercenter/cpd-market/";
-// 增
-function createApi(data: Market) {
-    return http.request({
-        url: baseUrl + "create",
-        method: "POST",
-        data,
-    });
-}
-
-// 删
-function deleteApi(params: DeleteApiParams) {
-    return http.request({
-        url: baseUrl + "deleteByIds",
-        method: "DELETE",
-        params,
-    });
-}
-
-// 改
-function upadteApi(data: Market) {
-    return http.request({
-        url: baseUrl + "update",
-        method: "PUT",
-        data,
-    });
-}
-
-// 查 market列表
-function getMarketListApi(params: GetMarketListApiParams) {
-    return http.request<GetMarketListApiRes>({
-        url: baseUrl + "page",
-        method: "GET",
-        params,
-    });
-}
-
-// 查 market
-function getMarketDeatilApi(params: GetDetailActParams) {
-    return http.request<Market>({
-        url: baseUrl + "get",
-        method: "GET",
-        params,
-    });
-}
-
-// 查 marketItem
-function getMarketItemListApi(params: GetMarketItemListParams) {
-    return http.request<MarketItem[]>({
-        url: baseUrl + "cpd-market-item/list-by-market-id",
-        method: "GET",
-        params,
-    });
-}
-
-function getMarketCarrierListApi() {
-    return http.request<MarketCarrier[]>({
-        url: baseUrl + "getMarketCarrierList",
-        method: "POST",
-    });
-}
+import { MarketCarrier, RedisData } from "./model";
 
 function getLocationListApi() {
     return http.request<MarketCarrier[]>({
@@ -80,24 +8,34 @@ function getLocationListApi() {
     });
 }
 
-function getAgencyDataApi(data: GetAgencyDataApiParams) {
-    return http.request<MarketCarrier[]>({
-        url: baseUrl + "getAgencyData",
+function getRedisDataApi() {
+    return http.request<RedisData>({
+        url: "/admin-api/usercenter/cpd-redis/syncAllData",
         method: "POST",
-        data,
+    });
+}
+
+function getIsAuditApi(params:any) {
+    return http.request({
+        url: "/admin-api/system/audit/page",
+        method: "GET",
+        params,
+    });
+}
+
+function createAuditApi(params:any) {
+    return http.request({
+        url: "/admin-api/system/audit/create",
+        method: "POST",
+        data: params,
     });
 }
 
 const devApi = {
-    getMarketDeatilApi,
     getLocationListApi,
-    getAgencyDataApi,
-    getMarketCarrierListApi,
-    createApi,
-    deleteApi,
-    upadteApi,
-    getMarketListApi,
-    getMarketItemListApi,
+    getRedisDataApi,
+    getIsAuditApi,
+    createAuditApi
 };
 
 export default devApi;

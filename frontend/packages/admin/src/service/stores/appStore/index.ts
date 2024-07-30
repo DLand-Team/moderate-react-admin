@@ -1,4 +1,3 @@
-/* name */
 import slice from "./slice";
 import thunks from "./thunks";
 import watch from "./watch";
