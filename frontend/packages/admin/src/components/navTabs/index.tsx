@@ -202,13 +202,11 @@ const NavTabs: React.FC = () => {
 								indexRoute.path!?.toLocaleLowerCase()
 							);
 						});
-						debugger;
 						insertIndex =
 							insertIndexTemp !== -1
 								? insertIndexTemp + 1
 								: insertIndex;
 					}
-					debugger;
 					tabItemsTemp.splice(insertIndex, 0, {
 						location,
 						label: label!,
@@ -355,7 +353,6 @@ const NavTabs: React.FC = () => {
 		action: "add" | "remove",
 	) => {
 		if (action === "remove") {
-			debugger;
 			appHelper.closeTabByPath({
 				pathName: tabItems.find((item) => {
 					return item.key == targetKey;
