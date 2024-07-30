@@ -5,7 +5,7 @@ import storageHelper from "../utils/storageHelper";
 import { HttpError } from "./HttpError";
 import { overrideHttpType } from "./overrideHttpType";
 const _http = axios.create({
-	timeout: 1,
+	timeout: 1000 * 10,
 });
 let isRefreshToken = false;
 let requestList: any[] = [];
