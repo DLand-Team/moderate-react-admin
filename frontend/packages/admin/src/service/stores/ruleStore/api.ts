@@ -1,13 +1,13 @@
-import { http, http2 } from "src/common/http";
-import {
-	DeleteApiParams,
-	GetRuleDetailApiParams,
-	GetRuleListApiParams,
-	Rule,
-	RuleCarrier,
-} from "./model";
-import { Carrier } from "../filterStore/model";
+import { http } from "src/common/http";
 import { mockRuleListData } from "src/mock/rulePageMock";
+import { Carrier } from "../filterStore/model";
+import {
+    DeleteApiParams,
+    GetRuleDetailApiParams,
+    GetRuleListApiParams,
+    Rule,
+    RuleCarrier,
+} from "./model";
 
 const baseUrl = "/admin-api/usercenter/cpd-rule/";
 // 增

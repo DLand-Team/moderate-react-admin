@@ -1,5 +1,4 @@
 import {
-	BlockOutlined,
 	CloseCircleOutlined,
 	DeleteRowOutlined,
 	ReloadOutlined,
@@ -275,7 +274,7 @@ const NavTabs: React.FC = () => {
 
 					// }}
 					>
-						Refesh
+						{t("common:Refesh")}
 					</a>
 				),
 				key: "0",
@@ -286,34 +285,34 @@ const NavTabs: React.FC = () => {
 			// 	key: "1",
 			// 	icon: <HeartOutlined />,
 			// },
-			{
-				label: (
-					<a
-						onClick={() => {
-							appHelper.addWinbox({
-								content: appHelper.getKeepAliveComponentById({
-									id: (currentTabRef.current as string)
-										.split("/")
-										.slice(-1)[0],
-								}),
-								pos: {
-									x: 500,
-									y: 200,
-								},
-								title: currentTabRef.current,
-								type: "page",
-							});
-							appHelper.closeTabByPath({
-								pathName: currentTabRef.current as string,
-							});
-						}}
-					>
-						Float
-					</a>
-				),
-				icon: <BlockOutlined />,
-				key: "3",
-			},
+			// {
+			//     label: (
+			//         <a
+			//             onClick={() => {
+			//                 appHelper.addWinbox({
+			//                     content: appHelper.getKeepAliveComponentById({
+			//                         id: (currentTabRef.current as string)
+			//                             .split("/")
+			//                             .slice(-1)[0],
+			//                     }),
+			//                     pos: {
+			//                         x: 500,
+			//                         y: 200,
+			//                     },
+			//                     title: currentTabRef.current,
+			//                     type: "page",
+			//                 });
+			//                 appHelper.closeTabByPath({
+			//                     pathName: currentTabRef.current as string,
+			//                 });
+			//             }}
+			//         >
+			//             t('Float')
+			//         </a>
+			//     ),
+			//     icon: <BlockOutlined />,
+			//     key: "3",
+			// },
 			{
 				label: (
 					<a
@@ -323,7 +322,7 @@ const NavTabs: React.FC = () => {
 							});
 						}}
 					>
-						Close Right
+						{t("common:CloseRight")}
 					</a>
 				),
 				icon: <DeleteRowOutlined />,
@@ -339,7 +338,7 @@ const NavTabs: React.FC = () => {
 								});
 						}}
 					>
-						Close Other
+						{t("common:CloseOther")}
 					</a>
 				),
 				icon: <CloseCircleOutlined />,

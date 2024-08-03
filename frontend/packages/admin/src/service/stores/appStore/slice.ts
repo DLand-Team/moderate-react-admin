@@ -29,7 +29,6 @@ const initialState = (): StoreState => {
     };
 
     return {
-        isDev:true,
         sign: "",
         menuDefaultSelectedKeys: [],
         menuDefaultOpenKeys: null,

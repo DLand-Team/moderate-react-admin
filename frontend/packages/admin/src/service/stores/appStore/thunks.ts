@@ -8,8 +8,10 @@ const thunks = createThunks("appStore", {
         const index = tabsHistoryCopy.findIndex((item) => {
             return item.key === pathName;
         });
-        tabsHistoryCopy.splice(index, 1);
-        dpChain("appStore").setTabItems(tabsHistoryCopy);
+        if (index != -1) {
+            tabsHistoryCopy.splice(index, 1);
+            dpChain("appStore").setTabItems(tabsHistoryCopy);
+        }
     },
     createMenuDataAct: async (_: null, api) => {
         const { menuPermissions, routesPermissions } = api.getState().authStore;

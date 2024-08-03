@@ -15,6 +15,7 @@ import {
 } from "./helpers";
 import "./setup";
 import { stores } from "./stores";
+import { type ReduxState } from "./setup";
 
 declare global {
     interface Window {
@@ -32,7 +33,7 @@ export const reduxStore =
         },
     });
 window.reduxStore = reduxStore;
-export type ReduxState = ReturnType<typeof reduxStore.getState>;
+
 // 后置
 /* Hooks */
 export const useResetRedux = resetReduxHookCreater(stores);

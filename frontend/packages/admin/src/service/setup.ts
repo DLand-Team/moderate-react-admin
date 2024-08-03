@@ -9,8 +9,8 @@ import {
     listenerMiddleware,
     useReduxDispatch,
 } from "redux-eazy";
-import { ReduxState, reduxStore } from "./index";
-
+import { reduxStore } from "./index";
+export type ReduxState = ReturnType<typeof reduxStore.getState>;
 /* Types */
 export type ReduxStore = typeof reduxStore;
 export type ReduxDispatch = typeof reduxStore.dispatch;

@@ -1,4 +1,3 @@
-import { LoadingOutlined } from "@ant-design/icons";
 import RiveLoading from "plugins/moderate-plugin-rive/common/components/riveLoading";
 import { Routes } from "react-router-dom";
 import { routerHelper } from "src/service";

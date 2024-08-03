@@ -6,7 +6,6 @@ export enum PLUGIN_ROUTE_NAME {
   PdfPage,
   HomePage,
   CmsPage,
-  PdfPage,
 }
 
 export const PLUGIN_ROUTE_ID = enumToObject(PLUGIN_ROUTE_NAME);

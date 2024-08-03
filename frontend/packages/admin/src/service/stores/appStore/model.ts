@@ -12,7 +12,6 @@ export interface TabItem {
 }
 export type XY_POS = { x: number; y: number };
 export interface StoreState {
-    isDev: boolean;
     sign: string;
     // 菜单相关信息
     menuDefaultSelectedKeys: string[];

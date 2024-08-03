@@ -64,7 +64,6 @@ export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [
       {
         id: ROUTE_ID.Cms,
         children: [
-          { id: ROUTE_ID.Pdf },
           { id: ROUTE_ID.Rive },
           { id: ROUTE_ID.Winbox },
         ],
