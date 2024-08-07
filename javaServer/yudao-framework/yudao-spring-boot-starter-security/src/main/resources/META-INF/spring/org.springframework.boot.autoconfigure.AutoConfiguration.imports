@@ -1,3 +1,0 @@
-cn.iocoder.yudao.framework.security.config.YudaoSecurityAutoConfiguration
-cn.iocoder.yudao.framework.security.config.YudaoWebSecurityConfigurerAdapter
-cn.iocoder.yudao.framework.operatelog.config.YudaoOperateLogV2Configuration
