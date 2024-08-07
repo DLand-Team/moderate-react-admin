@@ -686,7 +686,7 @@ class devHelper {
 		for (const key in treeData) {
 			if (treeData.hasOwnProperty(key) && key.endsWith("Page")) {
 				const element = treeData[key];
-				let id = `ROUTE_ID.${key.replace(/Page$/, "")}`;
+				let id = `ROUTE_ID.${key}`;
 				let temp: RouteItem = {
 					id: id,
 				};
@@ -791,15 +791,11 @@ class devHelper {
 			this.plguinTreeData = this.toreWritePluginRouteStructData();
 			this.toreWriteRouteStructData();
 		};
-		watcher
-			.on("addDir", handler)
-			.on("unlinkDir", handler)
-			.on("unlink", handler)
-			.on("add", handler)
-			.on("ready", async () => {
-				this.plguinTreeData = this.toreWritePluginRouteStructData();
-				this.toreWriteRouteStructData();
-			});
+
+		watcher.on("raw", handler).on("ready", async () => {
+			this.plguinTreeData = this.toreWritePluginRouteStructData();
+			this.toreWriteRouteStructData();
+		});
 	};
 	toWatchPluginsFlies = async () => {
 		const watcher = chokidar.watch(pathHelper.adminPlugins, {
