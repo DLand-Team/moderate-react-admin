@@ -45,7 +45,7 @@ const KeepAliveOutlet = memo(() => {
             return item.location?.pathname?.split("/").slice(-1)[0];
         });
         let allRouteKeys = [...pathArr];
-        debugger
+        
         pathArr.forEach((item) => {
             const routeItem= routerHelper.getRoutItemConfigById(
                 item as ROUTE_ID_KEY

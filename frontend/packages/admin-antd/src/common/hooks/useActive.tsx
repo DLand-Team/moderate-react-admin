@@ -52,7 +52,7 @@ const useActive = (
 
     useEffect(() => {
         if (routerHelper.getRouteIdByPath(currentPath.current) == activeKey) {
-            debugger;
+            ;
             const isFirst = activeFlag.current ?? true;
             if (isFirst && onFirstActive) {
                 onFirstActive?.();

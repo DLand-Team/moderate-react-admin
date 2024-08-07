@@ -4,7 +4,7 @@ const NameInfo = () => {
 	const { isCollapsedMenu, settingData } = useFlat("appStore");
 	const antdThemeToken = antdTheme.useToken();
 	const { projectName, logo } = settingData;
-	debugger;
+	;
 	return (
 		<div
 			style={{
