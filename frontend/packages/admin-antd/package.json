@@ -1,5 +1,5 @@
 {
-	"name": "moderate-admin",
+	"name": "moderate-admin-antd",
 	"private": true,
 	"version": "1.0.0",
 	"type": "module",
