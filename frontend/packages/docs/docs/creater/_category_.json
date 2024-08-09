@@ -1,8 +1,0 @@
-{
-	"label": "Creater",
-	"position": 4,
-	"link": {
-		"type": "generated-index",
-		"description": "工厂函数的存在主要意义，就是可以动态根据项目实际的开发情况，来设置类型支持。"
-	}
-}

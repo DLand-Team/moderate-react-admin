@@ -3,18 +3,18 @@ import type { Config } from "@docusaurus/types";
 import type * as Preset from "@docusaurus/preset-classic";
 
 const config: Config = {
-	title: "Redux Eazy",
-	tagline: "Redux Eazy are cool",
+	title: "Moderate Admin",
+	tagline: "Moderate Admin are cool",
 	favicon: "img/redux-eazy-logo.svg",
 	// Set the production url of your site here
 	url: "https://dland-team.github.io",
 	// Set the /<baseUrl>/ pathname under which your site is served
 	// For GitHub pages deployment, it is often '/<projectName>/'
-	baseUrl: "/redux-eazy/",
+	baseUrl: "/moderate-react-admin/",
 	// GitHub pages deployment config.
 	// If you aren't using GitHub pages, you don't need these.
 	organizationName: "dland-team", // Usually your GitHub org/user name.
-	projectName: "redux-eazy", // Usually your repo name.
+	projectName: "moderate-react-admin", // Usually your repo name.
 	deploymentBranch: "gh-pages",
 	onBrokenLinks: "throw",
 	onBrokenMarkdownLinks: "warn",
@@ -51,13 +51,15 @@ const config: Config = {
 					sidebarPath: "./sidebars.ts",
 					// Please change this to your repo.
 					// Remove this to remove the "edit this page" links.
-					editUrl: "https://dland-team.github.io/redux-eazy",
+					editUrl:
+						"https://github.com/DLand-Team/moderate-react-admin",
 				},
 				blog: {
 					showReadingTime: true,
 					// Please change this to your repo.
 					// Remove this to remove the "edit this page" links.
-					editUrl: "https://dland-team.github.io/redux-eazy",
+					editUrl:
+						"https://github.com/DLand-Team/moderate-react-admin",
 				},
 				theme: {
 					customCss: "./src/css/custom.css",
@@ -101,10 +103,10 @@ const config: Config = {
 		// Replace with your project's social card
 		image: "img/docusaurus-social-card.jpg",
 		navbar: {
-			title: "Redux Eazy",
+			title: "Moderate Admin",
 			logo: {
 				alt: "My Site Logo",
-				src: "img/redux-eazy-logo.png",
+				src: "img/logo.png",
 			},
 			items: [
 				{
@@ -115,7 +117,7 @@ const config: Config = {
 				},
 				{ to: "/blog", label: "记录", position: "left" },
 				{
-					href: "https://github.com/DLand-Team/redux-eazy",
+					href: "https://github.com/DLand-Team/moderate-react-admin",
 					label: "GitHub",
 					position: "right",
 				},
@@ -137,12 +139,8 @@ const config: Config = {
 					title: "More",
 					items: [
 						{
-							label: "123",
-							to: "/blog",
-						},
-						{
-							label: "GitHub",
-							href: "https://github.com/DLand-Team/redux-eazy",
+							label: "Dland",
+							to: "https://github.com/DLand-Team/",
 						},
 					],
 				},

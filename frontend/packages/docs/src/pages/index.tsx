@@ -16,12 +16,12 @@ function HomepageHeader() {
 			>
 				<div className={styles.header}>
 					<div className={styles.infoPart}>
-						<p className={styles.title}>ReduxEazy</p>
+						<p className={styles.title}>中用</p>
 						<p className={styles.title2}>
-							一个简约好用、类型友好、规范完整的Redux整合方案
+							一个可以被插件分解的管理后台
 						</p>
 						<p className={styles.title3}>
-							All in one, 代码简洁, 开发高效，易于维护，永远开源
+							React搬砖利器，对接若依，快速上手
 						</p>
 						<div className={styles.btnPart}>
 							<Link className={styles.btn} to="/docs/intro">
@@ -46,8 +46,7 @@ function HomepageHeader() {
 								}}
 								className={styles.imgLogo}
 								src={
-									require("@site/static/img/redux-eazy-logo.png")
-										.default
+									require("@site/static/img/logo.png").default
 								}
 							/>
 						</div>
