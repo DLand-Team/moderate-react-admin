@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/"
+                       xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+  <ShortName>Redux Eazy</ShortName>
+  <Description>Search Redux Eazy</Description>
+  <InputEncoding>UTF-8</InputEncoding>
+  <Image width="16" height="16" type="image/x-icon">https://dland-team.github.io/moderate-react-admin/img/redux-eazy-logo.svg</Image>
+  <Url type="text/html" method="get" template="https://dland-team.github.io/moderate-react-admin/search?q={searchTerms}"/>
+  <Url type="application/opensearchdescription+xml" rel="self" template="https://dland-team.github.io/moderate-react-admin/opensearch.xml" />
+  <moz:SearchForm>https://dland-team.github.io/moderate-react-admin/</moz:SearchForm>
+</OpenSearchDescription>

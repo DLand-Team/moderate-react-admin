@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://dland-team.github.io/moderate-react-admin/blog</id>
+    <title>Redux Eazy Blog</title>
+    <updated>2021-08-26T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://dland-team.github.io/moderate-react-admin/blog"/>
+    <subtitle>Redux Eazy Blog</subtitle>
+    <icon>https://dland-team.github.io/moderate-react-admin/img/redux-eazy-logo.svg</icon>
+    <entry>
+        <title type="html"><![CDATA[进军路线]]></title>
+        <id>https://dland-team.github.io/moderate-react-admin/blog/进军路线</id>
+        <link href="https://dland-team.github.io/moderate-react-admin/blog/进军路线"/>
+        <updated>2021-08-26T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[0.1.9]]></summary>
+        <content type="html"><![CDATA[<h2 class="anchor anchorWithStickyNavbar_uYZS" id="019">0.1.9<a class="hash-link" aria-label="Direct link to 0.1.9" title="Direct link to 0.1.9" href="https://dland-team.github.io/moderate-react-admin/blog/%E8%BF%9B%E5%86%9B%E8%B7%AF%E7%BA%BF#019">​</a></h2>
+<p>加入了<strong>分支</strong>的概念，你能想象么？</p>
+<p>一个仓库可以被分支管理，切换出不同的分支互不影响，彼此独立，但是公用一套代码。</p>
+<h2 class="anchor anchorWithStickyNavbar_uYZS" id="018">0.1.8<a class="hash-link" aria-label="Direct link to 0.1.8" title="Direct link to 0.1.8" href="https://dland-team.github.io/moderate-react-admin/blog/%E8%BF%9B%E5%86%9B%E8%B7%AF%E7%BA%BF#018">​</a></h2>
+<p>加入了 dpChain 这个 api，链式触发 action。</p>
+<p>好处就是大大的提升了跳转体验，可以直接跳转对应导出的代码位置，快速定位，相比 dp 好用了 一大截</p>
+<h2 class="anchor anchorWithStickyNavbar_uYZS" id="01-版本前后">0.1 版本前后<a class="hash-link" aria-label="Direct link to 0.1 版本前后" title="Direct link to 0.1 版本前后" href="https://dland-team.github.io/moderate-react-admin/blog/%E8%BF%9B%E5%86%9B%E8%B7%AF%E7%BA%BF#01-%E7%89%88%E6%9C%AC%E5%89%8D%E5%90%8E">​</a></h2>
+<p>主要区别就是，Redux 的生态更新的缘故，基本功能和 api 设计并没有发生太大变化，主要是扩展了功能</p>]]></content>
+    </entry>
+</feed>

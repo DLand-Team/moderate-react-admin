@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>Redux Eazy Blog</title>
+        <link>https://dland-team.github.io/moderate-react-admin/blog</link>
+        <description>Redux Eazy Blog</description>
+        <lastBuildDate>Thu, 26 Aug 2021 00:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en</language>
+        <item>
+            <title><![CDATA[进军路线]]></title>
+            <link>https://dland-team.github.io/moderate-react-admin/blog/进军路线</link>
+            <guid>https://dland-team.github.io/moderate-react-admin/blog/进军路线</guid>
+            <pubDate>Thu, 26 Aug 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[0.1.9]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_uYZS" id="019">0.1.9<a class="hash-link" aria-label="Direct link to 0.1.9" title="Direct link to 0.1.9" href="https://dland-team.github.io/moderate-react-admin/blog/%E8%BF%9B%E5%86%9B%E8%B7%AF%E7%BA%BF#019">​</a></h2>
+<p>加入了<strong>分支</strong>的概念，你能想象么？</p>
+<p>一个仓库可以被分支管理，切换出不同的分支互不影响，彼此独立，但是公用一套代码。</p>
+<h2 class="anchor anchorWithStickyNavbar_uYZS" id="018">0.1.8<a class="hash-link" aria-label="Direct link to 0.1.8" title="Direct link to 0.1.8" href="https://dland-team.github.io/moderate-react-admin/blog/%E8%BF%9B%E5%86%9B%E8%B7%AF%E7%BA%BF#018">​</a></h2>
+<p>加入了 dpChain 这个 api，链式触发 action。</p>
+<p>好处就是大大的提升了跳转体验，可以直接跳转对应导出的代码位置，快速定位，相比 dp 好用了 一大截</p>
+<h2 class="anchor anchorWithStickyNavbar_uYZS" id="01-版本前后">0.1 版本前后<a class="hash-link" aria-label="Direct link to 0.1 版本前后" title="Direct link to 0.1 版本前后" href="https://dland-team.github.io/moderate-react-admin/blog/%E8%BF%9B%E5%86%9B%E8%B7%AF%E7%BA%BF#01-%E7%89%88%E6%9C%AC%E5%89%8D%E5%90%8E">​</a></h2>
+<p>主要区别就是，Redux 的生态更新的缘故，基本功能和 api 设计并没有发生太大变化，主要是扩展了功能</p>]]></content:encoded>
+        </item>
+    </channel>
+</rss>

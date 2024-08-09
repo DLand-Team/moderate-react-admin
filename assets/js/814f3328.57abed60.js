@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdocs=self.webpackChunkdocs||[]).push([[472],{5513:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"\u8fdb\u519b\u8def\u7ebf","permalink":"/moderate-react-admin/blog/\u8fdb\u519b\u8def\u7ebf","unlisted":false}]}')}}]);

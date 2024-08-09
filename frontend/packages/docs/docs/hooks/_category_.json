@@ -1,8 +1,0 @@
-{
-	"label": "Hooks",
-	"position": 2,
-	"link": {
-		"type": "generated-index",
-		"description": "提供核心功能的Hooks，并具备友好的类型支持。"
-	}
-}
