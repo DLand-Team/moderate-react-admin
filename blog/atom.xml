@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://dland-team.github.io/moderate-react-admin/blog</id>
-    <title>Redux Eazy Blog</title>
+    <title>Moderate Admin Blog</title>
     <updated>2021-08-26T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://dland-team.github.io/moderate-react-admin/blog"/>
-    <subtitle>Redux Eazy Blog</subtitle>
+    <subtitle>Moderate Admin Blog</subtitle>
     <icon>https://dland-team.github.io/moderate-react-admin/img/redux-eazy-logo.svg</icon>
     <entry>
         <title type="html"><![CDATA[进军路线]]></title>
