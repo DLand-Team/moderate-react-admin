@@ -1,5 +1,8 @@
 # moderate-admin-react-antd5
 
+## 新文档搭建中
+文档地址：<a url={https://dland-team.github.io/moderate-react-admin/}/>
+
 ## 进军路线
 
 **大方向：对接若依后端主要功能，打造成为一个实用快捷的管理后台搬砖利器**
