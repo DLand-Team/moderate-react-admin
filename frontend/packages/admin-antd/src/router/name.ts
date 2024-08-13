@@ -16,8 +16,6 @@ export enum NAME {
 	MenuPage,
 	ErrorPage,
 	LoadingPage,
-	PluginsPage,
-	PluginListPage,
 	// Cpd
 	CpdPage,
 	// market
@@ -38,6 +36,8 @@ export enum NAME {
 	RuleListPage,
 	RuleEditPage,
 	RuleAddPage,
+	PluginsPage,
+	PluginListPage,
 }
 
 export const ROUTE_NAME = { ...NAME, ...PLUGIN_ROUTE_NAME };

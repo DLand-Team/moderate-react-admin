@@ -3,7 +3,7 @@ import { useNavigationType } from "react-router-dom";
 import { useFlat } from "src/service";
 
 import { motion, Variants } from "framer-motion";
-import { getRouteTransition, getTransition } from "./FramerVariants";
+import { getRouteTransition, getTransition } from "./framerVariants";
 
 const AnimationWrapper = ({ children }: PropsWithChildren) => {
     const action: ReturnType<typeof useNavigationType> = useNavigationType();

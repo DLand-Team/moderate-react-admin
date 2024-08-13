@@ -3,3 +3,105 @@ sidebar_position: 1
 ---
 
 # 代码生成
+
+通过配置界面，快速生成路由页面的代码。
+
+## 配置项目
+
+-   路由名称
+-   路径关系
+-   不鉴权，客户端强制显示
+-   是否嵌套子路由
+-   是否作为Index页面
+-   备注
+-   依赖的权限路由，即某个路由配置了权限，那么该路由就有权限
+
+## 生成原则
+
+两步走：**创建页面**和**创建路由**
+
+### 创建页面
+
+**根据名称和路径关系信息创建页面文件**
+
+代码位置：
+
+```
+packages/admin-antd/src/pages
+```
+
+**将页面统一注册改入口文件导出。**
+
+代码位置：
+
+```
+packages/admin-antd/src/pages/index.tsx
+```
+
+### 创建路由
+
+**根据路由名称，注册路由的name**
+
+代码位置：
+
+```
+packages/admin-antd/src/router/name.ts
+```
+
+示例：
+
+```ts
+export enum NAME {
+    ...
+    HomePage,
+    ...
+}
+```
+
+**生成路由数据**
+
+代码位置：
+
+```
+packages/admin-antd/src/router/routesConfig.ts
+```
+
+示例：
+
+```ts
+export const ROUTE_CONFIG_MAP: {
+	[key in ROUTE_ID_KEY]: RouteItem;
+} = {
+    ...
+    HomePage: {
+        id: "HomePage",
+        meta: { title: "common:HomePageTile" },
+        component: "HomePage",
+        actionPermissions: ["ADD", "EDIT"],
+        isNoAuth: true,
+        keepAlive: true,
+        isTab: false,
+    },
+    ...
+}
+
+```
+
+**生成路由结构信息**
+
+```
+packages/admin-antd/src/router/routesTree.ts
+```
+
+示例：
+
+```ts
+export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [
+    ...
+    {
+        id: ROUTE_ID.HomePage,
+        children: [...],
+    },
+    ...
+];
+```

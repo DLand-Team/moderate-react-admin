@@ -68,7 +68,7 @@ const CollectionCreateForm: React.FC<CollectionCreateFormProps> = ({
 						},
 					]}
 					name={"path"}
-					label={"路径"}
+					label={"路径关系"}
 				/>
 				<Form.Item
 					valuePropName="checked"
