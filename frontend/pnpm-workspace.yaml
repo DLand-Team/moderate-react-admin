@@ -2,6 +2,4 @@ packages:
     # all packages in direct subdirs of packages/
     - "packages/admin-antd"
     - "packages/dev-server"
-    - "packages/redux-eazy/packages/core"
-    - "packages/react"
-    - "packages/core"
+    - "packages/docs"

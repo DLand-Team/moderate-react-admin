@@ -87,6 +87,7 @@ export const ROUTE_CONFIG_MAP: {
 		meta: { title: "common:PageDevPageTitle" },
 		component: "PageDevPage",
 		actionPermissions: ["ADD", "EDIT"],
+		isNoAuth: true,
 	},
 	StoreDevPage: {
 		id: "StoreDevPage",
