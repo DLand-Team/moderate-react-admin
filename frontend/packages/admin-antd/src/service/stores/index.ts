@@ -1,4 +1,4 @@
-import 'src/service/setup'
+import "src/service/setup";
 import { stores as pluginStores } from "plugins/config/services/stores";
 import appStore from "./appStore";
 import authStore from "./authStore";
@@ -8,7 +8,6 @@ import marketStore from "./marketStore";
 import posStore from "./posStore";
 import routerStore from "./routerStore";
 import ruleStore from "./ruleStore";
-import userStore from "./userStore";
 import commonStore from "./commonStore";
 import categoryStore from "./categoryStore";
 
@@ -19,7 +18,6 @@ const stores = {
 	devStore,
 	routerStore,
 	dealStore,
-	userStore,
 	ruleStore,
 	marketStore,
 	posStore,

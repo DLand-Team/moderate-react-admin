@@ -6,10 +6,12 @@ import { OptionsDrawer, OptionsFloatBtn } from "./components";
 import { useFlat } from "./service";
 
 const App = () => {
+    
 	const { isLoading } = useFlat("appStore", {
 		isCollapsedMenu: "IN",
 		isLoading: "IN",
 	});
+
 	const { routesTree } = useFlat("routerStore", {
 		routesTree: "IN",
 	});
