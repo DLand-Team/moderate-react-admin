@@ -1,7 +1,8 @@
 # moderate-admin-react-antd5
 
-## 新文档搭建中
-文档地址：<a url={https://dland-team.github.io/moderate-react-admin/}/>
+## 文档搭建中
+
+[文档地址](https://dland-team.github.io/moderate-react-admin/)
 
 ## 进军路线
 
