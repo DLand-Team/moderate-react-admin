@@ -145,8 +145,8 @@ importers:
         specifier: ^1.5.0
         version: 1.5.0(react-dom@18.3.1)(react@18.3.1)
       redux-eazy:
-        specifier: 0.1.9-beta.18
-        version: 0.1.9-beta.18(@types/react@18.3.3)(react@18.3.1)
+        specifier: 0.1.9-beta.23
+        version: 0.1.9-beta.23(@types/react@18.3.3)(react@18.3.1)
       rehype-components:
         specifier: ^0.3.0
         version: 0.3.0
@@ -15721,8 +15721,8 @@ packages:
       strip-indent: 3.0.0
     dev: true
 
-  /redux-eazy@0.1.9-beta.18(@types/react@18.3.3)(react@18.3.1):
-    resolution: {integrity: sha512-NTGLDPscmuiCiKSZTRJJeEJi9UjRytpjQGOzTMSK/kmNaDTPr3IMl8ydClA/Jn922xlG2kzsPmM3IabTZVb1Ag==}
+  /redux-eazy@0.1.9-beta.23(@types/react@18.3.3)(react@18.3.1):
+    resolution: {integrity: sha512-swnU2tQJ96sWdk1+M28Gsk4vxjgkMqNpgv+/u0gpEgpHFMKgf7sJcPUclzcgsGbeZyz12Tps5Fj6Hkkc+mwd/A==}
     dependencies:
       '@reduxjs/toolkit': 2.2.3(react-redux@9.1.2)(react@18.3.1)
       fast-deep-equal: 3.1.3
