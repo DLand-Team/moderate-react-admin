@@ -20,6 +20,8 @@ export { default as NavHeaderMobile } from "./navHeaderMobile";
 export { default as SliderMenu } from "./sliderMenu";
 export { default as NavTabs } from "./navTabs"; // 导航tabs
 export { default as ProgressFallback } from "./progressFallback";
+export { default as NavChangePsw } from "./navChangePsw"; //修改密码
+export { default as TableCard } from "./tableCard";
 
 //--->>>dev设置相关<<<---//
 export { default as OptionsDrawer } from "./optionsDrawer"; // 配置侧边栏

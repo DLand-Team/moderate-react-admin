@@ -6,30 +6,31 @@ import { useFlat } from "src/service";
 import EditView, { EditViewProps } from "../views/editView";
 
 const MarketEditPage = (props: EditViewProps) => {
-    const branchName = ROUTE_ID.MarketEditPage;
-    const [searchParams] = useSearchParams();
-    const id = searchParams.get("id");
-    const { getCurrentDetailAct, setCurrentMarketData, getLocationListAct } =
-        useFlat(["marketStore", branchName]);
+	const { isSub, id: subId } = props;
+	const [searchParams] = useSearchParams();
+	const id = isSub ? subId : searchParams.get("id");
+	const branchName = ROUTE_ID.MarketEditPage;
+	const { getCurrentDetailAct, setCurrentMarketData, getLocationListAct } =
+		useFlat(["marketStore", branchName]);
 
-    useActive(
-        {
-            onFirstActive() {
-                getCurrentDetailAct({
-                    id,
-                });
-                getLocationListAct();
-            },
-            onLeave() {
-                setCurrentMarketData(null);
-            },
-        },
-        [id]
-    );
-    useEffect(() => {
-        return () => {};
-    }, [id]);
+	useActive(
+		{
+			onFirstActive() {
+				getCurrentDetailAct({
+					id,
+				});
+				getLocationListAct();
+			},
+			onLeave() {
+				setCurrentMarketData(null);
+			},
+		},
+		[id],
+	);
+	useEffect(() => {
+		return () => {};
+	}, [id]);
 
-    return <EditView branchName={branchName} {...props} />;
+	return <EditView id={id!} branchName={branchName} {...props} />;
 };
 export default MarketEditPage;

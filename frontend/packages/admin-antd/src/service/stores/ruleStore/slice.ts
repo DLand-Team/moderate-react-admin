@@ -12,6 +12,7 @@ import {
 	Segment,
 	StoreState,
 } from "./model";
+import { Carrier } from "../filterStore/model";
 
 const initialState = (): StoreState => {
 	return {
@@ -48,13 +49,18 @@ const initialState = (): StoreState => {
 		// init接口获得的carrierFamilyList
 		carrierFamilyList: [],
 		selectedRowKeys: [],
+		subId: "",
 	};
 };
 
 const slice = createSlice({
 	name: "ruleStore",
 	stateInit: initialState,
-	branch: [ROUTE_ID.RuleAddPage, ROUTE_ID.RuleDetailPage, ROUTE_ID.RuleEditPage],
+	branch: [
+		ROUTE_ID.RuleAddPage,
+		ROUTE_ID.RuleDetailPage,
+		ROUTE_ID.RuleEditPage,
+	],
 	reducers: {
 		setIsDetail(state, { payload }: PayloadAction<boolean>) {
 			state.isDetail = payload;
@@ -123,10 +129,15 @@ const slice = createSlice({
 			data: PayloadAction<{
 				flag: boolean;
 				type: AddItemDrawerType | "";
+				id?: string | number;
 			}>,
 		) {
 			state.isAddItemDrawerFlag = data.payload.flag;
 			state.addItemType = data.payload.type;
+			state.subId = data.payload.id || "";
+		},
+		setCarrierFamilyList(state, data: PayloadAction<Carrier[]>) {
+			state.carrierFamilyList = data.payload;
 		},
 	},
 	computed: {

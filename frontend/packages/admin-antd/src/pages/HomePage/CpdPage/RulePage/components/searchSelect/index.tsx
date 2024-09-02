@@ -13,14 +13,7 @@ const SearchSelect = (props: {
 }) => {
     const { processSearchSelectData } = useFlat("ruleStore", {});
     const dataSource = processSearchSelectData(null);
-    const {
-        disabled,
-        placeholder,
-        style,
-        name,
-        initValue = "ALL",
-        onSelect,
-    } = props;
+    const { disabled, placeholder, style, name, initValue, onSelect } = props;
     const recordTemp: any = {};
     dataSource.forEach((item: any) => {
         if (!(item.value in recordTemp)) {

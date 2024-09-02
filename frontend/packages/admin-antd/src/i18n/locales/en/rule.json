@@ -13,7 +13,8 @@
     "rulePage_actived": "Actived",
     "rulePage_ruleList": "Rule List",
     "rulePage.comment": "Comment",
-    "rulePage_effectDateRange": "生效日期范围",
+    "rulePage.placeholder_comment": "Please enter the remark description. The maximum length is 200 characters",
+    "rulePage_effectDateRange": "Effect Date Range",
     "rulePage_sequenceNo": "Sequence No.",
     "rulePage_saved": "Saved",
     "rulePage_all": "All",
@@ -72,6 +73,8 @@
     "rulePage_NONSTOP": "NON-STOP",
     "rulePage_DIRECT": "DIRECT",
     "rulePage_CONNECTION": "CONNECTION",
+    "edit_market": "Market Edit",
+    "edit_pos": "Pos Edit",
     "rulePage_Market": "Market",
     "rulePage_MarketDetail": "Market Detail",
     "rulePage_Pos": "POS",
@@ -100,5 +103,10 @@
     "rule_number": "Please enter number!",
     "add_market": "Add Market",
     "add_pos": "Add Pos",
-    "rulePage_zero": "Must not be zero"
+    "rulePage_zero": "Must not be zero",
+    "rule_max_30": "The maximum length allowed is 30!",
+    "rule_name_warn": "Please input should be letter,digit , '-' or '_'!",
+    "placeholder_input": "Please input",
+    "connectItem": "Connect Item",
+    "rulePage_ruleListTips": "Match the rules in ascending order according to the rule serial number. Once a match is successful, no other rules will be matched."
 }

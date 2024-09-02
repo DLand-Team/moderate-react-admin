@@ -19,7 +19,10 @@ const RuleDetailPage = () => {
 				getCurrentDetailAct({
 					id,
 				});
-				dpChain("posStore").queryPostListAct(null);
+				dpChain("marketStore").queryAllMarketListAct(null);
+				dpChain("posStore").queryAllPostListAct(null);
+				dpChain("filterStore").queryListAct(null);
+				dpChain("sortStore").queryListAct(null);
 			},
 			onLastLeave() {
 				setIsDetail(false);

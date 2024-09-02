@@ -47,6 +47,7 @@
 	"rulePage_notOperateCarriers": "不适用承运公司",
 	"rulePage_placeholder_sequenceNo": "通过起始MARKET和POS自动计算",
 	"rulePage_rule_comment": "请输入本条规则定义的备注说明，最长60个字符",
+	"rulePage.placeholder_comment": "请输入备注说明，最长200个字符",
 	"rulePage_placeholder_connectionMarket": "默认匹配所有渠道的查询",
 	"rulePage_rule_maxConxTime": "不可小于min time！",
 	"rulePage_warn_deleteCon": "请从最末尾删除！",
@@ -73,6 +74,8 @@
 	"rulePage_DIRECT": "有经停直飞",
 	"rulePage_CONNECTION": "联程",
 	"rulePage_Market": "市场",
+	"edit_market": "编辑市场信息",
+	"edit_pos": "编辑销售地信息",
 	"rulePage_MarketDetail": "市场详细信息",
 	"rulePage_Pos": "销售地",
 	"rulePage_PosDetail": "销售地详细信息",
@@ -101,5 +104,9 @@
 	"placeholder_input": "请输入",
 	"add_market": "添加市场",
 	"add_pos": "添加销售地",
-	"rulePage_zero": "不可为零！"
+	"rulePage_zero": "不可为零！",
+	"rule_max_30": "最多允许长度为30个字符!",
+	"rule_name_warn": "请输入英文字母，数字或,'_' or ' - '",
+	"connectItem": "中转子节点",
+	"rulePage_ruleListTips": "按规则的序列号从小到大的顺序进行规则匹配，一旦匹配成功，将不再继续匹配其他规则"
 }

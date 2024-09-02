@@ -7,6 +7,7 @@ import {
 	Rule,
 	RuleCarrier,
 } from "./model";
+import { Carrier } from "../filterStore/model";
 
 const baseUrl = "/admin-api/usercenter/cpd-rule/";
 // 增
@@ -80,6 +81,14 @@ const devApi = {
 	upadteApi,
 	getRuleListApi,
 	getRuleDetailApi,
+    fetchRuleInitApi() {
+        return http.request<{
+            carrierFamilyList: Carrier[];
+        }>({
+            url: baseUrl + "init",
+            method: "POST",
+        });
+    },
 	activeRuleApi(params: Rule) {
 		return httpBase.fetch(
 			{

@@ -7,6 +7,7 @@ import { UUID } from "src/common/utils";
 import { useFlat } from "src/service";
 import type { PosItem } from "src/service/stores/posStore/model";
 import columnsCreater from "./columnsCreater";
+import { ROUTE_ID } from "src/router";
 
 const WrapperComp: Wrapper<PosItem> = ({
 	children,
@@ -18,35 +19,38 @@ const WrapperComp: Wrapper<PosItem> = ({
 	const { t } = useTranslation(["pos"]);
 	const { t: commonT } = useTranslation(["common"]);
 	const { currentData, setCurrentDetail } = useFlat(["posStore", branchName]);
+	const isDetail = branchName == ROUTE_ID.PosDetailPage;
 	return (
 		<>
 			{children}
-			<Button
-				style={{
-					marginTop: "30px",
-				}}
-				onClick={() => {
-					if (editingKey) {
-						message.warning({
-							content: commonT`blog.editing`,
+			{!isDetail && (
+				<Button
+					style={{
+						marginTop: "30px",
+					}}
+					onClick={() => {
+						if (editingKey) {
+							message.warning({
+								content: commonT`blog.editing`,
+							});
+							return;
+						}
+						const newItem = {
+							uid: UUID(),
+						} as PosItem;
+						const nweList = [...dataList, newItem];
+						edit(newItem);
+						setCurrentDetail({
+							...currentData!,
+							cpdPosItems: nweList,
 						});
-						return;
-					}
-					const newItem = {
-						uid: UUID(),
-					} as PosItem;
-					const nweList = [...dataList, newItem];
-					edit(newItem);
-					setCurrentDetail({
-						...currentData!,
-						cpdPosItems: nweList,
-					});
-				}}
-				icon={<PlusOutlined />}
-				type="dashed"
-			>
-				{t`posPage.addLine`}
-			</Button>{" "}
+					}}
+					icon={<PlusOutlined />}
+					type="dashed"
+				>
+					{t`posPage.addLine`}
+				</Button>
+			)}
 		</>
 	);
 };

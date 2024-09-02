@@ -1,5 +1,7 @@
 import { appHelper, dpChain, reduxStore } from "src/service";
 import { createThunks } from "src/service";
+import httpApi from "./api";
+import { GetPswInfoParams } from "./model";
 
 const thunks = createThunks("appStore", {
     deleteTabHistoryAct: async ({ pathName }: { pathName: string }, api) => {
@@ -24,6 +26,9 @@ const thunks = createThunks("appStore", {
             routesTree
         );
         dpChain("appStore").setMenuDataAct(menuData);
+    },
+    async changePswAct(arg: GetPswInfoParams) {
+        return await httpApi.changePswApi(arg);
     },
 });
 export default thunks;

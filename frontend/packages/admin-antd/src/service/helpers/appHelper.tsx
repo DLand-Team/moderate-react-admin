@@ -280,7 +280,7 @@ export class AppHelper extends HelperBase {
         const { isTab = true, depends } =
             this.routerHelper.getRoutItemConfigByPath(pathName) || {};
         if (!isTab && depends?.length) {
-            const targetIndex = tabItems.findIndex((item) => {
+            const targetItem = tabItems.find((item) => {
                 const parentIndexRouteId =
                     this.routerHelper.getIndexRoute(depends[0])?.id ||
                     depends[0];
@@ -291,7 +291,7 @@ export class AppHelper extends HelperBase {
                         .toLowerCase()
                 );
             });
-            return targetIndex != -1;
+            return targetItem?.location?.pathname == pathName;
         } else {
             const targetIndex = tabItems.findIndex((item) => {
                 return item.key.toLowerCase() == pathName.toLowerCase();

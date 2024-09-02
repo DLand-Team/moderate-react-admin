@@ -1,5 +1,5 @@
 import { PayloadAction } from "redux-eazy";
-import { createSlice } from "src/service/setup";
+import { createSlice } from "src/service";
 import { Pos, PosCarrier, PosFilterData, StoreState } from "./model";
 import { PageBaseData } from "src/types/common";
 import { ROUTE_ID } from "src/router";

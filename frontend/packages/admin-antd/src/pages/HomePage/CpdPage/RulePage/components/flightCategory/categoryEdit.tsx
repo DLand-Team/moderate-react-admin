@@ -27,16 +27,18 @@ const CategoryEdit = (props: { branchName: string }) => {
     const {
         flightCategory = 1,
         noOverNight = 0,
+        noInterline = 0,
         carrier,
         allowCodeShare,
         operateCarriers,
         notOperateCarriers,
     } = targetItineraryState || {};
     const [formIns] = useForm<CategoryData>();
-
+    if (operateCarriers == "ALL") {
+        debugger;
+    }
     useEffect(() => {
         targetItineraryState && formIns.setFieldsValue(targetItineraryState);
-        console.log("!!!!!!!!!!!!!");
     }, [targetItineraryState]);
 
     const watchState = Form.useWatch((values) => {
@@ -44,6 +46,7 @@ const CategoryEdit = (props: { branchName: string }) => {
     }, formIns);
 
     useEffect(() => {
+        debugger;
         updateItineraryAct({
             ...watchState,
         });
@@ -90,6 +93,16 @@ const CategoryEdit = (props: { branchName: string }) => {
                             }}
                         >
                             {t("rule:rulePage_noOverNight")}
+                        </Checkbox>
+                        <Checkbox
+                            onChange={(e) => {
+                                updateItineraryAct({
+                                    noInterline: e.target.checked ? 1 : 0,
+                                });
+                            }}
+                            checked={noInterline ? true : false}
+                        >
+                            {t("rule:rulePage_noInterline")}
                         </Checkbox>
                     </Fragment>
                 ) : (

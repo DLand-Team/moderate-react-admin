@@ -120,6 +120,12 @@ const TopForm = ({
                         <Form.Item<FieldType>
                             label={t`marketPage.comment`}
                             name="comment"
+                            rules={[
+                                {
+                                    max: 200,
+                                    message: t("marketPage.placeholder_comment"),
+                                },
+                            ]}
                         >
                             <Input.TextArea style={{ height: 120 }} />
                         </Form.Item>

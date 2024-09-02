@@ -40,7 +40,7 @@ const columnsCreater: ColumnsCreater<PosItem, { branchName: string }> = (
 	const { t: commonT } = useTranslation(["common"]);
 	const { setIsEditing } = useFlat(["posStore", extra?.branchName]);
 	const isDetail = extra?.branchName == ROUTE_ID.PosDetailPage;
-	let data: MyColumnType<PosItem>[] = [
+	const data: MyColumnType<PosItem>[] = [
 		{
 			title: t("posPage.posType"),
 			dataIndex: "posType",
@@ -208,7 +208,7 @@ const columnsCreater: ColumnsCreater<PosItem, { branchName: string }> = (
 		},
 	];
 	if (!isDetail) {
-		data = data.concat({
+		data.push({
 			title: t("posPage.operation"),
 			dataIndex: "operation",
 			align: "center",

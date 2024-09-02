@@ -39,9 +39,9 @@ const SliderMenu = (props: any) => {
                     }}
                 >
                     {itByRankList[dragItem.rankId - 1].length !== 1 && (
-                        <Radio value={0}>{t("sortItem_move")}</Radio>
+                        <Radio value={0}>{t("rule:sortItem_move")}</Radio>
                     )}
-                    <Radio value={1}>{t("sortItem_copy")}</Radio>
+                    <Radio value={1}>{t("rule:sortItem_copy")}</Radio>
                 </Radio.Group>
             ),
             onOk: () => {
@@ -56,8 +56,34 @@ const SliderMenu = (props: any) => {
             },
         });
     };
+    const handleRankSwitch = (dragItem: DragItem, trgetItem: DragItem) => {
+        Modal.confirm({
+            title: "",
+            content: (
+                <Radio.Group
+                    defaultValue={actionName.current}
+                    onChange={(e) => {
+                        actionName.current = e.target.value;
+                    }}
+                >
+                    <Radio value={0}>{t("rule:sortItem_move")}</Radio>
+                    <Radio value={1}>{t("rule:sortItem_copy")}</Radio>
+                </Radio.Group>
+            ),
+            onOk: () => {
+                let newItem = cloneDeep(dragItem.itemData);
+                // move
+                if (actionName.current == 0) {
+                    switchRankAct([newItem.rankId, trgetItem.rankId]);
+                } else {
+                    copyRankAct([newItem.rankId, trgetItem.rankId]);
+                }
+            },
+        });
+    };
     const { t } = useTranslation();
     const [isSort, setIsSort] = useState(false);
+    const [isItSort, setItIsSort] = useState(false);
     const {
         setTargetRankId,
         setTargetItineraryId,
@@ -65,12 +91,17 @@ const SliderMenu = (props: any) => {
         targetRankId,
         targetItineraryId,
         addItineraryAct,
+        copyRankAct,
+        switchRankAct,
         deleteItineraryAct,
         deleteItineraryByRankAct,
     } = useFlat(["ruleStore", branchName]);
 
     const handleSwitchClick = () => {
         setIsSort(!isSort);
+    };
+    const handleItSwitchClick = () => {
+        setItIsSort(!isItSort);
     };
     return (
         <div className={styles.container}>
@@ -104,138 +135,180 @@ const SliderMenu = (props: any) => {
                     }}
                     onOpenChange={handleOpenChange}
                 >
-                    {itByRankList.map(
-                        (itArr: RuleItineraryItem[], rankIndex: number) => {
-                            return (
-                                <SubMenu
-                                    key={rankIndex}
-                                    title={
-                                        <span>
-                                            <span>
+                    {isItSort &&
+                        itByRankList.map(
+                            (itArr: RuleItineraryItem[], rankIndex: number) => {
+                                return (
+                                    <ItineraryItem
+                                        title={
+                                            <>
                                                 {t("rule:rulePage_rank")}
                                                 {rankIndex + 1}
-                                            </span>
-                                            {!isJustShow && !isSort && (
-                                                <Typography.Link
-                                                    className={styles.itemClose}
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        if (
-                                                            itByRankList.length <=
-                                                            1
-                                                        ) {
-                                                            message.warning(
-                                                                t(
-                                                                    "rule:rulePage_leastOne"
-                                                                )
-                                                            );
-                                                        } else {
-                                                            deleteItineraryByRankAct(
-                                                                itArr[0].rankId
-                                                            );
+                                            </>
+                                        }
+                                        it={itArr[0]}
+                                        handleItSwitch={handleRankSwitch}
+                                        handleSwitchClick={handleItSwitchClick}
+                                        key={rankIndex}
+                                    ></ItineraryItem>
+                                );
+                            }
+                        )}
+                    {!isItSort &&
+                        itByRankList.map(
+                            (itArr: RuleItineraryItem[], rankIndex: number) => {
+                                return (
+                                    <SubMenu
+                                        key={rankIndex}
+                                        title={
+                                            <span>
+                                                <span>
+                                                    {t("rule:rulePage_rank")}
+                                                    {rankIndex + 1}
+                                                </span>
+                                                {!isJustShow && !isSort && (
+                                                    <Typography.Link
+                                                        className={
+                                                            styles.itemClose
                                                         }
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            if (
+                                                                itByRankList.length <=
+                                                                1
+                                                            ) {
+                                                                message.warning(
+                                                                    t(
+                                                                        "rule:rulePage_leastOne"
+                                                                    )
+                                                                );
+                                                            } else {
+                                                                deleteItineraryByRankAct(
+                                                                    itArr[0]
+                                                                        .rankId
+                                                                );
+                                                            }
+                                                        }}
+                                                    >
+                                                        <DeleteOutlined></DeleteOutlined>
+                                                    </Typography.Link>
+                                                )}
+                                                {!isJustShow && (
+                                                    <ColumnHeightOutlined
+                                                        style={{
+                                                            marginLeft: "12px",
+                                                        }}
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            handleItSwitchClick();
+                                                        }}
+                                                    />
+                                                )}
+                                            </span>
+                                        }
+                                    >
+                                        {!isJustShow && (
+                                            <div className={styles.btn}>
+                                                <a
+                                                    onClick={() => {
+                                                        const newItem =
+                                                            itineraryItem();
+                                                        newItem.rankId =
+                                                            rankIndex + 1;
+                                                        addItineraryAct(
+                                                            newItem
+                                                        );
                                                     }}
                                                 >
-                                                    <DeleteOutlined></DeleteOutlined>
-                                                </Typography.Link>
-                                            )}
-                                        </span>
-                                    }
-                                >
-                                    {!isJustShow && (
-                                        <div className={styles.btn}>
-                                            <a
-                                                onClick={() => {
-                                                    const newItem =
-                                                        itineraryItem();
-                                                    newItem.rankId =
-                                                        rankIndex + 1;
-                                                    addItineraryAct(newItem);
-                                                }}
-                                            >
-                                                <PlusOutlined />
-                                                <span
-                                                    className={styles.btnLabel}
-                                                >
-                                                    {t("common:add") +
-                                                        t(
+                                                    <PlusOutlined />
+                                                    <span
+                                                        className={
+                                                            styles.btnLabel
+                                                        }
+                                                    >
+                                                        {t("common:add") +
+                                                            t(
+                                                                "rule:rulePage_itinerary"
+                                                            )}
+                                                    </span>
+                                                </a>
+                                            </div>
+                                        )}
+                                        {/* if you won`t use DndProvider to wraper your component that has processed by useDrop or useDrap,you will never get the context........so try it! */}
+                                        {itArr.map(
+                                            (
+                                                it: RuleItineraryItem,
+                                                itIndex: any
+                                            ) => {
+                                                let params = {
+                                                    it,
+                                                    itIndex,
+                                                    isJustShow,
+                                                    handleItDelete,
+                                                    rankIndex,
+                                                };
+                                                return isSort ? (
+                                                    <ItineraryItem
+                                                        {...params}
+                                                        handleItSwitch={
+                                                            handleItSwitch
+                                                        }
+                                                        handleSwitchClick={
+                                                            handleSwitchClick
+                                                        }
+                                                        key={itIndex}
+                                                    ></ItineraryItem>
+                                                ) : (
+                                                    <Menu.Item
+                                                        key={`${rankIndex}-${itIndex}`}
+                                                    >
+                                                        {t(
                                                             "rule:rulePage_itinerary"
-                                                        )}
-                                                </span>
-                                            </a>
-                                        </div>
-                                    )}
-                                    {/* if you won`t use DndProvider to wraper your component that has processed by useDrop or useDrap,you will never get the context........so try it! */}
-                                    {itArr.map(
-                                        (
-                                            it: RuleItineraryItem,
-                                            itIndex: any
-                                        ) => {
-                                            let params = {
-                                                it,
-                                                itIndex,
-                                                isJustShow,
-                                                handleItDelete,
-                                                rankIndex,
-                                            };
-                                            return isSort ? (
-                                                <ItineraryItem
-                                                    {...params}
-                                                    handleItSwitch={
-                                                        handleItSwitch
-                                                    }
-                                                    handleSwitchClick={
-                                                        handleSwitchClick
-                                                    }
-                                                    key={itIndex}
-                                                ></ItineraryItem>
-                                            ) : (
-                                                <Menu.Item
-                                                    key={`${rankIndex}-${itIndex}`}
-                                                >
-                                                    {t(
-                                                        "rule:rulePage_itinerary"
-                                                    )}{" "}
-                                                    {itIndex + 1}{" "}
-                                                    {!isJustShow && (
-                                                        <DeleteOutlined
-                                                            className={
-                                                                styles.itemClose
-                                                            }
-                                                            onClick={(e) => {
-                                                                e.stopPropagation();
-                                                                if (
-                                                                    itArr.length <=
-                                                                    1
-                                                                ) {
-                                                                    return message.warning(
-                                                                        t(
-                                                                            "rule:rulePage_leastOne"
-                                                                        )
-                                                                    );
+                                                        )}{" "}
+                                                        {itIndex + 1}{" "}
+                                                        {!isJustShow && (
+                                                            <DeleteOutlined
+                                                                className={
+                                                                    styles.itemClose
                                                                 }
-                                                                deleteItineraryAct(
-                                                                    it.uid
-                                                                );
-                                                            }}
-                                                        />
-                                                    )}
-                                                    {!isJustShow && (
-                                                        <ColumnHeightOutlined
-                                                            onClick={(e) => {
-                                                                e.stopPropagation();
-                                                                handleSwitchClick();
-                                                            }}
-                                                        />
-                                                    )}
-                                                </Menu.Item>
-                                            );
-                                        }
-                                    )}
-                                </SubMenu>
-                            );
-                        }
-                    )}
+                                                                onClick={(
+                                                                    e
+                                                                ) => {
+                                                                    e.stopPropagation();
+                                                                    if (
+                                                                        itArr.length <=
+                                                                        1
+                                                                    ) {
+                                                                        return message.warning(
+                                                                            t(
+                                                                                "rule:rulePage_leastOne"
+                                                                            )
+                                                                        );
+                                                                    }
+                                                                    deleteItineraryAct(
+                                                                        it.uid
+                                                                    );
+                                                                }}
+                                                            />
+                                                        )}
+                                                        {!isJustShow && (
+                                                            <ColumnHeightOutlined
+                                                                onClick={(
+                                                                    e
+                                                                ) => {
+                                                                    e.stopPropagation();
+                                                                    handleSwitchClick();
+                                                                }}
+                                                            />
+                                                        )}
+                                                    </Menu.Item>
+                                                );
+                                            }
+                                        )}
+                                    </SubMenu>
+                                );
+                            }
+                        )}
                 </Menu>
             </DndProvider>
         </div>

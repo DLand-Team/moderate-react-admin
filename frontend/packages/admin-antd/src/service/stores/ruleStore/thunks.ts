@@ -16,13 +16,22 @@ import slice from "./slice";
 import { PageBaseData } from "src/types/common";
 
 const thunks = createThunks(["ruleStore", slice.branch], {
+	async initRuleAct(_, __, branchName) {
+		const { data } = await httpApi.fetchRuleInitApi();
+		const { carrierFamilyList } = data;
+		dpChain(["ruleStore", branchName]).setCarrierFamilyList(
+			carrierFamilyList,
+		);
+	},
 	getRuleCarrierListAct: async (_, __, branchName) => {
 		const { data } = await httpApi.fetchRuleCarrierListApi();
 		dpChain(["ruleStore", branchName]).setRuleCarrier(data);
 	},
 	initItineraryListAct: async (_, __, branchName) => {
 		let data = ruleHelper.getItDefault();
-		dpChain(["ruleStore", branchName]).setItineraryList(data);
+		dpChain(["ruleStore", branchName]).setItineraryList(
+			data as RuleItineraryItem[],
+		);
 	},
 	// 初始化
 	initCurrentDetailAct: async (_, __, branchName) => {
@@ -32,6 +41,7 @@ const thunks = createThunks(["ruleStore", slice.branch], {
 			comment: "",
 			id: 1,
 			ownerId: "1",
+			effectEndDate: "20991231",
 		} as Rule;
 		dpChain(["ruleStore", branchName]).initItineraryListAct(null);
 		dpChain(["ruleStore", branchName]).setCurrentRuleData(ruleData);
@@ -65,6 +75,17 @@ const thunks = createThunks(["ruleStore", slice.branch], {
 	},
 	// 添加rule
 	addRuleAct: async (params: Rule) => {
+		params = cloneDeep(params);
+		delete params.id;
+		params.cpdRuleItinerarys?.forEach((item) => {
+			delete item.id;
+			item.cpdConnectionList?.forEach((conItem) => {
+				delete conItem.id;
+			});
+			item.cpdSegmentList?.forEach((segItem) => {
+				delete segItem.id;
+			});
+		});
 		await httpApi.createApi(params);
 	},
 	// 更新rule
@@ -104,6 +125,20 @@ const thunks = createThunks(["ruleStore", slice.branch], {
 			}
 			dpChain(["ruleStore", branchName]).setTargetItineraryId(0);
 		}
+		dpChain(["ruleStore", branchName]).setItineraryList(newValue);
+	},
+	copyRankAct: async (params: number[], _, branchName) => {
+		const newValue = ruleHelper.copyRank(
+			params,
+			getStore(["ruleStore", branchName]),
+		);
+		dpChain(["ruleStore", branchName]).setItineraryList(newValue);
+	},
+	switchRankAct: async (params: number[], _, branchName) => {
+		const newValue = ruleHelper.switchRank(
+			params,
+			getStore(["ruleStore", branchName]),
+		);
 		dpChain(["ruleStore", branchName]).setItineraryList(newValue);
 	},
 	deleteItineraryAct: async (uid: string, _, branchName) => {

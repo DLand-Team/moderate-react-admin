@@ -25,13 +25,18 @@ const DetailView = ({ branchName }: DetailViewProps) => {
 	} = useFlat(["ruleStore", branchName]);
 	const { t } = useTranslation("rule");
 	const { t: commonT } = useTranslation("common");
-	const { posList } = useFlat(["posStore", ROUTE_ID.RuleDetailPage], {
-		posList: "IN",
+	const { allPosList } = useFlat(["posStore", ROUTE_ID.RuleDetailPage], {
+		allPosList: "IN",
 	});
-	const { marketList } = useFlat("marketStore", {
-		marketList: "IN",
+	const { allMarketList } = useFlat("marketStore", {
+		allMarketList: "IN",
 	});
-
+	const { list: sortList } = useFlat("sortStore", {
+		list: "IN",
+	});
+	const { list: filterList } = useFlat("filterStore", {
+		list: "IN",
+	});
 	const items: DescriptionsProps["items"] = [
 		{
 			label: t`rulePage_ruleName`,
@@ -45,7 +50,7 @@ const DetailView = ({ branchName }: DetailViewProps) => {
 		{
 			label: t`rulePage_originMarket`,
 			children: currentData ? (
-				marketList
+				allMarketList
 					.filter((item) => {
 						return item.marketType === 0;
 					})
@@ -61,7 +66,7 @@ const DetailView = ({ branchName }: DetailViewProps) => {
 			label: t`rulePage_destinationMarket`,
 			span: 1,
 			children: currentData ? (
-				marketList
+				allMarketList
 					.filter((item) => {
 						return item.marketType === 0;
 					})
@@ -76,7 +81,7 @@ const DetailView = ({ branchName }: DetailViewProps) => {
 			label: t`rulePage_pos`,
 			span: 3,
 			children: currentData ? (
-				posList.find((item) => {
+				allPosList.find((item) => {
 					return item.id == currentData!.posId;
 				})?.posName
 			) : (
@@ -110,6 +115,28 @@ const DetailView = ({ branchName }: DetailViewProps) => {
 				) : (
 					""
 				)
+			) : (
+				<Skeleton.Input block={true} active={true} />
+			),
+		},
+		{
+			label: t`rulePage_sortItem`,
+			span: 3,
+			children: currentData ? (
+				sortList.find((item) => {
+					return String(item.id) == String(currentData!.sortItemId);
+				})?.sortItemName
+			) : (
+				<Skeleton.Input block={true} active={true} />
+			),
+		},
+		{
+			label: t`rulePage_filterItem`,
+			span: 2,
+			children: currentData ? (
+				filterList.find((item) => {
+					return String(item.id) == String(currentData!.filterItemId);
+				})?.filterItemName
 			) : (
 				<Skeleton.Input block={true} active={true} />
 			),
@@ -211,12 +238,12 @@ const DetailView = ({ branchName }: DetailViewProps) => {
 				}}
 				open={isAddItemDrawerFlag}
 				title={
-					addItemType == AddItemDrawerType.market
+					addItemType == AddItemDrawerType.market_add
 						? t("add_market")
 						: t("add_pos")
 				}
 			>
-				{AddItemDrawerType.pos === addItemType && (
+				{AddItemDrawerType.pos_add === addItemType && (
 					<PosEditPage
 						handleCancel={() => {
 							setIsAddItemDrawerFlag({

@@ -67,3 +67,9 @@ export enum ThemeColor {
     light = "light",
     dark = "dark",
 }
+
+export interface GetPswInfoParams {
+    oldPassword: string;
+    password: string;
+    confirm: string;
+}

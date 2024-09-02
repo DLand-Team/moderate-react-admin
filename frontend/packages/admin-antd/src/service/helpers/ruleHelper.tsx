@@ -1,5 +1,5 @@
 import { UUID, cloneDeep } from "src/common/utils";
-import { itineraryItem } from "src/shapes";
+import { connectionItem, itineraryItem, segmentItem } from "src/shapes";
 import type {
     Connection,
     DeleteConnectionByPosActPayload,
@@ -89,33 +89,32 @@ export class RuleHelper extends HelperBase {
             itByRankListTemp[targetRankId][targetItineraryId];
         return targetItinerary;
     }
-    getItDefault() {
+    getItDefault(): Partial<RuleItineraryItem>[] {
         return [
-            {
+            itineraryItem({
                 rankId: 1,
                 flightCategory: 2,
-                uid: UUID(),
                 cpdSegmentList: [
                     {
-                        position: 1,
+                        position: "1",
                         key: UUID(),
                         uid: UUID(),
                         carrier: "ALL",
                     },
                     {
-                        position: 2,
+                        position: "2",
                         uid: UUID(),
                         key: UUID(),
                         carrier: "ALL",
                     },
                 ],
                 cpdConnectionList: [
-                    { position: 1, uid: UUID(), key: UUID(), exclude: true },
+                    { position: 1, uid: UUID(), key: UUID(), exclude: false },
                 ],
                 allowCodeShare: 1,
-            } as any,
+            }),
             itineraryItem({
-                uid: "2",
+                rankId: 1,
                 flightCategory: 1,
                 allowCodeShare: 1,
             }),
@@ -144,8 +143,8 @@ export class RuleHelper extends HelperBase {
                     },
                 ],
                 cpdConnectionList: [
-                    { position: 1, uid: UUID(), key: UUID(), exclude: true },
-                    { position: 2, uid: UUID(), key: UUID(), exclude: true },
+                    { position: 1, uid: UUID(), key: UUID(), exclude: false },
+                    { position: 2, uid: UUID(), key: UUID(), exclude: false },
                 ],
             }),
         ];
@@ -154,26 +153,17 @@ export class RuleHelper extends HelperBase {
     getItineraryDefault() {
         return {
             cpdConnectionList: [
-                {
+                connectionItem({
                     position: 1,
-                    uid: UUID(),
-                    key: UUID(),
-                    exclude: true,
-                },
+                }),
             ],
             cpdSegmentList: [
-                {
-                    position: "1",
-                    key: UUID(),
-                    uid: UUID(),
-                    carrier: "ALL",
-                },
-                {
-                    position: "2",
-                    uid: UUID(),
-                    key: UUID(),
-                    carrier: "ALL",
-                },
+                segmentItem({
+                    position: 1,
+                }),
+                segmentItem({
+                    position: 2,
+                }),
             ],
         };
     }
@@ -204,6 +194,46 @@ export class RuleHelper extends HelperBase {
         });
         return itineraryListTemp;
     }
+    copyRank(params: number[], state: StoreState) {
+        const { itineraryList } = state;
+        const [startRankId, endRankId] = params;
+        const itineraryListTemp = cloneDeep(itineraryList);
+        let temp: any = [];
+        itineraryListTemp.forEach((item) => {
+            if (item.rankId == startRankId) {
+                temp.push({ ...item, rankId: endRankId + 1 });
+            }
+        });
+        itineraryListTemp.forEach((item) => {
+            if (item.rankId > endRankId) {
+                item.rankId = item.rankId + 1;
+            }
+        });
+
+        return itineraryListTemp.concat(temp);
+    }
+    switchRank(params: number[], state: StoreState) {
+        const { itineraryList } = state;
+        const [startRankId, endRankId] = params;
+        const itineraryListTemp = cloneDeep(itineraryList);
+        itineraryListTemp.forEach((item) => {
+            if (item.rankId == startRankId) {
+                item.rankId = -1;
+            }
+        });
+        itineraryListTemp.forEach((item) => {
+            if (item.rankId > startRankId && item.rankId <= endRankId) {
+                item.rankId = item.rankId - 1;
+            }
+        });
+        itineraryListTemp.forEach((item) => {
+            if (item.rankId == -1) {
+                item.rankId = endRankId;
+            }
+        });
+        return itineraryListTemp;
+    }
+
     deleteItineraryById({ id }: { id: string }, state: StoreState) {
         const { itineraryList } = state;
         const itineraryListTemp = cloneDeep(itineraryList);
@@ -348,6 +378,8 @@ export class RuleHelper extends HelperBase {
         marketList: Market[];
         posList: Pos[];
     }) => {
+        marketList = cloneDeep(marketList);
+        posList = cloneDeep(posList);
         let oriMarketId =
             type == "oriMarket" ? value : formRef?.getFieldValue("oriMarketId");
         let desMarketId =

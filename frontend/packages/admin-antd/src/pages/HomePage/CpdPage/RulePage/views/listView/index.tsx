@@ -1,6 +1,7 @@
-import { DeleteOutlined, QuestionCircleOutlined } from "@ant-design/icons";
-import { Button, Card, Modal, Table, Tooltip, message } from "antd";
+import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
+import { Card, Modal, Table, message } from "antd";
 import { useTranslation } from "react-i18next";
+import { TableCard } from "src/components";
 import { ROUTE_ID } from "src/router";
 import { routerHelper, useFlat } from "src/service";
 import SearchForm from "../../components/searchForm/searchForm";
@@ -28,28 +29,34 @@ const ListView = ({ branchName }: ListViewProps) => {
 			setSelectedRowKeys(selectedRowKeys);
 		},
 	};
+
 	return (
 		<div className={styles.container}>
 			<Card>
 				<SearchForm></SearchForm>
 			</Card>
 
-			<div className={styles.titleWapper}>
-				<div>
-					<Button
-						className={styles.btn}
-						type="primary"
-						onClick={() => {
+			<TableCard
+				style={{
+					marginTop: "12px",
+				}}
+				title={t("rulePage_ruleList")}
+				desc={t("rulePage_ruleListTips")}
+				buttonList={[
+					{
+						title: t("rulePage_add"),
+						icon: <PlusOutlined />,
+						handleClick: () => {
 							routerHelper.jumpTo(ROUTE_ID.RuleAddPage);
-						}}
-						style={{
-							marginBottom: 12,
-						}}
-					>
-						+ {t("rulePage_add")}
-					</Button>
-					<Button
-						onClick={() => {
+						},
+					},
+					{
+						title: t`pos:posPage.delete`,
+						icon: <DeleteOutlined />,
+						option: {
+							type: "default",
+						},
+						handleClick: () => {
 							if (selectedRowKeys.length == 0) {
 								return message.warning(
 									t`common:blog.warn_select`,
@@ -66,29 +73,13 @@ const ListView = ({ branchName }: ListViewProps) => {
 								okText: t`common:blog.Yes`,
 								cancelText: t`common:blog.No`,
 							});
-						}}
-						icon={<DeleteOutlined />}
-					>
-						{t`pos:posPage.delete`}
-					</Button>
-				</div>
-			</div>
-			<Card
-				title={
-					<div>
-						{t("rulePage_ruleList")}
-						<Tooltip
-							title={t("rulePage_ruleListTips")}
-							placement="rightTop"
-						>
-							<QuestionCircleOutlined style={{ marginLeft: 8 }} />
-						</Tooltip>
-					</div>
-				}
+						},
+					},
+				]}
 			>
 				<Table
 					rowKey={(record) => {
-						return record.id;
+						return record.id!;
 					}}
 					scroll={{ x: 1300 }}
 					pagination={{
@@ -97,6 +88,7 @@ const ListView = ({ branchName }: ListViewProps) => {
 						pageSize,
 						current: pageNum,
 						total,
+						// showTotal: (total) => `Total ${total} items`,
 						onChange(pageNum, pageSize) {
 							setRuleTablePageData({
 								pageNum,
@@ -111,7 +103,7 @@ const ListView = ({ branchName }: ListViewProps) => {
 						...rowSelection,
 					}}
 				/>
-			</Card>
+			</TableCard>
 		</div>
 	);
 };

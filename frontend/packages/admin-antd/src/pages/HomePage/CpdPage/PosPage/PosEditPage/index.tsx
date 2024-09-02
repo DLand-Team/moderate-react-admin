@@ -5,25 +5,26 @@ import { useFlat } from "src/service";
 import PosEditView, { PosEditViewProps } from "../views/editView";
 
 const PosEditPage = (props: PosEditViewProps) => {
-    const branchName = ROUTE_ID.PosEditPage;
-    const [searchParams] = useSearchParams();
-    const id = searchParams.get("id");
-    const { getCurrentDetailAct, setCurrentDetail } = useFlat([
-        "posStore",
-        branchName,
-    ]);
-    useActive({
-        onActive() {
-            getCurrentDetailAct({
-                id,
-            });
-        },
-        onLeave() {
-            setCurrentDetail(null);
-        },
-    });
+	const { isSub, id: subId } = props;
+	const [searchParams] = useSearchParams();
+	const id = isSub ? subId : searchParams.get("id");
+	const branchName = ROUTE_ID.PosEditPage;
+	const { getCurrentDetailAct, setCurrentDetail } = useFlat([
+		"posStore",
+		branchName,
+	]);
+	useActive({
+		onActive() {
+			getCurrentDetailAct({
+				id,
+			});
+		},
+		onLeave() {
+			setCurrentDetail(null);
+		},
+	});
 
-    return <PosEditView branchName={branchName} {...props} />;
+	return <PosEditView branchName={branchName} {...props} />;
 };
 
 export default PosEditPage;

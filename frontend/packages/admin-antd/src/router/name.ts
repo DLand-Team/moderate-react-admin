@@ -16,6 +16,7 @@ export enum NAME {
 	MenuPage,
 	ErrorPage,
 	LoadingPage,
+	PluginsPage,
 	// Cpd
 	CpdPage,
 	// market
@@ -36,7 +37,12 @@ export enum NAME {
 	RuleListPage,
 	RuleEditPage,
 	RuleAddPage,
-	PluginsPage,
+	// filter
+	FilterPage,
+	FilterListPage,
+	// sort
+	SortPage,
+	SortListPage,
 	PluginListPage,
 }
 

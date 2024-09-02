@@ -296,6 +296,42 @@ export const ROUTE_CONFIG_MAP: {
 		isTab: false,
 		isNoAuth: true,
 	},
+	FilterPage: {
+		id: "FilterPage",
+		meta: {
+			title: "common:filterPage",
+		},
+		component: "FilterPage",
+		isNoAuth: true,
+	},
+	FilterListPage: {
+		id: "FilterListPage",
+		// meta: {
+		//     title: "common:filterPage",
+		// },
+		component: "FilterListPage",
+		index: true,
+		isMenu: false,
+		isNoAuth: true,
+	},
+	SortPage: {
+		id: "SortPage",
+		meta: {
+			title: "common:sortPage",
+		},
+		component: "SortPage",
+		isNoAuth: true,
+	},
+	SortListPage: {
+		id: "SortListPage",
+		// meta: {
+		//     title: "common:sortPage",
+		// },
+		component: "SortListPage",
+		index: true,
+		isMenu: false,
+		isNoAuth: true,
+	},
 
 	...PLUGIN_ROUTE_CONFIG_MAP,
 };

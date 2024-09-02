@@ -11,6 +11,7 @@
     "filterItem.action":"操作",
     "filterItem.NewfilterItem":"新建过滤规则",
     "filterItem.EditfilterItem":"修改过滤规则",
+    "filterItem.FilterItemDetail": "过滤规则详情",
     "filterItem.Save":"保存",
     "filterItem.Cancel":"取消",
     "filterItem.Operator":"运算符",

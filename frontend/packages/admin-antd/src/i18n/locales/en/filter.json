@@ -11,6 +11,7 @@
     "filterItem.action":  "Actions",
     "filterItem.NewfilterItem":  "New Filter Item",
     "filterItem.EditfilterItem":  "Edit Filter Item",
+    "filterItem.FilterItemDetail": "Filter Item Detail",
     "filterItem.Save":  "Save",
     "filterItem.Cancel":  "Cancel",
     "filterItem.Operator":  "Operator",

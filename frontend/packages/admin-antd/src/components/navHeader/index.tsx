@@ -14,6 +14,7 @@ import CustomBreadcrumb from "src/components/customBreadcrumb";
 import { useFlat } from "src/service";
 import { ThemeColor } from "src/service/stores/appStore/model";
 import styles from "./index.module.scss";
+import { NavChangePsw } from "src/components";
 
 const CustomDropdownButton = themeHoc(Dropdown.Button, {});
 
@@ -123,6 +124,7 @@ const NavHeader = () => {
                 >
                     {t("common:logout")}
                 </Button>
+                <NavChangePsw></NavChangePsw>
             </div>
         </Layout.Header>
     );

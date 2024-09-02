@@ -167,7 +167,7 @@ const columnsCreater: ColumnsCreater<MarketItem, { branchName: string }> = (
 		},
 	];
 	if (!isDetail) {
-		data = data.concat({
+		data.push({
 			title: t("marketPage.operation"),
 			dataIndex: "operation",
 			align: "center",

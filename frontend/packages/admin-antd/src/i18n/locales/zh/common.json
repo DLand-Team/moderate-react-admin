@@ -59,5 +59,19 @@
 	"PageDevPageTitle": "路由助手",
 	"StoreDevPageTitle": "状态助手",
 	"NotFundPageTitle": "未找到",
-	"ErrorPageTitle": "错误页"
+	"ErrorPageTitle": "错误页",
+	"pswBtn": "修改密码",
+    "oldPw": " 旧密码",
+    "pleaseInputOldWord": "请输入旧密码",
+    "newPw": "新密码",
+    "pleaseInputNewWord": "请输入新密码",
+    "pwdTips": "密码至少8位，包括数字、大小写字母和特殊字符三种及以上!",
+    "PasswordConfirmation": "密码确认",
+    "pleaseInputConfirmWord": "请输入确认密码",
+    "passwordInconsistent": "两次输入的密码不一致！",
+    "oldPasswordIncorrect": "旧密码输入有误",
+    "oldIsEqualNew": "新密码不能与旧密码一样",
+    "Save": "保存",
+    "Cancel": "取消",
+    "Succeed": "修改成功"
 }

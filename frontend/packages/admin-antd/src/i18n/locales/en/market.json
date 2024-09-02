@@ -20,6 +20,7 @@
     "marketPage.placeholder_input": "Please input ",
     "marketPage.rule_max_30": "The maximum length allowed is 30!",
     "marketPage.rule_common1": "Please input should be letter,digit , '-' or '_'!",
+    "marketPage.placeholder_comment": "Please enter the remark description. The maximum length is 200 characters",
     "marketPage.rule_placeholder": "Please input the corresponding LOCATION according to the selected LOCATION TYPE.",
     "marketPage.addTile": "Market Detail",
     "marketPage.editTile": "Market Detail",
@@ -44,5 +45,6 @@
     "marketPage.TC": "TC",
     "marketPage.WORLD": "World",
     "marketPage.marketNameExist": "Market name already exists",
-    "marketPage.operation": "operation"
+    "marketPage.operation": "operation",
+    "marketPage.listTileTips":"The origin/destination in the request is matched with the corresponding market rule list. When matching, the areas in the following list are matched one by one from small to large according to the weight. If an 'excluded' area is matched, the rule is not applicable to the request and other rules are matched; if a non-'excluded' area is matched, the match is considered successful."
 }

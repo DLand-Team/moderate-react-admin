@@ -1,5 +1,5 @@
-import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { Button, Modal, Space } from "antd";
+import { CopyOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Button, Modal, Space, Tooltip } from "antd";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -145,11 +145,17 @@ const useConfig = () => {
 					return (
 						<div
 							style={{
-								width: "100%",
 								textAlign: "center",
+								width: "100%",
+								overflow: "hidden",
+								textOverflow: "ellipsis",
+								whiteSpace: "nowrap",
 							}}
 						>
-							{value}
+							{/* {value} */}
+							<Tooltip placement="topLeft" title={value}>
+								{value}
+							</Tooltip>
 						</div>
 					);
 				},
@@ -179,6 +185,17 @@ const useConfig = () => {
 				width: "200px",
 				render: (_, record) => (
 					<Space size="middle">
+						<a
+							onClick={() => {
+								routerHelper.jumpTo(ROUTE_ID.RuleAddPage, {
+									search: {
+										copyId: record.id,
+									},
+								});
+							}}
+						>
+							<CopyOutlined />
+						</a>
 						<a
 							onClick={() => {
 								routerHelper.jumpTo(ROUTE_ID.RuleEditPage, {

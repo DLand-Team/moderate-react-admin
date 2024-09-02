@@ -1,6 +1,10 @@
-import { DeleteOutlined, PlusOutlined, QuestionCircleOutlined } from "@ant-design/icons";
-import { Button, Card, Modal, Table, message, Tooltip } from "antd";
+import {
+    DeleteOutlined,
+    PlusOutlined
+} from "@ant-design/icons";
+import { Card, message, Modal, Table } from "antd";
 import { useTranslation } from "react-i18next";
+import { TableCard } from "src/components";
 import { ROUTE_ID } from "src/router";
 import { routerHelper, useFlat } from "src/service";
 import SearchForm from "../../components/searchForm";
@@ -9,88 +13,79 @@ import useTableConfig from "./useTableConfig";
 
 /* type */
 export interface PosListViewProps {
-    isSub?: boolean;
-    handleCancel?: () => void;
-    branchName?: string;
+	isSub?: boolean;
+	handleCancel?: () => void;
+	branchName?: string;
 }
 
 /* Main */
 const PosListView = ({ branchName }: PosListViewProps) => {
-    const { t } = useTranslation();
-    const { columns, searchList } = useTableConfig(branchName);
-    const {
-        posList,
-        posTablePagedata,
-        setPosTablePageData,
-        selectedRowKeys,
-        setSelectedRowKeys,
-        deletePosAct,
-    } = useFlat(["posStore", branchName]);
-    const { pageNum, pageSize, total } = posTablePagedata;
+	const { t } = useTranslation();
+	const { columns, searchList } = useTableConfig(branchName);
+	const {
+		posList,
+		posTablePagedata,
+		setPosTablePageData,
+		selectedRowKeys,
+		setSelectedRowKeys,
+		deletePosAct,
+	} = useFlat(["posStore", branchName]);
+	const { pageNum, pageSize, total } = posTablePagedata;
 
-    const rowSelection = {
-        onChange: (selectedRowKeys: any) => {
-            setSelectedRowKeys(selectedRowKeys);
-        },
-    };
+	const rowSelection = {
+		onChange: (selectedRowKeys: any) => {
+			setSelectedRowKeys(selectedRowKeys);
+		},
+	};
 
-    return (
-        <div className={styles.container}>
-            <Card>
-                <SearchForm searchList={searchList}></SearchForm>
-            </Card>
-
-            <div className={styles.titleWapper}>
-                <div>
-                    <Button
-                        type="primary"
-                        onClick={() => {
-                            routerHelper.jumpTo(ROUTE_ID.PosAddPage);
-                        }}
-                        icon={<PlusOutlined />}
-                        className={styles.btn}
-                    >
-                        {t`pos:posPage.add`}
-                    </Button>
-                    <Button
-                        onClick={() => {
-                            if (selectedRowKeys.length == 0) {
-                                return message.warning(
-                                    t`common:blog.warn_select`
-                                );
-                            }
-                            Modal.confirm({
-                                title: t`common:blog.modalDeleteTitle`,
-                                content: t`common:blog.modalDeleteContent`,
-                                onOk: async () => {
-                                    await deletePosAct({
-                                        ids: selectedRowKeys.join(","),
-                                    });
-                                },
-                                okText: t`common:blog.Yes`,
-                                cancelText: t`common:blog.No`,
-                            });
-                        }}
-                        icon={<DeleteOutlined />}
-                    >
-                        {t`pos:posPage.delete`}
-                    </Button>
-                </div>
-            </div>
+	return (
+		<div className={styles.container}>
+			<Card>
+				<SearchForm searchList={searchList}></SearchForm>
+			</Card>
 
 			{/* 表格 */}
-			<Card title={
-				<div>
-					{t`pos:posPage.listTitle`}
-					<Tooltip
-						title={t`pos:posPage.listTileTips`}
-						placement="rightTop"
-					>
-						<QuestionCircleOutlined style={{ marginLeft: 8 }} />
-					</Tooltip>
-
-				</div>
-			}>
+			<TableCard
+				style={{
+					marginTop: "12px",
+				}}
+				title={t`pos:posPage.listTitle`}
+				desc={t`pos:posPage.listTileTips`}
+				buttonList={[
+					{
+						title: t`pos:posPage.add`,
+						icon: <PlusOutlined />,
+						handleClick: () => {
+							routerHelper.jumpTo(ROUTE_ID.PosAddPage);
+						},
+					},
+					{
+						title: t`pos:posPage.delete`,
+						icon: <DeleteOutlined />,
+						option: {
+							type: "default",
+						},
+						handleClick: () => {
+							if (selectedRowKeys.length == 0) {
+								return message.warning(
+									t`common:blog.warn_select`,
+								);
+							}
+							Modal.confirm({
+								title: t`common:blog.modalDeleteTitle`,
+								content: t`common:blog.modalDeleteContent`,
+								onOk: async () => {
+									await deletePosAct({
+										ids: selectedRowKeys.join(","),
+									});
+								},
+								okText: t`common:blog.Yes`,
+								cancelText: t`common:blog.No`,
+							});
+						},
+					},
+				]}
+			>
 				<Table
 					scroll={{
 						x: "100%",
@@ -118,7 +113,7 @@ const PosListView = ({ branchName }: PosListViewProps) => {
 						...rowSelection,
 					}}
 				/>
-			</Card>
+			</TableCard>
 		</div>
 	);
 };

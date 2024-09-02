@@ -9,6 +9,7 @@
     "sortItem.action": "操作",
     "sortItem.NewsortItem": "新建排序规则",
     "sortItem.EditsortItem": "修改排序规则",
+    "sortItem.SortItemDetail": "排序规则详情",
     "sortItem.Save": "保存",
     "sortItem.Cancel": "取消",
     "sortItem.TravelTime": "旅行时间",

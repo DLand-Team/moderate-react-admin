@@ -58,5 +58,19 @@
 	"PageDevPageTitle": "PageDevPageTitle",
 	"StoreDevPageTitle": "StoreDevPageTitle",
 	"NotFundPageTitle": "NotFundPageTitle",
-	"ErrorPageTitle": "ErrorPageTitle"
+	"ErrorPageTitle": "ErrorPageTitle",
+	 "pswBtn": "change password",
+    "oldPw": " oldPassword",
+    "pleaseInputOldWord": "please enter a old password",
+    "newPw": "password",
+    "pleaseInputNewWord": "please enter a new password",
+    "pwdTips": "The password must be at least 8 characters, including numbers, uppercase and lowercase letters and special characters or more!",
+    "PasswordConfirmation": "confirm",
+    "pleaseInputConfirmWord": "please enter the confirmation password",
+    "passwordInconsistent": "The new password and the old password cannot be the same!",
+    "oldPasswordIncorrect": "The old password is incorrect",
+    "oldIsEqualNew": "The new password and the old password cannot be the same",
+    "Save": "Save",
+    "Cancel": "Cancel",
+    "Succeed": "Succeed"
 }

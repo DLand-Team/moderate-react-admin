@@ -60,11 +60,9 @@ const SliderMenu = ({ isMobile }: { isMobile?: boolean }) => {
                         }}
                         items={MenuItems as any}
                         onClick={({ key }) => {
-                            setTimeout(() => {
-                                routerHelper.jumpToIndexChild(
-                                    key as ROUTE_ID_KEY
-                                );
-                            }, 10);
+                            routerHelper.jumpToIndexChild(
+                                key as ROUTE_ID_KEY
+                            );
                         }}
                     />
                 )}

@@ -29,7 +29,7 @@
 	"posPage.placeholder_officeower": "Airline or GDS code",
 	"posPage.placeholder_searchPosName": "Please enter the full name or fragment of POS name. If it is blank, all items will be queried",
 	"posPage.placeholder_posName": "Please enter the POS name, letters, numbers or \"_ \" or \" - \"",
-	"posPage.placeholder_comment": "Please enter the remark description of this POS definition. The maximum length is 60 characters",
+	"posPage.placeholder_comment": "Please enter the remark description. The maximum length is 200 characters",
 	"posPage.placeholder_aoa": "By default, all channel queries are matched",
 	"posPage.save": "Save",
 	"posPage.cancel": "Cancel",
@@ -56,5 +56,6 @@
 	"posPage.Agent": "Agent",
 	"posPage.isPosInfo": "Please confirm if this POS Info is correct?",
 	"posPage.isPosInfo2": "Confirming accuracy will save this one",
-	"posPage.Succeed": "Succeed"
+	"posPage.Succeed": "Succeed",
+	"posPage.listTileTips":"Take the information information in the request and the sales of the sales place in the following list, and match it according to the weight from small to large. If the 'except' sales place is matched, the rules are not applicable to the request. If it is not 'except', The place of sales, believes that the matching is successful."
 }

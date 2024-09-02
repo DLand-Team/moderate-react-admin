@@ -1,4 +1,5 @@
 import { PageBaseData } from "src/types/common";
+import { Carrier } from "../filterStore/model";
 
 export interface StoreState {
 	ruleList: Rule[];
@@ -23,12 +24,19 @@ export interface StoreState {
 	isAddItemDrawerFlag: boolean;
 	addItemType: AddItemDrawerType | "";
 	isDetail?: boolean;
-	carrierFamilyList: any[];
+	carrierFamilyList: Carrier[];
 	selectedRowKeys: string[];
+	subId: string | number;
 }
 export enum AddItemDrawerType {
-	market,
-	pos,
+	market_edit,
+	pos_edit,
+	market_add,
+	pos_add,
+	market_detail,
+	pos_detail,
+	sort,
+	filter,
 }
 export type RuleFilterData = Partial<
 	Omit<GetRuleListApiParams, "pageNo" | "pageSize">
@@ -94,7 +102,7 @@ export interface RuleItem {
 	key?: string;
 }
 export interface Rule {
-	id: number;
+	id?: number;
 	ruleName: string;
 	ownerId: string;
 	comment: string;
@@ -115,7 +123,7 @@ export interface Rule {
 }
 
 export interface RuleItineraryItem {
-	id: number;
+	id?: number;
 	rankId: number;
 	flightCategory: number;
 	carrier: string;
@@ -124,7 +132,7 @@ export interface RuleItineraryItem {
 	allowCodeShare: number;
 	segmentNum: number;
 	ruleId: number;
-	noInterline: boolean;
+	noInterline: number;
 	noOverNight: number;
 	cpdConnectionList: Partial<Connection>[];
 	cpdSegmentList: Partial<Segment>[];
@@ -164,7 +172,7 @@ export interface Segment {
 	deleted: boolean;
 	id: number;
 	exclude: boolean;
-	position: string;
+	position: string | number;
 	carrier: string;
 	operateCarriers: string;
 	notOperateCarriers: string;

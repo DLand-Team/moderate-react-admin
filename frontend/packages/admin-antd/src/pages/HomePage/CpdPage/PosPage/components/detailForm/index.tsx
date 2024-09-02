@@ -77,6 +77,12 @@ const TopForm = ({
                         <Form.Item<FieldType>
                             label={t`posPage.comment`}
                             name="comment"
+                            rules={[
+                                {
+                                    max: 200,
+                                    message: t("posPage.placeholder_comment"),
+                                },
+                            ]}
                         >
                             <Input.TextArea
                                 placeholder={t("posPage.placeholder_input")}
