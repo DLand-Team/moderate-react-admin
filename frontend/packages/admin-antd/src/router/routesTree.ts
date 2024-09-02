@@ -11,6 +11,10 @@ export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [
 				id: ROUTE_ID.CpdPage,
 				children: [
 					{
+						id: ROUTE_ID.FilterPage,
+						children: [{ id: ROUTE_ID.FilterListPage }],
+					},
+					{
 						id: ROUTE_ID.MarketPage,
 						children: [
 							{ id: ROUTE_ID.MarketAddPage },
@@ -36,10 +40,6 @@ export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [
 							{ id: ROUTE_ID.RuleEditPage },
 							{ id: ROUTE_ID.RuleListPage },
 						],
-					},
-					{
-						id: ROUTE_ID.FilterPage,
-						children: [{ id: ROUTE_ID.FilterListPage }],
 					},
 					{
 						id: ROUTE_ID.SortPage,
