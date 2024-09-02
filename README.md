@@ -1,5 +1,10 @@
 # moderate-admin-react-antd5
 
+## 温馨提示
+
+拉取代码的时候，记得执行一下 `pnpm i` 一下，更新一下项目的依赖
+如果遇到一切运行问题都可以直接提，秒解决。
+
 ## 文档搭建中
 
 [文档地址](https://dland-team.github.io/moderate-react-admin/)
