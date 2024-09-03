@@ -4,10 +4,12 @@
 	"version": "1.0.0",
 	"type": "module",
 	"scripts": {
-		"dev": "vite",
-		"build": "vite build",
-		"lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-		"preview": "vite preview"
+		"dev": "rsbuild dev",
+		"build": "rsbuild build",
+		"preview": "rsbuild preview",
+		"vdev": "vite",
+		"vbuild": "vite build",
+		"vpreview": "vite preview"
 	},
 	"dependencies": {
 		"@ant-design/icons": "^5.3.4",
@@ -59,6 +61,9 @@
 	},
 	"devDependencies": {
 		"@babel/core": "^7.16.0",
+		"@rsbuild/core": "1.0.1-rc.2",
+		"@rsbuild/plugin-react": "1.0.1-rc.2",
+		"@rsbuild/plugin-sass": "1.0.1-rc.2",
 		"@types/lodash-es": "^4.17.7",
 		"@types/markdown-it": "^14.1.1",
 		"@types/node": "^20.11.28",
