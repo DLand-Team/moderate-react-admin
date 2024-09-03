@@ -86,6 +86,8 @@ export interface GetAgencyDataApiParams {
 	agentOrAirline: string;
 }
 export interface RuleItem {
+	locationInfo: string;
+	locationType: string;
 	createTime: string;
 	updateTime: string;
 	creator: string;
@@ -149,6 +151,7 @@ export interface ParamsById {
 	uid?: string | number;
 }
 export interface Connection {
+	minConxTime: string;
 	createTime: string;
 	updateTime: string;
 	creator: string;

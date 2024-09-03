@@ -1,7 +1,6 @@
 //--->>>通用<<<---//
 export { default as AnimateText } from "./animateText/animateText";
 export { default as AnimationWrapper } from "./animationWrapper";
-export { default as DragSortTable } from "./dragSortTable";
 export { default as TreeSelectBase } from "./treeSelectBase";
 export { default as UploadNormal } from "./uoloadNormal/uploadNormal"; // 公用上传组件
 

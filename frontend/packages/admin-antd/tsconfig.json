@@ -24,6 +24,7 @@
 			"plugins/*": ["./plugins/*"]
 		}
 	},
+	"exclude": ["node_modules"],
 	"include": [
 		"src",
 		"plugins",
