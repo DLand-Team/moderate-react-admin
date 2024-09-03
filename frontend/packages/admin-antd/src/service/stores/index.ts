@@ -1,4 +1,3 @@
-import "src/service/setup";
 import { stores as pluginStores } from "plugins/config/services/stores";
 import appStore from "./appStore";
 import authStore from "./authStore";
