@@ -4,6 +4,9 @@ import { pluginSass } from "@rsbuild/plugin-sass";
 import path from "path";
 
 export default defineConfig({
+	html: {
+		template: "./index.html",
+	},
 	source: {
 		alias: {
 			"@": path.resolve(__dirname, "./src"),
