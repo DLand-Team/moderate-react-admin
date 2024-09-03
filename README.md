@@ -32,7 +32,7 @@
 -   Antd5
 -   Redux 或 natur
 -   react-router 6.4.3
--   vite
+-   rspack/vite
 -   ts
 
 ## 功能点
