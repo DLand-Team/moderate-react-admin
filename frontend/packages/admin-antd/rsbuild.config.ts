@@ -17,7 +17,7 @@ export default defineConfig({
 		proxy: {
 			"/devApi": {
 				target: "http://localhost:8681",
-				pathRewrite: { "^/api": "" },
+				pathRewrite: { "^/devApi": "" },
 			},
 			// 若依的后端接口
 			"/admin-api": {
