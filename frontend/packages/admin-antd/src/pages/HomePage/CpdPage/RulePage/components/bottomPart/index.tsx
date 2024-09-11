@@ -1,19 +1,21 @@
 import { Col, Row } from "antd";
-import { useEffect } from "react";
+import { useActive } from "src/common/hooks";
 import { dpChain } from "src/service";
 import { Itinenarary } from "../itinenarary";
-import SliderMenu from "../sliderMenu";
+import RankSliderMenu from "../rankSliderMenu";
 
 const BottomPart = ({ branchName = "" }: { branchName?: string }) => {
-
-    useEffect(() => {
-        dpChain("ruleStore").getRuleCarrierListAct(null);
-    }, []);
+    useActive({
+        onActive() {
+            dpChain("ruleStore").getRuleCarrierListAct(null);
+            dpChain("ruleStore").initRuleAct(null);
+        },
+    });
 
     return (
         <Row>
             <Col span={5}>
-                <SliderMenu branchName={branchName} isJustShow={false} />
+                <RankSliderMenu branchName={branchName} isJustShow={false} />
             </Col>
             <Col span={19}>
                 <Itinenarary branchName={branchName} />

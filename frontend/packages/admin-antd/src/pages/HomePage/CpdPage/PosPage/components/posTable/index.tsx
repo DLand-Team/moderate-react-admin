@@ -15,8 +15,8 @@ import {
 } from "antd";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { ColumnsCreater, EditTable, Wrapper } from "src/components/editTable";
 import { UUID } from "src/common/utils";
+import { ColumnsCreater, EditTable, Wrapper } from "src/components/editTable";
 import { useFlat } from "src/service";
 import type { PosItem } from "src/service/stores/posStore/model";
 import FieldRenderPosInfo from "../customFIelds/posInfo-field";

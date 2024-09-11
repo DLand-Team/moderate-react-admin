@@ -4,8 +4,9 @@ import { useEffect, useRef } from "react";
 import useConfig from "../../useConfig";
 import { useFlat } from "src/service";
 import { useTranslation } from "react-i18next";
+import { EditViewProps } from "src/pages/HomePage/CpdPage/MarketPage/views/editView";
 
-const ModalForm: React.FC = () => {
+const ModalForm: React.FC = ({ handleCancel }: EditViewProps) => {
     const [form] = Form.useForm<any>();
 
     const {
@@ -46,6 +47,7 @@ const ModalForm: React.FC = () => {
             onCancel={() => {
                 form.resetFields();
                 setIsShowModal(false);
+                handleCancel?.();
             }}
             onOk={() => {
                 form.validateFields()
@@ -69,6 +71,7 @@ const ModalForm: React.FC = () => {
                             });
                         }
                         setIsShowModal(false);
+                        handleCancel?.();
                         form.resetFields();
                         queryListAct();
                     })

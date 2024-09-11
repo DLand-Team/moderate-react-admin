@@ -1,5 +1,9 @@
+import { FormInstance } from "antd";
 import { UUID, cloneDeep } from "src/common/utils";
+import { TopPartForm } from "src/pages/HomePage/CpdPage/RulePage/components/topPart";
 import { connectionItem, itineraryItem, segmentItem } from "src/shapes";
+import { Market } from "../stores/marketStore/model";
+import { Pos } from "../stores/posStore/model";
 import type {
     Connection,
     DeleteConnectionByPosActPayload,
@@ -9,10 +13,6 @@ import type {
     StoreState,
 } from "../stores/ruleStore/model";
 import HelperBase from "./_helperBase";
-import { FormInstance } from "antd";
-import { Pos } from "../stores/posStore/model";
-import { Market } from "../stores/marketStore/model";
-import { TopPartForm } from "src/pages/HomePage/CpdPage/RulePage/components/topPart";
 
 export class RuleHelper extends HelperBase {
     // 扁平化二维数组，通过pos进行分布的
@@ -86,7 +86,7 @@ export class RuleHelper extends HelperBase {
             return null;
         }
         const targetItinerary =
-            itByRankListTemp[targetRankId][targetItineraryId];
+            itByRankListTemp?.[targetRankId]?.[targetItineraryId] || {};
         return targetItinerary;
     }
     getItDefault(): Partial<RuleItineraryItem>[] {
@@ -95,21 +95,26 @@ export class RuleHelper extends HelperBase {
                 rankId: 1,
                 flightCategory: 2,
                 cpdSegmentList: [
-                    {
+                    segmentItem({
                         position: "1",
                         key: UUID(),
                         uid: UUID(),
                         carrier: "ALL",
-                    },
-                    {
+                    }),
+                    segmentItem({
                         position: "2",
                         uid: UUID(),
                         key: UUID(),
                         carrier: "ALL",
-                    },
+                    }),
                 ],
                 cpdConnectionList: [
-                    { position: 1, uid: UUID(), key: UUID(), exclude: false },
+                    connectionItem({
+                        position: 1,
+                        uid: UUID(),
+                        key: UUID(),
+                        exclude: false,
+                    }),
                 ],
                 allowCodeShare: 1,
             }),
@@ -123,28 +128,23 @@ export class RuleHelper extends HelperBase {
                 rankId: 3,
                 flightCategory: 3,
                 cpdSegmentList: [
-                    {
+                    segmentItem({
                         position: "1",
-                        key: UUID(),
-                        uid: UUID(),
-                        carrier: "ALL",
-                    },
-                    {
+                    }),
+                    segmentItem({
                         position: "2",
-                        uid: UUID(),
-                        key: UUID(),
-                        carrier: "ALL",
-                    },
-                    {
+                    }),
+                    segmentItem({
                         position: "3",
-                        uid: UUID(),
-                        key: UUID(),
-                        carrier: "ALL",
-                    },
+                    }),
                 ],
                 cpdConnectionList: [
-                    { position: 1, uid: UUID(), key: UUID(), exclude: false },
-                    { position: 2, uid: UUID(), key: UUID(), exclude: false },
+                    connectionItem({
+                        position: 1,
+                    }),
+                    connectionItem({
+                        position: 2,
+                    }),
                 ],
             }),
         ];
@@ -216,14 +216,23 @@ export class RuleHelper extends HelperBase {
         const { itineraryList } = state;
         const [startRankId, endRankId] = params;
         const itineraryListTemp = cloneDeep(itineraryList);
+        debugger;
+        // 判断是往上移动还是往下
+        const isUp = startRankId > endRankId;
         itineraryListTemp.forEach((item) => {
             if (item.rankId == startRankId) {
                 item.rankId = -1;
             }
         });
         itineraryListTemp.forEach((item) => {
-            if (item.rankId > startRankId && item.rankId <= endRankId) {
-                item.rankId = item.rankId - 1;
+            if (!isUp) {
+                if (item.rankId > startRankId && item.rankId <= endRankId) {
+                    item.rankId = item.rankId - 1;
+                }
+            } else {
+                if (item.rankId >= endRankId && item.rankId < startRankId) {
+                    item.rankId = item.rankId + 1;
+                }
             }
         });
         itineraryListTemp.forEach((item) => {
@@ -321,6 +330,19 @@ export class RuleHelper extends HelperBase {
             targetItinerary.cpdConnectionList.filter((item) => {
                 return item.position !== position;
             });
+        return targetItinerary;
+    }
+    deleteSegmentByPos(
+        payload: DeleteConnectionByPosActPayload,
+        state: StoreState
+    ) {
+        const { position } = payload;
+        const targetItinerary = this.getTargetItinerary(state)!;
+        targetItinerary.cpdSegmentList = targetItinerary.cpdSegmentList.filter(
+            (item) => {
+                return item.position != position;
+            }
+        );
         return targetItinerary;
     }
     addSegment(payload: Segment, state: StoreState) {

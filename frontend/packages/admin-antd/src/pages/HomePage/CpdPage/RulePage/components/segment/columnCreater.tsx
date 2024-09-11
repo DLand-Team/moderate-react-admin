@@ -4,7 +4,16 @@ import {
     EditOutlined,
     RightOutlined,
 } from "@ant-design/icons";
-import { Col, Form, Input, Popconfirm, Row, Switch, Typography } from "antd";
+import {
+    Col,
+    Form,
+    Input,
+    Popconfirm,
+    Row,
+    Switch,
+    Typography,
+    message,
+} from "antd";
 import { useTranslation } from "react-i18next";
 import { ColumnsCreater } from "src/components/editTable";
 import { useFlat } from "src/service";
@@ -18,10 +27,11 @@ const columnCreater: ColumnsCreater<Segment, { branchName: string }> = (
 ) => {
     const { t } = useTranslation(["rule"]);
     const { t: commonT } = useTranslation(["common"]);
-    const { isDetail, setIsEditing, deleteSegmentAct } = useFlat(
+    const { segByPosList, isDetail, setIsEditing, deleteSegmentAct } = useFlat(
         ["ruleStore", extra?.branchName],
         {
             isDetail: "IN",
+            segByPosList: "IN",
         }
     );
     let value: ReturnType<ColumnsCreater<Segment>> = [
@@ -133,6 +143,12 @@ const columnCreater: ColumnsCreater<Segment, { branchName: string }> = (
                 );
             },
             fieldConfig: {
+                watch(values, oldValues) {
+                    if (oldValues?.allowCodeShare != values?.allowCodeShare) {
+                        form.setFieldValue("notOperateCarriers", undefined);
+                        form.setFieldValue("operateCarriers", undefined);
+                    }
+                },
                 render: (_, formIns) => {
                     const {
                         allowCodeShare,
@@ -167,6 +183,7 @@ const columnCreater: ColumnsCreater<Segment, { branchName: string }> = (
                         <Form.Item
                             style={{
                                 margin: 0,
+                                width: "150px",
                             }}
                         >
                             <Row align={"middle"}>
@@ -184,31 +201,36 @@ const columnCreater: ColumnsCreater<Segment, { branchName: string }> = (
                                         rules={[
                                             {
                                                 required: true,
-                                                message:
-                                                    "rulePage_rule_flightNoStart",
+                                                message: t(
+                                                    "rulePage_rule_flightNoStart"
+                                                ),
                                             },
                                             {
                                                 pattern: /^[0-9]+$/,
-                                                message: "rule_number",
+                                                message: t("rule_number"),
                                             },
                                             {
-                                                message:
-                                                    "rulePage_rule_flightNoStart1",
+                                                message: t(
+                                                    "rulePage_rule_flightNoStart1"
+                                                ),
                                                 validator: (
                                                     _,
                                                     value,
                                                     callback
                                                 ) => {
                                                     if (value == 0) {
-                                                        callback(t`rulePage_zero`);
+                                                        callback(
+                                                            t`rulePage_zero`
+                                                        );
                                                     } else {
                                                         callback();
                                                     }
                                                 },
                                             },
                                             {
-                                                message:
-                                                    "rulePage_rule_flightNoStart2",
+                                                message: t(
+                                                    "rulePage_rule_flightNoStart2"
+                                                ),
                                                 validator: (
                                                     _,
                                                     value,
@@ -222,7 +244,9 @@ const columnCreater: ColumnsCreater<Segment, { branchName: string }> = (
                                                             ) *
                                                                 1
                                                     ) {
-                                                        callback(t`rulePage_zero`);
+                                                        callback(
+                                                            t`rulePage_zero`
+                                                        );
                                                     } else {
                                                         callback();
                                                     }
@@ -256,23 +280,27 @@ const columnCreater: ColumnsCreater<Segment, { branchName: string }> = (
                                         rules={[
                                             {
                                                 required: true,
-                                                message:
-                                                    "rulePage_rule_flightNoStart",
+                                                message: t(
+                                                    "rulePage_rule_flightNoStart"
+                                                ),
                                             },
                                             {
                                                 pattern: /^[0-9]+$/,
-                                                message: "rule_number",
+                                                message: t("rule_number"),
                                             },
                                             {
-                                                message:
-                                                    "rulePage_rule_flightNoStart1",
+                                                message: t(
+                                                    "rulePage_rule_flightNoStart1"
+                                                ),
                                                 validator: (
                                                     _,
                                                     value,
                                                     callback
                                                 ) => {
                                                     if (value == 0) {
-                                                        callback(t`rulePage_zero`);
+                                                        callback(
+                                                            t`rulePage_zero`
+                                                        );
                                                     } else {
                                                         callback();
                                                     }
@@ -311,9 +339,8 @@ const columnCreater: ColumnsCreater<Segment, { branchName: string }> = (
                     <span>
                         <Typography.Link
                             onClick={async () => {
-                                await form.validateFields();
+                                await save(record.uid!);
                                 setIsEditing(false);
-                                save(record.uid!);
                             }}
                             style={{ marginRight: 8 }}
                         >
@@ -348,10 +375,19 @@ const columnCreater: ColumnsCreater<Segment, { branchName: string }> = (
                             <Popconfirm
                                 title={commonT`blog.delete`}
                                 onConfirm={() => {
-                                    deleteSegmentAct({
-                                        id: record.id,
-                                        uid: record.uid!,
-                                    });
+                                    if (
+                                        segByPosList[Number(record.position)]
+                                            .length > 1
+                                    ) {
+                                        deleteSegmentAct({
+                                            id: record.id,
+                                            uid: record.uid!,
+                                        });
+                                    } else {
+                                        message.warning(
+                                            t("rulePage_leastOneItinerary")
+                                        );
+                                    }
                                 }}
                                 okText={commonT`blog.Yes`}
                                 cancelText={commonT`blog.No`}

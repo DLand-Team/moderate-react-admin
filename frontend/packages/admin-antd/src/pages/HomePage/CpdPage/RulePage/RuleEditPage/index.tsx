@@ -18,7 +18,11 @@ const RuleEditPage = () => {
 		},
 		[id],
 	);
-	return <EditView branchName={branchName} />;
+	return (
+		<>
+			<EditView branchName={branchName} />
+		</>
+	);
 };
 
 export default RuleEditPage;

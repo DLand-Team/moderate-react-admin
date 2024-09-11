@@ -15,21 +15,26 @@ export const itineraryItem = (
         operateCarriers: "ALL",
         carrier: "ALL",
         cpdSegmentList: [
-            {
+            segmentItem({
                 position: 1,
                 key: UUID(),
                 uid: UUID(),
                 carrier: "ALL",
-            },
-            {
+            }),
+            segmentItem({
                 position: 2,
                 uid: UUID(),
                 key: UUID(),
                 carrier: "ALL",
-            },
+            }),
         ],
         cpdConnectionList: [
-            { position: 1, uid: UUID(), key: UUID(), exclude: false },
+            connectionItem({
+                position: 1,
+                uid: UUID(),
+                key: UUID(),
+                exclude: false,
+            }),
         ],
         allowCodeShare: 1,
         ...data,
@@ -47,7 +52,10 @@ export const segmentItem = (data: Partial<Segment> = {}) => {
         key: UUID(),
         carrier: "ALL",
         exclude: false,
-        operateCarriers: "ALL",
+        onlyNonStopFlight: 0,
+        allowCodeShare: 0,
+        flightNoEnd: 9999,
+        flightNoStart: 1,
         ...data,
     } as Segment;
 };

@@ -1,5 +1,6 @@
 import { Button, Card } from "antd";
 import { useTranslation } from "react-i18next";
+import { useCurrentRoute } from "src/common/hooks";
 import InfoCard from "src/components/infoCard";
 import { ROUTE_ID } from "src/router";
 import { appHelper, dpChain, routerHelper } from "src/service";
@@ -9,23 +10,25 @@ import { EditViewProps } from "../editView";
 import styles from "./index.module.scss";
 import useDetailConfig from "./useDetailConfig";
 
-const DetailView = ({ branchName, isSub, id }: EditViewProps) => {
+const DetailView = ({ branchName, isSub, id, handleCancel }: EditViewProps) => {
 	const { t: commonT } = useTranslation(["common"]);
 	const items = useDetailConfig(branchName);
-
+	const currentRoute = useCurrentRoute();
 	return (
 		<div className={styles.container}>
 			<div className={styles.btnTable}>
 				<Button
 					onClick={async () => {
 						if (isSub) {
-							dpChain("ruleStore").setIsAddItemDrawerFlag({
+							dpChain([
+								"ruleStore",
+								currentRoute.id,
+							]).setIsAddItemDrawerFlag({
 								flag: true,
 								type: AddItemDrawerType.market_edit,
 								id: id!,
 							});
 						} else {
-							debugger;
 							routerHelper.jumpTo(ROUTE_ID.MarketEditPage, {
 								search: {
 									id,
@@ -40,7 +43,11 @@ const DetailView = ({ branchName, isSub, id }: EditViewProps) => {
 				</Button>
 				<Button
 					onClick={() => {
-						appHelper.closeTabByPath();
+						if (handleCancel) {
+							handleCancel();
+						} else {
+							appHelper.closeTabByPath();
+						}
 					}}
 				>
 					{commonT`cancel`}

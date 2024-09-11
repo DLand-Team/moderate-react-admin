@@ -142,7 +142,6 @@ const CustomTable = forwardRef(
 								? record.options()
 								: record.options;
 						let filterArrTemp = [...filterItemList];
-
 						let optionArr1 = optionArr?.filter((item) => {
 							return !filterArrTemp.find((item2) => {
 								return item2.filterBy === (item as any)?.value;
@@ -599,8 +598,10 @@ const CustomTable = forwardRef(
 								return;
 							}
 							if (filterItemList.length < 2) {
+								let key = UUID();
+								setEditingKey(key);
 								addFilterItem({
-									key: UUID(),
+									key,
 								} as FilterItem);
 								// return true;
 							} else {

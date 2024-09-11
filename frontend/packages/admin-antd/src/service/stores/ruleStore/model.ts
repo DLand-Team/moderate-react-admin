@@ -35,8 +35,12 @@ export enum AddItemDrawerType {
 	pos_add,
 	market_detail,
 	pos_detail,
-	sort,
-	filter,
+	sort_add,
+	sort_detail,
+	sort_edit,
+	filter_add,
+	filter_edit,
+	filter_detail,
 }
 export type RuleFilterData = Partial<
 	Omit<GetRuleListApiParams, "pageNo" | "pageSize">
@@ -86,8 +90,6 @@ export interface GetAgencyDataApiParams {
 	agentOrAirline: string;
 }
 export interface RuleItem {
-	locationInfo: string;
-	locationType: string;
 	createTime: string;
 	updateTime: string;
 	creator: string;
@@ -102,6 +104,8 @@ export interface RuleItem {
 	weight: number;
 	ruleId: number;
 	key?: string;
+	locationType?: string;
+	locationInfo?: string;
 }
 export interface Rule {
 	id?: number;
@@ -151,7 +155,6 @@ export interface ParamsById {
 	uid?: string | number;
 }
 export interface Connection {
-	minConxTime: string;
 	createTime: string;
 	updateTime: string;
 	creator: string;

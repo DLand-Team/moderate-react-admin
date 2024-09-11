@@ -47,6 +47,7 @@ const thunks = createThunks(["posStore", slice.branch], {
             pageSize,
             ...posFilterData,
         });
+        dpChain(["posStore", branchName]).setTablePageTotal(data.total);
         data.list && dpChain(["posStore", branchName]).setPostList(data.list);
     },
     queryAllPostListAct: async (_, __, branchName) => {

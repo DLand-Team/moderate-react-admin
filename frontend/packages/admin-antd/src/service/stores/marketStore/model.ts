@@ -19,9 +19,9 @@ export interface StoreState {
     currentData: Market | null; // 添加的marketData
     locationList: Record<PropertyKey, any[]>;
     marketFilterData: MarketFilterData;
-    isDisabledMarketType: boolean;
     selectedRowKeys: string[];
     isEditing: boolean;
+    marketItemtablePageNum: number;
 }
 export interface MarketFilterData {
     id?: string | number;

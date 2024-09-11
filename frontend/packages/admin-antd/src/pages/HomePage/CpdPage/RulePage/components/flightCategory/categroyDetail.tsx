@@ -9,6 +9,7 @@ const CategroyDetail = (props: { branchName: string }) => {
     const { targetItinerary } = useFlat(["ruleStore", props.branchName]);
     const targetItineraryState = targetItinerary(undefined);
     const {
+        noInterline,
         noOverNight,
         carrier,
         operateCarriers,
@@ -57,8 +58,24 @@ const CategroyDetail = (props: { branchName: string }) => {
                             ></div>
 
                             <span>
-                                {noOverNight && t("rule:rulePage_noOverNight")}
-                                {t("rule:rulePage_noOverNight")}
+                                {noOverNight
+                                    ? t("rule:rulePage_noOverNight2")
+                                    : t("rule:rulePage_overNight")}
+                            </span>
+                        </div>
+                        <div className={styles.itFormItemFlex2}>
+                            <div
+                                className={
+                                    !noInterline
+                                        ? styles.redPoint
+                                        : styles.noRedPoint
+                                }
+                            ></div>
+
+                            <span>
+                                {noInterline
+                                    ? t("rule:rulePage_nointerline2")
+                                    : t("rule:rulePage_interline")}
                             </span>
                         </div>
                     </Fragment>

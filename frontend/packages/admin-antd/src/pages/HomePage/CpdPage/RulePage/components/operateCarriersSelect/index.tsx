@@ -8,18 +8,20 @@ const { Option } = Select;
 
 export interface Props<T> {
 	isForm?: boolean;
-	formIns: FormInstance<
-		T & {
-			notOperateCarriers?: string | null;
-			operateCarriers?: string | null;
-		}
-	>;
+	formIns?: FormInstance<T>;
 	allowCodeShare: number;
 	operateCarriers: string;
 	notOperateCarriers: string;
 }
 
-export default <T,>(props: Props<T>) => {
+export default <
+	T extends {
+		notOperateCarriers?: string | null;
+		operateCarriers?: string | null;
+	} = any,
+>(
+	props: Props<T>,
+) => {
 	const { allowCodeShare, operateCarriers, notOperateCarriers, formIns } =
 		props;
 
@@ -29,10 +31,10 @@ export default <T,>(props: Props<T>) => {
 		setDisable(!allowCodeShare);
 	}, [allowCodeShare]);
 
-	const [useFlag, setUseFlag] = useState(operateCarriers ? 1 : 0);
+	const [useFlag, setUseFlag] = useState(notOperateCarriers ? 0 : 1);
 
 	useEffect(() => {
-		setUseFlag(operateCarriers ? 1 : 0);
+		setUseFlag(notOperateCarriers ? 0 : 1);
 	}, [operateCarriers, notOperateCarriers]);
 
 	return (

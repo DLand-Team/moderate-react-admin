@@ -5,6 +5,7 @@ import { useFlat } from "src/service";
 import type { Segment } from "src/service/stores/ruleStore/model";
 import { segmentItem } from "src/shapes";
 import columnsCreater from "./columnCreater";
+import { useState } from "react";
 
 const { Panel } = Collapse;
 
@@ -22,6 +23,7 @@ const SegmentItem = (props: {
     );
     const { t: commonT } = useTranslation("common");
     const { t } = useTranslation("rule");
+    const [page, setPage] = useState(1);
     return (
         <Collapse
             style={{
@@ -33,6 +35,12 @@ const SegmentItem = (props: {
                     tableOptions={{
                         scroll: {
                             x: "100%",
+                        },
+                        pagination: {
+                            current: page,
+                            onChange(page) {
+                                setPage(page);
+                            },
                         },
                     }}
                     handleValuesChange={({ changedData }) => {
@@ -55,6 +63,9 @@ const SegmentItem = (props: {
                                             };
                                             addSegmentAct(newData);
                                             edit(newData);
+                                            setPage(
+                                                Math.ceil((data.length + 1) / 5)
+                                            );
                                         }}
                                     >
                                         {commonT("add")}

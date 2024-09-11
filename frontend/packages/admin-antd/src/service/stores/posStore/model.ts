@@ -14,6 +14,7 @@ export interface StoreState {
     posFilterData: PosFilterData;
     selectedRowKeys: string[];
     isEditing: boolean;
+    posItemsTablePageNum: number;
 }
 
 export interface PosFilterData {

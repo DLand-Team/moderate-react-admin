@@ -1,7 +1,4 @@
-import {
-    DeleteOutlined,
-    PlusOutlined
-} from "@ant-design/icons";
+import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import { Card, message, Modal, Table } from "antd";
 import { useTranslation } from "react-i18next";
 import { TableCard } from "src/components";

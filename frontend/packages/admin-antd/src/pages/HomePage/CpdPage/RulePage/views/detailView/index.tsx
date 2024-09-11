@@ -1,4 +1,4 @@
-import { Button, Card, DescriptionsProps, Drawer, Skeleton } from "antd";
+import { Button, Card, DescriptionsProps, Skeleton, Typography } from "antd";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
@@ -6,9 +6,9 @@ import InfoCard from "src/components/infoCard";
 import { ROUTE_ID } from "src/router";
 import { appHelper, routerHelper, useFlat } from "src/service";
 import { AddItemDrawerType } from "src/service/stores/ruleStore/model";
-import PosEditPage from "../../../PosPage/PosEditPage";
 import TablePart from "../../components/bottomPart";
 import styles from "./style.module.scss";
+import DrawerView from "../../components/drawerView";
 
 export interface DetailViewProps {
 	branchName: string;
@@ -17,12 +17,8 @@ export interface DetailViewProps {
 const DetailView = ({ branchName }: DetailViewProps) => {
 	let [searchParams] = useSearchParams();
 	const id = searchParams.get("id");
-	const {
-		currentData,
-		isAddItemDrawerFlag,
-		setIsAddItemDrawerFlag,
-		addItemType,
-	} = useFlat(["ruleStore", branchName]);
+	const { setIsAddItemDrawerFlag } = useFlat(["ruleStore", branchName], {});
+	const { currentData } = useFlat(["ruleStore", branchName]);
 	const { t } = useTranslation("rule");
 	const { t: commonT } = useTranslation("common");
 	const { allPosList } = useFlat(["posStore", ROUTE_ID.RuleDetailPage], {
@@ -50,13 +46,25 @@ const DetailView = ({ branchName }: DetailViewProps) => {
 		{
 			label: t`rulePage_originMarket`,
 			children: currentData ? (
-				allMarketList
-					.filter((item) => {
-						return item.marketType === 0;
-					})
-					.find((item) => {
-						return item.id == currentData!?.oriMarketId;
-					})?.marketName
+				<Typography.Link
+					onClick={() => {
+						setIsAddItemDrawerFlag({
+							flag: true,
+							type: AddItemDrawerType.market_detail,
+							id: currentData!?.oriMarketId,
+						});
+					}}
+				>
+					{
+						allMarketList
+							.filter((item) => {
+								return item.marketType === 0;
+							})
+							.find((item) => {
+								return item.id == currentData!?.oriMarketId;
+							})?.marketName
+					}
+				</Typography.Link>
 			) : (
 				<Skeleton.Input block={true} active={true} />
 			),
@@ -66,13 +74,25 @@ const DetailView = ({ branchName }: DetailViewProps) => {
 			label: t`rulePage_destinationMarket`,
 			span: 1,
 			children: currentData ? (
-				allMarketList
-					.filter((item) => {
-						return item.marketType === 0;
-					})
-					.find((item) => {
-						return item.id == currentData!?.desMarketId;
-					})?.marketName
+				<Typography.Link
+					onClick={() => {
+						setIsAddItemDrawerFlag({
+							flag: true,
+							type: AddItemDrawerType.market_detail,
+							id: currentData!?.desMarketId,
+						});
+					}}
+				>
+					{
+						allMarketList
+							.filter((item) => {
+								return item.marketType === 0;
+							})
+							.find((item) => {
+								return item.id == currentData!?.desMarketId;
+							})?.marketName
+					}
+				</Typography.Link>
 			) : (
 				<Skeleton.Input block={true} active={true} />
 			),
@@ -81,9 +101,21 @@ const DetailView = ({ branchName }: DetailViewProps) => {
 			label: t`rulePage_pos`,
 			span: 3,
 			children: currentData ? (
-				allPosList.find((item) => {
-					return item.id == currentData!.posId;
-				})?.posName
+				<Typography.Link
+					onClick={() => {
+						setIsAddItemDrawerFlag({
+							flag: true,
+							type: AddItemDrawerType.pos_detail,
+							id: currentData!?.posId,
+						});
+					}}
+				>
+					{
+						allPosList.find((item) => {
+							return item.id == currentData!.posId;
+						})?.posName
+					}
+				</Typography.Link>
 			) : (
 				<Skeleton.Input block={true} active={true} />
 			),
@@ -123,9 +155,24 @@ const DetailView = ({ branchName }: DetailViewProps) => {
 			label: t`rulePage_sortItem`,
 			span: 3,
 			children: currentData ? (
-				sortList.find((item) => {
-					return String(item.id) == String(currentData!.sortItemId);
-				})?.sortItemName
+				<Typography.Link
+					onClick={() => {
+						setIsAddItemDrawerFlag({
+							flag: false,
+							type: AddItemDrawerType.sort_detail,
+							id: currentData!.sortItemId,
+						});
+					}}
+				>
+					{
+						sortList.find((item) => {
+							return (
+								String(item.id) ==
+								String(currentData!.sortItemId)
+							);
+						})?.sortItemName
+					}
+				</Typography.Link>
 			) : (
 				<Skeleton.Input block={true} active={true} />
 			),
@@ -134,9 +181,24 @@ const DetailView = ({ branchName }: DetailViewProps) => {
 			label: t`rulePage_filterItem`,
 			span: 2,
 			children: currentData ? (
-				filterList.find((item) => {
-					return String(item.id) == String(currentData!.filterItemId);
-				})?.filterItemName
+				<Typography.Link
+					onClick={() => {
+						setIsAddItemDrawerFlag({
+							flag: false,
+							type: AddItemDrawerType.filter_detail,
+							id: currentData!.filterItemId,
+						});
+					}}
+				>
+					{
+						filterList.find((item) => {
+							return (
+								String(item.id) ==
+								String(currentData!.filterItemId)
+							);
+						})?.filterItemName
+					}
+				</Typography.Link>
 			) : (
 				<Skeleton.Input block={true} active={true} />
 			),
@@ -227,33 +289,7 @@ const DetailView = ({ branchName }: DetailViewProps) => {
 					<TablePart branchName={ROUTE_ID.RuleDetailPage}></TablePart>
 				</Card>
 			</>
-
-			<Drawer
-				width={"40%"}
-				onClose={() => {
-					setIsAddItemDrawerFlag({
-						flag: false,
-						type: "",
-					});
-				}}
-				open={isAddItemDrawerFlag}
-				title={
-					addItemType == AddItemDrawerType.market_add
-						? t("add_market")
-						: t("add_pos")
-				}
-			>
-				{AddItemDrawerType.pos_add === addItemType && (
-					<PosEditPage
-						handleCancel={() => {
-							setIsAddItemDrawerFlag({
-								flag: false,
-								type: "",
-							});
-						}}
-					/>
-				)}
-			</Drawer>
+			<DrawerView branchName={branchName} />
 		</div>
 	);
 };

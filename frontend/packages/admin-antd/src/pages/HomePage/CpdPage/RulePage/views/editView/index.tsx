@@ -1,22 +1,13 @@
-import { Button, Card, Drawer, Form, message } from "antd";
+import { Button, Card, Form, message } from "antd";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "react-router-dom";
 import { appHelper, useFlat } from "src/service";
-import { AddItemDrawerType } from "src/service/stores/ruleStore/model";
-import MarketAddPage from "../../../MarketPage/MarketAddPage";
-import MarketEditPage from "../../../MarketPage/MarketEditPage";
-import PosAddPage from "../../../PosPage/PosAddPage";
-import PosEditPage from "../../../PosPage/PosEditPage";
 
 import BottomPart from "../../components/bottomPart";
 import TopPart, { TopPartForm } from "../../components/topPart";
 import styles from "./style.module.scss";
-import FilterModalForm from "../../../FilterPage/FilterListPage/components/modalForm/modalForm";
-import SortModalForm from "../../../SortPage/SortListPage/components/modalForm/modalForm";
-import PosDetailPage from "../../../PosPage/PosDetailPage";
-import MarketDetailPage from "../../../MarketPage/MarketDetailPage";
-import { PropsWithChildren } from "react";
+import DrawerView from "../../components/drawerView";
 
 /* type */
 export interface RuleEditViewPorps {
@@ -35,12 +26,6 @@ const EditView = ({ branchName = "" }: RuleEditViewPorps) => {
             itineraryList: "IN",
         }
     );
-    const { subId, setIsAddItemDrawerFlag, addItemType, isAddItemDrawerFlag } =
-        useFlat("ruleStore", {
-            subId: "IN",
-            addItemType: "IN",
-            isAddItemDrawerFlag: "IN",
-        });
     const { t } = useTranslation(["rule"]);
 
     // 提交回调
@@ -69,44 +54,7 @@ const EditView = ({ branchName = "" }: RuleEditViewPorps) => {
         });
         appHelper.closeTabByPath();
     };
-    const pageMap = {
-        [AddItemDrawerType.pos_add]: {
-            title: t("add_pos"),
-            comp: PosAddPage,
-        },
-        [AddItemDrawerType.market_add]: {
-            title: t("add_market"),
-            comp: MarketAddPage,
-        },
-        [AddItemDrawerType.pos_edit]: {
-            title: t("edit_pos"),
-            comp: PosEditPage,
-        },
-        [AddItemDrawerType.market_edit]: {
-            title: t("edit_market"),
-            comp: MarketEditPage,
-        },
-        [AddItemDrawerType.pos_detail]: {
-            title: t("rulePage_PosDetail"),
-            comp: PosDetailPage,
-        },
-        [AddItemDrawerType.market_detail]: {
-            title: t("rulePage_MarketDetail"),
-            comp: MarketDetailPage,
-        },
-        [AddItemDrawerType.filter]: { title: "", comp: FilterModalForm },
-        [AddItemDrawerType.sort]: { title: "", comp: SortModalForm },
-    };
-    const SubWrapper = isAddItemDrawerFlag
-        ? Drawer
-        : (props: PropsWithChildren) => <>{props.children}</>;
-    const { comp: SubPage, title } =
-        addItemType !== ""
-            ? pageMap[addItemType]
-            : {
-                  title: "",
-                  comp: (props: PropsWithChildren) => <>{props.children}</>,
-              };
+
     return (
         <div className={styles.container}>
             <div className={styles.btnTable}>
@@ -147,29 +95,7 @@ const EditView = ({ branchName = "" }: RuleEditViewPorps) => {
                     <BottomPart branchName={branchName}></BottomPart>
                 </Card>
             </>
-
-            <SubWrapper
-                width={"40%"}
-                onClose={() => {
-                    setIsAddItemDrawerFlag({
-                        flag: false,
-                        type: "",
-                    });
-                }}
-                open={isAddItemDrawerFlag}
-                title={title}
-            >
-                <SubPage
-                    id={subId}
-                    isSub={true}
-                    handleCancel={() => {
-                        setIsAddItemDrawerFlag({
-                            flag: false,
-                            type: "",
-                        });
-                    }}
-                />
-            </SubWrapper>
+            <DrawerView branchName={branchName} />
         </div>
     );
 };

@@ -34,9 +34,6 @@ const CategoryEdit = (props: { branchName: string }) => {
         notOperateCarriers,
     } = targetItineraryState || {};
     const [formIns] = useForm<CategoryData>();
-    if (operateCarriers == "ALL") {
-        debugger;
-    }
     useEffect(() => {
         targetItineraryState && formIns.setFieldsValue(targetItineraryState);
     }, [targetItineraryState]);
@@ -46,7 +43,6 @@ const CategoryEdit = (props: { branchName: string }) => {
     }, formIns);
 
     useEffect(() => {
-        debugger;
         updateItineraryAct({
             ...watchState,
         });

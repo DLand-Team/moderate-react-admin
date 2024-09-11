@@ -71,6 +71,7 @@ const thunks = createThunks(["marketStore", slice.branch], {
             pageSize: payload?.pageSize || pageSize,
             ...marketFilterData,
         });
+        dpChain(["marketStore", branchName]).setTablePageTotal(data.total);
         data.list && dpChain(["marketStore", branchName]).setMarketList(data);
     },
     getMarketCarrierListAct: async (_, __, branchName) => {

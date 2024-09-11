@@ -27,6 +27,7 @@ const initialState = (): StoreState => {
         posFilterData: {},
         selectedRowKeys: [], //要删除的id集合
         isEditing: false,
+        posItemsTablePageNum: 1,
     };
 };
 
@@ -60,11 +61,20 @@ const slice = createSlice({
                 ...data.payload,
             };
         },
+        setTablePageTotal(state, data: PayloadAction<number>) {
+            state.posTablePagedata = {
+                ...state.posTablePagedata,
+                total: data.payload,
+            };
+        },
         setSelectedRowKeys(state, data: PayloadAction<string[]>) {
             state.selectedRowKeys = data.payload;
         },
         setIsEditing(state, data: PayloadAction<boolean>) {
             state.isEditing = data.payload;
+        },
+        setPosItemsTablePageNum(state, data: PayloadAction<number>) {
+            state.posItemsTablePageNum = data.payload;
         },
     },
 });

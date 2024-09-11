@@ -55,7 +55,7 @@ function upadteApi(data: Pos) {
 
 // 查 pos列表
 function getPosPageApi(params: GetPosListApiParams) {
-    return httpBase.fetch<{ list: Pos[] }>({
+    return httpBase.fetch<{ list: Pos[]; total: number }>({
         url: baseUrl + "page",
         method: "GET",
         params,

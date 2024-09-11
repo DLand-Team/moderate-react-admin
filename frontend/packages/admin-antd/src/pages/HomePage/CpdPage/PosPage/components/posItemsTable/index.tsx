@@ -18,7 +18,14 @@ const WrapperComp: Wrapper<PosItem> = ({
 }) => {
 	const { t } = useTranslation(["pos"]);
 	const { t: commonT } = useTranslation(["common"]);
-	const { currentData, setCurrentDetail } = useFlat(["posStore", branchName]);
+	const {
+		setIsEditing,
+		currentData,
+		setCurrentDetail,
+		setPosItemsTablePageNum,
+	} = useFlat(["posStore", branchName], {
+		currentData: "IN",
+	});
 	const isDetail = branchName == ROUTE_ID.PosDetailPage;
 	return (
 		<>
@@ -39,11 +46,13 @@ const WrapperComp: Wrapper<PosItem> = ({
 							uid: UUID(),
 						} as PosItem;
 						const nweList = [...dataList, newItem];
+						setPosItemsTablePageNum(Math.ceil(nweList.length / 5));
 						edit(newItem);
 						setCurrentDetail({
 							...currentData!,
 							cpdPosItems: nweList,
 						});
+						setIsEditing(true);
 					}}
 					icon={<PlusOutlined />}
 					type="dashed"
@@ -56,12 +65,15 @@ const WrapperComp: Wrapper<PosItem> = ({
 };
 
 const PosItemsTable = ({ branchName }: { branchName: string }) => {
-	const { currentData, setCurrentDetail } = useFlat(
-		["posStore", branchName],
-		{
-			currentData: "IN",
-		},
-	);
+	const {
+		posItemsTablePageNum,
+		currentData,
+		setCurrentDetail,
+		setPosItemsTablePageNum,
+	} = useFlat(["posStore", branchName], {
+		currentData: "IN",
+		posItemsTablePageNum: "IN",
+	});
 	const { t } = useTranslation(["pos"]);
 	return (
 		<>
@@ -74,6 +86,14 @@ const PosItemsTable = ({ branchName }: { branchName: string }) => {
 				{t("posPage.itemListTitle")}
 			</Typography>
 			<EditTable<PosItem>
+				tableOptions={{
+					pagination: {
+						current: posItemsTablePageNum,
+						onChange(page) {
+							setPosItemsTablePageNum(page);
+						},
+					},
+				}}
 				columnCreater={(props) => {
 					return columnsCreater(props, { branchName });
 				}}

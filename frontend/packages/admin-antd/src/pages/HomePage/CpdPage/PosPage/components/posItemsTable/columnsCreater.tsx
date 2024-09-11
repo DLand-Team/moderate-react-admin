@@ -33,7 +33,7 @@ const calcWeight = (data: {
 };
 
 const columnsCreater: ColumnsCreater<PosItem, { branchName: string }> = (
-	{ editingKey, form, save, isEditing, cancel, edit, deleteByKey },
+	{ editingKey, form, save, isEditing, edit, deleteByKey },
 	extra,
 ) => {
 	const { t } = useTranslation(["pos"]);
@@ -217,25 +217,23 @@ const columnsCreater: ColumnsCreater<PosItem, { branchName: string }> = (
 				return editable ? (
 					<span>
 						<Typography.Link
-							onClick={() => {
+							onClick={async () => {
+								await save(record.uid!);
 								setIsEditing(false);
-								save(record.uid!);
 							}}
 							style={{ marginRight: 8 }}
 						>
-							{/* Save */}
 							<CheckOutlined />
 						</Typography.Link>
 						<Popconfirm
 							title={commonT`blog.cancel`}
-							onConfirm={() => {
+							onConfirm={async () => {
+								await save(record.uid!);
 								setIsEditing(false);
-								cancel();
 							}}
 							okText={commonT`blog.Yes`}
 							cancelText={commonT`blog.No`}
 						>
-							{/* <a>Cancel</a> */}
 							<DeleteOutlined />
 						</Popconfirm>
 					</span>

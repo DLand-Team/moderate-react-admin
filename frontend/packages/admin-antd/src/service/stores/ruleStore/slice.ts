@@ -103,6 +103,12 @@ const slice = createSlice({
 				...data.payload,
 			};
 		},
+		setRuleTablePageTotal(state, data: PayloadAction<number>) {
+			state.ruleTablePagedata = {
+				...state.ruleTablePagedata,
+				total: data.payload,
+			};
+		},
 		setIsEditing(state, data: PayloadAction<boolean>) {
 			state.isEditing = data.payload;
 		},

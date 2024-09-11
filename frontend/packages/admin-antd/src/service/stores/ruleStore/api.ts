@@ -42,6 +42,7 @@ function getRuleListApi(_: GetRuleListApiParams) {
 	return Promise.resolve({
 		data: {
 			list: mockRuleListData,
+			total: 100,
 		},
 	});
 	// return http.request<{ list: Rule[] }>({
@@ -81,14 +82,14 @@ const devApi = {
 	upadteApi,
 	getRuleListApi,
 	getRuleDetailApi,
-    fetchRuleInitApi() {
-        return http.request<{
-            carrierFamilyList: Carrier[];
-        }>({
-            url: baseUrl + "init",
-            method: "POST",
-        });
-    },
+	fetchRuleInitApi() {
+		return http.request<{
+			carrierFamilyList: Carrier[];
+		}>({
+			url: baseUrl + "init",
+			method: "POST",
+		});
+	},
 	activeRuleApi(params: Rule) {
 		return httpBase.fetch(
 			{

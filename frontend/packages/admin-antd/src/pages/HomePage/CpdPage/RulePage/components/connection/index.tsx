@@ -1,6 +1,6 @@
 import { DeleteOutlined, InfoCircleOutlined } from "@ant-design/icons";
-import { Button, Popover } from "antd";
-import { Fragment, useEffect } from "react";
+import { Button, Modal, Popover, message } from "antd";
+import { Fragment, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { EditTable } from "src/components/editTable";
 import { ROUTE_ID } from "src/router";
@@ -21,8 +21,13 @@ const connection = (
 	const isJustShow = branchName == ROUTE_ID.RuleDetailPage;
 	const { t } = useTranslation("rule");
 	const { t: commonT } = useTranslation("common");
-	const { updateConnectionAct, addConnectionAct, deleteConnectionByPosAct } =
-		useFlat(["ruleStore", branchName]);
+	const {
+		conByPosList,
+		updateConnectionAct,
+		addConnectionAct,
+		deleteConnectionByPosAct,
+		deleteSegmentByPosAct,
+	} = useFlat(["ruleStore", branchName]);
 	const { queryMarkettListAct } = useFlat("marketStore");
 	useEffect(() => {
 		queryMarkettListAct({
@@ -34,6 +39,7 @@ const connection = (
 	let handleCreate = async (newCon: Connection) => {
 		addConnectionAct(newCon);
 	};
+	const [page, setPage] = useState(1);
 	return (
 		<div className={styles.container}>
 			<EditTable
@@ -52,9 +58,52 @@ const connection = (
 											alignItems: "center",
 										}}
 										onClick={() => {
-											deleteConnectionByPosAct({
-												position,
-											});
+											if (
+												conByPosList
+													.slice(-1)?.[0]
+													?.slice(-1)?.[0].position ==
+												position
+											) {
+												Modal.confirm({
+													title: commonT`blog.modalDeleteTitle`,
+													content: commonT`blog.modalDeleteContent`,
+													onOk: async () => {
+														deleteConnectionByPosAct(
+															{
+																position,
+															},
+														);
+														if (position == 1) {
+															deleteSegmentByPosAct(
+																{
+																	position: 1,
+																},
+															);
+															deleteSegmentByPosAct(
+																{
+																	position: 2,
+																},
+															);
+														} else {
+															deleteSegmentByPosAct(
+																{
+																	position:
+																		position +
+																		1,
+																},
+															);
+														}
+													},
+													okText: commonT`blog.Yes`,
+													cancelText: commonT`blog.No`,
+												});
+											} else {
+												message.warning({
+													content: t(
+														"rulePage_warn_deleteCon",
+													),
+												});
+											}
 										}}
 									></Button>
 								)}
@@ -91,6 +140,11 @@ const connection = (
 												...connectionItem(),
 												position,
 											};
+											setPage(
+												Math.ceil(
+													(data.length + 1) / 5,
+												),
+											);
 											edit(newCon);
 											handleCreate(newCon);
 										}}
@@ -108,6 +162,12 @@ const connection = (
 				tableOptions={{
 					scroll: {
 						x: "100%",
+					},
+					pagination: {
+						current: page,
+						onChange(page) {
+							setPage(page);
+						},
 					},
 				}}
 				columnCreater={(props) => {

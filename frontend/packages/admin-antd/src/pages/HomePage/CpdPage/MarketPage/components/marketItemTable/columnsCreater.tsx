@@ -28,15 +28,12 @@ const calcWeight = (data: { locationType: string; exclude: boolean }) => {
 };
 
 const columnsCreater: ColumnsCreater<MarketItem, { branchName: string }> = (
-	{ editingKey, form, save, isEditing, cancel, edit, deleteByKey },
+	{ editingKey, form, save, isEditing, edit, deleteByKey },
 	extra,
 ) => {
 	const { t } = useTranslation(["market"]);
 	const { t: commonT } = useTranslation(["common"]);
-	const { setIsDisabledMarketType, setIsEditing } = useFlat([
-		"marketStore",
-		extra?.branchName,
-	]);
+	const { setIsEditing } = useFlat(["marketStore", extra?.branchName]);
 	const isDetail = extra?.branchName == ROUTE_ID.MarketDetailPage;
 	let data: MyColumnType<MarketItem>[] = [
 		{
@@ -176,10 +173,9 @@ const columnsCreater: ColumnsCreater<MarketItem, { branchName: string }> = (
 				return editable ? (
 					<span>
 						<Typography.Link
-							onClick={() => {
-								setIsDisabledMarketType(false);
+							onClick={async () => {
+								await save(record.uid!);
 								setIsEditing(false);
-								save(record.uid!);
 							}}
 							style={{ marginRight: 8 }}
 						>
@@ -187,8 +183,8 @@ const columnsCreater: ColumnsCreater<MarketItem, { branchName: string }> = (
 						</Typography.Link>
 						<Popconfirm
 							title={commonT`blog.cancel`}
-							onConfirm={() => {
-								cancel();
+							onConfirm={async () => {
+								await save(record.uid!);
 								setIsEditing(false);
 							}}
 							okText={commonT`blog.Yes`}

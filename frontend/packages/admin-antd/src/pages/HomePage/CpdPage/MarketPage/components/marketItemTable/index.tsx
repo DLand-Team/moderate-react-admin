@@ -7,6 +7,8 @@ import { useFlat } from "src/service";
 import type { MarketItem } from "src/service/stores/marketStore/model";
 import columnsCreater from "./columnsCreater";
 import { ROUTE_ID } from "src/router";
+import { useActive } from "src/common/hooks";
+import { MarketItemCreater } from "src/shapes/market";
 
 const WrapperComp: Wrapper<MarketItem> = ({
 	children,
@@ -17,8 +19,14 @@ const WrapperComp: Wrapper<MarketItem> = ({
 }) => {
 	const { t } = useTranslation(["market"]);
 	const { t: commonT } = useTranslation(["common"]);
-	const { currentData, setCurrentMarketData, setIsDisabledMarketType } =
-		useFlat(["marketStore", branchName]);
+	const {
+		currentData,
+		setCurrentMarketData,
+		setMarketItemtablePageNum,
+		setIsEditing,
+	} = useFlat(["marketStore", branchName], {
+		currentData: "IN",
+	});
 	const isDetail = branchName == ROUTE_ID.MarketDetailPage;
 	return (
 		<>
@@ -35,16 +43,17 @@ const WrapperComp: Wrapper<MarketItem> = ({
 							});
 							return;
 						}
-						const newData = {
+						const newData = MarketItemCreater({
 							uid: UUID(),
-						} as MarketItem;
+						});
 						const neList = [...dataList, newData];
 						edit(newData);
+						setMarketItemtablePageNum(Math.ceil(neList.length / 5));
 						setCurrentMarketData({
 							...currentData!,
 							cpdMarketItems: neList,
 						});
-						setIsDisabledMarketType(true);
+						setIsEditing(true);
 					}}
 					icon={<PlusOutlined />}
 					type="dashed"
@@ -57,12 +66,21 @@ const WrapperComp: Wrapper<MarketItem> = ({
 };
 
 const MarketItemsTable = ({ branchName }: { branchName: string }) => {
-	const { currentData, setCurrentMarketData } = useFlat([
-		"marketStore",
-		branchName,
-	]);
+	const {
+		currentData,
+		setCurrentMarketData,
+		marketItemtablePageNum,
+		setMarketItemtablePageNum,
+	} = useFlat(["marketStore", branchName], {
+		currentData: "IN",
+		marketItemtablePageNum: "IN",
+	});
 	const { t } = useTranslation(["market"]);
-
+	useActive({
+		onActive() {
+			setMarketItemtablePageNum(1);
+		},
+	});
 	return (
 		<>
 			<Typography
@@ -74,6 +92,14 @@ const MarketItemsTable = ({ branchName }: { branchName: string }) => {
 				{t("marketPage.itemlistTile")}
 			</Typography>
 			<EditTable<MarketItem>
+				tableOptions={{
+					pagination: {
+						current: marketItemtablePageNum,
+						onChange(page) {
+							setMarketItemtablePageNum(page);
+						},
+					},
+				}}
 				columnCreater={(props) => {
 					return columnsCreater(props, { branchName });
 				}}

@@ -3,8 +3,9 @@ import { useEffect, useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { useFlat } from "src/service";
 import TablePart from "./tablePart";
+import { EditViewProps } from "src/pages/HomePage/CpdPage/MarketPage/views/editView";
 
-const ModalForm: React.FC = () => {
+const ModalForm: React.FC = ({ handleCancel }: EditViewProps) => {
     const [form] = Form.useForm<any>();
     const {
         isShowModal,
@@ -62,6 +63,7 @@ const ModalForm: React.FC = () => {
                     //@ts-ignore
                     childRef.current.cancel();
                 }
+                handleCancel?.();
             }}
             onOk={() => {
                 form.validateFields()
@@ -118,6 +120,7 @@ const ModalForm: React.FC = () => {
                                 });
                             }
                             setIsShowModal(false);
+                            handleCancel?.();
                             form.resetFields();
                             form.setFieldValue("allDirect", false);
                             setFilterItemList([]);

@@ -1,10 +1,7 @@
-import { EditOutlined, FileOutlined, PlusOutlined } from "@ant-design/icons";
 import {
-    Button,
     Checkbox,
     Col,
     DatePicker,
-    Divider,
     Form,
     FormInstance,
     Input,
@@ -16,172 +13,18 @@ import dayjs from "dayjs";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { FieldType } from "src/common/utils";
-import { dpChain, ruleHelper, useFlat } from "src/service";
+import { ruleHelper, useFlat } from "src/service";
 import {
     AddItemDrawerType,
     type Rule,
 } from "src/service/stores/ruleStore/model";
+import SelectPro from "../selectPro";
 
 const { Option } = Select;
 export type TopPartForm = Omit<
     Rule & { effectDateData?: dayjs.Dayjs[] },
     "cpdRuleItinerarys"
 >;
-
-function CustomSelect({
-    optionArr,
-    inputAttrConfig = {},
-    handleChange,
-    drawerTableType,
-    branchName = "",
-    ...rest
-}: {
-    optionArr: any[];
-    inputAttrConfig?: any;
-    handleChange?: any;
-    drawerTableType: {
-        add: AddItemDrawerType;
-        edit?: AddItemDrawerType;
-        detail?: AddItemDrawerType;
-    };
-    branchName: string;
-}) {
-    const { setIsAddItemDrawerFlag } = useFlat("ruleStore", {});
-    const { t } = useTranslation(["rule"]);
-    const { t: commonT } = useTranslation(["common"]);
-    const handleClick = (
-        subType: "add" | "edit" | "detail",
-        id: string | number = ""
-    ) => {
-        let type = drawerTableType[subType];
-        let flag = true;
-        if (type == AddItemDrawerType.filter) {
-            if (subType != "add") {
-                dpChain("filterStore").getDetailAct({ id });
-                if (subType == "detail") {
-                    dpChain("filterStore").setIsDetail(true);
-                }
-            } else {
-                dpChain("filterStore").setCurrentData(null);
-            }
-            dpChain("filterStore").setIsShowModal(true);
-            flag = false;
-        } else if (type == AddItemDrawerType.sort) {
-            if (subType != "add") {
-                if (subType == "detail") {
-                    dpChain("sortStore").setIsDetail(true);
-                }
-                dpChain("sortStore").getDetailAct({ id });
-            } else {
-                dpChain("sortStore").setCurrentData(null);
-            }
-            dpChain("sortStore").setIsShowModal(true);
-            flag = false;
-        }
-        ;
-        type != undefined &&
-            setIsAddItemDrawerFlag({
-                flag,
-                type,
-                id,
-            });
-    };
-    return (
-        <Select
-            onChange={handleChange}
-            optionRender={(option) => {
-                return (
-                    <div
-                        style={{
-                            position: "relative",
-                            width: "100%",
-                            display: "flex",
-                            alignItems: "center",
-                        }}
-                    >
-                        <div
-                            style={{
-                                flex: 1,
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                                whiteSpace: "nowrap",
-                            }}
-                        >
-                            {option.label}
-                        </div>
-                        <Button.Group
-                            style={{
-                                width: "50px",
-                                height: "100%",
-                            }}
-                        >
-                            <Button
-                                onClick={() => {
-                                    handleClick("edit", option.value!);
-                                }}
-                                type="primary"
-                                size="small"
-                                icon={<EditOutlined />}
-                            ></Button>
-                            <Button
-                                onClick={() => {
-                                    handleClick("detail", option.value!);
-                                }}
-                                type="primary"
-                                size="small"
-                                icon={<FileOutlined />}
-                            ></Button>
-                        </Button.Group>
-                    </div>
-                );
-            }}
-            dropdownRender={(menu) => (
-                <div>
-                    {menu}
-                    <Divider style={{ margin: "4px 0" }} />
-                    <div
-                        style={{ cursor: "pointer" }}
-                        onClick={() => {
-                            handleClick("add");
-                        }}
-                    >
-                        <Button icon={<PlusOutlined />} type="text">
-                            {`${commonT("add")} ${
-                                {
-                                    [AddItemDrawerType.market_add]:
-                                        t("rulePage_Market"),
-                                    [AddItemDrawerType.pos_add]:
-                                        t("rulePage_pos"),
-                                    [AddItemDrawerType.sort]:
-                                        t("rulePage_sortItem"),
-                                    [AddItemDrawerType.filter]: t(
-                                        "rulePage_filterItem"
-                                    ),
-                                }[
-                                    drawerTableType[
-                                        "add"
-                                    ] as AddItemDrawerType.market_add
-                                ]
-                            }`}
-                        </Button>
-                    </div>
-                </div>
-            )}
-            {...inputAttrConfig}
-            {...rest}
-        >
-            {optionArr &&
-                optionArr.length > 0 &&
-                optionArr.map((item: any) => {
-                    return (
-                        <Option value={item.value} key={item.id + item.label}>
-                            {item.label}
-                        </Option>
-                    );
-                })}
-        </Select>
-    );
-}
 
 const TopPart = ({
     formRef,
@@ -248,7 +91,6 @@ const TopPart = ({
                         name === "desMarketId" ||
                         name === "posId"
                     ) {
-                        debugger
                         const seqValue = ruleHelper.calcSeqNo({
                             type: name,
                             value,
@@ -304,7 +146,7 @@ const TopPart = ({
                                 },
                             ]}
                         >
-                            <CustomSelect
+                            <SelectPro
                                 branchName={branchName}
                                 inputAttrConfig={{
                                     placeholder: commonT`placeholder_input`,
@@ -342,7 +184,7 @@ const TopPart = ({
                                 },
                             ]}
                         >
-                            <CustomSelect
+                            <SelectPro
                                 inputAttrConfig={{
                                     placeholder: commonT`placeholder_input`,
                                 }}
@@ -380,7 +222,7 @@ const TopPart = ({
                                 },
                             ]}
                         >
-                            <CustomSelect
+                            <SelectPro
                                 inputAttrConfig={{
                                     placeholder: commonT`placeholder_input`,
                                 }}
@@ -463,7 +305,7 @@ const TopPart = ({
                                 },
                             ]}
                         >
-                            <CustomSelect
+                            <SelectPro
                                 inputAttrConfig={{
                                     placeholder: commonT`placeholder_input`,
                                 }}
@@ -476,9 +318,9 @@ const TopPart = ({
                                     };
                                 })}
                                 drawerTableType={{
-                                    add: AddItemDrawerType.sort,
-                                    edit: AddItemDrawerType.sort,
-                                    detail: AddItemDrawerType.sort,
+                                    add: AddItemDrawerType.sort_add,
+                                    edit: AddItemDrawerType.sort_edit,
+                                    detail: AddItemDrawerType.sort_detail,
                                 }}
                             />
                         </Form.Item>
@@ -488,7 +330,7 @@ const TopPart = ({
                             label={t`rulePage_filterItem`}
                             name="filterItemId"
                         >
-                            <CustomSelect
+                            <SelectPro
                                 inputAttrConfig={{
                                     placeholder: commonT`placeholder_input`,
                                 }}
@@ -500,9 +342,9 @@ const TopPart = ({
                                     };
                                 })}
                                 drawerTableType={{
-                                    add: AddItemDrawerType.filter,
-                                    edit: AddItemDrawerType.filter,
-                                    detail: AddItemDrawerType.filter,
+                                    add: AddItemDrawerType.filter_add,
+                                    edit: AddItemDrawerType.filter_edit,
+                                    detail: AddItemDrawerType.filter_detail,
                                 }}
                                 branchName={branchName}
                             />
@@ -561,7 +403,6 @@ const TopPart = ({
                             ]}
                         >
                             <Input.TextArea
-                                
                                 placeholder={commonT`placeholder_input`}
                             />
                         </Form.Item>
