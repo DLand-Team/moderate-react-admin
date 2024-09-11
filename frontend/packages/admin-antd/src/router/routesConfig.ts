@@ -260,7 +260,6 @@ export const ROUTE_CONFIG_MAP: {
 		depends: ["RulePage"],
 		keepAlive: true,
 		isMenu: false,
-		isTab: false,
 		isNoAuth: true,
 	},
 	RuleListPage: {
@@ -281,7 +280,6 @@ export const ROUTE_CONFIG_MAP: {
 		depends: ["RulePage"],
 		keepAlive: true,
 		isMenu: false,
-		isTab: false,
 		isNoAuth: true,
 	},
 	RuleAddPage: {
@@ -293,7 +291,6 @@ export const ROUTE_CONFIG_MAP: {
 		depends: ["RulePage"],
 		keepAlive: true,
 		isMenu: false,
-		isTab: false,
 		isNoAuth: true,
 	},
 	FilterPage: {
