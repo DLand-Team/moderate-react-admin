@@ -63,7 +63,7 @@ export class RouterHelper extends HelperBase {
 			if (!(id in routesConfigMap)) {
 				return;
 			}
-			const { depends, path: pathE } = routesConfigMap[id];
+			const { depends, path: pathE, segment = "" } = routesConfigMap[id];
 			// 如果有权限或者是必须显示的，或者是管理员
 			if (
 				!routesPermissions ||
@@ -72,7 +72,7 @@ export class RouterHelper extends HelperBase {
 				routesConfigMap[id].isNoAuth
 			) {
 				const { component, ...rest } = routesConfigMap[id];
-				const path = prefix + "/" + id;
+				const path = prefix + "/" + id + (segment ? "/" + segment : "");
 				routesConfigMap[id].parentId = parentId;
 				routesConfigMap[id].id = id;
 				routesConfigMap[id].path = pathE
@@ -197,7 +197,10 @@ export class RouterHelper extends HelperBase {
 	// 每次登陆只会触发一次
 
 	getRoutePathByKey(key: ROUTE_ID_KEY) {
-		let path = this.routerStore.routesMap?.[key]?.path;
+		let path = this.routerStore.routesMap?.[key]?.path!?.replace(
+			/\/:.+$/,
+			"",
+		);
 		return path || "/" + key;
 	}
 
@@ -301,9 +304,10 @@ export class RouterHelper extends HelperBase {
 				type?: "replace" | "push";
 				state?: any;
 				search?: Record<PropertyKey, any>;
+				params?: string;
 			},
 		) => {
-			const { type = "push", state, search } = options || {};
+			const { type = "push", state, search, params = "" } = options || {};
 			const path = this.getRoutePathByKey(id);
 			if (!path) {
 				historyInstance!?.push("notFund", state);
@@ -317,7 +321,8 @@ export class RouterHelper extends HelperBase {
 				}
 				searchStr = "?" + arr.join("&");
 			}
-			let targetPath = `${path}${searchStr}`;
+			let targetPath =
+				`${path}${searchStr}` + (params ? "/" + params : "");
 			if (type === "push") {
 				historyInstance!?.push(targetPath, state);
 			} else {
@@ -329,6 +334,9 @@ export class RouterHelper extends HelperBase {
 
 	getRouteIdByPath(path: string): ROUTE_ID_KEY {
 		return Object.values(this.routerStore.routesMap).find((item) => {
+			if (item.segment) {
+				return item.path?.includes(path.replace(/\/[^\/]+$/, ""));
+			}
 			return item.path == path;
 		})?.id!;
 	}

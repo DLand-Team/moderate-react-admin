@@ -3,7 +3,7 @@ const http = require("http");
 const port = normalizePort(process.env.PORT || "3130");
 const server = http.createServer(app.callback());
 server.listen(port);
-console.log("server is running at port " + port);
+// console.log("server is running at port " + port);
 server.on("error", onError);
 
 function normalizePort(val) {

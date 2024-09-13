@@ -45,7 +45,7 @@ function formUploadPut(fileName, file) {
 				if (respInfo.statusCode == 200) {
 					resolve(respBody);
 				} else {
-					console.log(respInfo.statusCode);
+					// console.log(respInfo.statusCode);
 					resolve(respBody);
 				}
 			},

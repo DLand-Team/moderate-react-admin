@@ -5,7 +5,7 @@ function realLocalFiles(dir) {
 	const fileList = [];
 	const files = fs.readdirSync(dir);
 	files.forEach((file) => {
-		console.log(file);
+		// console.log(file);
 		fileList.push(file);
 	});
 	return fileList;
@@ -17,7 +17,7 @@ function removeOnefile(path) {
 		if (err) {
 			throw err;
 		}
-		console.log("文件删除成功");
+		// console.log("文件删除成功");
 	});
 }
 

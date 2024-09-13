@@ -9,7 +9,7 @@
 	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "pnpm   --filter=!moderate-admin-new1 -r dev",
+		"start": "pnpm   --filter=!docs -r dev",
 		"clean": "rimraf './node_modules'&&lerna clean"
 	},
 	"author": "闲D阿强",

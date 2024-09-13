@@ -18,6 +18,6 @@ if (canUseDom) {
     })
     window.addEventListener('test-passive-supported', null as never, opts)
   } catch (e) {
-    console.log(e)
+    // console.log(e)
   }
 }

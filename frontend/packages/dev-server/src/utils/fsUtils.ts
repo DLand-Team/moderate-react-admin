@@ -12,7 +12,7 @@ function emptyDir(path: string) {
 			emptyDir(filePath);
 		} else {
 			fs.unlinkSync(filePath);
-			console.log(`删除${file}文件成功`);
+			// console.log(`删除${file}文件成功`);
 		}
 	});
 }

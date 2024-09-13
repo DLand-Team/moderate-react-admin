@@ -30,7 +30,7 @@ const navChangePsw = () => {
                     return message.warning(t`oldIsEqualNew`);
                 }
 
-                debugger
+                
                 //修改密码接口
                 const { payload } = await changePswAct(values)
                 if (payload?.code == 0 || payload?.code == 200) {

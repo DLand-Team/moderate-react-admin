@@ -58,7 +58,7 @@ const RankSliderMenu = (props: any) => {
                 </Radio.Group>
             ),
             onOk: () => {
-                debugger;
+                ;
                 let newItem = cloneDeep(dragItem.itemData);
                 if (actionName.current !== ActionType.copy) {
                     deleteItineraryAct(newItem.uid);

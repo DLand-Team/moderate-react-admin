@@ -1,10 +1,10 @@
-import { qiniuConfig } from "@/config/secure";
+// import { qiniuConfig } from "@/config/secure";
 import { yearMonthDay } from "@/utils/dateFormate";
 import { realLocalFiles, removeOnefile } from "@/utils/files";
 import {
 	getQiniuToken,
 	getQiniuTokenWithName,
-	formUploadPut,
+	// formUploadPut,
 } from "@/utils/qiniu";
 
 const path = require("path");
@@ -45,10 +45,10 @@ qiniuRouter.get("/serversidepost", async (ctx) => {
 	const fileList = realLocalFiles(fileFoldPath);
 	fileList.forEach(async (file) => {
 		const filePath = fileFoldPath + "/" + file;
-		const resInfo = await formUploadPut(file, filePath);
-		console.log(resInfo);
-		const fileLink = qiniuConfig.domain + "/" + file;
-		console.log(fileLink);
+		// const resInfo = await formUploadPut(file, filePath);
+		// console.log(resInfo);
+		// const fileLink = qiniuConfig.domain + "/" + file;
+		// console.log(fileLink);
 		removeOnefile(filePath);
 	});
 	ctx.body = {
@@ -70,7 +70,7 @@ qiniuRouter.get("/token", async (ctx) => {
 // 根据文件名字生成token
 qiniuRouter.get("/token/name", async (ctx) => {
 	const fileName = ctx.query.name;
-	console.log(fileName);
+	// console.log(fileName);
 	const token = getQiniuTokenWithName(fileName);
 	ctx.body = {
 		token,
@@ -81,7 +81,7 @@ qiniuRouter.get("/token/name", async (ctx) => {
 qiniuRouter.get("/token/list", async (ctx) => {
 	let keyList = ctx.query.list;
 	const tokenList = [];
-	console.log(ctx.query.list);
+	// console.log(ctx.query.list);
 	if (!(keyList instanceof Array)) {
 		keyList = [];
 		keyList.push(ctx.query.list);

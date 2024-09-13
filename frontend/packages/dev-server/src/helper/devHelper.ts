@@ -607,7 +607,7 @@ class devHelper {
 				}
 			});
 		} catch (err) {
-			console.log(err);
+			// console.log(err);
 		}
 	};
 
@@ -619,7 +619,7 @@ class devHelper {
 				// 判断是否是文件夹
 				if (!stats.isFile() && file !== "components") {
 					const subFiles = fs.readdirSync(path + "/" + file);
-					console.log(subFiles);
+					// console.log(subFiles);
 					let isHasIndexPage = subFiles.some((item) => {
 						return item == "index.tsx";
 					});
@@ -646,7 +646,7 @@ class devHelper {
 				}
 			});
 		} catch (err) {
-			console.log(err);
+			// console.log(err);
 		}
 	};
 
@@ -665,9 +665,9 @@ class devHelper {
 					}
 				}
 			});
-			console.log(data);
+			// console.log(data);
 		} catch (err) {
-			console.log(err);
+			// console.log(err);
 		}
 	};
 
@@ -830,7 +830,7 @@ class devHelper {
 				?.map((item) => {
 					return item.replace(".tsx", "");
 				});
-			console.log(providerFiles);
+			// console.log(providerFiles);
 			return providerFiles;
 		}
 		return [];

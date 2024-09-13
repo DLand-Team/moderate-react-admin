@@ -31,9 +31,9 @@ const addPluginHandler = async (ctx) => {
 			const cmd = `git clone ${url}.git ${pluginName}`;
 			const cwd = pathHelper.pluginsCache;
 			await new Promise((resolve) => {
-				exec(cmd, { cwd }, function (error, _, stderr) {
+				exec(cmd, { cwd }, function (error, _, __) {
 					if (error) {
-						console.log(stderr);
+						// console.log(stderr);
 					}
 					resolve(`run ${cwd} successfully`);
 				});
@@ -42,9 +42,9 @@ const addPluginHandler = async (ctx) => {
 			const cmd = `git pull`;
 			const cwd = `${pathHelper.pluginsCache}/${pluginName}`;
 			await new Promise((resolve) => {
-				exec(cmd, { cwd }, function (error, _, stderr) {
+				exec(cmd, { cwd }, function (error, _, __) {
 					if (error) {
-						console.log(stderr);
+						// console.log(stderr);
 					}
 					resolve(`run ${cwd} successfully`);
 				});
@@ -58,8 +58,8 @@ const addPluginHandler = async (ctx) => {
 		const targetPath = pathHelper.adminPlugins + "/" + pluginName;
 		fs.cpSync(pluginPath, targetPath, { recursive: true });
 		// 删除拷贝过去的git文件夹
-		const files = fs.readdirSync(targetPath);
-		console.log(files);
+		// const files = fs.readdirSync(targetPath);
+		// console.log(files);
 		deleteDir(`${targetPath}/.git`);
 	}
 
@@ -73,9 +73,9 @@ const addPluginHandler = async (ctx) => {
 		const cmd = `${type} add ${depStr}`;
 		const cwd = pathHelper.webPath;
 		await new Promise((resolve) => {
-			exec(cmd, { cwd }, function (error, _, stderr) {
+			exec(cmd, { cwd }, function (error, _, __) {
 				if (error) {
-					console.log(stderr);
+					// console.log(stderr);
 				}
 				resolve(`run ${cwd} successfully`);
 			});
@@ -88,9 +88,9 @@ const addPluginHandler = async (ctx) => {
 			.join(" ");
 		const devCmd = `${type} add ${devDepStr} -D`;
 		await new Promise((resolve) => {
-			exec(devCmd, { cwd }, function (error, _, stderr) {
+			exec(devCmd, { cwd }, function (error, _, __) {
 				if (error) {
-					console.log(stderr);
+					// console.log(stderr);
 				}
 				resolve(`run ${devCmd} successfully`);
 			});

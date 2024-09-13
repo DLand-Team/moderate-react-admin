@@ -7,4 +7,4 @@ const destinationDir = path.resolve(__dirname,'../dist/views'); // 输出目标�
 // 拷贝源文件夹的内容到目标文件夹
 fs.cpSync(sourceDir, destinationDir, { recursive: true })
 
-console.log('Views文件夹已成功拷贝到dist目录！');
+// console.log('Views文件夹已成功拷贝到dist目录！');
