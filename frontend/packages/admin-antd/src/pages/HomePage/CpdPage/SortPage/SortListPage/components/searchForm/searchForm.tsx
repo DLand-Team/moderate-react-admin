@@ -38,7 +38,7 @@ const AdvancedSearchForm = () => {
   );
 };
 
-const App: React.FC = () => (
+const App = () => (
   <div style={{ marginBottom: "20px" }}>
     <AdvancedSearchForm />
   </div>

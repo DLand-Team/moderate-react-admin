@@ -6,7 +6,7 @@ import { useFlat } from "src/service";
 import { useTranslation } from "react-i18next";
 import { EditViewProps } from "src/pages/HomePage/CpdPage/MarketPage/views/editView";
 
-const ModalForm: React.FC = ({ handleCancel }: EditViewProps) => {
+const ModalForm = ({ handleCancel }: EditViewProps) => {
     const [form] = Form.useForm<any>();
 
     const {

@@ -23,10 +23,10 @@ export const objectExistValue = (obj:any) => Object.keys(obj).length > 0;
  * unescape() 函数可对通过 escape() 编码的字符串进行解码。
  */
 export const getUrlParam = (url:string, name:string) => {
-  var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-  let search = url.split("?")[1];
+  const reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+  const search = url.split("?")[1];
   if (search) {
-    var r = search.substr(0).match(reg);
+    const r = search.substr(0).match(reg);
     if (r !== null) return unescape(r[2]);
     return null;
   } else {
@@ -40,7 +40,7 @@ export function hasErrors(fieldsError:any) {
 
 export function guid() {
   return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
-    var r = (Math.random() * 16) | 0,
+    const r = (Math.random() * 16) | 0,
       v = c == "x" ? r : (r & 0x3) | 0x8;
     return v.toString(16);
   });

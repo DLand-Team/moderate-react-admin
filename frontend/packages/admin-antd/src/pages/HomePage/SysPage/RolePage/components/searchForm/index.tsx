@@ -1,6 +1,6 @@
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
 import { Button, Col, Form, Input, Row } from "antd";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const AdvancedSearchForm = () => {
 	const [expand, setExpand] = useState(false);
@@ -35,12 +35,7 @@ const AdvancedSearchForm = () => {
 	};
 
 	return (
-		<Form
-			form={form}
-
-
-			onFinish={onFinish}
-		>
+		<Form form={form} onFinish={onFinish}>
 			<Row gutter={24}>{getField()}</Row>
 			<Row>
 				<Col span={24} style={{ textAlign: "right" }}>
@@ -69,7 +64,7 @@ const AdvancedSearchForm = () => {
 	);
 };
 
-const App: React.FC = () => {
+const App = () => {
 	return (
 		<div style={{ marginBottom: "32px" }}>
 			<AdvancedSearchForm />

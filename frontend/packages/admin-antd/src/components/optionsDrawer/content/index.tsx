@@ -8,7 +8,7 @@ import ThemeSetting from "./themeSetting";
 import ProjectSetting from "./projectSetting";
 import OtherSetting from "./otherSetting";
 
-const SettingContent: React.FC = () => {
+const SettingContent = () => {
 	const { token } = theme.useToken();
 	const { t } = useTranslation();
 	const getItems: (panelStyle: CSSProperties) => CollapseProps["items"] = (

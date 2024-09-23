@@ -1,6 +1,6 @@
 import { ruleHelper } from "src/service";
 import type { Rule } from "src/service/stores/ruleStore/model";
-export let mockRuleListData: Rule[] = [];
+export const mockRuleListData: Rule[] = [];
 
 Array.from(Array(16), (_, k) => {
 	mockRuleListData.push({

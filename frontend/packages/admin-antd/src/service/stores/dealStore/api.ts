@@ -1,7 +1,7 @@
 import { http } from "src/common/http";
 import { RankApiParams } from "./model";
 
-let baseUrl = "/api/deal/";
+const baseUrl = "/api/deal/";
 
 // 增
 function addApi(data: any) {

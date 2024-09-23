@@ -1,12 +1,11 @@
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Form, FormInstance, Input } from "antd";
-import React from "react";
 import { FieldConfig } from "src/common/utils";
 
-const MultipleFieldOne: React.FC<{
+const MultipleFieldOne = (props: {
 	fieldConfig: FieldConfig;
 	formIns: FormInstance;
-}> = (props) => {
+}) => {
 	const { fieldConfig } = props;
 	const { formOptions, inputAttrConfig } = fieldConfig;
 	const { childRule = [] } = formOptions || {};

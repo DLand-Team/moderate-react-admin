@@ -44,7 +44,7 @@ const AdvancedSearchForm = () => {
     );
 };
 
-const SearchForm: React.FC = () => (
+const SearchForm = () => (
     <div style={{ marginBottom: "32px" }}>
         <AdvancedSearchForm />
     </div>

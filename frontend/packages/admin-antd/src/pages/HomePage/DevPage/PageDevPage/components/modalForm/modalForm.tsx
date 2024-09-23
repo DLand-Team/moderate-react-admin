@@ -1,5 +1,5 @@
 import { Button, Checkbox, Form, Input, Modal } from "antd";
-import React, { useState } from "react";
+import { useState } from "react";
 import TreeSelectBase from "src/components/treeSelectBase";
 
 interface Values {
@@ -14,11 +14,11 @@ interface CollectionCreateFormProps {
 	onCancel: () => void;
 }
 
-const CollectionCreateForm: React.FC<CollectionCreateFormProps> = ({
+const CollectionCreateForm = ({
 	open,
 	onCreate,
 	onCancel,
-}) => {
+}: CollectionCreateFormProps) => {
 	// 引入natur的articleStore
 	const [form] = Form.useForm();
 	return (

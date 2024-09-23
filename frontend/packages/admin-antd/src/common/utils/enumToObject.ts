@@ -5,7 +5,7 @@ export function enumToObject<T extends Record<keyof T, number | string>>(
 ): { [K in keyof T]: ROUTE_ID_KEY } {
     const obj = {} as { [K in keyof T]: T[K] };
     for (const key in enumObj) {
-        let keyStr = enumObj[key];
+        const keyStr = enumObj[key];
         if (typeof keyStr !== "number") {
             //@ts-ignore
             obj[keyStr] = enumObj[key];

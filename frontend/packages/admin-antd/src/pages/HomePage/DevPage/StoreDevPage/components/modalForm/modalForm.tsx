@@ -1,6 +1,6 @@
 import TreeSelectBase from "src/components/treeSelectBase";
 import { Button, Form, Input, Modal } from "antd";
-import React, { useState } from "react";
+import { useState } from "react";
 
 interface Values {
 	title: string;
@@ -14,11 +14,11 @@ interface CollectionCreateFormProps {
 	onCancel: () => void;
 }
 
-const CollectionCreateForm: React.FC<CollectionCreateFormProps> = ({
+const CollectionCreateForm = ({
 	open,
 	onCreate,
 	onCancel,
-}) => {
+}: CollectionCreateFormProps) => {
 	const [form] = Form.useForm();
 	return (
 		<Modal

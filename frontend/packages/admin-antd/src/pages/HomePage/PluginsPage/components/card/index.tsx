@@ -5,13 +5,12 @@ import {
 	GithubOutlined,
 } from "@ant-design/icons";
 import { Avatar, Card, Dropdown, Modal, Space, Tooltip, message } from "antd";
-import React from "react";
 import { useFlat } from "src/service";
 import type { Plugin } from "src/service/stores/devStore/model";
 
 const { Meta } = Card;
 
-const PluginCard: React.FC<{ data: Plugin }> = ({ data }) => {
+const PluginCard = ({ data }: { data: Plugin }) => {
 	const { setIsShowMdDrawer } = useFlat("appStore");
 	const { addPluginAct, loadPluginDetailAct, removePluginAct } =
 		useFlat("devStore");
@@ -114,9 +113,11 @@ const PluginCard: React.FC<{ data: Plugin }> = ({ data }) => {
 						}}
 					>
 						<Space>
-							<div onClick={(e)=>{
-                                e.stopPropagation()
-                            }}>
+							<div
+								onClick={(e) => {
+									e.stopPropagation();
+								}}
+							>
 								<EllipsisOutlined key="ellipsis" />
 								<div>更多</div>
 							</div>

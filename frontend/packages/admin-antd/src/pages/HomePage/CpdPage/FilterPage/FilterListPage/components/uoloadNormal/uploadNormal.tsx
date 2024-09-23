@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { UploadOutlined } from "@ant-design/icons";
 import { Button, message, Upload } from "antd";
 import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
 
-const App: React.FC = () => {
+const App = () => {
 	const [fileList, setFileList] = useState<UploadFile[]>([]);
 	const [uploading, setUploading] = useState(false);
 
@@ -17,7 +17,6 @@ const App: React.FC = () => {
 		fetch("https://www.mocky.io/v2/5cc8019d300000980a055e76", {
 			method: "POST",
 			body: formData,
-			
 		})
 			.then((res) => res.json())
 			.then(() => {
@@ -34,7 +33,7 @@ const App: React.FC = () => {
 
 	useEffect(() => {
 		const file = fileList[0];
-		if(!file) return
+		if (!file) return;
 		let data = {
 			id: 11,
 			file_size: file.size,
@@ -44,9 +43,9 @@ const App: React.FC = () => {
 		fetch("/nestApi/company/upload/logo", {
 			method: "POST",
 			body: JSON.stringify(data),
-			headers:{
-				'Authorization':"bearer 76e7df82-a111-47aa-bf50-dfca396f7b73"
-			}
+			headers: {
+				Authorization: "bearer 76e7df82-a111-47aa-bf50-dfca396f7b73",
+			},
 		})
 			.then((res) => res.json())
 			.then(() => {

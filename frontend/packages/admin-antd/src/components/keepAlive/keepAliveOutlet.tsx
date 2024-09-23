@@ -102,7 +102,9 @@ const KeepAliveOutlet = memo(() => {
 		debugger;
 		let key = activeKey.current;
 		if (currentRouteConfig?.segment) {
-			key = activeKey.current + "/" + pathname.split("/").slice(-1)[0];
+			key = (activeKey.current +
+				"/" +
+				pathname.split("/").slice(-1)[0]) as any;
 		}
 		if (isKeepAlive && !componentList.current.has(key)) {
 			componentList.current.set(key, outletRef.current);

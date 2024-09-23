@@ -57,7 +57,7 @@ export const getStore = <
                     : T[0]
             ];
         } else {
-            let c = reduxStore.getState()[storeName[0]];
+            const c = reduxStore.getState()[storeName[0]];
             return c as ReduxState[T extends keyof typeof stores ? T : T[0]];
         }
     } else {

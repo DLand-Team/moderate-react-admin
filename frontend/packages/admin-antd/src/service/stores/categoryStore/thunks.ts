@@ -20,7 +20,7 @@ const thunks = createThunks("categoryStore", {
         };
     },
     setAddModalShowAct: ({ isShowAddModal }: { isShowAddModal: boolean }) => {
-        let extra = !isShowAddModal
+        const extra = !isShowAddModal
             ? {
                   isDetail: false,
               }

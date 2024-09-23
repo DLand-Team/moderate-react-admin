@@ -39,13 +39,15 @@ interface EditableCellProps extends React.HTMLAttributes<HTMLElement> {
 	form: FormInstance<any>;
 }
 
-const EditableCell: React.FC<EditableCellProps> = ({
-	editing,
-	children,
-	fieldConfig,
-	form,
-	...rest
-}) => {
+const EditableCell = (
+    {
+        editing,
+        children,
+        fieldConfig,
+        form,
+        ...rest
+    }: EditableCellProps
+) => {
 	return (
 		<td {...rest}>
 			{editing ? (

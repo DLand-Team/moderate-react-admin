@@ -139,8 +139,8 @@ const appSlice = createSlice({
 				id: string | number;
 			}>,
 		) {
-			let temp = cloneDeep(state.winBoxList);
-			let targetId = temp.findIndex((item) => {
+			const temp = cloneDeep(state.winBoxList);
+			const targetId = temp.findIndex((item) => {
 				return item.id == id;
 			});
 			if (targetId != -1) {

@@ -42,11 +42,17 @@ const items: MenuItem[] = [
 	getItem("Files", "9", <FileOutlined />),
 ];
 
-const LayoutDemo: React.FC<{
-	themeConfig: any;
-	isDark: boolean;
-	CustomLayout?: FC<any>;
-}> = ({ themeConfig, isDark, CustomLayout }) => {
+const LayoutDemo = (
+    {
+        themeConfig,
+        isDark,
+        CustomLayout
+    }: {
+        themeConfig: any;
+        isDark: boolean;
+        CustomLayout?: FC<any>;
+    }
+) => {
 	const [collapsed, setCollapsed] = useState(false);
 	const {
 		token: { borderRadiusLG },

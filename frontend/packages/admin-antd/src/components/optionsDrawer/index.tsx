@@ -1,10 +1,10 @@
 import type { DrawerProps } from "antd";
 import { Button, Drawer, Space, theme } from "antd";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useFlat } from "src/service";
 import SettingContent from "./content/index";
 import { useTranslation } from "react-i18next";
-const OptionsDrawer: React.FC = () => {
+const OptionsDrawer = () => {
 	const { saveSettingAct } = useFlat("devStore");
 	const { isShowOptionsDrawer, setIsShowOptionsDrawer, settingData } =
 		useFlat("appStore");

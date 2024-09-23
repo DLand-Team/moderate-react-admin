@@ -45,12 +45,14 @@ const AdvancedSearchForm = ({ searchList }: { searchList: any }) => {
     );
 };
 
-const SearchForm: React.FC<{
-    searchList: MyColumnType<Market>[];
-}> = ({ searchList }) => (
-    <div style={{ marginBottom: "32px" }}>
-        <AdvancedSearchForm searchList={searchList} />
-    </div>
-);
+const SearchForm = (
+    {
+        searchList
+    }: {
+        searchList: MyColumnType<Market>[];
+    }
+) => (<div style={{ marginBottom: "32px" }}>
+    <AdvancedSearchForm searchList={searchList} />
+</div>);
 
 export default SearchForm;

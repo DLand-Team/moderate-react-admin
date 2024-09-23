@@ -19,7 +19,7 @@ const { Text } = Typography;
 // Just show the latest item.
 const displayRender = (labels: string[]) => labels[labels.length - 1];
 
-const ThemeSetting: React.FC = () => {
+const ThemeSetting = () => {
 	const { settingData, setSettingData } = useFlat("appStore");
 	const { t } = useTranslation();
 	const { paletteSet, layoutSet, color } = settingData || {};

@@ -4,7 +4,7 @@
 export function getTextWidth(str: string, fontSize: string) {
     let result = 10;
 
-    let ele = document.createElement("span");
+    const ele = document.createElement("span");
     //字符串中带有换行符时，会被自动转换成<br/>标签，若需要考虑这种情况，可以替换成空格，以获取正确的宽度
     //str = str.replace(/\\n/g,' ').replace(/\\r/g,' ');
     ele.innerText = str;

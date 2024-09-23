@@ -7,7 +7,7 @@ import slice from "./slice";
 
 const thunks = createThunks(["posStore", slice.branch], {
     initCurrentDetail: async (_, __, branchName) => {
-        let posData = posCreater() as Pos;
+        const posData = posCreater() as Pos;
         dpChain(["posStore", branchName]).setCurrentDetail(posData);
     },
     getCurrentDetailAct: async (params: GetDetailActParams, _, branchName) => {

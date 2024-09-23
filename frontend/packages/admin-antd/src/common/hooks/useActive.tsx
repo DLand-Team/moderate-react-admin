@@ -21,7 +21,6 @@ const useActive = (
 	const { activeKey } = useFlat("routerStore", {
 		activeKey: "IN",
 	});
-	;
 	const currentPath = useRef<string>(location.pathname);
 	const activeFlag = useRef<boolean>();
 	const isFirsted = useRef(false);
@@ -31,8 +30,6 @@ const useActive = (
 	// 只判断当前所在组件
 	// 并且有依赖
 
-	let a = routerHelper.getRouteIdByPath(currentPath.current);
-	;
 	if (
 		currentPath.current == location.pathname &&
 		routerHelper.getRouteIdByPath(currentPath.current) == activeKey &&

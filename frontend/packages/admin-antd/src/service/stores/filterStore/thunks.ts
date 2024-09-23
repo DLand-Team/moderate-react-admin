@@ -17,7 +17,7 @@ const thunks = createThunks("filterStore", {
     getDetailAct: async (params: GetApiParams) => {
         const { data } = await httpApi.getDetail(params);
         dp("filterStore", "setCurrentData", data);
-        let arr = [];
+        const arr = [];
         if (data.connectionsOperator) {
             arr.push({
                 filterId: data.id,

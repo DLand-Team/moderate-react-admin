@@ -43,10 +43,8 @@ const AdvancedSearchForm = ({ searchList }: AdvancedSearchFormProps) => {
     );
 };
 
-const SearchForm: React.FC<AdvancedSearchFormProps> = (props) => (
-    <div style={{ marginBottom: "32px" }}>
-        <AdvancedSearchForm {...props} />
-    </div>
-);
+const SearchForm = (props: AdvancedSearchFormProps) => (<div style={{ marginBottom: "32px" }}>
+    <AdvancedSearchForm {...props} />
+</div>);
 
 export default SearchForm;

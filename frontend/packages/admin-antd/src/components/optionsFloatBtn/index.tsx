@@ -1,9 +1,8 @@
 import { SettingOutlined } from "@ant-design/icons";
 import { FloatButton } from "antd";
-import React from "react";
 import { useFlat } from "src/service";
 
-const OptionsFloatBtn: React.FC = () => {
+const OptionsFloatBtn = () => {
 	const { setIsShowOptionsDrawer } = useFlat("appStore");
 	return (
 		<>

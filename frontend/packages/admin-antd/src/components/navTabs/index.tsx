@@ -116,7 +116,7 @@ const DraggableTabNode = ({
 	);
 };
 
-const NavTabs: React.FC = () => {
+const NavTabs = () => {
 	const { t } = useTranslation();
 	const {
 		setTabItems,

@@ -23,8 +23,8 @@ const storageHelper = {
         data: unknown,
         type: "session" | "local" = "session"
     ) => {
-        let flag = typeof window !== "undefined";
-        let sg = flag
+        const flag = typeof window !== "undefined";
+        const sg = flag
             ? {
                   session: window.sessionStorage,
                   local: window.localStorage,
@@ -33,8 +33,8 @@ const storageHelper = {
         sg && sg.setItem(key, JSON.stringify(data));
     },
     clear: (type: "session" | "local" = "session") => {
-        let flag = typeof window !== "undefined";
-        let sg = flag
+        const flag = typeof window !== "undefined";
+        const sg = flag
             ? {
                   session: window.sessionStorage,
                   local: window.localStorage,
@@ -43,8 +43,8 @@ const storageHelper = {
         sg?.clear();
     },
     removeItem: (key: ItemKey, type: "session" | "local" = "session") => {
-        let flag = typeof window !== "undefined";
-        let sg = flag
+        const flag = typeof window !== "undefined";
+        const sg = flag
             ? {
                   session: window.sessionStorage,
                   local: window.localStorage,
@@ -53,14 +53,14 @@ const storageHelper = {
         sg?.removeItem(key);
     },
     getItem: (key: ItemKey, type: "session" | "local" = "session") => {
-        let flag = typeof window !== "undefined";
-        let sg = flag
+        const flag = typeof window !== "undefined";
+        const sg = flag
             ? {
                   session: window.sessionStorage,
                   local: window.localStorage,
               }[type]
             : null;
-        let value = sg ? sg.getItem(key) || "" : "";
+        const value = sg ? sg.getItem(key) || "" : "";
         return value ? JSON.parse(value) : value;
     },
 };
