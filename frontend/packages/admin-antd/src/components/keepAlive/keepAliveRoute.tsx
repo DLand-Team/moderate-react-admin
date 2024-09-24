@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { ROUTE_ID_KEY } from "src/router";
 
 export type KeepAliveComponentProps = React.PropsWithChildren<{
-	parentDomRef: RefObject<HTMLElement>;
+	parentDomRef: RefObject<HTMLElement | null>;
 	activeKey: ROUTE_ID_KEY;
 	pageKey: ROUTE_ID_KEY;
 }>;

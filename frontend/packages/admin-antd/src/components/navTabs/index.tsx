@@ -126,9 +126,9 @@ const NavTabs = () => {
 		language,
 		setRefreshKey,
 	} = useFlat("appStore");
-	const currentTabRef = useRef<string>();
+	const currentTabRef = useRef<string | undefined>("");
 	const [tabClassName, setTabClassName] = useState("");
-	const currentDragRef = useRef<string>();
+	const currentDragRef = useRef<string | undefined>("");
 	const sensor = useSensor(PointerSensor, {
 		activationConstraint: { distance: 10 },
 	});
@@ -315,7 +315,6 @@ const NavTabs = () => {
 		action: "add" | "remove",
 	) => {
 		if (action === "remove") {
-			;
 			appHelper.closeTabByPath({
 				pathName: tabItems.find((item) => {
 					return item.key == targetKey;

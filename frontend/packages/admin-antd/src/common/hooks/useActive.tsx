@@ -22,7 +22,7 @@ const useActive = (
 		activeKey: "IN",
 	});
 	const currentPath = useRef<string>(location.pathname);
-	const activeFlag = useRef<boolean>();
+	const activeFlag = useRef<boolean | undefined>(false);
 	const isFirsted = useRef(false);
 	const activeDepsRecord = useRef(activeDeps);
 

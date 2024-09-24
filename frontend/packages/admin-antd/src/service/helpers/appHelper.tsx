@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, type JSX } from "react";
 import { UUID, cloneDeep } from "src/common/utils";
 import i18n from "src/i18n";
 import { pageList } from "src/pages";

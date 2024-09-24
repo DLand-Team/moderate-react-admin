@@ -30,7 +30,7 @@ const ModalForm = ({ handleCancel }: EditViewProps) => {
         }
     }, [currentData, isShowModal]);
 
-    const prime_id = useRef();
+    const prime_id = useRef(undefined);
     return (
         <Modal
             open={isShowModal}

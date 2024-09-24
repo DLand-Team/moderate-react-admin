@@ -16,7 +16,7 @@ interface EditableCellProps<T> extends React.HTMLAttributes<HTMLElement> {
     form: FormInstance<T>;
 }
 
-const EditableCell: <T>(props: EditableCellProps<T>) => React.ReactElement = ({
+const EditableCell: <T>(props: EditableCellProps<T>) => React.ReactElement<any> = ({
     editing,
     children,
     fieldConfig,
@@ -47,7 +47,7 @@ export type Wrapper<T> = (
         setDataList: React.Dispatch<React.SetStateAction<T[]>>;
         setIsfresh: () => void;
     }>
-) => React.ReactElement;
+) => React.ReactElement<any>;
 export type ColumnsCreater<T> = (props: {
     editingKey: string;
     form: FormInstance<T>;

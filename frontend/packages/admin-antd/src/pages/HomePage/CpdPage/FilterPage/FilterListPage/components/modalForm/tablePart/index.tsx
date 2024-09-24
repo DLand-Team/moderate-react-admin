@@ -67,7 +67,7 @@ const CustomTable = (
         isDetail: boolean;
         handleIsEditing: (isEditing: boolean) => void;
     } & {
-        ref: React.RefObject<unknown>;
+        ref: React.RefObject<unknown | null>;
     }
 ) => {
     const { handleIsEditing, isDetail = false } = dataProps;

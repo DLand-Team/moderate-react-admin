@@ -1,4 +1,4 @@
-import { Fragment, Suspense } from "react";
+import { Fragment, Suspense, type JSX } from "react";
 import { Route } from "react-router-dom";
 import { throttle, includeOne, upFirstcharacter } from "src/common/utils";
 import { pageList } from "src/pages";

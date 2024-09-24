@@ -1,4 +1,4 @@
-import React from "react";
+import React, { type JSX } from "react";
 import type { RouteProps } from "react-router-dom";
 import { pageList } from "src/pages";
 import { ACTION_DICT, MenuIconType } from "src/static";

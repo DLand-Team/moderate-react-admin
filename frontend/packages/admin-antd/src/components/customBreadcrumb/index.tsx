@@ -1,5 +1,5 @@
 import { Breadcrumb } from "antd";
-import { useState } from "react";
+import { useState, type JSX } from "react";
 import { useTranslation } from "react-i18next";
 import type { Location } from "react-router-dom";
 import useLocationListen from "src/common/hooks/useLocationListen";

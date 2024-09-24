@@ -16,7 +16,7 @@ export interface TableCardProps {
 	desc?: string;
 	buttonList: {
 		title: string;
-		icon?: ReactElement;
+		icon?: ReactElement<any>;
 		handleClick?: MouseEventHandler<HTMLElement>;
 		option?: ButtonProps;
 	}[];

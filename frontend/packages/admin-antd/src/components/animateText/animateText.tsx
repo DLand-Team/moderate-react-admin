@@ -132,8 +132,8 @@ function fragment(value: number): DocumentFragment {
 }
 const AnimateTest = (props: any) => {
 	const { texts } = props;
-	let container = useRef();
-	let container2 = useRef();
+	let container = useRef(undefined);
+	let container2 = useRef(undefined);
 	function init(): void {
 		setTimeout(() => {
 			if (destroyed) {

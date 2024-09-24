@@ -4,7 +4,7 @@ import styles from "./helloPage.module.scss";
 import { Info } from "./info";
 
 export default () => {
-	const containerRef = useRef<HTMLElement>();
+	const containerRef = useRef<HTMLElement | undefined>(undefined);
 	return (
 		<div
 			id="helloConent"
