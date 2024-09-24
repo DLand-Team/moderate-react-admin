@@ -11,6 +11,7 @@ const RuleEditPage = () => {
 	useActive(
 		{
 			onFirstActive() {
+				debugger;
 				dpChain(["ruleStore", branchName]).getCurrentDetailAct({
 					id,
 				});

@@ -29,6 +29,7 @@ const thunks = createThunks(["ruleStore", slice.branch], {
 	},
 	initItineraryListAct: async (_, __, branchName) => {
 		const data = ruleHelper.getItDefault();
+		debugger;
 		dpChain(["ruleStore", branchName]).setItineraryList(
 			data as RuleItineraryItem[],
 		);
@@ -54,6 +55,7 @@ const thunks = createThunks(["ruleStore", slice.branch], {
 		let ruleData: Rule;
 		const { data } = await httpApi.getRuleDetailApi(params);
 		ruleData = { ...data } as Rule;
+		debugger;
 		dpChain(["ruleStore", branchName]).setItineraryList(
 			data?.cpdRuleItinerarys || [],
 		);

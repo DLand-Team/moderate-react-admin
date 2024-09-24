@@ -99,7 +99,7 @@ const KeepAliveOutlet = memo(() => {
 			id: cacheKey,
 			comp: outlet,
 		});
-		debugger;
+		;
 		let key = activeKey.current;
 		if (currentRouteConfig?.segment) {
 			key = (activeKey.current +
@@ -112,7 +112,7 @@ const KeepAliveOutlet = memo(() => {
 		forceUpdate();
 	}, [cacheKey, cacheSig[0]]);
 	const aliveParentRef = useRef(null);
-	debugger;
+	;
 	return (
 		<>
 			<AnimationWrapper>

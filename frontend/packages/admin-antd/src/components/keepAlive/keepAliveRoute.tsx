@@ -11,7 +11,7 @@ export type KeepAliveComponentProps = React.PropsWithChildren<{
 function keepAliveRoute(props: KeepAliveComponentProps) {
 	const { parentDomRef, activeKey, children, pageKey } = props;
 	const isActive = activeKey == pageKey;
-	debugger;
+	;
 	const aliveDom = useMemo(() => {
 		const aliveDom = document.createElement("div");
 		aliveDom.setAttribute("id", "alive");
