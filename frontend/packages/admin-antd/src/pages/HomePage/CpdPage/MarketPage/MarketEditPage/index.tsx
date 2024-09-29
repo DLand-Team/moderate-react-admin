@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useActive } from "src/common/hooks";
 import { ROUTE_ID } from "src/router";
@@ -27,9 +26,6 @@ const MarketEditPage = (props: EditViewProps) => {
 		},
 		[id],
 	);
-	useEffect(() => {
-		return () => {};
-	}, [id]);
 
 	return <EditView id={id!} branchName={branchName} {...props} />;
 };

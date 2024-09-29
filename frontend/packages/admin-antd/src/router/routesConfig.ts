@@ -278,7 +278,6 @@ export const ROUTE_CONFIG_MAP: {
 		},
 		component: "RuleEditPage",
 		depends: ["RulePage"],
-		keepAlive: true,
 		isMenu: false,
 		isNoAuth: true,
 	},

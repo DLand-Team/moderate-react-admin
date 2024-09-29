@@ -16,7 +16,6 @@ const AnimationWrapper = ({ children }: PropsWithChildren) => {
 			animate="in"
 			exit="out"
 			initial="initial"
-			key={location.pathname}
 			transition={RouteTransition}
 			style={{
 				height: "100%",
