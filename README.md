@@ -1,4 +1,9 @@
 # moderate-admin-react-antd5
+# 当前的进军路线
+目前正在打造Nextjs15+React19+Rspack+Mui6等最新技术栈的项目。
+
+# 军令状
+- 战役的时间节点定在**10月末**，推出nextjs+mui全新版本，保证完成任务～
 
 ## 温馨提示
 
