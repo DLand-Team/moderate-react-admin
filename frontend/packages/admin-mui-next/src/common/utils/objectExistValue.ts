@@ -1,1 +1,0 @@
-export const objectExistValue = (obj: any) => Object.keys(obj).length > 0;
