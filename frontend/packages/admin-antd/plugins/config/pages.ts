@@ -14,10 +14,17 @@ const RivePage = lazy(
     ),
 );
 
+const MdPage = lazy(
+  () =>
+    import(
+      "plugins/moderate-plugin-markdown/pages/HomePage/CmsPage/MdPage"
+    ),
+);
 //>>>PAGE_INPORT_SIGN<<<//
 
 export const pageList = {
   WinboxPage,
   RivePage,
+  MdPage,
   //>>>PAGE_SIGN<<<//
 };

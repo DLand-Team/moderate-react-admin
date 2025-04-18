@@ -3,7 +3,7 @@
   "logo": "/logo.png",
   "icon": "",
   "paletteSet": { "light": "dland", "dark": "dland" },
-  "layoutSet": { "light": "Wind", "dark": "Wind" },
+  "layoutSet": { "light": "Default", "dark": "Wind" },
   "routerAni": "fade",
   "color": "light",
   "locale": "zh"

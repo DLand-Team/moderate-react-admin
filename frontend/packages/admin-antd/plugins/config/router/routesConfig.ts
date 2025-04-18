@@ -15,4 +15,10 @@ export const ROUTE_CONFIG_MAP: {
     isNoAuth: true,
     component: "RivePage",
   },
+  MdPage: {
+    id: "MdPage",
+    meta: { title: "MdPage:MdPageTitle" },
+    isNoAuth: true,
+    component: "MdPage",
+  },
 };
