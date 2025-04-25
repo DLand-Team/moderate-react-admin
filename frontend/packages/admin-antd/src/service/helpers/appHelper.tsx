@@ -115,9 +115,7 @@ export class AppHelper extends HelperBase {
 				(!isPublish && process.env.NODE_ENV == "production") ||
 				!isMenu ||
 				(!isNoAuth && !permissionList.includes(item.id as string)) ||
-				(component && !(component! in pageList)) ||
-				(permissionList.includes(item.id as string) &&
-					!item?.children?.length)
+				(component && !(component! in pageList))
 			) {
 				return;
 			}
