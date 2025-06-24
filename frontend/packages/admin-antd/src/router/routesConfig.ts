@@ -38,6 +38,7 @@ export const ROUTE_CONFIG_MAP: {
 			icon: "ApartmentOutlined",
 		},
 		actionPermissions: ["ADD", "EDIT"],
+		isNoAuth: true,
 	},
 	CmsPage: {
 		id: "CmsPage",
@@ -63,7 +64,6 @@ export const ROUTE_CONFIG_MAP: {
 			icon: "StarOutlined",
 		},
 		actionPermissions: ["ADD", "EDIT"],
-		isNoAuth: true,
 	},
 	RolePage: {
 		id: "RolePage",
@@ -71,6 +71,7 @@ export const ROUTE_CONFIG_MAP: {
 		component: "RolePage",
 		actionPermissions: ["ADD", "EDIT"],
 		path: undefined,
+		isNoAuth: true,
 	},
 	DevPage: {
 		id: "DevPage",
@@ -118,6 +119,7 @@ export const ROUTE_CONFIG_MAP: {
 		id: "MenuPage",
 		meta: { title: "common:MenuPageTitle" },
 		component: "MenuPage",
+		isNoAuth: true,
 	},
 	PluginsPage: {
 		id: "PluginsPage",
@@ -166,10 +168,12 @@ export const ROUTE_CONFIG_MAP: {
 	},
 	MarketListPage: {
 		id: "MarketListPage",
-
+		meta: {
+			title: "common:marketDetailPage",
+		},
 		component: "MarketListPage",
-		index: true,
 		depends: ["MarketPage"],
+		index: true,
 		isMenu: false,
 		isNoAuth: true,
 	},

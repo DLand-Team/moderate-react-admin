@@ -22,8 +22,8 @@ const stores = {
 	ruleStore,
 	marketStore,
 	posStore,
-    sortStore,
-    filterStore,
+	sortStore,
+	filterStore,
 	categoryStore,
 	...pluginStores,
 };

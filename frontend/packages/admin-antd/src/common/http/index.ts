@@ -1,4 +1,3 @@
-import { message } from "antd";
 import axios from "axios";
 import { dpChain } from "src/service";
 import storageHelper from "../utils/storageHelper";
@@ -10,6 +9,7 @@ const _http = axios.create({
 
 _http.interceptors.request.use(
 	(config) => {
+		config.headers["Tenant-id"] = 1;
 		config.headers.Authorization =
 			"Bearer " + storageHelper.getItem("ACCESS_TOKEN");
 		return config;
@@ -37,7 +37,6 @@ _http.interceptors.response.use(
 			Number(code) !== 200 &&
 			Number(code) !== 1
 		) {
-			message.warning(msg);
 			return handleError({
 				code,
 				message: msg,

@@ -21,7 +21,7 @@ export default defineConfig({
 			},
 			// 若依的后端接口
 			"/admin-api": {
-				target: "http://172.24.112.52:48080",
+				target: "http://localhost:48080",
 			},
 		},
 	},

@@ -2,7 +2,7 @@ import { ROUTE_ID } from "src/router";
 import { dpChain, getActionType } from "src/service";
 import { startAppListening } from "src/service";
 
-const watch = (branchName: string) => {
+const watch = ({ branchName }: { branchName: string }) => {
 	// 页码一边，就刷新列表
 	// 触发页码改变的情景如：
 	// 赛选条件变了

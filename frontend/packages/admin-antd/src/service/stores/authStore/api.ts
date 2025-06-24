@@ -1,8 +1,14 @@
 import { http } from "src/common/http";
-import { delay } from "src/common/utils";
 import storageHelper from "src/common/utils/storageHelper";
 import { dpChain } from "src/service";
-import { GetUserInfoParams, LoginApiParams, MenuPermissionItem } from "./model";
+import {
+	GetIdByNameApiReq,
+	GetUserInfoParams,
+	LoginApiReq,
+	LoginApiRes,
+	MenuItemData,
+	MenuPermissionItem,
+} from "./model";
 
 const baseUrl = "/admin-api/system";
 
@@ -18,6 +24,38 @@ const api = {
 			method: "post",
 		});
 	},
+	captchaApi() {
+		return http.request<any>({
+			url: "/admin-api/system/captcha/get",
+			method: "post",
+			data: {
+				captchaType: "blockPuzzle",
+			},
+		});
+	},
+	getIdByNameApi(data: GetIdByNameApiReq) {
+		return http.request<any>({
+			url:
+				"/admin-api/system/tenant/get-id-by-name?name=" +
+				data.tenantName,
+			method: "get",
+		});
+	},
+	loginApi(data: LoginApiReq) {
+		return http.request<LoginApiRes>({
+			url: "/admin-api/system/auth/login",
+			method: "post",
+			data,
+		});
+	},
+	// 获取权限
+	getPermissionInfoApi() {
+		return http.request<LoginApiRes>({
+			url: "/admin-api/system/auth/get-permission-info",
+			method: "get",
+		});
+	},
+	//
 	loginNestApi(_: any) {
 		return new Promise<{
 			data: { content: string };
@@ -34,22 +72,16 @@ const api = {
 		});
 	},
 
-	async loginApi(_: LoginApiParams) {
-		dpChain("appStore").setIsLoading(true);
-		await delay(3000);
-		dpChain("appStore").setIsLoading(false);
-		return Promise.resolve({
-			data: {
-				accessToken: Date.now().toString(),
-				refreshToken: Date.now().toString(),
-				userId: Date.now().toString(),
-			},
-		});
-	},
-
 	fetchUserPermissions() {
 		return http.request<{ permissions: any; menus: MenuPermissionItem[] }>({
 			url: baseUrl + "/auth/get-permission-info",
+			method: "GET",
+		});
+	},
+
+	getMenuListApi() {
+		return http.request<MenuItemData[]>({
+			url: "/admin-api/system/menu/list",
 			method: "GET",
 		});
 	},

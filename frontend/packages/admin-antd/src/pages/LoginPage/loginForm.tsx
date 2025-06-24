@@ -9,12 +9,18 @@ import { useFlat } from "src/service";
  */
 const LoginForm = () => {
 	const [form] = Form.useForm();
-	const { loginAct } = useFlat("authStore");
+	const { loginAct, getIdByNameAct, captchaAct } = useFlat("authStore");
 
 	const onFinish = async (values: { name: string; password: string }) => {
-		loginAct({
+		await captchaAct();
+		await getIdByNameAct({
+			tenantName: "芋道源码",
+		});
+		await loginAct({
 			username: values.name,
 			password: values.password,
+			rememberMe: true,
+			tenantName: "芋道源码",
 		})
 			.then(() => {
 				storageHelper.setItem("BTN_CON", "点击获取验证码");
