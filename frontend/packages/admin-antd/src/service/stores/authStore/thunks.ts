@@ -3,9 +3,11 @@ import { authHelper, createThunks, dpChain } from "src/service";
 import httpApi from "./api";
 import {
 	GetIdByNameApiReq,
+	GetMenuDataApiReq,
 	GetUserInfoParams,
 	LoginApiReq,
 	MenuPermissionItem,
+	UpdateMenuApiReq,
 } from "./model";
 
 const thunks = createThunks("authStore", {
@@ -39,7 +41,7 @@ const thunks = createThunks("authStore", {
 		const {
 			data: { permissions, menus },
 		} = await httpApi.fetchUserPermissions();
-
+		debugger;
 		const menuTreePermissions = {
 			id: -1,
 			parentId: -1,
@@ -76,6 +78,19 @@ const thunks = createThunks("authStore", {
 	async getUserinfoAct(arg: GetUserInfoParams) {
 		const { data } = await httpApi.getUserInfoApi(arg);
 		return data;
+	},
+	async updateMenuAct(arg: Partial<UpdateMenuApiReq>) {
+		await httpApi.updateMenuApi(arg);
+	},
+	async createMenuAct(arg: Partial<UpdateMenuApiReq>) {
+		await httpApi.createMenuApi(arg);
+	},
+	async getMenuDataAct(arg: GetMenuDataApiReq) {
+		const { data } = await httpApi.getMenuDataApi(arg);
+		dpChain("authStore").setCurrentEditMenuData(data);
+	},
+	async deleteMenuAct(arg: GetMenuDataApiReq) {
+		await httpApi.deleteMenuApi(arg);
 	},
 });
 export default thunks;

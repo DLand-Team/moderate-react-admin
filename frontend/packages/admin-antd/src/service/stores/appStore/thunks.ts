@@ -22,6 +22,7 @@ const thunks = createThunks("appStore", {
 			menuListData,
 			menuTreeData,
 		} = api.getState().authStore;
+		console.log(menuPermissions);
 		const { routesMap, routesTree } = reduxStore.getState().routerStore;
 		const menuData = appHelper.createMenuData({
 			menuPermissions,

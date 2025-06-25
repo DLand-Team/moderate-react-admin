@@ -20,6 +20,7 @@ export interface StoreState {
 	menuTreeData: MenuItemData[] | null;
 	menuListData: MenuItemData[] | null;
 	modalType: ModalType;
+	currentEditMenuData: MenuItemData | null;
 }
 export interface LoginNestApiParams {
 	username: string;
@@ -105,4 +106,26 @@ export interface LoginApiRes {
 
 export interface GetIdByNameApiReq {
 	tenantName: string;
+}
+
+export interface UpdateMenuApiReq {
+	alwaysShow: boolean;
+	component: string;
+	componentName: string;
+	createTime: number;
+	icon: string;
+	id: number;
+	keepAlive: boolean;
+	name: string;
+	parentId: number;
+	path: string;
+	permission: string;
+	sort: number;
+	status: number;
+	type: number;
+	visible: boolean;
+}
+
+export interface GetMenuDataApiReq {
+	id: number;
 }

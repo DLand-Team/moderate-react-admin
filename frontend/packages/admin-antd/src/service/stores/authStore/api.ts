@@ -2,11 +2,13 @@ import http from "src/common/http";
 import storageHelper from "src/common/utils/storageHelper";
 import {
 	GetIdByNameApiReq,
+	GetMenuDataApiReq,
 	GetUserInfoParams,
 	LoginApiReq,
 	LoginApiRes,
 	MenuItemData,
 	MenuPermissionItem,
+	UpdateMenuApiReq,
 } from "./model";
 import { getRefreshToken } from "src/common/http/auth";
 
@@ -92,6 +94,38 @@ const api = {
 			data: { deptId: string };
 		}>({
 			url: "/admin-api/system/user/get",
+			params,
+		});
+	},
+	updateMenuApi(data: Partial<UpdateMenuApiReq>) {
+		return http.put({
+			url: "/admin-api/system/menu/update",
+			data: {
+				...data,
+			},
+		});
+	},
+	createMenuApi(data: Partial<UpdateMenuApiReq>) {
+		return http.post({
+			url: "/admin-api/system/menu/create",
+			data: {
+				...data,
+			},
+		});
+	},
+	getMenuDataApi(params: GetMenuDataApiReq) {
+		return http.get<{
+			data: MenuItemData;
+		}>({
+			url: "/admin-api/system/menu/get",
+			params,
+		});
+	},
+	deleteMenuApi(params: GetMenuDataApiReq) {
+		return http.delete<{
+			data: MenuItemData;
+		}>({
+			url: "/admin-api/system/menu/delete",
 			params,
 		});
 	},

@@ -23,6 +23,7 @@ const SliderMenu = ({ isMobile }: { isMobile?: boolean }) => {
 		return appHelper.transMenuForAntdLoop(menuData);
 	}, [menuData, language]);
 
+	console.log(MenuItems);
 	useLocationListen(
 		(location: Location) => {
 			const { pathname } = location;

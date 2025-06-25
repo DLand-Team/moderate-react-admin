@@ -1,15 +1,15 @@
 import axios, {
-    AxiosError,
-    AxiosInstance,
-    AxiosResponse,
-    InternalAxiosRequestConfig,
+	AxiosError,
+	AxiosInstance,
+	AxiosResponse,
+	InternalAxiosRequestConfig,
 } from "axios";
 import qs from "qs";
 import {
-    getAccessToken,
-    getRefreshToken,
-    getTenantId,
-    getVisitTenantId,
+	getAccessToken,
+	getRefreshToken,
+	getTenantId,
+	getVisitTenantId,
 } from "./auth";
 import { config } from "./config";
 import errorCode from "./errorCode";

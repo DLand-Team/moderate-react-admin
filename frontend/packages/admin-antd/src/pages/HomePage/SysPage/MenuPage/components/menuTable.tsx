@@ -1,5 +1,5 @@
 import type { TableColumnsType, TableProps } from "antd";
-import { Button, Switch, Table } from "antd";
+import { Button, Modal, Switch, Table } from "antd";
 import React from "react";
 import { dpChain, useFlat } from "src/service";
 import ModalForm from "./modalForm";
@@ -13,6 +13,7 @@ interface DataType {
 	age: number;
 	address: string;
 	children?: DataType[];
+	id: number;
 }
 
 const columns: TableColumnsType<DataType> = [
@@ -65,7 +66,10 @@ const columns: TableColumnsType<DataType> = [
 					}}
 				>
 					<Button
-						onClick={() => {
+						onClick={async () => {
+							dpChain("authStore").getMenuDataAct({
+								id: record.id,
+							});
 							dpChain("authStore").setModalType("edit");
 						}}
 						type="link"
@@ -75,12 +79,30 @@ const columns: TableColumnsType<DataType> = [
 					<Button
 						onClick={() => {
 							dpChain("authStore").setModalType("add");
+							dpChain("authStore").setCurrentEditMenuData({
+								parentId: record.id,
+							});
 						}}
 						type="link"
 					>
 						新增
 					</Button>
-					<Button type="link">删除</Button>
+					<Button
+						type="link"
+						onClick={() => {
+							Modal.confirm({
+								title: "系统提示",
+								content: "是否删除选中数据",
+								onOk() {
+									dpChain("authStore").deleteMenuAct({
+										id: record.id,
+									});
+								},
+							});
+						}}
+					>
+						删除
+					</Button>
 				</div>
 			);
 		},

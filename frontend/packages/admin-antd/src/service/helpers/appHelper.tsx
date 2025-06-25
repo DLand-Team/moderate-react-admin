@@ -87,11 +87,11 @@ export class AppHelper extends HelperBase {
 			let clientMenuChildren = [];
 			for (let key in routesMap) {
 				const clientMenuItem = routesMap[key as ROUTE_ID_KEY];
-				const { isMenu = true } = clientMenuItem;
+				const { isMenu = true, isNoAuth } = clientMenuItem;
 				const isRegisterServer = !!menuListData.find((item) => {
 					return item.componentName == key;
 				});
-				if (!isMenu) {
+				if (!isMenu || !isNoAuth) {
 					continue;
 				}
 				if (
@@ -112,9 +112,6 @@ export class AppHelper extends HelperBase {
 			}
 			severMenuItem.children?.forEach(clientChildLoop);
 		};
-		if (menuListData.length) {
-			debugger;
-		}
 		clientChildLoop(root);
 	}
 

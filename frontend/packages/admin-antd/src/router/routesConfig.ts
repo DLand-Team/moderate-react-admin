@@ -203,7 +203,6 @@ export const ROUTE_CONFIG_MAP: {
 			title: "common:posPage",
 		},
 		component: "PosPage",
-		isNoAuth: true,
 	},
 	PosDetailPage: {
 		id: "PosDetailPage",

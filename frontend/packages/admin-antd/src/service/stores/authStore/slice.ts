@@ -39,6 +39,7 @@ const initialState = (): StoreState => {
 		menuTreeData: null,
 		menuListData: null,
 		modalType: "",
+		currentEditMenuData: null,
 	};
 };
 
@@ -119,6 +120,12 @@ const slice = createSlice({
 		},
 		setDemoData(state, { payload }: PayloadAction<Partial<DemoData>>) {
 			state.demoData = { ...state.demoData, ...payload } as DemoData;
+		},
+		setCurrentEditMenuData(
+			state,
+			{ payload }: PayloadAction<Partial<MenuItemData> | null>,
+		) {
+			state.currentEditMenuData = payload as MenuItemData;
 		},
 	},
 });

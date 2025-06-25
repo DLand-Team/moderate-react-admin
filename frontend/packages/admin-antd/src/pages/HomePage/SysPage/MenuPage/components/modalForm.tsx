@@ -1,45 +1,90 @@
-import { Checkbox, Form, Input, Modal, TreeSelect } from "antd";
-import TreeSelectBase from "src/components/treeSelectBase";
+import {
+	Form,
+	Input,
+	InputNumber,
+	Modal,
+	notification,
+	Radio,
+	Select,
+	TreeSelect,
+} from "antd";
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
+import i18n from "src/i18n";
 import { useFlat } from "src/service";
+import { MenuItemData } from "src/service/stores/authStore/model";
 
-interface Values {
-	title: string;
-	description: string;
-	modifier: string;
-}
+const options = [
+	{ label: i18n.t("menu:menuType_group"), value: 1 },
+	{ label: i18n.t("menu:menuType_menu"), value: 2 },
+	{ label: i18n.t("menu:menuType_link"), value: 3 },
+];
 
-interface CollectionCreateFormProps {
-	open: boolean;
-	onCreate: (values: Values) => void;
-	onCancel: () => void;
-}
-
-const CollectionCreateForm = ({
-	open,
-	onCreate,
-	onCancel,
-}: CollectionCreateFormProps) => {
-	const { menuTreeData } = useFlat("authStore");
-	if (menuTreeData?.length) {
-	}
-
-	// 引入natur的articleStore
-	const [form] = Form.useForm();
+const ModalForm = () => {
+	const { t } = useTranslation();
+	const { routesMap } = useFlat("routerStore");
+	const {
+		menuTreeData,
+		menuListData,
+		updateMenuAct,
+		createMenuAct,
+		currentEditMenuData,
+		setCurrentEditMenuData,
+		modalType,
+		setModalType,
+	} = useFlat("authStore");
+	const [form] = Form.useForm<MenuItemData>();
+	useEffect(() => {
+		form.setFieldsValue(currentEditMenuData || {});
+	}, [currentEditMenuData]);
+	const handleClose = () => {
+		setModalType("");
+		form.resetFields();
+		if (modalType == "edit") {
+			setCurrentEditMenuData(null);
+		}
+	};
 	return (
 		<Modal
-			open={open}
+			open={!!modalType}
 			title="新建路由"
 			okText="确定"
 			cancelText="取消"
 			onCancel={() => {
-				form.resetFields();
-				onCancel();
+				handleClose();
 			}}
+			onClose={() => {}}
 			onOk={() => {
 				form.validateFields()
 					.then((values) => {
-						form.resetFields();
-						onCreate(values);
+						const {
+							componentName,
+							sort,
+							type,
+							name,
+							parentId,
+							status,
+						} = values;
+						const api =
+							modalType == "edit" ? updateMenuAct : createMenuAct;
+						api({
+							...currentEditMenuData,
+							componentName,
+							path: componentName,
+							sort,
+							type: Number(type),
+							name,
+							parentId,
+							status,
+						});
+						notification.success({
+							message: "成功",
+							description: "",
+							showProgress: true,
+							duration: 2,
+							pauseOnHover: true,
+						});
+						handleClose();
 					})
 					.catch((info) => {
 						console.log("Validate Failed:", info);
@@ -53,8 +98,8 @@ const CollectionCreateForm = ({
 				initialValues={{ modifier: "public" }}
 			>
 				<Form.Item
-					name="name"
-					label="路由名称"
+					name="parentId"
+					label={t("menu:parentMenu")}
 					rules={[
 						{
 							required: true,
@@ -68,84 +113,107 @@ const CollectionCreateForm = ({
 						dropdownStyle={{ maxHeight: 400, overflow: "auto" }}
 						placeholder="Please select"
 						allowClear
-						treeData={menuTreeData!}
+						treeData={[
+							{
+								id: "0",
+								name: "主类目",
+								children: menuTreeData as any,
+							},
+						]}
 						fieldNames={{
 							label: "name",
 							value: "id",
 						}}
 					/>
 				</Form.Item>
-				<TreeSelectBase
+				<Form.Item
 					rules={[
 						{
 							required: true,
 							message: "请输入!",
 						},
 					]}
-					name={"path"}
-					label={"路径关系"}
-				/>
-				<Form.Item
-					valuePropName="checked"
-					name={"isNoAuth"}
-					label="不鉴权，客户端强制显示"
+					name={"name"}
+					label={t("menu:menuName")}
 				>
-					<Checkbox />
+					<Input />
 				</Form.Item>
+
 				<Form.Item
-					valuePropName="checked"
-					name={"isOutlet"}
-					label="是否嵌套子路由"
-				>
-					<Checkbox />
-				</Form.Item>
-				<Form.Item
-					valuePropName="checked"
-					name={"index"}
-					label="是否作为Index页面"
-				>
-					<Checkbox />
-				</Form.Item>
-				{/* // 备注 */}
-				<Form.Item
-					name={"remark"}
 					rules={[
 						{
 							required: true,
 							message: "请输入!",
 						},
 					]}
-					label="备注"
+					name={"type"}
+					label={t("menu:menuType")}
 				>
-					<Input type="textarea" />
+					<Radio.Group
+						options={options}
+						optionType="button"
+						buttonStyle="solid"
+					/>
 				</Form.Item>
-				<TreeSelectBase
-					rules={[]}
-					name={"depands"}
-					label={
-						"依赖的权限路由，即某个路由配置了权限，那么该路由就有权限"
-					}
-				/>
+
+				<Form.Item
+					name={"componentName"}
+					label={t("menu:componentName")}
+				>
+					<Select
+						showSearch
+						options={Object.values(routesMap)
+							.filter((routeItem) => {
+								return !menuListData?.find((item) => {
+									return item.componentName == routeItem.id;
+								});
+							})
+							.map((item) => {
+								return {
+									value: item.id,
+									label: item.id,
+								};
+							})}
+					></Select>
+				</Form.Item>
+				<Form.Item
+					rules={[
+						{
+							required: true,
+							message: "请输入!",
+						},
+					]}
+					name={"sort"}
+					label={t("menu:menuSort")}
+				>
+					<InputNumber type="number" />
+				</Form.Item>
+				<Form.Item
+					rules={[
+						{
+							required: true,
+							message: "请输入!",
+						},
+					]}
+					name={"status"}
+					label={t("menu:menuStatus")}
+					initialValue={0}
+				>
+					<Radio.Group
+						options={[
+							{
+								label: t("menu:menuStatus_off"),
+								value: 1,
+							},
+							{
+								label: t("menu:menuStatus_on"),
+								value: 0,
+							},
+						]}
+					></Radio.Group>
+				</Form.Item>
 			</Form>
 		</Modal>
-	);
-};
-
-const ModalForm = () => {
-	const { modalType, setModalType } = useFlat("authStore");
-
-	const onCreate = (values: any) => {
-		setModalType("");
-	};
-
-	return (
-		<CollectionCreateForm
-			open={!!modalType}
-			onCreate={onCreate}
-			onCancel={() => {
-				setModalType("");
-			}}
-		/>
 	);
 };
 
