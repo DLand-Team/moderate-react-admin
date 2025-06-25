@@ -1,15 +1,15 @@
 import axios, {
-	AxiosError,
-	AxiosInstance,
-	AxiosResponse,
-	InternalAxiosRequestConfig,
+    AxiosError,
+    AxiosInstance,
+    AxiosResponse,
+    InternalAxiosRequestConfig,
 } from "axios";
 import qs from "qs";
 import {
-	getAccessToken,
-	getRefreshToken,
-	getTenantId,
-	getVisitTenantId,
+    getAccessToken,
+    getRefreshToken,
+    getTenantId,
+    getVisitTenantId,
 } from "./auth";
 import { config } from "./config";
 import errorCode from "./errorCode";
@@ -20,7 +20,7 @@ import { dpChain } from "src/service";
 
 const tenantEnable = "true";
 const { result_code, request_timeout } = config;
-const base_url = "/admin-api";
+// const base_url = "/admin-api";
 // 需要忽略的提示。忽略后，自动 Promise.reject('error')
 const ignoreMsgs = [
 	"无效的刷新令牌", // 刷新令牌被删除时，不用提示
@@ -201,7 +201,6 @@ service.interceptors.response.use(
 	(error: AxiosError) => {
 		console.log("err" + error); // for debug
 		let { message: _message } = error;
-		const { t } = useI18n();
 		if (_message === "Network Error") {
 			_message = t("sys.api.errorMessage");
 		} else if (_message.includes("timeout")) {
@@ -216,14 +215,6 @@ service.interceptors.response.use(
 	},
 );
 
-const refreshToken = async () => {
-	axios.defaults.headers.common["tenant-id"] = getTenantId();
-	return await axios.post(
-		base_url +
-			"/system/auth/refresh-token?refreshToken=" +
-			getRefreshToken(),
-	);
-};
 const handleAuthorized = () => {
 	if (!isRelogin.show) {
 		// 如果已经到登录页面则不进行弹窗提示
