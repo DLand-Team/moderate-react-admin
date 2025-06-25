@@ -66,7 +66,7 @@ const useActive = (
 				const isLast =
 					!appHelper.judeIsHasTabByPath(currentPath.current) ||
 					!routerHelper.getRoutItemConfigByPath(currentPath.current)
-						.keepAlive;
+						?.keepAlive;
 				if (isLast && onLastLeave) {
 					onLastLeave();
 				} else {

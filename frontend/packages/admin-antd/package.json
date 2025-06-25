@@ -29,6 +29,7 @@
 		"i18next": "^23.10.1",
 		"i18next-browser-languagedetector": "^7.2.0",
 		"i18next-http-backend": "^2.5.0",
+		"jsencrypt": "^3.3.2",
 		"lodash-es": "^4.17.21",
 		"lz-string": "^1.5.0",
 		"nprogress": "^0.2.0",
@@ -46,12 +47,13 @@
 		"react-router-dom": "^6.22.3",
 		"react-syntax-highlighter": "^15.5.0",
 		"react-winbox": "^1.5.0",
-		"redux-eazy": "0.1.9-beta.23",
+		"redux-eazy": "0.1.16-beta.1",
 		"rehype-components": "^0.3.0",
 		"rehype-katex": "^7.0.1",
 		"rehype-raw": "^7.0.0",
 		"remark-gfm": "^4.0.0",
 		"remark-math": "^6.0.0",
+		"web-storage-cache": "^1.1.1",
 		"winbox": "^0.2.82"
 	},
 	"devDependencies": {

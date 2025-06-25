@@ -1,8 +1,7 @@
-import { message } from "antd";
 import React, { useEffect } from "react";
 import { Provider } from "redux-eazy";
 import { storageHelper } from "src/common/utils";
-import { devHelper, dpChain, reduxStore } from "../service";
+import { dpChain, reduxStore } from "../service";
 
 const App = (props: React.PropsWithChildren<{}>) => {
 	return <>{props.children}</>;
@@ -11,15 +10,15 @@ const App = (props: React.PropsWithChildren<{}>) => {
 const ServiceProvider = (props: React.PropsWithChildren<{}>) => {
 	useEffect(() => {
 		if (process.env.NODE_ENV === "development") {
-			devHelper.SocketSetup();
-			devHelper.socket.on("addPluginSuccessed", () => {
-				dpChain("appStore").setIsLoading(false);
-				storageHelper.removeItem("IS_PLUGIN_INSTALLING");
-				message.success("yeah~ plguin add success!");
-			});
-			devHelper.socket.on("connect_error", () => {
-				devHelper.socket.close();
-			});
+			// devHelper.SocketSetup();
+			// devHelper.socket.on("addPluginSuccessed", () => {
+			// 	dpChain("appStore").setIsLoading(false);
+			// 	storageHelper.removeItem("IS_PLUGIN_INSTALLING");
+			// 	message.success("yeah~ plguin add success!");
+			// });
+			// devHelper.socket.on("connect_error", () => {
+			// 	devHelper.socket.close();
+			// });
 			if (sessionStorage.getItem("IS_PLUGIN_INSTALLING") == "1") {
 				setTimeout(() => {
 					storageHelper.removeItem("IS_PLUGIN_INSTALLING");

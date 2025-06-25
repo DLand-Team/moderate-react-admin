@@ -14,7 +14,7 @@ import {
 } from "./model";
 
 const initialState = (): StoreState => {
-	const menuData = appHelper.createMenuData();
+	const menuData = appHelper.createMenuData({});
 	const settingDataPreset = {
 		projectName: "Dland Admin",
 		logo: "/logoBig.png",

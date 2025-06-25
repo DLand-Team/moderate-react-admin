@@ -1,9 +1,9 @@
 import { Fit, Layout } from "@rive-app/react-canvas";
 import { RiveAni } from "plugins/moderate-plugin-rive/common/components/riveAni";
+import { useIsMobile } from "src/common/hooks";
 import LoginCard from "./loginCard";
 import LoginForm from "./loginForm";
 import styles from "./loginPage.module.scss";
-import { useIsMobile } from "src/common/hooks";
 
 const LoginPage = () => {
 	const isMobile = useIsMobile();

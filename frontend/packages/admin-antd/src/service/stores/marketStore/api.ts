@@ -1,4 +1,4 @@
-import { http, httpBase } from "src/common/http";
+import { http, httpBase } from "src/common/httpOld";
 import {
     DeleteApiParams,
     GetAgencyDataApiParams,

@@ -46,7 +46,7 @@ const KeepAliveOutlet = memo(() => {
 			const configItem = routerHelper.getRoutItemConfigByPath(
 				item.location?.pathname!,
 			);
-			if (configItem.segment) {
+			if (configItem?.segment) {
 				return item.location?.pathname?.split("/").slice(-2).join("/");
 			}
 			return item.location?.pathname?.split("/").slice(-1)[0];

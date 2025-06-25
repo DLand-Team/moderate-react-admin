@@ -2,7 +2,7 @@ import { ROUTE_ID } from "src/router";
 import { dp, dpChain, getActionType } from "src/service";
 import { startAppListening } from "src/service";
 
-const watch = (branchName: string) => {
+const watch = ({ branchName }: { branchName: string }) => {
 	startAppListening({
 		type: getActionType(["posStore", branchName]).setPosFilterData,
 		effect: async () => {
