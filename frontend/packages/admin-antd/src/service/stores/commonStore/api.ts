@@ -1,4 +1,4 @@
-import { http } from "src/common/http";
+import { http } from "src/common/httpOld";
 import { MarketCarrier, RedisData } from "./model";
 
 function getLocationListApi() {

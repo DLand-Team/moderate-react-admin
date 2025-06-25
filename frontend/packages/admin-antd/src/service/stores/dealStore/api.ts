@@ -1,4 +1,4 @@
-import { http } from "src/common/http";
+import { http } from "src/common/httpOld";
 import { RankApiParams } from "./model";
 
 const baseUrl = "/api/deal/";

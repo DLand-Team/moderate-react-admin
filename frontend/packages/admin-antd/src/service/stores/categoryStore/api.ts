@@ -1,4 +1,4 @@
-import { http, http2 } from "src/common/http";
+import { http, http2 } from "src/common/httpOld";
 import { Category } from "./model";
 
 const baseUrl = "/api/category/";

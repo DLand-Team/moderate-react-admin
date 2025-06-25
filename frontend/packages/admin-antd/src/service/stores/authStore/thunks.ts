@@ -32,9 +32,8 @@ const thunks = createThunks("authStore", {
 	},
 	async refreshTokenAct() {
 		const { data } = await httpApi.refreshToken();
-		storageHelper.setItem("REFRESH_TOKEN", data.refreshToken);
 		dpChain("authStore").setToken(data);
-		return data.refreshToken;
+		return data;
 	},
 	getUserPermissionsAct: async () => {
 		const {
@@ -77,18 +76,6 @@ const thunks = createThunks("authStore", {
 	async getUserinfoAct(arg: GetUserInfoParams) {
 		const { data } = await httpApi.getUserInfoApi(arg);
 		return data;
-	},
-	async getInfraConfigAct() {
-		const { data } = await httpApi.getInfraConfigApi();
-		const { value } = data;
-		const [url, sname, spswd] = value.split("@@");
-
-		dpChain("authStore").setDemoData({
-			url,
-			sname,
-			spswd,
-			userType: "airline",
-		});
 	},
 });
 export default thunks;

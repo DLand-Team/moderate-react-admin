@@ -29,6 +29,7 @@
 		"i18next": "^23.10.1",
 		"i18next-browser-languagedetector": "^7.2.0",
 		"i18next-http-backend": "^2.5.0",
+		"jsencrypt": "^3.3.2",
 		"lodash-es": "^4.17.21",
 		"lz-string": "^1.5.0",
 		"nprogress": "^0.2.0",
@@ -52,6 +53,7 @@
 		"rehype-raw": "^7.0.0",
 		"remark-gfm": "^4.0.0",
 		"remark-math": "^6.0.0",
+		"web-storage-cache": "^1.1.1",
 		"winbox": "^0.2.82"
 	},
 	"devDependencies": {

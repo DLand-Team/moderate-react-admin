@@ -1,6 +1,5 @@
-import { http } from "src/common/http";
+import http from "src/common/http";
 import storageHelper from "src/common/utils/storageHelper";
-import { dpChain } from "src/service";
 import {
 	GetIdByNameApiReq,
 	GetUserInfoParams,
@@ -9,134 +8,91 @@ import {
 	MenuItemData,
 	MenuPermissionItem,
 } from "./model";
+import { getRefreshToken } from "src/common/http/auth";
 
 const baseUrl = "/admin-api/system";
 
 const api = {
 	refreshToken() {
-		return http.request<{
-			refreshToken: string;
-			accessToken: string;
+		return http.post<{
+			data: {
+				refreshToken: string;
+				accessToken: string;
+			};
 		}>({
 			url:
 				"/admin-api/system/auth/refresh-token?refreshToken=" +
-				storageHelper.getItem("REFRESH_TOKEN"),
-			method: "post",
+				getRefreshToken(),
 		});
 	},
 	captchaApi() {
-		return http.request<any>({
+		return http.post<any>({
 			url: "/admin-api/system/captcha/get",
-			method: "post",
 			data: {
 				captchaType: "blockPuzzle",
 			},
 		});
 	},
 	getIdByNameApi(data: GetIdByNameApiReq) {
-		return http.request<any>({
+		return http.get<any>({
 			url:
 				"/admin-api/system/tenant/get-id-by-name?name=" +
 				data.tenantName,
-			method: "get",
 		});
 	},
 	loginApi(data: LoginApiReq) {
-		return http.request<LoginApiRes>({
+		return http.post<{ data: LoginApiRes }>({
 			url: "/admin-api/system/auth/login",
-			method: "post",
 			data,
 		});
 	},
 	// 获取权限
 	getPermissionInfoApi() {
-		return http.request<LoginApiRes>({
+		return http.get<{ data: LoginApiRes }>({
 			url: "/admin-api/system/auth/get-permission-info",
-			method: "get",
 		});
 	},
-	//
-	loginNestApi(_: any) {
-		return new Promise<{
-			data: { content: string };
-		}>((resolve) => {
-			dpChain("appStore").setIsLoading(true);
-			setTimeout(() => {
-				dpChain("appStore").setIsLoading(false);
-				resolve({
-					data: {
-						content: "http://localhost:8681",
-					},
-				});
-			}, 3000);
-		});
-	},
-
 	fetchUserPermissions() {
-		return http.request<{ permissions: any; menus: MenuPermissionItem[] }>({
+		return http.get<{
+			data: { permissions: any; menus: MenuPermissionItem[] };
+		}>({
 			url: baseUrl + "/auth/get-permission-info",
-			method: "GET",
 		});
 	},
 
 	getMenuListApi() {
-		return http.request<MenuItemData[]>({
+		return http.get<{ data: MenuItemData[] }>({
 			url: "/admin-api/system/menu/list",
-			method: "GET",
 		});
 	},
 
 	//获取滑块图片
 	getImageUrlApi() {
-		return http.request({
+		return http.post({
 			url: baseUrl + "/auth/imageUrl",
-			method: "POST",
 		});
 	},
 
 	//获取活块验证成功标志
 	getCaptchaApi() {
-		return http.request({
+		return http.post({
 			url: baseUrl + "/auth/captcha",
-			method: "POST",
 		});
 	},
 
 	//获取邮箱验证码
 	getLoginCodeApi(params: any = {}) {
-		return http.request({
+		return http.post({
 			url: baseUrl + "/captcha/getUc",
-			method: "POST",
 			data: params,
 		});
 	},
-	createCpdSortItemDefaultApi() {
-		return http.request({
-			url: "/admin-api/usercenter/cpd-sort-item/createCpdSortItemDefault",
-			method: "GET",
-		});
-	},
 	getUserInfoApi(params: GetUserInfoParams) {
-		return http.request<{ deptId: string }>({
+		return http.get<{
+			data: { deptId: string };
+		}>({
 			url: "/admin-api/system/user/get",
 			params,
-			method: "GET",
-		});
-	},
-	getDeptInfoApi(params: GetUserInfoParams) {
-		return http.request({
-			url: "/admin-api/system/dept/get",
-			params,
-			method: "GET",
-		});
-	},
-	getInfraConfigApi() {
-		return http.request<{ value: string }>({
-			url: "/admin-api/infra/config/get",
-			params: {
-				id: "1818139318429220866",
-			},
-			method: "GET",
 		});
 	},
 };

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { MdPreview } from "../../../../components/mdPreview";
-import { http2 } from "src/common/http";
+import { http2 } from "src/common/httpOld";
 const PdfPage = () => {
 	const [md, setMd] = useState("");
 	useEffect(() => {

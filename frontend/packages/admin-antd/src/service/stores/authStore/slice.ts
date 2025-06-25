@@ -10,6 +10,7 @@ import {
 	RefreshTokenRes,
 	StoreState,
 } from "./model";
+import { getAccessToken, setToken } from "src/common/http/auth";
 
 const initialState = (): StoreState => {
 	const defaultPermissions = Object.values(ROUTE_CONFIG_MAP)
@@ -21,7 +22,7 @@ const initialState = (): StoreState => {
 		});
 	return {
 		userName: "",
-		token: storageHelper.getItem("ACCESS_TOKEN") || "",
+		token: getAccessToken() || "",
 		qiniuToken: "",
 		permissions: defaultPermissions!,
 		routesPermissions: defaultPermissions,
@@ -54,9 +55,10 @@ const slice = createSlice({
 		setToken(state, { payload }: PayloadAction<RefreshTokenRes>) {
 			const { accessToken, refreshToken } = payload;
 			state.token = payload.accessToken;
-			storageHelper.setItem("REFRESH_TOKEN", refreshToken);
-			storageHelper.setItem("ACCESS_TOKEN", accessToken);
-			storageHelper.setItem("IS_ADMIN", accessToken);
+			setToken({
+				accessToken,
+				refreshToken,
+			});
 		},
 		// 设置后端传过来的原始权限数据
 		setPermissions(
