@@ -2,6 +2,7 @@ import { ROUTE_CONFIG_MAP, RoutesStructDataItem } from "src/router";
 import { ACTION_DICT } from "src/static";
 import { type MenuPermissionItem } from "../stores/authStore/model";
 import HelperBase from "./_helperBase";
+import { FilterType } from "../stores/sysStore/model";
 
 type PermissionNode = any;
 
@@ -112,13 +113,78 @@ export class AuthHelper extends HelperBase {
 				tree.push(d);
 			}
 		}
-
+		debugger;
 		for (const t of tree) {
 			adaptToChildrenList(t);
 		}
 
 		function adaptToChildrenList(o) {
-			if (childrenListMap[o[config.id]] !== null) {
+			if (childrenListMap?.[o[config.id]] !== null) {
+				o[config.childrenList] = childrenListMap[o[config.id]];
+			}
+			if (o[config.childrenList]) {
+				for (const c of o[config.childrenList]) {
+					adaptToChildrenList(c);
+				}
+			}
+		}
+		return tree;
+	};
+
+	handleTreePro = ({
+		data,
+		id,
+		parentId,
+		children,
+		filterType,
+	}: {
+		data: any[];
+		id?: string;
+		parentId?: string;
+		children?: string;
+		filterType: FilterType;
+	}) => {
+		if (!Array.isArray(data)) {
+			console.warn("data must be an array");
+			return [];
+		}
+		const config = {
+			id: id || "id",
+			parentId: parentId || "parentId",
+			childrenList: children || "children",
+		};
+
+		const childrenListMap = {};
+		const nodeIds = {};
+		const tree: any[] = [];
+
+		for (const d of data) {
+			const parentId = d[config.parentId];
+			if (childrenListMap[parentId] == null) {
+				childrenListMap[parentId] = [];
+			}
+			nodeIds[d[config.id]] = d;
+			childrenListMap[parentId].push(d);
+		}
+
+		for (const d of data) {
+			const parentId = d[config.parentId];
+			if (nodeIds[parentId] == null) {
+				if (filterType == FilterType.ACTIVED) {
+					if (d.status === 0) {
+						tree.push(d);
+					}
+				} else {
+					tree.push(d);
+				}
+			}
+		}
+		for (const t of tree) {
+			adaptToChildrenList(t);
+		}
+
+		function adaptToChildrenList(o) {
+			if (childrenListMap?.[o[config.id]] !== null) {
 				o[config.childrenList] = childrenListMap[o[config.id]];
 			}
 			if (o[config.childrenList]) {

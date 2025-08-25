@@ -1,6 +1,11 @@
 import { Fragment, Suspense, type JSX } from "react";
 import { Route } from "react-router-dom";
-import { throttle, includeOne, upFirstcharacter } from "src/common/utils";
+import {
+	throttle,
+	includeOne,
+	upFirstcharacter,
+	sanitizePath,
+} from "src/common/utils";
 import { pageList } from "src/pages";
 import { historyInstance } from "src/providers/routerProvider/historyIns";
 import {
@@ -337,7 +342,7 @@ export class RouterHelper extends HelperBase {
 			if (item.segment) {
 				return item.path?.includes(path.replace(/\/[^\/]+$/, ""));
 			}
-			return item.path == path;
+			return item.path == sanitizePath(path);
 		})?.id!;
 	}
 

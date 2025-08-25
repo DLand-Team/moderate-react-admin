@@ -126,17 +126,8 @@ const ModalForm = () => {
 						}}
 					/>
 				</Form.Item>
-				<Form.Item
-					rules={[
-						{
-							required: true,
-							message: "请输入!",
-						},
-					]}
-					name={"name"}
-					label={t("menu:menuName")}
-				>
-					<Input />
+				<Form.Item name={"name"} label={t("menu:menuName")}>
+					<Input disabled />
 				</Form.Item>
 
 				<Form.Item
@@ -161,6 +152,9 @@ const ModalForm = () => {
 					label={t("menu:componentName")}
 				>
 					<Select
+						onChange={(e) => {
+							form.setFieldValue("name", e);
+						}}
 						showSearch
 						options={Object.values(routesMap)
 							.filter((routeItem) => {
@@ -183,6 +177,7 @@ const ModalForm = () => {
 							message: "请输入!",
 						},
 					]}
+					initialValue={1}
 					name={"sort"}
 					label={t("menu:menuSort")}
 				>

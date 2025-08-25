@@ -11,6 +11,7 @@ import ruleStore from "./ruleStore";
 import sortStore from "./sortStore";
 import commonStore from "./commonStore";
 import categoryStore from "./categoryStore";
+import sysStore from "./sysStore";
 
 const stores = {
 	appStore,
@@ -25,6 +26,7 @@ const stores = {
 	sortStore,
 	filterStore,
 	categoryStore,
+	sysStore,
 	...pluginStores,
 };
 

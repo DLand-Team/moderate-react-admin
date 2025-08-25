@@ -56,7 +56,7 @@ export default defineConfig({
                 rewrite: function (path) { return path.replace(/^\/devApi/, ""); },
             },
             "/admin-api": {
-                target: "http://172.24.153.225:48080",
+                target: "http://172.24.153.225:123",
                 changeOrigin: true, // 允许跨域
             },
         },

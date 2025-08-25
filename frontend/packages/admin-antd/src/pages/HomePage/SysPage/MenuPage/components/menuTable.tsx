@@ -1,28 +1,29 @@
-import type { TableColumnsType, TableProps } from "antd";
+import type { TableColumnsType } from "antd";
 import { Button, Modal, Switch, Table } from "antd";
+import { cloneDeep } from "lodash-es";
 import React from "react";
-import { dpChain, useFlat } from "src/service";
-import ModalForm from "./modalForm";
+import i18n from "src/i18n";
+import { authHelper, dpChain, routerHelper, useFlat } from "src/service";
+import { MenuItemData } from "src/service/stores/authStore/model";
 
-type TableRowSelection<T extends object = object> =
-	TableProps<T>["rowSelection"];
-
-interface DataType {
-	key: React.ReactNode;
-	name: string;
-	age: number;
-	address: string;
-	children?: DataType[];
-	id: number;
-}
-
-const columns: TableColumnsType<DataType> = [
+const columns: TableColumnsType<MenuItemData> = [
 	{
-		title: "菜单名称",
+		title: "前端i18n",
 		dataIndex: "name",
 		key: "name",
 		fixed: "left",
 		width: "200px",
+		render: (_, item) => {
+			const { componentName } = item;
+			const routerItem = routerHelper.getRoutItemConfigById(
+				componentName as any,
+			);
+			return (
+				<div>
+					{routerItem ? i18n.t(routerItem.meta?.title!) : item.name}
+				</div>
+			);
+		},
 	},
 	{
 		title: "路由名称",
@@ -109,35 +110,28 @@ const columns: TableColumnsType<DataType> = [
 	},
 ];
 
-// rowSelection objects indicates the need for row selection
-const rowSelection: TableRowSelection<DataType> = {
-	onChange: (selectedRowKeys, selectedRows) => {
-		console.log(
-			`selectedRowKeys: ${selectedRowKeys}`,
-			"selectedRows: ",
-			selectedRows,
-		);
-	},
-	onSelect: (record, selected, selectedRows) => {
-		console.log(record, selected, selectedRows);
-	},
-	onSelectAll: (selected, selectedRows, changeRows) => {
-		console.log(selected, selectedRows, changeRows);
-	},
-};
-
 const MenuTable: React.FC = () => {
-	const { menuTreeData } = useFlat("authStore");
+	const { filterType } = useFlat("sysStore");
+	const { menuListData } = useFlat("authStore");
+	let data = cloneDeep(menuListData) || [];
+	// if (filterType === FilterType.ACTIVED) {
+	// 	data =
+	// 		data?.filter((item) => {
+	// 			return item.status === 0;
+	// 		}) || [];
+	// }
+	const treeData = authHelper.handleTreePro({
+		data,
+		filterType: filterType,
+	});
 	return (
 		<>
-			<Table<DataType>
+			<Table<MenuItemData>
 				columns={columns}
-				rowSelection={{ ...rowSelection }}
-				dataSource={menuTreeData}
+				dataSource={treeData}
 				rowKey={"id"}
-				scroll={{ x: 2000 }}
+				scroll={{ x: 1000 }}
 			/>
-			<ModalForm />
 		</>
 	);
 };

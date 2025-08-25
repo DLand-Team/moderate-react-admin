@@ -28,7 +28,6 @@ export const ROUTE_CONFIG_MAP: {
 		component: "HelloPage",
 		actionPermissions: ["ADD", "EDIT"],
 		keepAlive: true,
-		isNoAuth: true,
 		index: true,
 	},
 	SysPage: {
@@ -38,7 +37,6 @@ export const ROUTE_CONFIG_MAP: {
 			icon: "ApartmentOutlined",
 		},
 		actionPermissions: ["ADD", "EDIT"],
-		isNoAuth: true,
 	},
 	CmsPage: {
 		id: "CmsPage",
@@ -55,15 +53,6 @@ export const ROUTE_CONFIG_MAP: {
 			title: "common:TemplatePage",
 			icon: "StarOutlined",
 		},
-		actionPermissions: ["ADD", "EDIT"],
-	},
-	CpdPage: {
-		id: "CpdPage",
-		meta: {
-			title: "common:cpdPage",
-			icon: "StarOutlined",
-		},
-		actionPermissions: ["ADD", "EDIT"],
 	},
 	RolePage: {
 		id: "RolePage",
@@ -71,7 +60,6 @@ export const ROUTE_CONFIG_MAP: {
 		component: "RolePage",
 		actionPermissions: ["ADD", "EDIT"],
 		path: undefined,
-		isNoAuth: true,
 	},
 	DevPage: {
 		id: "DevPage",
@@ -119,7 +107,6 @@ export const ROUTE_CONFIG_MAP: {
 		id: "MenuPage",
 		meta: { title: "common:MenuPageTitle" },
 		component: "MenuPage",
-		isNoAuth: true,
 	},
 	PluginsPage: {
 		id: "PluginsPage",

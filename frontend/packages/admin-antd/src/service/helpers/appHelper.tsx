@@ -167,42 +167,45 @@ export class AppHelper extends HelperBase {
 		// 如果没注册，那就找这个节点的依赖节点，如果存在就针对节点进行循环
 		const routeDataItem =
 			this.routerHelper.getRoutItemConfigByPath(pathName);
-		const loop = (routeDataItem: RouteItem) => {
-			const menuDataItem = menuList.find((item) => {
-				return item.componentName == routeDataItem?.id;
-			});
-			selectedKeys.push(routeDataItem.id);
-			openKeys.push(routeDataItem.id);
-			if (!menuDataItem) {
-				if (routeDataItem.depends?.length) {
-					const parentRouteDataItem =
-						this.routerHelper.getRoutItemConfigById(
-							routeDataItem.depends[0],
-						);
-					loop(parentRouteDataItem);
-				} else if (routeDataItem.parentId) {
-					const parentRouteDataItem =
-						this.routerHelper.getRoutItemConfigById(
-							routeDataItem.parentId,
-						);
-					loop(parentRouteDataItem);
-				}
-			} else {
-				const { parentId } = menuDataItem;
-				const parentMenuItem = menuList.find((item) => {
-					return item.id == parentId;
+		if (routeDataItem) {
+			const loop = (routeDataItem: RouteItem) => {
+				const menuDataItem = menuList.find((item) => {
+					return item.componentName == routeDataItem?.id;
 				});
-				if (parentMenuItem) {
-					const { componentName } = parentMenuItem;
-					const parentRouteDataItem =
-						this.routerHelper.getRoutItemConfigById(
-							componentName as ROUTE_ID_KEY,
-						);
-					parentRouteDataItem && loop(parentRouteDataItem);
+				selectedKeys.push(routeDataItem.id);
+				openKeys.push(routeDataItem.id);
+				if (!menuDataItem) {
+					if (routeDataItem.depends?.length) {
+						const parentRouteDataItem =
+							this.routerHelper.getRoutItemConfigById(
+								routeDataItem.depends[0],
+							);
+						loop(parentRouteDataItem);
+					} else if (routeDataItem.parentId) {
+						const parentRouteDataItem =
+							this.routerHelper.getRoutItemConfigById(
+								routeDataItem.parentId,
+							);
+						loop(parentRouteDataItem);
+					}
+				} else {
+					const { parentId } = menuDataItem;
+					const parentMenuItem = menuList.find((item) => {
+						return item.id == parentId;
+					});
+					if (parentMenuItem) {
+						const { componentName } = parentMenuItem;
+						const parentRouteDataItem =
+							this.routerHelper.getRoutItemConfigById(
+								componentName as ROUTE_ID_KEY,
+							);
+						parentRouteDataItem && loop(parentRouteDataItem);
+					}
 				}
-			}
-		};
-		loop(routeDataItem);
+			};
+			loop(routeDataItem);
+		}
+
 		return {
 			selectedKeys,
 			openKeys,

@@ -27,6 +27,13 @@ const watch = () => {
 			dpChain("authStore").getUserPermissionsAct(null);
 		},
 	});
+
+	startAppListening({
+		type: getActionType("sysStore").setFilterType,
+		effect: () => {
+			dpChain("authStore").getMenuListAct(null);
+		},
+	});
 };
 
 export default watch;

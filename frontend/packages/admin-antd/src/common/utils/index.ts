@@ -4,7 +4,7 @@ export * from "./fieldsPresetCreater"; // 预设表单数据
 export { default as storageHelper } from "./storageHelper";
 
 //--->>>通用<<<---//
-
+export { sanitizePath } from "./sanitizePath";
 export { bubbleSort } from "./bubbleSort";
 export { delay } from "./delay";
 export { enumToObject } from "./enumToObject";
