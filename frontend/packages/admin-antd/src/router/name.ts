@@ -17,6 +17,7 @@ export enum NAME {
 	ErrorPage,
 	LoadingPage,
 	PluginsPage,
+	UserPage,
 	// CpdPage,
 	// market
 	MarketPage,

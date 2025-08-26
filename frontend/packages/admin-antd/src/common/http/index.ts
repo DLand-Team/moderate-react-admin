@@ -1,10 +1,13 @@
 import { service } from "./service";
 
 import { config } from "./config";
+import { AxiosRequestConfig } from "axios";
 
 const { default_headers } = config;
 
-const request = (option: any) => {
+export type RequestOptions = AxiosRequestConfig & { headersType?: any };
+
+const request = (option: RequestOptions) => {
 	const { headersType, headers, ...otherOption } = option;
 	return service({
 		...otherOption,
@@ -14,28 +17,46 @@ const request = (option: any) => {
 		},
 	});
 };
+
+export type ResponseType<D> = {
+	data: D;
+	code: string | number;
+	message: null | string;
+	msg: null | string;
+};
+
 export default {
-	get: async <T = any>(option: any) => {
+	get: async <D extends any = any, T = ResponseType<D>>(
+		option: RequestOptions,
+	) => {
 		const res = await request({ method: "GET", ...option });
 		return res as unknown as T;
 	},
-	post: async <T = any>(option: any) => {
+	post: async <D extends any = any, T = ResponseType<D>>(
+		option: RequestOptions,
+	) => {
 		const res = await request({ method: "POST", ...option });
 		return res as unknown as T;
 	},
-	postOriginal: async (option: any) => {
+	postOriginal: async (option: RequestOptions) => {
 		const res = await request({ method: "POST", ...option });
 		return res;
 	},
-	delete: async <T = any>(option: any) => {
+	delete: async <D extends any = any, T = ResponseType<D>>(
+		option: RequestOptions,
+	) => {
 		const res = await request({ method: "DELETE", ...option });
 		return res as unknown as T;
 	},
-	put: async <T = any>(option: any) => {
+	put: async <D extends any = any, T = ResponseType<D>>(
+		option: RequestOptions,
+	) => {
 		const res = await request({ method: "PUT", ...option });
 		return res as unknown as T;
 	},
-	download: async <T = any>(option: any) => {
+	download: async <D extends any = any, T = ResponseType<D>>(
+		option: RequestOptions,
+	) => {
 		const res = await request({
 			method: "GET",
 			responseType: "blob",
@@ -43,7 +64,9 @@ export default {
 		});
 		return res as unknown as Promise<T>;
 	},
-	upload: async <T = any>(option: any) => {
+	upload: async <D extends any = any, T = ResponseType<D>>(
+		option: RequestOptions,
+	) => {
 		option.headersType = "multipart/form-data";
 		const res = await request({ method: "POST", ...option });
 		return res as unknown as Promise<T>;

@@ -1,5 +1,5 @@
 export interface PageBaseData {
 	pageSize: number;
-	pageNum: number;
+	pageNo: number;
 	total: number;
 }

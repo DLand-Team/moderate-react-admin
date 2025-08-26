@@ -66,6 +66,7 @@ export const ROUTE_STRUCT_CONFIG: RoutesStructDataItem[] = [
 				children: [
 					{ id: ROUTE_ID.MenuPage },
 					{ id: ROUTE_ID.RolePage },
+					{ id: ROUTE_ID.UserPage },
 				],
 			},
 			{

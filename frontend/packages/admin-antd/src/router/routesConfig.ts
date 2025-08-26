@@ -29,6 +29,7 @@ export const ROUTE_CONFIG_MAP: {
 		actionPermissions: ["ADD", "EDIT"],
 		keepAlive: true,
 		index: true,
+		isNoAuth: true,
 	},
 	SysPage: {
 		id: "SysPage",
@@ -54,12 +55,16 @@ export const ROUTE_CONFIG_MAP: {
 			icon: "StarOutlined",
 		},
 	},
+	UserPage: {
+		id: "UserPage",
+		meta: { title: "common:UserPageTitle" },
+		component: "UserPage",
+	},
 	RolePage: {
 		id: "RolePage",
 		meta: { title: "common:RolePageTitle" },
 		component: "RolePage",
 		actionPermissions: ["ADD", "EDIT"],
-		path: undefined,
 	},
 	DevPage: {
 		id: "DevPage",

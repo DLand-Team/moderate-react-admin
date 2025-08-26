@@ -1,5 +1,6 @@
 import { pageList as pluginsPages } from "plugins/config/pages";
 import { lazy } from "react";
+import UserPage from "./HomePage/SysPage/UserPage";
 
 const isProd = process.env.NODE_ENV == "production";
 // MODERATE_AUTO_PAGE_LAZY_IMPORT:START
@@ -129,4 +130,5 @@ export const pageList = {
 	// sort
 	SortPage,
 	SortListPage,
+	UserPage,
 };

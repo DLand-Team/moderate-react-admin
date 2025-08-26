@@ -17,6 +17,7 @@ import errorCode from "./errorCode";
 import { message, Modal } from "antd";
 import { t } from "i18next";
 import { dpChain } from "src/service";
+import { storageHelper } from "../utils";
 
 const tenantEnable = "true";
 const { result_code, request_timeout } = config;
@@ -227,6 +228,8 @@ const handleAuthorized = () => {
 			onOk: () => {
 				// removeToken();
 				isRelogin.show = false;
+				storageHelper.clear("local");
+				storageHelper.clear("session");
 				// 干掉token后再走一次路由让它过router.beforeEach的校验
 				window.location.href = window.location.href;
 			},
