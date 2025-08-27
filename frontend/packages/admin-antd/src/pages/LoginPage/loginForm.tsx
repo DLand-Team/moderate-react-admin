@@ -1,5 +1,5 @@
 import { Button, Form, Input, Typography, message } from "antd";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import storageHelper from "src/common/utils/storageHelper";
 import { useFlat } from "src/service";
 
@@ -10,12 +10,13 @@ import { useFlat } from "src/service";
 const LoginForm = () => {
 	const [form] = Form.useForm();
 	const { loginAct, getIdByNameAct, captchaAct } = useFlat("authStore");
-
+	const [loading, setLoading] = useState(false);
 	const onFinish = async (values: { name: string; password: string }) => {
 		await captchaAct();
 		await getIdByNameAct({
 			tenantName: "芋道源码",
 		});
+		setLoading(true);
 		await loginAct({
 			username: values.name,
 			password: values.password,
@@ -88,7 +89,7 @@ const LoginForm = () => {
 						style={{
 							height: "53px",
 						}}
-						placeholder={"请输入密码(测试密码：123)"}
+						placeholder={"请输入密码(测试密码：admin123)"}
 					/>
 				</Form.Item>
 				<div
@@ -111,6 +112,7 @@ const LoginForm = () => {
 					wrapperCol={{ span: 24 }}
 				>
 					<Button
+						loading={loading}
 						type="primary"
 						htmlType="submit"
 						style={{ height: "48px", width: "100%" }}

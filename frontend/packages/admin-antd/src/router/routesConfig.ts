@@ -76,7 +76,7 @@ export const ROUTE_CONFIG_MAP: {
 		},
 		actionPermissions: ["ADD", "EDIT"],
 		isPublish: false,
-		isNoAuth: true,
+		// isNoAuth: true,
 	},
 	PageDevPage: {
 		id: "PageDevPage",
