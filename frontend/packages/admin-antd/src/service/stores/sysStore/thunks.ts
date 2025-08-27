@@ -27,5 +27,15 @@ const thunks = createThunks("sysStore", {
 	async createUserAct(data: Partial<User>) {
 		await api.createUserApi(data);
 	},
+	async queryPostListAct() {
+		const { data } = await api.queryPostListApi();
+		dpChain("sysStore").setPostList(data);
+	},
+	async deleteUserAct(data: { id: number }) {
+		await api.deleteUserApi(data);
+	},
+	async updateUserPasswordAct(data: { id: number; password: string }) {
+		await api.updateUserPasswordApi(data);
+	},
 });
 export default thunks;

@@ -69,7 +69,7 @@ const ModalForm = () => {
 							modalType == "edit" ? updateMenuAct : createMenuAct;
 						api({
 							...currentEditMenuData,
-							componentName,
+							componentName: componentName || "",
 							path: componentName,
 							sort,
 							type: Number(type),
@@ -127,7 +127,7 @@ const ModalForm = () => {
 					/>
 				</Form.Item>
 				<Form.Item name={"name"} label={t("menu:menuName")}>
-					<Input disabled />
+					<Input />
 				</Form.Item>
 
 				<Form.Item
@@ -152,6 +152,7 @@ const ModalForm = () => {
 					label={t("menu:componentName")}
 				>
 					<Select
+						allowClear
 						onChange={(e) => {
 							form.setFieldValue("name", e);
 						}}

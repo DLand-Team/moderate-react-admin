@@ -1,8 +1,11 @@
+import { DoubleRightOutlined } from "@ant-design/icons";
 import type { PaginationProps, TableColumnsType } from "antd";
-import { Button, Modal, Switch, Table } from "antd";
+import { Button, Dropdown, Input, Modal, Switch, Table } from "antd";
 import React, { useEffect } from "react";
 import { dpChain, useFlat } from "src/service";
 import { ModalType, User } from "src/service/stores/sysStore/model";
+
+let newPassword = "";
 
 const columns: TableColumnsType<User> = [
 	{
@@ -66,30 +69,69 @@ const columns: TableColumnsType<User> = [
 					>
 						修改
 					</Button>
-					<Button
-						onClick={() => {
-							dpChain("sysStore").setUserModalType(ModalType.ADD);
-						}}
-						type="link"
-					>
-						新增
-					</Button>
-					<Button
-						type="link"
-						onClick={() => {
-							Modal.confirm({
-								title: "系统提示",
-								content: "是否删除选中数据",
-								onOk() {
-									dpChain("authStore").deleteMenuAct({
-										id: record.id,
-									});
+					<Dropdown
+						menu={{
+							items: [
+								{
+									key: "role",
+									label: "分配角色",
+									onClick: () => {},
 								},
-							});
+								{
+									key: "resetPassword",
+									label: "重置密码",
+									onClick: () => {
+										newPassword = "";
+										Modal.confirm({
+											title: "重置密码",
+											content: (
+												<div>
+													<Input.Password
+														onChange={(e) => {
+															newPassword =
+																e.target.value;
+														}}
+														placeholder="请输入新密码"
+													/>
+												</div>
+											),
+											onOk: () => {
+												dpChain(
+													"sysStore",
+												).updateUserPasswordAct({
+													id: record.id,
+													password: newPassword,
+												});
+											},
+										});
+									},
+								},
+								{
+									key: "delete",
+									label: "删除",
+									onClick: () => {
+										Modal.confirm({
+											title: "系统提示",
+											content: "是否删除选中数据",
+											onOk() {
+												dpChain(
+													"sysStore",
+												).deleteUserAct({
+													id: record.id,
+												});
+											},
+										});
+									},
+								},
+							],
 						}}
+						placement="bottomLeft"
 					>
-						删除
-					</Button>
+						<Button type="link">
+							<DoubleRightOutlined />
+							更多
+						</Button>
+					</Dropdown>
 				</div>
 			);
 		},

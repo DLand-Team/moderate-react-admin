@@ -38,6 +38,7 @@ export const ROUTE_CONFIG_MAP: {
 			icon: "ApartmentOutlined",
 		},
 		actionPermissions: ["ADD", "EDIT"],
+		isNoAuth: true,
 	},
 	CmsPage: {
 		id: "CmsPage",
@@ -59,6 +60,7 @@ export const ROUTE_CONFIG_MAP: {
 		id: "UserPage",
 		meta: { title: "common:UserPageTitle" },
 		component: "UserPage",
+		isNoAuth: true,
 	},
 	RolePage: {
 		id: "RolePage",
@@ -112,6 +114,7 @@ export const ROUTE_CONFIG_MAP: {
 		id: "MenuPage",
 		meta: { title: "common:MenuPageTitle" },
 		component: "MenuPage",
+		isNoAuth: true,
 	},
 	PluginsPage: {
 		id: "PluginsPage",

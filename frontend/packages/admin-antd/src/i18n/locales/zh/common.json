@@ -33,7 +33,6 @@
 	"ruleDetailPage": "规则详情",
 	"marketDetailPage": "市场详情",
 	"posDetailPage": "销售地详情",
-	"HelloPageTile": "数据同步",
 	"ruleListPage": "规则列表",
 	"marketListPage": "市场列表",
 	"posListPage": "销售地列表",
@@ -73,5 +72,6 @@
 	"oldIsEqualNew": "新密码不能与旧密码一样",
 	"Save": "保存",
 	"Cancel": "取消",
-	"Succeed": "修改成功"
+	"Succeed": "修改成功",
+	"confirmTitle": "重新登录"
 }

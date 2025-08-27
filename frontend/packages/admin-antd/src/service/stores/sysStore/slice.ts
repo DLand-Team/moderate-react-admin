@@ -1,7 +1,7 @@
 import { PayloadAction } from "redux-eazy";
 import { createSlice } from "src/service";
-import { Dept, FilterType, StoreState, User, ModalType } from "./model";
 import { PageBaseData } from "src/types/common";
+import { Dept, FilterType, ModalType, Pos, StoreState, User } from "./model";
 
 const initialState = (): StoreState => {
 	return {
@@ -16,6 +16,7 @@ const initialState = (): StoreState => {
 		currentDeptId: null,
 		userModalType: ModalType.NONE,
 		currentUser: null,
+		postList: [],
 	};
 };
 
@@ -50,6 +51,9 @@ const slice = createSlice({
 		},
 		setCurrentUser(state, { payload }: PayloadAction<User | null>) {
 			state.currentUser = payload;
+		},
+		setPostList(state, { payload }: PayloadAction<Pos[]>) {
+			state.postList = payload;
 		},
 	},
 });

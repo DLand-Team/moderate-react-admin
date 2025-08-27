@@ -224,7 +224,7 @@ const handleAuthorized = () => {
 		}
 		isRelogin.show = true;
 		Modal.confirm({
-			content: t("sys.api.timeoutMessage") + t("common.confirmTitle"),
+			content: t("common:confirmTitle"),
 			onOk: () => {
 				// removeToken();
 				isRelogin.show = false;

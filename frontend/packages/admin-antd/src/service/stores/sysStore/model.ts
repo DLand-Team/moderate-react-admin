@@ -10,6 +10,7 @@ export interface StoreState {
 	currentDeptId: number | null;
 	userModalType: ModalType;
 	currentUser: User | null;
+	postList: QueryPostListApiRes;
 }
 
 export enum ModalType {
@@ -49,6 +50,11 @@ export interface Dept {
 	parentId: number;
 }
 
+export interface Pos {
+	id: number;
+	name: string;
+}
+
 // 接口参数
 export interface QueryUserListApiReq extends PageBaseData {
 	deptId?: number;
@@ -59,3 +65,5 @@ export interface QueryUserListApiRes {
 }
 
 export type QueryDeptListApiRes = Dept[];
+
+export type QueryPostListApiRes = Pos[];
