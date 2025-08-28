@@ -37,7 +37,7 @@ const initialState = (): StoreState => {
 		activeTabKey: "",
 		isThemeAuto:
 			storageHelper.getItem("IS_THEME_AUTO") == "1" ? true : false,
-		currentTheme: storageHelper.getItem("THEME") || ThemeColor.light,
+		currentTheme: storageHelper.getItem("THEME") || ThemeColor.dark,
 		isShowOptionsDrawer: false,
 		isCollapsedMenu: false,
 		isShowMdDrawer: false,

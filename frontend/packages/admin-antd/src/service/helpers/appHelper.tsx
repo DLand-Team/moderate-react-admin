@@ -213,36 +213,36 @@ export class AppHelper extends HelperBase {
 	}
 
 	// // 根据路由数据来的，如果不存在后端控制菜单，那就可以完全使用这个
-	// getMenuConfigByPathName(pathName: string) {
-	// 	const selectedKeysTemp = pathName.split("/").filter((item) => {
-	// 		return item;
-	// 	});
-	// 	const openKeysTemp = selectedKeysTemp.slice(1, -1);
-	// 	const selectedKeys =
-	// 		selectedKeysTemp.length > 1
-	// 			? selectedKeysTemp.slice(1)
-	// 			: selectedKeysTemp;
-	// 	const { routesMap } = this.routerStore;
-	// 	selectedKeys.forEach((selectKey) => {
-	// 		for (let key in routesMap) {
-	// 			const item = routesMap[key as keyof typeof routesMap];
-	// 			// 判断一下，
-	// 			if (
-	// 				item.path == pathName &&
-	// 				item.parentId == selectKey &&
-	// 				item.index
-	// 			) {
-	// 				selectedKeys.push(item.id!);
-	// 				openKeysTemp.push(item.parentId);
-	// 			}
-	// 		}
-	// 	});
-	// 	return {
-	// 		selectedKeys,
-	// 		openKeys: openKeysTemp.length ? openKeysTemp : [],
-	// 		newTabItem: location,
-	// 	};
-	// }
+	getMenuConfigByPathName(pathName: string) {
+		const selectedKeysTemp = pathName.split("/").filter((item) => {
+			return item;
+		});
+		const openKeysTemp = selectedKeysTemp.slice(1, -1);
+		const selectedKeys =
+			selectedKeysTemp.length > 1
+				? selectedKeysTemp.slice(1)
+				: selectedKeysTemp;
+		const { routesMap } = this.routerStore;
+		selectedKeys.forEach((selectKey) => {
+			for (let key in routesMap) {
+				const item = routesMap[key as keyof typeof routesMap];
+				// 判断一下，
+				if (
+					item.path == pathName &&
+					item.parentId == selectKey &&
+					item.index
+				) {
+					selectedKeys.push(item.id!);
+					openKeysTemp.push(item.parentId);
+				}
+			}
+		});
+		return {
+			selectedKeys,
+			openKeys: openKeysTemp.length ? openKeysTemp : [],
+			newTabItem: location,
+		};
+	}
 
 	// 根据菜单数据（纯原始类型），转换为适用于antd，包含element的完整结构
 	// 为啥转？因为redux内部不可以直接存element类型的数据

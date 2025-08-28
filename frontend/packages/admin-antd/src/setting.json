@@ -3,8 +3,8 @@
   "logo": "/logo.png",
   "icon": "",
   "paletteSet": { "light": "dland", "dark": "dland" },
-  "layoutSet": { "light": "Default", "dark": "Wind" },
+  "layoutSet": { "light": "Wind", "dark": "Wind" },
   "routerAni": "fade",
-  "color": "light",
+  "color": "dark",
   "locale": "zh"
 }

@@ -95,9 +95,9 @@ let temp = [
 const PluginListPage = () => {
 	const { getPluginListAct, pluginList } = useFlat("devStore");
 
-	useEffect(() => {
-		getPluginListAct();
-	}, []);
+	// useEffect(() => {
+	// 	getPluginListAct();
+	// }, []);
 
 	return (
 		<Row
@@ -107,44 +107,24 @@ const PluginListPage = () => {
 			gutter={[16, 26]}
 			wrap={true}
 		>
-			{process.env.NODE_ENV == "production" &&
-				temp.map((item) => {
-					return (
-						<Col
-							xs={24}
-							sm={12}
-							md={8}
-							lg={8}
-							xl={6}
-							key={item.gitee}
-							style={{
-								display: "flex",
-								justifyContent: "center",
-							}}
-						>
-							<PluginCard data={item} />
-						</Col>
-					);
-				})}
-			{process.env.NODE_ENV == "development" &&
-				pluginList.map((item) => {
-					return (
-						<Col
-							xs={24}
-							sm={12}
-							md={8}
-							lg={8}
-							xl={6}
-							key={item.gitee}
-							style={{
-								display: "flex",
-								justifyContent: "center",
-							}}
-						>
-							<PluginCard data={item} />
-						</Col>
-					);
-				})}
+			{temp.map((item) => {
+				return (
+					<Col
+						xs={24}
+						sm={12}
+						md={8}
+						lg={8}
+						xl={6}
+						key={item.gitee}
+						style={{
+							display: "flex",
+							justifyContent: "center",
+						}}
+					>
+						<PluginCard data={{ ...item, cover: "/logo.png" }} />
+					</Col>
+				);
+			})}
 		</Row>
 	);
 };
