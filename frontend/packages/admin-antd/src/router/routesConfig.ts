@@ -61,6 +61,7 @@ export const ROUTE_CONFIG_MAP: {
 		meta: { title: "common:UserPageTitle" },
 		component: "UserPage",
 		isNoAuth: true,
+		keepAlive: true,
 	},
 	RolePage: {
 		id: "RolePage",

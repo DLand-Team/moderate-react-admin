@@ -1,9 +1,17 @@
 import http from "src/common/http";
 import {
+	MenuItem,
 	QueryDeptListApiRes,
+	QueryMenuListApiRes,
 	QueryPostListApiRes,
+	QueryRoleApiReq,
+	QueryRoleListApiReq,
+	QueryRoleListApiRes,
+	QueryRoleMenuPermissionsApiReq,
+	QueryRoleMenuPermissionsApiRes,
 	QueryUserListApiReq,
 	QueryUserListApiRes,
+	Role,
 	User,
 } from "./model";
 
@@ -42,17 +50,65 @@ const devApi = {
 			url: "/admin-api/system/post/simple-list",
 		});
 	},
-	// /admin-api/system/user/delete?id=139
 	deleteUserApi(params: { id: number }) {
 		return http.delete({
 			url: `/admin-api/system/user/delete`,
 			params,
 		});
 	},
-	// /admin-api/system/user/update-password
 	updateUserPasswordApi(data: { id: number; password: string }) {
 		return http.put({
 			url: `/admin-api/system/user/update-password`,
+			data,
+		});
+	},
+	queryRoleListApi(data: Partial<QueryRoleListApiReq>) {
+		return http.get<QueryRoleListApiRes>({
+			url: `/admin-api/system/role/page`,
+			params: data,
+		});
+	},
+
+	// Role-related APIs
+	queryRoleApi(params: QueryRoleApiReq) {
+		return http.get<Role>({
+			url: `/admin-api/system/role/get`,
+			params,
+		});
+	},
+	createRoleApi(data: Partial<Role>) {
+		return http.post({
+			url: `/admin-api/system/role/create`,
+			data,
+		});
+	},
+	deleteRoleApi(data: { id: number }) {
+		return http.delete({
+			url: `/admin-api/system/role/delete`,
+			data,
+		});
+	},
+	updateRoleApi(data: Partial<Role>) {
+		return http.put({
+			url: `/admin-api/system/role/update`,
+			data,
+		});
+	},
+	queryRoleMenuPermissionsApi(params: QueryRoleMenuPermissionsApiReq) {
+		return http.get<QueryRoleMenuPermissionsApiRes>({
+			url: `/admin-api/system/permission/list-role-menus`,
+			params,
+		});
+	},
+	queryMenuListApi() {
+		return http.get<MenuItem[]>({
+			url: `/admin-api/system/menu/simple-list`,
+		});
+	},
+	// /system/permission/assign-role-menu
+	assignRoleMenuApi(data: { roleId: number; menuIds: number[] }) {
+		return http.post({
+			url: `/admin-api/system/permission/assign-role-menu`,
 			data,
 		});
 	},

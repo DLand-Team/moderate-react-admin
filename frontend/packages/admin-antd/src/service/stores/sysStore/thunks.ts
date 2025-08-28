@@ -1,6 +1,15 @@
+import { convertArrToTreeData } from "src/common/utils";
 import { createThunks, dpChain } from "src/service";
 import api from "./api";
-import { QueryUserListApiReq, User } from "./model";
+import {
+	MenuItem,
+	QueryRoleApiReq,
+	QueryRoleListApiReq,
+	QueryRoleMenuPermissionsApiReq,
+	QueryUserListApiReq,
+	Role,
+	User,
+} from "./model";
 
 const thunks = createThunks("sysStore", {
 	async queryUserListAct(req: Partial<QueryUserListApiReq>, store) {
@@ -12,6 +21,24 @@ const thunks = createThunks("sysStore", {
 			list: list,
 			total,
 		});
+	},
+	async queryRoleListAct(payload: Partial<QueryRoleListApiReq>) {
+		const { data: { list = [], total = 0 } = {} } =
+			await api.queryRoleListApi(payload);
+		dpChain("sysStore").setRoleList({
+			list: list,
+			total,
+		});
+	},
+	async queryRoleAct(payload: QueryRoleApiReq) {
+		const { data } = await api.queryRoleApi(payload);
+		dpChain("sysStore").setCurrentRole(data);
+	},
+	async updateRoleAct(data: Partial<Role>) {
+		await api.updateRoleApi(data);
+	},
+	async createRoleAct(data: Partial<Role>) {
+		await api.createRoleApi(data);
 	},
 	async queryDeptListAct() {
 		const { data } = await api.queryDeptListApi();
@@ -36,6 +63,22 @@ const thunks = createThunks("sysStore", {
 	},
 	async updateUserPasswordAct(data: { id: number; password: string }) {
 		await api.updateUserPasswordApi(data);
+	},
+	async deleteRoleAct(data: { id: number }) {
+		await api.deleteRoleApi(data);
+	},
+	async queryMenuListAct() {
+		const { data } = await api.queryMenuListApi();
+		dpChain("sysStore").setActivedMenuList(data);
+		const tree = convertArrToTreeData<MenuItem>(data);
+		dpChain("sysStore").setActivedMenuTree(tree);
+	},
+	async queryRoleMenuPermissionsAct(params: QueryRoleMenuPermissionsApiReq) {
+		const { data } = await api.queryRoleMenuPermissionsApi(params);
+		dpChain("sysStore").setRoleMenuPermissions(data);
+	},
+	async assignRoleMenuAct(data: { roleId: number; menuIds: number[] }) {
+		await api.assignRoleMenuApi(data);
 	},
 });
 export default thunks;

@@ -16,10 +16,10 @@ interface TreeNode {
  * @param parentId 父节点ID（默认为0，表示根节点）
  * @returns 树形结构数组
  */
-export function convertArrToTreeData(
-	data: FlatItem[],
+export function convertArrToTreeData<T extends FlatItem = FlatItem>(
+	data: T[],
 	parentId: number = 0,
-): TreeNode[] {
+): T[] {
 	// 过滤出当前父节点的所有子节点
 	const children = data.filter((item) => item.parentId === parentId);
 
@@ -45,5 +45,5 @@ export function convertArrToTreeData(
 		}
 
 		return treeNode;
-	});
+	}) as any;
 }
