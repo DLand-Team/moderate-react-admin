@@ -24,10 +24,10 @@
 
 -   React18
 -   Antd5
--   Redux 或 natur
--   react-router 6.4.3
--   vite
--   ts
+-   Redux
+-   React-router 6.4.3
+-   Rsbuild 或 Vite
+-   Ts
 
 ## 功能点
 
