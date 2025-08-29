@@ -34,11 +34,13 @@ const initialState = (): StoreState => {
 			pageSize: 10,
 		},
 		roleModalType: RoleModalType.NONE,
-		currentRoleId: null,
 		currentRole: null,
 		activedMenuList: [],
 		roleMenuPermissions: [],
 		activedMenuTree: [],
+		currentUserRole: null,
+		userRoleList: [],
+		currentUserRoles: [],
 	};
 };
 
@@ -71,6 +73,12 @@ const slice = createSlice({
 				total: total,
 			};
 		},
+		setRolePagination(state, { payload }: PayloadAction<PageBaseData>) {
+			state.rolePagination = { ...state.rolePagination, ...payload };
+		},
+		setUserRoleList(state, { payload }: PayloadAction<Role[]>) {
+			state.userRoleList = payload;
+		},
 		setUserPagination(state, data: PayloadAction<PageBaseData>) {
 			state.userPagination = { ...state.userPagination, ...data.payload };
 		},
@@ -96,9 +104,6 @@ const slice = createSlice({
 		setDeptList(state, { payload }: PayloadAction<Dept[]>) {
 			state.deptList = payload;
 		},
-		setCurrentRoleId(state, { payload }: PayloadAction<number | null>) {
-			state.currentRoleId = payload;
-		},
 		setActivedMenuList(state, { payload }: PayloadAction<MenuItem[]>) {
 			state.activedMenuList = payload;
 		},
@@ -107,6 +112,12 @@ const slice = createSlice({
 		},
 		setRoleMenuPermissions(state, { payload }: PayloadAction<Number[]>) {
 			state.roleMenuPermissions = payload;
+		},
+		setCurrentUserRole(state, { payload }: PayloadAction<number | null>) {
+			state.currentUserRole = payload;
+		},
+		setCurrentUserRoles(state, { payload }: PayloadAction<number[]>) {
+			state.currentUserRoles = payload;
 		},
 	},
 });

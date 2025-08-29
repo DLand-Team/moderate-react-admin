@@ -1,18 +1,18 @@
 import http from "src/common/http";
 import {
-	MenuItem,
-	QueryDeptListApiRes,
-	QueryMenuListApiRes,
-	QueryPostListApiRes,
-	QueryRoleApiReq,
-	QueryRoleListApiReq,
-	QueryRoleListApiRes,
-	QueryRoleMenuPermissionsApiReq,
-	QueryRoleMenuPermissionsApiRes,
-	QueryUserListApiReq,
-	QueryUserListApiRes,
-	Role,
-	User,
+    AssignUserRoleApiReq,
+    MenuItem,
+    QueryDeptListApiRes,
+    QueryPostListApiRes,
+    QueryRoleApiReq,
+    QueryRoleListApiReq,
+    QueryRoleListApiRes,
+    QueryRoleMenuPermissionsApiReq,
+    QueryRoleMenuPermissionsApiRes,
+    QueryUserListApiReq,
+    QueryUserListApiRes,
+    Role,
+    User
 } from "./model";
 
 const devApi = {
@@ -110,6 +110,35 @@ const devApi = {
 		return http.post({
 			url: `/admin-api/system/permission/assign-role-menu`,
 			data,
+		});
+	},
+
+	// /admin-api/system/permission/list-user-role
+	listUserRoleApi(data: { userId: number }) {
+		return http.get({
+			url: `/admin-api/system/permission/list-user-role`,
+			params: data,
+		});
+	},
+
+	// /admin-api/system/role/simple-list
+	listRoleApi() {
+		return http.get<Role[]>({
+			url: `/admin-api/system/role/simple-list`,
+		});
+	},
+
+	// admin-api/system/permission/assign-user-role
+	assignUserRoleApi(data: AssignUserRoleApiReq) {
+		return http.post({
+			url: `/admin-api/system/permission/assign-user-role`,
+			data,
+		});
+	},
+	listUserRolesApi(data: { userId: number }) {
+		return http.get({
+			url: `/admin-api/system/permission/list-user-roles`,
+			params: data,
 		});
 	},
 };

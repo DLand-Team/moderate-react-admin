@@ -114,12 +114,6 @@ const MenuTable: React.FC = () => {
 	const { filterType } = useFlat("sysStore");
 	const { menuListData } = useFlat("authStore");
 	let data = cloneDeep(menuListData) || [];
-	// if (filterType === FilterType.ACTIVED) {
-	// 	data =
-	// 		data?.filter((item) => {
-	// 			return item.status === 0;
-	// 		}) || [];
-	// }
 	const treeData = authHelper.handleTreePro({
 		data,
 		filterType: filterType,

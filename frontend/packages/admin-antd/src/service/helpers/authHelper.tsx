@@ -113,7 +113,7 @@ export class AuthHelper extends HelperBase {
 				tree.push(d);
 			}
 		}
-		debugger;
+		;
 		for (const t of tree) {
 			adaptToChildrenList(t);
 		}

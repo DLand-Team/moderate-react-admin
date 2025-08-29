@@ -1,12 +1,12 @@
 import {
-	Form,
-	Input,
-	InputNumber,
-	Modal,
-	notification,
-	Radio,
-	Select,
-	TreeSelect,
+    Form,
+    Input,
+    InputNumber,
+    Modal,
+    notification,
+    Radio,
+    Select,
+    TreeSelect,
 } from "antd";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";

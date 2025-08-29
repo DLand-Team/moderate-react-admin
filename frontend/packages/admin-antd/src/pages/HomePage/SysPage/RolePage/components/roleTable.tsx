@@ -3,10 +3,7 @@ import { Modal, Table } from "antd";
 import dayjs from "dayjs";
 import React, { useEffect } from "react";
 import { dpChain, useFlat } from "src/service";
-import {
-    Role,
-    RoleModalType
-} from "src/service/stores/sysStore/model";
+import { Role, RoleModalType } from "src/service/stores/sysStore/model";
 
 export const columns: TableColumnsType<Role> = [
 	{
@@ -127,7 +124,7 @@ const UserTable: React.FC = () => {
 	const { roleList, queryRoleListAct, rolePagination } = useFlat("sysStore");
 	useEffect(() => {
 		queryRoleListAct();
-	}, [rolePagination]);
+	}, []);
 	return (
 		<Table<Role>
 			columns={columns}

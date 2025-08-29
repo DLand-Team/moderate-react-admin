@@ -2,6 +2,7 @@ import { convertArrToTreeData } from "src/common/utils";
 import { createThunks, dpChain } from "src/service";
 import api from "./api";
 import {
+	AssignUserRoleApiReq,
 	MenuItem,
 	QueryRoleApiReq,
 	QueryRoleListApiReq,
@@ -13,9 +14,13 @@ import {
 
 const thunks = createThunks("sysStore", {
 	async queryUserListAct(req: Partial<QueryUserListApiReq>, store) {
-		const { userPagination } = store.getState().sysStore;
+		const { userPagination, currentDeptId } = store.getState().sysStore;
 		const { data: { list = [], total = 0 } = {} } =
-			await api.queryUserListApi({ ...userPagination, ...req });
+			await api.queryUserListApi({
+				...userPagination,
+				deptId: currentDeptId!,
+				...req,
+			});
 
 		dpChain("sysStore").setUserList({
 			list: list,
@@ -79,6 +84,21 @@ const thunks = createThunks("sysStore", {
 	},
 	async assignRoleMenuAct(data: { roleId: number; menuIds: number[] }) {
 		await api.assignRoleMenuApi(data);
+	},
+	async listUserRoleAct(data: { userId: number }) {
+		const { data: roleData } = await api.listUserRoleApi(data);
+		dpChain("sysStore").setCurrentUserRole(roleData);
+	},
+	async listRoleAct() {
+		const { data } = await api.listRoleApi();
+		dpChain("sysStore").setUserRoleList(data);
+	},
+	async assignUserRoleAct(data: AssignUserRoleApiReq) {
+		await api.assignUserRoleApi(data);
+	},
+	async listUserRolesAct(data: { userId: number }) {
+		const { data: roleData } = await api.listUserRolesApi(data);
+		dpChain("sysStore").setCurrentUserRoles(roleData);
 	},
 });
 export default thunks;

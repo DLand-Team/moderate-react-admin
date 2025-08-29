@@ -1,6 +1,6 @@
-import { Button, Segmented } from "antd";
+import { Button, Card, Segmented } from "antd";
 import { dpChain, useFlat } from "src/service";
-import { FilterType } from "src/service/stores/sysStore/model";
+import { FilterType, ModalType } from "src/service/stores/sysStore/model";
 import MenuTable from "./components/menuTable";
 import styles from "./style.module.scss";
 import ModalForm from "./components/modalForm";
@@ -9,6 +9,19 @@ const MenuPage = () => {
 	const { filterType } = useFlat("sysStore");
 	return (
 		<div className={styles.content}>
+			<Card
+				style={{
+					marginBottom: "25px",
+				}}
+			>
+				<Button
+					onClick={() => {
+						dpChain("authStore").setModalType(ModalType.ADD);
+					}}
+				>
+					新增菜单
+				</Button>
+			</Card>
 			<div
 				style={{
 					display: "flex",
@@ -23,16 +36,9 @@ const MenuPage = () => {
 					}}
 					value={filterType}
 				/>
-				<Button
-					type="primary"
-					onClick={() => {
-						dpChain("authStore").setModalType("add");
-					}}
-				>
-					Add
-				</Button>
 			</div>
 			<ModalForm />
+
 			<MenuTable />
 		</div>
 	);

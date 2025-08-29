@@ -13,13 +13,15 @@ export interface StoreState {
 	currentDeptId: number | null;
 	userModalType: ModalType;
 	roleModalType: RoleModalType;
-	currentRoleId: number | null;
 	currentUser: User | null;
 	currentRole: Role | null;
 	postList: Pos[];
 	activedMenuList: MenuItem[];
 	activedMenuTree: MenuItem[];
 	roleMenuPermissions: Number[]; // 当前角色的菜单权限
+	currentUserRole: number | null;
+	userRoleList: Role[];
+	currentUserRoles: number[];
 }
 
 // 菜单
@@ -43,6 +45,7 @@ export enum ModalType {
 	ADD = "add",
 	EDIT = "edit",
 	NONE = "",
+	ROLE = "role",
 }
 
 export enum FilterType {
@@ -62,7 +65,7 @@ export interface User {
 	loginIp: string;
 	mobile: string;
 	nickname: string;
-	postIds: string | null;
+	postIds: number[] | undefined;
 	remark: string | null;
 	sex: number;
 	status: number;
@@ -137,4 +140,9 @@ export interface QueryMenuListApiRes {
 }
 export interface QueryRoleApiReq {
 	id: number;
+}
+
+export interface AssignUserRoleApiReq {
+	userId: number;
+	roleIds: number[];
 }

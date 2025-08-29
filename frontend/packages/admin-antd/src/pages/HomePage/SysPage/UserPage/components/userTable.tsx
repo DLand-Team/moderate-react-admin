@@ -58,7 +58,7 @@ const columns: TableColumnsType<User> = [
 				>
 					<Button
 						onClick={async () => {
-							dpChain("sysStore").queryUserAct({
+							await dpChain("sysStore").queryUserAct({
 								id: record.id,
 							});
 							dpChain("sysStore").setUserModalType(
@@ -75,7 +75,14 @@ const columns: TableColumnsType<User> = [
 								{
 									key: "role",
 									label: "分配角色",
-									onClick: () => {},
+									onClick: () => {
+										dpChain("sysStore").queryUserAct({
+											id: record.id,
+										});
+										dpChain("sysStore").setUserModalType(
+											ModalType.ROLE,
+										);
+									},
 								},
 								{
 									key: "resetPassword",
@@ -141,13 +148,15 @@ const columns: TableColumnsType<User> = [
 const showTotal: PaginationProps["showTotal"] = (total) => `共 ${total} 条数据`;
 
 const UserTable: React.FC = () => {
-	const { userList, queryUserListAct, userPagination, currentDeptId } =
-		useFlat("sysStore");
+	const { userList, userPagination, queryUserListAct } = useFlat("sysStore", {
+		userList: "IN",
+		userPagination: "IN",
+	});
+
 	useEffect(() => {
-		queryUserListAct({
-			deptId: currentDeptId!,
-		});
-	}, [userPagination, currentDeptId]);
+		queryUserListAct();
+	}, []);
+
 	return (
 		<Table<User>
 			columns={columns}

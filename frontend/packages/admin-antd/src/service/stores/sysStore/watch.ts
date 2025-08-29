@@ -3,7 +3,30 @@ import { startAppListening } from "src/service/setup";
 
 const watch = () => {
 	startAppListening({
-		type: getActionType("sysStore").deleteUserAct.fulfilled,
+		predicate: (action) => {
+			const {
+				createUserAct,
+				updateUserAct,
+				deleteUserAct,
+				assignUserRoleAct,
+				setUserPagination,
+				setCurrentDeptId,
+			} = getActionType("sysStore");
+			if (
+				[
+					setCurrentDeptId,
+					assignUserRoleAct.fulfilled,
+					createUserAct.fulfilled,
+					updateUserAct.fulfilled,
+					deleteUserAct.fulfilled,
+					setUserPagination,
+				].includes(action.type)
+			) {
+				return true;
+			}
+			return false;
+		},
+
 		effect: async () => {
 			dpChain("sysStore").queryUserListAct({});
 		},
@@ -11,11 +34,19 @@ const watch = () => {
 
 	startAppListening({
 		predicate: (action) => {
-			const { createRoleAct, updateRoleAct } = getActionType("sysStore");
+			const {
+				deleteRoleAct,
+				createRoleAct,
+				updateRoleAct,
+				setRolePagination,
+			} = getActionType("sysStore");
 			if (
-				[createRoleAct.fulfilled, updateRoleAct.fulfilled].includes(
-					action.type,
-				)
+				[
+					deleteRoleAct.fulfilled,
+					createRoleAct.fulfilled,
+					updateRoleAct.fulfilled,
+					setRolePagination,
+				].includes(action.type)
 			) {
 				return true;
 			}

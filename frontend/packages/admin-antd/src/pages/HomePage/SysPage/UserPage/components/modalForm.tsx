@@ -31,7 +31,7 @@ const ModalForm = () => {
 	};
 	return (
 		<Modal
-			open={!!userModalType}
+			open={[ModalType.EDIT, ModalType.ADD].includes(userModalType)}
 			title={currentUser ? "修改用户" : "新建用户"}
 			okText="确定"
 			cancelText="取消"
