@@ -148,10 +148,11 @@ const columns: TableColumnsType<User> = [
 const showTotal: PaginationProps["showTotal"] = (total) => `共 ${total} 条数据`;
 
 const UserTable: React.FC = () => {
-	const { userList, userPagination, queryUserListAct } = useFlat("sysStore", {
-		userList: "IN",
-		userPagination: "IN",
-	});
+	const { userList, userPagination, queryUserListAct, setUserPagination } =
+		useFlat("sysStore", {
+			userList: "IN",
+			userPagination: "IN",
+		});
 
 	useEffect(() => {
 		queryUserListAct();
@@ -164,6 +165,12 @@ const UserTable: React.FC = () => {
 			rowKey={"id"}
 			scroll={{ x: 1000 }}
 			pagination={{
+				onChange: (page, pageSize) => {
+					setUserPagination({
+						pageNo: page,
+						pageSize,
+					});
+				},
 				showSizeChanger: true,
 				showTotal: showTotal,
 				showQuickJumper: true,

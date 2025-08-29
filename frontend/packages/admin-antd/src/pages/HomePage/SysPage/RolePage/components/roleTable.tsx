@@ -121,7 +121,8 @@ export const columns: TableColumnsType<Role> = [
 const showTotal: PaginationProps["showTotal"] = (total) => `共 ${total} 条数据`;
 
 const UserTable: React.FC = () => {
-	const { roleList, queryRoleListAct, rolePagination } = useFlat("sysStore");
+	const { roleList, queryRoleListAct, rolePagination, setUserPagination } =
+		useFlat("sysStore");
 	useEffect(() => {
 		queryRoleListAct();
 	}, []);
@@ -135,6 +136,12 @@ const UserTable: React.FC = () => {
 				showSizeChanger: true,
 				showTotal: showTotal,
 				showQuickJumper: true,
+				onChange: (page, pageSize) => {
+					setUserPagination({
+						pageNo: page,
+						pageSize,
+					});
+				},
 				...rolePagination,
 			}}
 		/>

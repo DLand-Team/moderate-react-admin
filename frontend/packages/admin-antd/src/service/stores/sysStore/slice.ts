@@ -79,7 +79,7 @@ const slice = createSlice({
 		setUserRoleList(state, { payload }: PayloadAction<Role[]>) {
 			state.userRoleList = payload;
 		},
-		setUserPagination(state, data: PayloadAction<PageBaseData>) {
+		setUserPagination(state, data: PayloadAction<Partial<PageBaseData>>) {
 			state.userPagination = { ...state.userPagination, ...data.payload };
 		},
 
