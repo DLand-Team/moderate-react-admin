@@ -1,18 +1,19 @@
 import {
-    Form,
-    Input,
-    InputNumber,
-    Modal,
-    notification,
-    Radio,
-    Select,
-    TreeSelect,
+	Form,
+	Input,
+	InputNumber,
+	Modal,
+	notification,
+	Radio,
+	Select,
+	TreeSelect,
 } from "antd";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import i18n from "src/i18n";
 import { useFlat } from "src/service";
 import { MenuItemData } from "src/service/stores/authStore/model";
+import { ModalType } from "src/service/stores/sysStore/model";
 
 const options = [
 	{ label: i18n.t("menu:menuType_group"), value: 1 },
@@ -46,8 +47,8 @@ const ModalForm = () => {
 	};
 	return (
 		<Modal
-			open={!!modalType}
-			title="新建路由"
+			open={modalType == ModalType.ADD || modalType == ModalType.EDIT}
+			title={modalType == ModalType.ADD ? "新建路由" : "编辑路由"}
 			okText="确定"
 			cancelText="取消"
 			onCancel={() => {
