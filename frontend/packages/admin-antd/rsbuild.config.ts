@@ -7,9 +7,10 @@ export default defineConfig({
 	html: {
 		template: "./index.html",
 	},
-	source: {
+	resolve: {
 		alias: {
-			"@": path.resolve(__dirname, "./src"),
+			src: path.resolve(__dirname, "./src"),
+			plugins: path.resolve(__dirname, "./plugins"),
 		},
 	},
 	plugins: [pluginReact(), pluginSass()],
