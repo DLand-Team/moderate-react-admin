@@ -1,5 +1,5 @@
 import type { PaginationProps, TableColumnsType } from "antd";
-import { Modal, Table } from "antd";
+import { Checkbox, Modal, Table, Tag } from "antd";
 import dayjs from "dayjs";
 import React, { useEffect } from "react";
 import { dpChain, useFlat } from "src/service";
@@ -24,9 +24,9 @@ export const columns: TableColumnsType<Role> = [
 		key: "type",
 		width: 100,
 		render: (type: number) => (
-			<span style={{ color: type === 1 ? "red" : "blue" }}>
+			<Tag color={type === 1 ? "blue" : "green"}>
 				{type === 1 ? "内置" : "自定义"}
-			</span>
+			</Tag>
 		),
 	},
 	{
@@ -53,9 +53,9 @@ export const columns: TableColumnsType<Role> = [
 		key: "status",
 		width: 100,
 		render: (status: number) => (
-			<span style={{ color: status === 0 ? "blue" : "grey" }}>
+			<Checkbox checked={status === 0}>
 				{status === 0 ? "开启" : "关闭"}
-			</span>
+			</Checkbox>
 		),
 	},
 	{
@@ -70,7 +70,7 @@ export const columns: TableColumnsType<Role> = [
 		// action
 		title: "操作",
 		key: "action",
-		width: 150,
+		width: 250,
 		render: (_, record) => {
 			const handleClick = (type: RoleModalType) => {
 				dpChain("sysStore").queryRoleAct({
