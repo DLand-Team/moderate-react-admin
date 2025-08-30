@@ -29,6 +29,9 @@ const LoginForm = () => {
 			})
 			.catch(() => {
 				return message.error("error");
+			})
+			.finally(() => {
+				setLoading(false);
 			});
 	};
 
