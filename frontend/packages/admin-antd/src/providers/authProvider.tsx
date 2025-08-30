@@ -12,7 +12,7 @@ const AuthProvider = ({ children }: React.PropsWithChildren) => {
 		if (token) {
 			await dpChain("authStore").getUserPermissionsAct(null);
 			const loginPath = routerHelper.getRoutePathByKey(
-				ROUTE_ID.LoginPage,
+				ROUTE_ID.LoginPage
 			);
 			// 判断是否是登录页
 			if (location.pathname === loginPath) {

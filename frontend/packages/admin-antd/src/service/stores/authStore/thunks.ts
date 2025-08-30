@@ -1,4 +1,3 @@
-import storageHelper from "src/common/utils/storageHelper";
 import { authHelper, createThunks, dpChain } from "src/service";
 import httpApi from "./api";
 import {
@@ -37,11 +36,10 @@ const thunks = createThunks("authStore", {
 		dpChain("authStore").setToken(data);
 		return data;
 	},
-	getUserPermissionsAct: async () => {
+	async getUserPermissionsAct() {
 		const {
 			data: { permissions, menus },
 		} = await httpApi.fetchUserPermissions();
-		;
 		const menuTreePermissions = {
 			id: -1,
 			parentId: -1,
@@ -56,11 +54,11 @@ const thunks = createThunks("authStore", {
 			authHelper.createRoutesPermissionsByMenu(menuTreePermissions!);
 
 		menuTreePermissions &&
-			dpChain("authStore").setPermissions({
+			(await dpChain("authStore").setPermissions({
 				menuPermissions: menuTreePermissions,
 				permissions,
 				routesPermissions,
-			});
+			}));
 	},
 	updatePermissionsAct: async () => {},
 	getImageUrlAct: async () => {

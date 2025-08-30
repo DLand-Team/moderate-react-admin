@@ -1,7 +1,9 @@
 import { PayloadAction } from "redux-eazy";
+import { getAccessToken, setToken } from "src/common/http/auth";
 import storageHelper from "src/common/utils/storageHelper";
 import { ROUTE_CONFIG_MAP, ROUTE_ID_KEY } from "src/router";
-import { createSlice } from "src/service/setup";
+import { getActionType } from "src/service";
+import { createSlice, emitAsync } from "src/service/setup";
 import {
 	DemoData,
 	MenuItemData,
@@ -10,7 +12,6 @@ import {
 	RefreshTokenRes,
 	StoreState,
 } from "./model";
-import { getAccessToken, setToken } from "src/common/http/auth";
 
 const initialState = (): StoreState => {
 	const defaultPermissions = Object.values(ROUTE_CONFIG_MAP)
@@ -70,7 +71,7 @@ const slice = createSlice({
 				menuPermissions: MenuPermissionItem;
 				permissions: ROUTE_ID_KEY[];
 				routesPermissions: string[];
-			}>,
+			}>
 		) {
 			// 菜单权限
 			state.menuPermissions = payload.menuPermissions;
@@ -123,10 +124,35 @@ const slice = createSlice({
 		},
 		setCurrentEditMenuData(
 			state,
-			{ payload }: PayloadAction<Partial<MenuItemData> | null>,
+			{ payload }: PayloadAction<Partial<MenuItemData> | null>
 		) {
 			state.currentEditMenuData = payload as MenuItemData;
 		},
+	},
+	// getMenuListAct set loging
+	extraReducers: (builder) => {
+		builder
+			.addCase(
+				getActionType("authStore").getUserPermissionsAct.pending,
+				() => {
+					emitAsync("appStore").setIsLoading(true);
+				}
+			)
+			.addCase(
+				getActionType("authStore").getUserPermissionsAct.rejected,
+				() => {
+					emitAsync("appStore").setIsLoading(false);
+				}
+			)
+			.addCase(
+				getActionType("authStore").getMenuListAct.fulfilled,
+				() => {
+					emitAsync("appStore").setIsLoading(false);
+				}
+			)
+			.addCase(getActionType("authStore").getMenuListAct.rejected, () => {
+				emitAsync("appStore").setIsLoading(false);
+			});
 	},
 });
 

@@ -1,5 +1,5 @@
 import { Layout, Menu } from "antd";
-import { useEffect, useMemo } from "react";
+import { useMemo } from "react";
 import { type Location } from "react-router-dom";
 import { useLocationListen } from "src/common/hooks";
 import { removeDuplicatesInArray } from "src/common/utils";
@@ -23,21 +23,18 @@ const SliderMenu = ({ isMobile }: { isMobile?: boolean }) => {
 		return appHelper.transMenuForAntdLoop(menuData);
 	}, [menuData, language]);
 
-	console.log(MenuItems);
 	useLocationListen(
 		(location: Location) => {
 			const { pathname } = location;
 			const { selectedKeys, openKeys } =
 				appHelper.getMenuConfigByPathNameEx(
 					pathname,
-					menuTreeData || [],
+					menuTreeData || []
 				);
-			console.log(openKeys);
-			console.log(selectedKeys);
 			setMenuDefaultSelectedKeys(selectedKeys);
 			setMenuDefaultOpenKeys(removeDuplicatesInArray(openKeys));
 		},
-		[menuData, menuTreeData],
+		[menuData, menuTreeData]
 	);
 	const menuNode = (
 		<div

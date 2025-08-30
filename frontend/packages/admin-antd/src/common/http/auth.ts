@@ -3,7 +3,7 @@ import { useCache, CACHE_KEY } from "./useCache";
 import { decrypt, encrypt } from "./jsencrypt";
 
 type TokenType = any;
-const { wsCache } = useCache();
+const { wsCache } = useCache("sessionStorage");
 
 const AccessTokenKey = "ACCESS_TOKEN";
 const RefreshTokenKey = "REFRESH_TOKEN";

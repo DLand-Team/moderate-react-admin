@@ -48,13 +48,12 @@ const ModalForm = () => {
 	return (
 		<Modal
 			open={modalType == ModalType.ADD || modalType == ModalType.EDIT}
-			title={modalType == ModalType.ADD ? "新建路由" : "编辑路由"}
+			title={modalType == ModalType.ADD ? "新建菜单" : "编辑菜单"}
 			okText="确定"
 			cancelText="取消"
 			onCancel={() => {
 				handleClose();
 			}}
-			onClose={() => {}}
 			onOk={() => {
 				form.validateFields()
 					.then((values) => {

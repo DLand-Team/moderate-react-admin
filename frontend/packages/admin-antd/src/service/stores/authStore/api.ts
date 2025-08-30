@@ -17,10 +17,8 @@ const baseUrl = "/admin-api/system";
 const api = {
 	refreshToken() {
 		return http.post<{
-			data: {
-				refreshToken: string;
-				accessToken: string;
-			};
+			refreshToken: string;
+			accessToken: string;
 		}>({
 			url:
 				"/admin-api/system/auth/refresh-token?refreshToken=" +
@@ -43,27 +41,25 @@ const api = {
 		});
 	},
 	loginApi(data: LoginApiReq) {
-		return http.post<{ data: LoginApiRes }>({
+		return http.post<LoginApiRes>({
 			url: "/admin-api/system/auth/login",
 			data,
 		});
 	},
 	// 获取权限
 	getPermissionInfoApi() {
-		return http.get<{ data: LoginApiRes }>({
+		return http.get<LoginApiRes>({
 			url: "/admin-api/system/auth/get-permission-info",
 		});
 	},
 	fetchUserPermissions() {
-		return http.get<{
-			data: { permissions: any; menus: MenuPermissionItem[] };
-		}>({
+		return http.get<{ permissions: any; menus: MenuPermissionItem[] }>({
 			url: baseUrl + "/auth/get-permission-info",
 		});
 	},
 
 	getMenuListApi() {
-		return http.get<{ data: MenuItemData[] }>({
+		return http.get<MenuItemData[]>({
 			url: "/admin-api/system/menu/list",
 		});
 	},
@@ -114,17 +110,13 @@ const api = {
 		});
 	},
 	getMenuDataApi(params: GetMenuDataApiReq) {
-		return http.get<{
-			data: MenuItemData;
-		}>({
+		return http.get<MenuItemData>({
 			url: "/admin-api/system/menu/get",
 			params,
 		});
 	},
 	deleteMenuApi(params: GetMenuDataApiReq) {
-		return http.delete<{
-			data: MenuItemData;
-		}>({
+		return http.delete<MenuItemData>({
 			url: "/admin-api/system/menu/delete",
 			params,
 		});
