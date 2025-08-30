@@ -1,10 +1,10 @@
 {
-  "projectName": "Dland",
-  "logo": "/logo.png",
-  "icon": "",
-  "paletteSet": { "light": "dland", "dark": "dland" },
-  "layoutSet": { "light": "Wind", "dark": "Wind" },
-  "routerAni": "fade",
-  "color": "dark",
-  "locale": "zh"
+	"projectName": "Dland",
+	"logo": "/logo.png",
+	"icon": "",
+	"paletteSet": { "light": "dland", "dark": "dland" },
+	"layoutSet": { "light": "Wind", "dark": "Wind" },
+	"routerAni": "fade",
+	"color": "dark",
+	"locale": "zh"
 }

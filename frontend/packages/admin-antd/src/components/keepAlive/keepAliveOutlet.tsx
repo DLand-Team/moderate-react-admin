@@ -44,7 +44,7 @@ const KeepAliveOutlet = memo(() => {
 		if (!tabItems.length) return;
 		const pathArr = tabItems.map((item) => {
 			const configItem = routerHelper.getRoutItemConfigByPath(
-				item.location?.pathname!,
+				item.location?.pathname!
 			);
 			if (configItem?.segment) {
 				return item.location?.pathname?.split("/").slice(-2).join("/");
@@ -55,7 +55,7 @@ const KeepAliveOutlet = memo(() => {
 
 		pathArr.forEach((item) => {
 			const routeItem = routerHelper.getRoutItemConfigById(
-				item as ROUTE_ID_KEY,
+				item as ROUTE_ID_KEY
 			);
 			if (!routeItem) return;
 			const { isTab, depends } = routeItem;
@@ -133,8 +133,8 @@ const KeepAliveOutlet = memo(() => {
 						activeKey={
 							currentRouteConfig?.segment
 								? activeKey.current +
-									"/" +
-									pathname.split("/").slice(-1)[0]
+								  "/" +
+								  pathname.split("/").slice(-1)[0]
 								: activeKey.current
 						}
 						segm

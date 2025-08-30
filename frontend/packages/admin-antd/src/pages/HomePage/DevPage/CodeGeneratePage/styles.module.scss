@@ -1,0 +1,10 @@
+.content {
+	:global {
+		.ant-card .ant-card-body {
+			padding: 0;
+		}
+		.ant-tree {
+			height: 100%;
+		}
+	}
+}

@@ -1,6 +1,7 @@
 import { pageList as pluginsPages } from "plugins/config/pages";
 import { lazy } from "react";
 import UserPage from "./HomePage/SysPage/UserPage";
+import CodeGeneratePage from "./HomePage/DevPage/CodeGeneratePage";
 
 const isProd = process.env.NODE_ENV == "production";
 // MODERATE_AUTO_PAGE_LAZY_IMPORT:START
@@ -29,65 +30,65 @@ const PluginsPage = lazy(() => import("./HomePage/PluginsPage"));
 
 //PluginListPage
 const PluginListPage = lazy(
-	() => import("./HomePage/PluginsPage/PluginListPage"),
+	() => import("./HomePage/PluginsPage/PluginListPage")
 );
 const LoadingPage = lazy(() => import("./HomePage/LoadingPage"));
 
 // rule页面
 const RulePage = lazy(() => import("./HomePage/CpdPage/RulePage"));
 const RuleDetailPage = lazy(
-	() => import("./HomePage/CpdPage/RulePage/RuleDetailPage"),
+	() => import("./HomePage/CpdPage/RulePage/RuleDetailPage")
 );
 const RuleListPage = lazy(
-	() => import("./HomePage/CpdPage/RulePage/RuleListPage"),
+	() => import("./HomePage/CpdPage/RulePage/RuleListPage")
 );
 const RuleEditPage = lazy(
-	() => import("./HomePage/CpdPage/RulePage/RuleEditPage"),
+	() => import("./HomePage/CpdPage/RulePage/RuleEditPage")
 );
 const RuleAddPage = lazy(
-	() => import("./HomePage/CpdPage/RulePage/RuleAddPage"),
+	() => import("./HomePage/CpdPage/RulePage/RuleAddPage")
 );
 ////posPage
 const PosPage = lazy(() => import("./HomePage/CpdPage/PosPage"));
 const PosDetailPage = lazy(
-	() => import("./HomePage/CpdPage/PosPage/PosDetailPage"),
+	() => import("./HomePage/CpdPage/PosPage/PosDetailPage")
 );
 const PosAddPage = lazy(() => import("./HomePage/CpdPage/PosPage/PosAddPage"));
 const PosEditPage = lazy(
-	() => import("./HomePage/CpdPage/PosPage/PosEditPage"),
+	() => import("./HomePage/CpdPage/PosPage/PosEditPage")
 );
 const PosListPage = lazy(
-	() => import("./HomePage/CpdPage/PosPage/PosListPage"),
+	() => import("./HomePage/CpdPage/PosPage/PosListPage")
 );
 //market
 ////marketPage
 const MarketPage = lazy(() => import("./HomePage/CpdPage/MarketPage"));
 const MarketDetailPage = lazy(
-	() => import("./HomePage/CpdPage/MarketPage/MarketDetailPage"),
+	() => import("./HomePage/CpdPage/MarketPage/MarketDetailPage")
 );
 ////marketListPage
 const MarketListPage = lazy(
-	() => import("./HomePage/CpdPage/MarketPage/MarketListPage"),
+	() => import("./HomePage/CpdPage/MarketPage/MarketListPage")
 );
 ////marketEditPage
 const MarketEditPage = lazy(
-	() => import("./HomePage/CpdPage/MarketPage/MarketEditPage"),
+	() => import("./HomePage/CpdPage/MarketPage/MarketEditPage")
 );
 ////marketAddPage
 const MarketAddPage = lazy(
-	() => import("./HomePage/CpdPage/MarketPage/MarketAddPage"),
+	() => import("./HomePage/CpdPage/MarketPage/MarketAddPage")
 );
 // filterPage
 const FilterPage = lazy(() => import("./HomePage/CpdPage/FilterPage"));
 ////filterListPage
 const FilterListPage = lazy(
-	() => import("./HomePage/CpdPage/FilterPage/FilterListPage"),
+	() => import("./HomePage/CpdPage/FilterPage/FilterListPage")
 );
 // sortPage
 const SortPage = lazy(() => import("./HomePage/CpdPage/SortPage"));
 ////filterListPage
 const SortListPage = lazy(
-	() => import("./HomePage/CpdPage/SortPage/SortListPage"),
+	() => import("./HomePage/CpdPage/SortPage/SortListPage")
 );
 
 //MODERATE_AUTO_PAGE_LAZY_IMPORT:END
@@ -99,6 +100,7 @@ export const pageList = {
 	HelloPage,
 	RolePage,
 	PageDevPage,
+	CodeGeneratePage,
 	StoreDevPage,
 	NotFundPage,
 	MenuPage,

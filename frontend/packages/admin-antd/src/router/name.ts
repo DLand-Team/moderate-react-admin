@@ -11,6 +11,7 @@ export enum NAME {
 	MenuPage,
 	RolePage,
 	DevPage,
+	CodeGeneratePage,
 	PageDevPage,
 	StoreDevPage,
 	NotFundPage,

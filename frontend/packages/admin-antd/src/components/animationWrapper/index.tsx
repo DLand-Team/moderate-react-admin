@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import { useNavigationType } from "react-router-dom";
+import { useLocation, useNavigationType } from "react-router-dom";
 import { useFlat } from "src/service";
 
 import { motion, Variants } from "framer-motion";
@@ -10,9 +10,9 @@ const AnimationWrapper = ({ children }: PropsWithChildren) => {
 	const { routerAni } = settingData;
 	const { PushVariants, PopVariants } = getTransition(routerAni);
 	const RouteTransition = getRouteTransition(routerAni);
-
 	return (
 		<motion.div
+			key={useLocation().pathname}
 			animate="in"
 			exit="out"
 			initial="initial"

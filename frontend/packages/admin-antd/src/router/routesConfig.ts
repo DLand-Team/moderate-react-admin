@@ -27,7 +27,6 @@ export const ROUTE_CONFIG_MAP: {
 		},
 		component: "HelloPage",
 		actionPermissions: ["ADD", "EDIT"],
-		keepAlive: true,
 		index: true,
 		isNoAuth: true,
 	},
@@ -92,6 +91,14 @@ export const ROUTE_CONFIG_MAP: {
 		component: "StoreDevPage",
 		actionPermissions: ["ADD", "EDIT"],
 		isNoAuth: false,
+	},
+	CodeGeneratePage: {
+		id: "CodeGeneratePage",
+		meta: { title: "common:CodeGeneratePageTitle" },
+		component: "CodeGeneratePage",
+		isNoAuth: true,
+		isPublish: false,
+		keepAlive: true,
 	},
 	NotFundPage: {
 		id: "NotFundPage",
