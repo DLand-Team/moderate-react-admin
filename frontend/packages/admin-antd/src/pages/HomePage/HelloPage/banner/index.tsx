@@ -47,7 +47,7 @@ export function Banner() {
 					</div>
 					<div className={styles.btnPart}>
 						<Link
-							href="https://dland-core.github.io/mui-eazy/"
+							href="https://dland-team.github.io/moderate-react-admin/"
 							className={styles.btn}
 							style={{
 								marginRight: "32px",
