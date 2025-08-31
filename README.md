@@ -32,7 +32,7 @@
 
 
 
-### Shacn-nextJs版本
+### Shacn-NextJs版本
 
 ![alt text](_assets/shadcn.png)
 
