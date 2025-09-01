@@ -11,7 +11,6 @@ import {
 	routerHelper,
 	authHelper,
 	devHelper,
-	ruleHelper,
 } from "./setup";
 import { stores } from "./stores";
 import { type ReduxState } from "./setup";
@@ -42,9 +41,9 @@ export const dp = getDp(reduxStore, stores);
 export const dpChain = getDpChain(reduxStore, stores);
 
 export const getStore = <
-	T extends keyof typeof stores | [keyof typeof stores, string | undefined],
+	T extends keyof typeof stores | [keyof typeof stores, string | undefined]
 >(
-	storeName: T,
+	storeName: T
 ): ReduxState[T extends keyof typeof stores ? T : T[0]] => {
 	if (Array.isArray(storeName)) {
 		if (
@@ -78,8 +77,8 @@ export const serviceManager = {
 export type ServiceManagerType = typeof serviceManager;
 
 // 依赖注入serviceManager
+
 appHelper.injectServiceManager(serviceManager);
 routerHelper.injectServiceManager(serviceManager);
 authHelper.injectServiceManager(serviceManager);
 devHelper.injectServiceManager(serviceManager);
-ruleHelper.injectServiceManager(serviceManager);

@@ -19,31 +19,6 @@ export enum NAME {
 	LoadingPage,
 	PluginsPage,
 	UserPage,
-	// CpdPage,
-	// market
-	MarketPage,
-	MarketDetailPage,
-	MarketListPage,
-	MarketAddPage,
-	MarketEditPage,
-	// pos
-	PosPage,
-	PosListPage,
-	PosDetailPage,
-	PosEditPage,
-	PosAddPage,
-	// rule
-	RulePage,
-	RuleDetailPage,
-	RuleListPage,
-	RuleEditPage,
-	RuleAddPage,
-	// filter
-	FilterPage,
-	FilterListPage,
-	// sort
-	SortPage,
-	SortListPage,
 	PluginListPage,
 }
 
