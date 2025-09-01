@@ -15,8 +15,8 @@ import { config } from "./config";
 import errorCode from "./errorCode";
 
 // import { t } from "i18next";
-import { dpChain } from "@/service";
-import storageHelper from "@/lib/storageHelper";
+import { dpChain } from "src/service";
+import storageHelper from "@/src/shadcn/lib/storageHelper";
 
 const tenantEnable = "true";
 const { result_code, request_timeout } = config;
