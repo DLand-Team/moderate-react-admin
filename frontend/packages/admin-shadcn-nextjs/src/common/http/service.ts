@@ -16,7 +16,7 @@ import errorCode from "./errorCode";
 
 // import { t } from "i18next";
 import { dpChain } from "src/service";
-import storageHelper from "@/src/shadcn/lib/storageHelper";
+import { toast } from "sonner";
 
 const tenantEnable = "true";
 const { result_code, request_timeout } = config;
@@ -187,12 +187,14 @@ service.interceptors.response.use(
 			// });
 			return Promise.reject(new Error(msg));
 		} else if (code !== 200) {
+			debugger;
 			if (msg === "无效的刷新令牌") {
 				// hard coding：忽略这个提示，直接登出
 				console.log(msg);
 				return handleAuthorized();
 			} else {
 				// message.error({ content: msg });
+				toast.error(msg);
 			}
 			return Promise.reject("error");
 		} else {

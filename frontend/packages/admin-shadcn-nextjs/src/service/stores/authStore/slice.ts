@@ -57,7 +57,7 @@ const slice = createSlice({
 		) {
 			// 菜单权限
 			state.menuPermissions = payload.menuPermissions;
-            debugger
+            
 			// 路由权限
 			// state.routesPermissions = payload.routesPermissions;
 			// 按钮权限

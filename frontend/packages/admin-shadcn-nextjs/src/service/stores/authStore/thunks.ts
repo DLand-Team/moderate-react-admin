@@ -90,7 +90,7 @@ const thunks = createThunks("authStore", {
 		const {
 			data: { permissions, menus },
 		} = await httpApi.fetchUserPermissions();
-        debugger
+        
 		await dpChain("authStore").setPermissions({
 			menuPermissions: menus,
 			permissions,

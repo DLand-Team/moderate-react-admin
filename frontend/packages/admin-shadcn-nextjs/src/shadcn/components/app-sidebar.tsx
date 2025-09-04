@@ -57,7 +57,7 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 	const { menuPermissions } = useFlat("authStore");
-    debugger
+    
 	return (
 		<Sidebar {...props}>
 			<SidebarHeader>
