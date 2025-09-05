@@ -137,7 +137,6 @@ const KeepAliveOutlet = memo(() => {
 								  pathname.split("/").slice(-1)[0]
 								: activeKey.current
 						}
-						segm
 						pageKey={key as ROUTE_ID_KEY}
 					>
 						{component}
