@@ -10,9 +10,9 @@ export interface RouteTreeItem {
 
 class RouterHelper extends HelperBase {
 	// 存储组件View组件的Map，组件View是一个函数组件，不是节点
-	keepAliveMap = new Map<string, React.ComponentType>();
+	keepAliveMap = new Map<string, React.ReactNode>();
 	routeList: any[] = [];
-	registerPage(routeId: ROUTE_ID_KEY, component?: React.ComponentType) {
+	registerPage(routeId: ROUTE_ID_KEY, component?: React.ReactNode) {
 		if (component) {
 			this.keepAliveMap.set(routeId, component);
 			this.routeList.push(routeId);

@@ -28,10 +28,9 @@ const KeepAlive = ({ children }: PropsWithChildren) => {
 	useEffect(() => {
 		activeKey.current = cacheKey as ROUTE_ID_KEY;
 		if (isKeepAlive) {
-			const View = (routerHelper.getKeepAliveComponent(pathname) ||
-				Fragment) as React.ComponentType;
+			const View = routerHelper.getKeepAliveComponent(pathname);
 			if (View && !cache.current.has(pathname)) {
-				cache.current.set(pathname, <View />);
+				cache.current.set(pathname, View as React.ReactNode);
 				forceUpdate();
 			}
 		}

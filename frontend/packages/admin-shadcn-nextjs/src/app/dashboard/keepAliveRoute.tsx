@@ -25,7 +25,13 @@ function keepAliveRoute(props: KeepAliveComponentProps) {
 			const element = document.getElementById(pageKey);
 			if (element) {
 				while (element.firstChild) {
-					element.removeChild(element.firstChild);
+					try {
+						if (element.contains(element.firstChild)) {
+							element.removeChild(element.firstChild);
+						}
+					} catch (error) {
+						console.error("Error removing child:", error);
+					}
 				}
 			}
 			element?.appendChild(aliveDom);
