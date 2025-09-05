@@ -3,7 +3,13 @@ import { useForceUpdate } from "@/src/common/hooks/useForceUpdate";
 import { ROUTE_ID_KEY } from "@/src/router";
 import { routerHelper, useFlat } from "@/src/service";
 import { usePathname } from "next/navigation"; // 如果用的是 next/router
-import React, { PropsWithChildren, useEffect, useMemo, useRef } from "react";
+import React, {
+	Fragment,
+	PropsWithChildren,
+	useEffect,
+	useMemo,
+	useRef,
+} from "react";
 import KeepAliveRoute from "./keepAliveRoute";
 
 const KeepAlive = ({ children }: PropsWithChildren) => {
@@ -22,7 +28,8 @@ const KeepAlive = ({ children }: PropsWithChildren) => {
 	useEffect(() => {
 		activeKey.current = cacheKey as ROUTE_ID_KEY;
 		if (isKeepAlive) {
-			const View = routerHelper.getKeepAliveComponent(pathname);
+			const View = (routerHelper.getKeepAliveComponent(pathname) ||
+				Fragment) as React.ComponentType;
 			if (View && !cache.current.has(pathname)) {
 				cache.current.set(pathname, <View />);
 				forceUpdate();

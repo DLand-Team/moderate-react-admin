@@ -21,7 +21,14 @@ function keepAliveRoute(props: KeepAliveComponentProps) {
 
 	useLayoutEffect(() => {
 		if (isActive) {
-			document.getElementById(pageKey)?.appendChild(aliveDom);
+			// 删除所有子节点
+			const element = document.getElementById(pageKey);
+			if (element) {
+				while (element.firstChild) {
+					element.removeChild(element.firstChild);
+				}
+			}
+			element?.appendChild(aliveDom);
 		}
 	});
 	return createPortal(children, aliveDom, pageKey);

@@ -2,7 +2,7 @@ import { ROUTE_ID } from "@/src/router";
 import { DataTable } from "@/src/shadcn/components/data-table";
 import fs from "fs";
 import path from "path";
-import KeepAliveSign from "../keepAliveSign";
+import KeepAliveSign, { Slot } from "../keepAliveSign";
 import HelloView from "./view";
 
 export default function Page() {
@@ -15,8 +15,10 @@ export default function Page() {
 				key={ROUTE_ID.hello}
 				routeId={ROUTE_ID.hello}
 				render={HelloView}
-			></KeepAliveSign>
-			<DataTable data={JSON.parse(raw)} />
+			>
+				<Slot id={ROUTE_ID.hello} />
+				<DataTable data={JSON.parse(raw)} />
+			</KeepAliveSign>
 		</div>
 	);
 }
