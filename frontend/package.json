@@ -1,31 +1,20 @@
 {
-	"name": "moderate-admin-react",
-	"version": "2.0.0",
-	"description": "",
-	"main": "index.js",
-	"engines": {
-		"node": ">=16.17.0",
-		"npm": ">=8.15.0"
-	},
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
-		"start": "pnpm   --filter=!docs -r dev",
-		"clean": "rimraf './node_modules'&&lerna clean"
-	},
-	"author": "闲D阿强",
-	"license": "MIT",
-	"private": true,
-	"workspaces": [
-		"packages/*"
-	],
-	"devDependencies": {
-		"clean-webpack-plugin": "^4.0.0",
-		"lerna": "^3.22.1",
-		"npm-run-all": "^4.1.5"
-	},
-	"dependencies": {
-		"@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-		"cross-env": "^7.0.3",
-		"rimraf": "^5.0.1"
-	}
+  "name": "my-turborepo",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "check-types": "turbo run check-types"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "turbo": "^2.5.6",
+    "typescript": "5.9.2"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=18"
+  }
 }
