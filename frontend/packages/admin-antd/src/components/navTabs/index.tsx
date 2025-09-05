@@ -136,7 +136,7 @@ const NavTabs = () => {
 	useLocationListen(
 		(location) => {
 			const tabItemsTemp = cloneDeep(
-				getStore("appStore").tabItems,
+				getStore("appStore").tabItems
 			).filter((item) => {
 				return item;
 			});
@@ -156,12 +156,12 @@ const NavTabs = () => {
 			if (!component) return;
 
 			const parentConfigItem = routerHelper.getRoutItemConfigById(
-				parentId!,
+				parentId!
 			);
 			if (!isTab) {
 				if (!depends?.length) return;
 				const indexRoute = routerHelper.getIndexRouteByPath(
-					parentConfigItem.path!,
+					parentConfigItem.path!
 				);
 				if (indexRoute) {
 					let targetIndex = tabItemsTemp.findIndex((item) => {
@@ -173,7 +173,7 @@ const NavTabs = () => {
 						location,
 						label:
 							routerHelper.getRouteTitleByKey(
-								id as ROUTE_ID_KEY,
+								id as ROUTE_ID_KEY
 							) || "",
 					};
 					setActiveTabKey(indexRoute.path!);
@@ -235,7 +235,7 @@ const NavTabs = () => {
 			});
 			setTabItems(temp);
 		},
-		[language],
+		[language]
 	);
 	const onDragEnd = ({ active, over }: DragEndEvent) => {
 		setTabClassName(styles.test);
@@ -264,7 +264,7 @@ const NavTabs = () => {
 		if (!over) return;
 		const tabsHistoryTemp = [...tabItems];
 		const activeIndex = tabsHistoryTemp.findIndex(
-			(i) => i.key === active.id,
+			(i) => i.key === active.id
 		);
 		const overIndex = tabsHistoryTemp.findIndex((i) => i.key === over?.id);
 		setTabItems(arrayMove(tabsHistoryTemp, activeIndex, overIndex));
@@ -312,7 +312,7 @@ const NavTabs = () => {
 
 	const onEdit = (
 		targetKey: React.MouseEvent | React.KeyboardEvent | string,
-		action: "add" | "remove",
+		action: "add" | "remove"
 	) => {
 		if (action === "remove") {
 			appHelper.closeTabByPath({
@@ -353,7 +353,7 @@ const NavTabs = () => {
 					routerHelper.jumpToByPath(
 						target!?.location?.pathname +
 							(target.location?.search || "") +
-							(target.location?.hash || ""),
+							(target.location?.hash || "")
 					);
 				} else {
 					routerHelper.jumpToByPath(e);
@@ -372,7 +372,7 @@ const NavTabs = () => {
 							routerHelper.jumpToByPath(
 								currentDragRef.current +
 									target.location?.search +
-									target.location?.hash,
+									target.location?.hash
 							);
 						} else {
 							routerHelper.jumpToByPath(currentDragRef.current);
@@ -418,7 +418,7 @@ const NavTabs = () => {
 														key == location.pathname
 													) {
 														routerHelper.jumpTo(
-															ROUTE_ID.LoadingPage,
+															ROUTE_ID.LoadingPage
 														);
 													}
 
