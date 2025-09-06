@@ -14,7 +14,7 @@ import {
 	SidebarTrigger,
 } from "@/src/shadcn/components/ui/sidebar";
 import { PropsWithChildren } from "react";
-import KeepAlive from "./keepAlive";
+import KeepAlive from "../../router/keepAlive";
 import TabNav from "src/components/tab-nav";
 
 export default function Layout({ children }: PropsWithChildren) {

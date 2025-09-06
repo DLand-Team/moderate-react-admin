@@ -3,14 +3,19 @@ import { RouteItem } from "src/router";
 import { getActionType } from "src/service";
 import { createSlice } from "src/service/setup";
 import { StoreState } from "./model";
+import { storageHelper } from "@/src/common/utils";
 
 const initialState = (): StoreState => {
+	const historyRoutes = storageHelper.getItem("TABS_HISTORY");
+    debugger
 	return {
 		isLoading: false,
 		routeList: [],
-		routeListEx: [],
+		keepAliveRouteIds: [],
 		routeTree: null,
-		currentRoute: null,
+		historyRoutes: historyRoutes||[],
+		currentRouteUrl: "",
+		jumpingSignal: "",
 	};
 };
 
@@ -24,14 +29,21 @@ const slice = createSlice({
 		setRouteList(state, { payload }: PayloadAction<RouteItem[]>) {
 			state.routeList = payload;
 		},
-		setRouteListEx(state, { payload }: PayloadAction<any[]>) {
-			state.routeListEx = payload;
+		setKeepAliveList(state, { payload }: PayloadAction<any[]>) {
+			state.keepAliveRouteIds = payload;
 		},
 		setRouteTree(state, { payload }: PayloadAction<RouteItem | null>) {
 			state.routeTree = payload;
 		},
-		setCurrentRoute(state, { payload }: PayloadAction<RouteItem | null>) {
-			state.currentRoute = payload;
+		setHistoryRoutes(state, { payload }: PayloadAction<RouteItem[]>) {
+			state.historyRoutes = payload;
+			storageHelper.setItem("TABS_HISTORY", payload);
+		},
+		setCurrentRouteUrl(state, { payload }: PayloadAction<string>) {
+			state.currentRouteUrl = payload;
+		},
+		setJumping(state, _: PayloadAction<any>) {
+			state.jumpingSignal = new Date().getTime().toString();
 		},
 	},
 	extraReducers: (builder) => {

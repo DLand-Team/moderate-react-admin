@@ -21,11 +21,11 @@ const OtherProvider = ({ children }: React.PropsWithChildren) => {
 		<>
 			{children}
 			<Toaster />
-			{isLoading && (
+			{/* {isLoading && (
 				<div className="loading g-glossy">
 					<RiveLoading />
 				</div>
-			)}
+			)} */}
 		</>
 	);
 };

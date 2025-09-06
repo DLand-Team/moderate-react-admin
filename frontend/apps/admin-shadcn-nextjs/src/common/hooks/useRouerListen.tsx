@@ -3,7 +3,11 @@
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useRef } from "react";
 
-type Listener = (url: string) => void;
+type Listener = (params: {
+	pathname: string;
+	searchParams: URLSearchParams;
+	url: string;
+}) => void;
 
 /**
  * 监听 Next.js App Router 的路由变化
@@ -16,13 +20,17 @@ export function useAppRouterListener(listener: Listener) {
 
 	useEffect(() => {
 		const url =
-			searchParams && searchParams.toString()
-				? `${pathname}?${searchParams.toString()}`
-				: pathname;
+			window.location.pathname +
+			window.location.search +
+			window.location.hash;
 
 		// 避免首次渲染或重复触发
 		if (lastUrlRef.current !== url) {
-			listener(url);
+			listener({
+				pathname,
+				searchParams,
+				url,
+			});
 			lastUrlRef.current = url;
 		}
 	}, [pathname, searchParams, listener]);

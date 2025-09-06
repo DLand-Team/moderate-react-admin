@@ -187,7 +187,6 @@ service.interceptors.response.use(
 			// });
 			return Promise.reject(new Error(msg));
 		} else if (code !== 200) {
-			debugger;
 			if (msg === "无效的刷新令牌") {
 				// hard coding：忽略这个提示，直接登出
 				console.log(msg);

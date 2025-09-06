@@ -17,6 +17,7 @@ const AuthGuard = ({ children }: PropsWithChildren) => {
 			}
 			getUserPermissionsAct();
 		} else {
+            debugger
 			// 排除不鉴登录，直接放行的路由
 			if (excludeRoutePath.includes(pathName)) {
 				return;

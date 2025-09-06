@@ -13,7 +13,7 @@ import React, {
 import KeepAliveRoute from "./keepAliveRoute";
 
 const KeepAlive = ({ children }: PropsWithChildren) => {
-	const { routeListEx } = useFlat("appStore");
+	const { keepAliveRouteIds } = useFlat("appStore");
 	const pathname = usePathname();
 	const cache = useRef<Map<string, React.ReactNode>>(new Map());
 	const forceUpdate = useForceUpdate();
@@ -36,7 +36,7 @@ const KeepAlive = ({ children }: PropsWithChildren) => {
 		}
 		const domId = pathname.split("/").pop();
 		aliveParentRef.current = document.getElementById(domId!)!;
-	}, [routeListEx, pathname]);
+	}, [keepAliveRouteIds, pathname]);
 
 	return (
 		<div

@@ -1,7 +1,9 @@
-import { useEffect } from "react";
-import { RouteItem } from "./types";
-import { emit, useFlat } from "src/service";
+"use client";
 import { useRouter } from "@bprogress/next";
+import { useEffect, useRef } from "react";
+import { emit, useFlat } from "src/service";
+import { useAppRouterListener } from "../common/hooks/useRouerListen";
+import { RouteItem } from "./types";
 
 export const RouterEazyProvider = ({
 	children,
@@ -9,7 +11,13 @@ export const RouterEazyProvider = ({
 }: React.PropsWithChildren<{
 	routerData: { tree: RouteItem; list: RouteItem[] };
 }>) => {
-	const { currentRoute, setCurrentRoute } = useFlat("appStore");
+	const {
+		addHistoryRouteAct,
+		setCurrentRouteUrl,
+		currentRouteUrl,
+		jumpingSignal,
+	} = useFlat("appStore");
+	const router = useRouter();
 
 	// 存储的路由数据
 	useEffect(() => {
@@ -18,11 +26,15 @@ export const RouterEazyProvider = ({
 	}, []);
 
 	// 路由跳转
-	const router = useRouter();
 	useEffect(() => {
-		currentRoute?.path && router.push(currentRoute?.path);
-		setCurrentRoute(null);
-	}, [currentRoute]);
+		router.push(currentRouteUrl);
+	}, [jumpingSignal]);
+
+	// 路由监听
+	useAppRouterListener(({ pathname, url }) => {
+		addHistoryRouteAct({ pathname, url });
+		setCurrentRouteUrl(url);
+	});
 
 	return <>{children}</>;
 };

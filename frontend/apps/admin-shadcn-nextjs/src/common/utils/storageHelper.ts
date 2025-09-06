@@ -2,33 +2,28 @@ type ItemKey =
 	| "ACCESS_TOKEN"
 	| "SOCKET_ID"
 	| "SOCKET_STATUS"
-	| "DEAL_ID"
-	| "IS_ADMIN"
 	| "TABS_HISTORY"
 	| "THEME"
-	| "BTN_TIME"
-	| "BTN_CON"
 	| "IS_THEME_AUTO"
 	| "LANGUAGE"
 	| "SETTING"
 	| "IS_PLUGIN_INSTALLING"
 	| "REFRESH_TOKEN"
 	| "USERNAME"
-	| "CHECK"
-	| "DEMO_DATA";
+	| "CHECK";
 
 const storageHelper = {
 	setItem: (
 		key: ItemKey,
 		data: unknown,
-		type: "session" | "local" = "session"
+		type: "session" | "local" = "session",
 	) => {
 		const flag = typeof window !== "undefined";
 		const sg = flag
 			? {
 					session: window.sessionStorage,
 					local: window.localStorage,
-			  }[type]
+				}[type]
 			: null;
 		sg && sg.setItem(key, JSON.stringify(data));
 	},
@@ -38,7 +33,7 @@ const storageHelper = {
 			? {
 					session: window.sessionStorage,
 					local: window.localStorage,
-			  }[type]
+				}[type]
 			: null;
 		sg?.clear();
 		window.sessionStorage.clear();
@@ -50,7 +45,7 @@ const storageHelper = {
 			? {
 					session: window.sessionStorage,
 					local: window.localStorage,
-			  }[type]
+				}[type]
 			: null;
 		sg?.removeItem(key);
 	},
@@ -60,7 +55,7 @@ const storageHelper = {
 			? {
 					session: window.sessionStorage,
 					local: window.localStorage,
-			  }[type]
+				}[type]
 			: null;
 		const value = sg ? sg.getItem(key) || "" : "";
 		return value ? JSON.parse(value) : value;

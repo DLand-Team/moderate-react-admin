@@ -1,5 +1,5 @@
 import { ROUTE_ID } from "@/src/router";
-import KeepAliveSign from "../keepAliveSign";
+import KeepAliveSign from "../../../router/keepAliveSign";
 import TestView from "./view";
 
 export default function Page() {

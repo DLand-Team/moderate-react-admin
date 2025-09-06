@@ -19,45 +19,40 @@ import {
 	SidebarMenuSub,
 	SidebarRail,
 } from "@/src/shadcn/components/ui/sidebar";
-import { useFlat } from "src/service";
-import { MenuPermissionItem } from "src/service/stores/authStore/model";
 import { IconListDetails } from "@tabler/icons-react";
+import { routerHelper, useFlat } from "src/service";
+import { MenuPermissionItem } from "src/service/stores/authStore/model";
+import { cn } from "../lib/utils";
 import { SearchForm } from "./search-form";
 import { VersionSwitcher } from "./version-switcher";
 
-// This is sample data.
-const data = {
-	tree: [
-		[
-			"app",
-			[
-				"api",
-				["hello", ["route.ts"]],
-				"page.tsx",
-				"layout.tsx",
-				["blog", ["page.tsx"]],
-			],
-		],
-		[
-			"components",
-			["ui", "button.tsx", "card.tsx"],
-			"header.tsx",
-			"footer.tsx",
-		],
-		["lib", ["util.ts"]],
-		["public", "favicon.ico", "vercel.svg"],
-		".eslintrc.json",
-		".gitignore",
-		"next.config.js",
-		"tailwind.config.js",
-		"package.json",
-		"README.md",
-	],
-};
+export function isMenuExpanded(
+	menu: MenuPermissionItem,
+	selectedIds: Set<any>,
+): boolean {
+	// 递归终止条件：没有子菜单
+	if (!menu.children || menu.children.length === 0) {
+		return false;
+	}
+
+	// 如果有任何一个子菜单被选中或需要展开，则当前菜单需要展开
+	for (const child of menu.children) {
+		if (
+			selectedIds.has(
+				child.componentName?.replace(/Page$/, "").toLowerCase(),
+			) ||
+			isMenuExpanded(child, selectedIds)
+		) {
+			return true;
+		}
+	}
+
+	return false;
+}
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 	const { menuPermissions } = useFlat("authStore");
-    
+
 	return (
 		<Sidebar {...props}>
 			<SidebarHeader>
@@ -84,24 +79,53 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 }
 
 function Tree({ item }: { item: MenuPermissionItem }) {
+	const { currentRouteUrl } = useFlat("appStore");
 	const { name, children } = item;
 
 	if (!children?.length) {
 		return (
 			<SidebarMenuButton
-				isActive={name === "button.tsx"}
-				className="data-[active=true]:bg-transparent"
+				isActive={
+					routerHelper.getRouteConfigByUrl(currentRouteUrl)?.id ==
+					item.componentName?.replace(/Page$/, "").toLowerCase()
+				}
+				className={cn(
+					"data-[active=true]:bg-transparent",
+					"data-[active=true]:bg-blue-100",
+				)}
+				onClick={() => {
+					const { componentName } = item;
+					// componentName转换为路由id，小写并且去掉末尾的Page
+					const routeId = componentName
+						.replace(/Page$/, "")
+						.toLowerCase();
+					routerHelper.junpTo(routeId);
+				}}
 			>
 				{name}
 			</SidebarMenuButton>
 		);
 	}
+	const [isOpen, setIsOpen] = React.useState(false);
+	React.useEffect(() => {
+		setIsOpen(
+			isMenuExpanded(
+				item,
+				new Set([
+					routerHelper.getRouteConfigByUrl(currentRouteUrl)?.id,
+				]),
+			),
+		);
+	}, [currentRouteUrl]);
 
 	return (
 		<SidebarMenuItem>
 			<Collapsible
 				className="group/collapsible"
-				defaultOpen={name === "components" || name === "ui"}
+				open={isOpen}
+				onOpenChange={() => {
+					setIsOpen(!isOpen);
+				}}
 			>
 				<CollapsibleTrigger asChild>
 					<SidebarMenuButton tooltip={name}>

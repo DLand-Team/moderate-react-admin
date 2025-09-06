@@ -36,4 +36,21 @@ export const ROUTE_CONFIG_MAP: {
 		isNoAuth: true,
 		keepAlive: true,
 	},
+	sys: {
+		id: "sys",
+		meta: {
+			title: "common:SysPageTile",
+			icon: "FundProjectionScreenOutlined",
+		},
+		isNoAuth: true,
+		keepAlive: true,
+	},
+	menu: {
+		id: "menu",
+		meta: {
+			title: "common:MenuPageTile",
+			icon: "FundProjectionScreenOutlined",
+		},
+		keepAlive: true,
+	},
 };
