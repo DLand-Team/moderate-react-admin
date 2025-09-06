@@ -15,7 +15,7 @@ import {
 } from "@/src/shadcn/components/ui/sidebar";
 import { PropsWithChildren } from "react";
 import KeepAlive from "./keepAlive";
-import { TabNav } from "src/components/tab-nav";
+import TabNav from "src/components/tab-nav";
 
 export default function Layout({ children }: PropsWithChildren) {
 	return (
