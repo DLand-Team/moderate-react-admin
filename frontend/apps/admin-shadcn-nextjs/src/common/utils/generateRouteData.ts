@@ -14,7 +14,7 @@ function hasPageFile(dir: string): boolean {
  */
 function collectRoutes(
 	baseDir: string,
-	parentPathArr: string[] = []
+	parentPathArr: string[] = [],
 ): RouteItem[] {
 	if (!fs.existsSync(baseDir)) return [];
 	const entries = fs.readdirSync(baseDir, { withFileTypes: true });
@@ -59,13 +59,13 @@ function buildRouteTree(list: RouteItem[]): RouteItem[] {
 			const parent = list.find(
 				(i) =>
 					i.id === item.parentId &&
-					node.path!?.startsWith(i.path + "/")
+					node.path!?.startsWith(i.path + "/"),
 			);
 			if (parent && nodeMap.has(parent.path!)) {
 				const parentNode = nodeMap.get(parent.path!)!;
 				if (
 					!parentNode.children?.find(
-						(child) => child.path === node.path
+						(child) => child.path === node.path,
 					)
 				) {
 					parentNode.children?.push(node);
@@ -97,7 +97,7 @@ export function generateNextjsRouteStructure(baseDir: string): {
 	// 收集并用 path 去重
 	const list = collectRoutes(baseDir);
 	const uniqueList = Array.from(
-		new Map(list.map((i) => [i.path, i])).values()
+		new Map(list.map((i) => [i.path, i])).values(),
 	);
 	const tree = buildRouteTree(uniqueList);
 	return {

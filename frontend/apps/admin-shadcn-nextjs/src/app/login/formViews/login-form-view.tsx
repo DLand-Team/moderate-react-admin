@@ -68,7 +68,7 @@ export function LoginFormView({
 							label="User name"
 							name="username"
 							form={form}
-							placeholder={"m@example.com"}
+							placeholder={"admin"}
 						></FieldText>
 					</div>
 					<div className="grid gap-3">
@@ -103,7 +103,7 @@ export function LoginFormView({
 							type={"password"}
 							name="password"
 							form={form}
-							placeholder={"****"}
+							placeholder={"admin123"}
 						></FieldText>
 					</div>
 					<Button type="submit" className="w-full">
