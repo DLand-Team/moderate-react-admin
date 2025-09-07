@@ -1,0 +1,40 @@
+2023-08-02T20:52:15: 
+2023-08-02T20:52:15: > dev-server@0.1.0 dev
+2023-08-02T20:52:15: > npm run build&&npm run copyViews && cross-env PORT=8671 node -r tsconfig-paths/register ./dist/main
+2023-08-02T20:52:15: 
+2023-08-02T20:52:15: 
+2023-08-02T20:52:15: > dev-server@0.1.0 build
+2023-08-02T20:52:15: > rimraf dist && tsc --sourceMap
+2023-08-02T20:52:15: 
+2023-08-02T20:52:17: 
+2023-08-02T20:52:17: > dev-server@0.1.0 copyViews
+2023-08-02T20:52:17: > node ./src/scripts/copyView.js
+2023-08-02T20:52:17: 
+2023-08-02T20:52:17: Views文件夹已成功拷贝到dist目录！
+2023-08-02T20:52:17: server is running at port 8671
+2023-08-02T20:52:17: File /Users/johnlee/workSpace/frontEnd/DLand/dland-admin/packages/admin/src/config/routerConfig.tsx has been change
+2023-08-02T20:52:17: File /Users/johnlee/workSpace/frontEnd/DLand/dland-admin/packages/admin/src/pages/index.ts has been change
+2023-08-02T20:52:23:   <-- GET /
+2023-08-02T20:52:23:   --> GET / 200 19ms 226b
+2023-08-02T20:52:23:   <-- GET /stylesheets/style.css
+2023-08-02T20:52:23:   --> GET /stylesheets/style.css 404 6ms -
+2023-08-02T20:52:23:   <-- GET /
+2023-08-02T20:52:23:   --> GET / 200 5ms 226b
+2023-08-02T20:52:24:   <-- GET /stylesheets/style.css
+2023-08-02T20:52:24:   --> GET /stylesheets/style.css 404 6ms -
+2023-08-02T20:52:24:   <-- GET /
+2023-08-02T20:52:24:   --> GET / 200 6ms 226b
+2023-08-02T20:52:24:   <-- GET /stylesheets/style.css
+2023-08-02T20:52:24:   --> GET /stylesheets/style.css 404 1ms -
+2023-08-02T20:52:24:   <-- GET /
+2023-08-02T20:52:24:   --> GET / 200 5ms 226b
+2023-08-02T20:52:24:   <-- GET /stylesheets/style.css
+2023-08-02T20:52:24:   --> GET /stylesheets/style.css 404 2ms -
+2023-08-02T20:52:24:   <-- GET /
+2023-08-02T20:52:24:   --> GET / 200 1ms 226b
+2023-08-02T20:52:24:   <-- GET /stylesheets/style.css
+2023-08-02T20:52:24:   --> GET /stylesheets/style.css 404 3ms -
+2023-08-02T20:52:24:   <-- GET /
+2023-08-02T20:52:24:   --> GET / 200 11ms 226b
+2023-08-02T20:52:24:   <-- GET /stylesheets/style.css
+2023-08-02T20:52:24:   --> GET /stylesheets/style.css 404 2ms -

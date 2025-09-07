@@ -1,0 +1,27 @@
+.features {
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+  width: 100%;
+}
+
+.featureSvg {
+  height: 200px;
+  width: 200px;
+}
+
+
+
+[data-theme="dark"] .card {
+  border-radius: 12px;
+  background-color: rgb(32, 33, 39);
+  padding: 10px;
+  height: 100%;
+}
+
+[data-theme="light"] .card {
+  border-radius: 12px;
+  background-color: rgb(246, 246, 247);
+  padding: 10px;
+  height: 100%;
+}

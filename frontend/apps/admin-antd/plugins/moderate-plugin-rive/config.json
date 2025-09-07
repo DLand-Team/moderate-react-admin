@@ -1,0 +1,8 @@
+{
+  "name": "moderate-plugin-rive",
+  "desc": "实现pdf预览",
+  "dependencies": {
+    "pdfjs-dist": "^4.0.379",
+    "react-pdf": "^7.7.1"
+  }
+}

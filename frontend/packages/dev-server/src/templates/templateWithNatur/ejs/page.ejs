@@ -1,0 +1,70 @@
+<%
+  const name = locals.name
+-%>
+
+import type { PageType } from "@/services/stores/devStore/devStore.model";
+import { Checkbox, Space, Table } from "antd";
+import type { ColumnsType } from "antd/es/table";
+import { useEffect } from "react";
+import ModalForm from "./components/modalForm/modalForm";
+import styles from "./pageDevPage.module.scss";
+
+interface DataType {
+  key: string;
+  name: string;
+  age: number;
+  address: string;
+  tags: string[];
+}
+
+const columns: ColumnsType<PageType> = [
+  {
+    title: "页面名称",
+    dataIndex: "name",
+    key: "name",
+  },
+  {
+    title: "路径",
+    dataIndex: "path",
+    key: "path",
+  },
+  {
+    title: "可用",
+    dataIndex: "active",
+    key: "active",
+    render: (_, record) => (
+      <Checkbox checked={record.active}></Checkbox>
+    ),
+  },
+  {
+    title: "操作",
+    key: "action",
+    render: (_, record) => (
+      <Space size="middle">
+        <a>修改</a>
+      </Space>
+    ),
+  },
+];
+
+const data: DataType[] = [];
+
+const <%- name %> = () => {
+  
+  return (
+    <div className={styles.content}>
+      <div className={styles.operate_board}>
+        <ModalForm handleUpload={()=>{}} />
+      </div>
+      <Table
+        rowKey={(record) => {
+          return record.id;
+        }}
+        columns={columns}
+        dataSource={[]}
+      />
+    </div>
+  );
+};
+
+export default <%- name %>;

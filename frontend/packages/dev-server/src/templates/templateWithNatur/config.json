@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "fileList":[
+    {
+      "type":"tsx",
+      "template":"page.ejs"
+    },
+    {
+      "type":"module.scss",
+      "template":"style.ejs"
+    }
+  ]
+}

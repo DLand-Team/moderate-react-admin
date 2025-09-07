@@ -1,0 +1,8 @@
+{
+	"label": "Utilities",
+	"position": 3,
+	"link": {
+		"type": "generated-index",
+		"description": "针对redux各环节复杂的地方进行优化，并支持友好类型"
+	}
+}

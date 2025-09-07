@@ -1,0 +1,65 @@
+type ItemKey =
+	| "ACCESS_TOKEN"
+	| "SOCKET_ID"
+	| "SOCKET_STATUS"
+	| "TABS_HISTORY"
+	| "THEME"
+	| "IS_THEME_AUTO"
+	| "LANGUAGE"
+	| "SETTING"
+	| "IS_PLUGIN_INSTALLING"
+	| "REFRESH_TOKEN"
+	| "USERNAME"
+	| "CHECK";
+
+const storageHelper = {
+	setItem: (
+		key: ItemKey,
+		data: unknown,
+		type: "session" | "local" = "session",
+	) => {
+		const flag = typeof window !== "undefined";
+		const sg = flag
+			? {
+					session: window.sessionStorage,
+					local: window.localStorage,
+				}[type]
+			: null;
+		sg && sg.setItem(key, JSON.stringify(data));
+	},
+	clear: (type: "session" | "local" = "session") => {
+		const flag = typeof window !== "undefined";
+		const sg = flag
+			? {
+					session: window.sessionStorage,
+					local: window.localStorage,
+				}[type]
+			: null;
+		sg?.clear();
+		window.sessionStorage.clear();
+		window.localStorage.clear();
+	},
+	removeItem: (key: ItemKey, type: "session" | "local" = "session") => {
+		const flag = typeof window !== "undefined";
+		const sg = flag
+			? {
+					session: window.sessionStorage,
+					local: window.localStorage,
+				}[type]
+			: null;
+		sg?.removeItem(key);
+	},
+	getItem: (key: ItemKey, type: "session" | "local" = "session") => {
+		const flag = typeof window !== "undefined";
+		const sg = flag
+			? {
+					session: window.sessionStorage,
+					local: window.localStorage,
+				}[type]
+			: null;
+		const value = sg ? sg.getItem(key) || "" : "";
+		return value ? JSON.parse(value) : value;
+	},
+};
+
+export default storageHelper;

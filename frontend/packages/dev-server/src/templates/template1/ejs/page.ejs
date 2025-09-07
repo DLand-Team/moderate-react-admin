@@ -1,0 +1,25 @@
+<%
+  const name = locals.name
+  const pageName = locals.pageName
+	const isOutlet = locals.isOutlet
+-%>
+import styles from "./style.module.scss";
+<% if ( isOutlet) { %>
+import { Outlet } from "react-router-dom";
+<% } else { %>
+<% } %>
+const <%- pageName %> = () => {
+
+
+	return (
+		<div className={styles.content}>
+			<% if ( isOutlet) { %>
+				<Outlet />
+				<% } else { %>
+					<%- pageName %> welcome!
+				<% } %>
+		</div>
+	);
+};
+
+export default <%- pageName %>;

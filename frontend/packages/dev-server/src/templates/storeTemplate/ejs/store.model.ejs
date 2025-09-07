@@ -1,0 +1,16 @@
+<%
+  const name = locals.name
+  const typeName = locals.typeName
+-%>
+export interface <%- typeName %>State {
+  pageList: PageType[];
+  total: number;
+  pageSize: number;
+  pageNum: number;
+}
+export interface PageType {
+  id:string;
+  name:string;
+  path:string;
+  active:boolean;
+}

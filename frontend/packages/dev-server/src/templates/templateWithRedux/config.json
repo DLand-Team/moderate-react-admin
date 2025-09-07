@@ -1,0 +1,11 @@
+{
+	"version": 1,
+	"fileList": [
+		{
+			"type": "tsx",
+			"template": "page.ejs",
+			"path": "",
+			"extraName": ""
+		}
+	]
+}

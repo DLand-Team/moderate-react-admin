@@ -1,0 +1,29 @@
+.content {
+	width: 100%;
+	height: 100%;
+	scrollbar-width: none;
+	overflow-y: auto;
+	overflow-x: hidden;
+
+	.title {
+		text-align: center;
+		font-weight: bold;
+		background: -webkit-linear-gradient(315deg, #42d392 25%, #647eff);
+		background-clip: text;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		font-size: 76px;
+		line-height: 1.25;
+		letter-spacing: -1.5px;
+	}
+
+	.info {
+		box-sizing: border-box;
+		width: 100%;
+		padding: 40px;
+		display: flex;
+		justify-content: flex-start;
+		color: black;
+		align-items: center;
+	}
+}

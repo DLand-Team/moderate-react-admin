@@ -1,0 +1,17 @@
+<%
+  const name = locals.name
+  const pageName = locals.pageName
+-%>
+import styles from "./style.module.scss";
+
+const <%- pageName %> = () => {
+
+
+	return (
+		<div className={styles.content}>
+			welcome!
+		</div>
+	);
+};
+
+export default <%- pageName %>;
