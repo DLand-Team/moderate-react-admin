@@ -4,7 +4,7 @@
 
 ---
 
-[中文说明 (Switch to Chinese)](./README.zh-CN.md)
+[中文说明 (Switch to Chinese)](./README.md)
 
 ---
 
