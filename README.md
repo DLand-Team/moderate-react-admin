@@ -1,7 +1,8 @@
-<p align="center">
-  <img src="./_assets/logo.png" alt="logo" height="48" style="vertical-align: middle; margin-right: 8px;" />
-  <span style="font-size:2rem;vertical-align:middle;"><b>Moderate React Admin</b></span>
-</p>
+
+<div align="center" style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 16px;">
+  <img src="./_assets/logo.png" alt="logo" height="64" style="vertical-align: middle; margin-right: 12px;" />
+  <span style="font-size:2.8rem; font-weight: bold; vertical-align: middle; background: linear-gradient(90deg, #3b82f6 20%, #60a5fa 60%, #38bdf8 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; line-height: 1;">Moderate React Admin</span>
+</div>
 
 ![图片描述](./_assets/info.png)
 
