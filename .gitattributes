@@ -1,0 +1,2 @@
+*.html linguist-documentation=true
+docs/** linguist-documentation=true

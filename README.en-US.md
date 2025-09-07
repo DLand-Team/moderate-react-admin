@@ -1,4 +1,7 @@
-<h1 align="center">Moderate React Admin</h1>
+<p align="center">
+  <img src="./_assets/logo.png" alt="logo" height="48" style="vertical-align: middle; margin-right: 8px;" />
+  <span style="font-size:2rem;vertical-align:middle;"><b>Moderate React Admin</b></span>
+</p>
 
 ![图片描述](./_assets/info.png)
 
