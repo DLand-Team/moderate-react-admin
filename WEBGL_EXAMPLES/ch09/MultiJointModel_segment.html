@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Multi joint model (Buffered per segment)</title>
+  </head>
+
+  <body onload="main()">
+    <canvas id="webgl" width="400" height="400">
+    Please use a browser that supports "canvas"
+    </canvas>
+    <p>&larr;&rarr;: arm1 rotation,&uarr;&darr;: joint1 rotation, xz: joint2(wrist) rotation, cv: finger rotation</p>
+
+    <script src="../lib/webgl-utils.js"></script>
+    <script src="../lib/webgl-debug.js"></script>
+    <script src="../lib/cuon-utils.js"></script>
+    <script src="../lib/cuon-matrix.js"></script>
+    <script src="MultiJointModel_segment.js"></script>
+  </body>
+</html>

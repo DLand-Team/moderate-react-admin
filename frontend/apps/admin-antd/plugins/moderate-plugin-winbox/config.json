@@ -1,8 +1,0 @@
-{
-  "name": "plugin-winbox",
-  "type": "Page",
-  "dependencies": {
-    "react-winbox": "^1.5.0",
-    "winbox": "^0.2.82"
-  }
-}

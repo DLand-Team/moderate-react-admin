@@ -1,0 +1,33 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+hr {
+  border: 1px solid gray;
+}
+
+#menu {
+  position: absolute;
+  z-index: 2;
+  top: 5px;
+  right: 5px;
+}
+
+.title-container {
+  position: absolute;
+  padding: 10px;
+  z-index: 2;
+  top: 5px;
+  left: 5px;
+  border-radius: 6px;
+  background-color: rgba(255,255,255, 0.6);
+
+  h3, p {
+    margin: 0;
+  }
+  p {
+    margin-top: 10px;
+  }
+}
