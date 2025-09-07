@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 项目简介
 
-## Getting Started
+本项目基于 **Next.js** 和 **shadcn/ui**，支持 App Router 模式下的页面 KeepAlive，拥有强化的路由系统和高效的状态管理，适合中大型后台管理系统开发。
 
-First, run the development server:
+## 技术栈
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Next.js**：React 生态下的服务端渲染与静态网站生成框架，支持 App Router，性能优异，SEO 友好。
+- **shadcn/ui**：现代化、可定制的 React 组件库，设计美观，易于扩展和主题定制。
+- **Redux**：强大的全局状态管理方案，方便数据流管理和调试。
+
+## 主要特性
+
+- **App Router + KeepAlive**：支持页面级缓存，切换路由时保持组件状态，提升用户体验。
+- **强化路由系统**：基于 Next.js App Router，支持嵌套路由、动态路由、权限控制等高级特性。
+- **高效状态管理**：使用 Redux 统一管理全局状态，便于维护和扩展。
+- **现代 UI 体验**：shadcn/ui 提供丰富的组件和主题，快速搭建美观界面。
+
+## 文件结构示例
+
+```
+apps/
+    admin-shadcn-nextjs/
+        app/           # Next.js App Router 页面与布局
+        components/    # 通用 React 组件
+        features/      # 业务模块（Redux slice）
+        store/         # Redux 配置
+        styles/        # 全局样式
+        public/        # 静态资源
+        README.md
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## shadcn/ui 的优势与玩法
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- 组件高度可定制，支持 Tailwind CSS，轻松实现个性化主题。
+- 组件库按需引入，减少打包体积。
+- 丰富的表单、弹窗、数据展示等后台常用组件。
+- 支持无障碍和响应式设计。
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Next.js 的优势
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- 支持服务端渲染（SSR）、静态生成（SSG）、增量静态生成（ISR）。
+- App Router 提供更灵活的路由和布局能力。
+- 内置 API 路由，前后端一体化开发。
+- 优秀的性能优化和开发体验。
