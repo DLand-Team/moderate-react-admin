@@ -25,7 +25,7 @@
 
 ---
 
-[English Version (Switch to English)](./README.zh-CN.md)
+[English Version (Switch to English)](./README.en-US.md)
 
 ---
 
