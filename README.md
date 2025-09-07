@@ -36,10 +36,9 @@
 
 ### Shacn-NextJs版本
 
-<p>
-  <img src="_assets/shadcn-nextjs-2.png" alt="shadcn-nextjs-2" width="200"/>
-  <img src="_assets/shadcn-nexts-1.png" alt="shadcn-nexts-1" width="200"/>
-</p>
+
+| ![](_assets/shadcn-nextjs-2.png) | ![](_assets/shadcn-nexts-1.png) |
+|:-------------:|:-------------:|
 
 ## 接入 ruoyi-pro 的核心功能
 
