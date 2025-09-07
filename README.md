@@ -1,8 +1,5 @@
-<p align="center">
-    <a href="https://github.com/DLand-Team/moderate-react-admin">
-    <img alt="moderate-react-admin" src="./_assets/info.png" style="max-width: 100%; width: 400px; height: auto;" />
-    </a>
-</p>
+![图片描述](./_assets/info.png)
+
 
 <h1 align="center">Moderate React Admin</h1>
 
