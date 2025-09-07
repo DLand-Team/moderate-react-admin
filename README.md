@@ -38,10 +38,10 @@
 
 ## 技术选型
 
--   React 18
--   Ant Design 5
+-   React 18 / React 19
+-   Ant Design 5 / Shadcn
 -   Redux
--   React Router 6.4.3
+-   React Router
 -   Rsbuild / Vite
 -   TypeScript
 
