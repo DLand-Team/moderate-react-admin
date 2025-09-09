@@ -12,40 +12,41 @@ import { RouteItem } from "src/router";
 import { useFlat } from "src/service";
 import { RouterEazyProvider } from "../router/routerProvider";
 import RiveLoading from "./login/riveLoading";
+import "src/i18n";
 
 // 其他全局补充
 const OtherProvider = ({ children }: React.PropsWithChildren) => {
-	const { isLoading } = useFlat("appStore");
+  const { isLoading } = useFlat("appStore");
 
-	return (
-		<>
-			{children}
-			<Toaster />
-			{/* {isLoading && (
-				<div className="loading g-glossy">
-					<RiveLoading />
-				</div>
-			)} */}
-		</>
-	);
+  return (
+    <>
+      {children}
+      <Toaster />
+      {isLoading && (
+        <div className="loading g-glossy">
+          <RiveLoading />
+        </div>
+      )}
+    </>
+  );
 };
 
 const providerArr = [
-	ServiceProvider,
-	ProgressProvider,
-	AuthGuard,
-	OtherProvider,
-	RouterEazyProvider,
+  ServiceProvider,
+  ProgressProvider,
+  AuthGuard,
+  OtherProvider,
+  RouterEazyProvider,
 ];
 
 const Providers = (
-	props: React.PropsWithChildren<{
-		routerData: { tree: RouteItem; list: RouteItem[] };
-	}>
+  props: React.PropsWithChildren<{
+    routerData: { tree: RouteItem; list: RouteItem[] };
+  }>,
 ) => {
-	return providerArr.reduceRight((children, Provider) => {
-		return <Provider {...props}>{children}</Provider>;
-	}, props.children);
+  return providerArr.reduceRight((children, Provider) => {
+    return <Provider {...props}>{children}</Provider>;
+  }, props.children);
 };
 
 export default Providers;

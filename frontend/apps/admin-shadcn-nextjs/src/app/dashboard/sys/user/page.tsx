@@ -12,11 +12,11 @@ export default function MenuPage() {
     return (
         <div>
             <KeepAliveSign
-                key={ROUTE_ID.menu}
-                routeId={ROUTE_ID.menu}
+                key={ROUTE_ID.user}
+                routeId={ROUTE_ID.user}
                 ClientView={MenuView}>
+                <KeepAliveSlot id={ROUTE_ID.user} />
                 <DataTable data={JSON.parse(raw)} />
-                <KeepAliveSlot id={ROUTE_ID.menu} />
             </KeepAliveSign>
         </div>
     );

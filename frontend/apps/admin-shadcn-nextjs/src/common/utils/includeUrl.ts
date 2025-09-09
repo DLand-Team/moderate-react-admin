@@ -2,7 +2,7 @@ export function isRouteCovered(fullPath: string, targetPath: string): boolean {
 	if (!fullPath || !targetPath) {
 		return false;
 	}
-    debugger
+    
 	// 去除首尾多余的斜杠，并按斜杠切分
 	const fullSegments = fullPath.replace(/^\/+|\/+$/g, "").split("/");
 	const targetSegments = targetPath.replace(/^\/+|\/+$/g, "").split("/");

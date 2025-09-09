@@ -1,0 +1,14 @@
+{
+	"parentMenu": "Parent Menu",
+	"menuName": "Menu Name",
+	"menuType": "Menu Type",
+	"componentName": "Route Name",
+	"menuIcon": "Icon",
+	"menuSort": "Sort",
+	"menuType_group": "Group",
+	"menuType_menu": "Menu",
+	"menuType_link": "Link",
+	"menuStatus": "Menu Status",
+	"menuStatus_on": "On",
+	"menuStatus_off": "Off"
+}

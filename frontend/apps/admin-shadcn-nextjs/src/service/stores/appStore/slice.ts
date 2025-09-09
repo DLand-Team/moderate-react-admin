@@ -7,7 +7,7 @@ import { storageHelper } from "@/src/common/utils";
 
 const initialState = (): StoreState => {
 	const historyRoutes = storageHelper.getItem("TABS_HISTORY");
-    debugger
+    
 	return {
 		isLoading: false,
 		routeList: [],

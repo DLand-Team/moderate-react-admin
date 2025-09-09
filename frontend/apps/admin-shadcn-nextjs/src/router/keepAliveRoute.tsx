@@ -1,43 +1,47 @@
-import React, { RefObject, memo, useLayoutEffect, useMemo } from "react";
+import React, {
+    RefObject,
+    memo,
+    useEffect,
+    useMemo,
+    useRef
+} from "react";
 import { createPortal } from "react-dom";
 import { ROUTE_ID_KEY } from "src/router";
 
 export type KeepAliveComponentProps = React.PropsWithChildren<{
-	parentDomRef: RefObject<HTMLElement | null>;
-	activeKey: ROUTE_ID_KEY;
-	pageKey: ROUTE_ID_KEY;
+  parentDomRef: RefObject<HTMLElement | null>;
+  activeKey: ROUTE_ID_KEY;
+  pageKey: ROUTE_ID_KEY;
 }>;
 
 function keepAliveRoute(props: KeepAliveComponentProps) {
-	const { activeKey, children, pageKey } = props;
-	const isActive = activeKey == pageKey;
-	const aliveDom = useMemo(() => {
-		const aliveDom = document.createElement("div");
-		aliveDom.setAttribute("id", "alive");
-		aliveDom.setAttribute("page-name", pageKey);
-		// aliveDom.setAttribute("style", "height: 100%");
-		return aliveDom;
-	}, []);
+  const { activeKey, children, pageKey, parentDomRef } = props;
+  const isActive = activeKey == pageKey;
+  // alive标记，当被标记之后，就被保证挂载到混存的真实dom节点aliveDom上
+  const isAliveRef = useRef(false);
+  const aliveDom = useMemo(() => {
+    const aliveDom = document.createElement("div");
+    aliveDom.setAttribute("id", "alive");
+    aliveDom.setAttribute("page-name", pageKey);
+    // aliveDom.setAttribute("style", "height: 100%");
+    return aliveDom;
+  }, []);
+  // alive标记，当被标记之后，就被保证挂载到混存的真实dom节点aliveDom上
 
-	useLayoutEffect(() => {
-		if (isActive) {
-			// 删除所有子节点
-			const element = document.getElementById(pageKey);
-			if (element) {
-				while (element.firstChild) {
-					try {
-						if (element.contains(element.firstChild)) {
-							element.removeChild(element.firstChild);
-						}
-					} catch (error) {
-						console.error("Error removing child:", error);
-					}
-				}
-			}
-			element?.appendChild(aliveDom);
-		}
-	});
-	return createPortal(children, aliveDom, pageKey);
+  if (isActive && !isAliveRef.current) {
+    isAliveRef.current = isActive;
+  }
+  useEffect(() => {
+    const containerDiv = parentDomRef.current;
+    if (isActive) {
+      let oldDom = document.getElementById("alive");
+      containerDiv?.contains(oldDom) && containerDiv?.removeChild(oldDom!);
+      containerDiv?.appendChild(aliveDom);
+    } else {
+      containerDiv?.contains(aliveDom) && containerDiv?.removeChild(aliveDom);
+    }
+  }, [isActive]);
+  return isAliveRef.current ? createPortal(children, aliveDom, pageKey) : null;
 }
 
 export default memo(keepAliveRoute);
