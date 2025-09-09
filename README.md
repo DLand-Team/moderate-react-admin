@@ -1,10 +1,10 @@
 <p align="center">
- <img alt="antd-admin" height="64" src="./_assets/logo.png">
+ <img alt="antd-admin" height="268" src="./_assets/info.png">
 </p>
 
 <h1 align="center">Moderate Admin</h1>
 
-![图片描述](./_assets/info.png)
+
 
 <div align="center">
 
@@ -25,7 +25,7 @@
 
 ---
 
-[English Version (Switch to English)](./README.zh-CN.md)
+[English Version (Switch to English)](./README.en-US.md)
 
 ---
 
