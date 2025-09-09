@@ -1,10 +1,9 @@
 import { FileTextOutlined, FolderOutlined } from "@ant-design/icons";
-import { Card, Tabs, Tree, Typography } from "antd";
+import { Card, Tabs, Tree } from "antd";
 import { MdPreview } from "plugins/moderate-plugin-markdown/components/mdPreview";
 import React, { useState } from "react";
 import styles from "./styles.module.scss";
 const { DirectoryTree } = Tree;
-const { Title } = Typography;
 
 interface CodeFile {
   filePath: string;
