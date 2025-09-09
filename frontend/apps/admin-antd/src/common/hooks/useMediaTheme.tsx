@@ -9,14 +9,14 @@ export function useColorScheme(): {
     {
       query: "(prefers-color-scheme: dark)",
     },
-    undefined
+    undefined,
   );
   const [isDark, setIsDark] = useState<boolean>(
-    localStorage.getItem("THEME") == "dark"
+    localStorage.getItem("THEME") == "dark",
   );
   const value = useMemo(
     () => (isDark === undefined ? !!systemPrefersDark : isDark),
-    [isDark, systemPrefersDark]
+    [isDark, systemPrefersDark],
   );
   useEffect(() => {
     if (value) {

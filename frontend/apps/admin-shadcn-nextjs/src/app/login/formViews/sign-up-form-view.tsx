@@ -10,100 +10,103 @@ import { toast } from "sonner";
 import { z } from "zod";
 
 export const FormSchema = z
-    .object({
-        username: z.string().nonempty({ message: "User name is required!" }),
-        email: z.email({ message: "Email must be a valid email address!" }),
-        password: z
-            .string()
-            .max(100, { message: "Password name cannot exceed length of 100!" })
-            .min(1, { message: "Password is required!" }),
-        confirmPassword: z.string().max(100, {
-            message: "ConfirmPassword name cannot exceed length of 100!",
-        }),
-    })
-    .refine((data) => data.password === data.confirmPassword, {
-        message: "Passwords do not match!",
-        path: ["confirmPassword"],
-    });
+  .object({
+    username: z.string().nonempty({ message: "User name is required!" }),
+    email: z.email({ message: "Email must be a valid email address!" }),
+    password: z
+      .string()
+      .max(100, { message: "Password name cannot exceed length of 100!" })
+      .min(1, { message: "Password is required!" }),
+    confirmPassword: z.string().max(100, {
+      message: "ConfirmPassword name cannot exceed length of 100!",
+    }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match!",
+    path: ["confirmPassword"],
+  });
 
 export function SignUpFormView({
-    className,
-    ...props
+  className,
+  ...props
 }: React.ComponentProps<"form">) {
-    const form = useForm<{
-        username: string;
-        email: string;
-        password: string;
-        confirmPassword: string;
-    }>({
-        resolver: zodResolver(FormSchema),
-        defaultValues: {
-            email: "",
-            password: "",
-            confirmPassword: "",
-            username: "",
-        },
-    });
-    const onSubmit = form.handleSubmit(
-        async (data: z.infer<typeof FormSchema>) => {
-            const values = form.getValues();
-            await emit("authStore").registerAct(values);
-            toast.success("Successfully registered!");
-            emit("authStore").setCurrentViewId("SignIn");
-        }
-    );
+  const form = useForm<{
+    username: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+  }>({
+    resolver: zodResolver(FormSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+      confirmPassword: "",
+      username: "",
+    },
+  });
+  const onSubmit = form.handleSubmit(
+    async (data: z.infer<typeof FormSchema>) => {
+      const values = form.getValues();
+      await emit("authStore").registerAct(values);
+      toast.success("Successfully registered!");
+      emit("authStore").setCurrentViewId("SignIn");
+    },
+  );
 
-    return (
-        <Form {...form}>
-            <form
-                className={cn("flex flex-col gap-6", className)}
-                {...props}
-                onSubmit={onSubmit}>
-                <div className="flex flex-col items-center gap-2 text-center">
-                    <h1 className="text-2xl font-bold">Sign up</h1>
-                    <p className="text-muted-foreground text-sm text-balance">
-                        Choose how you’d like to sign up
-                    </p>
-                </div>
-                <div className="grid gap-6">
-                    <div className="grid gap-3">
-                        <FieldText
-                            label="User name"
-                            name="username"
-                            form={form}
-                            placeholder={
-                                "Please enter your user name"
-                            }></FieldText>
-                    </div>
-                    <div className="grid gap-3">
-                        <FieldText
-                            label="Email"
-                            name="email"
-                            form={form}
-                            placeholder={"m@example.com"}></FieldText>
-                    </div>
+  return (
+    <Form {...form}>
+      <form
+        className={cn("flex flex-col gap-6", className)}
+        {...props}
+        onSubmit={onSubmit}
+      >
+        <div className="flex flex-col items-center gap-2 text-center">
+          <h1 className="text-2xl font-bold">Sign up</h1>
+          <p className="text-muted-foreground text-sm text-balance">
+            Choose how you’d like to sign up
+          </p>
+        </div>
+        <div className="grid gap-6">
+          <div className="grid gap-3">
+            <FieldText
+              label="User name"
+              name="username"
+              form={form}
+              placeholder={"Please enter your user name"}
+            ></FieldText>
+          </div>
+          <div className="grid gap-3">
+            <FieldText
+              label="Email"
+              name="email"
+              form={form}
+              placeholder={"m@example.com"}
+            ></FieldText>
+          </div>
 
-                    <div className="grid gap-3">
-                        <FieldText
-                            label={"Password"}
-                            type={"password"}
-                            name="password"
-                            form={form}
-                            placeholder={"****"}></FieldText>
-                    </div>
+          <div className="grid gap-3">
+            <FieldText
+              label={"Password"}
+              type={"password"}
+              name="password"
+              form={form}
+              placeholder={"****"}
+            ></FieldText>
+          </div>
 
-                    <div className="grid gap-3">
-                        <FieldText
-                            label={"Confirm Password"}
-                            type={"password"}
-                            name="confirmPassword"
-                            form={form}
-                            placeholder={"****"}></FieldText>
-                    </div>
-                    <Button type="submit" className="w-full">
-                        Sign in
-                    </Button>
-                    {/* <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
+          <div className="grid gap-3">
+            <FieldText
+              label={"Confirm Password"}
+              type={"password"}
+              name="confirmPassword"
+              form={form}
+              placeholder={"****"}
+            ></FieldText>
+          </div>
+          <Button type="submit" className="w-full">
+            Sign in
+          </Button>
+          {/* <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
                         <span className="bg-background text-muted-foreground relative z-10 px-2">
                             Or continue with
                         </span>
@@ -119,19 +122,20 @@ export function SignUpFormView({
                         </svg>
                         Login with GitHub
                     </Button> */}
-                </div>
-                <div className="text-center text-sm">
-                    Already have an account?{" "}
-                    <a
-                        onClick={() => {
-                            emit("authStore").setCurrentViewId("SignIn");
-                        }}
-                        href="#"
-                        className="underline underline-offset-4">
-                        Login in
-                    </a>
-                </div>
-            </form>
-        </Form>
-    );
+        </div>
+        <div className="text-center text-sm">
+          Already have an account?{" "}
+          <a
+            onClick={() => {
+              emit("authStore").setCurrentViewId("SignIn");
+            }}
+            href="#"
+            className="underline underline-offset-4"
+          >
+            Login in
+          </a>
+        </div>
+      </form>
+    </Form>
+  );
 }

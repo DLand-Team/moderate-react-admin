@@ -6,11 +6,11 @@ import login from "./login.json";
 import menu from "./menu.json";
 
 const resourcesEn = {
-	dev,
-	common,
-	login,
-	hello,
-	errorPage,
-	menu,
+  dev,
+  common,
+  login,
+  hello,
+  errorPage,
+  menu,
 };
 export default resourcesEn;

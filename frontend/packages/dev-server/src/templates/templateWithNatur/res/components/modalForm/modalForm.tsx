@@ -21,9 +21,11 @@ const normFile = (e: any) => {
   }
   if (e?.fileList.response) {
   }
-  return e?.fileList[0].response ? e?.fileList.map((item)=>{
-   return item.response.hash
-  }) : e?.fileList;
+  return e?.fileList[0].response
+    ? e?.fileList.map((item) => {
+        return item.response.hash;
+      })
+    : e?.fileList;
 };
 
 const CollectionCreateForm: React.FC<CollectionCreateFormProps> = ({
@@ -160,7 +162,15 @@ const CollectionCreateForm: React.FC<CollectionCreateFormProps> = ({
           options={{
             maxCount: 1,
             itemRender: (originNode, file, fileList) => {
-              return fileList[0] ? <Image width={100} height={100} src={"https://qiniu.moderate.run/"+fileList[0]} /> : "";
+              return fileList[0] ? (
+                <Image
+                  width={100}
+                  height={100}
+                  src={"https://qiniu.moderate.run/" + fileList[0]}
+                />
+              ) : (
+                ""
+              );
             },
           }}
           name={"cover"}

@@ -16,30 +16,32 @@ npm install turbo --save-dev
 
 ```json
 {
-    "pipeline": {
-        "build": {
-            "dependsOn": ["^build"],
-            "outputs": [".next/**", "dist/**"]
-        },
-        "lint": {},
-        "test": {}
-    }
+  "pipeline": {
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "dist/**"]
+    },
+    "lint": {},
+    "test": {}
+  }
 }
 ```
 
 ## 常用命令
 
-- **运行任务**  
-    ```bash
-    npx turbo run build
-    ```
-    运行所有包的 `build` 脚本，并自动处理依赖关系。
+- **运行任务**
+
+  ```bash
+  npx turbo run build
+  ```
+
+  运行所有包的 `build` 脚本，并自动处理依赖关系。
 
 - **并行执行**  
-    Turbo 会自动并行执行无依赖的任务，加快构建速度。
+   Turbo 会自动并行执行无依赖的任务，加快构建速度。
 
 - **缓存**  
-    Turbo 支持智能缓存，跳过未变更的任务，提升效率。
+   Turbo 支持智能缓存，跳过未变更的任务，提升效率。
 
 ## 适用场景
 

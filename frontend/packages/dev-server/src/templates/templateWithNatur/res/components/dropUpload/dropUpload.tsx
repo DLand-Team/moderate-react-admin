@@ -4,22 +4,20 @@ import { message, Upload } from "antd";
 
 const { Dragger } = Upload;
 
-const DropUpload = (props: {
-  handleUploadMd: (mdStr: string) => void;
-}) => {
+const DropUpload = (props: { handleUploadMd: (mdStr: string) => void }) => {
   const { handleUploadMd } = props;
   const uploadProps: UploadProps = {
     beforeUpload: (file) => {
-        const reader = new FileReader();
-        reader.readAsText(file);
-        reader.onload = function (e) {
-            handleUploadMd(e.target.result as string)
-        };
-        return false;
+      const reader = new FileReader();
+      reader.readAsText(file);
+      reader.onload = function (e) {
+        handleUploadMd(e.target.result as string);
+      };
+      return false;
     },
     name: "file",
     multiple: true,
-    showUploadList:false,
+    showUploadList: false,
   };
   return (
     <Dragger {...uploadProps}>

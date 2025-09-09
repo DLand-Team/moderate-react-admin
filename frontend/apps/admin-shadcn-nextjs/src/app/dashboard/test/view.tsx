@@ -5,13 +5,13 @@ import { Input } from "@/src/shadcn/components/ui/input";
 import Link from "next/link";
 
 const TestView = () => {
-	return (
-		<div>
-			<Input />
-			<Link href="/dashboard/hello">Go to Hello</Link>
-			<SectionCards />
-		</div>
-	);
+  return (
+    <div>
+      <Input />
+      <Link href="/dashboard/hello">Go to Hello</Link>
+      <SectionCards />
+    </div>
+  );
 };
 // ;
 

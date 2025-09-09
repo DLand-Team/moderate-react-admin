@@ -3,7 +3,7 @@
 import { CustomTabs } from "./tabs";
 
 const TabNav = () => {
-	return <CustomTabs />;
+  return <CustomTabs />;
 };
 
 export default TabNav;

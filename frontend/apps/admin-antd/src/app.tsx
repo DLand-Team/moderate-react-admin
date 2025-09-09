@@ -6,33 +6,33 @@ import { OptionsDrawer, OptionsFloatBtn } from "./components";
 import { useFlat } from "./service";
 
 const App = () => {
-	const { isLoading } = useFlat("appStore", {
-		isCollapsedMenu: "IN",
-		isLoading: "IN",
-	});
+  const { isLoading } = useFlat("appStore", {
+    isCollapsedMenu: "IN",
+    isLoading: "IN",
+  });
 
-	const { routesTree } = useFlat("routerStore", {
-		routesTree: "IN",
-	});
+  const { routesTree } = useFlat("routerStore", {
+    routesTree: "IN",
+  });
 
-	return (
-		<>
-			<Routes>
-				{routesTree.map((item) => {
-					return routerHelper.toRenderRouteLoop(item);
-				})}
-			</Routes>
-			<>
-				<OptionsFloatBtn />
-				<OptionsDrawer />
-			</>
-			{isLoading && (
-				<div className="loading g-glossy">
-					<RiveLoading />
-				</div>
-			)}
-		</>
-	);
+  return (
+    <>
+      <Routes>
+        {routesTree.map((item) => {
+          return routerHelper.toRenderRouteLoop(item);
+        })}
+      </Routes>
+      <>
+        <OptionsFloatBtn />
+        <OptionsDrawer />
+      </>
+      {isLoading && (
+        <div className="loading g-glossy">
+          <RiveLoading />
+        </div>
+      )}
+    </>
+  );
 };
 
 export default App;

@@ -7,30 +7,30 @@ import { dpChain } from "src/service";
 import { RoleModalType } from "src/service/stores/sysStore/model";
 
 const UserPage = () => {
-	return (
-		<div
-			style={{
-				width: "100%",
-			}}
-		>
-			<Card
-				style={{
-					marginBottom: "25px",
-				}}
-			>
-				<Button
-					onClick={() => {
-						dpChain("sysStore").setRoleModalType(RoleModalType.ADD);
-					}}
-				>
-					新增角色
-				</Button>
-			</Card>
-			<RoleTable />
-			<ModalForm />
-			<MenuModalForm />
-			<DataModalForm />
-		</div>
-	);
+  return (
+    <div
+      style={{
+        width: "100%",
+      }}
+    >
+      <Card
+        style={{
+          marginBottom: "25px",
+        }}
+      >
+        <Button
+          onClick={() => {
+            dpChain("sysStore").setRoleModalType(RoleModalType.ADD);
+          }}
+        >
+          新增角色
+        </Button>
+      </Card>
+      <RoleTable />
+      <ModalForm />
+      <MenuModalForm />
+      <DataModalForm />
+    </div>
+  );
 };
 export default UserPage;

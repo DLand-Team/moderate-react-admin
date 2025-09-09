@@ -13,7 +13,8 @@ export const PluginDetailDrawer = () => {
           isShowMdDrawer: false,
           mdContent: "",
         });
-      }}>
+      }}
+    >
       <Md>{mdContent}</Md>
     </Drawer>
   );

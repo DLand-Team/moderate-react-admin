@@ -1,6 +1,6 @@
-import { Button } from "@/src/shadcn/components/ui/button"
-import { Separator } from "@/src/shadcn/components/ui/separator"
-import { SidebarTrigger } from "@/src/shadcn/components/ui/sidebar"
+import { Button } from "@/src/shadcn/components/ui/button";
+import { Separator } from "@/src/shadcn/components/ui/separator";
+import { SidebarTrigger } from "@/src/shadcn/components/ui/sidebar";
 
 export function SiteHeader() {
   return (
@@ -26,5 +26,5 @@ export function SiteHeader() {
         </div>
       </div>
     </header>
-  )
+  );
 }

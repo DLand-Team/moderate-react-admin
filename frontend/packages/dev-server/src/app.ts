@@ -6,23 +6,23 @@ import onerror from "koa-onerror";
 import views from "koa-views";
 
 import {
-	apiDevRouter,
-	pageDevRouter,
-	qiniuRouter,
-	rootRouter,
-	storeDevRouter,
-	pluginDevRouter,
-	settingDevRouter,
+  apiDevRouter,
+  pageDevRouter,
+  qiniuRouter,
+  rootRouter,
+  storeDevRouter,
+  pluginDevRouter,
+  settingDevRouter,
 } from "./apis";
 
 const routerArr = [
-	qiniuRouter,
-	rootRouter,
-	apiDevRouter,
-	pageDevRouter,
-	storeDevRouter,
-	pluginDevRouter,
-	settingDevRouter,
+  qiniuRouter,
+  rootRouter,
+  apiDevRouter,
+  pageDevRouter,
+  storeDevRouter,
+  pluginDevRouter,
+  settingDevRouter,
 ];
 const app = new Koa();
 
@@ -32,43 +32,41 @@ onerror(app);
 
 // middlewares
 app.use(
-	bodyparser({
-		enableTypes: ["json", "form", "text"],
-	}),
+  bodyparser({
+    enableTypes: ["json", "form", "text"],
+  }),
 );
 app.use(json());
 app.use(logger());
 app.use(require("koa-static")(__dirname + "/public"));
 
 app.use(
-	views(__dirname + "/views", {
-		extension: "ejs",
-	}),
+  views(__dirname + "/views", {
+    extension: "ejs",
+  }),
 );
 
 app.use((ctx, next) => {
-	return next().catch((err) => {
-		if (err.status === 401) {
-			ctx.status = 401;
-			ctx.body = {
-				ok: false,
-				code: 401,
-				msg: err.originalError
-					? err.originalError.message
-					: err.message,
-			};
-		} else {
-			throw err;
-		}
-	});
+  return next().catch((err) => {
+    if (err.status === 401) {
+      ctx.status = 401;
+      ctx.body = {
+        ok: false,
+        code: 401,
+        msg: err.originalError ? err.originalError.message : err.message,
+      };
+    } else {
+      throw err;
+    }
+  });
 });
 
 routerArr.forEach((router) => {
-	app.use(router.routes());
+  app.use(router.routes());
 });
 
 app.on("error", (err, ctx) => {
-	console.error("server error", err, ctx);
+  console.error("server error", err, ctx);
 });
 
 export default app;

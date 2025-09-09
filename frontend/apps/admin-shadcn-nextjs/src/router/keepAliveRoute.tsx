@@ -1,10 +1,4 @@
-import React, {
-    RefObject,
-    memo,
-    useEffect,
-    useMemo,
-    useRef
-} from "react";
+import React, { RefObject, memo, useEffect, useMemo, useRef } from "react";
 import { createPortal } from "react-dom";
 import { ROUTE_ID_KEY } from "src/router";
 

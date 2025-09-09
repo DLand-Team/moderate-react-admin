@@ -27,21 +27,21 @@
 
 1. 安装依赖：
 
-    ```bash
-    pnpm install
-    ```
+   ```bash
+   pnpm install
+   ```
 
 2. 启动开发服务器：
 
-    ```bash
-    pnpm dev
-    ```
+   ```bash
+   pnpm dev
+   ```
 
 3. 构建生产环境代码：
 
-    ```bash
-    pnpm build
-    ```
+   ```bash
+   pnpm build
+   ```
 
 ## 项目结构设计
 

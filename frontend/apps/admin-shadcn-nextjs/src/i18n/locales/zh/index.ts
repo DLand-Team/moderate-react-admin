@@ -6,11 +6,11 @@ import errorPage from "./errorPage.json";
 import menu from "./menu.json";
 
 const resourcesZh = {
-	dev,
-	common,
-	login,
-	hello,
-	errorPage,
-	menu,
+  dev,
+  common,
+  login,
+  hello,
+  errorPage,
+  menu,
 };
 export default resourcesZh;

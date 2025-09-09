@@ -6,9 +6,9 @@ import "src/service/helpers";
 import { appHelper } from "./service/setup";
 
 document.ondblclick = function (e) {
-	e.preventDefault();
+  e.preventDefault();
 };
 
 createRoot(document.getElementById("root")!).render(
-	appHelper.createApp(providerArr.concat(App)),
+  appHelper.createApp(providerArr.concat(App)),
 );

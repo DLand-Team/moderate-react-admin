@@ -1,6 +1,6 @@
 export const qiniuConfig = {
-	domain: "http://qiniu.hackslog.cn",
-	AK: "",
-	SK: "",
-	bucket: "moderate",
+  domain: "http://qiniu.hackslog.cn",
+  AK: "",
+  SK: "",
+  bucket: "moderate",
 };

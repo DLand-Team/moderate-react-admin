@@ -1,10 +1,10 @@
 const Router = require("koa-router");
 import devHelper from "@/helper/devHelper";
 import {
-	getPluginListHr,
-	addPluginHr,
-	getPluginDetailHr,
-	removePluginHandler,
+  getPluginListHr,
+  addPluginHr,
+  getPluginDetailHr,
+  removePluginHandler,
 } from "./handlers";
 import { createServer } from "http";
 const httpServer = createServer();

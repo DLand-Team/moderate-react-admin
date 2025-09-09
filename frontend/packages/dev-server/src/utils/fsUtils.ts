@@ -4,17 +4,17 @@ import fs from "fs";
  * @param {*} path
  */
 function emptyDir(path: string) {
-	const files = fs.readdirSync(path);
-	files.forEach((file) => {
-		const filePath = `${path}/${file}`;
-		const stats = fs.statSync(filePath);
-		if (stats.isDirectory()) {
-			emptyDir(filePath);
-		} else {
-			fs.unlinkSync(filePath);
-			// console.log(`删除${file}文件成功`);
-		}
-	});
+  const files = fs.readdirSync(path);
+  files.forEach((file) => {
+    const filePath = `${path}/${file}`;
+    const stats = fs.statSync(filePath);
+    if (stats.isDirectory()) {
+      emptyDir(filePath);
+    } else {
+      fs.unlinkSync(filePath);
+      // console.log(`删除${file}文件成功`);
+    }
+  });
 }
 
 /**
@@ -22,19 +22,19 @@ function emptyDir(path: string) {
  * @param {*} path
  */
 function rmEmptyDir(path: string, level = 0) {
-	const files = fs.readdirSync(path);
-	if (files.length > 0) {
-		let tempFile = 0;
-		files.forEach((file) => {
-			tempFile++;
-			rmEmptyDir(`${path}/${file}`, 1);
-		});
-		if (tempFile === files.length && level !== 0) {
-			fs.rmdirSync(path);
-		}
-	} else {
-		level !== 0 && fs.rmdirSync(path);
-	}
+  const files = fs.readdirSync(path);
+  if (files.length > 0) {
+    let tempFile = 0;
+    files.forEach((file) => {
+      tempFile++;
+      rmEmptyDir(`${path}/${file}`, 1);
+    });
+    if (tempFile === files.length && level !== 0) {
+      fs.rmdirSync(path);
+    }
+  } else {
+    level !== 0 && fs.rmdirSync(path);
+  }
 }
 
 /**
@@ -42,7 +42,7 @@ function rmEmptyDir(path: string, level = 0) {
  * @param {*} path
  */
 export function deleteDir(path: string) {
-	emptyDir(path);
-	rmEmptyDir(path);
-	fs.rmdirSync(path);
+  emptyDir(path);
+  rmEmptyDir(path);
+  fs.rmdirSync(path);
 }

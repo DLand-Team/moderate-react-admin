@@ -4,13 +4,13 @@
  * unescape() 函数可对通过 escape() 编码的字符串进行解码。
  */
 export const getUrlParam = (url: string, name: string) => {
-    const reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-    const search = url.split("?")[1];
-    if (search) {
-        const r = search.substr(0).match(reg);
-        if (r !== null) return unescape(r[2]);
-        return null;
-    } else {
-        return null;
-    }
+  const reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+  const search = url.split("?")[1];
+  if (search) {
+    const r = search.substr(0).match(reg);
+    if (r !== null) return unescape(r[2]);
+    return null;
+  } else {
+    return null;
+  }
 };

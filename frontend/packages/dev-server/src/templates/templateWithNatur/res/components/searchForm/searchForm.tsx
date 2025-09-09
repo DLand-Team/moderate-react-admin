@@ -26,7 +26,7 @@ const AdvancedSearchForm = () => {
           >
             <Input placeholder="placeholder" />
           </Form.Item>
-        </Col>
+        </Col>,
       );
     }
     return children;

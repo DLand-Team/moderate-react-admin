@@ -9,10 +9,10 @@ export const authHelper = new AuthHelper();
 export const devHelper = new DevHelper();
 
 export const helperManager = {
-	appHelper,
-	routerHelper,
-	authHelper,
-	devHelper,
+  appHelper,
+  routerHelper,
+  authHelper,
+  devHelper,
 };
 
 export type HelperManagerType = typeof helperManager;

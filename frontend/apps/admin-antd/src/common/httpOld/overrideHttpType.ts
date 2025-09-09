@@ -17,10 +17,10 @@ export const overrideHttpType = (_http: AxiosInstance) => {
   type PutParams = Parameters<typeof _http.put>;
 
   const _overrideHttpType = <D extends any = any, T = ResponseType<D>>(
-    config: AxiosRequestConfig
+    config: AxiosRequestConfig,
   ) => _http<T, T>(config);
   _overrideHttpType.request = <D extends any = any, T = ResponseType<D>>(
-    config: AxiosRequestConfig
+    config: AxiosRequestConfig,
   ) => _http.request<T, T>(config);
   _overrideHttpType.get = <D extends any = any, T = ResponseType<D>>(
     ...arg: GetParams

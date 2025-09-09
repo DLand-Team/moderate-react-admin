@@ -1,6 +1,3 @@
-
-const watch = () => {
-	
-};
+const watch = () => {};
 
 export default watch;

@@ -9,15 +9,15 @@ import routerStore from "./routerStore";
 import sysStore from "./sysStore";
 
 const stores = {
-	appStore,
-	commonStore,
-	authStore,
-	devStore,
-	routerStore,
-	dealStore,
-	categoryStore,
-	sysStore,
-	...pluginStores,
+  appStore,
+  commonStore,
+  authStore,
+  devStore,
+  routerStore,
+  dealStore,
+  categoryStore,
+  sysStore,
+  ...pluginStores,
 };
 
 export { stores };

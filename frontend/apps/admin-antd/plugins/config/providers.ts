@@ -4,7 +4,7 @@ import { PluginMarkDownProvider } from "plugins/moderate-plugin-markdown/provide
 //>>>PROVIDER_INPORT_SIGN<<<//
 
 export const pluginProviders = [
-	WinBoxProvider,
-	PluginMarkDownProvider,
-	//>>>PROVIDER_SIGN<<<//
+  WinBoxProvider,
+  PluginMarkDownProvider,
+  //>>>PROVIDER_SIGN<<<//
 ];

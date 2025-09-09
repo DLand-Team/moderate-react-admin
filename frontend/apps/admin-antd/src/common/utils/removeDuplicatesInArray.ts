@@ -1,3 +1,3 @@
 export function removeDuplicatesInArray(array: string[]): string[] {
-    return Array.from(new Set(array));
+  return Array.from(new Set(array));
 }
