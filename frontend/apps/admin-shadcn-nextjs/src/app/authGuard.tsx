@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { PropsWithChildren, useEffect } from "react";
 import { useFlat } from "src/service";
 
-const excludeRoutePath = ["/login", "/chart-test"];
+const excludeRoutePath = ["/login"];
 
 const AuthGuard = ({ children }: PropsWithChildren) => {
   const { token, getUserPermissionsAct } = useFlat("authStore");
