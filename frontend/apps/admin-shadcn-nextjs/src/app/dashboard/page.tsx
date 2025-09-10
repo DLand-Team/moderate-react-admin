@@ -1,4 +1,4 @@
-import { ChartAreaInteractive } from "@/src/shadcn/components/chart-area-interactive";
+import { ChartLineECharts } from "@/src/shadcn/components/chart-line-echarts";
 import { DataTable } from "@/src/shadcn/components/data-table";
 import { SectionCards } from "@/src/shadcn/components/sectionCards";
 import { Input } from "@/src/shadcn/components/ui/input";
@@ -17,7 +17,7 @@ export default function Page() {
         <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
           <SectionCards />
           <div className="px-4 lg:px-6">
-            <ChartAreaInteractive />
+            <ChartLineECharts />
           </div>
           <DataTable data={data} />
         </div>
