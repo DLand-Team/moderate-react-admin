@@ -25,8 +25,9 @@ const KeepAlive = ({ children }: PropsWithChildren) => {
   const routeItemId = routerHelper.getRouteIdByPath(pathname);
   const isKeepAlive = routeItemId && routerHelper.isKeepAlive(routeItemId);
   const aliveParentRef = useRef<HTMLDivElement>(null);
+  activeKey.current = cacheKey as ROUTE_ID_KEY;
   useEffect(() => {
-    activeKey.current = cacheKey as ROUTE_ID_KEY;
+    debugger;
     if (isKeepAlive) {
       const View = routerHelper.getKeepAliveComponent(pathname);
       if (View && !cache.current.has(pathname)) {
@@ -55,6 +56,8 @@ const KeepAlive = ({ children }: PropsWithChildren) => {
       forceUpdate();
     }
   }, [keepAliveRouteIds, pathname]);
+
+  debugger;
   return (
     <div
       style={{

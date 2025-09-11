@@ -8,7 +8,6 @@ export const ROUTE_CONFIG_MAP: {
     meta: { title: "common:HomePageTitle" },
     actionPermissions: ["ADD", "EDIT"],
     isNoAuth: true,
-    keepAlive: true,
     isTab: false,
   },
   login: {
