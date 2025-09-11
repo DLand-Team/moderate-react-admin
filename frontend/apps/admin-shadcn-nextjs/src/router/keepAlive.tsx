@@ -13,7 +13,7 @@ import React, {
 import KeepAliveRoute from "./keepAliveRoute";
 
 const KeepAlive = ({ children }: PropsWithChildren) => {
-  const { keepAliveRouteIds } = useFlat("appStore");
+  const { keepAliveRouteIds, historyRoutes } = useFlat("appStore");
   const pathname = usePathname();
   const cache = useRef<Map<string, React.ReactNode>>(new Map());
   const forceUpdate = useForceUpdate();
@@ -27,7 +27,6 @@ const KeepAlive = ({ children }: PropsWithChildren) => {
   const aliveParentRef = useRef<HTMLDivElement>(null);
   activeKey.current = cacheKey as ROUTE_ID_KEY;
   useEffect(() => {
-    debugger;
     if (isKeepAlive) {
       const View = routerHelper.getKeepAliveComponent(pathname);
       if (View && !cache.current.has(pathname)) {
@@ -57,7 +56,14 @@ const KeepAlive = ({ children }: PropsWithChildren) => {
     }
   }, [keepAliveRouteIds, pathname]);
 
-  debugger;
+  useEffect(() => {
+    // 删除cache.current中没有在historyRoutes中的节点
+    for (let key of cache.current.keys()) {
+      if (!historyRoutes.find((item) => item.url === key)) {
+        cache.current.delete(key);
+      }
+    }
+  }, [historyRoutes]);
   return (
     <div
       style={{

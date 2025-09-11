@@ -1,0 +1,40 @@
+---
+sidebar_position: 4
+---
+
+# Markdown 特性
+
+Docusaurus 支持标准的 **[Markdown](https://daringfireball.net/projects/markdown/syntax)**，并扩展了部分**额外特性**。
+
+## Front Matter（前置元数据）
+
+Markdown 文档顶部可以包含 [Front Matter](https://jekyllrb.com/docs/front-matter/) 元数据：
+
+```text title="my-doc.md"
+// highlight-start
+---
+id: my-doc-id
+title: 我的文档标题
+description: 我的文档描述
+slug: /my-custom-url
+---
+// highlight-end
+```
+
+## Markdown 标题
+
+Markdown 文本可以包含 [链接](./hello.md)
+
+## 链接
+
+支持常规 Markdown 链接，可以使用 URL 路径或相对文件路径。
+
+```md
+让我们看看如何[创建页面](/create-a-page)。
+```
+
+```md
+让我们看看如何[创建页面](./create-a-page.md)。
+```
+
+**效果：** 让我们看看如何[创建页面](./create-a-page.md)。
