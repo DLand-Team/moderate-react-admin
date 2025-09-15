@@ -1,4 +1,4 @@
-import { ROUTE_ID_KEY, RouteItem } from "./types";
+import { ROUTE_ID_KEY, RouteItem } from "./router-type";
 
 export const ROUTE_CONFIG_MAP: {
   [key in ROUTE_ID_KEY]: RouteItem;

@@ -10,7 +10,7 @@ import React, {
   useMemo,
   useRef,
 } from "react";
-import KeepAliveRoute from "./keepAliveRoute";
+import KeepAliveRoute from "./keep-alive-route";
 
 const KeepAlive = ({ children }: PropsWithChildren) => {
   const { keepAliveRouteIds, historyRoutes } = useFlat("appStore");

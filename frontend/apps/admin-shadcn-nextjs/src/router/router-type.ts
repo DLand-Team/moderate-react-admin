@@ -1,5 +1,5 @@
 import React, { type JSX } from "react";
-import { ROUTE_NAME } from "./name";
+import { ROUTE_NAME } from "./router-name";
 
 export interface RouteItem {
   id: ROUTE_ID_KEY; // 节点id

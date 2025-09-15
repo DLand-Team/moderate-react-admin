@@ -1,4 +1,3 @@
-export * from "./name";
-export * from "./routesConfig";
-export * from "./routesTree";
-export type * from "./types";
+export * from "./router-name";
+export * from "./router-config";
+export type * from "./router-type";

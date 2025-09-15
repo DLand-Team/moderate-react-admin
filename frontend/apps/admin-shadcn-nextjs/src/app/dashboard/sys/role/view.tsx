@@ -19,7 +19,7 @@ const MenuView = () => {
       <div>
         <Button
           onClick={() => {
-            routerHelper.junpTo("test");
+            routerHelper.jumpTo("test");
           }}
         >
           Go to Test Page

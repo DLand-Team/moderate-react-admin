@@ -69,8 +69,8 @@ class RouterHelper extends HelperBase {
     return pathname.startsWith("/dashboard");
   }
   // 通过路由ID跳转
-  junpTo(
-    id: ROUTE_ID_KEY,
+  jumpTo(
+    id: ROUTE_ID_KEY | ROUTE_NAME,
     {
       searchParams,
       hash,

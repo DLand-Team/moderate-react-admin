@@ -2,7 +2,7 @@ import { ROUTE_ID } from "@/src/router";
 import { DataTable } from "@/src/shadcn/components/data-table";
 import fs from "fs";
 import path from "path";
-import KeepAliveSign, { KeepAliveSlot } from "src/router/keepAliveSign";
+import KeepAliveSign, { KeepAliveSlot } from "@/src/router/keep-alive-sign";
 import MenuView from "./view";
 
 export default function MenuPage() {

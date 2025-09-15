@@ -1,8 +1,6 @@
-import { ROUTE_ID } from "@/src/router";
 import { DataTable } from "@/src/shadcn/components/data-table";
 import fs from "fs";
 import path from "path";
-import KeepAliveSign from "../../../router/keepAliveSign";
 import HelloView from "./view";
 
 export default function Page() {
@@ -11,10 +9,8 @@ export default function Page() {
   const raw = fs.readFileSync(dataPath, "utf-8");
   return (
     <div>
-      <KeepAliveSign key={ROUTE_ID.hello} routeId={ROUTE_ID.hello}>
-        <HelloView />
-        <DataTable data={JSON.parse(raw)} />
-      </KeepAliveSign>
+      <HelloView />
+      <DataTable data={JSON.parse(raw)} />
     </div>
   );
 }

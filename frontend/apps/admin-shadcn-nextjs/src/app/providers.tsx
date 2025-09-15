@@ -10,7 +10,7 @@ import AuthGuard from "./authGuard";
 import { Toaster } from "sonner";
 import { RouteItem } from "src/router";
 import { useFlat } from "src/service";
-import { RouterEazyProvider } from "../router/routerProvider";
+import { RouterEazyProvider } from "../router/router-provider";
 import RiveLoading from "./login/riveLoading";
 import "src/i18n";
 

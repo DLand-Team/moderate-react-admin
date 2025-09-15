@@ -1,12 +1,5 @@
+import DynamicBreadcrumb from "@/src/components/bread";
 import { AppSidebar } from "@/src/shadcn/components/app-sidebar";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/src/shadcn/components/ui/breadcrumb";
 import { Separator } from "@/src/shadcn/components/ui/separator";
 import {
   SidebarInset,
@@ -14,9 +7,8 @@ import {
   SidebarTrigger,
 } from "@/src/shadcn/components/ui/sidebar";
 import { PropsWithChildren } from "react";
-import KeepAlive from "../../router/keepAlive";
 import TabNav from "src/components/tab-nav";
-import DynamicBreadcrumb from "@/src/components/bread";
+import KeepAlive from "../../router/keep-alive";
 
 export default function Layout({ children }: PropsWithChildren) {
   return (

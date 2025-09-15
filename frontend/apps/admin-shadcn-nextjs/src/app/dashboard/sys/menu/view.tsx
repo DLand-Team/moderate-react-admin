@@ -1,6 +1,7 @@
 "use client";
 
 import useActive from "@/src/common/hooks/useActive";
+import { ROUTE_NAME } from "@/src/router";
 import { routerHelper } from "@/src/service";
 import { Button } from "@/src/shadcn/components/ui/button";
 import { Input } from "@/src/shadcn/components/ui/input";
@@ -19,7 +20,7 @@ const MenuView = () => {
       <div>
         <Button
           onClick={() => {
-            routerHelper.junpTo("test");
+            routerHelper.jumpTo(ROUTE_NAME.dashboard);
           }}
         >
           Go to Test Page

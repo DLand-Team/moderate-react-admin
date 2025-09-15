@@ -98,7 +98,7 @@ export const CustomTabs: React.FC = () => {
             <DraggableTabNode key={item.id} data-node-key={item.id}>
               <div
                 onClick={() => {
-                  routerHelper.junpTo(item.id);
+                  routerHelper.jumpTo(item.id);
                 }}
                 className={cn(
                   "relative flex items-center px-4 py-1.5 mr-1 rounded-t-md border border-b-0 text-sm overflow-hidden group select-none",

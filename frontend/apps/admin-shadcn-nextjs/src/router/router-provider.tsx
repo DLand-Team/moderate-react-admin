@@ -3,7 +3,7 @@ import { useRouter } from "@bprogress/next";
 import { useEffect, useRef } from "react";
 import { emit, useFlat } from "src/service";
 import { useAppRouterListener } from "../common/hooks/useRouerListen";
-import { RouteItem } from "./types";
+import { RouteItem } from "./router-type";
 
 export const RouterEazyProvider = ({
   children,

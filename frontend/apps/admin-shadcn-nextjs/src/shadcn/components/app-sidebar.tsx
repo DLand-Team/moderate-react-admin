@@ -97,7 +97,7 @@ function Tree({ item }: { item: MenuPermissionItem }) {
           const { componentName } = item;
           // componentName转换为路由id，小写并且去掉末尾的Page
           const routeId = componentName.replace(/Page$/, "").toLowerCase();
-          routerHelper.junpTo(routeId);
+          routerHelper.jumpTo(routeId);
         }}
       >
         {name}
