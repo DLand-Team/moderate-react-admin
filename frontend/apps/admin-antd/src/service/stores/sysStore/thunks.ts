@@ -11,6 +11,17 @@ import {
   Role,
   User,
 } from "./model";
+import { notification } from "antd";
+
+// 校验权限
+const checkPermission = () => {
+  // 开发模式可以
+  //   if (import.meta.env.DEV) return true;
+  notification.error({
+    message: "当前是演示环境, 无权限操作",
+  });
+  return false;
+};
 
 const thunks = createThunks("sysStore", {
   async queryUserListAct(req: Partial<QueryUserListApiReq>, store) {
@@ -39,6 +50,11 @@ const thunks = createThunks("sysStore", {
     dpChain("sysStore").setCurrentRole(data);
   },
   async updateRoleAct(data: Partial<Role>) {
+    debugger;
+    notification.error({
+      message: "当前是演示环境, 无权限操作",
+    });
+    if (!checkPermission()) return;
     await api.updateRoleApi(data);
   },
   async createRoleAct(data: Partial<Role>) {
@@ -53,6 +69,7 @@ const thunks = createThunks("sysStore", {
     dpChain("sysStore").setCurrentUser(userData);
   },
   async updateUserAct(data: Partial<User>) {
+    if (!checkPermission()) return;
     await api.updateUserApi(data);
   },
   async createUserAct(data: Partial<User>) {
@@ -63,12 +80,14 @@ const thunks = createThunks("sysStore", {
     dpChain("sysStore").setPostList(data);
   },
   async deleteUserAct(data: { id: number }) {
+    if (!checkPermission()) return;
     await api.deleteUserApi(data);
   },
   async updateUserPasswordAct(data: { id: number; password: string }) {
     await api.updateUserPasswordApi(data);
   },
   async deleteRoleAct(data: { id: number }) {
+    if (!checkPermission()) return;
     await api.deleteRoleApi(data);
   },
   async queryMenuListAct() {
@@ -82,6 +101,7 @@ const thunks = createThunks("sysStore", {
     dpChain("sysStore").setRoleMenuPermissions(data);
   },
   async assignRoleMenuAct(data: { roleId: number; menuIds: number[] }) {
+    if (!checkPermission()) return;
     await api.assignRoleMenuApi(data);
   },
   async listUserRoleAct(data: { userId: number }) {
@@ -93,6 +113,7 @@ const thunks = createThunks("sysStore", {
     dpChain("sysStore").setUserRoleList(data);
   },
   async assignUserRoleAct(data: AssignUserRoleApiReq) {
+    if (!checkPermission()) return;
     await api.assignUserRoleApi(data);
   },
   async listUserRolesAct(data: { userId: number }) {
