@@ -1,5 +1,5 @@
 import http from "src/common/http";
-import storageHelper from "src/common/utils/storageHelper";
+import { getRefreshToken } from "src/common/http/auth";
 import {
   GetIdByNameApiReq,
   GetMenuDataApiReq,
@@ -10,7 +10,6 @@ import {
   MenuPermissionItem,
   UpdateMenuApiReq,
 } from "./model";
-import { getRefreshToken } from "src/common/http/auth";
 
 const baseUrl = "/admin-api/system";
 

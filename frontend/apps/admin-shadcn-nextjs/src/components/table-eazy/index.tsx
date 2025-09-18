@@ -214,7 +214,6 @@ export function TableEazy<T extends { children: T[] }>({
     getFilteredRowModel: getFilteredRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
     paginateExpandedRows: false,
-    debugTable: true,
   });
 
   return (
