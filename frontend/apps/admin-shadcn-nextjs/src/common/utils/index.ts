@@ -12,7 +12,7 @@ export { includeOne } from "./includeOne";
 export { objectExistValue } from "./objectExistValue";
 export { removeDuplicatesInArray } from "./removeDuplicatesInArray";
 export { upFirstcharacter } from "./upFirstcharacter";
-export { convertArrToTreeData } from "./transformArrToTree";
+export * from "./transformArrToTree";
 
 //--->>>直接lodash实现<<<---//
 export { UUID } from "./uuid";

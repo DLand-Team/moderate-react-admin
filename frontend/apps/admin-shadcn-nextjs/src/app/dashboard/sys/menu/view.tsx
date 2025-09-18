@@ -1,32 +1,99 @@
 "use client";
 
 import useActive from "@/src/common/hooks/useActive";
-import { ROUTE_NAME } from "@/src/router";
-import { routerHelper } from "@/src/service";
+import { useFlat } from "@/src/service";
+import { MenuItem } from "@/src/service/stores/sysStore/model";
 import { Button } from "@/src/shadcn/components/ui/button";
-import { Input } from "@/src/shadcn/components/ui/input";
-import { useRef } from "react";
+import { ColumnDef } from "@tanstack/react-table";
+import { MenuTable } from "src/components/eazy-table";
 
 const MenuView = () => {
-  const flag = useRef(Date.now().toString());
+  const { getMenuListAct, menuTreeData } = useFlat("sysStore");
   useActive({
-    onActive(isFirst) {
-      console.log("MenuView onActive", isFirst);
-      console.log("MenuView flag", flag.current);
+    onFirstActive() {
+      getMenuListAct();
     },
   });
+
+  const columns: ColumnDef<MenuItem>[] = [
+    {
+      header: "前端i18n",
+      accessorKey: "name",
+    },
+    {
+      accessorKey: "componentName",
+      header: "路由名称",
+      cell: ({ row }) => <div>{row.original.componentName}</div>,
+    },
+    {
+      accessorKey: "icon",
+      header: "图标",
+      cell: ({ row }) => <div>{row.original.icon}</div>,
+    },
+    {
+      accessorKey: "sort",
+      header: "排序",
+      cell: ({ row }) => <div>{row.original.sort}</div>,
+    },
+    {
+      accessorKey: "status",
+      header: "状态",
+      // cell: ({ row }) => <Switch checked={row.original.status === 0} />,
+    },
+    {
+      id: "action",
+      header: "操作",
+      cell: ({ row }) => {
+        const record = row.original;
+        return (
+          <div style={{ display: "flex", gap: "8px", width: "100px" }}>
+            <Button
+              variant={"outline"}
+              onClick={async () => {
+                //   dpChain("authStore").getMenuDataAct({ id: record.id });
+                //   dpChain("authStore").setModalType("edit");
+              }}
+            >
+              修改
+            </Button>
+            <Button
+              variant={"outline"}
+              onClick={() => {
+                //   dpChain("authStore").setModalType("add");
+                //   dpChain("authStore").setCurrentEditMenuData({
+                //     parentId: record.id,
+                //   });
+              }}
+            >
+              新增
+            </Button>
+            <Button
+              variant={"outline"}
+              onClick={() => {
+                //   Modal.confirm({
+                //     title: "系统提示",
+                //     content: "是否删除选中数据",
+                //     onOk() {
+                //       dpChain("authStore").deleteMenuAct({ id: record.id });
+                //     },
+                //   });
+              }}
+            >
+              删除
+            </Button>
+          </div>
+        );
+      },
+    },
+  ];
   return (
     <div>
-      <div>
-        <Button
-          onClick={() => {
-            routerHelper.jumpTo(ROUTE_NAME.dashboard);
-          }}
-        >
-          Go to Test Page
-        </Button>
-      </div>
-      <Input />
+      <MenuTable<MenuItem>
+        columns={columns}
+        data={menuTreeData || []}
+        isShowExpand
+        isShowSelection
+      />
     </div>
   );
 };

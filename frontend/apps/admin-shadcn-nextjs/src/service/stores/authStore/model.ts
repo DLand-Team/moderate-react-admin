@@ -7,8 +7,7 @@ export interface StoreState {
   routesPermissions: string[];
   locale: string;
   userId: number | null;
-  menuTreeData: MenuItemData[] | null;
-  menuListData: MenuItemData[] | null;
+
   modalType: ModalType;
   currentEditMenuData: MenuItemData | null;
 }
@@ -116,6 +115,4 @@ export interface UpdateMenuApiReq {
   visible: boolean;
 }
 
-export interface GetMenuDataApiReq {
-  id: number;
-}
+

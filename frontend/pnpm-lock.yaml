@@ -43,10 +43,10 @@ importers:
         version: 1.29.2
       '@shikitor/core':
         specifier: ^0.0.8
-        version: 0.0.8(@types/react@18.3.1)(react@18.3.1)
+        version: 0.0.8(@types/react@19.1.1)(react@18.3.1)
       '@shikitor/react':
         specifier: ^0.1.3
-        version: 0.1.6(@types/react@18.3.1)(react@18.3.1)
+        version: 0.1.6(@types/react@19.1.1)(react@18.3.1)
       antd:
         specifier: ^5.17.1
         version: 5.27.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -106,7 +106,7 @@ importers:
         version: 18.3.1
       react-dnd:
         specifier: ^16.0.1
-        version: 16.0.1(@types/node@20.19.13)(@types/react@18.3.1)(react@18.3.1)
+        version: 16.0.1(@types/node@20.19.13)(@types/react@19.1.1)(react@18.3.1)
       react-dnd-html5-backend:
         specifier: ^16.0.1
         version: 16.0.1
@@ -118,10 +118,10 @@ importers:
         version: 14.1.3(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-markdown:
         specifier: ^9.0.1
-        version: 9.1.0(@types/react@18.3.1)(react@18.3.1)
+        version: 9.1.0(@types/react@19.1.1)(react@18.3.1)
       react-pdf:
         specifier: ^7.7.3
-        version: 7.7.3(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 7.7.3(@types/react@19.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-photo-view:
         specifier: ^1.2.6
         version: 1.2.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -139,7 +139,7 @@ importers:
         version: 1.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       redux-eazy:
         specifier: 0.1.16-beta.1
-        version: 0.1.16-beta.1(@types/react@18.3.1)(react@18.3.1)
+        version: 0.1.16-beta.1(@types/react@19.1.1)(react@18.3.1)
       rehype-components:
         specifier: ^0.3.0
         version: 0.3.0
@@ -202,11 +202,11 @@ importers:
         specifier: ^6.9.15
         version: 6.14.0
       '@types/react':
-        specifier: 18.3.1
-        version: 18.3.1
+        specifier: 19.1.1
+        version: 19.1.1
       '@types/react-dom':
-        specifier: 18.3.1
-        version: 18.3.1
+        specifier: 19.1.1
+        version: 19.1.1(@types/react@19.1.1)
       '@types/react-syntax-highlighter':
         specifier: ^15.5.11
         version: 15.5.13
@@ -285,6 +285,9 @@ importers:
       '@hookform/resolvers':
         specifier: ^5.2.1
         version: 5.2.1(react-hook-form@7.62.0(react@19.1.1))
+      '@iconify/react':
+        specifier: ^6.0.2
+        version: 6.0.2(react@19.1.1)
       '@radix-ui/react-alert-dialog':
         specifier: ^1.1.15
         version: 1.1.15(@types/react-dom@19.1.1(@types/react@19.1.1))(@types/react@19.1.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -330,6 +333,12 @@ importers:
       '@radix-ui/react-tooltip':
         specifier: ^1.2.8
         version: 1.2.8(@types/react-dom@19.1.1(@types/react@19.1.1))(@types/react@19.1.1)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@rc-component/motion':
+        specifier: ^1.1.4
+        version: 1.1.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@rc-component/tree':
+        specifier: ^1.0.1
+        version: 1.0.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
       '@rive-app/react-canvas':
         specifier: ^4.23.1
         version: 4.23.3(react@19.1.1)
@@ -348,6 +357,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      dayjs:
+        specifier: ^1.11.10
+        version: 1.11.18
       i18next:
         specifier: ^23.10.1
         version: 23.16.8
@@ -2419,6 +2431,14 @@ packages:
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
 
+  '@iconify/react@6.0.2':
+    resolution: {integrity: sha512-SMmC2sactfpJD427WJEDN6PMyznTFMhByK9yLW0gOTtnjzzbsi/Ke/XqsumsavFPwNiXs8jSiYeZTmLCLwO+Fg==}
+    peerDependencies:
+      react: '>=16'
+
+  '@iconify/types@2.0.0':
+    resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
+
   '@img/sharp-darwin-arm64@0.34.3':
     resolution: {integrity: sha512-ryFMfvxxpQRsgZJqBd4wsttYQbCxsJksrv9Lw/v798JcQ8+w84mBWuXwl+TT0WJ/WrYOLaYpwQXi3sA9nTIaIg==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
@@ -3434,6 +3454,12 @@ packages:
     resolution: {integrity: sha512-jS4E7T9Li2GuYwI6PyiVXmxTiM6b07rlD9Ge8uGZSCz3WlzcG5ZK7g5bbuKNeZ9pgUuPK/5guV781ujdVpm4HQ==}
     engines: {node: '>=8.x'}
 
+  '@rc-component/motion@1.1.4':
+    resolution: {integrity: sha512-rz3+kqQ05xEgIAB9/UKQZKCg5CO/ivGNU78QWYKVfptmbjJKynZO4KXJ7pJD3oMxE9aW94LD/N3eppXWeysTjw==}
+    peerDependencies:
+      react: '>=16.9.0'
+      react-dom: '>=16.9.0'
+
   '@rc-component/mutate-observer@1.1.0':
     resolution: {integrity: sha512-QjrOsDXQusNwGZPf4/qRQasg7UFEj06XiCJ8iuiq/Io7CrHrgVi6Uuetw60WAMG1799v+aM8kyc+1L/GBbHSlw==}
     engines: {node: '>=8.x'}
@@ -3462,12 +3488,25 @@ packages:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
 
+  '@rc-component/tree@1.0.1':
+    resolution: {integrity: sha512-pUhcYUXv2Xqt093JcIAikj4QFGIhTsGntFgLEv8Vwmw1fyG0x6rIFqopUxYqr0oWulxVob9ECu0O86SC42fuOw==}
+    engines: {node: '>=10.x'}
+    peerDependencies:
+      react: '*'
+      react-dom: '*'
+
   '@rc-component/trigger@2.3.0':
     resolution: {integrity: sha512-iwaxZyzOuK0D7lS+0AQEtW52zUWxoGqTGkke3dRyb8pYiShmRpCjB/8TzPI4R6YySCH7Vm9BZj/31VPiiQTLBg==}
     engines: {node: '>=8.x'}
     peerDependencies:
       react: '>=16.9.0'
       react-dom: '>=16.9.0'
+
+  '@rc-component/util@1.3.0':
+    resolution: {integrity: sha512-hfXE04CVsxI/slmWKeSh6du7sSKpbvVdVEZCa8A+2QWDlL97EsCYme2c3ZWLn1uC9FR21JoewlrhUPWO4QgO8w==}
+    peerDependencies:
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
 
   '@react-dnd/asap@5.0.2':
     resolution: {integrity: sha512-WLyfoHvxhs0V9U+GTsGilGgf2QsPl6ZZ44fnv0/b8T3nQyvzxidxsg/ZltbWssbsRDlYW8UKSQMTGotuTotZ6A==}
@@ -4261,9 +4300,6 @@ packages:
   '@types/range-parser@1.2.7':
     resolution: {integrity: sha512-hKormJbkJqzQGhziax5PItDUTMAM9uE2XXQmM37dyd4hVM+5aVl7oVxMVUiVQn2oCQFN/LKCZdvSM0pFRqbSmQ==}
 
-  '@types/react-dom@18.3.1':
-    resolution: {integrity: sha512-qW1Mfv8taImTthu4KoXgDfLuk4bydU6Q/TkADnDWWHwi4NX4BR+LWfTp2sVmTqRrsHvyDDTelgelxJ+SsejKKQ==}
-
   '@types/react-dom@19.1.1':
     resolution: {integrity: sha512-jFf/woGTVTjUJsl2O7hcopJ1r0upqoq/vIOoCj0yLh3RIXxWcljlpuZ+vEBRXsymD1jhfeJrlyTy/S1UW+4y1w==}
     peerDependencies:
@@ -4285,9 +4321,6 @@ packages:
     resolution: {integrity: sha512-8TV6R3h2j7a91c+1DXdJi3Syo69zzIZbz7Lg5tORM5LEJG7X/E6a1V3drRyBRZq7/utz7A+c4OgYLiLcYGHG6w==}
     peerDependencies:
       '@types/react': '*'
-
-  '@types/react@18.3.1':
-    resolution: {integrity: sha512-V0kuGBX3+prX+DQ/7r2qsv1NsdfnCLnTgnRJ1pYnxykBhGMz+qj+box5lq7XsO5mtZsBqpjwwTu/7wszPfMBcw==}
 
   '@types/react@19.1.0':
     resolution: {integrity: sha512-UaicktuQI+9UKyA4njtDOGBD/67t8YEBt2xdfqu8+gP9hqPUPsiXlNPcpS2gVdjmis5GKPG3fCxbQLVgxsQZ8w==}
@@ -7131,6 +7164,9 @@ packages:
   is-map@2.0.3:
     resolution: {integrity: sha512-1Qed0/Hr2m+YqxnM09CjA2d/i6YZNfF6R2oRAOj36eUdS6qIV/huPJNSEpKbupewFs+ZsJlxsjjPbc0/afW6Lw==}
     engines: {node: '>= 0.4'}
+
+  is-mobile@5.0.0:
+    resolution: {integrity: sha512-Tz/yndySvLAEXh+Uk8liFCxOwVH6YutuR74utvOcu7I9Di+DwM0mtdPVZNaVvvBUM2OXxne/NhOs1zAO7riusQ==}
 
   is-negative-zero@2.0.3:
     resolution: {integrity: sha512-5KoIu2Ngpyek75jXodFvnafB6DJgr3u8uuK0LEZJjrU19DrMD3EVERaR8sjz8CCGgpZvxPl9SuE1GMVPFHx1mw==}
@@ -14241,6 +14277,13 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
+  '@iconify/react@6.0.2(react@19.1.1)':
+    dependencies:
+      '@iconify/types': 2.0.0
+      react: 19.1.1
+
+  '@iconify/types@2.0.0': {}
+
   '@img/sharp-darwin-arm64@0.34.3':
     optionalDependencies:
       '@img/sharp-libvips-darwin-arm64': 1.2.0
@@ -15222,6 +15265,13 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.28.4
 
+  '@rc-component/motion@1.1.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@rc-component/util': 1.3.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      classnames: 2.5.1
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+
   '@rc-component/mutate-observer@1.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -15256,6 +15306,15 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
+  '@rc-component/tree@1.0.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      '@rc-component/motion': 1.1.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      '@rc-component/util': 1.3.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      classnames: 2.5.1
+      rc-virtual-list: 3.19.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+
   '@rc-component/trigger@2.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@babel/runtime': 7.28.4
@@ -15267,13 +15326,20 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
+  '@rc-component/util@1.3.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
+    dependencies:
+      is-mobile: 5.0.0
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+      react-is: 18.3.1
+
   '@react-dnd/asap@5.0.2': {}
 
   '@react-dnd/invariant@4.0.2': {}
 
   '@react-dnd/shallowequal@4.0.2': {}
 
-  '@reduxjs/toolkit@2.2.3(react-redux@9.2.0(@types/react@18.3.1)(react@18.3.1)(redux@5.0.1))(react@18.3.1)':
+  '@reduxjs/toolkit@2.2.3(react-redux@9.2.0(@types/react@19.1.1)(react@18.3.1)(redux@5.0.1))(react@18.3.1)':
     dependencies:
       immer: 10.1.3
       redux: 5.0.1
@@ -15281,7 +15347,7 @@ snapshots:
       reselect: 5.1.1
     optionalDependencies:
       react: 18.3.1
-      react-redux: 9.2.0(@types/react@18.3.1)(react@18.3.1)(redux@5.0.1)
+      react-redux: 9.2.0(@types/react@19.1.1)(react@18.3.1)(redux@5.0.1)
 
   '@reduxjs/toolkit@2.2.3(react-redux@9.2.0(@types/react@19.1.1)(react@19.1.1)(redux@5.0.1))(react@19.1.1)':
     dependencies:
@@ -15507,31 +15573,31 @@ snapshots:
 
   '@shikijs/vscode-textmate@10.0.2': {}
 
-  '@shikitor/core@0.0.8(@types/react@18.3.1)(react@18.3.1)':
+  '@shikitor/core@0.0.8(@types/react@19.1.1)(react@18.3.1)':
     dependencies:
       '@shikijs/core': 1.29.2
       '@shikijs/transformers': 1.29.2
-      derive-valtio: 0.1.0(valtio@1.13.2(@types/react@18.3.1)(react@18.3.1))
+      derive-valtio: 0.1.0(valtio@1.13.2(@types/react@19.1.1)(react@18.3.1))
       shiki: 1.29.2
-      valtio: 1.13.2(@types/react@18.3.1)(react@18.3.1)
+      valtio: 1.13.2(@types/react@19.1.1)(react@18.3.1)
     transitivePeerDependencies:
       - '@types/react'
       - react
 
-  '@shikitor/core@0.0.9(@types/react@18.3.1)(react@18.3.1)':
+  '@shikitor/core@0.0.9(@types/react@19.1.1)(react@18.3.1)':
     dependencies:
       '@shikijs/core': 1.29.2
       '@shikijs/transformers': 1.29.2
-      derive-valtio: 0.1.0(valtio@1.13.2(@types/react@18.3.1)(react@18.3.1))
+      derive-valtio: 0.1.0(valtio@1.13.2(@types/react@19.1.1)(react@18.3.1))
       shiki: 1.29.2
-      valtio: 1.13.2(@types/react@18.3.1)(react@18.3.1)
+      valtio: 1.13.2(@types/react@19.1.1)(react@18.3.1)
     transitivePeerDependencies:
       - '@types/react'
       - react
 
-  '@shikitor/react@0.1.6(@types/react@18.3.1)(react@18.3.1)':
+  '@shikitor/react@0.1.6(@types/react@19.1.1)(react@18.3.1)':
     dependencies:
-      '@shikitor/core': 0.0.9(@types/react@18.3.1)(react@18.3.1)
+      '@shikitor/core': 0.0.9(@types/react@19.1.1)(react@18.3.1)
       react: 18.3.1
     transitivePeerDependencies:
       - '@types/react'
@@ -16097,10 +16163,6 @@ snapshots:
 
   '@types/range-parser@1.2.7': {}
 
-  '@types/react-dom@18.3.1':
-    dependencies:
-      '@types/react': 19.1.1
-
   '@types/react-dom@19.1.1(@types/react@19.1.0)':
     dependencies:
       '@types/react': 19.1.0
@@ -16133,11 +16195,6 @@ snapshots:
   '@types/react-transition-group@4.4.12(@types/react@19.1.1)':
     dependencies:
       '@types/react': 19.1.1
-
-  '@types/react@18.3.1':
-    dependencies:
-      '@types/prop-types': 15.7.15
-      csstype: 3.1.3
 
   '@types/react@19.1.0':
     dependencies:
@@ -17817,9 +17874,9 @@ snapshots:
 
   dequal@2.0.3: {}
 
-  derive-valtio@0.1.0(valtio@1.13.2(@types/react@18.3.1)(react@18.3.1)):
+  derive-valtio@0.1.0(valtio@1.13.2(@types/react@19.1.1)(react@18.3.1)):
     dependencies:
-      valtio: 1.13.2(@types/react@18.3.1)(react@18.3.1)
+      valtio: 1.13.2(@types/react@19.1.1)(react@18.3.1)
 
   destroy@1.2.0: {}
 
@@ -17893,7 +17950,7 @@ snapshots:
 
   dom-helpers@5.2.1:
     dependencies:
-      '@babel/runtime': 7.26.10
+      '@babel/runtime': 7.28.4
       csstype: 3.1.3
 
   dom-serializer@1.4.1:
@@ -19572,6 +19629,8 @@ snapshots:
 
   is-map@2.0.3: {}
 
+  is-mobile@5.0.0: {}
+
   is-negative-zero@2.0.3: {}
 
   is-npm@6.0.0: {}
@@ -20407,9 +20466,9 @@ snapshots:
 
   merge-descriptors@1.0.3: {}
 
-  merge-refs@1.3.0(@types/react@18.3.1):
+  merge-refs@1.3.0(@types/react@19.1.1):
     optionalDependencies:
-      '@types/react': 18.3.1
+      '@types/react': 19.1.1
 
   merge-stream@2.0.0: {}
 
@@ -22050,6 +22109,15 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       resize-observer-polyfill: 1.5.1
 
+  rc-resize-observer@1.4.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
+    dependencies:
+      '@babel/runtime': 7.28.4
+      classnames: 2.5.1
+      rc-util: 5.44.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+      resize-observer-polyfill: 1.5.1
+
   rc-segmented@2.7.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.28.4
@@ -22172,6 +22240,13 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       react-is: 18.3.1
 
+  rc-util@5.44.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
+    dependencies:
+      '@babel/runtime': 7.28.4
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+      react-is: 18.3.1
+
   rc-virtual-list@3.19.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@babel/runtime': 7.28.4
@@ -22180,6 +22255,15 @@ snapshots:
       rc-util: 5.44.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
+
+  rc-virtual-list@3.19.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1):
+    dependencies:
+      '@babel/runtime': 7.28.4
+      classnames: 2.5.1
+      rc-resize-observer: 1.4.3(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      rc-util: 5.44.4(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
 
   rc@1.2.8:
     dependencies:
@@ -22226,7 +22310,7 @@ snapshots:
     dependencies:
       dnd-core: 16.0.1
 
-  react-dnd@16.0.1(@types/node@20.19.13)(@types/react@18.3.1)(react@18.3.1):
+  react-dnd@16.0.1(@types/node@20.19.13)(@types/react@19.1.1)(react@18.3.1):
     dependencies:
       '@react-dnd/invariant': 4.0.2
       '@react-dnd/shallowequal': 4.0.2
@@ -22236,7 +22320,7 @@ snapshots:
       react: 18.3.1
     optionalDependencies:
       '@types/node': 20.19.13
-      '@types/react': 18.3.1
+      '@types/react': 19.1.1
 
   react-dom@18.3.1(react@18.3.1):
     dependencies:
@@ -22318,11 +22402,11 @@ snapshots:
       react-loadable: '@docusaurus/react-loadable@6.0.0(react@19.1.1)'
       webpack: 5.101.3
 
-  react-markdown@9.1.0(@types/react@18.3.1)(react@18.3.1):
+  react-markdown@9.1.0(@types/react@19.1.1)(react@18.3.1):
     dependencies:
       '@types/hast': 3.0.4
       '@types/mdast': 4.0.4
-      '@types/react': 18.3.1
+      '@types/react': 19.1.1
       devlop: 1.1.0
       hast-util-to-jsx-runtime: 2.3.6
       html-url-attributes: 3.0.1
@@ -22336,13 +22420,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  react-pdf@7.7.3(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-pdf@7.7.3(@types/react@19.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       clsx: 2.1.1
       dequal: 2.0.3
       make-cancellable-promise: 1.3.2
       make-event-props: 1.6.2
-      merge-refs: 1.3.0(@types/react@18.3.1)
+      merge-refs: 1.3.0(@types/react@19.1.1)
       pdfjs-dist: 3.11.174
       prop-types: 15.8.1
       react: 18.3.1
@@ -22350,7 +22434,7 @@ snapshots:
       tiny-invariant: 1.3.3
       warning: 4.0.3
     optionalDependencies:
-      '@types/react': 18.3.1
+      '@types/react': 19.1.1
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -22360,13 +22444,13 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  react-redux@9.2.0(@types/react@18.3.1)(react@18.3.1)(redux@5.0.1):
+  react-redux@9.2.0(@types/react@19.1.1)(react@18.3.1)(redux@5.0.1):
     dependencies:
       '@types/use-sync-external-store': 0.0.6
       react: 18.3.1
       use-sync-external-store: 1.5.0(react@18.3.1)
     optionalDependencies:
-      '@types/react': 18.3.1
+      '@types/react': 19.1.1
       redux: 5.0.1
 
   react-redux@9.2.0(@types/react@19.1.1)(react@19.1.1)(redux@5.0.1):
@@ -22615,11 +22699,11 @@ snapshots:
 
   reduce-configs@1.1.1: {}
 
-  redux-eazy@0.1.16-beta.1(@types/react@18.3.1)(react@18.3.1):
+  redux-eazy@0.1.16-beta.1(@types/react@19.1.1)(react@18.3.1):
     dependencies:
-      '@reduxjs/toolkit': 2.2.3(react-redux@9.2.0(@types/react@18.3.1)(react@18.3.1)(redux@5.0.1))(react@18.3.1)
+      '@reduxjs/toolkit': 2.2.3(react-redux@9.2.0(@types/react@19.1.1)(react@18.3.1)(redux@5.0.1))(react@18.3.1)
       fast-deep-equal: 3.1.3
-      react-redux: 9.2.0(@types/react@18.3.1)(react@18.3.1)(redux@5.0.1)
+      react-redux: 9.2.0(@types/react@19.1.1)(react@18.3.1)(redux@5.0.1)
       redux: 5.0.1
       redux-logger: 3.0.6
     transitivePeerDependencies:
@@ -23669,7 +23753,7 @@ snapshots:
 
   tdesign-icons-react@0.5.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
-      '@babel/runtime': 7.26.10
+      '@babel/runtime': 7.28.4
       classnames: 2.5.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -24138,13 +24222,13 @@ snapshots:
 
   validator@13.15.15: {}
 
-  valtio@1.13.2(@types/react@18.3.1)(react@18.3.1):
+  valtio@1.13.2(@types/react@19.1.1)(react@18.3.1):
     dependencies:
-      derive-valtio: 0.1.0(valtio@1.13.2(@types/react@18.3.1)(react@18.3.1))
+      derive-valtio: 0.1.0(valtio@1.13.2(@types/react@19.1.1)(react@18.3.1))
       proxy-compare: 2.6.0
       use-sync-external-store: 1.2.0(react@18.3.1)
     optionalDependencies:
-      '@types/react': 18.3.1
+      '@types/react': 19.1.1
       react: 18.3.1
 
   value-equal@1.0.1: {}

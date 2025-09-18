@@ -55,11 +55,7 @@ const api = {
     });
   },
 
-  getMenuListApi() {
-    return http.get<MenuItemData[]>({
-      url: "/admin-api/system/menu/list",
-    });
-  },
+ 
 
   //获取滑块图片
   getImageUrlApi() {

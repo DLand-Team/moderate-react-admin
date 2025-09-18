@@ -1,0 +1,93 @@
+.animation {
+    .rc-tree-treenode {
+        display: flex;
+        align-items: center;
+
+        .rc-tree-indent {
+            position: relative;
+            align-self: stretch;
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: stretch;
+
+            .rc-tree-indent-unit {
+                position: relative;
+                height: 100%;
+
+                &::before {
+                    position: absolute;
+                    top: 0;
+                    bottom: 0;
+                    border-right: 1px solid blue;
+                    left: 50%;
+                    content: "";
+                }
+
+                &-end {
+                    &::before {
+                        display: none;
+                    }
+                }
+
+                // End should ignore
+                // &-end {
+                //   &::before {
+                //     display: none;
+                //   }
+                // }
+            }
+        }
+        .rc-tree-node-selected {
+            background-color: initial;
+            opacity: initial;
+            box-shadow: initial;
+        }
+        .rc-tree-switcher-noop {
+            // &::before {
+            //     content: "";
+            //     display: inline-block;
+            //     width: 16px;
+            //     height: 16px;
+            //     background: red;
+            //     border-radius: 100%;
+            // }
+        }
+
+        // Motion
+        &-motion:not(.node-motion-appear-active) {
+            // .rc-tree-indent-unit {
+            //   &::before {
+            //     display: none;
+            //   }
+            // }
+        }
+        .rc-tree-node-content-wrapper {
+            height: initial;
+        }
+        span {
+            &.rc-tree-switcher,
+            &.rc-tree-checkbox,
+            &.rc-tree-iconEle {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                margin-right: 2px;
+                line-height: 20px;
+                vertical-align: -0.125em;
+                background-image: initial;
+                background-repeat: no-repeat;
+                background-attachment: scroll;
+                border: 0 none;
+                outline: none;
+                cursor: pointer;
+                z-index: 1;
+                position: relative;
+                right: -28px;
+
+                &.rc-tree-icon__customize {
+                    background-image: none;
+                }
+            }
+        }
+    }
+}

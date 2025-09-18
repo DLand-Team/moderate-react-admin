@@ -1,9 +1,11 @@
 import authStore from "./authStore";
 import appStore from "./appStore";
+import sysStore from "./sysStore";
 
 const stores = {
   authStore,
-  appStore: appStore,
+  appStore,
+  sysStore,
 };
 
 export { stores };

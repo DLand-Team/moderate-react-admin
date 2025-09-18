@@ -123,6 +123,7 @@ export const ROUTE_CONFIG_MAP: {
     meta: { title: "common:MenuPageTitle" },
     component: "MenuPage",
     isNoAuth: true,
+    keepAlive: true,
   },
   PluginsPage: {
     id: "PluginsPage",

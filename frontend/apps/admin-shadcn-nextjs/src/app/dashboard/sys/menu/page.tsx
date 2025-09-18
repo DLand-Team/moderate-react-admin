@@ -4,6 +4,7 @@ import fs from "fs";
 import path from "path";
 import KeepAliveSign, { KeepAliveSlot } from "@/src/router/keep-alive-sign";
 import MenuView from "./view";
+import { TreeDemo } from "@/src/components/tree/rctree";
 
 export default function MenuPage() {
   // 只能服务端执行：读取本地 JSON 文件
@@ -16,7 +17,7 @@ export default function MenuPage() {
         routeId={ROUTE_ID.menu}
         ClientView={MenuView}
       >
-        <DataTable data={JSON.parse(raw)} />
+        {/* <DataTable data={JSON.parse(raw)} /> */}
         <KeepAliveSlot id={ROUTE_ID.menu} />
       </KeepAliveSign>
     </div>

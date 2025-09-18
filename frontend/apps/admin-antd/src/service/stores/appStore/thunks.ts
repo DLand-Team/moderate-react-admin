@@ -18,7 +18,6 @@ const thunks = createThunks("appStore", {
   createMenuDataAct: async (_: null, api) => {
     const { menuPermissions, routesPermissions, menuListData, menuTreeData } =
       api.getState().authStore;
-    console.log(menuPermissions);
     const { routesMap, routesTree } = reduxStore.getState().routerStore;
     const menuData = appHelper.createMenuData({
       menuPermissions,
