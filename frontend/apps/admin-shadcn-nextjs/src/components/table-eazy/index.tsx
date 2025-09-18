@@ -82,7 +82,7 @@ export function IndeterminateCheckbox({
   return (
     <Checkbox
       ref={ref as any}
-      checked={rest.checked || rest.halfChecked}
+      checked={rest.checked}
       onClick={rest.onChange as any}
       halfChecked={rest.halfChecked}
     />
@@ -123,7 +123,7 @@ function RowItem<T>({ row }: { row: Row<T> }) {
   );
 }
 
-export function MenuTable<T extends { children: T[] }>({
+export function TableEazy<T extends { children: T[] }>({
   columns,
   data,
   isShowSelection,
@@ -142,9 +142,11 @@ export function MenuTable<T extends { children: T[] }>({
           {isShowSelection && (
             <IndeterminateCheckbox
               {...{
-                checked: table.getIsAllRowsSelected(),
+                checked:
+                  table.getIsAllRowsSelected() || table.getIsSomeRowsSelected(),
                 indeterminate: table.getIsSomeRowsSelected(),
                 onChange: table.getToggleAllRowsSelectedHandler(),
+                halfChecked: table.getIsSomeRowsSelected(),
               }}
             />
           )}
@@ -169,7 +171,10 @@ export function MenuTable<T extends { children: T[] }>({
           <div className="flex items-center gap-2">
             <IndeterminateCheckbox
               {...{
-                checked: row.getIsSelected() || row.getIsAllSubRowsSelected(),
+                checked:
+                  row.getIsSelected() ||
+                  row.getIsAllSubRowsSelected() ||
+                  row.getIsSomeSelected(),
                 indeterminate: row.getIsSomeSelected(),
                 onChange: row.getToggleSelectedHandler(),
                 halfChecked: row.getIsSomeSelected(),

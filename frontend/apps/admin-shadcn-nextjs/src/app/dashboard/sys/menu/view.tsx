@@ -1,11 +1,11 @@
 "use client";
 
 import useActive from "@/src/common/hooks/useActive";
+import { TableEazy } from "@/src/components/table-eazy";
 import { useFlat } from "@/src/service";
 import { MenuItem } from "@/src/service/stores/sysStore/model";
 import { Button } from "@/src/shadcn/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
-import { MenuTable } from "src/components/eazy-table";
 
 const MenuView = () => {
   const { getMenuListAct, menuTreeData } = useFlat("sysStore");
@@ -88,7 +88,7 @@ const MenuView = () => {
   ];
   return (
     <div>
-      <MenuTable<MenuItem>
+      <TableEazy<MenuItem>
         columns={columns}
         data={menuTreeData || []}
         isShowExpand
