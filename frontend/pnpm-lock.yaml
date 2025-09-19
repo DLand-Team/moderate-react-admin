@@ -43,10 +43,10 @@ importers:
         version: 1.29.2
       '@shikitor/core':
         specifier: ^0.0.8
-        version: 0.0.8(@types/react@19.1.1)(react@18.3.1)
+        version: 0.0.8(@types/react@18.3.1)(react@18.3.1)
       '@shikitor/react':
         specifier: ^0.1.3
-        version: 0.1.6(@types/react@19.1.1)(react@18.3.1)
+        version: 0.1.6(@types/react@18.3.1)(react@18.3.1)
       antd:
         specifier: ^5.17.1
         version: 5.27.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -106,7 +106,7 @@ importers:
         version: 18.3.1
       react-dnd:
         specifier: ^16.0.1
-        version: 16.0.1(@types/node@20.19.13)(@types/react@19.1.1)(react@18.3.1)
+        version: 16.0.1(@types/node@20.19.13)(@types/react@18.3.1)(react@18.3.1)
       react-dnd-html5-backend:
         specifier: ^16.0.1
         version: 16.0.1
@@ -118,10 +118,10 @@ importers:
         version: 14.1.3(i18next@23.16.8)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-markdown:
         specifier: ^9.0.1
-        version: 9.1.0(@types/react@19.1.1)(react@18.3.1)
+        version: 9.1.0(@types/react@18.3.1)(react@18.3.1)
       react-pdf:
         specifier: ^7.7.3
-        version: 7.7.3(@types/react@19.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 7.7.3(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-photo-view:
         specifier: ^1.2.6
         version: 1.2.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -139,7 +139,7 @@ importers:
         version: 1.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       redux-eazy:
         specifier: 0.1.16-beta.1
-        version: 0.1.16-beta.1(@types/react@19.1.1)(react@18.3.1)
+        version: 0.1.16-beta.1(@types/react@18.3.1)(react@18.3.1)
       rehype-components:
         specifier: ^0.3.0
         version: 0.3.0
@@ -202,11 +202,11 @@ importers:
         specifier: ^6.9.15
         version: 6.14.0
       '@types/react':
-        specifier: 19.1.1
-        version: 19.1.1
+        specifier: 18.3.1
+        version: 18.3.1
       '@types/react-dom':
-        specifier: 19.1.1
-        version: 19.1.1(@types/react@19.1.1)
+        specifier: 18.3.1
+        version: 18.3.1
       '@types/react-syntax-highlighter':
         specifier: ^15.5.11
         version: 15.5.13
@@ -405,6 +405,9 @@ importers:
       redux-eazy:
         specifier: 0.1.16-beta.1
         version: 0.1.16-beta.1(@types/react@19.1.1)(react@19.1.1)
+      sass:
+        specifier: ^1.72.0
+        version: 1.92.1
       sonner:
         specifier: ^2.0.7
         version: 2.0.7(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -4300,6 +4303,9 @@ packages:
   '@types/range-parser@1.2.7':
     resolution: {integrity: sha512-hKormJbkJqzQGhziax5PItDUTMAM9uE2XXQmM37dyd4hVM+5aVl7oVxMVUiVQn2oCQFN/LKCZdvSM0pFRqbSmQ==}
 
+  '@types/react-dom@18.3.1':
+    resolution: {integrity: sha512-qW1Mfv8taImTthu4KoXgDfLuk4bydU6Q/TkADnDWWHwi4NX4BR+LWfTp2sVmTqRrsHvyDDTelgelxJ+SsejKKQ==}
+
   '@types/react-dom@19.1.1':
     resolution: {integrity: sha512-jFf/woGTVTjUJsl2O7hcopJ1r0upqoq/vIOoCj0yLh3RIXxWcljlpuZ+vEBRXsymD1jhfeJrlyTy/S1UW+4y1w==}
     peerDependencies:
@@ -4321,6 +4327,9 @@ packages:
     resolution: {integrity: sha512-8TV6R3h2j7a91c+1DXdJi3Syo69zzIZbz7Lg5tORM5LEJG7X/E6a1V3drRyBRZq7/utz7A+c4OgYLiLcYGHG6w==}
     peerDependencies:
       '@types/react': '*'
+
+  '@types/react@18.3.1':
+    resolution: {integrity: sha512-V0kuGBX3+prX+DQ/7r2qsv1NsdfnCLnTgnRJ1pYnxykBhGMz+qj+box5lq7XsO5mtZsBqpjwwTu/7wszPfMBcw==}
 
   '@types/react@19.1.0':
     resolution: {integrity: sha512-UaicktuQI+9UKyA4njtDOGBD/67t8YEBt2xdfqu8+gP9hqPUPsiXlNPcpS2gVdjmis5GKPG3fCxbQLVgxsQZ8w==}
@@ -15339,7 +15348,7 @@ snapshots:
 
   '@react-dnd/shallowequal@4.0.2': {}
 
-  '@reduxjs/toolkit@2.2.3(react-redux@9.2.0(@types/react@19.1.1)(react@18.3.1)(redux@5.0.1))(react@18.3.1)':
+  '@reduxjs/toolkit@2.2.3(react-redux@9.2.0(@types/react@18.3.1)(react@18.3.1)(redux@5.0.1))(react@18.3.1)':
     dependencies:
       immer: 10.1.3
       redux: 5.0.1
@@ -15347,7 +15356,7 @@ snapshots:
       reselect: 5.1.1
     optionalDependencies:
       react: 18.3.1
-      react-redux: 9.2.0(@types/react@19.1.1)(react@18.3.1)(redux@5.0.1)
+      react-redux: 9.2.0(@types/react@18.3.1)(react@18.3.1)(redux@5.0.1)
 
   '@reduxjs/toolkit@2.2.3(react-redux@9.2.0(@types/react@19.1.1)(react@19.1.1)(redux@5.0.1))(react@19.1.1)':
     dependencies:
@@ -15573,31 +15582,31 @@ snapshots:
 
   '@shikijs/vscode-textmate@10.0.2': {}
 
-  '@shikitor/core@0.0.8(@types/react@19.1.1)(react@18.3.1)':
+  '@shikitor/core@0.0.8(@types/react@18.3.1)(react@18.3.1)':
     dependencies:
       '@shikijs/core': 1.29.2
       '@shikijs/transformers': 1.29.2
-      derive-valtio: 0.1.0(valtio@1.13.2(@types/react@19.1.1)(react@18.3.1))
+      derive-valtio: 0.1.0(valtio@1.13.2(@types/react@18.3.1)(react@18.3.1))
       shiki: 1.29.2
-      valtio: 1.13.2(@types/react@19.1.1)(react@18.3.1)
+      valtio: 1.13.2(@types/react@18.3.1)(react@18.3.1)
     transitivePeerDependencies:
       - '@types/react'
       - react
 
-  '@shikitor/core@0.0.9(@types/react@19.1.1)(react@18.3.1)':
+  '@shikitor/core@0.0.9(@types/react@18.3.1)(react@18.3.1)':
     dependencies:
       '@shikijs/core': 1.29.2
       '@shikijs/transformers': 1.29.2
-      derive-valtio: 0.1.0(valtio@1.13.2(@types/react@19.1.1)(react@18.3.1))
+      derive-valtio: 0.1.0(valtio@1.13.2(@types/react@18.3.1)(react@18.3.1))
       shiki: 1.29.2
-      valtio: 1.13.2(@types/react@19.1.1)(react@18.3.1)
+      valtio: 1.13.2(@types/react@18.3.1)(react@18.3.1)
     transitivePeerDependencies:
       - '@types/react'
       - react
 
-  '@shikitor/react@0.1.6(@types/react@19.1.1)(react@18.3.1)':
+  '@shikitor/react@0.1.6(@types/react@18.3.1)(react@18.3.1)':
     dependencies:
-      '@shikitor/core': 0.0.9(@types/react@19.1.1)(react@18.3.1)
+      '@shikitor/core': 0.0.9(@types/react@18.3.1)(react@18.3.1)
       react: 18.3.1
     transitivePeerDependencies:
       - '@types/react'
@@ -16163,6 +16172,10 @@ snapshots:
 
   '@types/range-parser@1.2.7': {}
 
+  '@types/react-dom@18.3.1':
+    dependencies:
+      '@types/react': 19.1.1
+
   '@types/react-dom@19.1.1(@types/react@19.1.0)':
     dependencies:
       '@types/react': 19.1.0
@@ -16195,6 +16208,11 @@ snapshots:
   '@types/react-transition-group@4.4.12(@types/react@19.1.1)':
     dependencies:
       '@types/react': 19.1.1
+
+  '@types/react@18.3.1':
+    dependencies:
+      '@types/prop-types': 15.7.15
+      csstype: 3.1.3
 
   '@types/react@19.1.0':
     dependencies:
@@ -17874,9 +17892,9 @@ snapshots:
 
   dequal@2.0.3: {}
 
-  derive-valtio@0.1.0(valtio@1.13.2(@types/react@19.1.1)(react@18.3.1)):
+  derive-valtio@0.1.0(valtio@1.13.2(@types/react@18.3.1)(react@18.3.1)):
     dependencies:
-      valtio: 1.13.2(@types/react@19.1.1)(react@18.3.1)
+      valtio: 1.13.2(@types/react@18.3.1)(react@18.3.1)
 
   destroy@1.2.0: {}
 
@@ -20466,9 +20484,9 @@ snapshots:
 
   merge-descriptors@1.0.3: {}
 
-  merge-refs@1.3.0(@types/react@19.1.1):
+  merge-refs@1.3.0(@types/react@18.3.1):
     optionalDependencies:
-      '@types/react': 19.1.1
+      '@types/react': 18.3.1
 
   merge-stream@2.0.0: {}
 
@@ -22310,7 +22328,7 @@ snapshots:
     dependencies:
       dnd-core: 16.0.1
 
-  react-dnd@16.0.1(@types/node@20.19.13)(@types/react@19.1.1)(react@18.3.1):
+  react-dnd@16.0.1(@types/node@20.19.13)(@types/react@18.3.1)(react@18.3.1):
     dependencies:
       '@react-dnd/invariant': 4.0.2
       '@react-dnd/shallowequal': 4.0.2
@@ -22320,7 +22338,7 @@ snapshots:
       react: 18.3.1
     optionalDependencies:
       '@types/node': 20.19.13
-      '@types/react': 19.1.1
+      '@types/react': 18.3.1
 
   react-dom@18.3.1(react@18.3.1):
     dependencies:
@@ -22402,11 +22420,11 @@ snapshots:
       react-loadable: '@docusaurus/react-loadable@6.0.0(react@19.1.1)'
       webpack: 5.101.3
 
-  react-markdown@9.1.0(@types/react@19.1.1)(react@18.3.1):
+  react-markdown@9.1.0(@types/react@18.3.1)(react@18.3.1):
     dependencies:
       '@types/hast': 3.0.4
       '@types/mdast': 4.0.4
-      '@types/react': 19.1.1
+      '@types/react': 18.3.1
       devlop: 1.1.0
       hast-util-to-jsx-runtime: 2.3.6
       html-url-attributes: 3.0.1
@@ -22420,13 +22438,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  react-pdf@7.7.3(@types/react@19.1.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-pdf@7.7.3(@types/react@18.3.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       clsx: 2.1.1
       dequal: 2.0.3
       make-cancellable-promise: 1.3.2
       make-event-props: 1.6.2
-      merge-refs: 1.3.0(@types/react@19.1.1)
+      merge-refs: 1.3.0(@types/react@18.3.1)
       pdfjs-dist: 3.11.174
       prop-types: 15.8.1
       react: 18.3.1
@@ -22434,7 +22452,7 @@ snapshots:
       tiny-invariant: 1.3.3
       warning: 4.0.3
     optionalDependencies:
-      '@types/react': 19.1.1
+      '@types/react': 18.3.1
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -22444,13 +22462,13 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  react-redux@9.2.0(@types/react@19.1.1)(react@18.3.1)(redux@5.0.1):
+  react-redux@9.2.0(@types/react@18.3.1)(react@18.3.1)(redux@5.0.1):
     dependencies:
       '@types/use-sync-external-store': 0.0.6
       react: 18.3.1
       use-sync-external-store: 1.5.0(react@18.3.1)
     optionalDependencies:
-      '@types/react': 19.1.1
+      '@types/react': 18.3.1
       redux: 5.0.1
 
   react-redux@9.2.0(@types/react@19.1.1)(react@19.1.1)(redux@5.0.1):
@@ -22699,11 +22717,11 @@ snapshots:
 
   reduce-configs@1.1.1: {}
 
-  redux-eazy@0.1.16-beta.1(@types/react@19.1.1)(react@18.3.1):
+  redux-eazy@0.1.16-beta.1(@types/react@18.3.1)(react@18.3.1):
     dependencies:
-      '@reduxjs/toolkit': 2.2.3(react-redux@9.2.0(@types/react@19.1.1)(react@18.3.1)(redux@5.0.1))(react@18.3.1)
+      '@reduxjs/toolkit': 2.2.3(react-redux@9.2.0(@types/react@18.3.1)(react@18.3.1)(redux@5.0.1))(react@18.3.1)
       fast-deep-equal: 3.1.3
-      react-redux: 9.2.0(@types/react@19.1.1)(react@18.3.1)(redux@5.0.1)
+      react-redux: 9.2.0(@types/react@18.3.1)(react@18.3.1)(redux@5.0.1)
       redux: 5.0.1
       redux-logger: 3.0.6
     transitivePeerDependencies:
@@ -24222,13 +24240,13 @@ snapshots:
 
   validator@13.15.15: {}
 
-  valtio@1.13.2(@types/react@19.1.1)(react@18.3.1):
+  valtio@1.13.2(@types/react@18.3.1)(react@18.3.1):
     dependencies:
-      derive-valtio: 0.1.0(valtio@1.13.2(@types/react@19.1.1)(react@18.3.1))
+      derive-valtio: 0.1.0(valtio@1.13.2(@types/react@18.3.1)(react@18.3.1))
       proxy-compare: 2.6.0
       use-sync-external-store: 1.2.0(react@18.3.1)
     optionalDependencies:
-      '@types/react': 19.1.1
+      '@types/react': 18.3.1
       react: 18.3.1
 
   value-equal@1.0.1: {}
