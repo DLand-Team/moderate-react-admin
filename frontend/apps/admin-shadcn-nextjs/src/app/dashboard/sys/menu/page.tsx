@@ -4,7 +4,7 @@ import fs from "fs";
 import path from "path";
 import KeepAliveSign, { KeepAliveSlot } from "@/src/router/keep-alive-sign";
 import MenuView from "./view";
-import { TreeDemo } from "@/src/components/tree/rctree";
+import { TreeDemo } from "@/src/components/tree-eazy";
 
 export default function MenuPage() {
   // 只能服务端执行：读取本地 JSON 文件

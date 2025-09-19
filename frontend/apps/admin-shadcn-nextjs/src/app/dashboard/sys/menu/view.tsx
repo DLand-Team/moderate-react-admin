@@ -93,6 +93,7 @@ const MenuView = () => {
         data={menuTreeData || []}
         isShowExpand
         isShowSelection
+        isTreeTable
       />
     </div>
   );

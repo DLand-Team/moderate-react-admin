@@ -123,16 +123,20 @@ function RowItem<T>({ row }: { row: Row<T> }) {
   );
 }
 
-export function TableEazy<T extends { children: T[] }>({
+export function TableEazy<T>({
   columns,
   data,
   isShowSelection,
   isShowExpand,
+  isTreeTable,
+  childrenKey,
 }: {
   columns: ColumnDef<T>[];
   data?: T[];
   isShowSelection?: boolean;
   isShowExpand?: boolean;
+  isTreeTable?: boolean;
+  childrenKey?: keyof T;
 }) {
   if (isShowSelection || isShowExpand) {
     columns.unshift({
@@ -208,12 +212,16 @@ export function TableEazy<T extends { children: T[] }>({
       expanded,
     },
     onExpandedChange: setExpanded,
-    getSubRows: (row) => row.children,
+
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getExpandedRowModel: getExpandedRowModel(),
     paginateExpandedRows: false,
+    ...(isTreeTable
+      ? //@ts-ignore
+        { getSubRows: (row) => row[childrenKey || "children"] }
+      : {}),
   });
 
   return (

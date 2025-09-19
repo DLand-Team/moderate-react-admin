@@ -1,22 +1,28 @@
 "use client";
 /* eslint no-console:0, react/no-danger: 0 */
-import { Iconify } from "src/components/iconify";
-import { Provider } from "@rc-component/motion";
-import Tree from "@rc-component/tree";
-import "@rc-component/tree/assets/index.css";
-import { DataNode, IconType } from "@rc-component/tree/lib/interface";
-import { IconFileCode, IconFolder } from "@tabler/icons-react";
-import React, { useRef } from "react";
-import "./animation.scss";
-import { Checkbox } from "./checkBox";
+import { useSidebar } from "@/src/shadcn/components/ui/sidebar";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/src/shadcn/components/ui/tooltip";
-import { useSidebar } from "@/src/shadcn/components/ui/sidebar";
-import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "@/src/shadcn/lib/utils";
+import { Provider } from "@rc-component/motion";
+import Tree from "@rc-component/tree";
+import "@rc-component/tree/assets/index.css";
+import { DataNode, IconType } from "@rc-component/tree/lib/interface";
+import { IconFileCode, IconFolder } from "@tabler/icons-react";
+import { cva, VariantProps } from "class-variance-authority";
+import React, { useRef } from "react";
+import { Iconify } from "src/components/iconify";
+import "./animation.scss";
+import { Checkbox } from "./check-box";
+
+export interface Dept {
+  id: number;
+  name: string;
+  parentId: number;
+}
 
 const sidebarMenuButtonVariants = cva(
   "peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-hidden ring-sidebar-ring transition-[width,height,padding] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 group-has-data-[sidebar=menu-action]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-border data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground data-[state=open]:hover:bg-sidebar-accent data-[state=open]:hover:text-sidebar-accent-foreground group-data-[collapsible=icon]:size-8! group-data-[collapsible=icon]:p-2! [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
@@ -106,8 +112,8 @@ const motion = {
   motionName: "node-motion",
   motionAppear: false,
   onAppearStart: () => ({ height: 0 }),
-  onAppearActive: (node) => ({ height: node.scrollHeight }),
-  onLeaveStart: (node) => ({ height: node.offsetHeight }),
+  onAppearActive: (node: any) => ({ height: node.scrollHeight }),
+  onLeaveStart: (node: any) => ({ height: node.offsetHeight }),
   onLeaveActive: () => ({ height: 0 }),
 };
 
@@ -128,6 +134,7 @@ const TitleRender = ({
   menuKey,
   isLeaf,
   title,
+  key,
 }: DataNode & {
   treeRef: React.RefObject<Tree<DataNode> | null>;
   menuKey: string;
@@ -156,6 +163,66 @@ const TitleRender = ({
   }
   return "";
 };
+
+// 将部门数据转换为树形结构
+function transformDeptToTreeData(deptList: Dept[]): DataNode[] {
+  if (!deptList || deptList.length === 0) {
+    return [];
+  }
+
+  // 创建一个映射来快速查找部门
+  const deptMap = new Map<number, DataNode & { children: DataNode[] }>();
+
+  // 首先创建所有节点
+  deptList.forEach((dept) => {
+    deptMap.set(dept.id, {
+      key: dept.id.toString(),
+      title: dept.name,
+      children: [],
+      isLeaf: false, // 先假设都不是叶子节点
+    });
+  });
+
+  // 构建树形结构
+  const rootNodes: DataNode[] = [];
+
+  deptList.forEach((dept) => {
+    const node = deptMap.get(dept.id);
+    if (node) {
+      if (
+        dept.parentId === 0 ||
+        dept.parentId === null ||
+        !deptMap.has(dept.parentId)
+      ) {
+        // 根节点
+        rootNodes.push(node);
+      } else {
+        // 子节点
+        const parentNode = deptMap.get(dept.parentId);
+        if (parentNode) {
+          parentNode.children.push(node);
+        }
+      }
+    }
+  });
+
+  // 设置叶子节点标识
+  function setLeafStatus(nodes: DataNode[]) {
+    nodes.forEach((node) => {
+      const nodeWithChildren = node as DataNode & { children: DataNode[] };
+      if (nodeWithChildren.children && nodeWithChildren.children.length > 0) {
+        nodeWithChildren.isLeaf = false;
+        setLeafStatus(nodeWithChildren.children);
+      } else {
+        nodeWithChildren.isLeaf = true;
+      }
+    });
+  }
+
+  setLeafStatus(rootNodes);
+
+  return rootNodes;
+}
 
 function getTreeData(
   treeRef: React.RefObject<Tree<DataNode> | null>,
@@ -266,9 +333,30 @@ function getTreeData(
     },
   ];
 }
-export const TreeDemo = () => {
+export const TreeEazy = ({ treeData }: { treeData: any }) => {
   const treeRef = React.useRef<Tree>(null);
   const [enableMotion, setEnableMotion] = React.useState(true);
+
+  // 转换数据格式
+  const transformedTreeData = React.useMemo(() => {
+    // 如果是 Dept 类型的数组，进行转换
+    if (treeData && Array.isArray(treeData) && treeData.length > 0) {
+      // 检查是否是 Dept 类型（有 id, name, parentId 属性）
+      const firstItem = treeData[0];
+      if (
+        firstItem &&
+        typeof firstItem === "object" &&
+        "id" in firstItem &&
+        "name" in firstItem &&
+        "parentId" in firstItem
+      ) {
+        return transformDeptToTreeData(treeData as Dept[]);
+      }
+    }
+
+    // 如果已经是正确的格式或者为空，直接返回
+    return treeData;
+  }, [treeData]);
 
   setTimeout(() => {
     if (treeRef.current) {
@@ -276,25 +364,13 @@ export const TreeDemo = () => {
     }
   }, 100);
   const ref = useRef<Tree<DataNode>>(null);
-  debugger;
   return (
     <Provider motion={enableMotion}>
-      <button
-        onClick={() => {
-          setEnableMotion((e) => !e);
-        }}
-      >
-        Motion: {String(enableMotion)}
-      </button>
-
       <React.StrictMode>
         <div className="animation">
-          <h2>expanded</h2>
           <style dangerouslySetInnerHTML={{ __html: STYLE }} />
-
           <div style={{ display: "flex" }}>
             <div style={{ flex: "1 1 50%" }}>
-              <h3>Without Virtual</h3>
               <Tree
                 switcherIcon={({ expanded, isLeaf }) => {
                   if (isLeaf) {
@@ -318,13 +394,13 @@ export const TreeDemo = () => {
                 defaultExpandAll={false}
                 defaultExpandedKeys={defaultExpandedKeys}
                 motion={motion}
-                style={{ border: "1px solid #000" }}
-                treeData={getTreeData(ref) as any}
+                treeData={transformedTreeData}
                 titleRender={(props) => {
                   const { key, ...rest } = props;
                   let data = {
                     ...rest,
-                    menuKey: key,
+                    key,
+                    menuKey: key as string,
                   };
 
                   return (

@@ -17,7 +17,6 @@ export default function MenuPage() {
         ClientView={MenuView}
       >
         <KeepAliveSlot id={ROUTE_ID.user} />
-        <DataTable data={JSON.parse(raw)} />
       </KeepAliveSign>
     </div>
   );
