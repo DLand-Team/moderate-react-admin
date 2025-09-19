@@ -399,7 +399,6 @@ export const TreeEazy = ({ treeData }: { treeData: any }) => {
                   const { key, ...rest } = props;
                   let data = {
                     ...rest,
-                    key,
                     menuKey: key as string,
                   };
 
