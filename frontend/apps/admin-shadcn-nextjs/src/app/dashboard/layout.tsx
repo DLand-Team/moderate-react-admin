@@ -2,9 +2,9 @@ import DynamicBreadcrumb from "@/src/components/bread";
 import { AppSidebar } from "@/src/shadcn/components/app-sidebar";
 import { Separator } from "@/src/shadcn/components/ui/separator";
 import {
-  SidebarInset,
-  SidebarProvider,
-  SidebarTrigger,
+    SidebarInset,
+    SidebarProvider,
+    SidebarTrigger,
 } from "@/src/shadcn/components/ui/sidebar";
 import { PropsWithChildren } from "react";
 import TabNav from "src/components/tab-nav";

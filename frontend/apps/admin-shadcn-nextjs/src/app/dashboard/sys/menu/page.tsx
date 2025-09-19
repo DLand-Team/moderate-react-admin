@@ -1,10 +1,8 @@
 import { ROUTE_ID } from "@/src/router";
-import { DataTable } from "@/src/shadcn/components/data-table";
+import KeepAliveSign, { KeepAliveSlot } from "@/src/router/keep-alive-sign";
 import fs from "fs";
 import path from "path";
-import KeepAliveSign, { KeepAliveSlot } from "@/src/router/keep-alive-sign";
 import MenuView from "./view";
-import { TreeDemo } from "@/src/components/tree-eazy";
 
 export default function MenuPage() {
   // 只能服务端执行：读取本地 JSON 文件

@@ -13,6 +13,7 @@ import { useFlat } from "src/service";
 import { RouterEazyProvider } from "../router/router-provider";
 import RiveLoading from "./login/riveLoading";
 import "src/i18n";
+import { Suspense } from "react";
 
 // 其他全局补充
 const OtherProvider = ({ children }: React.PropsWithChildren) => {
@@ -32,6 +33,7 @@ const OtherProvider = ({ children }: React.PropsWithChildren) => {
 };
 
 const providerArr = [
+  Suspense,
   ServiceProvider,
   ProgressProvider,
   AuthGuard,

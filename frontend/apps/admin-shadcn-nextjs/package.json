@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev --turbopack -p 3002",
     "build": "next build --turbopack",
-    "start": "next start",
+    "start": "next start -p 3002",
+    "prod": "npm run build && pm2 start npm --name \"admin-shadcn\" -- start",
     "lint": "eslint"
   },
   "dependencies": {
@@ -56,6 +57,7 @@
     "react-i18next": "^14.1.0",
     "recharts": "2.15.4",
     "redux-eazy": "0.1.16-beta.1",
+    "sass": "^1.72.0",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.3.1",
     "vaul": "^1.1.2",
