@@ -40,6 +40,7 @@ export interface MenuItem {
   keepAlive: boolean;
   alwaysShow: boolean;
   children: MenuItem[];
+  permission?: string;
 }
 export enum RoleModalType {
   ADD = "add",

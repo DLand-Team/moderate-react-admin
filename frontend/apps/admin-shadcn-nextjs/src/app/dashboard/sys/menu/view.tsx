@@ -26,14 +26,9 @@ const MenuView = () => {
       cell: ({ row }) => <div>{row.original.componentName}</div>,
     },
     {
-      accessorKey: "icon",
-      header: "图标",
-      cell: ({ row }) => <div>{row.original.icon}</div>,
-    },
-    {
-      accessorKey: "sort",
-      header: "排序",
-      cell: ({ row }) => <div>{row.original.sort}</div>,
+      accessorKey: "permission",
+      header: "权限标识",
+      cell: ({ row }) => <div>{row.original.permission}</div>,
     },
     {
       accessorKey: "status",
