@@ -224,193 +224,168 @@ function transformDeptToTreeData(deptList: Dept[]): DataNode[] {
   return rootNodes;
 }
 
-function getTreeData(
-  treeRef: React.RefObject<Tree<DataNode> | null>,
-): DataNode[] {
-  // big-data: generateData(1000, 3, 2)
-  return [
-    {
-      key: "0",
-      title: "node 0",
-      children: [
-        { key: "0-0", title: "node 0-0" },
-        { key: "0-1", title: "node 0-1" },
-        {
-          key: "0-2",
-          title: "node 0-2",
-          children: [
-            { key: "0-2-0", title: "node 0-2-0", isLeaf: true },
-            { key: "0-2-1", title: "node 0-2-1", isLeaf: true },
-            { key: "0-2-2", title: "node 0-2-2", isLeaf: true },
-          ],
-        },
-        { key: "0-3", title: "node 0-3", isLeaf: true },
-        { key: "0-4", title: "node 0-4", isLeaf: true },
-        { key: "0-5", title: "node 0-5", isLeaf: true },
-        { key: "0-6", title: "node 0-6", isLeaf: true },
-        { key: "0-7", title: "node 0-7", isLeaf: true },
-        { key: "0-8", title: "node 0-8", isLeaf: true },
-        {
-          key: "0-9",
-          title: "node 0-9",
-          children: [
-            { key: "0-9-0", title: "node 0-9-0", isLeaf: true },
-            {
-              key: "0-9-1",
-              title: "node 0-9-1",
-              children: [
-                {
-                  key: "0-9-1-0",
-                  title: "node 0-9-1-0",
-                  isLeaf: true,
-                },
-                {
-                  key: "0-9-1-1",
-                  title: "node 0-9-1-1",
-                  isLeaf: true,
-                },
-                {
-                  key: "0-9-1-2",
-                  title: "node 0-9-1-2",
-                  isLeaf: true,
-                },
-                {
-                  key: "0-9-1-3",
-                  title: "node 0-9-1-3",
-                  isLeaf: true,
-                },
-                {
-                  key: "0-9-1-4",
-                  title: "node 0-9-1-4",
-                  isLeaf: true,
-                },
-              ],
-            },
-            {
-              key: "0-9-2",
-              title: "node 0-9-2",
-              children: [
-                {
-                  key: "0-9-2-0",
-                  title: "node 0-9-2-0",
-                  isLeaf: true,
-                },
-                {
-                  key: "0-9-2-1",
-                  title: "node 0-9-2-1",
-                  isLeaf: true,
-                },
-              ],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      key: "1",
-      title: "node 1",
-      // children: new Array(1000)
-      //   .fill(null)
-      //   .map((_, index) => ({ title: `auto ${index}`, key: `auto-${index}` })),
-      children: [
-        {
-          key: "1-0",
-          title: "node 1-0",
-          children: [
-            { key: "1-0-0", title: "node 1-0-0" },
-            {
-              key: "1-0-1",
-              title: "node 1-0-1",
-              children: [
-                { key: "1-0-1-0", title: "node 1-0-1-0" },
-                { key: "1-0-1-1", title: "node 1-0-1-1" },
-              ],
-            },
-            { key: "1-0-2", title: "node 1-0-2" },
-          ],
-        },
-      ],
-    },
-  ];
+export interface TreeEazyFieldNames {
+  id: string;
+  parentId: string;
+  name: string;
+  children?: string;
 }
-export const TreeEazy = ({ treeData }: { treeData: any }) => {
-  const treeRef = React.useRef<Tree>(null);
-  const [enableMotion, setEnableMotion] = React.useState(true);
 
-  // 转换数据格式
-  const transformedTreeData = React.useMemo(() => {
-    // 如果是 Dept 类型的数组，进行转换
-    if (treeData && Array.isArray(treeData) && treeData.length > 0) {
-      // 检查是否是 Dept 类型（有 id, name, parentId 属性）
-      const firstItem = treeData[0];
-      if (
-        firstItem &&
-        typeof firstItem === "object" &&
-        "id" in firstItem &&
-        "name" in firstItem &&
-        "parentId" in firstItem
-      ) {
-        return transformDeptToTreeData(treeData as Dept[]);
+function isFlatArray(
+  data: any[],
+  fieldNames: TreeEazyFieldNames = {
+    id: "id",
+    parentId: "parentId",
+    name: "name",
+  },
+) {
+  // 判断是否为扁平数组（没有children字段或children都为空/不存在）
+  const childrenKey = fieldNames.children || "children";
+  return data.every(
+    (item) =>
+      !item[childrenKey] ||
+      !Array.isArray(item[childrenKey]) ||
+      item[childrenKey].length === 0,
+  );
+}
+
+function flatToTreeData(
+  data: any[],
+  fieldNames: TreeEazyFieldNames = {
+    id: "id",
+    parentId: "parentId",
+    name: "name",
+  },
+): DataNode[] {
+  // 通用扁平转tree，支持字段映射
+  const idKey = fieldNames.id;
+  const parentIdKey = fieldNames.parentId;
+  const nameKey = fieldNames.name;
+  const nodeMap = new Map<any, any>();
+  data.forEach((item) => {
+    nodeMap.set(item[idKey], {
+      key: String(item[idKey]),
+      title: item[nameKey],
+      children: [],
+      isLeaf: false,
+      raw: item,
+    });
+  });
+  const roots: DataNode[] = [];
+  data.forEach((item) => {
+    const node = nodeMap.get(item[idKey]);
+    const parentId = item[parentIdKey];
+    if (parentId === 0 || parentId === null || !nodeMap.has(parentId)) {
+      roots.push(node);
+    } else {
+      const parent = nodeMap.get(parentId);
+      if (parent) {
+        parent.children.push(node);
       }
     }
+  });
+  // 设置isLeaf
+  function setLeaf(nodes: DataNode[]) {
+    nodes.forEach((node) => {
+      if (node.children && node.children.length > 0) {
+        node.isLeaf = false;
+        setLeaf(node.children);
+      } else {
+        node.isLeaf = true;
+      }
+    });
+  }
+  setLeaf(roots);
+  return roots;
+}
 
-    // 如果已经是正确的格式或者为空，直接返回
-    return treeData;
-  }, [treeData]);
+function treeDataWithMapping(
+  data: any[],
+  fieldNames: TreeEazyFieldNames,
+): DataNode[] {
+  // 已经是树结构，递归映射字段
+  const idKey = fieldNames.id;
+  const nameKey = fieldNames.name;
+  const childrenKey = fieldNames.children || "children";
+  return data.map((item) => {
+    const children = Array.isArray(item[childrenKey])
+      ? treeDataWithMapping(item[childrenKey], fieldNames)
+      : undefined;
+    return {
+      key: String(item[idKey]),
+      title: item[nameKey],
+      children,
+      isLeaf: !children || children.length === 0,
+      raw: item,
+    };
+  });
+}
 
-  setTimeout(() => {
-    if (treeRef.current) {
-      treeRef.current.scrollTo({ key: "0-9-2" });
+interface TreeEazyProps {
+  treeData: any;
+  fieldNames: TreeEazyFieldNames;
+}
+
+export const TreeEazy = ({ treeData, fieldNames }: TreeEazyProps) => {
+  const [enableMotion, setEnableMotion] = React.useState(true);
+
+  const transformedTreeData = React.useMemo(() => {
+    if (!treeData || !Array.isArray(treeData) || treeData.length === 0)
+      return [];
+    // 判断是否为扁平数组
+    if (isFlatArray(treeData, fieldNames)) {
+      return flatToTreeData(treeData, fieldNames);
+    } else {
+      return treeDataWithMapping(treeData, fieldNames);
     }
-  }, 100);
+  }, [treeData, fieldNames]);
+
   const ref = useRef<Tree<DataNode>>(null);
   return (
     <Provider motion={enableMotion}>
-      <React.StrictMode>
-        <div className="animation">
-          <style dangerouslySetInnerHTML={{ __html: STYLE }} />
-          <div style={{ display: "flex" }}>
-            <div style={{ flex: "1 1 50%" }}>
-              <Tree
-                switcherIcon={({ expanded, isLeaf }) => {
-                  if (isLeaf) {
-                    return <></>;
-                  }
-                  return (
-                    <Iconify
-                      icon={
-                        expanded
-                          ? "ic:round-keyboard-arrow-down"
-                          : "ic:round-keyboard-arrow-right"
-                      }
-                    />
-                  );
-                }}
-                ref={(e) => {
-                  ref.current = e;
-                }}
-                showIcon={false}
-                checkable={true}
-                defaultExpandAll={false}
-                defaultExpandedKeys={defaultExpandedKeys}
-                motion={motion}
-                treeData={transformedTreeData}
-                titleRender={(props) => {
-                  const { key, ...rest } = props;
-                  let data = {
-                    ...rest,
-                    menuKey: key as string,
-                  };
+      <div className="animation">
+        <style dangerouslySetInnerHTML={{ __html: STYLE }} />
+        <div style={{ display: "flex" }}>
+          <div style={{ flex: "1 1 50%" }}>
+            <Tree
+              switcherIcon={({ expanded, isLeaf }) => {
+                if (isLeaf) {
+                  return <></>;
+                }
+                return (
+                  <Iconify
+                    icon={
+                      expanded
+                        ? "ic:round-keyboard-arrow-down"
+                        : "ic:round-keyboard-arrow-right"
+                    }
+                  />
+                );
+              }}
+              ref={(e) => {
+                ref.current = e;
+              }}
+              showIcon={false}
+              checkable={true}
+              defaultExpandAll={false}
+              defaultExpandedKeys={defaultExpandedKeys}
+              motion={motion}
+              treeData={transformedTreeData}
+              titleRender={(props) => {
+                const { key, ...rest } = props;
+                let data = {
+                  ...rest,
+                  menuKey: key as string,
+                };
 
-                  return (
-                    <TitleRender {...(data as any)} treeRef={ref}></TitleRender>
-                  );
-                }}
-              />
-            </div>
+                return (
+                  <TitleRender {...(data as any)} treeRef={ref}></TitleRender>
+                );
+              }}
+            />
           </div>
         </div>
-      </React.StrictMode>
+      </div>
     </Provider>
   );
 };

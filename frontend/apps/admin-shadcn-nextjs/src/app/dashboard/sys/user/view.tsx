@@ -4,7 +4,7 @@ import useActive from "@/src/common/hooks/useActive";
 import { TableEazy } from "@/src/components/table-eazy";
 import { TreeEazy } from "@/src/components/tree-eazy";
 import { appHelper, dpChain, useFlat } from "@/src/service";
-import { User } from "@/src/service/stores/sysStore/model";
+import { Dept, User } from "@/src/service/stores/sysStore/model";
 import { Button } from "@/src/shadcn/components/ui/button";
 import {
   DropdownMenu,
@@ -12,16 +12,24 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/src/shadcn/components/ui/dropdown-menu";
-import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal } from "lucide-react";
-import { useMemo, useState } from "react";
 import {
   Sheet,
   SheetContent,
   SheetTrigger,
 } from "@/src/shadcn/components/ui/sheet";
-import { Menu } from "lucide-react";
-
+import { ColumnDef } from "@tanstack/react-table";
+import { Menu, MoreHorizontal } from "lucide-react";
+import { useState } from "react";
+const DeptTreeComponent = ({ deptList }: { deptList: Dept[] }) => (
+  <div className="h-full">
+    <div className="mb-4">
+      <h3 className="text-lg font-semibold">部门结构</h3>
+    </div>
+    <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
+      <TreeEazy treeData={deptList || []} />
+    </div>
+  </div>
+);
 const UserView = () => {
   const { userList, userPagination, queryUserListAct, setUserPagination } =
     useFlat("sysStore", {
@@ -29,7 +37,7 @@ const UserView = () => {
       userPagination: "IN",
     });
 
-  const { queryDeptListAct, deptList, setCurrentDeptId } = useFlat("sysStore", {
+  const { queryDeptListAct, deptList } = useFlat("sysStore", {
     deptList: "IN",
   });
 
@@ -161,7 +169,7 @@ const UserView = () => {
                       </div>
                     );
                   },
-                })
+                });
                 appHelper.showModal({
                   Content: () => {
                     return <div>修改用户 - {record.username}</div>;
@@ -254,16 +262,6 @@ const UserView = () => {
   };
 
   // 部门树组件
-  const DeptTreeComponent = () => (
-    <div className="h-full">
-      <div className="mb-4">
-        <h3 className="text-lg font-semibold">部门结构</h3>
-      </div>
-      <div className="max-h-[calc(100vh-12rem)] overflow-y-auto">
-        <TreeEazy treeData={deptList || []} />
-      </div>
-    </div>
-  );
 
   return (
     <div className="flex flex-col lg:flex-row h-full gap-4 p-4">
@@ -286,14 +284,14 @@ const UserView = () => {
             </Button>
           </SheetTrigger>
           <SheetContent side="left" className="w-80 p-4">
-            <DeptTreeComponent />
+            <DeptTreeComponent deptList={deptList} />
           </SheetContent>
         </Sheet>
       </div>
 
       {/* 桌面端左侧部门树 */}
       <div className="hidden lg:block w-80 border-r pr-4 flex-shrink-0">
-        <DeptTreeComponent />
+        <DeptTreeComponent deptList={deptList} />
       </div>
 
       {/* 右侧用户列表 */}
