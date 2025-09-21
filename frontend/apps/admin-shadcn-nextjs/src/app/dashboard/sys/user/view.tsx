@@ -3,7 +3,7 @@
 import useActive from "@/src/common/hooks/useActive";
 import { TableEazy } from "@/src/components/table-eazy";
 import { TreeEazy } from "@/src/components/tree-eazy";
-import { dpChain, useFlat } from "@/src/service";
+import { appHelper, dpChain, useFlat } from "@/src/service";
 import { User } from "@/src/service/stores/sysStore/model";
 import { Button } from "@/src/shadcn/components/ui/button";
 import {
@@ -101,7 +101,7 @@ const UserView = () => {
       accessorKey: "status",
       header: "状态",
       cell: ({ row }) => (
-        <div className="text-center">
+        <div>
           <span
             className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
               row.original.status === 0
@@ -130,9 +130,15 @@ const UserView = () => {
               size="sm"
               className="h-8 px-2 text-xs sm:px-3 sm:text-sm"
               onClick={async () => {
-                await dpChain("sysStore").queryUserAct({
-                  id: record.id,
+                // await dpChain("sysStore").queryUserAct({
+                //   id: record.id,
+                // });
+                appHelper.showModal({
+                  Content: () => {
+                    return <div>修改用户 - {record.username}</div>;
+                  },
                 });
+
                 // dpChain("sysStore").setUserModalType(ModalType.EDIT);
               }}
             >

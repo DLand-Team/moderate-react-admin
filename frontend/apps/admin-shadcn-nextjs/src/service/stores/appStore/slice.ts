@@ -1,7 +1,7 @@
 import { PayloadAction } from "redux-eazy";
 import { RouteItem } from "src/router";
 import { getActionType } from "src/service";
-import { createSlice } from "src/service/setup";
+import { appHelper, createSlice } from "src/service/setup";
 import { StoreState } from "./model";
 import { storageHelper } from "@/src/common/utils";
 
@@ -16,6 +16,7 @@ const initialState = (): StoreState => {
     historyRoutes: historyRoutes || [],
     currentRouteUrl: "",
     jumpingSignal: "",
+    modalContentId: "",
   };
 };
 
@@ -44,6 +45,15 @@ const slice = createSlice({
     },
     setJumping(state, _: PayloadAction<any>) {
       state.jumpingSignal = new Date().getTime().toString();
+    },
+    setIsShowModal(state, { payload }: PayloadAction<boolean>) {
+      state.isShowModal = payload;
+      if (state.modalContentId && !payload) {
+        appHelper.removeModal(state.modalContentId);
+      }
+    },
+    setModalContentId(state, { payload }: PayloadAction<string>) {
+      state.modalContentId = payload;
     },
   },
   extraReducers: (builder) => {

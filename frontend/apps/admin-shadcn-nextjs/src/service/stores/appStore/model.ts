@@ -9,4 +9,6 @@ export interface StoreState {
   historyRoutes: RouteItem[];
   currentRouteUrl: string;
   jumpingSignal: string;
+  isShowModal?: boolean;
+  modalContentId?: string;
 }
