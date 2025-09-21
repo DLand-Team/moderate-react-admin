@@ -9,6 +9,5 @@ export interface StoreState {
   historyRoutes: RouteItem[];
   currentRouteUrl: string;
   jumpingSignal: string;
-  isShowModal?: boolean;
-  modalContentId?: string;
+  modalData: Record<string, { id: string; isShow: boolean }>;
 }

@@ -135,7 +135,60 @@ const UserView = () => {
                 // });
                 appHelper.showModal({
                   Content: () => {
+                    return <div>123123{record.username}</div>;
+                  },
+                  Header() {
+                    return <div>修改用户</div>;
+                  },
+                  Footer({ closeModal }) {
+                    return (
+                      <div className="flex justify-end gap-2">
+                        <Button
+                          variant="outline"
+                          onClick={({}) => {
+                            closeModal();
+                          }}
+                        >
+                          取消
+                        </Button>
+                        <Button
+                          onClick={() => {
+                            closeModal();
+                          }}
+                        >
+                          保存
+                        </Button>
+                      </div>
+                    );
+                  },
+                })
+                appHelper.showModal({
+                  Content: () => {
                     return <div>修改用户 - {record.username}</div>;
+                  },
+                  Header() {
+                    return <div>修改用户</div>;
+                  },
+                  Footer({ closeModal }) {
+                    return (
+                      <div className="flex justify-end gap-2">
+                        <Button
+                          variant="outline"
+                          onClick={({}) => {
+                            closeModal();
+                          }}
+                        >
+                          取消
+                        </Button>
+                        <Button
+                          onClick={() => {
+                            closeModal();
+                          }}
+                        >
+                          保存
+                        </Button>
+                      </div>
+                    );
                   },
                 });
 

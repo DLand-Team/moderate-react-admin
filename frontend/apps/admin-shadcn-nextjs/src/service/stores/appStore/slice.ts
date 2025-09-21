@@ -1,9 +1,9 @@
+import { storageHelper } from "@/src/common/utils";
 import { PayloadAction } from "redux-eazy";
 import { RouteItem } from "src/router";
 import { getActionType } from "src/service";
 import { appHelper, createSlice } from "src/service/setup";
 import { StoreState } from "./model";
-import { storageHelper } from "@/src/common/utils";
 
 const initialState = (): StoreState => {
   const historyRoutes = storageHelper.getItem("TABS_HISTORY");
@@ -16,7 +16,7 @@ const initialState = (): StoreState => {
     historyRoutes: historyRoutes || [],
     currentRouteUrl: "",
     jumpingSignal: "",
-    modalContentId: "",
+    modalData: {},
   };
 };
 
@@ -46,14 +46,21 @@ const slice = createSlice({
     setJumping(state, _: PayloadAction<any>) {
       state.jumpingSignal = new Date().getTime().toString();
     },
-    setIsShowModal(state, { payload }: PayloadAction<boolean>) {
-      state.isShowModal = payload;
-      if (state.modalContentId && !payload) {
-        appHelper.removeModal(state.modalContentId);
+    updateModalStatus(
+      state,
+      {
+        payload,
+      }: PayloadAction<{
+        id: string;
+        isShow: boolean;
+      }>,
+    ) {
+      if (!payload.isShow) {
+        appHelper.removeModal(payload.id);
+        delete state.modalData[payload.id];
+      } else {
+        state.modalData[payload.id] = payload;
       }
-    },
-    setModalContentId(state, { payload }: PayloadAction<string>) {
-      state.modalContentId = payload;
     },
   },
   extraReducers: (builder) => {
