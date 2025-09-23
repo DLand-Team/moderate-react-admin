@@ -323,10 +323,17 @@ function treeDataWithMapping(
 
 interface TreeEazyProps {
   treeData: any;
-  fieldNames: TreeEazyFieldNames;
+  fieldNames?: TreeEazyFieldNames;
 }
 
-export const TreeEazy = ({ treeData, fieldNames }: TreeEazyProps) => {
+export const TreeEazy = ({
+  treeData,
+  fieldNames = {
+    id: "id",
+    parentId: "parentId",
+    name: "name",
+  },
+}: TreeEazyProps) => {
   const [enableMotion, setEnableMotion] = React.useState(true);
 
   const transformedTreeData = React.useMemo(() => {

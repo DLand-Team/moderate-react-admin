@@ -20,6 +20,7 @@ import {
 import { ColumnDef } from "@tanstack/react-table";
 import { Menu, MoreHorizontal } from "lucide-react";
 import { useState } from "react";
+import UserForm from "./user-form";
 const DeptTreeComponent = ({ deptList }: { deptList: Dept[] }) => (
   <div className="h-full">
     <div className="mb-4">
@@ -142,65 +143,16 @@ const UserView = () => {
                 //   id: record.id,
                 // });
                 appHelper.showModal({
-                  Content: () => {
-                    return <div>123123{record.username}</div>;
+                  Content: ({ closeModal }) => {
+                    return <UserForm onCancel={closeModal} />;
                   },
                   Header() {
                     return <div>修改用户</div>;
                   },
                   Footer({ closeModal }) {
-                    return (
-                      <div className="flex justify-end gap-2">
-                        <Button
-                          variant="outline"
-                          onClick={({}) => {
-                            closeModal();
-                          }}
-                        >
-                          取消
-                        </Button>
-                        <Button
-                          onClick={() => {
-                            closeModal();
-                          }}
-                        >
-                          保存
-                        </Button>
-                      </div>
-                    );
+                    return <></>;
                   },
                 });
-                appHelper.showModal({
-                  Content: () => {
-                    return <div>修改用户 - {record.username}</div>;
-                  },
-                  Header() {
-                    return <div>修改用户</div>;
-                  },
-                  Footer({ closeModal }) {
-                    return (
-                      <div className="flex justify-end gap-2">
-                        <Button
-                          variant="outline"
-                          onClick={({}) => {
-                            closeModal();
-                          }}
-                        >
-                          取消
-                        </Button>
-                        <Button
-                          onClick={() => {
-                            closeModal();
-                          }}
-                        >
-                          保存
-                        </Button>
-                      </div>
-                    );
-                  },
-                });
-
-                // dpChain("sysStore").setUserModalType(ModalType.EDIT);
               }}
             >
               <span className="hidden sm:inline">修改</span>

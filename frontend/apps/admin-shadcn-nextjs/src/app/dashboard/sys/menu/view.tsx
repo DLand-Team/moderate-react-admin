@@ -10,8 +10,13 @@ import { ColumnDef } from "@tanstack/react-table";
 const MenuView = () => {
   const { getMenuListAct, menuTreeData } = useFlat("sysStore");
   useActive({
-    onFirstActive() {
-      getMenuListAct();
+    onActive(isFirst) {
+      if (isFirst) {
+        console.log("首次显示");
+        getMenuListAct();
+      } else {
+        console.log("再次显示");
+      }
     },
   });
 

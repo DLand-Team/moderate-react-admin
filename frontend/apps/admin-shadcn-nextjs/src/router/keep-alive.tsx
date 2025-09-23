@@ -11,6 +11,7 @@ import React, {
   useRef,
 } from "react";
 import KeepAliveRoute from "./keep-alive-route";
+import AnimationWrapper from "../components/animationWrapper";
 
 const KeepAlive = ({ children }: PropsWithChildren) => {
   const { keepAliveRouteIds, historyRoutes } = useFlat("appStore");
@@ -70,16 +71,18 @@ const KeepAlive = ({ children }: PropsWithChildren) => {
         height: "100%",
       }}
     >
-      <div
-        id={"container"}
-        style={{
-          height: "100%",
-        }}
-        ref={aliveParentRef}
-      >
-        {/* {!isKeepAlive && <Outlet />} */}
-        {!cache.current.has(pathname) && children}
-      </div>
+      <AnimationWrapper>
+        <div
+          id={"container"}
+          style={{
+            height: "100%",
+          }}
+          ref={aliveParentRef}
+        >
+          {/* {!isKeepAlive && <Outlet />} */}
+          {!cache.current.has(pathname) && children}
+        </div>
+      </AnimationWrapper>
 
       {[...cache.current.entries()].map(([key, node]) => (
         <KeepAliveRoute
