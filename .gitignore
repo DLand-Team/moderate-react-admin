@@ -7,3 +7,4 @@ packages/redux-eazy2
 packages/redux-eazy
 
 *.zip
+frontend/packages/dump.rdb
