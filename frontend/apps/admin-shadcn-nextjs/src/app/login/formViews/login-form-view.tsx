@@ -8,6 +8,7 @@ import { emit, useFlat } from "src/service";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { GuideHook } from "@/src/components/guide-eazy/guide-provider";
 
 const FormSchema = z.object({
   username: z

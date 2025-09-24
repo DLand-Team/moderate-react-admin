@@ -2,6 +2,7 @@ import { cn } from "@/src/shadcn/lib/utils";
 import { Button } from "@/src/shadcn/components/ui/button";
 import { Input } from "@/src/shadcn/components/ui/input";
 import { Label } from "@/src/shadcn/components/ui/label";
+import { GuideHook } from "@/src/components/guide-eazy/guide-provider";
 
 export function LoginForm({
   className,

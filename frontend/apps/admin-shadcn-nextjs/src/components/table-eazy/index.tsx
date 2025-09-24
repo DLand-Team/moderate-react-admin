@@ -138,7 +138,10 @@ export function TableEazy<T>({
   isTreeTable?: boolean;
   childrenKey?: keyof T;
 }) {
-  if (isShowSelection || isShowExpand) {
+  if (
+    (isShowSelection || isShowExpand) &&
+    columns.findIndex((i) => i.id === "expand") < 0
+  ) {
     columns.unshift({
       id: "expand",
       header: ({ table }) => (

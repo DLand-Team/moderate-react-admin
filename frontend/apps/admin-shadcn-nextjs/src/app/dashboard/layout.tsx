@@ -1,4 +1,5 @@
 import DynamicBreadcrumb from "@/src/components/bread";
+import { GuideHook } from "@/src/components/guide-eazy/guide-provider";
 import { AppSidebar } from "@/src/shadcn/components/app-sidebar";
 import { Separator } from "@/src/shadcn/components/ui/separator";
 import {
@@ -23,7 +24,11 @@ export default function Layout({ children }: PropsWithChildren) {
           />
           <DynamicBreadcrumb />
         </header>
-        <TabNav />
+        <div>
+          <GuideHook readyId="step1_2" />
+          <TabNav />
+        </div>
+
         {/* padding */}
         <div className="p-6">
           <KeepAlive>{children}</KeepAlive>

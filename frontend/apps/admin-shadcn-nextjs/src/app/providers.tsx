@@ -15,6 +15,7 @@ import RiveLoading from "./login/riveLoading";
 import "src/i18n";
 import { Suspense } from "react";
 import { Modal } from "../components/modal";
+import GuideProvider from "../components/guide-eazy/guide-provider";
 
 // 其他全局补充
 const OtherProvider = ({ children }: React.PropsWithChildren) => {
@@ -41,6 +42,7 @@ const providerArr = [
   AuthGuard,
   OtherProvider,
   RouterEazyProvider,
+  GuideProvider,
 ];
 
 const Providers = (

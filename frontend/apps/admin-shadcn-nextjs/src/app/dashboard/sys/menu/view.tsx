@@ -1,6 +1,8 @@
 "use client";
 
 import useActive from "@/src/common/hooks/useActive";
+import { GuideHook } from "@/src/components/guide-eazy/guide-provider";
+import { useGuideContext } from "@/src/components/guide-eazy/guideCoreProvider";
 import { TableEazy } from "@/src/components/table-eazy";
 import { useFlat } from "@/src/service";
 import { MenuItem } from "@/src/service/stores/sysStore/model";
@@ -9,11 +11,14 @@ import { ColumnDef } from "@tanstack/react-table";
 
 const MenuView = () => {
   const { getMenuListAct, menuTreeData } = useFlat("sysStore");
+  const guide = useGuideContext();
   useActive({
     onActive(isFirst) {
       if (isFirst) {
         console.log("首次显示");
-        getMenuListAct();
+        getMenuListAct().then(() => {
+          guide.setGuideIndex(3);
+        });
       } else {
         console.log("再次显示");
       }
@@ -88,6 +93,7 @@ const MenuView = () => {
   ];
   return (
     <div>
+      <GuideHook readyId="step1_3" />
       <TableEazy<MenuItem>
         columns={columns}
         data={menuTreeData || []}

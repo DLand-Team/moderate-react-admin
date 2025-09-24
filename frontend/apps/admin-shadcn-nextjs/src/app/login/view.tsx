@@ -1,10 +1,16 @@
 "use client";
-import { GalleryVerticalEnd } from "lucide-react";
+import { GuideHook, useGuideContext } from "@/src/components/guide-eazy";
+import { appHelper } from "@/src/service";
+import { Fit, Layout } from "@rive-app/react-canvas";
+import { useEffect } from "react";
 import { LoginFormView } from "./formViews/login-form-view";
 import { RiveAni } from "./riveAni";
-import { Fit, Layout } from "@rive-app/react-canvas";
 
 export default function LoginView() {
+  const guide = useGuideContext();
+  useEffect(() => {
+    guide.setGuideIndex(0);
+  }, []);
   return (
     <div className="grid min-h-svh lg:grid-cols-2">
       <div className="flex flex-col gap-4 p-6 md:p-10">
@@ -22,7 +28,8 @@ export default function LoginView() {
           </div>
         </div>
       </div>
-      <div className="bg-muted relative hidden lg:block">
+      <div className="bg-muted relative hidden lg:block overflow-hidden">
+        <GuideHook readyId="step1_1" />
         <RiveAni
           options={{
             // This is optional.Provides additional layout control.

@@ -1,13 +1,22 @@
-import { ComponentType, ReactNode, type JSX } from "react";
+import { ComponentType, ReactNode, RefObject, type JSX } from "react";
 import { emit } from "../setup";
 import HelperBase from "./_helperBase";
 import { UUID } from "@/src/common/utils";
+import { Driver } from "driver.js";
 
 export class AppHelper extends HelperBase {
   modalMap: Record<
     string,
     { Content: ReactNode; Header: ReactNode; Footer: ReactNode }
   > = {};
+  guideIns: RefObject<Driver> | null = null;
+  setGuideIns(guideIns: RefObject<Driver>) {
+    this.guideIns = guideIns;
+  }
+  getGuideIns() {
+    debugger
+    return this.guideIns?.current;
+  }
   createApp(
     providerList: (
       | ((props: { children?: ReactNode }) => JSX.Element)
